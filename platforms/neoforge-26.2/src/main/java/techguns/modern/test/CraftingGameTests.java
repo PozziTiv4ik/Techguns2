@@ -60,7 +60,7 @@ final class CraftingGameTests {
         return helper.getLevel().getServer().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, input, helper.getLevel())
                 .orElseThrow(() -> new AssertionError("No real crafting recipe matches the supplied ingredients")).value();
     }
-    private static ItemStack craft(GameTestHelper helper, int width, int height, ItemStack... grid) {
+    static ItemStack craft(GameTestHelper helper, int width, int height, ItemStack... grid) {
         CraftingInput input = CraftingInput.of(width, height, List.of(grid));
         return recipe(helper, input).assemble(input);
     }

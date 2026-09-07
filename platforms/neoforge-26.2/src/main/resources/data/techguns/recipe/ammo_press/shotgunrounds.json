@@ -1,0 +1,13 @@
+{
+  "type": "techguns:ammo_press",
+  "plan": 1,
+  "metal1": "#techguns:ammo_press/metal1",
+  "metal2": "#techguns:ammo_press/metal2",
+  "powder": "#techguns:ammo_press/powder",
+  "result": {
+    "id": "techguns:shotgunrounds",
+    "count": 16
+  },
+  "duration": 100,
+  "power_per_tick": 5
+}

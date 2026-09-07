@@ -1,0 +1,14 @@
+{
+  "values": [
+    "#c:ingots/copper",
+    "#c:ingots/iron",
+    {
+      "id": "#c:ingots/tin",
+      "required": false
+    },
+    {
+      "id": "#c:ingots/bronze",
+      "required": false
+    }
+  ]
+}

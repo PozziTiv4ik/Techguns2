@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:electricengine",
+    "count": 1
+  },
+  "pattern": [
+    "wrw",
+    "imi",
+    "wrw"
+  ],
+  "key": {
+    "r": "#c:dusts/redstone",
+    "w": "#c:wires/copper",
+    "i": "#c:ingots/iron",
+    "m": "techguns:mechanicalpartsiron"
+  }
+}

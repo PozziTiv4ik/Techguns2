@@ -15,6 +15,7 @@ import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import techguns.modern.TGContent;
@@ -36,6 +37,7 @@ public final class TechgunsClient {
     public TechgunsClient(IEventBus modBus) {
         modBus.addListener(TechgunsClient::renderers);
         modBus.addListener(TechgunsClient::keys);
+        modBus.addListener(TechgunsClient::screens);
         NeoForge.EVENT_BUS.addListener(TechgunsClient::tick);
         NeoForge.EVENT_BUS.addListener(TechgunsClient::interaction);
         NeoForge.EVENT_BUS.addListener(TechgunsClient::fov);
@@ -43,6 +45,9 @@ public final class TechgunsClient {
     }
 
     private static void keys(RegisterKeyMappingsEvent event) { event.register(RELOAD); }
+    private static void screens(RegisterMenuScreensEvent event) {
+        event.register(techguns.modern.machine.TGMachineContent.AMMO_PRESS_MENU.get(), AmmoPressScreen::new);
+    }
 
     private static void tick(ClientTickEvent.Pre event) {
         Minecraft client = Minecraft.getInstance();

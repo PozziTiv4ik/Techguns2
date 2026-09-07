@@ -53,6 +53,7 @@ public final class TGContent {
                         GUNS.values().forEach(item -> output.accept(item.get()));
                         AMMO.values().forEach(item -> output.accept(item.get()));
                         MATERIALS.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> output.accept(entry.getValue().get()));
+                        output.accept(techguns.modern.machine.TGMachineContent.AMMO_PRESS_ITEM.get());
                     }).build());
 
     private static Map<String, DeferredItem<GunItem>> registerGuns() {
@@ -76,7 +77,8 @@ public final class TGContent {
     }
     private static Map<String, DeferredItem<Item>> registerMaterials() {
         Map<String, DeferredItem<Item>> items = new LinkedHashMap<>();
-        CraftingContent.MATERIALS.forEach(id -> items.put(id, ITEMS.registerSimpleItem(id)));
+        CraftingContent.MATERIALS.forEach(id -> items.put(id, ITEMS.registerItem(id, Item::new,
+                props -> props.stacksTo(id.equals("machinestackupgrade") ? 7 : 64))));
         return Collections.unmodifiableMap(items);
     }
     private static Map<String, DeferredHolder<SoundEvent, SoundEvent>> registerSounds() {

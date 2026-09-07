@@ -215,5 +215,21 @@
       "techguns:guns/vector_reload"
     ],
     "subtitle": "subtitles.techguns.guns.vectorreload"
+  },
+  "machines.ammopresswork1": {
+    "sounds": [
+      "techguns:machines/ammopress_work1_a",
+      "techguns:machines/ammopress_work1_b",
+      "techguns:machines/ammopress_work1_c"
+    ],
+    "subtitle": "subtitles.techguns.machines.ammopresswork1"
+  },
+  "machines.ammopresswork2": {
+    "sounds": [
+      "techguns:machines/ammopress_work2_a",
+      "techguns:machines/ammopress_work2_b",
+      "techguns:machines/ammopress_work2_c"
+    ],
+    "subtitle": "subtitles.techguns.machines.ammopresswork2"
   }
 }

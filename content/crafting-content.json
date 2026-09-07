@@ -31,11 +31,17 @@
     "57": "techguns:mechanicalpartsiron",
     "58": "techguns:mechanicalpartsobsidiansteel",
     "59": "techguns:mechanicalpartscarbon",
+    "62": "techguns:copperwire",
+    "70": "techguns:electricengine",
     "82": "techguns:ingotlead",
     "83": "techguns:ingotsteel",
     "84": "techguns:ingotobsidiansteel",
     "87": "techguns:nuggetlead",
-    "88": "techguns:nuggetsteel"
+    "88": "techguns:nuggetsteel",
+    "94": "techguns:machinestackupgrade"
+  },
+  "block_metadata": {
+    "techguns:basicmachine@0": "techguns:ammo_press"
   },
   "recipes": [
     {
@@ -61,6 +67,10 @@
     {
       "id": "techguns:aug_alt",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/aug_alt.json"
+    },
+    {
+      "id": "techguns:ammo_press",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/basicmachine_0_ammo_press.json"
     },
     {
       "id": "techguns:boltaction",
@@ -171,6 +181,14 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_57_mechanicalpartsiron.json"
     },
     {
+      "id": "techguns:copperwire",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_62_copperwire.json"
+    },
+    {
+      "id": "techguns:electricengine",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_70_electricengine.json"
+    },
+    {
       "id": "techguns:ingotlead",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_82_ingotlead.json"
     },
@@ -189,6 +207,10 @@
     {
       "id": "techguns:rifleroundsstack",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_8_rifleroundsstack.json"
+    },
+    {
+      "id": "techguns:machinestackupgrade",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_94_machinestackupgrade.json"
     },
     {
       "id": "techguns:smgmagazine",
@@ -286,6 +308,9 @@
     ],
     "c:sheets/plastic": [
       "techguns:plasticsheet"
+    ],
+    "c:wires/copper": [
+      "techguns:copperwire"
     ]
   },
   "requires_non_workbench_production": [

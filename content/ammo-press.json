@@ -1,0 +1,61 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/tileentities/AmmoPressTileEnt.java",
+  "energy_capacity": 20000,
+  "input_counts": [
+    1,
+    2,
+    1
+  ],
+  "upgrade_limit": 7,
+  "plans": [
+    {
+      "plan": 0,
+      "metal1": "#techguns:ammo_press/metal1",
+      "metal2": "#techguns:ammo_press/metal2",
+      "powder": "#techguns:ammo_press/powder",
+      "result": {
+        "id": "techguns:pistolrounds",
+        "count": 12
+      },
+      "duration": 100,
+      "power_per_tick": 5
+    },
+    {
+      "plan": 1,
+      "metal1": "#techguns:ammo_press/metal1",
+      "metal2": "#techguns:ammo_press/metal2",
+      "powder": "#techguns:ammo_press/powder",
+      "result": {
+        "id": "techguns:shotgunrounds",
+        "count": 16
+      },
+      "duration": 100,
+      "power_per_tick": 5
+    },
+    {
+      "plan": 2,
+      "metal1": "#techguns:ammo_press/metal1",
+      "metal2": "#techguns:ammo_press/metal2",
+      "powder": "#techguns:ammo_press/powder",
+      "result": {
+        "id": "techguns:riflerounds",
+        "count": 8
+      },
+      "duration": 100,
+      "power_per_tick": 5
+    },
+    {
+      "plan": 3,
+      "metal1": "#techguns:ammo_press/metal1",
+      "metal2": "#techguns:ammo_press/metal2",
+      "powder": "#techguns:ammo_press/powder",
+      "result": {
+        "id": "techguns:sniperrounds",
+        "count": 4
+      },
+      "duration": 100,
+      "power_per_tick": 5
+    }
+  ],
+  "rendering": "original geometry at rest; animation pending"
+}

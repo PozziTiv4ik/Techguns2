@@ -19,6 +19,7 @@ ORE_TAGS = {
     'HARDENEDGLASSORGLASS': ('c:glass_blocks/hardened', None),
     'DUSTREDSTONE': ('c:dusts/redstone', None), 'GEMDIAMOND': ('c:gems/diamond', None),
     'INGOTIRON': ('c:ingots/iron', None), 'NUGGETIRON': ('c:nuggets/iron', None),
+    'INGOTCOPPER': ('c:ingots/copper', None),
     'INGOTGOLD': ('c:ingots/gold', None), 'NUGGETCOPPER': ('c:nuggets/copper', None),
     'INGOTLEAD': ('c:ingots/lead', 'ingotlead'), 'NUGGETLEAD': ('c:nuggets/lead', 'nuggetlead'),
     'INGOTSTEEL': ('c:ingots/steel', 'ingotsteel'), 'NUGGETSTEEL': ('c:nuggets/steel', 'nuggetsteel'),
@@ -26,6 +27,9 @@ ORE_TAGS = {
     'PLATEIRON': ('c:plates/iron', 'plateiron'), 'PLATESTEEL': ('c:plates/steel', 'platesteel'),
     'PLATEOBSIDIANSTEEL': ('c:plates/obsidian_steel', 'plateobsidiansteel'),
     'SHEETPLASTIC': ('c:sheets/plastic', 'plasticsheet'),
+    'WIRECOPPER': ('c:wires/copper', 'copperwire'),
+    'PLATECOPPER': ('c:plates/copper', 'platecopper'),
+    'DYEGREEN': ('c:dyes/green', None),
 }
 
 
@@ -42,6 +46,7 @@ def inputs(recipe):
 def convert_recipe(legacy, shared, weapons):
     def item(value):
         identifier = value['item']
+        if identifier == 'techguns:basicmachine' and value.get('data', 0) == 0: return 'techguns:ammo_press'
         if identifier == 'techguns:itemshared': return 'techguns:' + shared[value['data']]
         if identifier.startswith('#'): raise ValueError('A tag cannot be a recipe result')
         if value.get('data', 0) not in (0, 32767) and identifier.removeprefix('techguns:') not in weapons:
@@ -86,10 +91,11 @@ def plan_crafting(weapon_list):
     ammo = {gun['ammo'][field] for gun in weapon_list for field in ('item', 'empty_item', 'loose_item') if gun['ammo'][field]}
     selected = {name: recipe for name, recipe in source_recipes.items()
                 if name in weapons or name.endswith('_alt') and name[:-4] in weapons}
+    selected['basicmachine_0_ammo_press'] = source_recipes['basicmachine_0_ammo_press']
     # These two original recipes overlap after GenericGun.onCreated resets damage to zero.
     # Keep that migration question explicit until upgrade state has its own verified rule.
     pending = {name: selected.pop(name) for name in ('m4_infiltrator', 'm4_infiltrator_alt') if name in selected}
-    wanted = {by_name[name] for name in ammo | {'stonebarrel', 'woodstock'}}
+    wanted = {by_name[name] for name in ammo | {'stonebarrel', 'woodstock', 'machinestackupgrade'}}
     used_tags = set()
     while True:
         for recipe in selected.values():
@@ -110,6 +116,7 @@ def plan_crafting(weapon_list):
     recipes, sources = {}, []
     for name, recipe in sorted(selected.items()):
         identifier = name
+        if name == 'basicmachine_0_ammo_press': identifier = 'ammo_press'
         if name.startswith('itemshared_'): identifier = re.sub(r'^itemshared_\d+_', '', name)
         if identifier in recipes: raise ValueError(f'Colliding recipe ID: {identifier}')
         recipes[identifier] = convert_recipe(recipe, shared, weapons)
@@ -122,6 +129,7 @@ def plan_crafting(weapon_list):
     # Record direct machine-produced materials/ammunition separately from metal packing loops.
     workbench_outputs = {r['result']['id'].removeprefix('techguns:') for r in recipes.values()}
     catalog = {'shared_metadata': {str(meta): 'techguns:' + shared[meta] for meta in sorted(wanted)},
+               'block_metadata': {'techguns:basicmachine@0': 'techguns:ammo_press'},
                'recipes': sources, 'tags': tags,
                'requires_non_workbench_production': sorted(names - workbench_outputs),
                'metal_packing_requires_feedstock': sorted(names & {'ingotlead', 'ingotsteel'}),

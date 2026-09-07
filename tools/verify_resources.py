@@ -58,6 +58,9 @@ def main():
     for path in ROOT.rglob('*.json'):
         json.loads(path.read_text(encoding='utf-8'))
     names = []
+    for path in (ASSETS / 'blockstates').glob('*.json'):
+        for variant in json.loads(path.read_text(encoding='utf-8'))['variants'].values():
+            require(local_path(variant['model'], 'models', '.json'))
     for path in (ASSETS / 'items').glob('*.json'):
         definition = json.loads(path.read_text(encoding='utf-8'))['model']
         check_item_model(definition)
@@ -71,7 +74,8 @@ def main():
                 continue
             require(local_path(texture, 'textures', '.png'))
             # Default 26.2 item atlas includes textures/item/, not the legacy items/ or guns/.
-            if texture.startswith('techguns:') and not texture.startswith('techguns:item/'):
+            atlas_path = 'techguns:block/' if path.parent.name == 'block' else 'techguns:item/'
+            if texture.startswith('techguns:') and not texture.startswith(atlas_path):
                 raise ValueError(f'Texture outside the item atlas: {texture}; add an explicit atlas source first')
             texture_count += 1
     for lang in ('en_us', 'ru_ru'):
@@ -93,11 +97,13 @@ def main():
         elif value.get('neoforge:ingredient_type') == 'techguns:tag_fallback':
             if not value.get('preferred') or not value.get('fallback'): raise ValueError('Incomplete fallback ingredient')
         else: raise ValueError(f'Unsupported recipe ingredient: {value}')
-    recipes = list((ROOT / 'data/techguns/recipe').glob('*.json'))
+    recipes = list((ROOT / 'data/techguns/recipe').rglob('*.json'))
     for path in recipes:
         recipe = json.loads(path.read_text(encoding='utf-8'))
         check_ingredient(recipe['result']['id'])
         for value in list(recipe.get('key', {}).values()) + recipe.get('ingredients', []): check_ingredient(value)
+        if recipe['type'] == 'techguns:ammo_press':
+            for key in ('metal1', 'metal2', 'powder'): check_ingredient(recipe[key])
     for path in (ROOT / 'data/c/tags/item').rglob('*.json'):
         for value in json.loads(path.read_text(encoding='utf-8'))['values']: check_ingredient(value)
     print(f'Validated {len(names)} item definitions, {texture_count} texture references, {len(sounds)} sound events and {len(recipes)} recipes')

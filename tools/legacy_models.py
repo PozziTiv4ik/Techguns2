@@ -182,13 +182,17 @@ def shape_vertices(shape):
             for corner in corners]
 
 
-def convert_mesh(source, class_name, identifier, texture, forward, gui_hidden=(), constructor_values=None):
+def convert_mesh(source, class_name, identifier, texture, forward, gui_hidden=(), constructor_values=None,
+                 coordinate_transform=None, reverse_winding=True, model_folder='item', skip_parts=()):
     width, height, shapes = extract_shapes(source, class_name, constructor_values)
+    shapes = [shape for shape in shapes if shape['name'] not in skip_parts]
     geometry = {shape['name']: shape_vertices(shape) for shape in shapes}
     body = [point for name, points in geometry.items() if name not in gui_hidden for point in points]
     center = [(min(p[i] for p in body) + max(p[i] for p in body)) / 2 for i in range(3)]
     # OBJ positions are in block units. Preserve the nominal half-scale of cuboid conversion.
-    def point(p): return [(8 + (v-c) * .5 * (-1 if i == 1 else 1)) / 16 for i, (v,c) in enumerate(zip(p,center))]
+    def point(p):
+        if coordinate_transform: return coordinate_transform(p)
+        return [(8 + (v-c) * .5 * (-1 if i == 1 else 1)) / 16 for i, (v,c) in enumerate(zip(p,center))]
     lines = [f'# Original Techguns {class_name}; Techguns Mod License', f'mtllib {identifier}.mtl']
     index = 1
     for shape in shapes:
@@ -209,9 +213,9 @@ def convert_mesh(source, class_name, identifier, texture, forward, gui_hidden=()
             if sum(n*n for n in cross) < 1e-18: continue
             for vertex in vertices: lines.append('v ' + ' '.join(f'{value:.9f}' for value in vertex))
             for uv in uvs: lines.append('vt ' + ' '.join(f'{value:.9f}' for value in uv))
-            lines.append('f ' + ' '.join(f'{index+i}/{index+i}' for i in (3,2,1,0)))
+            lines.append('f ' + ' '.join(f'{index+i}/{index+i}' for i in ((3,2,1,0) if reverse_winding else (0,1,2,3))))
             index += 4
-    model = {'loader': 'neoforge:obj', 'model': f'techguns:models/item/{identifier}.obj',
+    model = {'loader': 'neoforge:obj', 'model': f'techguns:models/{model_folder}/{identifier}.obj',
              'automatic_culling': False, 'flip_v': False, 'emissive_ambient': False,
              'textures': {'gun': texture, 'particle': texture}, 'display': display_transforms(forward)}
     material = 'newmtl gun\nKa 0 0 0\nKd 1 1 1\nmap_Kd #gun\n'

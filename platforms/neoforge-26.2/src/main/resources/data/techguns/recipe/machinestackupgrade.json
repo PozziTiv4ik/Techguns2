@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:machinestackupgrade",
+    "count": 1
+  },
+  "pattern": [
+    "pgp",
+    "ncn",
+    "pnp"
+  ],
+  "key": {
+    "p": "#c:plates/iron",
+    "c": "minecraft:chest",
+    "g": "#c:dyes/green",
+    "n": "#c:ingots/gold"
+  }
+}
