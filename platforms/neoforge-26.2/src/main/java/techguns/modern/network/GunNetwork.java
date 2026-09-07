@@ -5,12 +5,14 @@ import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import techguns.modern.ReloadSessions;
 import techguns.modern.GunItem;
+import techguns.modern.AimSessions;
 
 public final class GunNetwork {
     public static void register(RegisterPayloadHandlersEvent event) {
         // PayloadRegistrar defaults to the main game thread.
-        event.registrar("1").playToServer(GunActionPayload.TYPE, GunActionPayload.CODEC,
-                (payload, context) -> handle(context.player(), payload));
+        var registrar = event.registrar("2");
+        registrar.playToServer(GunActionPayload.TYPE, GunActionPayload.CODEC, (payload, context) -> handle(context.player(), payload));
+        registrar.playToServer(AimPayload.TYPE, AimPayload.CODEC, (payload, context) -> AimSessions.set(context.player(), payload.enabled()));
     }
 
     public static boolean handle(Player player, GunActionPayload payload) {

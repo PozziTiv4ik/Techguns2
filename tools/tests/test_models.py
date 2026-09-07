@@ -4,20 +4,21 @@ import math
 import sys
 import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from legacy_models import extract_shapes, convert_model, display_transforms, texture_faces
+from legacy_models import extract_shapes, convert_model, convert_mesh, display_transforms, texture_faces, shape_vertices
 from generate_weapon_content import parse_weapons, SELECTION, LEGACY, generate
 
 
 class ModelPortTests(unittest.TestCase):
     def test_muzzle_points_away_from_camera_in_both_hands(self):
-        for hand in ('righthand', 'lefthand'):
-            display = display_transforms()[f'firstperson_{hand}']
-            # +X is the original model's muzzle direction. Minecraft applies a sign
-            # reversal to a left-hand item's Y rotation before quaternion construction.
-            theta = math.radians(display['rotation'][1] * (-1 if hand == 'lefthand' else 1))
-            self.assertAlmostEqual(math.cos(theta), 0, places=6)
-            self.assertLess(-math.sin(theta), -.99, 'Muzzle must face camera-forward (-Z)')
-            self.assertEqual(display['rotation'][0], 0, 'Gun grip must remain below barrel')
+        for forward in ('+x', '-z'):
+            for hand in ('righthand', 'lefthand'):
+                display = display_transforms(forward)[f'firstperson_{hand}']
+                # Minecraft negates Y for the left hand before quaternion construction.
+                theta = math.radians(display['rotation'][1] * (-1 if hand == 'lefthand' else 1))
+                x, z = (1, 0) if forward == '+x' else (0, -1)
+                self.assertAlmostEqual(x*math.cos(theta) + z*math.sin(theta), 0, places=6)
+                self.assertLess(-x*math.sin(theta) + z*math.cos(theta), -.99, 'Muzzle must face camera-forward (-Z)')
+                self.assertEqual(display['rotation'][0], 0, 'Gun grip must remain below barrel')
 
     def test_uvs_preserve_legacy_vertices_after_y_reflection(self):
         faces = texture_faces(4, 3, 5, 2, 3, 64, 32)
@@ -39,6 +40,10 @@ class ModelPortTests(unittest.TestCase):
         for identifier, class_name in SELECTION.items():
             source = (LEGACY / f'java/techguns/client/models/guns/{class_name}.java').read_text()
             _, _, shapes = extract_shapes(source, class_name)
+            if any(s['inflate'] != 0 or s['render_scale'] != [1,1,1] for s in shapes) or identifier == 'm4_infiltrator':
+                _, mesh, _ = convert_mesh(source, class_name, identifier, 'techguns:item/'+identifier, '-z')
+                self.assertEqual(mesh.count('\no '), len(shapes), identifier)
+                continue
             model = convert_model(source, class_name, f'techguns:item/{identifier}')
             self.assertEqual(len(model['elements']), len(shapes), identifier)
             for element in model['elements']:
@@ -46,6 +51,41 @@ class ModelPortTests(unittest.TestCase):
                     self.assertLessEqual(lower, upper)
                     self.assertGreaterEqual(lower, -16)
                     self.assertLessEqual(upper, 32)
+
+    def test_mac10_negative_inflation_and_rotation_are_preserved(self):
+        source = (LEGACY / 'java/techguns/client/models/guns/ModelMac10.java').read_text()
+        _, _, shapes = extract_shapes(source, 'ModelMac10')
+        grip = next(s for s in shapes if s['name'] == 'Grip4')
+        first = shape_vertices(grip)[0]
+        self.assertAlmostEqual(first[0], -1.4, places=6)
+        angle = -.2181661564992912
+        self.assertAlmostEqual(first[1], 2.5 + .1*math.cos(angle) - .1*math.sin(angle), places=6)
+        stock = next(s for s in shapes if s['name'] == 'Stock2')
+        self.assertEqual(stock['rotation'], [0,0,0], 'Omitted rotation means identity')
+
+    def test_vector_render_scales_are_not_lost(self):
+        source = (LEGACY / 'java/techguns/client/models/guns/ModelVector.java').read_text()
+        _, _, shapes = extract_shapes(source, 'ModelVector')
+        self.assertEqual(next(s for s in shapes if s['name'] == 'Receiver05')['render_scale'], [.98,1,1])
+        self.assertEqual(next(s for s in shapes if s['name'] == 'Eotech04')['render_scale'], [.8,.8,.8])
+
+    def test_empty_magazine_really_omits_cartridges(self):
+        for name in ('ModelARMagazine', 'ModelLmgMag', 'ModelAS50Mag'):
+            source = (LEGACY / f'java/techguns/client/models/items/{name}.java').read_text()
+            _, _, full = extract_shapes(source, name, {'empty': False})
+            _, _, empty = extract_shapes(source, name, {'empty': True})
+            self.assertLess(len(empty), len(full), name)
+            self.assertTrue({s['name'] for s in empty} < {s['name'] for s in full})
+
+    def test_new_ammo_and_renderer_metadata_follow_original_sources(self):
+        guns = {g['id']: g for g in parse_weapons()}
+        self.assertEqual(guns['pistol']['ammo']['item'], 'pistolmagazine')
+        self.assertEqual(guns['m4']['ammo']['bundles_per_magazine'], 3)
+        self.assertEqual(guns['lmg']['ammo']['bundles_per_magazine'], 8)
+        self.assertEqual(guns['as50']['ammo']['item'], 'as50magazine')
+        self.assertEqual(guns['pistol']['forward_axis'], '-z')
+        self.assertEqual(guns['revolver']['forward_axis'], '+x')
+        self.assertEqual(guns['m4_infiltrator']['fire_sound'], 'guns.silencedm4fire')
 
     def test_source_balance_is_not_flattened_to_the_revolver(self):
         guns = {g['id']: g for g in parse_weapons()}

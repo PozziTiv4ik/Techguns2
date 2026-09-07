@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:aug",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 0
+    }
+  },
+  "pattern": [
+    "gpg",
+    "bfs",
+    "i m"
+  ],
+  "key": {
+    "p": "#c:plates/steel",
+    "b": "techguns:obsidiansteelbarrel",
+    "s": "techguns:plasticstock",
+    "f": "techguns:steelreceiver",
+    "g": "#c:glass_panes",
+    "i": "#c:sheets/plastic",
+    "m": "techguns:assaultriflemagazineempty"
+  }
+}

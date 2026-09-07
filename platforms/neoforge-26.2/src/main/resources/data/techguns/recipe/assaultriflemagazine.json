@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "result": {
+    "id": "techguns:assaultriflemagazine",
+    "count": 1
+  },
+  "ingredients": [
+    "techguns:assaultriflemagazineempty",
+    "techguns:riflerounds",
+    "techguns:riflerounds",
+    "techguns:riflerounds"
+  ]
+}

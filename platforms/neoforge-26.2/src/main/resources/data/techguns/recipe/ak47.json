@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:ak47",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 30
+    }
+  },
+  "pattern": [
+    "bfs",
+    "wm "
+  ],
+  "key": {
+    "b": "techguns:obsidiansteelbarrel",
+    "s": "techguns:woodstock",
+    "f": "techguns:ironreceiver",
+    "w": "#minecraft:logs",
+    "m": "techguns:assaultriflemagazine"
+  }
+}

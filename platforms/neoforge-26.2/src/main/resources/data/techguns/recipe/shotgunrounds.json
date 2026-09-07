@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:shotgunrounds",
+    "count": 5
+  },
+  "pattern": [
+    "lll",
+    "cgc",
+    "ccc"
+  ],
+  "key": {
+    "c": "#c:nuggets/copper",
+    "g": "minecraft:gunpowder",
+    "l": "#c:nuggets/lead"
+  }
+}

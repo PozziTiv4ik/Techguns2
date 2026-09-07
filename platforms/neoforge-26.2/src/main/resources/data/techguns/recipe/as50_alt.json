@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:as50",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 0
+    }
+  },
+  "pattern": [
+    "dpd",
+    "bbf",
+    " mt"
+  ],
+  "key": {
+    "p": "#c:plates/obsidian_steel",
+    "b": "techguns:obsidiansteelbarrel",
+    "t": "techguns:plasticstock",
+    "d": "#c:gems/diamond",
+    "f": "techguns:obsidiansteelreceiver",
+    "m": "techguns:as50magazineempty"
+  }
+}

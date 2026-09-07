@@ -90,5 +90,130 @@
       "techguns:guns/combatshotgun_reload"
     ],
     "subtitle": "subtitles.techguns.guns.combatshotgunreload"
+  },
+  "guns.pistolfire": {
+    "sounds": [
+      "techguns:guns/pistol_shot_a",
+      "techguns:guns/pistol_shot_b",
+      "techguns:guns/pistol_shot_c"
+    ],
+    "subtitle": "subtitles.techguns.guns.pistolfire"
+  },
+  "guns.pistolreload": {
+    "sounds": [
+      "techguns:guns/pistol_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.pistolreload"
+  },
+  "guns.ak47fire": {
+    "sounds": [
+      "techguns:guns/ak47_shot_a",
+      "techguns:guns/ak47_shot_b",
+      "techguns:guns/ak47_shot_c"
+    ],
+    "subtitle": "subtitles.techguns.guns.ak47fire"
+  },
+  "guns.ak47reload": {
+    "sounds": [
+      "techguns:guns/ak47_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.ak47reload"
+  },
+  "guns.assaultriflefire": {
+    "sounds": [
+      "techguns:guns/ar1_shot_a",
+      "techguns:guns/ar1_shot_b"
+    ],
+    "subtitle": "subtitles.techguns.guns.assaultriflefire"
+  },
+  "guns.assaultriflereload": {
+    "sounds": [
+      "techguns:guns/ar1_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.assaultriflereload"
+  },
+  "guns.silencedm4fire": {
+    "sounds": [
+      "techguns:guns/silencedm4_shot_a",
+      "techguns:guns/silencedm4_shot_b"
+    ],
+    "subtitle": "subtitles.techguns.guns.silencedm4fire"
+  },
+  "guns.lmgfire": {
+    "sounds": [
+      "techguns:guns/lmg_shot_a",
+      "techguns:guns/lmg_shot_b",
+      "techguns:guns/lmg_shot_c"
+    ],
+    "subtitle": "subtitles.techguns.guns.lmgfire"
+  },
+  "guns.lmgreload": {
+    "sounds": [
+      "techguns:guns/lmg_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.lmgreload"
+  },
+  "guns.mac10fire": {
+    "sounds": [
+      "techguns:guns/mac10_shot_a",
+      "techguns:guns/mac10_shot_b",
+      "techguns:guns/mac10_shot_c"
+    ],
+    "subtitle": "subtitles.techguns.guns.mac10fire"
+  },
+  "guns.as50fire": {
+    "sounds": [
+      "techguns:guns/as50_shot_a",
+      "techguns:guns/as50_shot_b"
+    ],
+    "subtitle": "subtitles.techguns.guns.as50fire"
+  },
+  "guns.as50reload": {
+    "sounds": [
+      "techguns:guns/as50_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.as50reload"
+  },
+  "guns.augfire": {
+    "sounds": [
+      "techguns:guns/aug_shot_a",
+      "techguns:guns/aug_shot_b",
+      "techguns:guns/aug_shot_c"
+    ],
+    "subtitle": "subtitles.techguns.guns.augfire"
+  },
+  "guns.augreload": {
+    "sounds": [
+      "techguns:guns/aug_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.augreload"
+  },
+  "guns.scarfire": {
+    "sounds": [
+      "techguns:guns/scar_shot_a",
+      "techguns:guns/scar_shot_b",
+      "techguns:guns/scar_shot_c"
+    ],
+    "subtitle": "subtitles.techguns.guns.scarfire"
+  },
+  "guns.scarreload": {
+    "sounds": [
+      "techguns:guns/scar_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.scarreload"
+  },
+  "guns.vectorfire": {
+    "sounds": [
+      "techguns:guns/vector_shot_a",
+      "techguns:guns/vector_shot_b",
+      "techguns:guns/vector_shot_c"
+    ],
+    "subtitle": "subtitles.techguns.guns.vectorfire"
+  },
+  "guns.vectorreload": {
+    "sounds": [
+      "techguns:guns/vector_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.vectorreload"
   }
 }

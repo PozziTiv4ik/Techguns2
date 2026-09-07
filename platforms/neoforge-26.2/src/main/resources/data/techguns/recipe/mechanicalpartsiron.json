@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:mechanicalpartsiron",
+    "count": 1
+  },
+  "pattern": [
+    " i ",
+    "ifi",
+    " i "
+  ],
+  "key": {
+    "f": "minecraft:flint",
+    "i": "#c:ingots/iron"
+  }
+}

@@ -3,7 +3,10 @@
   "category": "misc",
   "result": {
     "id": "techguns:handcannon",
-    "count": 1
+    "count": 1,
+    "components": {
+      "techguns:rounds": 0
+    }
   },
   "pattern": [
     "bfs"

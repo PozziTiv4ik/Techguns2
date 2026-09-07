@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:as50magazineempty",
+    "count": 4
+  },
+  "pattern": [
+    "s s",
+    "s s",
+    "sms"
+  ],
+  "key": {
+    "s": "#c:ingots/steel",
+    "m": "techguns:mechanicalpartsiron"
+  }
+}

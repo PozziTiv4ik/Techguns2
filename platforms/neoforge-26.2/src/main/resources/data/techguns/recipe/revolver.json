@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:revolver",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 0
+    }
+  },
+  "pattern": [
+    "bmf",
+    " s "
+  ],
+  "key": {
+    "b": "techguns:ironbarrel",
+    "s": "techguns:woodstock",
+    "f": "minecraft:flint_and_steel",
+    "m": "techguns:mechanicalpartsiron"
+  }
+}

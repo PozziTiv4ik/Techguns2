@@ -24,6 +24,8 @@ public final class ReloadSessions {
         if (!(stack.getItem() instanceof GunItem gun) || player.getCooldowns().isOnCooldown(stack)
                 || !GunItem.canReload(player, stack)) return false;
         PENDING.put(player, new Pending(stack, level, gun.definition().stats().reloadTicks()));
+        AimSessions.cancel(player);
+        stack.set(TGContent.RELOAD_TICKS.get(), gun.definition().stats().reloadTicks());
         GunItem.playReload(player, gun.definition());
         return true;
     }
@@ -36,20 +38,27 @@ public final class ReloadSessions {
             cancel(player);
         } else if (pending.remaining() > 1) {
             PENDING.put(player, new Pending(pending.stack(), pending.level(), pending.remaining() - 1));
+            pending.stack().set(TGContent.RELOAD_TICKS.get(), pending.remaining() - 1);
         } else {
             GunItem.completeReload(player, pending.stack());
             cancel(player);
         }
     }
 
-    public static void cancel(Player player) { PENDING.remove(player); }
+    public static void cancel(Player player) {
+        Pending old = PENDING.remove(player);
+        if (old != null) old.stack().remove(TGContent.RELOAD_TICKS.get());
+    }
 
     @SubscribeEvent public static void onTick(PlayerTickEvent.Post event) {
         if (event.getEntity().level() instanceof ServerLevel) tick(event.getEntity());
     }
     @SubscribeEvent public static void onLogout(PlayerEvent.PlayerLoggedOutEvent event) { cancel(event.getEntity()); }
     @SubscribeEvent public static void onRespawn(PlayerEvent.PlayerRespawnEvent event) { cancel(event.getEntity()); }
-    @SubscribeEvent public static void onStop(ServerStoppedEvent event) { PENDING.clear(); }
+    @SubscribeEvent public static void onStop(ServerStoppedEvent event) {
+        PENDING.values().forEach(state -> state.stack().remove(TGContent.RELOAD_TICKS.get()));
+        PENDING.clear();
+    }
 
     private ReloadSessions() {}
 }

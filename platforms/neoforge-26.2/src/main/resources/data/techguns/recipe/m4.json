@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:m4",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 30
+    }
+  },
+  "pattern": [
+    " gr",
+    "bfs",
+    "nmi"
+  ],
+  "key": {
+    "r": "#c:dusts/redstone",
+    "b": "techguns:obsidiansteelbarrel",
+    "s": "techguns:plasticstock",
+    "f": "techguns:steelreceiver",
+    "g": "#c:glass_panes",
+    "i": "#c:ingots/iron",
+    "m": "techguns:assaultriflemagazine",
+    "n": "#c:nuggets/iron"
+  }
+}

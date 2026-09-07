@@ -1,0 +1,21 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:display_context",
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "techguns:item/m4_infiltrator"
+    },
+    "cases": [
+      {
+        "when": [
+          "gui"
+        ],
+        "model": {
+          "type": "minecraft:model",
+          "model": "techguns:item/m4_infiltrator_gui"
+        }
+      }
+    ]
+  }
+}

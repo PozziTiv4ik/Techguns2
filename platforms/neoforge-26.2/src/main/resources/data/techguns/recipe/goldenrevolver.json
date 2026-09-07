@@ -1,0 +1,20 @@
+{
+  "type": "techguns:copy_gun",
+  "category": "misc",
+  "result": {
+    "id": "techguns:goldenrevolver",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 6
+    }
+  },
+  "pattern": [
+    "ggg",
+    "grg",
+    "ggg"
+  ],
+  "key": {
+    "r": "techguns:revolver",
+    "g": "#c:ingots/gold"
+  }
+}

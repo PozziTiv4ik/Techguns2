@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:thompson",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 20
+    }
+  },
+  "pattern": [
+    "bfs",
+    " m "
+  ],
+  "key": {
+    "b": "techguns:ironbarrel",
+    "s": "techguns:woodstock",
+    "f": "techguns:ironreceiver",
+    "m": "techguns:smgmagazine"
+  }
+}

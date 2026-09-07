@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:ironbarrel",
+    "count": 1
+  },
+  "pattern": [
+    "iii",
+    "   ",
+    "iii"
+  ],
+  "key": {
+    "i": "#c:ingots/iron"
+  }
+}

@@ -5,5 +5,15 @@
   "goldenrevolver": "ModelGoldenRevolver",
   "thompson": "ModelThompson",
   "boltaction": "ModelBoltaction",
-  "combatshotgun": "ModelCombatShotgun"
+  "combatshotgun": "ModelCombatShotgun",
+  "pistol": "ModelPistol",
+  "ak47": "ModelAK",
+  "m4": "ModelM4",
+  "m4_infiltrator": "ModelM4Infiltrator",
+  "lmg": "ModelLMG",
+  "mac10": "ModelMac10",
+  "as50": "ModelAS50",
+  "aug": "ModelAUG",
+  "scar": "ModelScar",
+  "vector": "ModelVector"
 }

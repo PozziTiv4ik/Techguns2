@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:scar",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 0
+    }
+  },
+  "pattern": [
+    "gpd",
+    "brs",
+    " m "
+  ],
+  "key": {
+    "p": "#c:sheets/plastic",
+    "r": "techguns:obsidiansteelreceiver",
+    "b": "techguns:obsidiansteelbarrel",
+    "s": "techguns:plasticstock",
+    "d": "#c:gems/diamond",
+    "g": {
+      "neoforge:ingredient_type": "techguns:tag_fallback",
+      "preferred": "c:glass_blocks/hardened",
+      "fallback": "c:glass_blocks"
+    },
+    "m": "techguns:assaultriflemagazineempty"
+  }
+}

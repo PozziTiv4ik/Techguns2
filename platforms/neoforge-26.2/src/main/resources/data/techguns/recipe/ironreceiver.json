@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:ironreceiver",
+    "count": 1
+  },
+  "pattern": [
+    "iii",
+    " mn",
+    "  n"
+  ],
+  "key": {
+    "i": "#c:ingots/iron",
+    "m": "techguns:mechanicalpartsiron",
+    "n": "#c:nuggets/iron"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:mac10",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 32
+    }
+  },
+  "pattern": [
+    " pi",
+    "bri",
+    " m "
+  ],
+  "key": {
+    "p": "#c:sheets/plastic",
+    "r": "techguns:steelreceiver",
+    "b": "techguns:obsidiansteelbarrel",
+    "i": "#c:nuggets/iron",
+    "m": "techguns:smgmagazine"
+  }
+}

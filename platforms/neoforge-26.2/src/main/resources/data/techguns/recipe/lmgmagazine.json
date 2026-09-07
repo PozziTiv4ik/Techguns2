@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:lmgmagazine",
+    "count": 1
+  },
+  "pattern": [
+    "bbb",
+    "bmb",
+    "bbb"
+  ],
+  "key": {
+    "b": "techguns:riflerounds",
+    "m": "techguns:lmgmagazineempty"
+  }
+}

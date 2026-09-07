@@ -2,14 +2,9 @@ package techguns.modern;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUseAnimation;
-import net.minecraft.world.level.Level;
 import techguns.core.Magazine;
 import techguns.core.WeaponDefinition;
 
@@ -22,30 +17,20 @@ public final class GunItem extends Item {
                 ? gun.definition.stats().clampRounds(stack.getOrDefault(TGContent.ROUNDS.get(), 0)) : 0;
     }
 
-    @Override public InteractionResult use(Level level, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-        if (player.getCooldowns().isOnCooldown(stack) || player.isUsingItem()) return InteractionResult.FAIL;
-        if (level instanceof ServerLevel && ReloadSessions.active(player)) return InteractionResult.FAIL;
-        if (player.isShiftKeyDown() || rounds(stack) == 0) {
-            if (!canReload(player, stack)) return InteractionResult.FAIL;
-            player.startUsingItem(hand);
-            if (level instanceof ServerLevel) playReload(player, definition);
-            return InteractionResult.CONSUME;
-        }
-        return InteractionResult.PASS;
-    }
-
     public static boolean fire(ServerLevel server, Player player, ItemStack stack) {
         if (!(stack.getItem() instanceof GunItem item) || player.level() != server || !player.isAlive() || player.isSpectator()
                 || (player.getMainHandItem() != stack && player.getOffhandItem() != stack)
                 || player.getCooldowns().isOnCooldown(stack) || ReloadSessions.active(player)
                 || !Magazine.canFire(item.definition.stats(), rounds(stack), 0, player.isUsingItem())) return false;
         WeaponDefinition gun = item.definition;
+        boolean aiming = AimSessions.active(player, stack);
+        double accuracyMultiplier = aiming ? gun.aim().accuracyMultiplier() : 1;
         for (int pellet = 0; pellet < gun.projectileCount(); pellet++) {
             Bullet bullet = new Bullet(TGContent.BULLET.get(), server);
             bullet.configure(gun);
             bullet.setOwner(player);
-            bullet.shootLegacy(player, pellet == 0 ? gun.stats().spread() : gun.pelletSpread());
+            bullet.shootLegacy(player, (pellet == 0 ? gun.stats().spread() : gun.pelletSpread()) * accuracyMultiplier,
+                    aiming && gun.aim().centered());
             // The first round must enter the world before consuming ammo. A later spawn
             // cancellation suppresses that pellet but does not refund an already fired shot.
             if (!server.addFreshEntity(bullet) && pellet == 0) return false;
@@ -101,13 +86,6 @@ public final class GunItem extends Item {
     public static void playReload(Player player, WeaponDefinition gun) {
         player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
                 TGContent.SOUND_EVENTS.get(gun.reloadSound()).get(), SoundSource.PLAYERS, 1, 1);
-    }
-    @Override public int getUseDuration(ItemStack stack, LivingEntity entity) { return definition.stats().reloadTicks(); }
-    @Override public ItemUseAnimation getUseAnimation(ItemStack stack) { return ItemUseAnimation.BOW; }
-    @Override public boolean canContinueUsing(ItemStack oldStack, ItemStack newStack) { return oldStack == newStack; }
-    @Override public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
-        if (level instanceof ServerLevel && user instanceof Player player) completeReload(player, stack);
-        return stack;
     }
     @Override public boolean isBarVisible(ItemStack stack) { return rounds(stack) < definition.stats().capacity(); }
     @Override public int getBarWidth(ItemStack stack) { return Math.round(13f * rounds(stack) / definition.stats().capacity()); }

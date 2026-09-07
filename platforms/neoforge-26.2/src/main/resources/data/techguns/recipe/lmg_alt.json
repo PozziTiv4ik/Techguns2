@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:lmg",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 0
+    }
+  },
+  "pattern": [
+    " gr",
+    "bfs",
+    " m "
+  ],
+  "key": {
+    "r": "#c:dusts/redstone",
+    "b": "techguns:obsidiansteelbarrel",
+    "s": "techguns:plasticstock",
+    "f": "techguns:obsidiansteelreceiver",
+    "g": "#c:glass_panes",
+    "m": "techguns:lmgmagazineempty"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "result": {
+    "id": "techguns:ingotsteel",
+    "count": 1
+  },
+  "ingredients": [
+    "#c:nuggets/steel",
+    "#c:nuggets/steel",
+    "#c:nuggets/steel",
+    "#c:nuggets/steel",
+    "#c:nuggets/steel",
+    "#c:nuggets/steel",
+    "#c:nuggets/steel",
+    "#c:nuggets/steel",
+    "#c:nuggets/steel"
+  ]
+}

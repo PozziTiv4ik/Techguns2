@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:assaultriflemagazineempty",
+    "count": 4
+  },
+  "pattern": [
+    "s s",
+    "s s",
+    "sms"
+  ],
+  "key": {
+    "s": "#c:nuggets/steel",
+    "m": "techguns:mechanicalpartsiron"
+  }
+}

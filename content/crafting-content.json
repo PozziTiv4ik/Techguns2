@@ -1,0 +1,309 @@
+{
+  "shared_metadata": {
+    "0": "techguns:stonebullets",
+    "1": "techguns:pistolrounds",
+    "2": "techguns:shotgunrounds",
+    "3": "techguns:riflerounds",
+    "4": "techguns:sniperrounds",
+    "8": "techguns:rifleroundsstack",
+    "9": "techguns:smgmagazine",
+    "10": "techguns:smgmagazineempty",
+    "11": "techguns:pistolmagazine",
+    "12": "techguns:pistolmagazineempty",
+    "13": "techguns:assaultriflemagazine",
+    "14": "techguns:assaultriflemagazineempty",
+    "15": "techguns:lmgmagazine",
+    "16": "techguns:lmgmagazineempty",
+    "19": "techguns:as50magazine",
+    "20": "techguns:as50magazineempty",
+    "33": "techguns:ironreceiver",
+    "34": "techguns:steelreceiver",
+    "35": "techguns:obsidiansteelreceiver",
+    "37": "techguns:stonebarrel",
+    "38": "techguns:ironbarrel",
+    "39": "techguns:obsidiansteelbarrel",
+    "42": "techguns:woodstock",
+    "43": "techguns:plasticstock",
+    "46": "techguns:plateiron",
+    "50": "techguns:platesteel",
+    "51": "techguns:plateobsidiansteel",
+    "55": "techguns:plasticsheet",
+    "57": "techguns:mechanicalpartsiron",
+    "58": "techguns:mechanicalpartsobsidiansteel",
+    "59": "techguns:mechanicalpartscarbon",
+    "82": "techguns:ingotlead",
+    "83": "techguns:ingotsteel",
+    "84": "techguns:ingotobsidiansteel",
+    "87": "techguns:nuggetlead",
+    "88": "techguns:nuggetsteel"
+  },
+  "recipes": [
+    {
+      "id": "techguns:ak47",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/ak47.json"
+    },
+    {
+      "id": "techguns:ak47_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/ak47_alt.json"
+    },
+    {
+      "id": "techguns:as50",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/as50.json"
+    },
+    {
+      "id": "techguns:as50_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/as50_alt.json"
+    },
+    {
+      "id": "techguns:aug",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/aug.json"
+    },
+    {
+      "id": "techguns:aug_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/aug_alt.json"
+    },
+    {
+      "id": "techguns:boltaction",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/boltaction.json"
+    },
+    {
+      "id": "techguns:combatshotgun",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/combatshotgun.json"
+    },
+    {
+      "id": "techguns:goldenrevolver",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/goldenrevolver.json"
+    },
+    {
+      "id": "techguns:handcannon",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/handcannon.json"
+    },
+    {
+      "id": "techguns:stonebullets",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_0_stonebullets.json"
+    },
+    {
+      "id": "techguns:smgmagazineempty",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_10_smgmagazineempty.json"
+    },
+    {
+      "id": "techguns:pistolmagazine",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_11_pistolmagazine.json"
+    },
+    {
+      "id": "techguns:pistolmagazineempty",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_12_pistolmagazineempty.json"
+    },
+    {
+      "id": "techguns:assaultriflemagazine",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_13_assaultriflemagazine.json"
+    },
+    {
+      "id": "techguns:assaultriflemagazineempty",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_14_assaultriflemagazineempty.json"
+    },
+    {
+      "id": "techguns:lmgmagazine",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_15_lmgmagazine.json"
+    },
+    {
+      "id": "techguns:lmgmagazine_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_15_lmgmagazine_alt.json"
+    },
+    {
+      "id": "techguns:lmgmagazineempty",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_16_lmgmagazineempty.json"
+    },
+    {
+      "id": "techguns:as50magazine",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_19_as50magazine.json"
+    },
+    {
+      "id": "techguns:pistolrounds",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_1_pistolrounds.json"
+    },
+    {
+      "id": "techguns:as50magazineempty",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_20_as50magazineempty.json"
+    },
+    {
+      "id": "techguns:shotgunrounds",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_2_shotgunrounds.json"
+    },
+    {
+      "id": "techguns:ironreceiver",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_33_ironreceiver.json"
+    },
+    {
+      "id": "techguns:steelreceiver",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_34_steelreceiver.json"
+    },
+    {
+      "id": "techguns:obsidiansteelreceiver",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_35_obsidiansteelreceiver.json"
+    },
+    {
+      "id": "techguns:stonebarrel",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_37_stonebarrel.json"
+    },
+    {
+      "id": "techguns:ironbarrel",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_38_ironbarrel.json"
+    },
+    {
+      "id": "techguns:obsidiansteelbarrel",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_39_obsidiansteelbarrel.json"
+    },
+    {
+      "id": "techguns:riflerounds",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_3_riflerounds.json"
+    },
+    {
+      "id": "techguns:woodstock",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_42_woodstock.json"
+    },
+    {
+      "id": "techguns:plasticstock",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_43_plasticstock.json"
+    },
+    {
+      "id": "techguns:mechanicalpartsiron",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_57_mechanicalpartsiron.json"
+    },
+    {
+      "id": "techguns:ingotlead",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_82_ingotlead.json"
+    },
+    {
+      "id": "techguns:ingotsteel",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_83_ingotsteel.json"
+    },
+    {
+      "id": "techguns:nuggetlead",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_87_nuggetlead.json"
+    },
+    {
+      "id": "techguns:nuggetsteel",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_88_nuggetsteel.json"
+    },
+    {
+      "id": "techguns:rifleroundsstack",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_8_rifleroundsstack.json"
+    },
+    {
+      "id": "techguns:smgmagazine",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_9_smgmagazine.json"
+    },
+    {
+      "id": "techguns:lmg",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/lmg.json"
+    },
+    {
+      "id": "techguns:lmg_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/lmg_alt.json"
+    },
+    {
+      "id": "techguns:m4",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/m4.json"
+    },
+    {
+      "id": "techguns:m4_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/m4_alt.json"
+    },
+    {
+      "id": "techguns:mac10",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/mac10.json"
+    },
+    {
+      "id": "techguns:mac10_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/mac10_alt.json"
+    },
+    {
+      "id": "techguns:pistol",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/pistol.json"
+    },
+    {
+      "id": "techguns:pistol_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/pistol_alt.json"
+    },
+    {
+      "id": "techguns:revolver",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/revolver.json"
+    },
+    {
+      "id": "techguns:sawedoff",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/sawedoff.json"
+    },
+    {
+      "id": "techguns:scar",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/scar.json"
+    },
+    {
+      "id": "techguns:scar_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/scar_alt.json"
+    },
+    {
+      "id": "techguns:thompson",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/thompson.json"
+    },
+    {
+      "id": "techguns:thompson_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/thompson_alt.json"
+    },
+    {
+      "id": "techguns:vector",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/vector.json"
+    },
+    {
+      "id": "techguns:vector_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/vector_alt.json"
+    }
+  ],
+  "tags": {
+    "c:ingots/lead": [
+      "techguns:ingotlead"
+    ],
+    "c:ingots/obsidian_steel": [
+      "techguns:ingotobsidiansteel"
+    ],
+    "c:ingots/steel": [
+      "techguns:ingotsteel"
+    ],
+    "c:nuggets/lead": [
+      "techguns:nuggetlead"
+    ],
+    "c:nuggets/steel": [
+      "techguns:nuggetsteel"
+    ],
+    "c:plates/iron": [
+      "techguns:plateiron"
+    ],
+    "c:plates/obsidian_steel": [
+      "techguns:plateobsidiansteel"
+    ],
+    "c:plates/steel": [
+      "techguns:platesteel"
+    ],
+    "c:sheets/plastic": [
+      "techguns:plasticsheet"
+    ]
+  },
+  "requires_non_workbench_production": [
+    "ingotobsidiansteel",
+    "mechanicalpartscarbon",
+    "mechanicalpartsobsidiansteel",
+    "plasticsheet",
+    "plateiron",
+    "plateobsidiansteel",
+    "platesteel",
+    "sniperrounds"
+  ],
+  "metal_packing_requires_feedstock": [
+    "ingotlead",
+    "ingotsteel"
+  ],
+  "pending_upgrade_recipes": [
+    "m4_infiltrator.json",
+    "m4_infiltrator_alt.json"
+  ]
+}

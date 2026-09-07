@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:pistolmagazineempty",
+    "count": 4
+  },
+  "pattern": [
+    "i i",
+    "imi",
+    "igi"
+  ],
+  "key": {
+    "g": "#c:ingots/iron",
+    "i": "#c:nuggets/iron",
+    "m": "techguns:mechanicalpartsiron"
+  }
+}

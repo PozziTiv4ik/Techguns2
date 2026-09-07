@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:smgmagazineempty",
+    "count": 4
+  },
+  "pattern": [
+    "i i",
+    "i i",
+    "imi"
+  ],
+  "key": {
+    "i": "#c:nuggets/iron",
+    "m": "techguns:mechanicalpartsiron"
+  }
+}

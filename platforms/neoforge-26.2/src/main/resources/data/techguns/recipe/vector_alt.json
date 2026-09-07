@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:vector",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 0
+    }
+  },
+  "pattern": [
+    " gd",
+    "brs",
+    " m "
+  ],
+  "key": {
+    "r": "techguns:obsidiansteelreceiver",
+    "b": "techguns:obsidiansteelbarrel",
+    "s": "techguns:plasticstock",
+    "d": "#c:dusts/redstone",
+    "g": "#c:glass_panes",
+    "m": "techguns:smgmagazineempty"
+  }
+}

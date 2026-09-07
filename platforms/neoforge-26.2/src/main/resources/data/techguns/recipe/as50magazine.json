@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "result": {
+    "id": "techguns:as50magazine",
+    "count": 1
+  },
+  "ingredients": [
+    "techguns:as50magazineempty",
+    "techguns:sniperrounds",
+    "techguns:sniperrounds"
+  ]
+}

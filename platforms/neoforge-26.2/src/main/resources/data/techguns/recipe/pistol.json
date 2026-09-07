@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:pistol",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 18
+    }
+  },
+  "pattern": [
+    "bsp",
+    " fp",
+    "  m"
+  ],
+  "key": {
+    "p": "techguns:plasticsheet",
+    "b": "techguns:obsidiansteelbarrel",
+    "s": "#c:plates/steel",
+    "f": "techguns:mechanicalpartsobsidiansteel",
+    "m": "techguns:pistolmagazine"
+  }
+}

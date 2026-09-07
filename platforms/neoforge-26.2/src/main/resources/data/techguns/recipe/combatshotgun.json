@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:combatshotgun",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 0
+    }
+  },
+  "pattern": [
+    "bfs",
+    "i  "
+  ],
+  "key": {
+    "b": "techguns:obsidiansteelbarrel",
+    "s": "techguns:plasticstock",
+    "f": "techguns:steelreceiver",
+    "i": "#c:ingots/steel"
+  }
+}

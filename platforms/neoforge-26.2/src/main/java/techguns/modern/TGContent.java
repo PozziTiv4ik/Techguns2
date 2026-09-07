@@ -24,17 +24,20 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import techguns.core.WeaponDefinition;
 import techguns.core.Weapons;
+import techguns.core.CraftingContent;
 
 public final class TGContent {
     public static final DeferredRegister.DataComponents COMPONENTS = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, Techguns.MOD_ID);
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ROUNDS = COMPONENTS.registerComponentType(
             "rounds", builder -> builder.persistent(Codec.intRange(0, 10000)).networkSynchronized(ByteBufCodecs.VAR_INT).ignoreSwapAnimation());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> AIMING = COMPONENTS.registerComponentType(
+            "aiming", builder -> builder.networkSynchronized(ByteBufCodecs.BOOL).ignoreSwapAnimation());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> RELOAD_TICKS = COMPONENTS.registerComponentType(
+            "reload_ticks", builder -> builder.networkSynchronized(ByteBufCodecs.VAR_INT).ignoreSwapAnimation());
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Techguns.MOD_ID);
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, Techguns.MOD_ID);
     public static final Map<String, DeferredItem<Item>> AMMO = registerAmmo();
-    public static final Map<String, DeferredItem<Item>> MATERIALS = Map.of(
-            "stonebarrel", ITEMS.registerSimpleItem("stonebarrel"),
-            "woodstock", ITEMS.registerSimpleItem("woodstock"));
+    public static final Map<String, DeferredItem<Item>> MATERIALS = registerMaterials();
     public static final Map<String, DeferredItem<GunItem>> GUNS = registerGuns();
     public static final Map<String, DeferredHolder<SoundEvent, SoundEvent>> SOUND_EVENTS = registerSounds();
     public static final DeferredItem<Item> PISTOL_ROUNDS = AMMO.get("pistolrounds");
@@ -61,6 +64,7 @@ public final class TGContent {
     }
     private static Map<String, DeferredItem<Item>> registerAmmo() {
         TreeSet<String> ids = new TreeSet<>();
+        ids.addAll(CraftingContent.EXTRA_AMMO);
         for (WeaponDefinition gun : Weapons.ALL) {
             ids.add(gun.ammo().item());
             if (!gun.ammo().emptyItem().isEmpty()) ids.add(gun.ammo().emptyItem());
@@ -68,6 +72,11 @@ public final class TGContent {
         }
         Map<String, DeferredItem<Item>> items = new LinkedHashMap<>();
         ids.forEach(id -> items.put(id, ITEMS.registerSimpleItem(id)));
+        return Collections.unmodifiableMap(items);
+    }
+    private static Map<String, DeferredItem<Item>> registerMaterials() {
+        Map<String, DeferredItem<Item>> items = new LinkedHashMap<>();
+        CraftingContent.MATERIALS.forEach(id -> items.put(id, ITEMS.registerSimpleItem(id)));
         return Collections.unmodifiableMap(items);
     }
     private static Map<String, DeferredHolder<SoundEvent, SoundEvent>> registerSounds() {
