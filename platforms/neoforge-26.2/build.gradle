@@ -1,0 +1,38 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev'
+}
+base { archivesName = 'techguns-26.2-neoforge' }
+dependencies { implementation project(':core') }
+neoForge {
+    version = project.neo_version
+    runs {
+        client { client() }
+        server {
+            server()
+            programArgument '--nogui'
+        }
+        gameTestServer {
+            type = 'gameTestServer'
+            systemProperty 'neoforge.enabledGameTestNamespaces', 'techguns'
+            systemProperty 'techguns.gametest', 'true'
+        }
+    }
+    mods {
+        techguns {
+            sourceSet sourceSets.main
+            sourceSet project(':core').sourceSets.main
+        }
+    }
+}
+tasks.named('processResources', ProcessResources) {
+    inputs.property 'mod_version', project.version
+    inputs.property 'neo_version', project.neo_version
+    filesMatching('META-INF/neoforge.mods.toml') {
+        expand mod_version: project.version, neo_version: project.neo_version
+    }
+}
+tasks.named('jar', Jar) {
+    from project(':core').sourceSets.main.output
+    from rootProject.file('LICENSE.txt')
+}

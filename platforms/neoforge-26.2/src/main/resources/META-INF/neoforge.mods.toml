@@ -1,0 +1,23 @@
+license="Techguns Mod License (see LICENSE.txt)"
+[[mods]]
+modId="techguns"
+version="${mod_version}"
+displayName="Techguns — Development Port"
+displayURL="https://github.com/PozziTiv4ik/Techguns2"
+authors="Original Techguns authors; port development: PozziTiv4ik"
+description='''
+Development port of Techguns to Minecraft 26.2. Incomplete: see the feature matrix.
+Original code and assets remain subject to the Techguns Mod License.
+'''
+[[dependencies.techguns]]
+modId="neoforge"
+type="required"
+versionRange="[${neo_version},26.3)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.techguns]]
+modId="minecraft"
+type="required"
+versionRange="[26.2]"
+ordering="NONE"
+side="BOTH"

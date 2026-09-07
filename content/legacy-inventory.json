@@ -1,0 +1,4173 @@
+{
+  "upstream": "pWn3d1337/Techguns2",
+  "commit": "5c95a5b6d79f5adb08096dae39c6307e72b87d64",
+  "hash_format": "SHA-256 of UTF-8 file bytes with CRLF normalized to LF",
+  "summary": {
+    "java_files": 761,
+    "java_lines": 103043,
+    "resource_files": 2133,
+    "weapons": 44
+  },
+  "packages": {
+    "micdoodle8/mods": 3,
+    "techguns": 15,
+    "techguns/api": 19,
+    "techguns/blocks": 65,
+    "techguns/capabilities": 14,
+    "techguns/client": 186,
+    "techguns/core": 4,
+    "techguns/damagesystem": 4,
+    "techguns/deatheffects": 1,
+    "techguns/debug": 1,
+    "techguns/entities": 65,
+    "techguns/events": 5,
+    "techguns/factions": 1,
+    "techguns/gui": 72,
+    "techguns/init": 1,
+    "techguns/items": 55,
+    "techguns/keybind": 2,
+    "techguns/packets": 24,
+    "techguns/plugins": 51,
+    "techguns/radiation": 5,
+    "techguns/recipes": 11,
+    "techguns/server": 1,
+    "techguns/tileentities": 57,
+    "techguns/tools": 2,
+    "techguns/util": 21,
+    "techguns/world": 76
+  },
+  "resource_extensions": {
+    "": 19,
+    ".cfg": 1,
+    ".info": 1,
+    ".json": 928,
+    ".lang": 3,
+    ".mcmeta": 37,
+    ".mtl": 7,
+    ".obj": 18,
+    ".off": 3,
+    ".ogg": 405,
+    ".old": 4,
+    ".old2": 1,
+    ".png": 689,
+    ".ser": 12,
+    ".txt": 5
+  },
+  "weapons": [
+    {
+      "id": "handcannon",
+      "field": "handcannon",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 241
+    },
+    {
+      "id": "sawedoff",
+      "field": "sawedoff",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 243
+    },
+    {
+      "id": "revolver",
+      "field": "revolver",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 245
+    },
+    {
+      "id": "ak47",
+      "field": "ak47",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 247
+    },
+    {
+      "id": "m4",
+      "field": "m4",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 249
+    },
+    {
+      "id": "thompson",
+      "field": "thompson",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 250
+    },
+    {
+      "id": "pistol",
+      "field": "pistol",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 251
+    },
+    {
+      "id": "lmg",
+      "field": "lmg",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 252
+    },
+    {
+      "id": "boltaction",
+      "field": "boltaction",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 254
+    },
+    {
+      "id": "flamethrower",
+      "field": "flamethrower",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 257
+    },
+    {
+      "id": "biogun",
+      "field": "biogun",
+      "legacy_class": "GenericGunCharge",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 259
+    },
+    {
+      "id": "rocketlauncher",
+      "field": "rocketlauncher",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 261
+    },
+    {
+      "id": "minigun",
+      "field": "minigun",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 263
+    },
+    {
+      "id": "combatshotgun",
+      "field": "combatshotgun",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 265
+    },
+    {
+      "id": "grimreaper",
+      "field": "grimreaper",
+      "legacy_class": "GuidedMissileLauncher",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 267
+    },
+    {
+      "id": "pdw",
+      "field": "pdw",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 269
+    },
+    {
+      "id": "as50",
+      "field": "as50",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 271
+    },
+    {
+      "id": "teslagun",
+      "field": "teslagun",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 273
+    },
+    {
+      "id": "m4_infiltrator",
+      "field": "m4_infiltrator",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 275
+    },
+    {
+      "id": "goldenrevolver",
+      "field": "goldenrevolver",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 277
+    },
+    {
+      "id": "pulserifle",
+      "field": "pulserifle",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 279
+    },
+    {
+      "id": "lasergun",
+      "field": "lasergun",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 281
+    },
+    {
+      "id": "alienblaster",
+      "field": "alienblaster",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 283
+    },
+    {
+      "id": "netherblaster",
+      "field": "netherblaster",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 285
+    },
+    {
+      "id": "blasterrifle",
+      "field": "blasterrifle",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 287
+    },
+    {
+      "id": "powerhammer",
+      "field": "powerhammer",
+      "legacy_class": "PowerHammer",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 289
+    },
+    {
+      "id": "grenadelauncher",
+      "field": "grenadelauncher",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 291
+    },
+    {
+      "id": "aug",
+      "field": "aug",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 293
+    },
+    {
+      "id": "sonicshotgun",
+      "field": "sonicshotgun",
+      "legacy_class": "SonicShotgun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 294
+    },
+    {
+      "id": "chainsaw",
+      "field": "chainsaw",
+      "legacy_class": "Chainsaw",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 295
+    },
+    {
+      "id": "scatterbeamrifle",
+      "field": "scatterbeamrifle",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 296
+    },
+    {
+      "id": "nucleardeathray",
+      "field": "nucleardeathray",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 297
+    },
+    {
+      "id": "mac10",
+      "field": "mac10",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 299
+    },
+    {
+      "id": "mibgun",
+      "field": "mibgun",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 300
+    },
+    {
+      "id": "scar",
+      "field": "scar",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 301
+    },
+    {
+      "id": "vector",
+      "field": "vector",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 302
+    },
+    {
+      "id": "gaussrifle",
+      "field": "gaussrifle",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 304
+    },
+    {
+      "id": "guidedmissilelauncher",
+      "field": "guidedmissilelauncher",
+      "legacy_class": "GuidedMissileLauncher",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 306
+    },
+    {
+      "id": "miningdrill",
+      "field": "miningdrill",
+      "legacy_class": "MiningDrill",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 308
+    },
+    {
+      "id": "tfg",
+      "field": "tfg",
+      "legacy_class": "GenericGunCharge",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 310
+    },
+    {
+      "id": "laserpistol",
+      "field": "laserpistol",
+      "legacy_class": "GenericGun",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 312
+    },
+    {
+      "id": "shishkebap",
+      "field": "shishkebap",
+      "legacy_class": "Shishkebap",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 315
+    },
+    {
+      "id": "stielgranate",
+      "field": "stielgranate",
+      "legacy_class": "GenericGrenade",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 318
+    },
+    {
+      "id": "fraggrenade",
+      "field": "fraggrenade",
+      "legacy_class": "GenericGrenade",
+      "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "line": 320
+    }
+  ],
+  "java_sources": [
+    {
+      "path": "legacy/1.12.2/src/main/java/micdoodle8/mods/galacticraft/api/client/tabs/AbstractTab.java",
+      "lines": 85,
+      "sha256": "8c8f3e0d591f45a048d221c2a08767a51dfb2cbb1df8f5104e25d0c5705bf643"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/micdoodle8/mods/galacticraft/api/client/tabs/InventoryTabVanilla.java",
+      "lines": 24,
+      "sha256": "5e17dc54b15d577aac2729156d2c19cf62659b38f8704e6d0c5c6a2328e53471"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/micdoodle8/mods/galacticraft/api/client/tabs/TabRegistry.java",
+      "lines": 214,
+      "sha256": "6ff551754048ba628550a99ad40b267b267b52c7bdb7690741313a12f3933c39"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/api/capabilities/AttackTime.java",
+      "lines": 85,
+      "sha256": "ec8e34f9d874c100a9e9e4e950887cffece8228c5fb484bc4804e3bed4392fd1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/api/capabilities/ITGExtendedPlayer.java",
+      "lines": 22,
+      "sha256": "b07a964cd423b4cd7f4b651aef3fa692e9a6b85bc1f2f9e4ca188c6dc1141575"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/api/capabilities/ITGShooterValues.java",
+      "lines": 8,
+      "sha256": "99f39cc90cfe3c729cdd67ea2327857a77935ca40d540e6185ab3a0a598f63c1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/api/damagesystem/DamageType.java",
+      "lines": 51,
+      "sha256": "b8f4166a2321d5aae01427407c9ba99db01a7dd4bcb8c96320b44e51f7259be4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/api/damagesystem/IToolTGDamageSystem.java",
+      "lines": 8,
+      "sha256": "f8e713ed32ace9bf8bab2d9b6aca10dbfe7c6b12ef78c89dc966e64a2140c461"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/api/guns/GunHandType.java",
+      "lines": 30,
+      "sha256": "fc6580d652248a94ed79cfa72c1f424e58835a298b6042005e1005b300a8a13a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/api/guns/GunManager.java",
+      "lines": 42,
+      "sha256": "7b8b4cf4a62d75da369c3c68b644c08a4d00231d0a13f1aa280f741c2c6e681a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/api/guns/IGenericGun.java",
+      "lines": 34,
+      "sha256": "2deb53fd5a167baf1a5af288257e3a948aad14e5c88402e1ae09d03bdfb7c011"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/api/machines/IMachineType.java",
+      "lines": 45,
+      "sha256": "c916c806333b674eb76d3b59e7db5698b692ffab83e27c32d1d62aead6300ce4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/api/machines/ITGTileEntSecurity.java",
+      "lines": 20,
+      "sha256": "da9cadb02d21d7768bbec0d7bb4925019b483071d72ac70158dc4aadd803ed7c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/api/npc/factions/ITGNpcTeam.java",
+      "lines": 5,
+      "sha256": "2763f90d791b85cb8708fa006ac7ba409083cccda2d103545142b7bde30e0b5c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/api/npc/factions/TGNpcFaction.java",
+      "lines": 7,
+      "sha256": "06ad50bf2f1d42266637add268889a191aaf4cb596eb5f78bc5c802947bccdf6"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/api/npc/INPCTechgunsShooter.java",
+      "lines": 23,
+      "sha256": "516fa7255c9330e20e7e53d9230d65b14ad9cbe6673d454e27bb36088655ef32"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/api/npc/INpcTGDamageSystem.java",
+      "lines": 22,
+      "sha256": "90245b333718981fb3c625b7427dfc53dbb7ed25598e25b19abe7570224acf72"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/api/radiation/TGRadiation.java",
+      "lines": 13,
+      "sha256": "c9f196924e0accc1234391419ef504c16707c31685cdbf21b14164c00540e3be"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/api/render/IItemRenderer.java",
+      "lines": 17,
+      "sha256": "cca48d65777fb5a8687fe53503e3cab39ea2b3e53cca99c5108e02d0cb2c5e51"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/api/render/IItemTGRenderer.java",
+      "lines": 15,
+      "sha256": "8317b5e7c97c2a333feb388e2bf81554fc79c2a9f97058b3dfa5d93d53470ac5"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/api/tginventory/ITGSpecialSlot.java",
+      "lines": 33,
+      "sha256": "53844fce733b25ea892a65de4c36ceaf4aa664130ff3790bf9de6b50d7c6fbe1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/api/tginventory/TGSlotType.java",
+      "lines": 56,
+      "sha256": "b25dde816bea499f7278cdacd80eed7af43cd8a67e95d1bfd985b6d468bb55ad"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/BlockBioblob.java",
+      "lines": 183,
+      "sha256": "3e21e11a77872c00f43b8f1a3d8264142ce3779898e312c4ed2cff01c2f78b9c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/BlockDebugMarker.java",
+      "lines": 86,
+      "sha256": "18ff58d4197421cfc1a42cec5e1be271d3d6bbc7d891d76353687ef003f2fc9f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/BlockFluidAcid.java",
+      "lines": 33,
+      "sha256": "3bfeeb316739594ff0d6cdc20167116b0d64edf83df80c47c281fa8668c90af4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/BlockMilitaryCrate.java",
+      "lines": 88,
+      "sha256": "bacf917604b47f552d8eee53058b60941c1f2e26c6759703a79c90cd6fdb9ffa"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/BlockOreCluster.java",
+      "lines": 102,
+      "sha256": "32d2fa2bc650effcf2a63457a45be62d2f38295a5b95bd0329ee1260b6e2b011"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/BlockSandbags.java",
+      "lines": 310,
+      "sha256": "4d86a9511a91367b582a62aef2326e8ec39d382c89a90c51556f10f3bb30cc63"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/BlockTGCamoNet.java",
+      "lines": 154,
+      "sha256": "8b37fd2669f5d12271e4e05bfe5dc728199f2b5afe9cf774e0dc45956af60648"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/BlockTGCamoNetTop.java",
+      "lines": 133,
+      "sha256": "c0c8486dcd2165c7a23ac4576bc5b541d98c1836597d2f778a7c22c2948478c0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/BlockTGDoor2x1.java",
+      "lines": 143,
+      "sha256": "acd3d99561a5e35c3247db241c2dfc76e98ae13b3c41a4f6e1b8b0038ad6d1ff"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/BlockTGDoor3x3.java",
+      "lines": 858,
+      "sha256": "5510a8d83b64256f938d6f7ba2be2e7c3ea6a6cbdcfc1358bcfb47d33f60a8f9"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/BlockTGLadder.java",
+      "lines": 236,
+      "sha256": "1b678d318a2e8a4027fae0a035cba2df2c9d3409bf6151a64536ee9c0bedb6b8"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/BlockTGLamp.java",
+      "lines": 364,
+      "sha256": "090ecd5e6d8c16bf1c410a6131bd151b600f89afdab48da73eadc9c24d65e89d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/BlockTGMetalPanel.java",
+      "lines": 72,
+      "sha256": "b733610048a1de80ae7bbdfced6612e717b734fd036ba97caaeff7aa7044d7ab"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/BlockTGOre.java",
+      "lines": 102,
+      "sha256": "6df92af33923065b30748dc6e153f70ab8f8282356cd39297b83347656b6fa23"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/BlockTGSandHard.java",
+      "lines": 17,
+      "sha256": "253832d71d434db622a303411f049a2cc1ddfad41684ecd7d4b28aa129cdc840"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/BlockTGSlimy.java",
+      "lines": 18,
+      "sha256": "ac5214df79f590f4057d22f3c8dc242101147a94f9ca21e58993c04703850a43"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/BlockTGSlimyLadder.java",
+      "lines": 80,
+      "sha256": "dc2ab95ae40c1b43d254e2ebf568420c421b5ba2d3a3132b720a7de3ded33af3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/BlockTGSpawner.java",
+      "lines": 123,
+      "sha256": "5043f6e5a29765c4649e6e5cd93e8205184075a252c232004b1e4c6c4d616cd2"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/BlockTGStairs.java",
+      "lines": 543,
+      "sha256": "ec1df1d9047ed32e5c5ce801f97cafaaf00aee7e489a29ab92ff430388d12b9f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/EnumCamoNetType.java",
+      "lines": 14,
+      "sha256": "9d48425721f1474f2fe9f1aef0c4b3efa87f0804ca7ad13855b0ff115600071e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/EnumConcreteType.java",
+      "lines": 19,
+      "sha256": "a8166ff1ad3831f46fb8eb68a18f856863376f9b6d1de0deca28fb6a01192cf1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/EnumConnectionType.java",
+      "lines": 38,
+      "sha256": "bc7f8c860e34c866d219ef3dd0ab60800b19eb4b61884828c229de5314180411"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/EnumDebugBlockType.java",
+      "lines": 17,
+      "sha256": "00f2b5665eed33a8d5d9f10bf369aa797b44872bc1fd53646732eb940482377c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/EnumDoorState.java",
+      "lines": 16,
+      "sha256": "fe82f2fa9e860904115e76280220fb13b16de243d4e5e7a80e20f05a8d48d630"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/EnumDoorType.java",
+      "lines": 16,
+      "sha256": "eb7b4e4198827fe6a2ed2ee096c2f945a020d58ac04c82d4a7491fb56f731650"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/EnumLadderType.java",
+      "lines": 15,
+      "sha256": "4ebc489e8d1fe640670b8cf0c4ea0882db12920637208650a7bda1b4dfefa000"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/EnumLampType.java",
+      "lines": 15,
+      "sha256": "d7b09d83c43869ea4e51009e8c41d912849e41b928deb5823fc57031e9dfb270"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/EnumLightblockType.java",
+      "lines": 16,
+      "sha256": "7a60bd0033658562707c92c3c44b0c3a2068e8fd826cb0cf1992d7f288d756f2"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/EnumMilitaryCrateType.java",
+      "lines": 21,
+      "sha256": "d9eb6c6055933c2a826dee094523349fcea860afb03f6bc0c5c45b5ec6037380"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/EnumMonsterSpawnerType.java",
+      "lines": 14,
+      "sha256": "68c67b3c278d2aaed53f40eb5dbc1055ac104671d2a28bb6b2024218b26465c3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/EnumNetherMetalType.java",
+      "lines": 34,
+      "sha256": "4c255a68c397920b8733a851f22866a9bef362628221ac2f61d0a203970e903e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/EnumOreClusterType.java",
+      "lines": 47,
+      "sha256": "07afaed845f6411e8030ad5e3a921d89450c9c710a03b2d207438adc1385d7a3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/EnumOreType.java",
+      "lines": 52,
+      "sha256": "3ce0611a97b390c9e7b8e1b02b2237a2b694244fc0a03dc38d1cd28fc2f292ac"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/EnumTGSandHardTypes.java",
+      "lines": 12,
+      "sha256": "1fcc3e4f85c5419edec2ce3dec5459076a47845df8a9bca0dddc370070e85638"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/EnumTGSlimyType.java",
+      "lines": 12,
+      "sha256": "3ddd9849169172c5a1eadbfd333d1344d988ff6f4b709416d7315ea2a9d4f34c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/GenericBlock.java",
+      "lines": 53,
+      "sha256": "569dd98cbc26e3500b0a7a56c8a5e4c352ef58daee6dfc53c62041d0fd2f335f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/GenericBlockMetaEnum.java",
+      "lines": 100,
+      "sha256": "51943bd27db8153b8385bcdfd8281f8f919e48c4e896ef96f30eb132311cc891"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/GenericBlockMetaEnumCamoChangeable.java",
+      "lines": 72,
+      "sha256": "bb7c75a3e5065c37a63ba0144ca4aca98d02b32b1ed83ca88a51ac336fdb2b68"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/GenericBlockMetaEnumCamoChangeableLightlevel.java",
+      "lines": 25,
+      "sha256": "7bbb5054661e5b565745854e7474f86f30292f11f71e7ff8dbe164b8bbab33b1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/GenericItemBlock.java",
+      "lines": 16,
+      "sha256": "c8e4ede6776a5723a095ef46875a9d02c12bd02fcb8473838402ce2f19d4e5a3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/GenericItemBlockMeta.java",
+      "lines": 45,
+      "sha256": "3560d4eba1fefd3c789a03191b6e7c4cb3a0d824a4108ede3971d17a1e658844"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/GenericItemBlockMetaMachineBlock.java",
+      "lines": 43,
+      "sha256": "d9cdf409e67ec0b07728069c9e4173759e82276a5501156e40617280ed824d40"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/IEnumLightlevel.java",
+      "lines": 5,
+      "sha256": "d08268c475ab2d32fbf2d0f704309dd56291a2da2536c9e1654558a54a01027a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/IEnumOreClusterType.java",
+      "lines": 10,
+      "sha256": "ac2ecc7f6b24ba4176238960ffe2c17163974aed765ee6326a3bae4daf33c2e7"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/IGenericBlock.java",
+      "lines": 36,
+      "sha256": "f019fcf888e1915749b696280e0f0e7749821e9e05237d9c49eb3369e9581175"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/ItemBlockLamp.java",
+      "lines": 34,
+      "sha256": "44f15c7bc82346a15dafb38fa6a736492d9c996f2a4535498576dd87e2d20f58"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/ItemBlockOreDrill.java",
+      "lines": 157,
+      "sha256": "f772d3c85bf911c248bc7b3a5d62951e0ed456318f9a8d30f7f04a1f7e309d47"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/machines/BasicMachine.java",
+      "lines": 383,
+      "sha256": "7661208ac06c5d4c5b460c560fd235f032f25113daadbc4fa35004fb427db9f1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/machines/BlockExplosiveCharge.java",
+      "lines": 150,
+      "sha256": "035ce747fc72f0cf08aeb81d273148cec4fcafb947d6624f7d1fee6e204f6310"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/machines/BlockOreDrill.java",
+      "lines": 51,
+      "sha256": "af8f9012ebd764f02eeecbb1a6ada473f999926ba5f2b16035d205beb6ce06ee"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/machines/EnumExplosiveChargeType.java",
+      "lines": 68,
+      "sha256": "f3ac5ada376f1104aa258fa0462908f145dafd76890afe207998260acbf1da5b"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/machines/EnumMachineType.java",
+      "lines": 100,
+      "sha256": "0cd01dcaf0c5e3a8a405020e61a9b566056dc64504baace03df7209daf8c7e11"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/machines/EnumMultiBlockMachineType.java",
+      "lines": 101,
+      "sha256": "9b9f2652b317f28d545fb0944e8c12c57fe5228110aebd1e79d91594a46ea465"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/machines/EnumOreDrillType.java",
+      "lines": 108,
+      "sha256": "9553c7081243ba6be10f8cabedf7fce01dfabfad42f3e9474bee6cccc98ef603"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/machines/EnumSimpleMachineType.java",
+      "lines": 91,
+      "sha256": "419f37e55982a9667ecf00534163c8063e82778fdcc6a32b61f939ebebaeb18d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/machines/EnumSimpleMachineType2.java",
+      "lines": 118,
+      "sha256": "839e41416fd0cb0874f63728e5aefbfaf81962cd9064c38e56975d7d436ccd15"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/machines/MultiBlockMachine.java",
+      "lines": 165,
+      "sha256": "c28dac7e8265c29437e5e831049e02334f5bf5ada63a5e79eceb40ce28b97442"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/machines/multiblocks/FabricatorDefinition.java",
+      "lines": 115,
+      "sha256": "f3b6072cb72b5ed974cbe0956ddc1bbf97f83e8d2cc6b5ac5107ff1d89c35533"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/machines/multiblocks/MultiBlockMachineSchematic.java",
+      "lines": 108,
+      "sha256": "3750fbaec7f174b501266d62c6ac492cbeea4b8907cdd57722f26b97769437e4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/machines/multiblocks/MultiBlockRegister.java",
+      "lines": 46,
+      "sha256": "726e6d8c488f5bfc9bad38cbe397b24fb58ff348ea3ae23fcd4a80d6b078d70c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/machines/multiblocks/OreDrillDefinition.java",
+      "lines": 430,
+      "sha256": "67e0ea3aa4e4941e3f53fea5007634db3aed4c67d364b0e562f9998f04b3aa1a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/machines/multiblocks/ReactionChamberDefinition.java",
+      "lines": 213,
+      "sha256": "fa098fc027327b71811d859394453d1d3642c7f4b265c47b3fc987f3ce767f06"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/machines/multiblocks/SlavePos.java",
+      "lines": 56,
+      "sha256": "ea20b7dd72a9fb16b7c03964a9a417fb297f533b3304d54d1f897c312e53a80c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/machines/SimpleMachine.java",
+      "lines": 141,
+      "sha256": "bacce5828151e4d72b94a96844ea6b7c0f6573e1d4a3a5a855d9899ada31e37b"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/blocks/TGMetalPanelType.java",
+      "lines": 23,
+      "sha256": "0cd36b2d4fa14009c5cb149a2426af99c50f45d9abe3f06ce92bd376c547462c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/capabilities/CapabilityEventHandler.java",
+      "lines": 67,
+      "sha256": "0a9bb770a7bb1d2e03c0e8389d7cf9ca8c6d904211e9656cdae1b22290e77539"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/capabilities/TGDeathTypeCap.java",
+      "lines": 31,
+      "sha256": "559cabe248c81dccc485fe312cc642e7aae96389c4194e899202611a08056727"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/capabilities/TGDeathTypeCapProvider.java",
+      "lines": 50,
+      "sha256": "ffb79167b10a78ca1c8b12d442768d6f77682b50d3306f31478a8fd9221233c7"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/capabilities/TGDeathTypeCapStorage.java",
+      "lines": 21,
+      "sha256": "400efb0f08f30938a9e586f62bd8f1b8bae0e102b2e27284fe4587a28cc42016"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/capabilities/TGExtendedPlayer.java",
+      "lines": 367,
+      "sha256": "7fef851b8c48b5d08d899cdbe0dfb67df655093ea3d51cdde0fc5f0d9ed78d11"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/capabilities/TGExtendedPlayerCapProvider.java",
+      "lines": 50,
+      "sha256": "56acc2b247acf3a5d65efb4fe755a8fa89809771646de350af17e11d30579513"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/capabilities/TGExtendedPlayerClient.java",
+      "lines": 142,
+      "sha256": "cfe01337f3635fcb58235db1adcab4acaf028961ba887b07fd3c43b94cc85f42"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/capabilities/TGExtendedPlayerStorage.java",
+      "lines": 25,
+      "sha256": "387fc709038d040b35c214282c822e41a60800b00c50be994b9502caf8787ed0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/capabilities/TGShooterValues.java",
+      "lines": 123,
+      "sha256": "0e6f661a3c6208553a8c3a31122849302b40a21e427bd264329163298c59f9b9"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/capabilities/TGShooterValuesCapProvider.java",
+      "lines": 50,
+      "sha256": "bef1a01202327e693441ff6c1b9de84fbe96ea3f1fb24efd5cba691381774627"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/capabilities/TGShooterValuesStorage.java",
+      "lines": 22,
+      "sha256": "2cb6e73006ce0fb62738132f672ca4c461d88560d2efc5c2630ab41c0fb8bb65"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/capabilities/TGSpawnerNPCData.java",
+      "lines": 56,
+      "sha256": "354cbe4a8fa0b223c5bf3d938362bfbe4a4d15730422dbcfa2f516c22f015a09"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/capabilities/TGSpawnerNPCDataCapProvider.java",
+      "lines": 49,
+      "sha256": "9138d57511055bed2e3739759dc47e1f2a55a8a1d7debd1a09e4f8de82976383"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/capabilities/TGSpawnerNPCDataStorage.java",
+      "lines": 25,
+      "sha256": "c7bf27749b9db3b1df03e9d687add69ca63cbf40ad72b87ad2fc952da523cb64"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/audio/TGSound.java",
+      "lines": 125,
+      "sha256": "c4333ffa394b9da47c1f20506ff8c7097e28095e78415ac52d034803499bf7c0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/audio/TGSoundCategory.java",
+      "lines": 50,
+      "sha256": "c1847676e8717816d4751d08862cc566c3bd305899c5c511cfc6464c591715af"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/ClientProxy.java",
+      "lines": 1498,
+      "sha256": "13f33b7b79e13bb00f3744773de50029a3321d4b7966836631810c3702e648e9"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/armor/ModelAdditionalSlotBase.java",
+      "lines": 49,
+      "sha256": "529d62fb6eb7e89077a30dfdf59a64f3536fa19091565cc9d3754d4df325a9cb"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/armor/ModelAdvancedShield.java",
+      "lines": 76,
+      "sha256": "5957f9be3aa28add9bf7a70080f9dd2cc2221ccef3486514a28fb84ef481f82a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/armor/ModelAntiGravPack.java",
+      "lines": 80,
+      "sha256": "1b3a6acd62dc2e66968346a808e06942d0677a705faaf4d2f9e989e187711fcb"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/armor/ModelArmorCoat.java",
+      "lines": 72,
+      "sha256": "40c2f46caf03f4ea60b51b98850f05ed5c782acbacc9e85c8a52c8879d5d19ca"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/armor/ModelBallisticShield.java",
+      "lines": 62,
+      "sha256": "01599846061eb5a43157d5361d93e4877dba1d5870ea37d85d5fd1263a7b0565"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/armor/ModelBeret.java",
+      "lines": 40,
+      "sha256": "d830da269af4971b4f13311d9f8d82186b83ddba6eca96c037b8e7ae0bcf807c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/armor/ModelExoSuit.java",
+      "lines": 264,
+      "sha256": "3e3ee93d43529d10eb3b459847b5ca6a9a60a51844b86e79b406fa0ecdf6a18b"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/armor/ModelFaceMask.java",
+      "lines": 48,
+      "sha256": "c32cbf871406183368911c843e70db6250e0c037bfbce3f3d15f1040ef861fcb"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/armor/ModelGasMask.java",
+      "lines": 62,
+      "sha256": "2e14e8616412607fa502fd58ce1658c4212371d641beabb35b7112e25ae17701"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/armor/ModelGlider.java",
+      "lines": 186,
+      "sha256": "14de66d38bede0219251c2cf082e60ed120a41a3aa5c25208437ac824ccc3a61"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/armor/ModelGloves.java",
+      "lines": 40,
+      "sha256": "b574ae917221ea9de7efc232a10a1e6545a62c021479d0bdc489d6a5d6bf7139"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/armor/ModelHeavyShield.java",
+      "lines": 105,
+      "sha256": "6475a71de86ca9381af1fecc39e52232ed6759dc264335fe46c306b40a9f4890"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/armor/ModelJetPack.java",
+      "lines": 188,
+      "sha256": "02501a33e1ed690518db5f0e584a6936fd0dd4a81c4e54c15bed179dfaf6dd0c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/armor/ModelNightVisionGoggles.java",
+      "lines": 134,
+      "sha256": "1cac09f31e96b7aedfca49a48c372561b7ee3d72f6d6a1b6f7a8b40c57d4d02d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/armor/ModelOxygenTanks.java",
+      "lines": 68,
+      "sha256": "5cf9449e557ed26e4505aaef7329bf349c5e9802da40304af53dcb26ef2343a1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/armor/ModelRiotShield.java",
+      "lines": 48,
+      "sha256": "46b019b641207952220d919bceb607b466270ceb0aea2865400af9eced597fce"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/armor/ModelSteamArmor.java",
+      "lines": 528,
+      "sha256": "08220400d6199d7ed36a276c67e5f2ff03f972425c19ce06bb159483ad1ad3b5"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/armor/ModelT3PowerArmor.java",
+      "lines": 513,
+      "sha256": "aafe599d6dcfac761c3a0a9dc9dcf71c4ef3c4a3fdc09e1decbcd3eac5123709"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/armor/ModelT4PowerArmorMk2.java",
+      "lines": 332,
+      "sha256": "95446fd1d7e669f831da7e7fed452f9401e21b6b5f4dfac124a186f937d15fa0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/gibs/ModelGibs.java",
+      "lines": 11,
+      "sha256": "cab28a9029120036a4988ff87bb4fb3f83b85d06f9593f9a837b6eedf09e9ec7"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/gibs/ModelGibsBiped.java",
+      "lines": 54,
+      "sha256": "6e8e654c3ebe6fb7339bfb4bb8fd737785fe1fedcc16f0d001aab484aedcb9ce"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/gibs/ModelGibsGeneric.java",
+      "lines": 78,
+      "sha256": "36b868448f61c6ff5e397428fefe9c0cb267dc22fe70c08d92839344f6271cc5"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/gibs/ModelGibsHorse.java",
+      "lines": 97,
+      "sha256": "bd1ca87d80a83fd40e5768e9f00b00ce6408b0459eb020e9df01427740b207bd"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/gibs/ModelGibsIllager.java",
+      "lines": 49,
+      "sha256": "08b83d453b1de98b7d1b1680db2ac55a2e403dcb6681a884fad5f3dbe7264978"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/gibs/ModelGibsQuadruped.java",
+      "lines": 51,
+      "sha256": "dcab07ec72cd4e9c912660ad35b596f109e7765b63f15253defa865b27b76f74"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/gibs/ModelGibsSlime.java",
+      "lines": 43,
+      "sha256": "e5e78f917141a641c2f8b17a61c53824e47107bcb3715a50f6a34a085f1b7ffd"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/gibs/ModelGibsVillager.java",
+      "lines": 48,
+      "sha256": "9c8611da05bd99aeb4db7e81a11dabde631e5fff79467634712f0bce7b73d241"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelAK.java",
+      "lines": 302,
+      "sha256": "689a564357f833c5dec4e4ac56e61c7597f007af7c81a64042432ac4c98a13fa"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelAlienBlaster.java",
+      "lines": 216,
+      "sha256": "7dd047f8ee1ce2d2c21e1e29245728b598a7ec17d38ffccb4464a7d7fdbb86be"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelAS50.java",
+      "lines": 423,
+      "sha256": "a453e8dfdb534b3159be76afc6cef6d6cc96e8526c7f0f0723ca1373d9db45a7"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelAUG.java",
+      "lines": 175,
+      "sha256": "5b445accd8236079db6a39d1f745b88542af418795c66d8708045275dccdf3bf"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelBaseBaked.java",
+      "lines": 81,
+      "sha256": "a863830b49de511283ed70e1486086a0f5755939a8e63d92ac7bdc6e7f8ccfd6"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelBaseBakedGrenadeLauncher.java",
+      "lines": 52,
+      "sha256": "84752908792bbed8da38ddf659ed0a0e3a41abe6d3d1678f650a40f192d783f4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelBiogun.java",
+      "lines": 354,
+      "sha256": "83c9256ddc24ef75c65a2dd0fde9f911e358832b22d7af82e949ee163bfff84d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelBlasterRifle.java",
+      "lines": 149,
+      "sha256": "d1cc036cb425c5575a532d667cb6b66d445cf78da2a64e356793c3f9ca9f6ff0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelBoltaction.java",
+      "lines": 198,
+      "sha256": "5fc9af66906f956db5763a174cd6f30f4559bf67dbc83aeb99b57a1b2afc1d78"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelChainsaw.java",
+      "lines": 271,
+      "sha256": "7de8299f0a23a3a22ede826c7ea2c590c4347abf948e6f1ea9b8f338a04f39cb"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelCombatShotgun.java",
+      "lines": 205,
+      "sha256": "b8e7073514728e8345fc6d57cb21dcbd647171e34a71233bc923980f9252493c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelFlamethrower.java",
+      "lines": 317,
+      "sha256": "af052f952d375329cafb1430e2a25178146540479def10c6d9d05c9d027ce5fa"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelFragGrenade.java",
+      "lines": 93,
+      "sha256": "66139b33950d933b186a43a99e66883aa377c59df1f87c6f6b2d94d8b5d01c8a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelGoldenRevolver.java",
+      "lines": 217,
+      "sha256": "c4c76d6e0371a54eff43f6ae6b63bde5b80c604d7552a9193cef69e55856bc43"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelGrimReaper.java",
+      "lines": 501,
+      "sha256": "4f482cc467d7dfaefe5e9bf8a32290592e873942185a0e6bb5056837cce4bfcb"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelGuidedMissileLauncher.java",
+      "lines": 235,
+      "sha256": "3e7ef0ae9e47bbbe3193cf455eb552dde364176cf8a4e03ac6a0423f6c8b1ed1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelHandgun.java",
+      "lines": 145,
+      "sha256": "7dcab4b47cc62099edd41531c560a2b8f75c1cf0046cb0c9bdae5b4f54be3ad2"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelLasergun.java",
+      "lines": 356,
+      "sha256": "4fd5051bc08139e66a469439fcea88655a862dc9a86adf86d07159b940899bf6"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelLasergun2.java",
+      "lines": 377,
+      "sha256": "2fc6fc41f9795c13b1f3fd5b5a22bb7d157ac412c632feb382317f2f946024ed"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelLaserPistol.java",
+      "lines": 121,
+      "sha256": "a1c47736d0bb54334b6620aaceca19a46d005af968ca49ea198f8f3b22b7823f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelLMG.java",
+      "lines": 454,
+      "sha256": "5495b2659f338a6a67bc98c002d9afbd58b52f8b8fd922eee4d1aa918ffb0040"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelM4.java",
+      "lines": 363,
+      "sha256": "6076606c00380a12bea0ae37c84d40eec0aca5a7d32de57888ef33fa82bfb325"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelM4Infiltrator.java",
+      "lines": 389,
+      "sha256": "8891e797ae561889cb10adf7f11e921dfa9a22a62a29be48895791b3e9a30772"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelMac10.java",
+      "lines": 149,
+      "sha256": "4e7acd604e6bcd0a771cd96eeb4f6d4645abc2f56231c12da9f4879b0bb18c3d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelMibGun.java",
+      "lines": 301,
+      "sha256": "34d2f593a621476dc145ee6d73c02a6c01559c15afa257e7b6096e20648fdffb"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelMinigun.java",
+      "lines": 616,
+      "sha256": "aa3f9c1b3ca4a4c32a590455b9950fce825ee7be8d30069bbd51a6fc405011d6"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelMiningDrill.java",
+      "lines": 259,
+      "sha256": "2cd010bade817769d2faaf12201b83d947af5fb030c597dae1ea2fcece8fc973"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelNDR.java",
+      "lines": 440,
+      "sha256": "7079c5c7661889c6f29441f28c1d409a20befa51fea8b9ffc63fab6ad22528d7"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelNetherBlaster.java",
+      "lines": 217,
+      "sha256": "e003e7fa9f29cb95f919ae7b0994d46a83bb7e1acfafc6152eb6aa52f5e3e7f8"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelPDW.java",
+      "lines": 354,
+      "sha256": "bb3bc2372eb18f1220e4190b858307c3efaaca840bdd6ae3767121baac117398"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelPistol.java",
+      "lines": 107,
+      "sha256": "7b83603c996aa5f484e4c023178d894251fd281fa32e2104a9c673960b9f6d23"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelPowerHammer.java",
+      "lines": 360,
+      "sha256": "f978b811f924a9686933e6298a24e52c88b95fa312ddd4cf50b4284e8e8f4413"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelPulseRifle.java",
+      "lines": 601,
+      "sha256": "29a4fd216ded48775c1d958d8dc695fba131a30093e8b25bd75d65c9f4b833e8"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelRevolver.java",
+      "lines": 183,
+      "sha256": "1a805eb0770cc50d05f930feb011a6b774c376b495321501223845cd05d78792"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelRocketLauncher.java",
+      "lines": 287,
+      "sha256": "f553fe5efd4efc0a03bbda71d5099290063610938bc6308ef8bfd6764d8c2728"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelSawedOff.java",
+      "lines": 181,
+      "sha256": "96e12dcff91cb5f8b6f2d7a96264d93ce020acbb7eef212e1acebf3ed2cfab4f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelScar.java",
+      "lines": 418,
+      "sha256": "64d50d86626271da5bbcb64ef954ada44724fe3d6c7ca28bce3434aa0828aec2"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelShishkebap.java",
+      "lines": 176,
+      "sha256": "3e373b1a68cc9c42f474366191f98a44d0254f8a47701d339938c02b6daf3215"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelSonicShotgun.java",
+      "lines": 363,
+      "sha256": "19b02e49a1e449cbfa4f5032dac43053b8db49479d9ed33aeea52b8e28f5ec2d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelStielgranate.java",
+      "lines": 47,
+      "sha256": "9662f86da40c14ad3d64ee7ff38df0bd93e8e9042076c886a07820395ce6e8b1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelTeslaGun.java",
+      "lines": 533,
+      "sha256": "32a99c0ce4e33000d4e2ae60119f3be3b90d4ed892a72b6e96cfd0829f2f4077"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelTFG.java",
+      "lines": 622,
+      "sha256": "30ca27b88b9537837bf7126e760b1674a2ed2e74482aead948587a153fa12aad"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelThompson.java",
+      "lines": 220,
+      "sha256": "15d247df25e6bff822307851877f13f85728d0f6750cbf3ea61fa0a254e9a377"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelVector.java",
+      "lines": 261,
+      "sha256": "d01d81a1164d2fe22ba63f27aa2cb13a11e773c9ad34cc479e633b19eeb27f30"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/items/ModelARMagazine.java",
+      "lines": 64,
+      "sha256": "c57f8c03604a2ec1b7fc0b48dc4b0653589c1b86c25559109331bbc306f89846"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/items/ModelAS50Mag.java",
+      "lines": 72,
+      "sha256": "2c82749bac8d040ba27b2b128e65767088144e063be6eaa712382d8a5a2d9100"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/items/ModelLmgMag.java",
+      "lines": 103,
+      "sha256": "e4cfc20b4618ef04970db42415aa4c98b3ef8448718e9c3f65d45890d418a027"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/machines/ModelAmmoPress.java",
+      "lines": 392,
+      "sha256": "12859d59355bafd71bc3a7586f2802f06e176aa8b9393cc52676e559266ace81"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/machines/ModelChemLab.java",
+      "lines": 624,
+      "sha256": "e69a0c78e1764e893b3ab7827b74bae1bb6dff6605f96e4ee327070fd92d3016"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/machines/ModelFabricator.java",
+      "lines": 284,
+      "sha256": "bb312b42ea8db4c31af0943461e8201d44f2b264d5a63783fc3fc45dd6d28609"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/machines/ModelMachine.java",
+      "lines": 21,
+      "sha256": "93464c3acf610998b5450fb13e2e4e2e6413e782a54007b5d130a92df80bc63d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/machines/ModelMetalPress.java",
+      "lines": 321,
+      "sha256": "69fcd09d9f86667c5682c8d784af38ad80dfee5d885c5ba2929a732494311089"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/machines/ModelTurretBase.java",
+      "lines": 168,
+      "sha256": "895233186d4e1d39136ada1b76460363447396e2d326de822a26a5f0dcb01a0e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/ModelMultipart.java",
+      "lines": 30,
+      "sha256": "866436b237fb1a5ae0f84c6ca133d6b153c547db5228c513c6fd6768212eb96d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/npcs/ModelAlienBug.java",
+      "lines": 202,
+      "sha256": "709ea2c270ebafe12bc8f82732647429d8689a9f9173eb672a8abcf0d1382276"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/npcs/ModelCyberDemon.java",
+      "lines": 222,
+      "sha256": "332ffb82346f12be7921077075ef5cd793473504817208d2e5ce880cb426e8ba"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/npcs/ModelGenericNPC.java",
+      "lines": 54,
+      "sha256": "f9487f795e464d4b62fca99f29f08cbc7cf0b73a45810a585eafc4a77e5c1754"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/npcs/ModelGhastling.java",
+      "lines": 71,
+      "sha256": "b9177c2133dac10ffaebdc87ead9fea1a40341b6c83e846a2f280f510de5b088"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/npcs/ModelSkeletonSoldier.java",
+      "lines": 30,
+      "sha256": "44316df1ee7ac08e931a39006c465289cadd61c8b3a4b662e22c37284c686160"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/npcs/ModelSuperMutant.java",
+      "lines": 97,
+      "sha256": "a88dbbc8d69fc4869edc4b64c2d0bb32582a5c8e03632b9e95f95b5125d5068a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/npcs/ModelTurret.java",
+      "lines": 65,
+      "sha256": "fe9acfed4d3d1fb5ff10c868ddd2b8603465f20255faa569e3b5e34b8e875759"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/models/projectiles/ModelRocket.java",
+      "lines": 114,
+      "sha256": "ef7f3a96ce77a8b3d4ee43861695e3db013a867d822bcb59746a05815c2dc04c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/particle/DeathEffect.java",
+      "lines": 401,
+      "sha256": "7bb4d1196a20531bcf59cebc07b012b316defd2c4261cdfbb81dde0e5e5820d4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/particle/ITGParticle.java",
+      "lines": 27,
+      "sha256": "b11dc4ed2a7e41493740159b7de7ed659cfacffef4b56c39b58d3de786d6e250"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/particle/ITGParticleAttachments.java",
+      "lines": 130,
+      "sha256": "317e87d265b36ab8198b150d1012ab58c37ffff8b0815800acf2798493d2106d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/particle/LightPulse.java",
+      "lines": 91,
+      "sha256": "ec054db3e92f1adba0e1e87114aa3b56ae8495295b5344258ec27b92cdbd096f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/particle/list/ParticleList.java",
+      "lines": 257,
+      "sha256": "7d397d4a08582d42d08816a9e8b72d1e5a820eb2b73098d167377008608163c2"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/particle/TGFX.java",
+      "lines": 407,
+      "sha256": "ec90f1a44f18477640b45e683e3a6636bb64412fdc602e748707d8d4ee342c07"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/particle/TGFXType.java",
+      "lines": 18,
+      "sha256": "f6c8b2ddde930ff53da53688154504529715f83fd1ad528116849d78c74b4eb3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/particle/TGParticle.java",
+      "lines": 711,
+      "sha256": "6ad481094ebde9483e381d4eb9a5e755bbb2ef35211fc3706e1fe12494cb0930"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/particle/TGParticleItemAttached.java",
+      "lines": 156,
+      "sha256": "b38d01a7c228fc33f0af941bb2da45a938977f34dc50668e8b67fc4c912c6dec"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/particle/TGParticleListType.java",
+      "lines": 82,
+      "sha256": "d2b03b19eb0f247f8721d4986edc6e12c44807262822c31a981b70c249336024"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/particle/TGParticleManager.java",
+      "lines": 178,
+      "sha256": "fe9ba77cf91c93e7e0d5a2913ffe616d229e35a6a457d305796681bf5fac6051"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/particle/TGParticleStreak.java",
+      "lines": 221,
+      "sha256": "1a1dcf3a44f76798256dfef0dedefada67da5e90cfbb78a4f2d1ade368729a35"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/particle/TGParticleSystem.java",
+      "lines": 349,
+      "sha256": "8971562e222721df698ac3925a8baaac1868ad0d885636264a9448a129e256a1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/particle/TGParticleSystemItemAttached.java",
+      "lines": 57,
+      "sha256": "8dcb23fa701947471c84ecb40d71cdcce89c4b787e89ad8dd3556798c8f02179"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/particle/TGParticleSystemType.java",
+      "lines": 482,
+      "sha256": "1d72e76723f8481306f2a58c3bc50d94dda5248a26058464f06efea75bfad8a9"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/AdditionalSlotRenderRegistry.java",
+      "lines": 18,
+      "sha256": "99eb63eaa68d086f8a3d9db3ec95a0d68d755ee97a000b1a9e0e685fbca7dca4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/LayerHeldItemTranslateGun.java",
+      "lines": 77,
+      "sha256": "d5860a2258ed81693e72c32da1347e5cb5e3ee87880fbd8a2b0b81284b56be6f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/npcs/RenderAlienBug.java",
+      "lines": 23,
+      "sha256": "bad1dd2f4b6382b618da8694566d1c89699a3f88d669bc97fd9981a4359ae6cf"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/npcs/RenderArmySoldier.java",
+      "lines": 33,
+      "sha256": "7eb60c753b89988261c35a2092f20ad47530eb9687f649fb95b52de9bce9c2da"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/npcs/RenderAttackHelicopter.java",
+      "lines": 143,
+      "sha256": "40f95dbb68ed66f9e6f1ef07876ceebc40228fd13428772c3697d9a69b0f5fcd"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/npcs/RenderBandit.java",
+      "lines": 34,
+      "sha256": "c5ff68dac8f9c221250ae6fd77ceb5e66316fde8fbe02278c58817b6c16a5ad5"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/npcs/RenderCommando.java",
+      "lines": 33,
+      "sha256": "8f33e3f2d54fcefb7ea6cdd255ec66a296e39e1185a17a124fe967fa6cdd1bb1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/npcs/RenderCyberDemon.java",
+      "lines": 26,
+      "sha256": "2202ec742e7c0b27761821c8e2e1b592b5028322fe31235ca0c5207ef318e3ab"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/npcs/RenderDictatorDave.java",
+      "lines": 33,
+      "sha256": "66a53e1351cfd5ae7451852e19642b9d0ae34ee7bceda1b922cdec43f5945244"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/npcs/RenderGenericNPC.java",
+      "lines": 14,
+      "sha256": "63da13d16451669ce32fc435ebb293e0e69e22d1c0a7c74f089e110af0e3e3ea"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/npcs/RenderGhastling.java",
+      "lines": 24,
+      "sha256": "f16cd307de8e735478835cb517d12ab42256e8822b7d462207ba3bd24d1c565b"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/npcs/RenderNPCTurret.java",
+      "lines": 118,
+      "sha256": "fa72998fa3e2ff0edd3d8934b2f3e4f8075abc99fd7d22f93ea852dd3205db7c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/npcs/RenderOutcast.java",
+      "lines": 33,
+      "sha256": "a0ffd64801388e72f266f64da3132849947b122cc1109dc19258d1eddf09b6fb"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/npcs/RenderPsychoSteve.java",
+      "lines": 33,
+      "sha256": "8cefbc8bfeb014797c3aa5cc903382e464cf518ebd69dfd9a0b5eb1546e86076"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/npcs/RenderSkeletonSoldier.java",
+      "lines": 37,
+      "sha256": "5b1404af953c7450bbc2da7eae5cdd76a3f2e40d37d6477db5f25e04f4fb8b53"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/npcs/RenderStormTrooper.java",
+      "lines": 33,
+      "sha256": "8b648d065f0d970debf0ce66b029e400e237b2271f492187d7dfc38fdfedbbc5"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/npcs/RenderSuperMutant.java",
+      "lines": 47,
+      "sha256": "ddf4671e4df90c5c9c9b349e2de41252d2bd349a9560c55ea8f9467646fd0657"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/npcs/RenderZombieFarmer.java",
+      "lines": 35,
+      "sha256": "8374c2a622436d3ab43d8c60ed7a18e155b176c42817dd09746be4e4f82765cb"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/npcs/RenderZombieMiner.java",
+      "lines": 34,
+      "sha256": "71e1aae0f9bf539cbee158368ff028cc132f47d59a332ce7ccee46351bcad597"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/npcs/RenderZombiePigmanSoldier.java",
+      "lines": 35,
+      "sha256": "c723bcc15b88bca7013e970b36d1a332970ada8780c58250b0028660a2a0eee1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/npcs/RenderZombiePoliceman.java",
+      "lines": 30,
+      "sha256": "af84de13a24704a7ac8bbcf9c4310ecc1cb3d756d1a12054a3284f1309a2ac02"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/npcs/RenderZombieSoldier.java",
+      "lines": 38,
+      "sha256": "8f7e7bfb9300e3a92a42ecb8ff46687b02e8ff917d166157949485f7663e18df"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/projectiles/DeathEffectEntityRenderer.java",
+      "lines": 879,
+      "sha256": "c343e50aaa5787acede0c431966d34268deea468492727ad9ebe44d03079e903"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/projectiles/RenderAdvancedBulletProjectile.java",
+      "lines": 93,
+      "sha256": "530ea182dad0bd48e1ee162a1e145dd4d7061f43b45fcc97bf00e52b8fd5e247"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/projectiles/RenderBioGunProjectile.java",
+      "lines": 57,
+      "sha256": "bb0bf0fe2fe0ac1f62798a33fc152611dbc06c7cfd5291d9a3fa26f0c381ed96"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/projectiles/RenderBlasterProjectile.java",
+      "lines": 36,
+      "sha256": "d257410fd5ae5b0ff46159f50abfc9ff93e3bd90014820d1266495188d893a1a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/projectiles/RenderFlameThrowerProjectile.java",
+      "lines": 21,
+      "sha256": "b16657dc1867b222371a826f6d9a2dea8d81901fd2d2a638243832b37014fee6"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/projectiles/RenderFlyingGibs.java",
+      "lines": 113,
+      "sha256": "b33a916b73f3a4b1161a6dc233fc80581f9540abc413365345296ac0262bc08d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/projectiles/RenderFragGrenadeProjectile.java",
+      "lines": 60,
+      "sha256": "f1172a1efec8cfc40da6a32b74d1ed366153fcfbd2da46f817e7563add6b1526"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/projectiles/RenderGenericProjectile.java",
+      "lines": 98,
+      "sha256": "29f22ca3133dc7957a87928a3bc2fc32c729527a68d09852e6512c993b1ab7df"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/projectiles/RenderGrenade40mmProjectile.java",
+      "lines": 98,
+      "sha256": "dbe90df890453f460ceb09910d76fb1165c13e7d437c564f463760124dd7637c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/projectiles/RenderGrenadeProjectile.java",
+      "lines": 62,
+      "sha256": "26fda6cb7c7b0940ac9523a89e79b21c82b4986103fafa3fd554fc398d2063ee"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/projectiles/RenderInvisibleProjectile.java",
+      "lines": 29,
+      "sha256": "dfb372a7a8bb9a63e8b95e89de08208114555c9c1b4e7dbeac7dfb26a8ad0fab"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/projectiles/RenderLaserProjectile.java",
+      "lines": 141,
+      "sha256": "505ac64252a37c176a566306152ad93ad1e0972554f062d7d9e9e1df7dd5ed01"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/projectiles/RenderNDRProjectile.java",
+      "lines": 213,
+      "sha256": "9117f8ba1f2ee180822fc2a65c9d78ebfc32cf7dd201b92f12816e5e6a855522"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/projectiles/RenderRocketProjectile.java",
+      "lines": 67,
+      "sha256": "57576132228f34d7e66c0684e8b387e4efab65404aa88604a8b0b78144d722f6"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/projectiles/RenderSonicShotgunProjectile.java",
+      "lines": 96,
+      "sha256": "b1bf757967fa52656279d7d5bf8bc6c878b9e748a2a2547121d5d870154ac823"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/projectiles/RenderStoneBulletProjectile.java",
+      "lines": 18,
+      "sha256": "9a2fd72b8482b90adaf164b0b42d4b87f88f65010c295d0eefd1e5e26818b2e8"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/projectiles/RenderTeslaProjectile.java",
+      "lines": 224,
+      "sha256": "3fca5c33ab52576321c01fcc8fdd5eca5948129cee363baeb2693ff3a520ceae"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/projectiles/RenderTextureProjectile.java",
+      "lines": 68,
+      "sha256": "bedab44fee431cfcfb2a80a9c7a809700c6cb329c6d23e1cc293d6d36b96409d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/entities/TGLayerRendererer.java",
+      "lines": 81,
+      "sha256": "4bd5831819be5e57544f67ba5ad5e8631b74defcf93447f6f1f92b1e7b62e71e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/fx/IScreenEffect.java",
+      "lines": 59,
+      "sha256": "8b557cfb73270c2ce619f1e14b94d0f956eb0bb7ce14f7b3c9397ba704f40ad3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/fx/MultiScreenEffect.java",
+      "lines": 52,
+      "sha256": "fc0c2c027d1af57f790e19bd13e59e0365ec635d64286bc9d1ad58d8812e76e1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/fx/ParticleSystemScreenEffect.java",
+      "lines": 10,
+      "sha256": "28d1f84550a707d376e40faecf641b0b70901605bec5beec6a83df5ba53f0d3e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/fx/ScreenEffect.java",
+      "lines": 197,
+      "sha256": "61ebcea69469a476967dd6a33fa081798c5266ec9d4ec886661805886ef19622"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/GLStateSnapshot.java",
+      "lines": 113,
+      "sha256": "34274f02de9917d0edaae43e0e53fb96ed95bb7defec4456fd2ec2e056935aca"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/item/GunAnimation.java",
+      "lines": 165,
+      "sha256": "1afe52f178b66dcf90512530ebc09f0f9b5ee78fdd8a2984eb1e84fb0c672d45"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/item/RenderArmorItem.java",
+      "lines": 98,
+      "sha256": "5f9b42bb48b7c7ee94ff9a4a4d2e4bb7b947e4a427144e73a2b144e245fae9ad"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/item/RenderGenericSharedItem3D.java",
+      "lines": 31,
+      "sha256": "c697c132af3f32c0a9e7dcdd5521e1e40f5025ba828415859829ddd57f4606f0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/item/RenderGrenade.java",
+      "lines": 83,
+      "sha256": "635aa010ad3f84e762be62820f34c540524616a577ff6e19574f727d5006da64"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/item/RenderGunBase.java",
+      "lines": 489,
+      "sha256": "31f68fcde3b85aeba578aff9045021f2d82798c3544927c7587deaca90d9b548"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/item/RenderGunBase90.java",
+      "lines": 19,
+      "sha256": "156100db232eec92d7d105da89a41ff2102af521d895d403c3e4103c265c3211"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/item/RenderGunBaseObj.java",
+      "lines": 21,
+      "sha256": "3567d329b4f7c0c65fe8c397b0a2646ea4246c8440a1b09c79dcc4e2ccbc258f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/item/RenderGunChainsaw.java",
+      "lines": 30,
+      "sha256": "c471f6eb9d48672f9e973a8f165210e79e57ed23aa5c157a72d5d655db95d5ad"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/item/RenderGunFlamethrower.java",
+      "lines": 31,
+      "sha256": "36616edb66b609d409fb38e285674889612e293cc95db2b891070725cda54c50"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/item/RenderItemBase.java",
+      "lines": 466,
+      "sha256": "890014fd756067796728a44caba05c0d01821e7d37013fbdae689f804d6d13a0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/item/RenderItemBaseRocketItem.java",
+      "lines": 21,
+      "sha256": "819bf0f959bbee3fb088ec1b1698d7738bc2a8246672fda6d919d696d4ff8414"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/item/RenderItemLMGMag.java",
+      "lines": 25,
+      "sha256": "00046f6fec97640e7096bad0270a5888317e3053cd519dd58ea3703d4e3c6a54"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/item/RenderMiningToolMultiTexture.java",
+      "lines": 34,
+      "sha256": "b61aa98fee87727ee834a46bc018ef57297cb483569d54d846775e12623d8940"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/item/RenderRocketLauncher.java",
+      "lines": 41,
+      "sha256": "87f563c2f92f15ed72e67452c8d2e64445ad410584e6d33002d01f28274b1a3c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/item/TileEntityItemRendererTGShield.java",
+      "lines": 40,
+      "sha256": "819eec50bbf4749f11c47c8d92104f1cf8c550b1fcb8ba425b67b1f7630ee573"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/ItemRenderHack.java",
+      "lines": 135,
+      "sha256": "87de48457a1dad3241b385e30ee2cd18d870cdfc28c33397a4a5eb175eff4d1f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/RenderAdditionalSlotItem.java",
+      "lines": 67,
+      "sha256": "13a9fd06dec7eab7499050b1447e10e7217919ef33a17c2aab3e7d6e75cc2b72"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/RenderAdditionalSlotSharedItem.java",
+      "lines": 34,
+      "sha256": "a35ecacb8986edd5bd3a438e01fb7ed5141f0b8b1602f4c604cd76d6962c3ac1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/TGRenderHelper.java",
+      "lines": 103,
+      "sha256": "b9c3ccc299105146d8e205b51e0d7e4d16767440737329d97798c0715d2ea990"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/tileentities/OreDrillCube.java",
+      "lines": 118,
+      "sha256": "a18ed2026175e15eda94c90ddf4db53a0385cbff2afd11621834cfca1cf089f0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/tileentities/RenderBlastfurnace.java",
+      "lines": 83,
+      "sha256": "abd57ca2595e548302a92322b3963c2655d8c935ffefe0a022653171c0c1ed0f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/tileentities/RenderChargingStation.java",
+      "lines": 41,
+      "sha256": "d635bd706bf961d00731d6499c08a45aa2cca0fed1c8cb4597b315db1fdbbd7b"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/tileentities/RenderDoor3x3Fast.java",
+      "lines": 349,
+      "sha256": "cd83bef594541560b4a69a8475a390134b03b09921705b44bfd8533b9665a405"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/tileentities/RenderDungeonGenerator.java",
+      "lines": 82,
+      "sha256": "1d2e1fe4154ebd68aa0b1a67f30ecfd19d8f7659497018040217c9d52d96348f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/tileentities/RenderDungeonScanner.java",
+      "lines": 195,
+      "sha256": "37eb048b997867bc9eb7283306c64b052734a98ad554976c572baaf95f7146be"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/tileentities/RenderFabricator.java",
+      "lines": 94,
+      "sha256": "b90db9b059483d4aef1dd8d8b6dc6d0cdb1741ed44eec0f319faf8c48cf0e001"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/tileentities/RenderGrinder.java",
+      "lines": 169,
+      "sha256": "bdfb17f13bd2346e18c83674b821e529b7a01ffc8c62717f6e480e4a11cb52b1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/tileentities/RenderMachine.java",
+      "lines": 74,
+      "sha256": "aa32c11a47963c28d6d6772a98cafc110d0aac310b409368cc1fc49a82d91300"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/tileentities/RenderOreDrill.java",
+      "lines": 205,
+      "sha256": "17850da0587731f49340fa32bfc003aa0925957acab7efc3666951be37b6474e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/tileentities/RenderReactionChamber.java",
+      "lines": 305,
+      "sha256": "e0881bb5c57ae0af108bf4788c18c2636d11694bac46269f52cf69a37993f112"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/tileentities/RenderTurret.java",
+      "lines": 110,
+      "sha256": "8b1076dd033012064b8c4bb69ae3a7233b94f80bbf5bf97c5c066739277c6efc"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/render/tileentities/TessellatorCube.java",
+      "lines": 191,
+      "sha256": "07491b4b8497ab7d00a6579fe636b5405014c959c473bdbd5a7d53cb5638257d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/client/ShooterValues.java",
+      "lines": 163,
+      "sha256": "d2a309776929ed27626e43dc12f96a44a22c82f76e5a527756070eae5192ae0e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/CommonProxy.java",
+      "lines": 222,
+      "sha256": "3e2c5ecffaa4e737fd7d8acd4f3805cb2a28a3a38b5fb17157d55d0bedaebe95"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/core/CustomClassWriter.java",
+      "lines": 31,
+      "sha256": "107d37c7d3834bf1dda7ec53e9af12095c7d2d5763c0dcb1905525511f3f0e9b"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/core/TechgunsASMTransformer.java",
+      "lines": 537,
+      "sha256": "0b0e3ddb88c2ac58b323b58b329a938f56a7551a37b36e409f6f4e368b7c4ab7"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/core/TechgunsCore.java",
+      "lines": 25,
+      "sha256": "bcfbe6b03af953c7a40735450ab30fc68b331fe8d22d8693b149163e3fc56f7b"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/core/TechgunsFMLPlugin.java",
+      "lines": 38,
+      "sha256": "dd12f143ecc9a06a316d3bf29c6ed0ac1e762b0919afca546a7ad41ea8fb404a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/damagesystem/DamageSystem.java",
+      "lines": 488,
+      "sha256": "94b176205d6f02eb09027e5915d52a263dc5ee23df976805eaeca9d794b79567"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/damagesystem/ShieldStats.java",
+      "lines": 204,
+      "sha256": "cec9b7cd8ba79f76b0d3c7372d295086f954681ba0f68241da786e45f48e1065"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/damagesystem/TGDamageSource.java",
+      "lines": 359,
+      "sha256": "bb823ae71702a2f0f95132177f1d6d6503876e0b44d508f491fd0254a2e12851"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/damagesystem/TGExplosion.java",
+      "lines": 315,
+      "sha256": "c007cd9185e8490f8dbdcbdd684e42214125a43023d666db7ca82c916477ced7"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/deatheffects/EntityDeathUtils.java",
+      "lines": 176,
+      "sha256": "421d0d639b82912049b28295898050f63bb0e6e6a4d874b8f7f2a4ce0420d4c4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/debug/Keybinds.java",
+      "lines": 113,
+      "sha256": "e19cabf77a36cbecbdc7dd02f675c43be9e2b683fc0d7ce70ae7bb5d4b5c756a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/ai/EntityAIHurtByTargetTGFactions.java",
+      "lines": 42,
+      "sha256": "a3ef18820403d1812a844ce5c43063810dd9e6b4367e848b750344749b8bedee"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/ai/EntityAIRangedAttack.java",
+      "lines": 167,
+      "sha256": "02e4b0d35a2e20f38f3d802eee84dfbfb6dfa6bf9cf2b785239183e307526d00"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/ai/TurretEntityAINearestAttackableTarget.java",
+      "lines": 27,
+      "sha256": "facf3bdf96a053d34ee953a100bfde139e24e6d1ed11546d7a61853bbaa6a2a4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/ai/TurretEntityAIWatchClosest.java",
+      "lines": 121,
+      "sha256": "4e927e3dabf14d5338b6b6716b6e505311530c7ad608192b4034d58b9be18317"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/AlienBug.java",
+      "lines": 257,
+      "sha256": "6fd15926fd5ef5e599643b2035314e64f263f0fdd32fa9145e948e1e302eebbb"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/ArmySoldier.java",
+      "lines": 102,
+      "sha256": "ae439dfc8b95e39048d3b452c64635db26620b9bcdb6afff04ece96954561ff1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/AttackHelicopter.java",
+      "lines": 389,
+      "sha256": "7cabef83e929b8f7e5028b8d0eb4174bbe6e64c15e56f612b9928581a0eb9e8b"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/Bandit.java",
+      "lines": 77,
+      "sha256": "310a5fea564fadd56ed903bc48fb83e99e1dafd09f9ac8e4528fad1910c68713"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/Commando.java",
+      "lines": 80,
+      "sha256": "d8a5ff05adf2b44fc4424da5e7cc19369192bf6890fbad6cac9aed9865c906de"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/CyberDemon.java",
+      "lines": 125,
+      "sha256": "45d60d7d76e5109a01967bf84a499d625651723181a1518bde2fb17a22729af3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/DictatorDave.java",
+      "lines": 82,
+      "sha256": "037671bdb1e2661cd7547da01b3cd920e124dd16027fdcb0cfb73144ecf0b48d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/GenericFlyingMob.java",
+      "lines": 260,
+      "sha256": "f9344dd9dc84cee23db2b04fd59615aef4a3cf65d3cf903b3f160237d9ba359f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/GenericNPC.java",
+      "lines": 390,
+      "sha256": "413440f0b16f3b066e67d11cdf425c41c55eede88262a026241229ab178149d0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/GenericNPCGearSpecificStats.java",
+      "lines": 75,
+      "sha256": "de88ace2631bcb1a83716b69ef50fa54cdd77a14d1fa136a0952b71bdf883995"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/GenericNPCUndead.java",
+      "lines": 54,
+      "sha256": "112e7c75bf7b241fa5d1b3ac87c36ff3b65012d24deaa8c7d35ba72a92ad0a88"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/Ghastling.java",
+      "lines": 441,
+      "sha256": "09447dc72bf7fe5b17531fca90e61282af128b44be6b2245c7e60454ebf4edea"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/ITGSpawnerNPC.java",
+      "lines": 75,
+      "sha256": "aedcac2b3e4bff9fa90bf096d465cc3dfde321197eb4d1a3379c184ebae97f86"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/NPCTurret.java",
+      "lines": 463,
+      "sha256": "f9c46b425fcc158f0d366fdd40ef6e83ccf59693e186a1b4a6fb17221799f396"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/Outcast.java",
+      "lines": 86,
+      "sha256": "2f300e61bb7237c1505b08b122c5f887cfc42694e83495554d6cdac09ec2c437"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/PsychoSteve.java",
+      "lines": 87,
+      "sha256": "07552ad36abcbc33bcc920479a627f750077b0b5e61ac9717dc2cecf6616e33c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/SkeletonSoldier.java",
+      "lines": 118,
+      "sha256": "d493c467a06086433ca521f8a09c3f26de630ba58a3a8ef9e8b0ad9b8f77dfad"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/StormTrooper.java",
+      "lines": 97,
+      "sha256": "9dfd4c1e83ff8fbba7484dc861922c425cb31ec0883986fe22929815ff4d6fdd"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/SuperMutantBasic.java",
+      "lines": 156,
+      "sha256": "83817f3263104d1726ed8d7cb591c32dda9a86c4c912adc89f645e1e8609d77f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/SuperMutantElite.java",
+      "lines": 78,
+      "sha256": "e46f68408b8474852a45af807ab86cc0e12ec0c8f24011712c874f5eec1a9b89"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/SuperMutantHeavy.java",
+      "lines": 78,
+      "sha256": "259f7cb599fe472a7bd64d9a5c2029064bd2fbe9d90c8db457d5792095fd01ad"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/TGDummySpawn.java",
+      "lines": 11,
+      "sha256": "b0a8f8c8e9135db2aaa7a30db0d27c656c9208daee6ab694d83416826038c5cb"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/ZombieFarmer.java",
+      "lines": 107,
+      "sha256": "1d5e72fa927fcbb53a557eb9aa22be2cd6e7315acbf3f4b19153703d742e87bb"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/ZombieMiner.java",
+      "lines": 108,
+      "sha256": "3f05d26209773db819c390ba121794814dab948f09922596bc282946c3b37a91"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/ZombiePigmanSoldier.java",
+      "lines": 134,
+      "sha256": "e623440d34ebc9aa4d2f9172fb6456e4d57cdb49dd3197f7dcd4591f2bc47358"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/ZombiePoliceman.java",
+      "lines": 101,
+      "sha256": "508fa9b8b0678335fc183b70697cd16af55fdf3982396ad2c9cdde1c8df8cf54"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/npcs/ZombieSoldier.java",
+      "lines": 152,
+      "sha256": "d5625999b4ffe421a52281fc2866714ee76cfd7191f769f4adff2fb14898e34c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/AbstractBeamProjectile.java",
+      "lines": 115,
+      "sha256": "37ba08915eb1604d26752a747c0be078f3255261b89134860223720b54cf7038"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/AdvancedBulletProjectile.java",
+      "lines": 96,
+      "sha256": "67dcb7d01dcb228c698a3f251f8f4ab096dbb00cbf7fc1f0cd833b1dd9864512"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/AlienBlasterProjectile.java",
+      "lines": 113,
+      "sha256": "244b916380f00bba0da104d871ab746fa896c8dd404a8cba3c1edd1a3035e36e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/BioGunProjectile.java",
+      "lines": 249,
+      "sha256": "12195bf84d5d6171528141fecd7504646660904709b44374f44a97bcfb625bdf"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/BlasterProjectile.java",
+      "lines": 76,
+      "sha256": "a95e18ae9437a8b89c10af29b5ec477218f3cd07f54ec898bbf6c6e9ef7be01d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/ChainsawProjectile.java",
+      "lines": 100,
+      "sha256": "470e870f6735b819a577f3b819443b8d529265145bc864fe7d025fb2f093413c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/CyberdemonBlasterProjectile.java",
+      "lines": 75,
+      "sha256": "dc0fb614830b28ea9501ad083406b87b4697497101c22ec3c4fe54912d1305b4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/DeatomizerProjectile.java",
+      "lines": 76,
+      "sha256": "18f85ba587c35af41cd64f5162e13db5a4d08c04d8de4fe47ecb476dfa912ae3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/EnumBulletFirePos.java",
+      "lines": 7,
+      "sha256": "13b67554f7f045814e1355e052f0b26485a6805b5924e94ea34705ce3ece56ed"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/FlamethrowerProjectile.java",
+      "lines": 137,
+      "sha256": "ccc97ec7e44f24cf61330fa49bb6123c5819baee1e7bbca424c0b48b59ab4eda"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/FlyingGibs.java",
+      "lines": 137,
+      "sha256": "dda574e732044264c00de426a750f509cf6306516940c73e0445206f1bc88be2"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/FragGrenadeProjectile.java",
+      "lines": 66,
+      "sha256": "32188add8c3aee66257b97378296ddf44af5db2d7463b404e547f240706d3a85"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/GaussProjectile.java",
+      "lines": 158,
+      "sha256": "124972476acc6a743aff03ea6f22fa8557137d945edf41cfd5a722d2dd833e09"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/GenericProjectile.java",
+      "lines": 787,
+      "sha256": "b4b4b8009bed5ab4a60c142b582b124fb0ef6c6f411012a78fe0a8e32c2d5ec9"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/GenericProjectileExplosive.java",
+      "lines": 99,
+      "sha256": "a7d02601d86947535102ef78899b198a7e6ef73cb672f85b81001a10fb10fcd2"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/GenericProjectileIncendiary.java",
+      "lines": 182,
+      "sha256": "b586592f8510d37644d18d19cf89cf51d90c229ec5ba49c0e75b3acdcba9c8f3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/Grenade40mmProjectile.java",
+      "lines": 60,
+      "sha256": "381aae864f0307ec89eacc3856353b17b02fe95efce7b5bd93c4d85967fb75f8"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/GrenadeProjectile.java",
+      "lines": 176,
+      "sha256": "8d47c98f0462e56bc9fa6191adda99d0795208f02fc3fd91c619abe538e93b86"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/GuidedMissileProjectile.java",
+      "lines": 161,
+      "sha256": "f765b51ab42ba2b3b2e04daca9bcde0ad2f549f6633a256eae219a49049f3fa5"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/GuidedMissileProjectileHV.java",
+      "lines": 84,
+      "sha256": "cee317332df4d3b9322914e597c77e5cbc4ddf8367f43e666e062e4cd03d48af"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/LaserProjectile.java",
+      "lines": 88,
+      "sha256": "34f802b7cb2ac394e5f5bf8e543ef07e1aa119628ba31e18d044a640cd1a4dc6"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/NDRProjectile.java",
+      "lines": 209,
+      "sha256": "58b87cf8dd43cf3ce274f553cd3194b2c873627ff0854f0c9d2e746e0316ba94"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/PowerHammerProjectile.java",
+      "lines": 94,
+      "sha256": "ed17c6336c17f37dc1aa6c514fd5750f2b70e97b489a94d9ed716eff864203ad"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/RocketProjectile.java",
+      "lines": 121,
+      "sha256": "67c0b0ea15e7d5a7552f5352acfb080fd548d22dabb8eedadf81a3a6c08b3996"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/RocketProjectileHV.java",
+      "lines": 51,
+      "sha256": "2e4a1d1e6a13d6ac3e590bbf7e31435c9cc7acc7274c67d066d369ecb3364df3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/RocketProjectileNuke.java",
+      "lines": 96,
+      "sha256": "f400a70fac4602fb6fae4612287e7d37adec9feb1c5d8787625df62c5deebadc"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/SonicShotgunProjectile.java",
+      "lines": 136,
+      "sha256": "68945e08af9c646c70d4c03dc4d849a3fd04ea9a374268d830dc7565f33d23c0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/StoneBulletProjectile.java",
+      "lines": 43,
+      "sha256": "8bce8ae111a8f2ea8ff86b17de1544ffe63c0b20f00bdb2ad4593b761f412c9f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/TeslaProjectile.java",
+      "lines": 169,
+      "sha256": "7d559e977bd9e59a14a690d9b3eb7d05a6ace079cbcf4d42a1d90c38d33b39a9"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/projectiles/TFGProjectile.java",
+      "lines": 151,
+      "sha256": "deeab9037acd08f80f72fb65181637ef9a554e0eaa0de717560750096c4f1959"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/spawn/TGNpcSpawn.java",
+      "lines": 69,
+      "sha256": "cc17064e7f3d56dd8d85f8325122c294e65a45f85174062bfe8c92c08cb85aca"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/spawn/TGNpcSpawnTable.java",
+      "lines": 42,
+      "sha256": "4f5ffe574a1b0c97a601edaca0250f643d6f6a83da221281a91d59696d9017e7"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/spawn/TGSpawnManager.java",
+      "lines": 224,
+      "sha256": "341507acb1619379b8d27ab5847f049c5489d7bf00745ff1e67f4a2726acffa9"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/entities/special/EntityRadiation.java",
+      "lines": 165,
+      "sha256": "cc768417ee2c840659129ae91708e36957fc47131db32abfba275a67cc55c8c0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/events/IGuiFactory.java",
+      "lines": 7,
+      "sha256": "1b06efeb89c6e2d90b093c415799a5e81a683dd54aa53f989d145ea86eebf126"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/events/TechgunsGuiHandler.java",
+      "lines": 106,
+      "sha256": "873eba1fefe3e917b7b977d915e81f9082ecf8fadbc1aad84950d4ae497693fb"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/events/TGEventHandler.java",
+      "lines": 875,
+      "sha256": "39c3c522c1a6dd8973419bdd7063c3de3526dc3c04c2fa19eb4b821896343112"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/events/TGGuiEvents.java",
+      "lines": 473,
+      "sha256": "56c694c17f1c5119e38ccfa35d352fb357f6c44bfde8822f801c1617c6638b9d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/events/TGTickHandler.java",
+      "lines": 658,
+      "sha256": "e4de7a00ce8edd06037bdfab4dbcf3df13727a1083f36db321e0cfced8310e50"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/factions/TGNpcFactions.java",
+      "lines": 122,
+      "sha256": "c1930c72d79a1955146010a0bee61ac1847bfe6039ba5a5de8e147b96a900c5e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/AmmoPressGui.java",
+      "lines": 76,
+      "sha256": "b7dc2c6fb7a66e9a89ac249d770d2c549b7b0b62f6ea9aab99798391bdae205d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/BlastFurnaceGui.java",
+      "lines": 58,
+      "sha256": "683308cfb5917d172f210a2b19a0ae275c9f045be47bbb692814257ca9db78d3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/ButtonConstants.java",
+      "lines": 6,
+      "sha256": "6fc2e6e552e2a42a88ad1fa9a45b3d8c633bcbeb6debdc54340ea93dff3feea3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/CamoBenchGui.java",
+      "lines": 172,
+      "sha256": "89638d11f6d2043a62b46608be021802fea872d3184d126309b13901639d4af2"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/ChargingStationGui.java",
+      "lines": 36,
+      "sha256": "0414b9d0f161b901b0a71a23d8c3341e2d2e45d87fb654597387caf51bb430b7"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/ChemLabGui.java",
+      "lines": 157,
+      "sha256": "ec8a5426267e9111b6e32c9aad20d0be4ce723d840fd2f3e6f1d3db82f5d63df"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/config/GuiFactoryTechguns.java",
+      "lines": 30,
+      "sha256": "2d31161baf26b747fd24ae4cf63df09250009606015471199e377353bbbedd2c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/config/TechgunsConfigGui.java",
+      "lines": 24,
+      "sha256": "ee704f5b97b59897cd21178fef04281f250d8afb31b8af1046391f50de5bb841"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/containers/AmmoPressContainer.java",
+      "lines": 132,
+      "sha256": "0ad0d04a6e7a4a25098c96b3d4ddfdfd3017955969e50980edbb27c6fb2f01d3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/containers/BasicMachineContainer.java",
+      "lines": 66,
+      "sha256": "979ffa6ce06b85c0a59797d8cf27037da7b9e43363267ecd902ac66e3447b883"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/containers/BlastFurnaceContainer.java",
+      "lines": 106,
+      "sha256": "32afb2151c1e23c4866081989c1ef739d740e7971c00e0b5f3638860b2b2535a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/containers/CamoBenchContainer.java",
+      "lines": 118,
+      "sha256": "01d7cdce3608bbfab6f8d798f56c206d71f2f9adea5ccc0df8a6ab0c2d328877"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/containers/ChargingStationContainer.java",
+      "lines": 95,
+      "sha256": "a750dd34bc7148abbf4df52cc6eb232883c72bdce639f914af338a8941f11671"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/containers/ChemLabContainer.java",
+      "lines": 162,
+      "sha256": "0a379bced49aaf43543aa754f710127c426746a26fb1c90f5af429905153084f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/containers/Door3x3Container.java",
+      "lines": 55,
+      "sha256": "d7c6607aa6c8d0d7b76e582986274955554a1901b26bda321087f5a8a6949009"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/containers/DungeonGeneratorContainer.java",
+      "lines": 15,
+      "sha256": "9037fedc3641b2a7183c0ca5c1fcfcce201c267ea4a8db5aa0bcc147e52a9941"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/containers/DungeonScannerContainer.java",
+      "lines": 15,
+      "sha256": "2a983b446ca6a4389a1ea0398f1d6a8ac8bf28a4010a5ede488b459db418f3d5"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/containers/ExplosiveChargeContainer.java",
+      "lines": 26,
+      "sha256": "619c49743e6a1a44d457068b2628882064952e662cafb7e36050ee76a1fbd8a0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/containers/FabricatorContainer.java",
+      "lines": 107,
+      "sha256": "237b9017045ae7d0a17c4af59c17864238284764fad5765515d3276ccde60564"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/containers/GrinderContainer.java",
+      "lines": 113,
+      "sha256": "c60c0b761d45969c220e81ee6a830740aaab1a5316486cfce40dece02ffc6fc9"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/containers/MetalPressContainer.java",
+      "lines": 127,
+      "sha256": "38b96376a5c1758cdc4f8a87838cd26c63cfa4af09c2343a970a10ee593a4e55"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/containers/OreDrillContainer.java",
+      "lines": 166,
+      "sha256": "414f72bebd501422d7e724b9eff15619ab06dfb50fadbf85f20721d88c6bd6bd"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/containers/OwnedTileContainer.java",
+      "lines": 44,
+      "sha256": "fba8a6ba1f19ec9aea42a7284be890a4f76d44b9d186403653d1ff47071a88f6"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/containers/ReactionChamberContainer.java",
+      "lines": 158,
+      "sha256": "e04ea1174889c9d03adc21041ebde72b52b40788c8a157fa9314aa09bddc802d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/containers/RedstoneTileContainer.java",
+      "lines": 46,
+      "sha256": "c7e6cb44b1c5ac3b3d3f993967d97816fd3c9d58005952b0f66eacb3def81d6d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/containers/RepairBenchContainer.java",
+      "lines": 114,
+      "sha256": "ec952c999ad43c7ce451891ebffe812c06b4f599fe1b3a36397eeeb34e267e87"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/containers/TGBaseContainer.java",
+      "lines": 51,
+      "sha256": "716ba27bcfe231501bea1ba306229a8b11bb9a188fe60d08e592864bc5f09f68"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/containers/TurretContainer.java",
+      "lines": 175,
+      "sha256": "a75a6062806163182897ea49924e841658e2cc9fd0ef43ebfcff873624c02ba3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/containers/UpgradeBenchContainer.java",
+      "lines": 288,
+      "sha256": "4f418637bb6f8e0152a86bbef00009431ccab0d7963a0c08baecf03bf2f6a335"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/Door3x3Gui.java",
+      "lines": 60,
+      "sha256": "c36168b6857076b2a5547f515bd08c2ca3d578842da9a470ca683f31e549940d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/DungeonGeneratorGui.java",
+      "lines": 132,
+      "sha256": "7f0b34d00af5a410f7fffbe5cc6b092476d697aebd9dc33694f20e3a4ae0001b"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/DungeonScannerGui.java",
+      "lines": 232,
+      "sha256": "027e789930cc55871a04a99bd5fedf4ac045d9dfe628e8296240ebaee6bf3906"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/ExplosiveChargeGui.java",
+      "lines": 84,
+      "sha256": "a7f4254377e0054c2cc6fa4e68ed1678a85349429c6fb2c77779ca72b541c05b"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/FabricatorGui.java",
+      "lines": 39,
+      "sha256": "180e96419089e0acef7002ac3afae3087e0a3c0f86ab6cb76bb86423b38e8066"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/GrinderGui.java",
+      "lines": 42,
+      "sha256": "bd0f92136c30d33333fca420e46fdc9116de79c4d1825c2f358e1f481a28d772"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/MetalPressGui.java",
+      "lines": 66,
+      "sha256": "7051fb5289c7fc55faa9c3a8ddd46be2573521372066565f8b233683549897a8"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/OreDrillGui.java",
+      "lines": 184,
+      "sha256": "39fec655262deac16d8f823005e260edec8f6a1d2a5c1becea43e9f68a37e007"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/OwnedTileEntGui.java",
+      "lines": 100,
+      "sha256": "06d45426d4d2ad500e3deb77b6ffeadf2cb672ce9e2ab2f370f09a6537759df6"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/player/tabs/TGPlayerTab.java",
+      "lines": 25,
+      "sha256": "693e4ad36e4e2cc13949e4017954c8b64e827bb08f1240a86f65cb149664bd69"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/player/TGGuiTabButton.java",
+      "lines": 102,
+      "sha256": "a62dcc521b2b8569c1071bcc2ae422049f405b07c58a2877725d0363e495c123"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/player/TGGuiToggleButton.java",
+      "lines": 110,
+      "sha256": "a7590b030aa79b501ebb0ea18d914de09f969aa13fe75d3d31ac311a988f1600"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/player/TGPlayerInventory.java",
+      "lines": 174,
+      "sha256": "c42ad884d997629a7b5ec9120c65a0c6b77b46340c515aa9ae6683796c739864"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/player/TGPlayerInventoryContainer.java",
+      "lines": 224,
+      "sha256": "dc49bfe69e57db1ec1b4ace87709377a92c6da65451fcb96bd75ca67402a3b16"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/player/TGPlayerInventoryGui.java",
+      "lines": 240,
+      "sha256": "8134cd235192e9ef1d2f3365abaa02ee3b7f2f7ea96b66850d0cd899513b2a34"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/PoweredTileEntGui.java",
+      "lines": 66,
+      "sha256": "254d6e940cc6c22c53fdef41674e46d79ac61fe03c46333898bd087ee493ab61"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/ReactionChamberGui.java",
+      "lines": 144,
+      "sha256": "86c6da2ee1009526b93eb46bf2c2a48c2bf2847d17e9d313ac75536c152d974d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/RedstoneTileEntGui.java",
+      "lines": 66,
+      "sha256": "0cd827925d04ebb998487a57d14576c6c7d870642d3872f74866e7d0ff59f86c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/RepairBenchGui.java",
+      "lines": 136,
+      "sha256": "45eb295ce050db88aa8bcc16468cea4d234304eff7807e5bd49d63fd8aceb0a2"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/TGBaseGui.java",
+      "lines": 108,
+      "sha256": "1aefc4bad74e3a65ffbd84e33b19e759221210169c23926105b5e0e08241b698"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/TurretGui.java",
+      "lines": 86,
+      "sha256": "ebc7ac9958c7becbc33139978bf4765778185d98101faf1ad127fac845c09286"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/UpgradeBenchGui.java",
+      "lines": 74,
+      "sha256": "315d6df475951b567d251b95837ad87162f8a7f85537690238d4e4133a49befe"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/widgets/GuiButtonDoorRightClickSetting.java",
+      "lines": 67,
+      "sha256": "21354c37dd48086c82f4dfac698ede71fc4cf4bf099f3506ed4ef0bcdb3b9edd"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/widgets/GuiButtonPvPSetting.java",
+      "lines": 34,
+      "sha256": "d48127689f18ef2016bd73ee2ce3fa9de8b32a7febc3efc2b38647b962e4e64c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/widgets/GuiButtonRedstoneState.java",
+      "lines": 34,
+      "sha256": "a10c6ccacec31acd0331025eb88aea24c023a1fbc399433f7e26ac8d495cf1bd"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/widgets/GuiButtonRepair.java",
+      "lines": 28,
+      "sha256": "f8d14a76b38961c5bcca589f7332d87229de1a96da3c7ea6cbf0f75fa0bd5142"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/widgets/GuiButtonSecurity.java",
+      "lines": 38,
+      "sha256": "04c5d74d30fe0c13eaf43bb15b1ae148b458b056c0226bd4e68d38a8b11e44ed"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/widgets/GuiButtonTargetAnimals.java",
+      "lines": 37,
+      "sha256": "a8c5abe0007e40c3bf2def015f84b5eafd1fdf800d17c7af1397f5d1a6bea41d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/widgets/GuiButtonToggleDrainTank.java",
+      "lines": 34,
+      "sha256": "9de60cfb3dcd207cc76ea8e2a8b27b1ba4d010740ab82bff7e07ec638218a247"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/widgets/SlotAmmoPressInput.java",
+      "lines": 29,
+      "sha256": "e79f309e466b67203646c2c55ac571f950f50cf159e778e6175de7574a44430c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/widgets/SlotArmor.java",
+      "lines": 82,
+      "sha256": "dfd8be1b927ae4027dc3f37f16cc0360771fecbeeff6f2505968a2b7d86c39e6"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/widgets/SlotDrill.java",
+      "lines": 36,
+      "sha256": "58ca6c46046da126bf245ea72fc00791662fb99de484543c54f079f49416ae53"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/widgets/SlotFabricator.java",
+      "lines": 41,
+      "sha256": "77ff0c77b5cac2574743f522ea1ad16f18829fa9b0e3f67e2504280c2749eadb"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/widgets/SlotFood.java",
+      "lines": 23,
+      "sha256": "c027ff97c042e2388f6e697a1055988320935fe83f681f29046c897872e9171c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/widgets/SlotFurnaceFuelTG.java",
+      "lines": 20,
+      "sha256": "f835c2f51e05bbded186c30beb61f5407bc353e2e690d545a855e442e0124e30"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/widgets/SlotItemHandlerOutput.java",
+      "lines": 18,
+      "sha256": "b0528eacb89c10f6843dc9726b873723b9750942cd6d1e9e9766bec6cf52c054"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/widgets/SlotMachineInput.java",
+      "lines": 41,
+      "sha256": "f78babc6aafc06d72243e6f2360beecffb656e98c18cb1caf054a4780ae8a182"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/widgets/SlotMachineInputBG.java",
+      "lines": 19,
+      "sha256": "e1e4a575727db2e06d364305ad5a0b20c5a9774692fa537b3d055fc8e5d96a81"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/widgets/SlotMachineUpgrade.java",
+      "lines": 26,
+      "sha256": "a0fe40c2a7d7345292d88847323dfcf45be8a01e137260fb462745b43bbdac58"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/widgets/SlotRCFocus.java",
+      "lines": 29,
+      "sha256": "7ebd015aa8a47224731fee87b904368da47269a3a6c328474227e214a02939ca"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/widgets/SlotTG.java",
+      "lines": 68,
+      "sha256": "90db3102e82100cf87aacaa3edf01ce38f3ef8be975b0484939f8c9629e5f0b0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/widgets/SlotTurretArmor.java",
+      "lines": 30,
+      "sha256": "d9858a082784ea5c749cb5fb8f29d320336cee2cb5e924a72be402ea3b647411"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/gui/widgets/SlotTurretGun.java",
+      "lines": 27,
+      "sha256": "b354b4686c1d3d34710b951bad30eff55d89e3184c3cbcc760e026038440e9a2"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/init/ITGInitializer.java",
+      "lines": 14,
+      "sha256": "8c801f5cd0cfebce13b48d6530852fc8c561b6358c84773d72f4a2b275adfdb0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/additionalslots/ItemAntiGravPack.java",
+      "lines": 58,
+      "sha256": "bf01cbd52727fa635574945286fe19472e74b945a3259090db85e41911266204"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/additionalslots/ItemGasMask.java",
+      "lines": 63,
+      "sha256": "5739a1c097f39c9f58aad38ed3a1e43b872585356c8f2492ec5cce6a599037ff"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/additionalslots/ItemGlider.java",
+      "lines": 52,
+      "sha256": "c58f08701263f72dd40ebdea7514e3beccb23f7e402243bd99c175bb61277e1d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/additionalslots/ItemJetpack.java",
+      "lines": 105,
+      "sha256": "4c959602e651f43289b82b1fab3a136d58414b01b3467c9983cb8e5af8804b33"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/additionalslots/ItemJumpPack.java",
+      "lines": 113,
+      "sha256": "f5eb731a7a397da718f0615ed195eaab6b9d0eee5b4467759ca8a4bd546716a5"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/additionalslots/ItemNightVisionGoggles.java",
+      "lines": 39,
+      "sha256": "bdb2df45ced9ae57a20f6fc14625c83249fd41d7a44e76d0e6a8b27d7a4e53ec"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/additionalslots/ItemScubaTanks.java",
+      "lines": 34,
+      "sha256": "1ec4719457323b4087f95abc533cf4077da556a63897d53778af5447c202f553"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/additionalslots/ItemTacticalMask.java",
+      "lines": 52,
+      "sha256": "a984a3aa57f15e6997495f8722d569944420e969d37bf34cdfc9651e5977bbb6"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/additionalslots/ItemTGSpecialSlot.java",
+      "lines": 99,
+      "sha256": "a6bc7f5ab104e64b719fbd91f8b07747b05603dab0cf290082044879ee3c5563"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/additionalslots/ItemTGSpecialSlotAmmo.java",
+      "lines": 52,
+      "sha256": "07ad43a97945b6a115f27e26b3355e08cd11cba7065d3dfe4ff7fdfe5d08ccf9"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/armors/ArmorPowerType.java",
+      "lines": 21,
+      "sha256": "009bc0c2684832574821463046249646485545d659e376471061531920594d90"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/armors/EnumArmorStat.java",
+      "lines": 79,
+      "sha256": "2726a20fd8cdbf80df7d3370a4be2f8fe67049fe60867004c39583ffd8f454ce"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/armors/GenericArmor.java",
+      "lines": 727,
+      "sha256": "95a551720e113d0362b96774c781bc92bb3d7bd572b8ab221e8e8a1269b13c05"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/armors/GenericArmorMultiCamo.java",
+      "lines": 171,
+      "sha256": "7819802d594a8ea47bf1561d0a2b5fa8480b55e000a533eb468d0ab108ae970d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/armors/GenericShield.java",
+      "lines": 185,
+      "sha256": "807c07024d0811cc6cde536fe70602bae5051d8ad26f6e784b209ddbe398d224"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/armors/ICamoChangeable.java",
+      "lines": 60,
+      "sha256": "888ee535654a7787558d3449c463afac46386eca58479252a949ad017a1f0dc4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/armors/PoweredArmor.java",
+      "lines": 475,
+      "sha256": "a91a77d03d26a04f87ea21eb276b9fdab160201ca2e9a2b5ce4393d42388cddb"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/armors/TGArmorBonus.java",
+      "lines": 22,
+      "sha256": "56ccec1412906ce0e6832276680842d12474367044e9ffc4c06db1670d6939c4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/armors/TGArmorMaterial.java",
+      "lines": 305,
+      "sha256": "b93a68d93e0d187783344bc3ad079a050a15c1466d1c04c89023ca835af34a2f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/BuildingScanTool.java",
+      "lines": 138,
+      "sha256": "88cb14fbb7fff47bfd6dc30d5660a96ce4c6eb289723fd0f26ca7dc5897eabb5"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/GenericItem.java",
+      "lines": 36,
+      "sha256": "55f90fd966862c4f2cc51529f9306674216780a1a8c5bad264f56d25da68295d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/GenericItemConsumable.java",
+      "lines": 105,
+      "sha256": "4eac22470c523808ec6d046a25b54c55ebea5a2de47a8259ded4b94dbf779c1a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/GenericItemShared.java",
+      "lines": 343,
+      "sha256": "33af9d42008546aaeb6440df697cdebcf6b7d9754b83965f4907898bcb5be8f6"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/ammo/AmmoType.java",
+      "lines": 99,
+      "sha256": "8ede769862f8de564572611787c8bb8c4ec5434d25bdbdf410f6a222d5bdb1e0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/ammo/AmmoTypes.java",
+      "lines": 102,
+      "sha256": "fad1876a7c379c78231e80f0bace287a24e376e0fda625f9841b7e486d9c4294"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/ammo/AmmoVariant.java",
+      "lines": 25,
+      "sha256": "2a328c94a245174bab90625247311dcc4bcb7072a0da90eaa40ca298e806b485"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/ammo/DamageModifier.java",
+      "lines": 113,
+      "sha256": "96dd1b5a736ece828ff421d030076b32a29c27be54e4816c03a61788de4f6fd1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/Chainsaw.java",
+      "lines": 58,
+      "sha256": "1c2e17939c9c98b8917265c038fc688ff000c25df35f8ebdfaead46afac9957a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/ChargedProjectileSelector.java",
+      "lines": 18,
+      "sha256": "eb4688f1ff39b2ebbb29304b092634ced96a36bc1b663ffb59752d5a0482ed2a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/EnumCrosshairDynamicType.java",
+      "lines": 11,
+      "sha256": "e2b955cdd51c15f643d18593825ae6d18028123c61254c913fa48555327cda26"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/EnumCrosshairStyle.java",
+      "lines": 43,
+      "sha256": "74518c619524f79eadc1adc4bf9b8010c043462f566fc4ec7b83b5cd0d18e103"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/GenericGrenade.java",
+      "lines": 180,
+      "sha256": "71610cc258f9cc0ddef5defc4fbae59c1b3d1fee61273be02f12f9051bd5ac20"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/GenericGun.java",
+      "lines": 1672,
+      "sha256": "cf8ea44c24caa09ee1ce0d22d790ae7b939084319a63cfba64817e69e65f80a3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/GenericGunCharge.java",
+      "lines": 351,
+      "sha256": "84ec685304b5171e4013c37b6d1944382cf0916a397005a805e390d2caf33b33"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/GenericGunMeleeCharge.java",
+      "lines": 392,
+      "sha256": "8f1f6aea760bdea6f97fb314dcbb02c16b349f181e38cedd19443bf3b88e6368"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/GuidedMissileLauncher.java",
+      "lines": 208,
+      "sha256": "2b7c5b9fcfef1391c172b6e838a7b962fd0ad0d3f5a7e805df5aaa679fb33d58"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/IChargedProjectileFactory.java",
+      "lines": 14,
+      "sha256": "2b7780c848f6277e610c1d07cc2692c657c6ec024283b2f9d20043dc5f15e624"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/IGenericGunMelee.java",
+      "lines": 86,
+      "sha256": "9d100f2d0dbde01b7d2dbc4492c131e02d94f5d6291af6f5ea4f74b70c36d951"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/IGrenadeProjectileFactory.java",
+      "lines": 18,
+      "sha256": "209c8876f9672971e60ec4e82f1946ef235202284cfff629921ac641adc9e534"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/IProjectileBounceFactory.java",
+      "lines": 19,
+      "sha256": "66dfbbed789d56973f88f02770b1f2861ed8a04f5d27a4fd7ae8ce5f6c30c7e9"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/IProjectileFactory.java",
+      "lines": 24,
+      "sha256": "1716a36f24f7c2ca457118e49df4b854b53d2edd28ad3c43b096874914299bb4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/MiningDrill.java",
+      "lines": 97,
+      "sha256": "ac747477674fdf4211d53dd98a775b58bfb74d8b00d6f16821ed40b9f8cfb03a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/PowerHammer.java",
+      "lines": 70,
+      "sha256": "5551c253d1f2f12e4f9f5fe33e27a623047a540c85cf3d94f1f24fae49216c09"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/ProjectileSelector.java",
+      "lines": 34,
+      "sha256": "0e589567bdd399a003c2ca754a4bf7a4c2a90044362e1e05dc184632ff2a6cb9"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/RangeTooltipType.java",
+      "lines": 7,
+      "sha256": "0764f39c38ef704f1fab152701a8ae15fa274533fefb473fb689f2bcd0126d95"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/Shishkebap.java",
+      "lines": 106,
+      "sha256": "c4b6021cfbee5e963ca651a0b4dba0d3ad2f95787ef074120cf3cbcdadb3d482"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/guns/SonicShotgun.java",
+      "lines": 91,
+      "sha256": "c3ac56faa074886066ed684333286c56e96604b2ab0bda54e66721a656f8c7fb"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/ItemRadAway.java",
+      "lines": 61,
+      "sha256": "75c4734f40d70ec0b1ee139dcf6e85d0c1cd80b1d7b6b5b7378ce4313efa9a26"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/ItemRadpills.java",
+      "lines": 52,
+      "sha256": "e38cc0dd628e74eb648bb2b977531ff5b4d4f15a96cd97e1df45fcd589b4b97f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/ItemTGDoor2x1.java",
+      "lines": 103,
+      "sha256": "797af5b4f723bda3388d5c255a753303bf2ebcc8a648ffb07da6048d6541109d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/ItemTGDoor3x3.java",
+      "lines": 145,
+      "sha256": "e622a71c25d0702d2386516dacc52b3478b7a30883341f34ee92f96b68ab926c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/tools/TGCrowbar.java",
+      "lines": 51,
+      "sha256": "7985f2f98deb54159bb96d2490c583bd2d2dbbee063279e57b77bd5cb6a1ce6f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/tools/TGPickaxe.java",
+      "lines": 53,
+      "sha256": "1c0d250a38ef6f9afc297ad1267ce803092ad652b3fb2e99b952c0d209a2bc8a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/tools/TGSword.java",
+      "lines": 52,
+      "sha256": "ef20b169f0449e68b3c830ee5e52ff3a43d92ce54892591c1a01f593e489ec38"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/items/WorldGenTestTool.java",
+      "lines": 199,
+      "sha256": "4cd51fad5ddf96385e96d30c0516f4880eb12a4deda731d94a0072793cc25319"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/keybind/TGKeybinds.java",
+      "lines": 129,
+      "sha256": "e69e41e5ff78f5699f60b6656a930f6a56fc2c1ddddfc940d3c6fc1c36535664"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/keybind/TGKeybindsID.java",
+      "lines": 38,
+      "sha256": "0e75fe21e2cd12bc58db13772c42b1db106cff345d0b1a79d3c0a359a4416aad"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/GunFiredMessage.java",
+      "lines": 88,
+      "sha256": "875e3e8f30ce34e8270ad6bd95c3fbc1f90b2d136c4127acabd7ec88208244b8"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/HandlerTemplate.java",
+      "lines": 18,
+      "sha256": "79c71333c32fc57ca3584456a860456b648809d7093f819eb887715e41f9d9da"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/PacketDoorStateChange.java",
+      "lines": 67,
+      "sha256": "e817b8f2bcef8629490486650a03d17f2030511a2e76277eb19c411d621b54a3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/PacketEntityDeathType.java",
+      "lines": 101,
+      "sha256": "421211e44efb1c7f94806d232abe4b576af16b02e331545cb509f210781594ff"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/PacketGuiButtonClick.java",
+      "lines": 89,
+      "sha256": "09022592c1428ef4385d902e9748b8948ea49558adf2fcd91127c56a6292d5d6"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/PacketGunImpactFX.java",
+      "lines": 129,
+      "sha256": "6e0e3e150ffa2a4a5b0a037f7f78d832e93b79a205a4e7164caca86ce10d13a3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/PacketMultiBlockFormInvalidBlockMessage.java",
+      "lines": 93,
+      "sha256": "7280fbbb040c475f49f42542b39c08931264bcaf96fc81434412bcee9b1f6bee"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/PacketNotifyAmbientEffectChange.java",
+      "lines": 37,
+      "sha256": "11e5d5864d6c7a27bfc8fb9d47705de24ae719afa92f4be84d065fca281dce97"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/PacketNotifyAmbientEffectHandler.java",
+      "lines": 67,
+      "sha256": "d906a479943790e84bf78a38d3820782d30b1611df0e0627836bb034a28256ea"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/PacketOpenPlayerGUI.java",
+      "lines": 48,
+      "sha256": "b45d8a43cda2a0b0cfca0d1d1edc61fe73870428c29ef1da345b5d69ab58214f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/PacketPlaySound.java",
+      "lines": 157,
+      "sha256": "4827a7e6dda804b895623c69efc66c03fd873d6647e7e61edd3a569451c094f5"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/PacketRequestTGPlayerSync.java",
+      "lines": 53,
+      "sha256": "dc8618720767892990d8d11adf8ce4acdb4659c17fb23654e64e02faf49eaad4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/PacketRequestTileEntitySync.java",
+      "lines": 52,
+      "sha256": "04bc390010ca3aca7217a1917dfd2952a881d6acdf8df7a05f529516dc2cbc5e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/PacketShootGun.java",
+      "lines": 62,
+      "sha256": "d323125e8f1b010e27e91b29e283f11a061274b6b84435810ae8a1df54f22e03"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/PacketShootGunTarget.java",
+      "lines": 68,
+      "sha256": "0b453f9bd36e87cd842eeaa6191b596281a4cf20a59d09d1f76a14523564b1fc"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/PacketShowKeybindConfirmMessage.java",
+      "lines": 71,
+      "sha256": "faf0993131de837484e7afebc94cf552ebfd7d611de4b959ed48594de0fb87ff"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/PacketSpawnParticle.java",
+      "lines": 105,
+      "sha256": "d74536c55d63d51f6b4820b54f80bbe90a351f559933d27b80cdc87745e26830"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/PacketSpawnParticleOnEntity.java",
+      "lines": 110,
+      "sha256": "2ed81cdd0c486e07775d56e918d924b5ff8ad39a5f8060d326d650df91da6f9f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/PacketSwapWeapon.java",
+      "lines": 56,
+      "sha256": "0164aacb2f6b97cd7d64b6ac65cf5f5859aab4cd4351163b1e06d49fd7badb27"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/PacketTGExtendedPlayerSync.java",
+      "lines": 142,
+      "sha256": "5bd43b085e197cfcb195b72bf27a0a4102e39b4cb7f3bf2ecf7078f00ab5aca1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/PacketTGKeybindPress.java",
+      "lines": 179,
+      "sha256": "0fceecadc7bef4ca859dd94465c525bfc371bbbba6d701d07e9d1208ce30e1cd"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/PacketTGPlayerFieldSync.java",
+      "lines": 122,
+      "sha256": "40458225a6445378d24c5513aec49751e895274af9d54127de197851f2dfa428"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/PacketUpdateTileEntTanks.java",
+      "lines": 60,
+      "sha256": "aba27f866d42c4e457b24c1153fbc9df073c5cab955ae668446e3b1611194a92"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/packets/ReloadStartedMessage.java",
+      "lines": 75,
+      "sha256": "2f851298132a48ec71de38eff62b726b727cebaf7405f436f8f24baf730ed371"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/chisel/ChiselIMCHelper.java",
+      "lines": 27,
+      "sha256": "5ebb6f866c76b7782ccf4ab7943c07558a7324bb0148c5c12ef5fb9936e37b93"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/chisel/TGChiselBlocks.java",
+      "lines": 187,
+      "sha256": "4e51e888ab70ccf849165ac838b51eb14317a97caa695ed1a776770a09c6b19c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/crafttweaker/AmmoPressTweaker.java",
+      "lines": 172,
+      "sha256": "a3cb720363b9341d1adf878bc3d9be3aa9a3364ed7d16d0f49953b6e99d227b8"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/crafttweaker/ArmorStatTweaker.java",
+      "lines": 148,
+      "sha256": "4045288c699c6fe6b8651700099d62e5cbce2d41c32ca3ceb742a8dd00ce96ee"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/crafttweaker/BlastFurnaceTweaker.java",
+      "lines": 162,
+      "sha256": "7f22e69b3bd59c14072cabb208be6c06d057dbb00c8a8bc8813cf0f98cfe45f3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/crafttweaker/ChargingStationTweaker.java",
+      "lines": 102,
+      "sha256": "d42cc68d3801e8c24333e5db84f4faf32c8b96c3f46e04ba7db3d1bcfb2bddd6"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/crafttweaker/ChemLabTweaker.java",
+      "lines": 168,
+      "sha256": "b56327190ea170f35ef7d3b528e40139ff4a434e33a7b69a80174c758e50c1ee"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/crafttweaker/DeathEffectTweaker.java",
+      "lines": 104,
+      "sha256": "aec46ecc6a4265b97298d631ab5e6c944a77bc047e6ccf299675377d085fce06"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/crafttweaker/EnumGunStat.java",
+      "lines": 50,
+      "sha256": "1e65d830f87f90aac4c9dcfbb07b7aaf80b4678f64aad162eceee4cc0720063c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/crafttweaker/FabricatorTweaker.java",
+      "lines": 372,
+      "sha256": "e107a789cb73309ef202279a17313bc271a5c5ed7bf88206d8f39fcce65a5367"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/crafttweaker/GrinderTweaker.java",
+      "lines": 105,
+      "sha256": "48ab70eba3367dd31cdc89879ad1b44a4e0066a3745a019c14bd139bfd1e1fa7"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/crafttweaker/GunStatTweaker.java",
+      "lines": 63,
+      "sha256": "7bee79bc531897774f121ddcea86bffba1b468286362d600923b8b267492a145"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/crafttweaker/MetalPressTweaker.java",
+      "lines": 139,
+      "sha256": "2f86d0b4b57ba89f5ca0b8e4692a6d02c15b840f9c918f5b402b8a97b00ef141"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/crafttweaker/OreClusterTweaker.java",
+      "lines": 142,
+      "sha256": "726381b71ba48c3aa0154347e69b487d57815abc9784f13e65bdf436d4bdcffe"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/crafttweaker/ReactionChamberTweaker.java",
+      "lines": 212,
+      "sha256": "5552cfedce3310ce7306a69e9ca3736b9f3302f3390eec058df72cff3c10759a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/crafttweaker/TGCraftTweakerHelper.java",
+      "lines": 42,
+      "sha256": "faaf53afff9fdb3de5f79c9b8fa03c9061ccc7cb198cfd070a54a09227000071"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/crafttweaker/TGCraftTweakerIntegration.java",
+      "lines": 23,
+      "sha256": "d3e6e8f791f5a0f77c9725396e609ca702c9851528ae34826b76596b97d41535"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/ftbl/TeamSystemIntegration.java",
+      "lines": 86,
+      "sha256": "726cbd054ef2f58f1250cb7351038e183f99966c1e73af32cf77150c6a540067"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/AmmoPressJeiRecipe.java",
+      "lines": 68,
+      "sha256": "8dbaf4b526672dfad755c31b3ac6a8bf731480960ca71029cbea1da54656b373"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/AmmoPressRecipeCategory.java",
+      "lines": 55,
+      "sha256": "74566be907ca45ef43ea886ae4c82f5509e4a720314c043d5bb29fabb6378f81"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/AmmoSwitchRecipeWrapper.java",
+      "lines": 82,
+      "sha256": "c07a5a646ca491ca6be353fee278064246fc9f4bfb4a1fd7f0e3b170ca1230e6"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/BasicRecipeCategory.java",
+      "lines": 58,
+      "sha256": "7001d3fb5944bf368a25a2b4d4142ae42717e95d27759b73a91cc61fcc3a441f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/BasicRecipeWrapper.java",
+      "lines": 76,
+      "sha256": "680700ba8cd293509255d88049609948cec22b70d1460193fb75621ddc91b5d7"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/BlastFurnaceJeiRecipe.java",
+      "lines": 61,
+      "sha256": "aeb3b2a194c5b4f18e8d79757da605eeec56560982a67b023c3032fedbec67b0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/BlastFurnaceJeiRecipeCategory.java",
+      "lines": 52,
+      "sha256": "e55aa0c69f94c564b2e43f17275ba9db3cb2885ab749ab0d411ba5c51e28dd57"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/CamoBenchJeiRecipe.java",
+      "lines": 43,
+      "sha256": "a9fa29112b8351eb79f1925185ad397e3d41396220a7e28deff7f359f99abab4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/CamoBenchJeiRecipeCategory.java",
+      "lines": 31,
+      "sha256": "be2930734a27a2cb25393c3f28971cc5520c0a024f861fb6936a965ab7226c6b"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/ChargingStationJeiRecipe.java",
+      "lines": 59,
+      "sha256": "4064fa2f605c8df69e9293bff727740ad0964def6f05d2ad97b1c870067d8760"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/ChargingStationJeiRecipeCategory.java",
+      "lines": 49,
+      "sha256": "6a62bd36ef3dbe29345f4e6da0faead6eaf5ed4ae93b602e180bc3109edcbe67"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/ChemLabJeiRecipe.java",
+      "lines": 35,
+      "sha256": "ab03a5dd2c95a1b9e21e7562d59b8d50150c08c04c1a6c084a395006d4c2c45d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/ChemLabJeiRecipeCategory.java",
+      "lines": 57,
+      "sha256": "ff2ea94d2419f16dfd1b8521136f657cea488179451bc1468fad44ae85a81869"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/FabricatorJeiRecipe.java",
+      "lines": 35,
+      "sha256": "1ee0a069925a7b137ed5c0fb70890defe744805e6207c0a564cf61e3a74c77e8"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/FabricatorJeiRecipeCategory.java",
+      "lines": 54,
+      "sha256": "7052a421c62f0abed6c2fc626427084eb914496409d367c65c17d5b85ac43684"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/GrinderJeiRecipe.java",
+      "lines": 41,
+      "sha256": "e5643c31c6d96cc9e8934b583d8d0de0cb86cfd3bb32428b731ae21bf8f07e9a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/GrinderRecipeCategory.java",
+      "lines": 91,
+      "sha256": "c4064e5b01c092cd19209e8aba806e7b2d7edc8b9897fb0d3c2af9a9d4f5983b"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/MetalPressJeiRecipe.java",
+      "lines": 37,
+      "sha256": "8b33dc19277499b55e365c8818dbedb8a1c2b1cc47980077b98d3ca427fc557e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/MetalPressJeiRecipeCategory.java",
+      "lines": 52,
+      "sha256": "0d54955c4ddea9ae9a6afa06390582bdbd6ebf4e38433a1617f8f79b64a0224e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/MiningToolUpgradeRecipeWrapper.java",
+      "lines": 83,
+      "sha256": "adc565902bfe8e64aeb1b0ddb791bb6829891acc9ec384c1b337c7a5b4bc7d85"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/OreDrillJeiRecipe.java",
+      "lines": 81,
+      "sha256": "a2363a4602616cb424bbe0c1bc1f829db21ef703035fa604dee9f81385509a4e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/OreDrillJeiRecipeCategory.java",
+      "lines": 105,
+      "sha256": "b2a4ca7443f577c27418cadb918c58720e69094f7a7491ac81e48df5ea933f01"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/OreDrillMachineRecipe.java",
+      "lines": 107,
+      "sha256": "010aae290d175caf909f2daf7f33d692a9a08373808f6fb45dc9ad4e9f5d5cc7"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/ProgressBarChemLab.java",
+      "lines": 72,
+      "sha256": "1b0e34dedad3dd72878f2008169fa0e3d2a196e51416a8e398882f0902ef96a6"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/ProgressBarReactionChamberCompletion.java",
+      "lines": 71,
+      "sha256": "1773e844345936caf9c002bc94e65c43c560cf9d00e0a9a39789c05d7d7ad37a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/ProgressBarReactionChamberIntensityJump.java",
+      "lines": 80,
+      "sha256": "1ed268cf3caf5a1e8f5ba846453403a0673625c3050d44380e1776fae1177b4a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/ReactionChamberJeiRecipe.java",
+      "lines": 160,
+      "sha256": "e255153a3cb4d64e95f13d3bb27619b9818959d18b4d2c48cad87e46a498f2fe"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/ReactionChamberJeiRecipeCategory.java",
+      "lines": 79,
+      "sha256": "d43332c8c7c35ea7815044220716b63ca60b2d57f51512f72b1133e24aaeb07f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/TGJeiPlugin.java",
+      "lines": 117,
+      "sha256": "f6d26d51073f3caf627a3985559a752aba7da738fc49a526d3cd70b643db43b4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/UpgradeBenchAnimation.java",
+      "lines": 80,
+      "sha256": "5a6014b37f028653465c7bf81d68999d408975fe0b19e23a0c9fd44fd8ca31f7"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/UpgradeBenchJeiRecipe.java",
+      "lines": 66,
+      "sha256": "d089322f5cdc702b9ef91c464235a96758d82bf1d73373df23a447002654337f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/jei/UpgradeBenchJeiRecipeCategory.java",
+      "lines": 49,
+      "sha256": "c26119d75464799ec07256b162b2721c932fc1673adddb5d0fec7d396b34e831"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/plugins/thermalexpansion/TGThermalExpansionBlocks.java",
+      "lines": 8,
+      "sha256": "9a15029336a0b1e34eef3544d88bfc1f30faa23841c6fa710abb7ccfe44c49f8"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/radiation/ItemRadiationData.java",
+      "lines": 11,
+      "sha256": "38927135f53ff7755a3ba03064b4098c02747eb5607edbcdbd2ef854dd35c15e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/radiation/ItemRadiationRegistry.java",
+      "lines": 47,
+      "sha256": "630eba0f8f48a453c722a30a2ae25481a6ac90eb208a75dc9faefd3b7113b8c3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/radiation/RadiationPotion.java",
+      "lines": 117,
+      "sha256": "25a23da792a9ade7560f4477cc29aeda21fe0bc58521bc83078b2f549d5377d0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/radiation/RadRegenerationPotion.java",
+      "lines": 63,
+      "sha256": "14ea45bf427cc3cbe4db71ad1f4ad7342fe38023c68bee5cb22427d00cfdae52"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/radiation/RadResistancePotion.java",
+      "lines": 38,
+      "sha256": "5cf321f33667f2772955fea14ea6dff380559335d7292929deb3cae6655298c9"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/recipes/AmmoSumRecipeFactory.java",
+      "lines": 66,
+      "sha256": "8ee9a72fe045d884558e2cb5a6cab82931729b84fbc8a2299b55d480b47db81c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/recipes/AmmoSwitchRecipeFactory.java",
+      "lines": 85,
+      "sha256": "263022f055ca1f0808ac2f7dcc0d29c4d18e0babefdff531f2fa8a91ab4490d5"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/recipes/IngredientFactoryMatchNBTInt.java",
+      "lines": 26,
+      "sha256": "5fb40b5d96031198bffbbc8793d8b3ecc0ebcde29079acf9c85afb13b17a91d6"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/recipes/IngredientHasNBTTag.java",
+      "lines": 167,
+      "sha256": "c4a2346e92e8abfd93d1d846fcb33b7e816f38306ba14058eda005d0f418a52c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/recipes/IngredientTypeFactory.java",
+      "lines": 22,
+      "sha256": "0dbf9ad0244d80541e04f89cbed91b7d3c448ae357cc05a9f4a6c026450877db"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/recipes/MiningToolUpgradeHeadRecipeFactory.java",
+      "lines": 78,
+      "sha256": "053504f8d78bb42437a9050f20d68a8386c1db05507d62b9bd95d73e1461fc9b"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/recipes/OreDictIngredientElectrumOrGold.java",
+      "lines": 21,
+      "sha256": "88431e352848b5b8e14f187726f718e66c25884502dc6fbe466e91d603a5d5db"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/recipes/OreDictIngredientHardenedGlass.java",
+      "lines": 21,
+      "sha256": "30666a9726d6f7dc2b1e80a25afa09816068e5c8fb20eb49c71dc181a6283104"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/recipes/RecipeJsonConverter.java",
+      "lines": 548,
+      "sha256": "ac12252b452c2743a6c881fa6d6e13480146907ada9de5ebf4ddc84a759235f4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/recipes/Recipewriter.java",
+      "lines": 756,
+      "sha256": "edf939b001554e14aeedefd2994bac0354e019fa6f252b82145a85fa151d0881"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/recipes/ShapedOreRecipeCopyNBTFactory.java",
+      "lines": 73,
+      "sha256": "09e727e5585ea4559b0999d4b8e7aa33e480b01787716fb04a797d50a16dd90b"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/server/ServerProxy.java",
+      "lines": 91,
+      "sha256": "1f93a69efd828856ff2bf9a48891b41d26125839b3d007494256724e5e4122a0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/Techguns.java",
+      "lines": 151,
+      "sha256": "613ee00d1b488782bc1185edbb976bedf545ddaf40bc398a1aba9aaaa5201913"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/TGArmors.java",
+      "lines": 300,
+      "sha256": "5b1d509cb941f16a235aae72ca49c568d18466046395949ae8859866c1674915"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/TGBlocks.java",
+      "lines": 224,
+      "sha256": "34c991a2cf665324a709c7c78ca5c10781170ef911e680c110a5b0373c914663"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/TGConfig.java",
+      "lines": 318,
+      "sha256": "485d17a47c34f895a669c672640accb929e30c369a7d6c4a5c0c8d1fc8c78101"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/TGEntities.java",
+      "lines": 209,
+      "sha256": "42ee81585c615a8ade2d72a416a4a3ab8b1ae8e9312769935eddfa82c130a7ec"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/TGFluids.java",
+      "lines": 194,
+      "sha256": "49172e063b5586092a2ceac1490e7026521e006dc711fcee67782bd798922e91"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/TGItems.java",
+      "lines": 691,
+      "sha256": "758f3cebe7b167ef39b453978ae1530fc60d4dc936caa9f62ddbc71cadfc577e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/TGMachineRecipes.java",
+      "lines": 439,
+      "sha256": "67a8fa5a614ad5c1d6dbba1eff876c76d0e41cf4d6c55f7b0cf88056a9f1fc63"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/TGOreClusters.java",
+      "lines": 266,
+      "sha256": "d700d444b238893e1bb464af8a0aa0665b5f7581f28e4a575051388fc62d4f4d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/TGPackets.java",
+      "lines": 111,
+      "sha256": "f96fe097c11b92315690256feeb74d149e02e63186c024f321b93b399e5d4e96"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/TGPermissions.java",
+      "lines": 38,
+      "sha256": "6f6e45b49131909095c17184077ce1be00a74215a0a145503fdcf4f227a974ae"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/TGRadiationSystem.java",
+      "lines": 143,
+      "sha256": "f7e6c5d1f6a66c068927c8eb12579409dd0f1a7eae34bee1da0a5eeffc74f736"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/TGSounds.java",
+      "lines": 253,
+      "sha256": "b1bcb8d5e809476733502866908578c3aa5731a0f7ef3de55414546daf53c906"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+      "lines": 345,
+      "sha256": "45930ec3fcbeb54a8a504af2ee0ca9ffc25652315542f7dc51e56e20d1675cd6"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/AmmoPressTileEnt.java",
+      "lines": 216,
+      "sha256": "118f0e2221da6a60b32b0e26bdd996a92a76b48d0fe34f78831bfbddeebb9ab9"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/BasicInventoryTileEnt.java",
+      "lines": 160,
+      "sha256": "df7cfe01a8a816d693255f445037b9ca707017c47971930c37d6c753aa22d289"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/BasicMachineTileEnt.java",
+      "lines": 156,
+      "sha256": "4ee1cf594757c7f1cf72502a35bba2974f8e91b6f5d55083847b1688f6e84b23"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/BasicOwnedTileEnt.java",
+      "lines": 145,
+      "sha256": "ff9a12dbd408ca18a8813abdb9e10afe3a9ee2394667ae30533e45174ded8bc2"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/BasicPoweredTileEnt.java",
+      "lines": 59,
+      "sha256": "7fc57eabac3df3a67cea4579a8e3e8defd26ba116641eac428f1a44aa986a23f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/BasicRedstoneTileEnt.java",
+      "lines": 107,
+      "sha256": "7db1e46b642d5c785d4c767a1bbc56aabac8d7c86d1883eb3e152d0ccf9f215a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/BasicTGTileEntity.java",
+      "lines": 137,
+      "sha256": "7d737dc61b2b347e5f01d3952f7824e3ed23ff6d79ead2aab9d7a47395022a3b"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/BioBlobTileEnt.java",
+      "lines": 187,
+      "sha256": "bb0c3748ea6a61d3a417cc0ff56c93999a14410a8226fe83e02f11dc4a880a9a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/BlastFurnaceTileEnt.java",
+      "lines": 220,
+      "sha256": "cb036579c93889fec5f3b3d626b5fc5e31461ddc36557cbc1ee27ec4108fb3c0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/CamoBenchTileEnt.java",
+      "lines": 116,
+      "sha256": "ba8722283762af340607ee8eec170101eb4fd450f4151388f5f72abdcaddda51"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/ChargingStationTileEnt.java",
+      "lines": 306,
+      "sha256": "f18fb7da4d4210430571e4a25510bb323e015b69e65c456dce1bfe90c774d210"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/ChemLabTileEnt.java",
+      "lines": 459,
+      "sha256": "0137c8617399553a47306859d17b779d02ed21380fe5eba2a95c8e576098025e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/Door3x3TileEntity.java",
+      "lines": 246,
+      "sha256": "4bd6bfbfcf380b2ae6803edeee23f39c77c959d4279303bd6718ed2fa7755497"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/DungeonGeneratorTileEnt.java",
+      "lines": 118,
+      "sha256": "73a1b1c9845a9d2a749979a397e5e4c2c29739e1f579f056351ef2cce50d6af8"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/DungeonScannerTileEnt.java",
+      "lines": 175,
+      "sha256": "ff80068d5f85e2907e59a9eeab0051d5455deb6a607c744d5eb2cb5e0bef1156"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/EnergyStoragePlus.java",
+      "lines": 27,
+      "sha256": "1a58519e7bf80136859e0c2430ac22fbd52e3930299ecd448ef1a5bebd1a1478"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/ExplosiveChargeAdvTileEnt.java",
+      "lines": 36,
+      "sha256": "17e3bb4da2e953cef839618342c9f9f76e12a077e806119c0cb7b227416d5d41"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/ExplosiveChargeTileEnt.java",
+      "lines": 271,
+      "sha256": "311ff57bd8d5d5c48fe075ba3a1f4b2a1de4a11f1dc6982fcf5169a58d26c3dc"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/FabricatorTileEntMaster.java",
+      "lines": 188,
+      "sha256": "5ee92daa6d8c910090a84dd30a13353dc79bc15d0cffd687372c9d99dd4dd9db"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/FabricatorTileEntSlave.java",
+      "lines": 56,
+      "sha256": "fe1c27cbb56841cafc9b5130fc7a64505e26c5301814ca697bf445aaf83e3b5c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/GrinderTileEnt.java",
+      "lines": 193,
+      "sha256": "146f065b9de514c7eee40deecdcccd70c039007d29b9643ab639ba0d2fd1d49d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/MetalPressTileEnt.java",
+      "lines": 250,
+      "sha256": "cf452cc08eb53bf3d306298f45b7511763dacc66ec6196470ee576f0e071e8d1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/MultiBlockMachineTileEntMaster.java",
+      "lines": 111,
+      "sha256": "3799f3e247daca5dd73fb7addcd7f3da27c0b85e5104dcad2be1024cefbde339"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/MultiBlockMachineTileEntSlave.java",
+      "lines": 177,
+      "sha256": "6338bdf4d5d8fb71ea7a6171ea1fabfd48e4be8e04c87411080e5d7c1dcfa740"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/AmmoPressBuildPlans.java",
+      "lines": 198,
+      "sha256": "ed409c67c99022aba61353580f87dbafbe08825ea17d9ff0bdbda393785be4b4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/BlastFurnaceRecipes.java",
+      "lines": 145,
+      "sha256": "df34160751ec93a4fac6414632fc266f557940a085963a31f3ccca1a78d2f1b2"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/CamoBenchRecipes.java",
+      "lines": 194,
+      "sha256": "d5ab796304a9a786e4a01bf5e2d31678a0ef1fb8d82414d87f1a3cd235d849ed"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/ChargingStationRecipe.java",
+      "lines": 61,
+      "sha256": "8cdb9e30dc484bcb1e0b380654a7390caaaff89d8a7619dbad78a85683e4a1b1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/ChemLabRecipes.java",
+      "lines": 331,
+      "sha256": "6dc0653d5bd9ffd69951beca3689a89670583e821cd5bb50b9f07ed277db05fd"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/FabricatorRecipe.java",
+      "lines": 279,
+      "sha256": "70b7dfe285396c11d44ea6aa383292a8e785cc15c095169d0b41b3dfe0192257"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/FluidTankPlus.java",
+      "lines": 88,
+      "sha256": "ff821fae1465e1ae9e31fcf119c8605dbf677d21e3b9c85d9dda7ce76d5fb4c6"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/GrinderRecipes.java",
+      "lines": 214,
+      "sha256": "6335d94a0377d823b433b207c3c6fe19b9a31f5cfb9c97f322bf716860b10c7d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/IMachineInput.java",
+      "lines": 5,
+      "sha256": "b0a4e8a9c91d2aa1eaeb8f7953cab94037fcd740b5ea24bb93ef67e5243ac850"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/IMachineRecipe.java",
+      "lines": 27,
+      "sha256": "2c19193f8907f685f4d35604710bb0215ab8f6ceac59f159ec2f129adba831c7"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/ItemStackHandlerPlus.java",
+      "lines": 156,
+      "sha256": "de75cb69fc9295daa9ebed08885f80c8aa9d0dfff7eb6b57e1cc58854e866a74"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/ITileEntityFluidTanks.java",
+      "lines": 8,
+      "sha256": "346f34cfa0edd345f8495ac58609b725ace15834189780ab5a9b07327922e458"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/MachineInputFluid.java",
+      "lines": 19,
+      "sha256": "4055efa0f5f8616c4565d900c806ea9b21afed0f9411617e48154ca2b9ecaab8"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/MachineInputItemStack.java",
+      "lines": 28,
+      "sha256": "498af8e821c65060cda98598511714812f9b725a04e9654dc7d89adab711a174"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/MachineInputs.java",
+      "lines": 5,
+      "sha256": "e350ad42883ca3c2b49b30aa6b0c2bff246418c91301e6dd51b9a626d4dec522"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/MachineOperation.java",
+      "lines": 333,
+      "sha256": "edaecc657957aee10b80f87dcc05cf2d9979582cd43a84a1539daf2bac92e679"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/MachineOperationChance.java",
+      "lines": 59,
+      "sha256": "1d47a6e57d20c080395607eaa38d2372443a3c4185fd41e91d3d90b69ce0258b"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/MachineRecipe.java",
+      "lines": 10,
+      "sha256": "0cd3866cf26842be7568b781e807e49dd422b5c5d1b504a2dcbcc4b2aa781b1c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/MachineSlotFluid.java",
+      "lines": 40,
+      "sha256": "77fc1d184d76680f7a0aad1c9532fd448a3ce1c51d6f2acc62ec5cb35b6d58db"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/MachineSlotItem.java",
+      "lines": 52,
+      "sha256": "e8665774fc4acb76e03b6426c6026093494877b07dbacb03a65f3a635026c22e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/MetalPressRecipes.java",
+      "lines": 145,
+      "sha256": "57fdad55ce38f76c5eb0263076661f23c7e15bc3f5c99f778efca77a84e7f624"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/ReactionBeamFocus.java",
+      "lines": 66,
+      "sha256": "cd19b2acd6cfee6616895024fa715fe269b14891619a13963368b88c70f24965"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/ReactionChamberOperation.java",
+      "lines": 172,
+      "sha256": "0dc771a8b280a9f3425232b5794b8c2fa6c3c9ab39f73042e2812680bcb0017f"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/ReactionChamberRecipe.java",
+      "lines": 241,
+      "sha256": "a033b7397b6d4f0b4ce7f13cf13065fb7e807239ec7d7b7886d335ef7d4b0032"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/operation/UpgradeBenchRecipes.java",
+      "lines": 123,
+      "sha256": "1ebba77582eb9308f3aeaf7b7af0bce4f66d2de701ac7ed166a74bd53024c8ba"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/OreDrillTileEntMaster.java",
+      "lines": 790,
+      "sha256": "1a65a1a4eacfebd6f1572d3698208e35f3b0123e7f76c6323ab13fd5f0f3ebd4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/OreDrillTileEntSlave.java",
+      "lines": 29,
+      "sha256": "34000c3fd032403d8d3496165535aecc21ab328301d28bd5f52db71c1a47cbd1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/ReactionChamberTileEntMaster.java",
+      "lines": 826,
+      "sha256": "5ce0ffcb4fea79a6f89013e4403b5315ad18a73ed412fddd7015f5f9b2704aac"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/ReactionChamberTileEntSlave.java",
+      "lines": 59,
+      "sha256": "04266c9633b39f84b5f57fc0475e1bb82535a209b58976e93d5865880aeac813"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/RepairBenchTileEnt.java",
+      "lines": 74,
+      "sha256": "9d564267a95260a7489dbc42d9c677a7ac0c805690172b847260dd9b48bcba46"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/TGSpawnerTileEnt.java",
+      "lines": 268,
+      "sha256": "e9ac900d209179f519412cef6bbef70e495ec0c2931578dcd78a5c9e961a9be4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/TurretTileEnt.java",
+      "lines": 554,
+      "sha256": "7a7255e36152cd49a5493dab4b30ed56b8a2be3904a41068278cd38143690d19"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tileentities/UpgradeBenchTileEnt.java",
+      "lines": 21,
+      "sha256": "703c3c78d87ea1459bd04107fb97322e1adb8c800029739ebd12084a13b20034"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tools/BlockJsonCreator.java",
+      "lines": 107,
+      "sha256": "9f1aca772583e42dc0b0f7780cd0745937f459deeccebfb944a998e69a6decc6"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/tools/ItemJsonCreator.java",
+      "lines": 88,
+      "sha256": "9422f2a899a53985c4476e5cca436b589a4ffe23c068dae2e3bac3b10f821e75"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/util/BlockPosInd.java",
+      "lines": 17,
+      "sha256": "41370c100becd17329d51bfbebefd014d26572d9fc0be274e8bdeb0e0b9cbcc2"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/util/BlockUtils.java",
+      "lines": 1087,
+      "sha256": "8b1d5eb7d9b441d5e7aabd1d4c86b03dc160a2da658b66b9694d311b3499139e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/util/DataUtil.java",
+      "lines": 135,
+      "sha256": "94d30972d4d99e4318f2605ad35835e97e01da2e7b4d0b0ebd8b5671ccef31e0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/util/EntityCondition.java",
+      "lines": 42,
+      "sha256": "2f71e163604de5cb35fdf3bac1900b7373cefa4811c21e23997f205e39af94a7"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/util/EntityUtil.java",
+      "lines": 39,
+      "sha256": "ef17c6a077de1d4610f9efdc3199fafe196032fe218941ad514930f0a272aca3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/util/InventoryUtil.java",
+      "lines": 474,
+      "sha256": "22891db96ceb058b3ecd307b156c44619838ea883f222a514d967f5df7a314bf"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/util/ItemStackOreDict.java",
+      "lines": 155,
+      "sha256": "776f74045e9f479ccbc26fa69fc0a1e1e3ef6a4a00385b8fc446c7081fa1029a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/util/ItemUtil.java",
+      "lines": 68,
+      "sha256": "4076d0214901d83ffff271f97f269e9a211ec8d58225b0e2dcd17b6c4cd3b6c0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/util/MathUtil.java",
+      "lines": 317,
+      "sha256": "44327b8ef041be55715e6a5cf73691b35e5f81f024fd2bb0b6e27503b9d160f7"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/util/MBlock.java",
+      "lines": 202,
+      "sha256": "41eac0b887d471f6889f71ccf15e92c5dafe47dc0874e8bdb42491880daa2469"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/util/MBlockBiomeColorType.java",
+      "lines": 43,
+      "sha256": "1f200873d06dd81a659dc3d61e0d9adebe85ad45b5ca872e4a19e10388602f3e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/util/MBlockCamoNetTop.java",
+      "lines": 47,
+      "sha256": "42ab2e02b33e8221fb0d334c3807fd7a465283dcf7440bc59ad46cd19d739114"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/util/MBlockOreclusterType.java",
+      "lines": 50,
+      "sha256": "962546a3602c47814fcd49136949795d754bcdd8461a3732f3c74b0128d9b1dd"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/util/MBlockOreClusterTypeOre.java",
+      "lines": 30,
+      "sha256": "aded18b86e356e32ea6c82c26fd0a016f64cd1e3742d9dff19c25182fc271bc0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/util/MBlockVanillaSpawner.java",
+      "lines": 34,
+      "sha256": "84817386c0608b0b66ee680a12794fcc69ce7ceafc848534a67a035a000776f4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/util/MultiMBlock.java",
+      "lines": 68,
+      "sha256": "4f1cf60231527afa867860fd273ace4515ac266f5b89898e4c8305b304dd8cd5"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/util/MultiMMBlock.java",
+      "lines": 57,
+      "sha256": "4fc0340bbd198a2f0c5e69f35b09d38b1ee584c3448db3f21d5829f111f5c48a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/util/MultiMMBlockIndexRoll.java",
+      "lines": 19,
+      "sha256": "9e6be870f0f6a84b9f4d8ebb55bb84ae2283695797c95e670090a8359f300a97"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/util/SoundUtil.java",
+      "lines": 91,
+      "sha256": "813546dbfd8ed3e98d56cb4ad06236bed71c3b31353a89aabd3d322818b029b5"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/util/TextUtil.java",
+      "lines": 16,
+      "sha256": "88aec74824da73432a5c06f622f0218fad1f0bcc29d965c71b9a15b94e5e00a8"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/util/TGLogger.java",
+      "lines": 9,
+      "sha256": "cee17f10e930ca850f35686f0835034d3cd173564afd96eaae9ec9fa01663d20"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/BlockData.java",
+      "lines": 82,
+      "sha256": "ddaf5a5244c3650687ad3874866ed822e9a330845311b304fbc27aa8a142af5d"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/BlockRotator.java",
+      "lines": 110,
+      "sha256": "1460b0f7c8bdad35b2c67bd277b36bd9e6c0a2df8319bfb168ebd4deeed10c23"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/dungeon/Dungeon.java",
+      "lines": 70,
+      "sha256": "7fd03d0417bfba71ce704bcb1284a631c876ba71fd20c7011469eb8e4bb96229"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/dungeon/DungeonSegment.java",
+      "lines": 79,
+      "sha256": "8c875c129d6abddb7c8e6d1861804db0aa81a0cfea76b1cd7900941742185d22"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/dungeon/DungeonTemplate.java",
+      "lines": 144,
+      "sha256": "79ab8a286a22c736bb04c408851c491e9834d8ffbe4c2d9f7f704cf4c92ac6b4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/dungeon/IDungeonPath.java",
+      "lines": 24,
+      "sha256": "a2bfca7f08170c04ba85770152dbd6b6e280ac09ef1da6c570a98d6675c1d6e3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/dungeon/MazeDungeonPath.java",
+      "lines": 866,
+      "sha256": "623a5e667b3e1c9ca83817b04aebae01067b6099ca887b578b700041d4ae68ea"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/dungeon/presets/IDungeonPreset.java",
+      "lines": 48,
+      "sha256": "d670e7e1a9035f273a071a7ed3e75531bc4c951ac197d5450c61f732c79d9fd6"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/dungeon/presets/PresetCastle.java",
+      "lines": 109,
+      "sha256": "e0410fe58390fb89c0b130ed8509361c55459333d59ef2cb007ea6b955d97f7e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/dungeon/presets/PresetNetherDungeon.java",
+      "lines": 112,
+      "sha256": "0eaaca946a6692b3bad01608a5c05a299c4dbeea344017105237722b62136d64"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/dungeon/presets/PresetNetherDungeonUnderground.java",
+      "lines": 113,
+      "sha256": "a82eeb1972288d77e1e592e04691611c04b1aed6b6a849fb4d5de33144e5742b"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/dungeon/presets/PresetTechFortress.java",
+      "lines": 72,
+      "sha256": "80bd76fa09fd9687fd6df3fcd0b3ed37512998c519dab7659abb630d70458c1e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/dungeon/presets/PresetTemplateTest.java",
+      "lines": 45,
+      "sha256": "47388bb0f540ad156a0610a753bc036c0d5f29a72cecd170ac10dab4db1d0c64"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/dungeon/presets/PresetTestDungeon.java",
+      "lines": 54,
+      "sha256": "072aab02d67a245cc5e2927263495c1bd2267b4c9b392f98560552bd915d17ea"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/dungeon/presets/specialblocks/MBlockChestLoottable.java",
+      "lines": 32,
+      "sha256": "fffd4ded7d06b7ada060d35f55aea1e631752ed0251509e65f01fbadd9f5b74a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/dungeon/presets/specialblocks/MBlockItemFrame.java",
+      "lines": 53,
+      "sha256": "490030b41cdeac114840e48118e96851371b6ac2e1d0d7c09cd07f7e8b577216"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/dungeon/presets/specialblocks/MBlockSkullBlock.java",
+      "lines": 33,
+      "sha256": "aabf73bd3090fd16a836951b5dca0102ec6cb83ed92fd3628ba1b97a515ce65e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/dungeon/presets/specialblocks/MBlockTGSpawner.java",
+      "lines": 81,
+      "sha256": "5db1753173ea44a1ae9f35a86e0064f64350b63c0454af66a0039b4a94cdf753"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/dungeon/presets/specialblocks/RandomStateMBlock.java",
+      "lines": 27,
+      "sha256": "cfe7d07ebe13d6916aef14835bff69be886da379882efc41334e1d205aa9cbf9"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/dungeon/presets/specialblocks/SpecialBlockHandler.java",
+      "lines": 34,
+      "sha256": "a32d6c7ee1bb53cdedaa827fb608fc947c2b80c5b43c1f5c5c53b20dcdff102c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/dungeon/TemplateSegment.java",
+      "lines": 135,
+      "sha256": "201007692142ccbc4928db607341e2373ac3895a226bc35c856bff49238a1b09"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/EnumLootType.java",
+      "lines": 7,
+      "sha256": "ac358ace442d3b56ca0f1d430c7bdf93f5a572dc28eabdbf42ce1eec3e95aa62"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/OreGenerator.java",
+      "lines": 55,
+      "sha256": "f97eabb317cf760fb0f2b4c9778aa36116e8bc57d4dcb6387d957b3db5e74cc3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/Structure.java",
+      "lines": 119,
+      "sha256": "fd362404281c02eb71f25b13f98b379b510951230a8cb77c1a3fe572b4a2cf67"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/StructureLandType.java",
+      "lines": 6,
+      "sha256": "43f273d14b208e4945fd2e84692d9f767f3a9475f2616e367b06c2b4f75c045a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/AircraftCarrier.java",
+      "lines": 177,
+      "sha256": "9765fb6d284ecdde057bf058f2f48ddeecf14190d3447c850ef910649e27b096"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/AlienBugNest.java",
+      "lines": 357,
+      "sha256": "d54e0c35395534f8252665181e461e4e24a09b0c5d1676167c8491f48194061b"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/AlienBugNestStructure.java",
+      "lines": 33,
+      "sha256": "04245cf3008c4020cb0c144e1cfb8314367cb01f1aba8a10a710443a414e7451"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/Barracks.java",
+      "lines": 238,
+      "sha256": "79721381de5bca5d344a6892f7a8bf3fa20da292a302b18dcdfb669fa9bf263b"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/Bunker.java",
+      "lines": 308,
+      "sha256": "e916b90e4d0f14ee6926d5a36357d38f71b3b4c1e7d639a96bc4c4e514025bf7"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/CampProps.java",
+      "lines": 232,
+      "sha256": "e52a775ab2949590c263dab0003bcc088ff0b3966ebe1390b031d47614fd0fc1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/CastleStructure.java",
+      "lines": 41,
+      "sha256": "6f8483de843f09625f1fd397fd61906e2adc5512a1253d964ab173f030862522"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/city/BuildingStyle.java",
+      "lines": 76,
+      "sha256": "d81363da7967669ae797f08b3d68c92113d156d0eec389675c023ddfeb2d90f5"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/city/CityBuilding.java",
+      "lines": 23,
+      "sha256": "3c5b80205845c2b77e87769a9e08a1cb116aa1a5e00c132fc30504c7caa2f642"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/city/CityBuildingType.java",
+      "lines": 451,
+      "sha256": "028931fc2478c064ebd9e659b5f398d79e9a7f7d52447be335045394c961242e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/city/CityRoad.java",
+      "lines": 65,
+      "sha256": "53f8a37987f4a8f86b767da1ab89c24c2bd1b7b4f16f2708e0531460a09d0140"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/city/CityStructure.java",
+      "lines": 66,
+      "sha256": "0a78aae3e19eb83693fbe637960eac38de191013b3b8a86f713c8c4319cdabb3"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/city/EmptyPlane.java",
+      "lines": 37,
+      "sha256": "82b17ded3de84969a410d8109d6e71af09a1759604edea228bb13f58b26ae303"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/city/GenericCity.java",
+      "lines": 159,
+      "sha256": "c4a9bfdf57a8d77a032c13b03411f81d160fb792f2eb91d32bf30dfa8c14dc61"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/city/GenericCitySegment.java",
+      "lines": 203,
+      "sha256": "282cf966862d0dc7aca2ef8179600536cd23f5cb1f7cb9ecfd5daabfb8d54fc8"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/city/IRoad.java",
+      "lines": 10,
+      "sha256": "86fc900e88125af935eb6cd8a3248f7d03b9fbb793d395947e134101b8d1897a"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/city/Staircase.java",
+      "lines": 49,
+      "sha256": "08a10a813faabb52ec9a117035646bf4014c0d91b697764839000b300abbd111"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/Containers.java",
+      "lines": 56,
+      "sha256": "d98083c2b4f2743240d441bc2af4769e72b8edcfd60df5c72263e0d6c8cc6b70"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/DesertOilCluster.java",
+      "lines": 91,
+      "sha256": "9f215d10d7daecb51a23cd957d2db1eb7b3da18165ec4f5b82357b84d8727216"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/EmptyPlane.java",
+      "lines": 33,
+      "sha256": "f6ce0160827c1ca44fc49e22d0804d598c20b29dca20412998bafc7beb032690"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/FactoryHouseSmall.java",
+      "lines": 81,
+      "sha256": "a9a0ab24968e61239756d1ce69fbb69a80ab22a75bb6aa70115d19c67860f996"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/GasStation.java",
+      "lines": 88,
+      "sha256": "20959458b133038e7614d44cb03fed1341815161dd2c2a9d9809cb50ede9abc4"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/Helipad.java",
+      "lines": 74,
+      "sha256": "00dcfa4fb3ed2717633eefabf0b0abc466878e05c2bedc2bba0081a788073f1e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/MBlockRegister.java",
+      "lines": 169,
+      "sha256": "8abb78982b9d5a350e263212b032fc4dde7d68df1c71399ce4ec3f4e24fdfb02"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/MilitaryBaseStructure.java",
+      "lines": 75,
+      "sha256": "ce9dd2e860beb4566910c6e2469bd4578b134937ccc18216f8301aa47fb0d140"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/MilitaryCamp.java",
+      "lines": 575,
+      "sha256": "1ef1794681b2dc99dfbafeb1cd55592baf7a2a6124eaaa0b8dc7138cf85ac05c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/NetherAcidHole.java",
+      "lines": 60,
+      "sha256": "e2759a7f786eb0ac4c88dc18b2d02bb6661b9b73dd82c34d8424b403f2ef7b04"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/NetherAltarMedium.java",
+      "lines": 67,
+      "sha256": "8bcd02f9790ffa118d8beadb115ddf89f6cba317acfef1533836ea872834040e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/NetherAltarSmall.java",
+      "lines": 62,
+      "sha256": "5c6d5f2616a5f06ae9d9560ec20f2cca6d70d067144b0618c02d84d984048c4e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/NetherDungeonEntrance.java",
+      "lines": 59,
+      "sha256": "8f0f69f6d047e5184b3138b2572b9f76f38ce1a030b7fb51c7efb60e7d7fc538"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/NetherDungeonStructure.java",
+      "lines": 38,
+      "sha256": "85a244bfc10e6b6a2d0b4e7910df04d763ea798781472cdb3cf9b4d724ad447c"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/NetherGhastSpawner.java",
+      "lines": 69,
+      "sha256": "941edf4f1fd99d7dc385373907062fe5cd867b71c43028cdbbb2b2d7a68c29ad"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/NetherLoot01.java",
+      "lines": 67,
+      "sha256": "92e4a3a334479f4cee3fc00f7be45d01449db42a8b023ecdfc5bc79961c17844"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/NetherOreClusterCastle.java",
+      "lines": 65,
+      "sha256": "ad6208f7aa8cf1541ddaa374b26324080abcd87a3a178a706fa1ce8d8536cb61"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/NetherOreClusterSmall.java",
+      "lines": 58,
+      "sha256": "403e39d9346f95cdb41a13ec9bc670261677fb6847604cf9fe4d33e74348a8a0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/NetherSoulPlatform.java",
+      "lines": 65,
+      "sha256": "6b4b68200b6fde6fec247723b04c1ed9ca62745075fd78f06023c29a9668e154"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/OreClusterMeteorBasis.java",
+      "lines": 98,
+      "sha256": "f005555e668b59ad9e1343d4fe3f5c524f3580468a5ed9a9b98bbca576944a36"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/OreClusterSpike.java",
+      "lines": 87,
+      "sha256": "9d4d79f9f7c13c39e180ca760a6be642e3c0d21a1d8e0fff3a792c987a3fcabf"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/PoliceStation.java",
+      "lines": 88,
+      "sha256": "5e679fb40837170f595bf5b08b7ea632a2bb679da914d73ef2435063ada08558"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/SmallMine.java",
+      "lines": 94,
+      "sha256": "5e1eadee17073d7ff873755b6853840c9b6c2645e9786f425aff13d2860ff3a0"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/SmallTrainstation.java",
+      "lines": 95,
+      "sha256": "0c788a76c687a417d49e8f6d4b6081ab392505a8a4a7fbb396f155c251e34954"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/SurvivorHideout.java",
+      "lines": 91,
+      "sha256": "99213db30034f75a5ec827edfbc32b43eea08f4989301e6b08cd4b8da204992e"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/Tanks.java",
+      "lines": 206,
+      "sha256": "987850602ccdcf4165fab4e82d999050c49929efc6e1229fabe06aaec56d69b9"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/TechFortressStructure.java",
+      "lines": 38,
+      "sha256": "0c345f8473758ed98a3265c101109cb3bba46450ba684b74d911166790999d4b"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/Tent.java",
+      "lines": 125,
+      "sha256": "421d661ee8c670f0c74514ff60de970800903e3a13b0fcc38499d81c39940fac"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/WatchTowerSmall.java",
+      "lines": 89,
+      "sha256": "57f13a5f148d2382d7c5ddf2594675b641dbcfa67c8113cd4ad623446d85e3f1"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/structures/WorldgenStructure.java",
+      "lines": 277,
+      "sha256": "d32162a47f946d394ce7753a8abc3e3c7df3643372e40210f5f656bcf4b17b68"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/StructureSize.java",
+      "lines": 7,
+      "sha256": "9d1e389fb17767d2dfff5b7aa711a9f12b6489ce105eb7907cc6b4dcdf56ce00"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/TGStructureSpawn.java",
+      "lines": 71,
+      "sha256": "5986fb39e04e2e3725fe662745bc6202802d3dadd1ed0b5212983e85f87ac075"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/TGStructureSpawnRegister.java",
+      "lines": 158,
+      "sha256": "18e744bf56efb54f1e413f7cb38eae7a8dc71a389d46a6b10e44be4351f42470"
+    },
+    {
+      "path": "legacy/1.12.2/src/main/java/techguns/world/WorldGenTGStructureSpawn.java",
+      "lines": 159,
+      "sha256": "3e76dac626e94f7e8ccbc246b533fbe31559160af1ec8c7e27ac79b7fce5c28a"
+    }
+  ]
+}

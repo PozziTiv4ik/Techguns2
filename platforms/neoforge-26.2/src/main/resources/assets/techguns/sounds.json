@@ -1,0 +1,16 @@
+{
+  "guns.revolverfire": {
+    "subtitle": "subtitles.techguns.revolver_fire",
+    "sounds": [
+      "techguns:guns/revolver_shot_a",
+      "techguns:guns/revolver_shot_b",
+      "techguns:guns/revolver_shot_c"
+    ]
+  },
+  "guns.revolverreload": {
+    "subtitle": "subtitles.techguns.revolver_reload",
+    "sounds": [
+      "techguns:guns/revolver_reload"
+    ]
+  }
+}

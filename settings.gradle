@@ -1,0 +1,9 @@
+pluginManagement {
+    repositories { gradlePluginPortal() }
+}
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
+}
+rootProject.name = 'techguns-modern'
+include 'core', 'neoforge-26.2'
+project(':neoforge-26.2').projectDir = file('platforms/neoforge-26.2')
