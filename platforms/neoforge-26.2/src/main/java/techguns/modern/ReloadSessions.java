@@ -3,15 +3,12 @@ package techguns.modern;
 import java.util.IdentityHashMap;
 import java.util.Map;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import techguns.core.Magazine;
-import techguns.core.Weapons;
 
 /** Server-only R-key reloads. Sessions are transient and never follow an item to another player. */
 public final class ReloadSessions {
@@ -24,12 +21,10 @@ public final class ReloadSessions {
         if (!(player.level() instanceof ServerLevel level) || !player.isAlive() || player.isSpectator()
                 || active(player) || player.isUsingItem()) return false;
         ItemStack stack = player.getMainHandItem();
-        if (!stack.is(TGContent.REVOLVER.get()) || player.getCooldowns().isOnCooldown(stack)
-                || RevolverItem.rounds(stack) == Weapons.REVOLVER.capacity()
-                || (!player.getAbilities().instabuild && RevolverItem.findAmmo(player).isEmpty())) return false;
-        PENDING.put(player, new Pending(stack, level, Weapons.REVOLVER.reloadTicks()));
-        level.playSound(null, player.getX(), player.getY(), player.getZ(),
-                TGContent.REVOLVER_RELOAD.get(), SoundSource.PLAYERS, 1, 1);
+        if (!(stack.getItem() instanceof GunItem gun) || player.getCooldowns().isOnCooldown(stack)
+                || !GunItem.canReload(player, stack)) return false;
+        PENDING.put(player, new Pending(stack, level, gun.definition().stats().reloadTicks()));
+        GunItem.playReload(player, gun.definition());
         return true;
     }
 
@@ -42,11 +37,7 @@ public final class ReloadSessions {
         } else if (pending.remaining() > 1) {
             PENDING.put(player, new Pending(pending.stack(), pending.level(), pending.remaining() - 1));
         } else {
-            ItemStack ammo = RevolverItem.findAmmo(player);
-            Magazine.Reload result = Magazine.reloadBundle(Weapons.REVOLVER, RevolverItem.rounds(pending.stack()),
-                    ammo.getCount(), player.getAbilities().instabuild);
-            ammo.shrink(result.consumedItems());
-            pending.stack().set(TGContent.ROUNDS.get(), result.rounds());
+            GunItem.completeReload(player, pending.stack());
             cancel(player);
         }
     }

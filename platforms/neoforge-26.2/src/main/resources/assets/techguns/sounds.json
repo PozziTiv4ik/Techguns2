@@ -1,16 +1,94 @@
 {
+  "guns.handgunfire": {
+    "sounds": [
+      "techguns:guns/handgun_shot_a",
+      "techguns:guns/handgun_shot_b",
+      "techguns:guns/handgun_shot_c"
+    ],
+    "subtitle": "subtitles.techguns.guns.handgunfire"
+  },
+  "guns.handgunreload": {
+    "sounds": [
+      "techguns:guns/handgun_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.handgunreload"
+  },
+  "guns.sawedofffire": {
+    "sounds": [
+      "techguns:guns/sawedoff_shot_a",
+      "techguns:guns/sawedoff_shot_b",
+      "techguns:guns/sawedoff_shot_c"
+    ],
+    "subtitle": "subtitles.techguns.guns.sawedofffire"
+  },
+  "guns.sawedoffreload": {
+    "sounds": [
+      "techguns:guns/sawedoff_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.sawedoffreload"
+  },
   "guns.revolverfire": {
-    "subtitle": "subtitles.techguns.revolver_fire",
     "sounds": [
       "techguns:guns/revolver_shot_a",
       "techguns:guns/revolver_shot_b",
       "techguns:guns/revolver_shot_c"
-    ]
+    ],
+    "subtitle": "subtitles.techguns.guns.revolverfire"
   },
   "guns.revolverreload": {
-    "subtitle": "subtitles.techguns.revolver_reload",
     "sounds": [
       "techguns:guns/revolver_reload"
-    ]
+    ],
+    "subtitle": "subtitles.techguns.guns.revolverreload"
+  },
+  "guns.goldenrevolverfire": {
+    "sounds": [
+      "techguns:guns/goldenrevolver_shot_a",
+      "techguns:guns/goldenrevolver_shot_b",
+      "techguns:guns/goldenrevolver_shot_c"
+    ],
+    "subtitle": "subtitles.techguns.guns.goldenrevolverfire"
+  },
+  "guns.thompsonfire": {
+    "sounds": [
+      "techguns:guns/thompson_shot_a",
+      "techguns:guns/thompson_shot_b",
+      "techguns:guns/thompson_shot_c"
+    ],
+    "subtitle": "subtitles.techguns.guns.thompsonfire"
+  },
+  "guns.thompsonreload": {
+    "sounds": [
+      "techguns:guns/thompson_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.thompsonreload"
+  },
+  "guns.boltactionfire": {
+    "sounds": [
+      "techguns:guns/boltaction_shot_a",
+      "techguns:guns/boltaction_shot_b",
+      "techguns:guns/boltaction_shot_c"
+    ],
+    "subtitle": "subtitles.techguns.guns.boltactionfire"
+  },
+  "guns.boltactionreload": {
+    "sounds": [
+      "techguns:guns/boltaction_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.boltactionreload"
+  },
+  "guns.combatshotgunfire": {
+    "sounds": [
+      "techguns:guns/combatshotgun_shot_a",
+      "techguns:guns/combatshotgun_shot_b",
+      "techguns:guns/combatshotgun_shot_c"
+    ],
+    "subtitle": "subtitles.techguns.guns.combatshotgunfire"
+  },
+  "guns.combatshotgunreload": {
+    "sounds": [
+      "techguns:guns/combatshotgun_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.combatshotgunreload"
   }
 }

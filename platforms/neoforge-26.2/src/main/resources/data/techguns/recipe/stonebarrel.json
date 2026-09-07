@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:stonebarrel",
+    "count": 1
+  },
+  "pattern": [
+    "sss",
+    "   ",
+    "sss"
+  ],
+  "key": {
+    "s": "#c:stones"
+  }
+}

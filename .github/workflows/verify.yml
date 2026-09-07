@@ -23,7 +23,8 @@ jobs:
       - name: Verify legacy inventory and converted resources
         run: |
           python3 tools/audit_legacy.py --check
-          python3 tools/generate_revolver_resources.py --check
+          python3 tools/generate_weapon_content.py --check
+          python3 -m unittest discover -s tools/tests -v
           python3 tools/verify_resources.py
       - name: Build and test core
         run: ./gradlew build --console=plain

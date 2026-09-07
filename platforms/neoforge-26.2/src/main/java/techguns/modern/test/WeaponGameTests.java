@@ -17,7 +17,7 @@ import net.neoforged.neoforge.event.RegisterGameTestsEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import techguns.core.Weapons;
 import techguns.modern.Bullet;
-import techguns.modern.RevolverItem;
+import techguns.modern.GunItem;
 import techguns.modern.TGContent;
 import techguns.modern.ReloadSessions;
 import techguns.modern.network.GunActionPayload;
@@ -30,6 +30,7 @@ public final class WeaponGameTests {
             DeferredRegister.create(Registries.TEST_FUNCTION, "techguns");
 
     static {
+        ArsenalGameTests.register(FUNCTIONS);
         FUNCTIONS.register("ammo_persists", () -> WeaponGameTests::ammoPersists);
         FUNCTIONS.register("reload_timing_and_consumption", () -> WeaponGameTests::reloadTiming);
         FUNCTIONS.register("reload_cancellation", () -> WeaponGameTests::reloadCancellation);
@@ -52,7 +53,7 @@ public final class WeaponGameTests {
                         new TestData<>(environment, TGContent.id("weapon_test"), 100, 0, true))));
     }
 
-    private static Player player(GameTestHelper helper) {
+    static Player player(GameTestHelper helper) {
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         player.setPos(helper.absoluteVec(new Vec3(2, 2, 2)));
         player.setNoGravity(true);
@@ -67,7 +68,7 @@ public final class WeaponGameTests {
         var tag = ItemStack.CODEC.encodeStart(ops, gun).getOrThrow();
         ItemStack decoded = ItemStack.CODEC.parse(ops, tag).getOrThrow();
         helper.assertTrue(decoded.is(TGContent.REVOLVER.get()), "Item ID survives serialization");
-        helper.assertValueEqual(RevolverItem.rounds(decoded), 3, "Saved magazine");
+        helper.assertValueEqual(GunItem.rounds(decoded), 3, "Saved magazine");
         helper.succeed();
     }
 
@@ -79,10 +80,10 @@ public final class WeaponGameTests {
         TGContent.REVOLVER.get().use(helper.getLevel(), player, InteractionHand.MAIN_HAND);
         helper.assertTrue(player.isUsingItem(), "Reload started");
         for (int i = 0; i < Weapons.REVOLVER.reloadTicks() - 1; i++) player.tick();
-        helper.assertValueEqual(RevolverItem.rounds(gun), 0, "Not loaded before 45 ticks");
+        helper.assertValueEqual(GunItem.rounds(gun), 0, "Not loaded before 45 ticks");
         helper.assertValueEqual(ammo.getCount(), 2, "Ammo retained until completion");
         player.tick();
-        helper.assertValueEqual(RevolverItem.rounds(gun), 6, "Loaded cylinder");
+        helper.assertValueEqual(GunItem.rounds(gun), 6, "Loaded cylinder");
         helper.assertValueEqual(ammo.getCount(), 1, "One bundle consumed");
         helper.succeed();
     }
@@ -97,7 +98,7 @@ public final class WeaponGameTests {
         player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
         for (int i = 0; i < 50; i++) player.tick();
         helper.assertTrue(!player.isUsingItem(), "Changing item cancels reload");
-        helper.assertValueEqual(RevolverItem.rounds(gun), 0, "Cancelled magazine");
+        helper.assertValueEqual(GunItem.rounds(gun), 0, "Cancelled magazine");
         helper.assertValueEqual(ammo.getCount(), 2, "Cancelled reload consumes no ammo");
         helper.succeed();
     }
@@ -109,7 +110,7 @@ public final class WeaponGameTests {
         TGContent.REVOLVER.get().use(helper.getLevel(), player, InteractionHand.MAIN_HAND);
         player.getInventory().setItem(1, ItemStack.EMPTY);
         for (int i = 0; i < 45; i++) player.tick();
-        helper.assertValueEqual(RevolverItem.rounds(gun), 0, "Cannot reload with removed ammo");
+        helper.assertValueEqual(GunItem.rounds(gun), 0, "Cannot reload with removed ammo");
         helper.succeed();
     }
 
@@ -124,8 +125,8 @@ public final class WeaponGameTests {
         player.setItemInHand(InteractionHand.MAIN_HAND, replacement);
         for (int i = 0; i < 50; i++) player.tick();
         helper.assertTrue(!player.isUsingItem(), "Swapping identical weapons cancels reload");
-        helper.assertValueEqual(RevolverItem.rounds(original), 0, "Original remains empty");
-        helper.assertValueEqual(RevolverItem.rounds(replacement), 0, "Replacement remains empty");
+        helper.assertValueEqual(GunItem.rounds(original), 0, "Original remains empty");
+        helper.assertValueEqual(GunItem.rounds(replacement), 0, "Replacement remains empty");
         helper.assertValueEqual(ammo.getCount(), 2, "No ammo consumed on swap");
         helper.succeed();
     }
@@ -134,15 +135,15 @@ public final class WeaponGameTests {
         Player player = player(helper);
         ItemStack gun = player.getMainHandItem();
         gun.set(TGContent.ROUNDS.get(), 6);
-        helper.assertTrue(RevolverItem.fire(helper.getLevel(), player, gun), "First shot allowed");
-        helper.assertValueEqual(RevolverItem.rounds(gun), 5, "Shot consumes one round");
-        helper.assertTrue(!RevolverItem.fire(helper.getLevel(), player, gun), "Immediate repeated shot rejected");
+        helper.assertTrue(GunItem.fire(helper.getLevel(), player, gun), "First shot allowed");
+        helper.assertValueEqual(GunItem.rounds(gun), 5, "Shot consumes one round");
+        helper.assertTrue(!GunItem.fire(helper.getLevel(), player, gun), "Immediate repeated shot rejected");
         ItemStack otherGun = TGContent.REVOLVER.toStack();
         otherGun.set(TGContent.ROUNDS.get(), 6);
         player.setItemInHand(InteractionHand.MAIN_HAND, otherGun);
-        helper.assertTrue(!RevolverItem.fire(helper.getLevel(), player, otherGun), "Swapping guns does not bypass cooldown");
+        helper.assertTrue(!GunItem.fire(helper.getLevel(), player, otherGun), "Swapping guns does not bypass cooldown");
         for (int i = 0; i < 6; i++) player.getCooldowns().tick();
-        helper.assertTrue(RevolverItem.fire(helper.getLevel(), player, otherGun), "Shot allowed after cooldown");
+        helper.assertTrue(GunItem.fire(helper.getLevel(), player, otherGun), "Shot allowed after cooldown");
         helper.succeed();
     }
 
@@ -199,11 +200,11 @@ public final class WeaponGameTests {
         helper.assertTrue(GunNetwork.handle(player, new GunActionPayload(true)), "R starts server reload");
         helper.assertTrue(!GunNetwork.handle(player, new GunActionPayload(false)), "No firing during R reload");
         for (int i = 0; i < 44; i++) player.tick();
-        helper.assertValueEqual(RevolverItem.rounds(gun), 3, "R reload not complete early");
+        helper.assertValueEqual(GunItem.rounds(gun), 3, "R reload not complete early");
         helper.assertValueEqual(ammo.getCount(), 2, "R reload retains ammo until end");
         helper.assertTrue(!GunNetwork.handle(player, new GunActionPayload(true)), "Spam cannot restart or complete reload");
         player.tick();
-        helper.assertValueEqual(RevolverItem.rounds(gun), 6, "R reload finished through player tick event");
+        helper.assertValueEqual(GunItem.rounds(gun), 6, "R reload finished through player tick event");
         helper.assertValueEqual(ammo.getCount(), 1, "R reload uses one bundle");
         helper.assertTrue(!ReloadSessions.active(player), "Completed reload cleans session");
         helper.succeed();
@@ -219,8 +220,8 @@ public final class WeaponGameTests {
         player.setItemInHand(InteractionHand.MAIN_HAND, TGContent.REVOLVER.toStack());
         for (int i = 0; i < 50; i++) player.tick();
         helper.assertTrue(!ReloadSessions.active(player), "Swapping cancels server reload session");
-        helper.assertValueEqual(RevolverItem.rounds(oldGun), 0, "Original gun remains empty");
-        helper.assertValueEqual(RevolverItem.rounds(player.getMainHandItem()), 0, "Replacement stays empty");
+        helper.assertValueEqual(GunItem.rounds(oldGun), 0, "Original gun remains empty");
+        helper.assertValueEqual(GunItem.rounds(player.getMainHandItem()), 0, "Replacement stays empty");
         helper.assertValueEqual(ammo.getCount(), 2, "Swap consumes no ammo");
         helper.succeed();
     }

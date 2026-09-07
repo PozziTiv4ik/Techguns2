@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "result": {
+    "id": "techguns:stonebullets",
+    "count": 16
+  },
+  "ingredients": [
+    "#c:cobblestones",
+    "#c:cobblestones",
+    "#c:cobblestones",
+    "minecraft:gunpowder"
+  ]
+}

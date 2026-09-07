@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:handcannon",
+    "count": 1
+  },
+  "pattern": [
+    "bfs"
+  ],
+  "key": {
+    "b": "techguns:stonebarrel",
+    "s": "techguns:woodstock",
+    "f": "minecraft:flint_and_steel"
+  }
+}

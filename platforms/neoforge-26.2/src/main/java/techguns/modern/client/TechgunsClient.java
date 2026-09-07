@@ -15,6 +15,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import techguns.modern.TGContent;
 import techguns.modern.Techguns;
+import techguns.modern.GunItem;
 import techguns.modern.network.GunActionPayload;
 
 @Mod(value = Techguns.MOD_ID, dist = Dist.CLIENT)
@@ -36,7 +37,8 @@ public final class TechgunsClient {
         boolean down = client.options.keyAttack.isDown();
         boolean playing = client.player != null && client.gui.screen() == null && !client.isPaused();
         if (!down) attackWasDown = false;
-        if (playing && client.player.getMainHandItem().is(TGContent.REVOLVER.get())) {
+        if (playing && client.player.getMainHandItem().getItem() instanceof GunItem gun) {
+            if (down && attackWasDown && gun.definition().automatic()) ClientPacketDistributor.sendToServer(new GunActionPayload(false));
             while (RELOAD.consumeClick()) ClientPacketDistributor.sendToServer(new GunActionPayload(true));
         } else {
             while (RELOAD.consumeClick()) { /* Discard key presses from menus and other items. */ }
@@ -46,7 +48,7 @@ public final class TechgunsClient {
 
     private static void interaction(InputEvent.InteractionKeyMappingTriggered event) {
         Minecraft client = Minecraft.getInstance();
-        if (event.isAttack() && client.player != null && client.player.getMainHandItem().is(TGContent.REVOLVER.get())) {
+        if (event.isAttack() && client.player != null && client.player.getMainHandItem().getItem() instanceof GunItem) {
             event.setCanceled(true);
             event.setSwingHand(false);
             if (!attackWasDown) ClientPacketDistributor.sendToServer(new GunActionPayload(false));

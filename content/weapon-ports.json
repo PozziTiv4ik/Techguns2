@@ -1,0 +1,9 @@
+{
+  "handcannon": "ModelHandgun",
+  "sawedoff": "ModelSawedOff",
+  "revolver": "ModelRevolver",
+  "goldenrevolver": "ModelGoldenRevolver",
+  "thompson": "ModelThompson",
+  "boltaction": "ModelBoltaction",
+  "combatshotgun": "ModelCombatShotgun"
+}

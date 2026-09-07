@@ -4,8 +4,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import techguns.modern.ReloadSessions;
-import techguns.modern.RevolverItem;
-import techguns.modern.TGContent;
+import techguns.modern.GunItem;
 
 public final class GunNetwork {
     public static void register(RegisterPayloadHandlersEvent event) {
@@ -16,9 +15,9 @@ public final class GunNetwork {
 
     public static boolean handle(Player player, GunActionPayload payload) {
         if (!(player.level() instanceof ServerLevel server) || !player.isAlive() || player.isSpectator()
-                || !player.getMainHandItem().is(TGContent.REVOLVER.get())) return false;
+                || !(player.getMainHandItem().getItem() instanceof GunItem)) return false;
         return payload.reload() ? ReloadSessions.begin(player)
-                : RevolverItem.fire(server, player, player.getMainHandItem());
+                : GunItem.fire(server, player, player.getMainHandItem());
     }
 
     private GunNetwork() {}
