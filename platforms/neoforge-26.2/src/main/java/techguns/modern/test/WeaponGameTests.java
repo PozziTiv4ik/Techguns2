@@ -34,6 +34,7 @@ public final class WeaponGameTests {
         AimGameTests.register(FUNCTIONS);
         CraftingGameTests.register(FUNCTIONS);
         AmmoPressGameTests.register(FUNCTIONS);
+        MetalPressGameTests.register(FUNCTIONS);
         FUNCTIONS.register("ammo_persists", () -> WeaponGameTests::ammoPersists);
         FUNCTIONS.register("reload_timing_and_consumption", () -> WeaponGameTests::reloadTiming);
         FUNCTIONS.register("reload_cancellation", () -> WeaponGameTests::reloadCancellation);
@@ -52,7 +53,7 @@ public final class WeaponGameTests {
         var environment = event.registerEnvironment(TGContent.id("weapons"));
         FUNCTIONS.getEntries().forEach(function -> event.registerTest(function.getId(),
                 new FunctionGameTestInstance(function.getKey(),
-                        new TestData<>(environment, TGContent.id("weapon_test"), function.getId().getPath().startsWith("press_") ? 300 : 100, 0, true))));
+                        new TestData<>(environment, TGContent.id("weapon_test"), function.getId().getPath().startsWith("press_") || function.getId().getPath().startsWith("metal_") ? 300 : 100, 0, true))));
     }
 
     static Player player(GameTestHelper helper) {

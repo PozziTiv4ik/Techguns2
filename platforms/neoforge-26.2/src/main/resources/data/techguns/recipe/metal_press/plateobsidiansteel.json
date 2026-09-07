@@ -1,0 +1,12 @@
+{
+  "type": "techguns:metal_press",
+  "first": "#c:ingots/obsidian_steel",
+  "second": "#c:ingots/obsidian_steel",
+  "allow_swap": true,
+  "result": {
+    "id": "techguns:plateobsidiansteel",
+    "count": 2
+  },
+  "duration": 100,
+  "power_per_tick": 20
+}

@@ -1,0 +1,12 @@
+{
+  "type": "techguns:metal_press",
+  "first": "#c:plates/copper",
+  "second": "#c:plates/copper",
+  "allow_swap": true,
+  "result": {
+    "id": "techguns:copperwire",
+    "count": 8
+  },
+  "duration": 100,
+  "power_per_tick": 20
+}

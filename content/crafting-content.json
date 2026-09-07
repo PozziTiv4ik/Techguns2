@@ -5,6 +5,8 @@
     "2": "techguns:shotgunrounds",
     "3": "techguns:riflerounds",
     "4": "techguns:sniperrounds",
+    "5": "techguns:40mmgrenade",
+    "6": "techguns:advancedrounds",
     "8": "techguns:rifleroundsstack",
     "9": "techguns:smgmagazine",
     "10": "techguns:smgmagazineempty",
@@ -24,24 +26,41 @@
     "39": "techguns:obsidiansteelbarrel",
     "42": "techguns:woodstock",
     "43": "techguns:plasticstock",
+    "45": "techguns:steamarmorplate",
     "46": "techguns:plateiron",
+    "47": "techguns:platecopper",
+    "48": "techguns:platetin",
+    "49": "techguns:platebronze",
     "50": "techguns:platesteel",
     "51": "techguns:plateobsidiansteel",
+    "52": "techguns:platelead",
+    "53": "techguns:platecarbon",
+    "54": "techguns:platetitanium",
     "55": "techguns:plasticsheet",
     "57": "techguns:mechanicalpartsiron",
     "58": "techguns:mechanicalpartsobsidiansteel",
     "59": "techguns:mechanicalpartscarbon",
     "62": "techguns:copperwire",
+    "63": "techguns:goldwire",
+    "64": "techguns:carbonfibers",
     "70": "techguns:electricengine",
+    "75": "techguns:tgx",
+    "80": "techguns:ingottin",
+    "81": "techguns:ingotbronze",
     "82": "techguns:ingotlead",
     "83": "techguns:ingotsteel",
     "84": "techguns:ingotobsidiansteel",
+    "85": "techguns:ingottitanium",
     "87": "techguns:nuggetlead",
     "88": "techguns:nuggetsteel",
-    "94": "techguns:machinestackupgrade"
+    "94": "techguns:machinestackupgrade",
+    "108": "techguns:sniperrounds_incendiary",
+    "127": "techguns:gaussrifleslugs",
+    "144": "techguns:sniperrounds_explosive"
   },
   "block_metadata": {
-    "techguns:basicmachine@0": "techguns:ammo_press"
+    "techguns:basicmachine@0": "techguns:ammo_press",
+    "techguns:basicmachine@1": "techguns:metal_press"
   },
   "recipes": [
     {
@@ -71,6 +90,14 @@
     {
       "id": "techguns:ammo_press",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/basicmachine_0_ammo_press.json"
+    },
+    {
+      "id": "techguns:metal_press",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/basicmachine_1_metal_press.json"
+    },
+    {
+      "id": "techguns:metal_press_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/basicmachine_1_metal_press_alt.json"
     },
     {
       "id": "techguns:boltaction",
@@ -282,6 +309,12 @@
     }
   ],
   "tags": {
+    "c:fibers/carbon": [
+      "techguns:carbonfibers"
+    ],
+    "c:ingots/bronze": [
+      "techguns:ingotbronze"
+    ],
     "c:ingots/lead": [
       "techguns:ingotlead"
     ],
@@ -291,11 +324,26 @@
     "c:ingots/steel": [
       "techguns:ingotsteel"
     ],
+    "c:ingots/tin": [
+      "techguns:ingottin"
+    ],
+    "c:ingots/titanium": [
+      "techguns:ingottitanium"
+    ],
     "c:nuggets/lead": [
       "techguns:nuggetlead"
     ],
     "c:nuggets/steel": [
       "techguns:nuggetsteel"
+    ],
+    "c:plates/bronze": [
+      "techguns:platebronze"
+    ],
+    "c:plates/carbon": [
+      "techguns:platecarbon"
+    ],
+    "c:plates/copper": [
+      "techguns:platecopper"
     ],
     "c:plates/iron": [
       "techguns:plateiron"
@@ -306,6 +354,9 @@
     "c:plates/steel": [
       "techguns:platesteel"
     ],
+    "c:plates/titanium": [
+      "techguns:platetitanium"
+    ],
     "c:sheets/plastic": [
       "techguns:plasticsheet"
     ],
@@ -314,14 +365,32 @@
     ]
   },
   "requires_non_workbench_production": [
+    "40mmgrenade",
+    "advancedrounds",
+    "carbonfibers",
+    "gaussrifleslugs",
+    "goldwire",
+    "ingotbronze",
     "ingotobsidiansteel",
+    "ingottin",
+    "ingottitanium",
     "mechanicalpartscarbon",
     "mechanicalpartsobsidiansteel",
     "plasticsheet",
+    "platebronze",
+    "platecarbon",
+    "platecopper",
     "plateiron",
+    "platelead",
     "plateobsidiansteel",
     "platesteel",
-    "sniperrounds"
+    "platetin",
+    "platetitanium",
+    "sniperrounds",
+    "sniperrounds_explosive",
+    "sniperrounds_incendiary",
+    "steamarmorplate",
+    "tgx"
   ],
   "metal_packing_requires_feedstock": [
     "ingotlead",

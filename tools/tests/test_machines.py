@@ -4,7 +4,7 @@ import json
 import sys
 import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from legacy_machines import ammo_press_data, generate_machine_content, RESOURCES
+from legacy_machines import ammo_press_data, metal_press_data, generate_machine_content, RESOURCES
 from legacy_crafting import plan_crafting
 from generate_weapon_content import parse_weapons
 
@@ -42,6 +42,40 @@ class AmmoPressPortTests(unittest.TestCase):
         self.assertEqual(plan['recipes']['ammo_press']['key']['e'], 'techguns:electricengine')
         self.assertEqual(plan['recipes']['machinestackupgrade']['key']['p'], '#c:plates/iron')
         self.assertIn('copperwire', plan['materials'])
+
+
+class MetalPressPortTests(unittest.TestCase):
+    def test_all_original_recipes_are_selected(self):
+        recipes = metal_press_data()
+        self.assertEqual(len(recipes), 19)
+        by_output = {r['result']['id']: r for r in recipes}
+        self.assertEqual(by_output['techguns:copperwire']['result']['count'], 8)
+        self.assertEqual(by_output['techguns:mechanicalpartscarbon']['result']['count'], 2)
+        self.assertEqual(by_output['techguns:40mmgrenade']['second'], 'minecraft:tnt')
+        self.assertEqual(by_output['techguns:sniperrounds_explosive']['first'], 'techguns:sniperrounds_incendiary')
+        for recipe in recipes:
+            self.assertTrue(recipe['allow_swap'])
+            self.assertEqual((recipe['duration'], recipe['power_per_tick']), (100,20))
+
+    def test_material_tags_have_original_items(self):
+        plan = plan_crafting(parse_weapons())
+        self.assertEqual(plan['tags']['c:ingots/tin'], ['techguns:ingottin'])
+        self.assertEqual(plan['tags']['c:plates/titanium'], ['techguns:platetitanium'])
+        self.assertIn('sniperrounds_explosive', plan['extra_ammo'])
+        self.assertNotIn('sniperrounds_explosive', plan['materials'])
+
+    def test_machine_crafting_preserves_cheaper_plate_variant(self):
+        recipes = plan_crafting(parse_weapons())['recipes']
+        self.assertEqual(recipes['metal_press']['key']['b'], '#c:storage_blocks/iron')
+        self.assertEqual(recipes['metal_press_alt']['key']['b'], '#c:plates/iron')
+        self.assertEqual(recipes['metal_press']['result']['id'], 'techguns:metal_press')
+
+    def test_idle_machine_preserves_all_static_parts(self):
+        files = generate_machine_content()
+        mesh = files[RESOURCES+'assets/techguns/models/block/metal_press.obj'].decode()
+        self.assertEqual(mesh.count('\no '), 35)
+        self.assertNotIn('\no MetalPiece\n', mesh)
+        for moving_part in range(1,7): self.assertIn(f'\no p{moving_part}\n', mesh)
 
 
 if __name__ == '__main__': unittest.main()

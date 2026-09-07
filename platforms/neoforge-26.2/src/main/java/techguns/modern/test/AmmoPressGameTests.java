@@ -47,6 +47,7 @@ final class AmmoPressGameTests {
         registry.register("press_optional_power", () -> AmmoPressGameTests::optionalPower);
         registry.register("press_hopper_production", () -> AmmoPressGameTests::hoppers);
         registry.register("press_crafting_chain", () -> AmmoPressGameTests::crafting);
+        registry.register("press_earlier_port_save", () -> AmmoPressGameTests::earlierSave);
     }
     private static AmmoPressBlockEntity machine(GameTestHelper h) {
         h.setBlock(POS, TGMachineContent.AMMO_PRESS.get());
@@ -79,6 +80,7 @@ final class AmmoPressGameTests {
             h.assertTrue(machine.getItem(0).isEmpty() && machine.getItem(1).isEmpty() && machine.getItem(2).isEmpty(), "Inputs are reserved at start");
             h.assertTrue(machine.getItem(3).isEmpty(), "No early production");
             h.assertValueEqual(machine.data.get(2), 100, "Original cycle duration");
+            h.assertValueEqual(machine.data.get(7), 5, "Menu reports Ammo Press power independently of Metal Press scaling");
         });
         h.runAfterDelay(105, () -> {
             assertOutput(h, machine, plan, YIELDS[plan]);
@@ -307,6 +309,16 @@ final class AmmoPressGameTests {
         ItemStack upgrade = CraftingGameTests.craft(h, 3, 3, plate,new ItemStack(Items.DYE.green()),plate,gold,new ItemStack(Items.CHEST),gold,plate,gold,plate);
         h.assertTrue(upgrade.is(TGContent.MATERIALS.get("machinestackupgrade").get()), "Original reusable batch upgrade recipe");
         h.assertValueEqual(upgrade.getMaxStackSize(), 7, "Upgrade retains original stack limit");
+        h.succeed();
+    }
+    private static void earlierSave(GameTestHelper h) {
+        var machine = machine(h);
+        var saved = machine.saveWithFullMetadata(h.getLevel().registryAccess());
+        saved.remove("mode");
+        saved.putInt("plan", 3); // field written by the first 26.2 Ammo Press port
+        var restored = (AmmoPressBlockEntity) BlockEntity.loadStatic(h.absolutePos(POS), machine.getBlockState(), saved, h.getLevel().registryAccess());
+        h.assertValueEqual(restored.data.get(3), 3, "Shared machine implementation still reads the earlier port's saved plan");
+        h.assertValueEqual(restored.getContainerSize(), 5, "Inventory layout remains compatible");
         h.succeed();
     }
     private AmmoPressGameTests() {}

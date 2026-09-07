@@ -1,0 +1,222 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/TGMachineRecipes.java",
+  "energy_capacity": 20000,
+  "input_counts": [
+    1,
+    1
+  ],
+  "upgrade_limit": 7,
+  "batch_power_exponent": 2,
+  "recipes": [
+    {
+      "first": "#c:ingots/tin",
+      "second": "#c:ingots/tin",
+      "allow_swap": true,
+      "result": {
+        "id": "techguns:platetin",
+        "count": 2
+      },
+      "duration": 100,
+      "power_per_tick": 20
+    },
+    {
+      "first": "#c:ingots/copper",
+      "second": "#c:ingots/copper",
+      "allow_swap": true,
+      "result": {
+        "id": "techguns:platecopper",
+        "count": 2
+      },
+      "duration": 100,
+      "power_per_tick": 20
+    },
+    {
+      "first": "#c:ingots/bronze",
+      "second": "#c:ingots/bronze",
+      "allow_swap": true,
+      "result": {
+        "id": "techguns:platebronze",
+        "count": 2
+      },
+      "duration": 100,
+      "power_per_tick": 20
+    },
+    {
+      "first": "#c:ingots/iron",
+      "second": "#c:ingots/iron",
+      "allow_swap": true,
+      "result": {
+        "id": "techguns:plateiron",
+        "count": 2
+      },
+      "duration": 100,
+      "power_per_tick": 20
+    },
+    {
+      "first": "#c:ingots/steel",
+      "second": "#c:ingots/steel",
+      "allow_swap": true,
+      "result": {
+        "id": "techguns:platesteel",
+        "count": 2
+      },
+      "duration": 100,
+      "power_per_tick": 20
+    },
+    {
+      "first": "#c:ingots/lead",
+      "second": "#c:ingots/lead",
+      "allow_swap": true,
+      "result": {
+        "id": "techguns:platelead",
+        "count": 2
+      },
+      "duration": 100,
+      "power_per_tick": 20
+    },
+    {
+      "first": "#c:plates/iron",
+      "second": "minecraft:flint",
+      "allow_swap": true,
+      "result": {
+        "id": "techguns:mechanicalpartsiron",
+        "count": 1
+      },
+      "duration": 100,
+      "power_per_tick": 20
+    },
+    {
+      "first": "#c:plates/obsidian_steel",
+      "second": "#c:gems/quartz",
+      "allow_swap": true,
+      "result": {
+        "id": "techguns:mechanicalpartsobsidiansteel",
+        "count": 1
+      },
+      "duration": 100,
+      "power_per_tick": 20
+    },
+    {
+      "first": "#c:plates/carbon",
+      "second": "minecraft:blaze_rod",
+      "allow_swap": true,
+      "result": {
+        "id": "techguns:mechanicalpartscarbon",
+        "count": 2
+      },
+      "duration": 100,
+      "power_per_tick": 20
+    },
+    {
+      "first": "#c:plates/copper",
+      "second": "#c:plates/copper",
+      "allow_swap": true,
+      "result": {
+        "id": "techguns:copperwire",
+        "count": 8
+      },
+      "duration": 100,
+      "power_per_tick": 20
+    },
+    {
+      "first": "#c:fibers/carbon",
+      "second": "#c:fibers/carbon",
+      "allow_swap": true,
+      "result": {
+        "id": "techguns:platecarbon",
+        "count": 2
+      },
+      "duration": 100,
+      "power_per_tick": 20
+    },
+    {
+      "first": "#c:plates/obsidian_steel",
+      "second": "techguns:tgx",
+      "allow_swap": true,
+      "result": {
+        "id": "techguns:advancedrounds",
+        "count": 16
+      },
+      "duration": 100,
+      "power_per_tick": 20
+    },
+    {
+      "first": "#c:ingots/obsidian_steel",
+      "second": "#c:ingots/obsidian_steel",
+      "allow_swap": true,
+      "result": {
+        "id": "techguns:plateobsidiansteel",
+        "count": 2
+      },
+      "duration": 100,
+      "power_per_tick": 20
+    },
+    {
+      "first": "#c:plates/steel",
+      "second": "#c:plates/bronze",
+      "allow_swap": true,
+      "result": {
+        "id": "techguns:steamarmorplate",
+        "count": 1
+      },
+      "duration": 100,
+      "power_per_tick": 20
+    },
+    {
+      "first": "#c:ingots/gold",
+      "second": "#c:ingots/gold",
+      "allow_swap": true,
+      "result": {
+        "id": "techguns:goldwire",
+        "count": 2
+      },
+      "duration": 100,
+      "power_per_tick": 20
+    },
+    {
+      "first": "#c:plates/iron",
+      "second": "minecraft:tnt",
+      "allow_swap": true,
+      "result": {
+        "id": "techguns:40mmgrenade",
+        "count": 16
+      },
+      "duration": 100,
+      "power_per_tick": 20
+    },
+    {
+      "first": "#c:ingots/titanium",
+      "second": "#c:ingots/titanium",
+      "allow_swap": true,
+      "result": {
+        "id": "techguns:platetitanium",
+        "count": 2
+      },
+      "duration": 100,
+      "power_per_tick": 20
+    },
+    {
+      "first": "#c:plates/obsidian_steel",
+      "second": "#c:plates/titanium",
+      "allow_swap": true,
+      "result": {
+        "id": "techguns:gaussrifleslugs",
+        "count": 4
+      },
+      "duration": 100,
+      "power_per_tick": 20
+    },
+    {
+      "first": "techguns:sniperrounds_incendiary",
+      "second": "techguns:tgx",
+      "allow_swap": true,
+      "result": {
+        "id": "techguns:sniperrounds_explosive",
+        "count": 1
+      },
+      "duration": 100,
+      "power_per_tick": 20
+    }
+  ],
+  "rendering": "original geometry at rest; animation pending"
+}

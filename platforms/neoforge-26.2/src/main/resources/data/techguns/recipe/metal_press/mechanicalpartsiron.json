@@ -1,0 +1,12 @@
+{
+  "type": "techguns:metal_press",
+  "first": "#c:plates/iron",
+  "second": "minecraft:flint",
+  "allow_swap": true,
+  "result": {
+    "id": "techguns:mechanicalpartsiron",
+    "count": 1
+  },
+  "duration": 100,
+  "power_per_tick": 20
+}

@@ -1,0 +1,27 @@
+{
+  "values": [
+    "#c:fibers/carbon",
+    "#c:gems/quartz",
+    "#c:ingots/bronze",
+    "#c:ingots/copper",
+    "#c:ingots/gold",
+    "#c:ingots/iron",
+    "#c:ingots/lead",
+    "#c:ingots/obsidian_steel",
+    "#c:ingots/steel",
+    "#c:ingots/tin",
+    "#c:ingots/titanium",
+    "#c:plates/bronze",
+    "#c:plates/carbon",
+    "#c:plates/copper",
+    "#c:plates/iron",
+    "#c:plates/obsidian_steel",
+    "#c:plates/steel",
+    "#c:plates/titanium",
+    "minecraft:blaze_rod",
+    "minecraft:flint",
+    "minecraft:tnt",
+    "techguns:sniperrounds_incendiary",
+    "techguns:tgx"
+  ]
+}

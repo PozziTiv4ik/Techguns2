@@ -231,5 +231,13 @@
       "techguns:machines/ammopress_work2_c"
     ],
     "subtitle": "subtitles.techguns.machines.ammopresswork2"
+  },
+  "machines.metalpresswork": {
+    "sounds": [
+      "techguns:machines/metalpress_small_work_a",
+      "techguns:machines/metalpress_small_work_b",
+      "techguns:machines/metalpress_small_work_c"
+    ],
+    "subtitle": "subtitles.techguns.machines.metalpresswork"
   }
 }

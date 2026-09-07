@@ -1,0 +1,12 @@
+{
+  "type": "techguns:metal_press",
+  "first": "#c:plates/obsidian_steel",
+  "second": "#c:plates/titanium",
+  "allow_swap": true,
+  "result": {
+    "id": "techguns:gaussrifleslugs",
+    "count": 4
+  },
+  "duration": 100,
+  "power_per_tick": 20
+}

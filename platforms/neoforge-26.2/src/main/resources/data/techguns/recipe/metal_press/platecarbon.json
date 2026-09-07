@@ -1,0 +1,12 @@
+{
+  "type": "techguns:metal_press",
+  "first": "#c:fibers/carbon",
+  "second": "#c:fibers/carbon",
+  "allow_swap": true,
+  "result": {
+    "id": "techguns:platecarbon",
+    "count": 2
+  },
+  "duration": 100,
+  "power_per_tick": 20
+}

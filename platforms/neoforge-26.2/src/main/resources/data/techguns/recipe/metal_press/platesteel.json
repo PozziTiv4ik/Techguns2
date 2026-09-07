@@ -1,0 +1,12 @@
+{
+  "type": "techguns:metal_press",
+  "first": "#c:ingots/steel",
+  "second": "#c:ingots/steel",
+  "allow_swap": true,
+  "result": {
+    "id": "techguns:platesteel",
+    "count": 2
+  },
+  "duration": 100,
+  "power_per_tick": 20
+}

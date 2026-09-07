@@ -1,0 +1,12 @@
+{
+  "type": "techguns:metal_press",
+  "first": "techguns:sniperrounds_incendiary",
+  "second": "techguns:tgx",
+  "allow_swap": true,
+  "result": {
+    "id": "techguns:sniperrounds_explosive",
+    "count": 1
+  },
+  "duration": 100,
+  "power_per_tick": 20
+}

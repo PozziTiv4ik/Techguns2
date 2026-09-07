@@ -104,6 +104,8 @@ def main():
         for value in list(recipe.get('key', {}).values()) + recipe.get('ingredients', []): check_ingredient(value)
         if recipe['type'] == 'techguns:ammo_press':
             for key in ('metal1', 'metal2', 'powder'): check_ingredient(recipe[key])
+        if recipe['type'] == 'techguns:metal_press':
+            for key in ('first', 'second'): check_ingredient(recipe[key])
     for path in (ROOT / 'data/c/tags/item').rglob('*.json'):
         for value in json.loads(path.read_text(encoding='utf-8'))['values']: check_ingredient(value)
     print(f'Validated {len(names)} item definitions, {texture_count} texture references, {len(sounds)} sound events and {len(recipes)} recipes')

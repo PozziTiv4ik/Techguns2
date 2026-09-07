@@ -1,0 +1,12 @@
+{
+  "type": "techguns:metal_press",
+  "first": "#c:ingots/bronze",
+  "second": "#c:ingots/bronze",
+  "allow_swap": true,
+  "result": {
+    "id": "techguns:platebronze",
+    "count": 2
+  },
+  "duration": 100,
+  "power_per_tick": 20
+}

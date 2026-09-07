@@ -1,0 +1,12 @@
+{
+  "type": "techguns:metal_press",
+  "first": "#c:ingots/titanium",
+  "second": "#c:ingots/titanium",
+  "allow_swap": true,
+  "result": {
+    "id": "techguns:platetitanium",
+    "count": 2
+  },
+  "duration": 100,
+  "power_per_tick": 20
+}

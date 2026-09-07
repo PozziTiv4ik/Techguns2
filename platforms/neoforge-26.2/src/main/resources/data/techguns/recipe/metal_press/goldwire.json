@@ -1,0 +1,12 @@
+{
+  "type": "techguns:metal_press",
+  "first": "#c:ingots/gold",
+  "second": "#c:ingots/gold",
+  "allow_swap": true,
+  "result": {
+    "id": "techguns:goldwire",
+    "count": 2
+  },
+  "duration": 100,
+  "power_per_tick": 20
+}

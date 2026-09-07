@@ -1,0 +1,12 @@
+{
+  "type": "techguns:metal_press",
+  "first": "#c:plates/obsidian_steel",
+  "second": "techguns:tgx",
+  "allow_swap": true,
+  "result": {
+    "id": "techguns:advancedrounds",
+    "count": 16
+  },
+  "duration": 100,
+  "power_per_tick": 20
+}
