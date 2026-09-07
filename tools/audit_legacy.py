@@ -13,7 +13,7 @@ OUTPUT = ROOT / "content/legacy-inventory.json"
 
 def inventory():
     java = []
-    for path in sorted((LEGACY / "java").rglob("*.java")):
+    for path in sorted((LEGACY / "java").rglob("*.java"), key=lambda p: p.as_posix()):
         # Canonical LF hashes are stable across Git's Windows/Linux checkout settings.
         data = path.read_bytes().replace(b"\r\n", b"\n")
         java.append({"path": path.relative_to(ROOT).as_posix(),

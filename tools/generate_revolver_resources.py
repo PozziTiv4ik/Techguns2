@@ -84,10 +84,10 @@ def build_files():
         json_file(f'assets/techguns/items/{item}.json', {
             'model': {'type': 'minecraft:model', 'model': f'techguns:item/{item}'}})
     for lang, values in {
-        'en_us': {'itemGroup.techguns': 'Techguns · Development', 'item.techguns.revolver': 'Revolver',
+        'en_us': {'itemGroup.techguns': 'Techguns · Development', 'key.techguns.reload': 'Reload weapon', 'item.techguns.revolver': 'Revolver',
                   'item.techguns.pistolrounds': 'Pistol Rounds', 'subtitles.techguns.revolver_fire': 'Revolver fires',
                   'subtitles.techguns.revolver_reload': 'Revolver reloads'},
-        'ru_ru': {'itemGroup.techguns': 'Techguns · В разработке', 'item.techguns.revolver': 'Револьвер',
+        'ru_ru': {'itemGroup.techguns': 'Techguns · В разработке', 'key.techguns.reload': 'Перезарядить оружие', 'item.techguns.revolver': 'Револьвер',
                   'item.techguns.pistolrounds': 'Пистолетные патроны', 'subtitles.techguns.revolver_fire': 'Выстрел револьвера',
                   'subtitles.techguns.revolver_reload': 'Перезарядка револьвера'}
     }.items():

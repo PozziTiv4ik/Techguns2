@@ -25,6 +25,7 @@ public final class RevolverItem extends Item {
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         if (player.getCooldowns().isOnCooldown(stack) || player.isUsingItem()) return InteractionResult.FAIL;
+        if (level instanceof ServerLevel && ReloadSessions.active(player)) return InteractionResult.FAIL;
         if (player.isShiftKeyDown() || rounds(stack) == 0) {
             if (rounds(stack) == Weapons.REVOLVER.capacity()
                     || (!player.getAbilities().instabuild && findAmmo(player).isEmpty())) return InteractionResult.FAIL;
@@ -33,15 +34,14 @@ public final class RevolverItem extends Item {
                     TGContent.REVOLVER_RELOAD.get(), SoundSource.PLAYERS, 1, 1);
             return InteractionResult.CONSUME;
         }
-        if (level instanceof ServerLevel server) fire(server, player, stack);
-        return InteractionResult.SUCCESS;
+        return InteractionResult.PASS;
     }
 
     /** Returns false without side effects if server state disallows a shot. Also used by integration tests. */
     public static boolean fire(ServerLevel server, Player player, ItemStack stack) {
         if (!stack.is(TGContent.REVOLVER.get()) || player.isSpectator()
                 || (player.getMainHandItem() != stack && player.getOffhandItem() != stack)
-                || player.getCooldowns().isOnCooldown(stack)
+                || player.getCooldowns().isOnCooldown(stack) || ReloadSessions.active(player)
                 || !Magazine.canFire(Weapons.REVOLVER, rounds(stack), 0, player.isUsingItem())) return false;
         Bullet bullet = new Bullet(TGContent.BULLET.get(), server);
         bullet.setOwner(player);
@@ -80,7 +80,7 @@ public final class RevolverItem extends Item {
         return stack;
     }
 
-    private static ItemStack findAmmo(Player player) {
+    static ItemStack findAmmo(Player player) {
         for (int slot = 0; slot < player.getInventory().getContainerSize(); slot++) {
             ItemStack candidate = player.getInventory().getItem(slot);
             if (candidate.is(TGContent.PISTOL_ROUNDS.get())) return candidate;

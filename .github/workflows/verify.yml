@@ -24,6 +24,7 @@ jobs:
         run: |
           python3 tools/audit_legacy.py --check
           python3 tools/generate_revolver_resources.py --check
+          python3 tools/verify_resources.py
       - name: Build and test core
         run: ./gradlew build --console=plain
       - name: Test in Minecraft dedicated GameTest server

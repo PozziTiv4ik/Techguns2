@@ -1,5 +1,6 @@
 {
   "itemGroup.techguns": "Techguns · В разработке",
+  "key.techguns.reload": "Перезарядить оружие",
   "item.techguns.revolver": "Револьвер",
   "item.techguns.pistolrounds": "Пистолетные патроны",
   "subtitles.techguns.revolver_fire": "Выстрел револьвера",

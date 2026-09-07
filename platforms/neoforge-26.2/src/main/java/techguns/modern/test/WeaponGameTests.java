@@ -19,6 +19,10 @@ import techguns.core.Weapons;
 import techguns.modern.Bullet;
 import techguns.modern.RevolverItem;
 import techguns.modern.TGContent;
+import techguns.modern.ReloadSessions;
+import techguns.modern.network.GunActionPayload;
+import techguns.modern.network.GunNetwork;
+import io.netty.buffer.Unpooled;
 
 /** Opt-in tests: activated only by the dedicated Gradle gameTestServer run. */
 public final class WeaponGameTests {
@@ -35,6 +39,10 @@ public final class WeaponGameTests {
         FUNCTIONS.register("bullet_hits_target", () -> helper -> bulletCollision(helper, false));
         FUNCTIONS.register("wall_blocks_bullet", () -> helper -> bulletCollision(helper, true));
         FUNCTIONS.register("bullet_expires", () -> WeaponGameTests::bulletExpires);
+        FUNCTIONS.register("action_payload_roundtrip", () -> WeaponGameTests::payloadRoundtrip);
+        FUNCTIONS.register("reload_key_server_timer", () -> WeaponGameTests::reloadKeyTimer);
+        FUNCTIONS.register("reload_key_swap_cancels", () -> WeaponGameTests::reloadKeySwap);
+        FUNCTIONS.register("invalid_action_rejected", () -> WeaponGameTests::invalidAction);
     }
 
     public static void registerTests(RegisterGameTestsEvent event) {
@@ -167,6 +175,69 @@ public final class WeaponGameTests {
             helper.assertTrue(bullet.isRemoved(), "Projectile lifetime is bounded");
             helper.succeed();
         });
+    }
+
+    private static void payloadRoundtrip(GameTestHelper helper) {
+        for (boolean reload : new boolean[]{false, true}) {
+            var buffer = Unpooled.buffer();
+            try {
+                GunActionPayload.CODEC.encode(buffer, new GunActionPayload(reload));
+                helper.assertValueEqual(buffer.readableBytes(), 1, "Fixed action payload size");
+                helper.assertValueEqual(GunActionPayload.CODEC.decode(buffer), new GunActionPayload(reload), "Action codec roundtrip");
+                helper.assertValueEqual(buffer.readableBytes(), 0, "Payload fully consumed");
+            } finally { buffer.release(); }
+        }
+        helper.succeed();
+    }
+
+    private static void reloadKeyTimer(GameTestHelper helper) {
+        Player player = player(helper);
+        ItemStack gun = player.getMainHandItem();
+        gun.set(TGContent.ROUNDS.get(), 3);
+        ItemStack ammo = TGContent.PISTOL_ROUNDS.toStack(2);
+        player.getInventory().setItem(1, ammo);
+        helper.assertTrue(GunNetwork.handle(player, new GunActionPayload(true)), "R starts server reload");
+        helper.assertTrue(!GunNetwork.handle(player, new GunActionPayload(false)), "No firing during R reload");
+        for (int i = 0; i < 44; i++) player.tick();
+        helper.assertValueEqual(RevolverItem.rounds(gun), 3, "R reload not complete early");
+        helper.assertValueEqual(ammo.getCount(), 2, "R reload retains ammo until end");
+        helper.assertTrue(!GunNetwork.handle(player, new GunActionPayload(true)), "Spam cannot restart or complete reload");
+        player.tick();
+        helper.assertValueEqual(RevolverItem.rounds(gun), 6, "R reload finished through player tick event");
+        helper.assertValueEqual(ammo.getCount(), 1, "R reload uses one bundle");
+        helper.assertTrue(!ReloadSessions.active(player), "Completed reload cleans session");
+        helper.succeed();
+    }
+
+    private static void reloadKeySwap(GameTestHelper helper) {
+        Player player = player(helper);
+        ItemStack oldGun = player.getMainHandItem();
+        ItemStack ammo = TGContent.PISTOL_ROUNDS.toStack(2);
+        player.getInventory().setItem(1, ammo);
+        helper.assertTrue(GunNetwork.handle(player, new GunActionPayload(true)), "Reload starts");
+        player.tick();
+        player.setItemInHand(InteractionHand.MAIN_HAND, TGContent.REVOLVER.toStack());
+        for (int i = 0; i < 50; i++) player.tick();
+        helper.assertTrue(!ReloadSessions.active(player), "Swapping cancels server reload session");
+        helper.assertValueEqual(RevolverItem.rounds(oldGun), 0, "Original gun remains empty");
+        helper.assertValueEqual(RevolverItem.rounds(player.getMainHandItem()), 0, "Replacement stays empty");
+        helper.assertValueEqual(ammo.getCount(), 2, "Swap consumes no ammo");
+        helper.succeed();
+    }
+
+    private static void invalidAction(GameTestHelper helper) {
+        Player player = player(helper);
+        helper.assertTrue(!GunNetwork.handle(player, new GunActionPayload(false)), "Empty gun cannot fire");
+        helper.assertTrue(!GunNetwork.handle(player, new GunActionPayload(true)), "No ammo cannot reload");
+        player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+        helper.assertTrue(!GunNetwork.handle(player, new GunActionPayload(false)), "Gun must be held");
+        helper.assertTrue(!GunNetwork.handle(player, new GunActionPayload(true)), "No held gun cannot reload");
+        ItemStack gun = TGContent.REVOLVER.toStack();
+        gun.set(TGContent.ROUNDS.get(), 6);
+        player.setItemInHand(InteractionHand.MAIN_HAND, gun);
+        player.setHealth(0);
+        helper.assertTrue(!GunNetwork.handle(player, new GunActionPayload(false)), "Dead player cannot fire");
+        helper.succeed();
     }
 
     private WeaponGameTests() {}
