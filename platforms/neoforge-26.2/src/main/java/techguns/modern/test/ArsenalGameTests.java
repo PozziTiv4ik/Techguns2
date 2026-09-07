@@ -7,6 +7,7 @@ import net.minecraft.nbt.NbtOps;
 import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -35,6 +36,8 @@ final class ArsenalGameTests {
         registry.register("handcannon_gravity", () -> ArsenalGameTests::handcannonGravity);
         registry.register("cross_weapon_cooldown", () -> ArsenalGameTests::crossWeaponCooldown);
         registry.register("survival_handcannon_crafting", () -> ArsenalGameTests::survivalCrafting);
+        registry.register("armor_penetration", () -> h -> armoredTarget(h, 0, 10.88f));
+        registry.register("armor_toughness", () -> h -> armoredTarget(h, 2, 9.6f));
     }
 
     private static void weaponCycle(GameTestHelper helper, WeaponDefinition gun) {
@@ -183,6 +186,25 @@ final class ArsenalGameTests {
         helper.assertTrue(GunNetwork.handle(player, new GunActionPayload(false)), "Crafted gun can fire in survival");
         helper.assertValueEqual(ammo.getCount(), 15, "Survival reload consumed exactly one stone bullet");
         helper.succeed();
+    }
+
+    private static void armoredTarget(GameTestHelper helper, double toughness, float expectedDamage) {
+        var target = helper.spawnWithNoFreeWill(EntityTypes.IRON_GOLEM, new Vec3(8, 2, 2));
+        target.setNoGravity(true);
+        target.getAttribute(Attributes.ARMOR).setBaseValue(10);
+        target.getAttribute(Attributes.ARMOR_TOUGHNESS).setBaseValue(toughness);
+        float initial = target.getHealth();
+        Bullet bullet = new Bullet(TGContent.BULLET.get(), helper.getLevel());
+        bullet.configure(Weapons.definition("boltaction"));
+        bullet.setOwner(WeaponGameTests.player(helper));
+        bullet.setPos(target.position().add(-.8, 1, 0));
+        bullet.setDeltaMovement(1, 0, 0);
+        helper.getLevel().addFreshEntity(bullet);
+        helper.runAfterDelay(2, () -> {
+            helper.assertTrue(Math.abs(target.getHealth() - (initial - expectedDamage)) < .0001,
+                    "Armor and toughness use Techguns penetration formula");
+            helper.succeed();
+        });
     }
 
     private ArsenalGameTests() {}

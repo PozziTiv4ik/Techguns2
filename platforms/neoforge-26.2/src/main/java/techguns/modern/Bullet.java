@@ -25,7 +25,7 @@ import net.neoforged.neoforge.event.EventHooks;
 
 /** Server-simulated ballistic round, retaining its source weapon across saves. */
 public final class Bullet extends Projectile {
-    private static final ResourceKey<DamageType> DAMAGE_TYPE = ResourceKey.create(Registries.DAMAGE_TYPE, TGContent.id("bullet"));
+    static final ResourceKey<DamageType> DAMAGE_TYPE = ResourceKey.create(Registries.DAMAGE_TYPE, TGContent.id("bullet"));
     private WeaponDefinition weapon = Weapons.definition("revolver");
     private double distance;
     private int age;

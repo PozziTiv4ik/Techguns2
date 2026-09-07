@@ -16,6 +16,7 @@ public final class Techguns {
         TGContent.TABS.register(modBus);
         modBus.addListener(techguns.modern.network.GunNetwork::register);
         NeoForge.EVENT_BUS.register(ReloadSessions.class);
+        NeoForge.EVENT_BUS.addListener(ArmorDamage::onIncoming);
         if (Boolean.getBoolean("techguns.gametest")) {
             techguns.modern.test.WeaponGameTests.FUNCTIONS.register(modBus);
             modBus.addListener(techguns.modern.test.WeaponGameTests::registerTests);
