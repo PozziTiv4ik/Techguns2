@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "techguns:ammo_press",
-    "techguns:metal_press"
+    "techguns:metal_press",
+    "techguns:blast_furnace"
   ]
 }

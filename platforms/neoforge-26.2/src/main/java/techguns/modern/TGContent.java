@@ -55,6 +55,7 @@ public final class TGContent {
                         MATERIALS.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> output.accept(entry.getValue().get()));
                         output.accept(techguns.modern.machine.TGMachineContent.AMMO_PRESS_ITEM.get());
                         output.accept(techguns.modern.machine.TGMachineContent.METAL_PRESS_ITEM.get());
+                        output.accept(techguns.modern.machine.TGMachineContent.BLAST_FURNACE_ITEM.get());
                     }).build());
 
     private static Map<String, DeferredItem<GunItem>> registerGuns() {

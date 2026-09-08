@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:blast_furnace",
+    "count": 1
+  },
+  "pattern": [
+    "iri",
+    "ifi",
+    "sbs"
+  ],
+  "key": {
+    "b": "#c:storage_blocks/iron",
+    "r": "#c:dusts/redstone",
+    "s": "minecraft:stone_bricks",
+    "f": "minecraft:furnace",
+    "i": "#c:plates/iron"
+  }
+}

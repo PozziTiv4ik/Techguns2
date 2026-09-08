@@ -48,6 +48,7 @@ public final class TechgunsClient {
     private static void screens(RegisterMenuScreensEvent event) {
         event.register(techguns.modern.machine.TGMachineContent.AMMO_PRESS_MENU.get(), AmmoPressScreen::new);
         event.register(techguns.modern.machine.TGMachineContent.METAL_PRESS_MENU.get(), MetalPressScreen::new);
+        event.register(techguns.modern.machine.TGMachineContent.BLAST_FURNACE_MENU.get(), BlastFurnaceScreen::new);
     }
 
     private static void tick(ClientTickEvent.Pre event) {

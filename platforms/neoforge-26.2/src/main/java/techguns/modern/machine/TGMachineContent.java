@@ -28,6 +28,9 @@ public final class TGMachineContent {
     public static final DeferredBlock<MetalPressBlock> METAL_PRESS = BLOCKS.registerBlock("metal_press", MetalPressBlock::new,
             properties -> properties.mapColor(MapColor.METAL).strength(4).sound(SoundType.METAL).noOcclusion().requiresCorrectToolForDrops().pushReaction(PushReaction.BLOCK));
     public static final DeferredItem<BlockItem> METAL_PRESS_ITEM = TGContent.ITEMS.registerSimpleBlockItem(METAL_PRESS);
+    public static final DeferredBlock<BlastFurnaceBlock> BLAST_FURNACE = BLOCKS.registerBlock("blast_furnace", BlastFurnaceBlock::new,
+            properties -> properties.mapColor(MapColor.METAL).strength(4).sound(SoundType.METAL).requiresCorrectToolForDrops().pushReaction(PushReaction.BLOCK));
+    public static final DeferredItem<BlockItem> BLAST_FURNACE_ITEM = TGContent.ITEMS.registerSimpleBlockItem(BLAST_FURNACE);
     public static final DeferredHolder<SoundEvent, SoundEvent> PRESS_WORK1 = TGContent.SOUNDS.register("machines.ammopresswork1", () -> SoundEvent.createVariableRangeEvent(TGContent.id("machines.ammopresswork1")));
     public static final DeferredHolder<SoundEvent, SoundEvent> PRESS_WORK2 = TGContent.SOUNDS.register("machines.ammopresswork2", () -> SoundEvent.createVariableRangeEvent(TGContent.id("machines.ammopresswork2")));
     public static final DeferredHolder<SoundEvent, SoundEvent> METAL_WORK = TGContent.SOUNDS.register("machines.metalpresswork", () -> SoundEvent.createVariableRangeEvent(TGContent.id("machines.metalpresswork")));
@@ -37,11 +40,15 @@ public final class TGMachineContent {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MetalPressBlockEntity>> METAL_PRESS_ENTITY = BLOCK_ENTITIES.register("metal_press",
             () -> new BlockEntityType<>(MetalPressBlockEntity::new, METAL_PRESS.get()));
     private static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, Techguns.MOD_ID);
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BlastFurnaceBlockEntity>> BLAST_FURNACE_ENTITY = BLOCK_ENTITIES.register("blast_furnace",
+            () -> new BlockEntityType<>(BlastFurnaceBlockEntity::new, BLAST_FURNACE.get()));
     public static final DeferredHolder<MenuType<?>, MenuType<AmmoPressMenu>> AMMO_PRESS_MENU = MENUS.register("ammo_press",
             () -> new MenuType<>(AmmoPressMenu::new, net.minecraft.world.flag.FeatureFlags.DEFAULT_FLAGS));
     public static final DeferredHolder<MenuType<?>, MenuType<MetalPressMenu>> METAL_PRESS_MENU = MENUS.register("metal_press",
             () -> new MenuType<>(MetalPressMenu::new, net.minecraft.world.flag.FeatureFlags.DEFAULT_FLAGS));
     private static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(Registries.RECIPE_TYPE, Techguns.MOD_ID);
+    public static final DeferredHolder<MenuType<?>, MenuType<BlastFurnaceMenu>> BLAST_FURNACE_MENU = MENUS.register("blast_furnace",
+            () -> new MenuType<>(BlastFurnaceMenu::new, net.minecraft.world.flag.FeatureFlags.DEFAULT_FLAGS));
     public static final DeferredHolder<RecipeType<?>, RecipeType<AmmoPressRecipe>> AMMO_PRESS_RECIPE = RECIPE_TYPES.register("ammo_press", () -> new RecipeType<>() {
         @Override public String toString() { return "techguns:ammo_press"; }
     });
@@ -53,6 +60,11 @@ public final class TGMachineContent {
             () -> new RecipeSerializer<>(AmmoPressRecipe.CODEC, AmmoPressRecipe.STREAM_CODEC));
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<MetalPressRecipe>> METAL_PRESS_SERIALIZER = SERIALIZERS.register("metal_press",
             () -> new RecipeSerializer<>(MetalPressRecipe.CODEC, MetalPressRecipe.STREAM_CODEC));
+    public static final DeferredHolder<RecipeType<?>, RecipeType<BlastFurnaceRecipe>> BLAST_FURNACE_RECIPE = RECIPE_TYPES.register("blast_furnace", () -> new RecipeType<>() {
+        @Override public String toString() { return "techguns:blast_furnace"; }
+    });
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<BlastFurnaceRecipe>> BLAST_FURNACE_SERIALIZER = SERIALIZERS.register("blast_furnace",
+            () -> new RecipeSerializer<>(BlastFurnaceRecipe.CODEC, BlastFurnaceRecipe.STREAM_CODEC));
 
     public static void register(IEventBus bus) {
         BLOCKS.register(bus); BLOCK_ENTITIES.register(bus); MENUS.register(bus); RECIPE_TYPES.register(bus); SERIALIZERS.register(bus);
@@ -63,6 +75,8 @@ public final class TGMachineContent {
         event.registerBlockEntity(Capabilities.Item.BLOCK, AMMO_PRESS_ENTITY.get(), (machine, side) -> machine.automation());
         event.registerBlockEntity(Capabilities.Energy.BLOCK, METAL_PRESS_ENTITY.get(), (machine, side) -> machine.energy());
         event.registerBlockEntity(Capabilities.Item.BLOCK, METAL_PRESS_ENTITY.get(), (machine, side) -> machine.automation());
+        event.registerBlockEntity(Capabilities.Energy.BLOCK, BLAST_FURNACE_ENTITY.get(), (machine, side) -> machine.energy());
+        event.registerBlockEntity(Capabilities.Item.BLOCK, BLAST_FURNACE_ENTITY.get(), (machine, side) -> machine.automation());
     }
     private TGMachineContent() {}
 }

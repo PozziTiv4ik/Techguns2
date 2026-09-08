@@ -61,3 +61,19 @@ def arguments(text):
                 parts.append(text[start:i].strip())
                 start = i+1
     return parts + [text[start:].strip()]
+
+
+def parse_stack(expression):
+    fields = shared_fields()
+    match = re.fullmatch(r'TGItems\.newStack\(TGItems\.(\w+),\s*(\d+)\)', expression)
+    if match: return {'id': 'techguns:'+fields[match[1]], 'count': int(match[2])}
+    match = re.fullmatch(r'TGItems\.(\w+)', expression)
+    if match: return {'id': 'techguns:'+fields[match[1]], 'count': 1}
+    match = re.fullmatch(r'new ItemStack\((Items|Blocks)\.(\w+)(?:,\s*(\d+))?(?:,\s*(\d+))?\)', expression)
+    if match:
+        name, count, metadata = match[2].lower(), int(match[3] or 1), int(match[4] or 0)
+        if name == 'coal' and metadata == 1: name, metadata = 'charcoal', 0
+        if name == 'stonebrick' and metadata == 0: name = 'stone_bricks'
+        if metadata != 0: raise ValueError(f'Unconverted vanilla metadata: {expression}')
+        return {'id': 'minecraft:'+name, 'count': count}
+    raise ValueError(f'Unconverted machine stack: {expression}')

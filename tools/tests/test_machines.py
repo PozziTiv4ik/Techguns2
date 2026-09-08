@@ -4,7 +4,8 @@ import json
 import sys
 import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from legacy_machines import ammo_press_data, metal_press_data, generate_machine_content, RESOURCES
+from legacy_machines import ammo_press_data, metal_press_data, blast_furnace_data, generate_machine_content, RESOURCES, LEGACY
+from legacy_items import parse_stack
 from legacy_crafting import plan_crafting
 from generate_weapon_content import parse_weapons
 
@@ -76,6 +77,35 @@ class MetalPressPortTests(unittest.TestCase):
         self.assertEqual(mesh.count('\no '), 35)
         self.assertNotIn('\no MetalPiece\n', mesh)
         for moving_part in range(1,7): self.assertIn(f'\no p{moving_part}\n', mesh)
+
+
+class BlastFurnacePortTests(unittest.TestCase):
+    def test_four_original_counted_recipes(self):
+        recipes = blast_furnace_data()
+        self.assertEqual(len(recipes), 4)
+        self.assertEqual([r['first_count'] for r in recipes], [4,4,1,3])
+        self.assertEqual([r['second_count'] for r in recipes], [1,1,1,1])
+        self.assertEqual([r['duration'] for r in recipes], [800,800,200,100])
+        self.assertEqual([r['result']['count'] for r in recipes], [4,4,1,4])
+        self.assertTrue(all(r['power_per_tick'] == 10 for r in recipes))
+        self.assertEqual(recipes[1]['second'], 'minecraft:charcoal')
+        self.assertEqual(recipes[3]['second'], '#c:ingots/tin')
+
+    def test_vanilla_metadata_is_explicit(self):
+        self.assertEqual(parse_stack('new ItemStack(Items.COAL,1,1)'), {'id':'minecraft:charcoal','count':1})
+        with self.assertRaises(ValueError): parse_stack('new ItemStack(Items.COAL,1,7)')
+        recipe = plan_crafting(parse_weapons())['recipes']['blast_furnace']
+        self.assertEqual(recipe['key']['s'], 'minecraft:stone_bricks')
+        self.assertEqual(recipe['result']['id'], 'techguns:blast_furnace')
+
+    def test_original_furnace_geometry_and_uvs_remain_exact(self):
+        original = json.loads((LEGACY / 'resources/assets/techguns/models/block/blast_furnace.json').read_text())
+        files = generate_machine_content()
+        self.assertEqual(len(original['elements']), 7)
+        for atlas in ('block','item'):
+            model = json.loads(files[RESOURCES+f'assets/techguns/models/{atlas}/blast_furnace.json'])
+            self.assertEqual(model['elements'], original['elements'])
+            self.assertTrue(all(texture.startswith(f'techguns:{atlas}/') for texture in model['textures'].values()))
 
 
 if __name__ == '__main__': unittest.main()

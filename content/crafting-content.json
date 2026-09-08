@@ -60,7 +60,8 @@
   },
   "block_metadata": {
     "techguns:basicmachine@0": "techguns:ammo_press",
-    "techguns:basicmachine@1": "techguns:metal_press"
+    "techguns:basicmachine@1": "techguns:metal_press",
+    "techguns:simplemachine@11": "techguns:blast_furnace"
   },
   "recipes": [
     {
@@ -290,6 +291,10 @@
     {
       "id": "techguns:scar_alt",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/scar_alt.json"
+    },
+    {
+      "id": "techguns:blast_furnace",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/simplemachine_11_blast_furnace.json"
     },
     {
       "id": "techguns:thompson",

@@ -1,0 +1,13 @@
+{
+  "type": "techguns:blast_furnace",
+  "first": "#c:ingots/copper",
+  "first_count": 3,
+  "second": "#c:ingots/tin",
+  "second_count": 1,
+  "result": {
+    "id": "techguns:ingotbronze",
+    "count": 4
+  },
+  "power_per_tick": 10,
+  "duration": 100
+}

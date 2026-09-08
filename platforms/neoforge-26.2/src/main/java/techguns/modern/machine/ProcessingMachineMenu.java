@@ -8,6 +8,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.SimpleContainerData;
 import java.util.function.BiPredicate;
 
 public abstract class ProcessingMachineMenu extends AbstractContainerMenu {
@@ -15,6 +16,9 @@ public abstract class ProcessingMachineMenu extends AbstractContainerMenu {
     private final ContainerData data;
     private final int machineSlots;
     protected ProcessingMachineMenu(MenuType<?> type, int id, Inventory inventory, Container machine, ContainerData data, int inputs, BiPredicate<Integer, ItemStack> clientAccepts) {
+        this(type, id, inventory, machine, data, inputs, clientAccepts, null);
+    }
+    protected ProcessingMachineMenu(MenuType<?> type, int id, Inventory inventory, Container machine, ContainerData data, int inputs, BiPredicate<Integer, ItemStack> clientAccepts, int[][] positions) {
         super(type, id);
         machineSlots = inputs + 2;
         checkContainerSize(machine, machineSlots); checkContainerDataCount(data, ProcessingMachineBlockEntity.DATA_COUNT);
@@ -23,6 +27,7 @@ public abstract class ProcessingMachineMenu extends AbstractContainerMenu {
             final int slot = index;
             int x = index < inputs ? (inputs == 3 ? 100 : 110) + index * 20 : index == inputs ? 120 : 152;
             int y = index < inputs ? 17 : 60;
+            if (positions != null) { x = positions[index][0]; y = positions[index][1]; }
             addSlot(new Slot(machine, index, x, y) {
                 @Override public boolean mayPlace(ItemStack stack) {
                     return machine instanceof ProcessingMachineBlockEntity ? machine.canPlaceItem(slot, stack) : clientAccepts.test(slot, stack);
@@ -30,7 +35,12 @@ public abstract class ProcessingMachineMenu extends AbstractContainerMenu {
             });
         }
         addStandardInventorySlots(inventory, 8, 84);
-        addDataSlots(data);
+        addDataSlots(new SplitIntContainerData(data));
+    }
+    protected static ContainerData clientData(int capacity) {
+        var data = new SimpleContainerData(ProcessingMachineBlockEntity.DATA_COUNT);
+        data.set(8, capacity);
+        return data;
     }
     public int value(int index) { return data.get(index); }
     @Override public boolean stillValid(Player player) { return machine.stillValid(player); }

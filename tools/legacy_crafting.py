@@ -7,7 +7,7 @@ from pathlib import Path
 import json
 import re
 from legacy_items import ORE_TAGS, shared_items, ammo_slot_items
-from legacy_machines import metal_press_data
+from legacy_machines import metal_press_data, blast_furnace_data
 
 ROOT = Path(__file__).resolve().parents[1]
 LEGACY = ROOT / 'legacy/1.12.2/src/main'
@@ -23,6 +23,8 @@ def convert_recipe(legacy, shared, weapons):
         identifier = value['item']
         if identifier == 'techguns:basicmachine':
             return 'techguns:' + {0: 'ammo_press', 1: 'metal_press'}[value.get('data', 0)]
+        if identifier == 'techguns:simplemachine' and value.get('data') == 11: return 'techguns:blast_furnace'
+        if identifier == 'minecraft:stonebrick' and value.get('data', 0) == 0: return 'minecraft:stone_bricks'
         if identifier == 'techguns:itemshared': return 'techguns:' + shared[value['data']]
         if identifier.startswith('#'): raise ValueError('A tag cannot be a recipe result')
         if value.get('data', 0) not in (0, 32767) and identifier.removeprefix('techguns:') not in weapons:
@@ -69,12 +71,13 @@ def plan_crafting(weapon_list):
                 if name in weapons or name.endswith('_alt') and name[:-4] in weapons}
     selected['basicmachine_0_ammo_press'] = source_recipes['basicmachine_0_ammo_press']
     for name in ('basicmachine_1_metal_press', 'basicmachine_1_metal_press_alt'): selected[name] = source_recipes[name]
+    selected['simplemachine_11_blast_furnace'] = source_recipes['simplemachine_11_blast_furnace']
     # These two original recipes overlap after GenericGun.onCreated resets damage to zero.
     # Keep that migration question explicit until upgrade state has its own verified rule.
     pending = {name: selected.pop(name) for name in ('m4_infiltrator', 'm4_infiltrator_alt') if name in selected}
     wanted = {by_name[name] for name in ammo | {'stonebarrel', 'woodstock', 'machinestackupgrade'}}
     used_tags = set()
-    for recipe in metal_press_data():
+    for recipe in metal_press_data() + blast_furnace_data():
         for identifier in (recipe['first'], recipe['second'], recipe['result']['id']):
             if identifier.startswith('techguns:'): wanted.add(by_name[identifier.split(':')[1]])
             elif identifier.startswith('#'):
@@ -102,6 +105,7 @@ def plan_crafting(weapon_list):
         identifier = name
         if name == 'basicmachine_0_ammo_press': identifier = 'ammo_press'
         if name.startswith('basicmachine_1_metal_press'): identifier = name.removeprefix('basicmachine_1_')
+        if name == 'simplemachine_11_blast_furnace': identifier = 'blast_furnace'
         if name.startswith('itemshared_'): identifier = re.sub(r'^itemshared_\d+_', '', name)
         if identifier in recipes: raise ValueError(f'Colliding recipe ID: {identifier}')
         recipes[identifier] = convert_recipe(recipe, shared, weapons)
@@ -114,7 +118,8 @@ def plan_crafting(weapon_list):
     # Record direct machine-produced materials/ammunition separately from metal packing loops.
     workbench_outputs = {r['result']['id'].removeprefix('techguns:') for r in recipes.values()}
     catalog = {'shared_metadata': {str(meta): 'techguns:' + shared[meta] for meta in sorted(wanted)},
-               'block_metadata': {'techguns:basicmachine@0': 'techguns:ammo_press', 'techguns:basicmachine@1': 'techguns:metal_press'},
+               'block_metadata': {'techguns:basicmachine@0': 'techguns:ammo_press', 'techguns:basicmachine@1': 'techguns:metal_press',
+                                  'techguns:simplemachine@11': 'techguns:blast_furnace'},
                'recipes': sources, 'tags': tags,
                'requires_non_workbench_production': sorted(names - workbench_outputs),
                'metal_packing_requires_feedstock': sorted(names & {'ingotlead', 'ingotsteel'}),

@@ -28,12 +28,11 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
 import techguns.modern.TGContent;
 
 public abstract class ProcessingMachineBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer {
-    public static final int ENERGY_CAPACITY = 20000, DATA_COUNT = 8;
+    public static final int ENERGY_CAPACITY = 20000, DATA_COUNT = 9;
     private final int inputSlots;
+    private final int energyCapacity;
     private NonNullList<ItemStack> items;
-    private final SimpleEnergyHandler energy = new SimpleEnergyHandler(ENERGY_CAPACITY) {
-        @Override protected void onEnergyChanged(int previousAmount) { setChanged(); }
-    };
+    private final SimpleEnergyHandler energy;
     // Every side uses the original input/output restrictions, including unsided queries.
     private final ResourceHandler<ItemResource> automation;
     private List<ItemStack> reserved = List.of();
@@ -50,6 +49,7 @@ public abstract class ProcessingMachineBlockEntity extends BaseContainerBlockEnt
                 case 0 -> (int) energy.getAmountAsLong(); case 1 -> progress; case 2 -> duration;
                 case 3 -> mode; case 4 -> redstoneMode; case 5 -> ownerOnly ? 1 : 0; case 6 -> multiplier;
                 case 7 -> working() && progress < duration && !TGMachineConfig.MACHINES_NEED_NO_POWER.get() ? batchPower(powerPerTick, multiplier) : 0;
+                case 8 -> energyCapacity;
                 default -> 0;
             };
         }
@@ -58,9 +58,16 @@ public abstract class ProcessingMachineBlockEntity extends BaseContainerBlockEnt
     };
 
     protected ProcessingMachineBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, int inputSlots) {
+        this(type, pos, state, inputSlots, ENERGY_CAPACITY);
+    }
+    protected ProcessingMachineBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, int inputSlots, int energyCapacity) {
         super(type, pos, state);
         this.inputSlots = inputSlots;
+        this.energyCapacity = energyCapacity;
         items = NonNullList.withSize(inputSlots + 2, ItemStack.EMPTY);
+        energy = new SimpleEnergyHandler(energyCapacity) {
+            @Override protected void onEnergyChanged(int previousAmount) { setChanged(); }
+        };
         // Vanilla's transactional wrapper captures the container size when constructed.
         automation = new WorldlyContainerWrapper(this, Direction.DOWN);
     }
@@ -134,7 +141,7 @@ public abstract class ProcessingMachineBlockEntity extends BaseContainerBlockEnt
         for (int slot = 0; slot < inputSlots; slot++) batch = Math.min(batch, items.get(slot).getCount() / recipe.inputCounts().get(slot));
         batch = Math.min(batch, (output.getMaxStackSize() - items.get(outputSlot()).getCount()) / output.getCount());
         if (!TGMachineConfig.MACHINES_NEED_NO_POWER.get())
-            while (batch > 0 && batchPower(recipe.powerPerTick(), batch) > ENERGY_CAPACITY) batch--;
+            while (batch > 0 && batchPower(recipe.powerPerTick(), batch) > energyCapacity) batch--;
         if (batch < 1) return;
         reserved = new ArrayList<>();
         for (int slot = 0; slot < inputSlots; slot++) reserved.add(removeItem(slot, recipe.inputCounts().get(slot) * batch));
@@ -193,7 +200,7 @@ public abstract class ProcessingMachineBlockEntity extends BaseContainerBlockEnt
         super.loadAdditional(input);
         items = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
         ContainerHelper.loadAllItems(input, items);
-        energy.set(Math.clamp(input.getIntOr("energy", 0), 0, ENERGY_CAPACITY));
+        energy.set(Math.clamp(input.getIntOr("energy", 0), 0, energyCapacity));
         mode = Math.clamp(input.getIntOr("mode", input.getIntOr("plan", 0)), 0, modeCount() - 1);
         redstoneMode = Math.clamp(input.getIntOr("redstone", 0), 0, 2);
         ownerOnly = input.getBooleanOr("owner_only", false);
@@ -202,7 +209,7 @@ public abstract class ProcessingMachineBlockEntity extends BaseContainerBlockEnt
         pendingOutput = input.read("pending_output", ItemStack.OPTIONAL_CODEC).orElse(ItemStack.EMPTY);
         duration = Math.clamp(input.getIntOr("duration", 100), 1, 72000);
         progress = Math.clamp(input.getIntOr("progress", 0), 0, duration);
-        powerPerTick = Math.clamp(input.getIntOr("power_per_tick", 5), 1, 20000);
+        powerPerTick = Math.clamp(input.getIntOr("power_per_tick", 5), 1, energyCapacity);
         multiplier = Math.clamp(input.getIntOr("multiplier", 1), 1, 8);
         if (!working()) { progress = duration = 0; multiplier = 1; }
         needsRecipeCheck = true;

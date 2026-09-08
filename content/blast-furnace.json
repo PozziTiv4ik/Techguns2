@@ -1,0 +1,61 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/TGMachineRecipes.java",
+  "energy_capacity": 40000,
+  "upgrade_limit": 7,
+  "batch_power_exponent": 2,
+  "recipes": [
+    {
+      "id": "ingotsteel_from_iron_ingot_and_coal",
+      "first": "minecraft:iron_ingot",
+      "first_count": 4,
+      "second": "minecraft:coal",
+      "second_count": 1,
+      "result": {
+        "id": "techguns:ingotsteel",
+        "count": 4
+      },
+      "power_per_tick": 10,
+      "duration": 800
+    },
+    {
+      "id": "ingotsteel_from_iron_ingot_and_charcoal",
+      "first": "minecraft:iron_ingot",
+      "first_count": 4,
+      "second": "minecraft:charcoal",
+      "second_count": 1,
+      "result": {
+        "id": "techguns:ingotsteel",
+        "count": 4
+      },
+      "power_per_tick": 10,
+      "duration": 800
+    },
+    {
+      "id": "ingotobsidiansteel_from_ingots_steel_and_obsidian",
+      "first": "#c:ingots/steel",
+      "first_count": 1,
+      "second": "minecraft:obsidian",
+      "second_count": 1,
+      "result": {
+        "id": "techguns:ingotobsidiansteel",
+        "count": 1
+      },
+      "power_per_tick": 10,
+      "duration": 200
+    },
+    {
+      "id": "ingotbronze_from_ingots_copper_and_ingots_tin",
+      "first": "#c:ingots/copper",
+      "first_count": 3,
+      "second": "#c:ingots/tin",
+      "second_count": 1,
+      "result": {
+        "id": "techguns:ingotbronze",
+        "count": 4
+      },
+      "power_per_tick": 10,
+      "duration": 100
+    }
+  ],
+  "rendering": "seven original model elements and working sound/particles; visual acceptance pending"
+}
