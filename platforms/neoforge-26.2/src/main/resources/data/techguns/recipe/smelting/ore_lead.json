@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "ingredient": "techguns:ore_lead",
+  "result": {
+    "id": "techguns:ingotlead",
+    "count": 1
+  },
+  "experience": 1.0,
+  "cookingtime": 200
+}

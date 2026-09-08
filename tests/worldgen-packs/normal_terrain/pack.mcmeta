@@ -1,0 +1,7 @@
+{
+  "pack": {
+    "description": "Techguns dedicated worldgen test only: use normal terrain for the GameTest preset",
+    "min_format": [107, 1],
+    "max_format": [107, 1]
+  }
+}

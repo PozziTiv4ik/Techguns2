@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "ingredient": "techguns:platetin",
+  "result": {
+    "id": "techguns:ingottin",
+    "count": 1
+  },
+  "experience": 0.0,
+  "cookingtime": 200
+}

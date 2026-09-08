@@ -6,6 +6,7 @@ import re
 from legacy_models import strip_comments, numeric, convert_model, convert_mesh, extract_shapes
 from legacy_crafting import plan_crafting
 from legacy_machines import generate_machine_content, machine_translations
+from legacy_ores import generate_ore_content, ore_translations
 from legacy_items import arguments
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -194,6 +195,7 @@ def generate():
         values['death.attack.techguns.bullet'] = '%1$s was shot by %2$s' if lang == 'en_us' else '%1$s застрелен игроком %2$s'
         values['death.attack.techguns.bullet.player'] = values['death.attack.techguns.bullet']
         values['death.attack.techguns.bullet.item'] = '%1$s was shot by %2$s using %3$s' if lang == 'en_us' else '%1$s застрелен игроком %2$s с помощью %3$s'
+        values.update(ore_translations(lang))
         resource(f'assets/techguns/lang/{lang}.json', values)
     resource('assets/techguns/sounds.json', selected_sounds)
     for identifier, recipe in crafting['recipes'].items():
@@ -231,6 +233,14 @@ public final class Weapons {
 '''
     output('core/src/main/java/techguns/core/Weapons.java', source)
     files.update(generate_machine_content())
+    for path, value in generate_ore_content().items():
+        if path in files:
+            # Several content domains contribute to the same mining/tool and common item tags.
+            if '/tags/' not in path: raise ValueError(f'Colliding generated resource: {path}')
+            merged = json.loads(files[path])
+            merged['values'] = sorted(set(merged['values'] + json.loads(value)['values']))
+            data(path, merged)
+        else: files[path] = value
     return files
 
 

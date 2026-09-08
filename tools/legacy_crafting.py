@@ -8,6 +8,7 @@ import json
 import re
 from legacy_items import ORE_TAGS, shared_items, ammo_slot_items
 from legacy_machines import metal_press_data, blast_furnace_data
+from legacy_ores import smelting_data
 
 ROOT = Path(__file__).resolve().parents[1]
 LEGACY = ROOT / 'legacy/1.12.2/src/main'
@@ -76,6 +77,10 @@ def plan_crafting(weapon_list):
     # Keep that migration question explicit until upgrade state has its own verified rule.
     pending = {name: selected.pop(name) for name in ('m4_infiltrator', 'm4_infiltrator_alt') if name in selected}
     wanted = {by_name[name] for name in ammo | {'stonebarrel', 'woodstock', 'machinestackupgrade'}}
+    for recipe in smelting_data():
+        for identifier in (recipe['ingredient'], recipe['result']['id']):
+            if identifier.startswith('techguns:') and not identifier.startswith('techguns:ore_'):
+                wanted.add(by_name[identifier.split(':')[1]])
     used_tags = set()
     for recipe in metal_press_data() + blast_furnace_data():
         for identifier in (recipe['first'], recipe['second'], recipe['result']['id']):
@@ -122,6 +127,6 @@ def plan_crafting(weapon_list):
                                   'techguns:simplemachine@11': 'techguns:blast_furnace'},
                'recipes': sources, 'tags': tags,
                'requires_non_workbench_production': sorted(names - workbench_outputs),
-               'metal_packing_requires_feedstock': sorted(names & {'ingotlead', 'ingotsteel'}),
+               'metal_packing_requires_feedstock': sorted(names & {'ingotcopper', 'ingotlead', 'ingotsteel'}),
                'pending_upgrade_recipes': [name + '.json' for name in pending]}
     return {'recipes': recipes, 'materials': materials, 'extra_ammo': sorted(extra_ammo), 'tags': tags, 'catalog': catalog}

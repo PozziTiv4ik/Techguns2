@@ -56,6 +56,8 @@ public final class TGContent {
                         output.accept(techguns.modern.machine.TGMachineContent.AMMO_PRESS_ITEM.get());
                         output.accept(techguns.modern.machine.TGMachineContent.METAL_PRESS_ITEM.get());
                         output.accept(techguns.modern.machine.TGMachineContent.BLAST_FURNACE_ITEM.get());
+                        techguns.core.Ores.ALL.stream().sorted(java.util.Comparator.comparingInt(techguns.core.OreDefinition::legacyMetadata))
+                                .forEach(ore -> output.accept(techguns.modern.world.TGOreContent.ORES.get(ore.id()).get()));
                     }).build());
 
     private static Map<String, DeferredItem<GunItem>> registerGuns() {

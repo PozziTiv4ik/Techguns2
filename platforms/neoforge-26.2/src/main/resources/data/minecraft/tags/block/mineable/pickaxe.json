@@ -2,7 +2,12 @@
   "replace": false,
   "values": [
     "techguns:ammo_press",
+    "techguns:blast_furnace",
     "techguns:metal_press",
-    "techguns:blast_furnace"
+    "techguns:ore_copper",
+    "techguns:ore_lead",
+    "techguns:ore_tin",
+    "techguns:ore_titanium",
+    "techguns:ore_uranium"
   ]
 }

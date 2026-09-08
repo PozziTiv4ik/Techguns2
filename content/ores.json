@@ -1,0 +1,86 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/world/OreGenerator.java",
+  "dimension": "minecraft:overworld",
+  "size_selection": "once_per_ore_per_chunk",
+  "ores": [
+    {
+      "id": "ore_copper",
+      "legacy_metadata": 0,
+      "hardness": 4.0,
+      "mining_level": 1,
+      "light": 0,
+      "config": "doOreGenCopper",
+      "enabled_by_default": true,
+      "vein_size_min": 5,
+      "vein_size_max": 7,
+      "attempts": 12,
+      "min_y": 5,
+      "max_y_exclusive": 80
+    },
+    {
+      "id": "ore_tin",
+      "legacy_metadata": 1,
+      "hardness": 4.0,
+      "mining_level": 1,
+      "light": 0,
+      "config": "doOreGenTin",
+      "enabled_by_default": true,
+      "vein_size_min": 4,
+      "vein_size_max": 6,
+      "attempts": 10,
+      "min_y": 5,
+      "max_y_exclusive": 60
+    },
+    {
+      "id": "ore_lead",
+      "legacy_metadata": 2,
+      "hardness": 6.0,
+      "mining_level": 2,
+      "light": 0,
+      "config": "doOreGenLead",
+      "enabled_by_default": true,
+      "vein_size_min": 4,
+      "vein_size_max": 5,
+      "attempts": 8,
+      "min_y": 5,
+      "max_y_exclusive": 50
+    },
+    {
+      "id": "ore_uranium",
+      "legacy_metadata": 4,
+      "hardness": 7.0,
+      "mining_level": 2,
+      "light": 4,
+      "config": "doOreGenUranium",
+      "enabled_by_default": true,
+      "vein_size_min": 4,
+      "vein_size_max": 5,
+      "attempts": 4,
+      "min_y": 4,
+      "max_y_exclusive": 24
+    },
+    {
+      "id": "ore_titanium",
+      "legacy_metadata": 3,
+      "hardness": 8.0,
+      "mining_level": 3,
+      "light": 0,
+      "config": "doOreGenTitanium",
+      "enabled_by_default": true,
+      "vein_size_min": 4,
+      "vein_size_max": 7,
+      "attempts": 5,
+      "min_y": 4,
+      "max_y_exclusive": 32
+    }
+  ],
+  "block_metadata": {
+    "techguns:basicore@0": "techguns:ore_copper",
+    "techguns:basicore@1": "techguns:ore_tin",
+    "techguns:basicore@2": "techguns:ore_lead",
+    "techguns:basicore@4": "techguns:ore_uranium",
+    "techguns:basicore@3": "techguns:ore_titanium"
+  },
+  "vein_geometry": "Minecraft 26.2 OreFeature; original attempt counts, absolute origin heights and size ranges",
+  "replacement_tag": "minecraft:stone_ore_replaceables"
+}

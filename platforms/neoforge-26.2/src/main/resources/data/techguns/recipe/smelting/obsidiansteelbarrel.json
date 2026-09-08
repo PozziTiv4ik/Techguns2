@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "ingredient": "techguns:obsidiansteelbarrel",
+  "result": {
+    "id": "techguns:ingotobsidiansteel",
+    "count": 6
+  },
+  "experience": 0.0,
+  "cookingtime": 200
+}

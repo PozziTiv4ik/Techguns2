@@ -18,6 +18,8 @@ public final class Techguns {
         techguns.modern.crafting.TGCrafting.register(modBus);
         techguns.modern.machine.TGMachineContent.register(modBus);
         techguns.modern.machine.TGMachineConfig.register(container);
+        techguns.modern.world.TGOreContent.register(modBus);
+        techguns.modern.world.TGOreConfig.register(container);
         modBus.addListener(techguns.modern.network.GunNetwork::register);
         NeoForge.EVENT_BUS.register(ReloadSessions.class);
         NeoForge.EVENT_BUS.register(AimSessions.class);

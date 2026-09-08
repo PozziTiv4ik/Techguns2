@@ -102,6 +102,7 @@ def main():
         recipe = json.loads(path.read_text(encoding='utf-8'))
         check_ingredient(recipe['result']['id'])
         for value in list(recipe.get('key', {}).values()) + recipe.get('ingredients', []): check_ingredient(value)
+        if 'ingredient' in recipe: check_ingredient(recipe['ingredient'])
         if recipe['type'] == 'techguns:ammo_press':
             for key in ('metal1', 'metal2', 'powder'): check_ingredient(recipe[key])
         if recipe['type'] in ('techguns:metal_press', 'techguns:blast_furnace'):

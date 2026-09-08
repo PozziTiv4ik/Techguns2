@@ -17,6 +17,18 @@ neoForge {
             systemProperty 'neoforge.enabledGameTestNamespaces', 'techguns'
             systemProperty 'techguns.gametest', 'true'
         }
+        oreWorldTestServer {
+            type = 'gameTestServer'
+            systemProperty 'neoforge.enabledGameTestNamespaces', 'techguns'
+            systemProperty 'techguns.gametest', 'true'
+            systemProperty 'techguns.worldgenTest', 'true'
+            programArgument '--packs'
+            programArgument rootProject.file('tests/worldgen-packs').absolutePath
+            programArgument '--universe'
+            programArgument 'ore-worldgen-tests'
+            programArgument '--tests'
+            programArgument 'techguns:ore_natural_chunks'
+        }
     }
     mods {
         techguns {

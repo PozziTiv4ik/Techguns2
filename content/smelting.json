@@ -1,0 +1,199 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/TGMachineRecipes.java",
+  "recipes": [
+    {
+      "id": "ore_copper",
+      "ingredient": "techguns:ore_copper",
+      "result": {
+        "id": "techguns:ingotcopper",
+        "count": 1
+      },
+      "experience": 0.5,
+      "cookingtime": 200
+    },
+    {
+      "id": "ore_tin",
+      "ingredient": "techguns:ore_tin",
+      "result": {
+        "id": "techguns:ingottin",
+        "count": 1
+      },
+      "experience": 0.5,
+      "cookingtime": 200
+    },
+    {
+      "id": "ore_lead",
+      "ingredient": "techguns:ore_lead",
+      "result": {
+        "id": "techguns:ingotlead",
+        "count": 1
+      },
+      "experience": 1.0,
+      "cookingtime": 200
+    },
+    {
+      "id": "turretarmoriron",
+      "ingredient": "techguns:turretarmoriron",
+      "result": {
+        "id": "minecraft:iron_ingot",
+        "count": 5
+      },
+      "experience": 0.0,
+      "cookingtime": 200
+    },
+    {
+      "id": "turretarmorsteel",
+      "ingredient": "techguns:turretarmorsteel",
+      "result": {
+        "id": "techguns:ingotsteel",
+        "count": 5
+      },
+      "experience": 0.0,
+      "cookingtime": 200
+    },
+    {
+      "id": "turretarmorobsidiansteel",
+      "ingredient": "techguns:turretarmorobsidiansteel",
+      "result": {
+        "id": "techguns:ingotobsidiansteel",
+        "count": 5
+      },
+      "experience": 0.0,
+      "cookingtime": 200
+    },
+    {
+      "id": "ironbarrel",
+      "ingredient": "techguns:ironbarrel",
+      "result": {
+        "id": "minecraft:iron_ingot",
+        "count": 6
+      },
+      "experience": 0.0,
+      "cookingtime": 200
+    },
+    {
+      "id": "obsidiansteelbarrel",
+      "ingredient": "techguns:obsidiansteelbarrel",
+      "result": {
+        "id": "techguns:ingotobsidiansteel",
+        "count": 6
+      },
+      "experience": 0.0,
+      "cookingtime": 200
+    },
+    {
+      "id": "platebronze",
+      "ingredient": "techguns:platebronze",
+      "result": {
+        "id": "techguns:ingotbronze",
+        "count": 1
+      },
+      "experience": 0.0,
+      "cookingtime": 200
+    },
+    {
+      "id": "platecopper",
+      "ingredient": "techguns:platecopper",
+      "result": {
+        "id": "techguns:ingotcopper",
+        "count": 1
+      },
+      "experience": 0.0,
+      "cookingtime": 200
+    },
+    {
+      "id": "platetin",
+      "ingredient": "techguns:platetin",
+      "result": {
+        "id": "techguns:ingottin",
+        "count": 1
+      },
+      "experience": 0.0,
+      "cookingtime": 200
+    },
+    {
+      "id": "platelead",
+      "ingredient": "techguns:platelead",
+      "result": {
+        "id": "techguns:ingotlead",
+        "count": 1
+      },
+      "experience": 0.0,
+      "cookingtime": 200
+    },
+    {
+      "id": "plateiron",
+      "ingredient": "techguns:plateiron",
+      "result": {
+        "id": "minecraft:iron_ingot",
+        "count": 1
+      },
+      "experience": 0.0,
+      "cookingtime": 200
+    },
+    {
+      "id": "plateobsidiansteel",
+      "ingredient": "techguns:plateobsidiansteel",
+      "result": {
+        "id": "techguns:ingotobsidiansteel",
+        "count": 1
+      },
+      "experience": 0.0,
+      "cookingtime": 200
+    },
+    {
+      "id": "platetitanium",
+      "ingredient": "techguns:platetitanium",
+      "result": {
+        "id": "techguns:ingottitanium",
+        "count": 1
+      },
+      "experience": 0.0,
+      "cookingtime": 200
+    },
+    {
+      "id": "platesteel",
+      "ingredient": "techguns:platesteel",
+      "result": {
+        "id": "techguns:ingotsteel",
+        "count": 1
+      },
+      "experience": 0.0,
+      "cookingtime": 200
+    },
+    {
+      "id": "rawrubber",
+      "ingredient": "techguns:rawrubber",
+      "result": {
+        "id": "techguns:rubberbar",
+        "count": 1
+      },
+      "experience": 0.0,
+      "cookingtime": 200
+    },
+    {
+      "id": "rawplastic",
+      "ingredient": "techguns:rawplastic",
+      "result": {
+        "id": "techguns:plasticsheet",
+        "count": 1
+      },
+      "experience": 0.0,
+      "cookingtime": 200
+    },
+    {
+      "id": "oretitanium",
+      "ingredient": "techguns:oretitanium",
+      "result": {
+        "id": "techguns:ingottitanium",
+        "count": 1
+      },
+      "experience": 0.0,
+      "cookingtime": 200
+    }
+  ],
+  "pending_ore_processing": {
+    "techguns:ore_titanium": "Reaction Chamber RC_TITANIUM with acid and heat-ray focus",
+    "techguns:ore_uranium": "Chemical Laboratory with acid produces yellowcake"
+  }
+}

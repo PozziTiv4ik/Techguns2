@@ -37,6 +37,7 @@
     "53": "techguns:platecarbon",
     "54": "techguns:platetitanium",
     "55": "techguns:plasticsheet",
+    "56": "techguns:rubberbar",
     "57": "techguns:mechanicalpartsiron",
     "58": "techguns:mechanicalpartsobsidiansteel",
     "59": "techguns:mechanicalpartscarbon",
@@ -45,15 +46,23 @@
     "64": "techguns:carbonfibers",
     "70": "techguns:electricengine",
     "75": "techguns:tgx",
+    "78": "techguns:oretitanium",
+    "79": "techguns:ingotcopper",
     "80": "techguns:ingottin",
     "81": "techguns:ingotbronze",
     "82": "techguns:ingotlead",
     "83": "techguns:ingotsteel",
     "84": "techguns:ingotobsidiansteel",
     "85": "techguns:ingottitanium",
+    "86": "techguns:nuggetcopper",
     "87": "techguns:nuggetlead",
     "88": "techguns:nuggetsteel",
     "94": "techguns:machinestackupgrade",
+    "95": "techguns:rawrubber",
+    "96": "techguns:rawplastic",
+    "99": "techguns:turretarmoriron",
+    "100": "techguns:turretarmorsteel",
+    "101": "techguns:turretarmorobsidiansteel",
     "108": "techguns:sniperrounds_incendiary",
     "127": "techguns:gaussrifleslugs",
     "144": "techguns:sniperrounds_explosive"
@@ -119,6 +128,14 @@
     {
       "id": "techguns:stonebullets",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_0_stonebullets.json"
+    },
+    {
+      "id": "techguns:turretarmorsteel",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_100_turretarmorsteel.json"
+    },
+    {
+      "id": "techguns:turretarmorobsidiansteel",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_101_turretarmorobsidiansteel.json"
     },
     {
       "id": "techguns:smgmagazineempty",
@@ -217,12 +234,20 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_70_electricengine.json"
     },
     {
+      "id": "techguns:ingotcopper",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_79_ingotcopper.json"
+    },
+    {
       "id": "techguns:ingotlead",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_82_ingotlead.json"
     },
     {
       "id": "techguns:ingotsteel",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_83_ingotsteel.json"
+    },
+    {
+      "id": "techguns:nuggetcopper",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_86_nuggetcopper.json"
     },
     {
       "id": "techguns:nuggetlead",
@@ -239,6 +264,10 @@
     {
       "id": "techguns:machinestackupgrade",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_94_machinestackupgrade.json"
+    },
+    {
+      "id": "techguns:turretarmoriron",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_99_turretarmoriron.json"
     },
     {
       "id": "techguns:smgmagazine",
@@ -320,6 +349,9 @@
     "c:ingots/bronze": [
       "techguns:ingotbronze"
     ],
+    "c:ingots/copper": [
+      "techguns:ingotcopper"
+    ],
     "c:ingots/lead": [
       "techguns:ingotlead"
     ],
@@ -334,6 +366,9 @@
     ],
     "c:ingots/titanium": [
       "techguns:ingottitanium"
+    ],
+    "c:nuggets/copper": [
+      "techguns:nuggetcopper"
     ],
     "c:nuggets/lead": [
       "techguns:nuggetlead"
@@ -381,6 +416,7 @@
     "ingottitanium",
     "mechanicalpartscarbon",
     "mechanicalpartsobsidiansteel",
+    "oretitanium",
     "plasticsheet",
     "platebronze",
     "platecarbon",
@@ -391,6 +427,9 @@
     "platesteel",
     "platetin",
     "platetitanium",
+    "rawplastic",
+    "rawrubber",
+    "rubberbar",
     "sniperrounds",
     "sniperrounds_explosive",
     "sniperrounds_incendiary",
@@ -398,6 +437,7 @@
     "tgx"
   ],
   "metal_packing_requires_feedstock": [
+    "ingotcopper",
     "ingotlead",
     "ingotsteel"
   ],
