@@ -106,7 +106,10 @@ B переключает безопасный режим; HUD ракетницы
 RocketExplosion/NukeExplosion FX, световой импульс, gore, отдача и полные анимации
 остаются в M5; наличие моделей не означает завершённую визуальную приёмку.
 
-Windows: прошли 36 специальных GameTests ракет, один общий цикл ракетницы,
+Windows/Linux: прошли 36 специальных GameTests ракет и один общий цикл ракетницы;
+Windows также подтвердил
 четыре новых JUnit-теста и шесть проверок исходников/ресурсов Python. Вместе с
 остальным портом — 371 GameTest, 36 JUnit и 68 Python. Журнал и Linux CI:
-[VERIFICATION.ru.md](VERIFICATION.ru.md). Minecraft-клиент для этого этапа не запускался.
+[VERIFICATION.ru.md](VERIFICATION.ru.md),
+[Linux CI](https://github.com/PozziTiv4ik/Techguns2/actions/runs/34361077262).
+Minecraft-клиент для этого этапа не запускался.
