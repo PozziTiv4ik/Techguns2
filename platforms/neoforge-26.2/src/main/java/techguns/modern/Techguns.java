@@ -22,6 +22,7 @@ public final class Techguns {
         techguns.modern.machine.fabricator.FabricatorContent.register(modBus);
         techguns.modern.machine.charging.ChargingStationContent.register(modBus);
         techguns.modern.radiation.RadiationSystem.register(modBus,container);
+        SafeMode.register(modBus, container);
         techguns.modern.machine.TGMachineConfig.register(container);
         techguns.modern.world.TGOreContent.register(modBus);
         techguns.modern.world.TGOreConfig.register(container);
@@ -32,6 +33,7 @@ public final class Techguns {
         NeoForge.EVENT_BUS.register(ReloadSessions.class);
         NeoForge.EVENT_BUS.register(AimSessions.class);
         NeoForge.EVENT_BUS.addListener(ArmorDamage::onIncoming);
+        NeoForge.EVENT_BUS.addListener(RocketDamage::knockback);
         if (Boolean.getBoolean("techguns.gametest")) {
             techguns.modern.test.ChargingTestItems.register(modBus);
             techguns.modern.test.WeaponGameTests.FUNCTIONS.register(modBus);

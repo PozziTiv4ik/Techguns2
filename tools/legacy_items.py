@@ -37,6 +37,7 @@ ORE_TAGS = {
     'GEMLAPIS': ('c:gems/lapis', None), 'OREURANIUM': ('c:ores/uranium', None),
     'SLIMEBALL': ('c:slime_balls', None),
     'DUSTURANIUM': ('c:dusts/uranium', 'yellowcake'),
+    'INGOTURANIUMENRICHED': ('c:ingots/uranium_enriched', 'enricheduranium'),
     'BLOCKREDSTONE': ('c:storage_blocks/redstone', None),
     'CIRCUITELITE': ('c:circuits/elite', 'circuitboardelite'),
     'CIRCUITBASIC': ('c:circuits/basic', 'circuitboard'),

@@ -25,9 +25,14 @@ def require(path):
 def check_item_model(definition):
     if definition['type'] == 'minecraft:model':
         require(local_path(definition['model'], 'models', '.json'))
-    elif definition['type'] == 'minecraft:select' and definition['property'] == 'minecraft:display_context':
+    elif definition['type'] == 'minecraft:select' and definition['property'] in ('minecraft:display_context', 'minecraft:component'):
         check_item_model(definition['fallback'])
         for case in definition['cases']: check_item_model(case['model'])
+    elif definition['type'] == 'minecraft:composite':
+        for model in definition['models']: check_item_model(model)
+    elif definition['type'] == 'minecraft:condition' and definition['property'] == 'techguns:rocket_loaded':
+        check_item_model(definition['on_true']); check_item_model(definition['on_false'])
+    elif definition['type'] == 'minecraft:empty': pass
     elif definition['type'] == 'neoforge:fluid_container':
         if not definition.get('fluid') or not definition.get('textures'): raise ValueError('Incomplete fluid container model')
         for texture in definition['textures'].values(): require(local_path(texture,'textures','.png'))

@@ -34,6 +34,8 @@ public final class TGContent {
             "aiming", builder -> builder.networkSynchronized(ByteBufCodecs.BOOL).ignoreSwapAnimation());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> RELOAD_TICKS = COMPONENTS.registerComponentType(
             "reload_ticks", builder -> builder.networkSynchronized(ByteBufCodecs.VAR_INT).ignoreSwapAnimation());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<techguns.core.RocketVariant>> ROCKET_VARIANT = COMPONENTS.registerComponentType(
+            "rocket_variant", builder -> builder.persistent(RocketAmmo.CODEC).networkSynchronized(ByteBufCodecs.STRING_UTF8.map(techguns.core.RocketVariant::fromId, techguns.core.RocketVariant::id)));
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Techguns.MOD_ID);
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, Techguns.MOD_ID);
     public static final Map<String, DeferredItem<Item>> AMMO = registerAmmo();
@@ -49,6 +51,13 @@ public final class TGContent {
     public static final DeferredHolder<EntityType<?>, EntityType<LaserBeam>> LASER_BEAM = ENTITIES.register("laser_beam", () ->
             EntityType.Builder.<LaserBeam>of(LaserBeam::new, MobCategory.MISC).sized(0.1f, 0.1f).clientTrackingRange(12).updateInterval(1)
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, id("laser_beam"))));
+    public static final DeferredHolder<EntityType<?>, EntityType<RocketProjectile>> ROCKET = ENTITIES.register("rocket", () ->
+            EntityType.Builder.<RocketProjectile>of(RocketProjectile::new, MobCategory.MISC).sized(.25f, .25f).clientTrackingRange(12).updateInterval(1)
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE, id("rocket"))));
+    public static final DeferredHolder<EntityType<?>, EntityType<techguns.modern.radiation.RadiationZone>> RADIATION_ZONE = ENTITIES.register("radiation_zone", () ->
+            EntityType.Builder.<techguns.modern.radiation.RadiationZone>of(techguns.modern.radiation.RadiationZone::new, MobCategory.MISC).sized(.1f, .1f).clientTrackingRange(0).updateInterval(Integer.MAX_VALUE)
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE, id("radiation_zone"))));
+    public static final DeferredHolder<SoundEvent, SoundEvent> NUKE_EXPLOSION = SOUNDS.register("effects.nukeexplosion", () -> SoundEvent.createVariableRangeEvent(id("effects.nukeexplosion")));
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Techguns.MOD_ID);
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TAB = TABS.register("techguns", () ->
             CreativeModeTab.builder().title(Component.translatable("itemGroup.techguns")).icon(REVOLVER::toStack)

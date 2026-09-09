@@ -17,5 +17,6 @@
   "scar": "ModelScar",
   "vector": "ModelVector",
   "lasergun": "ModelLasergun",
-  "laserpistol": "ModelLaserPistol"
+  "laserpistol": "ModelLaserPistol",
+  "rocketlauncher": "ModelRocketLauncher"
 }

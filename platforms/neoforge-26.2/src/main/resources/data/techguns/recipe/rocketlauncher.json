@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:rocketlauncher",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 1
+    }
+  },
+  "pattern": [
+    "rbb",
+    " f "
+  ],
+  "key": {
+    "r": "techguns:rocket",
+    "b": "techguns:obsidiansteelbarrel",
+    "f": "techguns:steelreceiver"
+  }
+}

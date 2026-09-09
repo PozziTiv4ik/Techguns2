@@ -243,6 +243,20 @@
     ],
     "subtitle": "subtitles.techguns.guns.laserpistolreload"
   },
+  "guns.rocketfire": {
+    "sounds": [
+      "techguns:guns/rocket_shot_a",
+      "techguns:guns/rocket_shot_b",
+      "techguns:guns/rocket_shot_c"
+    ],
+    "subtitle": "subtitles.techguns.guns.rocketfire"
+  },
+  "guns.rocketreload": {
+    "sounds": [
+      "techguns:guns/rocket_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.rocketreload"
+  },
   "machines.ammopresswork1": {
     "sounds": [
       "techguns:machines/ammopress_work1_a",
@@ -321,5 +335,11 @@
       "techguns:machines/charginstation_work"
     ],
     "subtitle": "subtitles.techguns.machines.chargingstationwork"
+  },
+  "effects.nukeexplosion": {
+    "sounds": [
+      "techguns:effects/nukeexplosion"
+    ],
+    "subtitle": "subtitles.techguns.effects.nukeexplosion"
   }
 }

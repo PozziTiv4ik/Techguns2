@@ -45,6 +45,7 @@ public final class WeaponGameTests {
         FabricatorGameTests.register(FUNCTIONS);
         LaserGameTests.register(FUNCTIONS);
         ChargingStationGameTests.register(FUNCTIONS);
+        RocketGameTests.register(FUNCTIONS);
         FUNCTIONS.register("ammo_persists", () -> WeaponGameTests::ammoPersists);
         FUNCTIONS.register("reload_timing_and_consumption", () -> WeaponGameTests::reloadTiming);
         FUNCTIONS.register("reload_cancellation", () -> WeaponGameTests::reloadCancellation);

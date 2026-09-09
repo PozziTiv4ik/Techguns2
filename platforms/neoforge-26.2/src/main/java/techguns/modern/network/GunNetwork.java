@@ -10,9 +10,10 @@ import techguns.modern.AimSessions;
 public final class GunNetwork {
     public static void register(RegisterPayloadHandlersEvent event) {
         // PayloadRegistrar defaults to the main game thread.
-        var registrar = event.registrar("2");
+        var registrar = event.registrar("3");
         registrar.playToServer(GunActionPayload.TYPE, GunActionPayload.CODEC, (payload, context) -> handle(context.player(), payload));
         registrar.playToServer(AimPayload.TYPE, AimPayload.CODEC, (payload, context) -> AimSessions.set(context.player(), payload.enabled()));
+        registrar.playToServer(SafeModePayload.TYPE, SafeModePayload.CODEC, (payload, context) -> techguns.modern.SafeMode.toggle(context.player()));
     }
 
     public static boolean handle(Player player, GunActionPayload payload) {

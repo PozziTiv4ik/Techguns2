@@ -88,12 +88,15 @@ public final class RadiationSystem {
         if(DISABLED.get() || intensity<=0) return;
         int amplifier=(int)Math.ceil(intensity*.5)-1;
         Vec3 center=Vec3.atCenterOf(controller);
-        for(var entity:level.getEntitiesOfClass(LivingEntity.class,new AABB(center,center).inflate(6))) {
+        applyZone(level, center, 6, 62, amplifier, 4, 0);
+    }
+    public static void applyZone(ServerLevel level, Vec3 center, double radius, int duration, int innerStrength, double innerRadius, int outerStrength) {
+        if (DISABLED.get()) return;
+        for(var entity:level.getEntitiesOfClass(LivingEntity.class,new AABB(center,center).inflate(radius))) {
             double distance=entity.position().distanceTo(center);
-            if(distance>=6) continue;
-            // Preserve the original outer-band expression (it rises again between radii 4 and 6).
-            int strength=distance>4 ? (int)Math.round(amplifier*(distance-4)/2) : amplifier;
-            entity.addEffect(new MobEffectInstance(EXPOSURE,62,strength,true,true));
+            if(distance>=radius) continue;
+            int strength=(int)Math.round(techguns.core.ExplosionMath.band(distance, innerRadius, radius, innerStrength, outerStrength));
+            entity.addEffect(new MobEffectInstance(EXPOSURE,duration,strength,true,true));
         }
     }
     public static int inventoryStrength(ItemStack item) {

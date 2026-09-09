@@ -1,0 +1,50 @@
+{
+  "model": {
+    "type": "minecraft:composite",
+    "models": [
+      {
+        "type": "minecraft:model",
+        "model": "techguns:item/rocketlauncher"
+      },
+      {
+        "type": "minecraft:condition",
+        "property": "techguns:rocket_loaded",
+        "on_false": {
+          "type": "minecraft:empty"
+        },
+        "on_true": {
+          "type": "minecraft:select",
+          "property": "minecraft:component",
+          "component": "techguns:rocket_variant",
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "techguns:item/rocketlauncher_default"
+          },
+          "cases": [
+            {
+              "when": "default",
+              "model": {
+                "type": "minecraft:model",
+                "model": "techguns:item/rocketlauncher_default"
+              }
+            },
+            {
+              "when": "nuke",
+              "model": {
+                "type": "minecraft:model",
+                "model": "techguns:item/rocketlauncher_nuke"
+              }
+            },
+            {
+              "when": "high_velocity",
+              "model": {
+                "type": "minecraft:model",
+                "model": "techguns:item/rocketlauncher_high_velocity"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

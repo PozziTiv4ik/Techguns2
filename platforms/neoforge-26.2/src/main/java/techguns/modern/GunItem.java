@@ -26,6 +26,14 @@ public final class GunItem extends Item {
         boolean aiming = AimSessions.active(player, stack);
         double accuracyMultiplier = aiming ? gun.aim().accuracyMultiplier() : 1;
         for (int pellet = 0; pellet < gun.projectileCount(); pellet++) {
+            if (gun.projectile() == techguns.core.ProjectileKind.ROCKET) {
+                RocketProjectile rocket = new RocketProjectile(TGContent.ROCKET.get(), server);
+                rocket.configure(gun, RocketAmmo.variant(stack), !SafeMode.enabled(player));
+                rocket.setOwner(player);
+                rocket.shootLegacy(player, gun.stats().spread());
+                if (!server.addFreshEntity(rocket)) return false;
+                continue;
+            }
             if (gun.projectile() == techguns.core.ProjectileKind.LASER) {
                 LaserBeam beam = new LaserBeam(TGContent.LASER_BEAM.get(), server);
                 beam.configure(gun);
@@ -52,7 +60,16 @@ public final class GunItem extends Item {
     }
 
     public static int availableAmmo(Player player, WeaponDefinition gun) {
-        Item ammo = TGContent.AMMO.get(gun.ammo().item()).get();
+        return availableAmmo(player, gun.ammo().item());
+    }
+    private static String ammoId(ItemStack stack, WeaponDefinition gun) {
+        return gun.projectile() == techguns.core.ProjectileKind.ROCKET ? RocketAmmo.variant(stack).ammo() : gun.ammo().item();
+    }
+    public static int availableAmmo(Player player, ItemStack stack) {
+        return stack.getItem() instanceof GunItem gun ? availableAmmo(player, ammoId(stack, gun.definition)) : 0;
+    }
+    private static int availableAmmo(Player player, String id) {
+        Item ammo = TGContent.AMMO.get(id).get();
         int total = 0;
         for (int slot = 0; slot < player.getInventory().getContainerSize(); slot++) {
             ItemStack candidate = player.getInventory().getItem(slot);
@@ -63,15 +80,15 @@ public final class GunItem extends Item {
 
     public static boolean canReload(Player player, ItemStack stack) {
         return stack.getItem() instanceof GunItem gun && rounds(stack) < gun.definition.stats().capacity()
-                && (player.getAbilities().instabuild || availableAmmo(player, gun.definition) > 0);
+                && (player.getAbilities().instabuild || availableAmmo(player, stack) > 0);
     }
 
     public static void completeReload(Player player, ItemStack stack) {
         if (!(player.level() instanceof ServerLevel) || !(stack.getItem() instanceof GunItem item)) return;
         WeaponDefinition gun = item.definition;
-        Magazine.Plan plan = Magazine.plan(gun, rounds(stack), availableAmmo(player, gun), player.getAbilities().instabuild);
+        Magazine.Plan plan = Magazine.plan(gun, rounds(stack), availableAmmo(player, stack), player.getAbilities().instabuild);
         int pending = plan.consumedItems();
-        Item ammo = TGContent.AMMO.get(gun.ammo().item()).get();
+        Item ammo = TGContent.AMMO.get(ammoId(stack, gun)).get();
         for (int slot = 0; slot < player.getInventory().getContainerSize() && pending > 0; slot++) {
             ItemStack candidate = player.getInventory().getItem(slot);
             if (candidate.is(ammo)) {

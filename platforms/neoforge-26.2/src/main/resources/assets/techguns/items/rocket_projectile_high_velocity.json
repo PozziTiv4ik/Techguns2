@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "techguns:item/rocket_projectile_high_velocity"
+  }
+}

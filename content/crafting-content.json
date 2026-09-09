@@ -97,6 +97,8 @@
     "109": "techguns:pistolrounds_incendiary",
     "110": "techguns:riflerounds_incendiary",
     "111": "techguns:rifleroundsstack_incendiary",
+    "117": "techguns:rocket_nuke",
+    "118": "techguns:tacticalnukewarhead",
     "125": "techguns:redstone_battery",
     "126": "techguns:redstone_battery_empty",
     "127": "techguns:gaussrifleslugs",
@@ -209,6 +211,14 @@
     {
       "id": "techguns:rifleroundsstack_incendiary",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_111_rifleroundsstack_incendiary.json"
+    },
+    {
+      "id": "techguns:rocket_nuke",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_117_rocket_nuke.json"
+    },
+    {
+      "id": "techguns:tacticalnukewarhead",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_118_tacticalnukewarhead.json"
     },
     {
       "id": "techguns:pistolmagazine",
@@ -471,6 +481,26 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/revolver.json"
     },
     {
+      "id": "techguns:rocketlauncher",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/rocketlauncher.json"
+    },
+    {
+      "id": "techguns:rocketlauncher_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/rocketlauncher_alt.json"
+    },
+    {
+      "id": "techguns:rocketlauncher_ammo_default",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/rocketlauncher_ammo_default.json"
+    },
+    {
+      "id": "techguns:rocketlauncher_ammo_high_velocity",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/rocketlauncher_ammo_high_velocity.json"
+    },
+    {
+      "id": "techguns:rocketlauncher_ammo_nuke",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/rocketlauncher_ammo_nuke.json"
+    },
+    {
       "id": "techguns:sawedoff",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/sawedoff.json"
     },
@@ -540,6 +570,9 @@
     ],
     "c:ingots/titanium": [
       "techguns:ingottitanium"
+    ],
+    "c:ingots/uranium_enriched": [
+      "techguns:enricheduranium"
     ],
     "c:rubbers/raw": [
       "techguns:rawrubber"

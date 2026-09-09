@@ -28,6 +28,7 @@ import techguns.core.WeaponHud;
 @Mod(value = Techguns.MOD_ID, dist = Dist.CLIENT)
 public final class TechgunsClient {
     private static final KeyMapping RELOAD = new KeyMapping("key.techguns.reload", GLFW.GLFW_KEY_R, KeyMapping.Category.GAMEPLAY);
+    private static final KeyMapping SAFE_MODE = new KeyMapping("key.techguns.safemode", GLFW.GLFW_KEY_B, KeyMapping.Category.GAMEPLAY);
     private static boolean attackWasDown;
     private static boolean aimWasDown;
     private static boolean requestedAim;
@@ -40,13 +41,17 @@ public final class TechgunsClient {
         modBus.addListener(TechgunsClient::screens);
         modBus.addListener(FluidRendering::register);
         modBus.addListener(LaserBeamRenderer::pipelines);
+        modBus.addListener(TechgunsClient::itemProperties);
         NeoForge.EVENT_BUS.addListener(TechgunsClient::tick);
         NeoForge.EVENT_BUS.addListener(TechgunsClient::interaction);
         NeoForge.EVENT_BUS.addListener(TechgunsClient::fov);
         NeoForge.EVENT_BUS.addListener(TechgunsClient::hud);
     }
 
-    private static void keys(RegisterKeyMappingsEvent event) { event.register(RELOAD); }
+    private static void keys(RegisterKeyMappingsEvent event) { event.register(RELOAD); event.register(SAFE_MODE); }
+    private static void itemProperties(net.neoforged.neoforge.client.event.RegisterConditionalItemModelPropertyEvent event) {
+        event.register(TGContent.id("rocket_loaded"), RocketLoadedProperty.CODEC);
+    }
     private static void screens(RegisterMenuScreensEvent event) {
         event.register(techguns.modern.machine.TGMachineContent.AMMO_PRESS_MENU.get(), AmmoPressScreen::new);
         event.register(techguns.modern.machine.TGMachineContent.METAL_PRESS_MENU.get(), MetalPressScreen::new);
@@ -61,6 +66,7 @@ public final class TechgunsClient {
         Minecraft client = Minecraft.getInstance();
         boolean down = client.options.keyAttack.isDown();
         boolean playing = client.player != null && client.gui.screen() == null && !client.isPaused();
+        while (SAFE_MODE.consumeClick()) if (playing) ClientPacketDistributor.sendToServer(techguns.modern.network.SafeModePayload.INSTANCE);
         boolean useDown = client.options.keyUse.isDown();
         if (!down) attackWasDown = false;
         if (!useDown) aimWasDown = false;
@@ -129,13 +135,20 @@ public final class TechgunsClient {
         int remaining = stack.getOrDefault(TGContent.RELOAD_TICKS.get(), 0);
         WeaponHud state = WeaponHud.of(gun.definition(), GunItem.rounds(stack), remaining);
         var gui = event.getGuiGraphics();
-        int x = Math.max(6, gui.guiWidth() - 154), y = Math.max(6, gui.guiHeight() - 68);
-        gui.fill(x - 5, y - 5, x + 144, y + 36, 0xA0181C20);
+        boolean rocket = gun.definition().projectile() == techguns.core.ProjectileKind.ROCKET;
+        int x = Math.max(6, gui.guiWidth() - 154), y = Math.max(6, gui.guiHeight() - (rocket ? 94 : 68));
+        gui.fill(x - 5, y - 5, x + 144, y + (rocket ? 62 : 36), 0xA0181C20);
         gui.text(client.font, Component.literal(client.font.plainSubstrByWidth(stack.getHoverName().getString(), 138)), x, y, 0xFFE7E7E7);
         gui.text(client.font, Component.translatable("hud.techguns.ammo", state.rounds(), state.capacity()), x, y + 13, 0xFFE9A63B);
         if (state.reloading()) {
             gui.text(client.font, Component.translatable("hud.techguns.reloading"), x + 60, y + 13, 0xFFC5C5C5);
             gui.fill(x, y + 28, x + Math.round(138 * state.reloadProgress()), y + 31, 0xFFE9A63B);
+        }
+        if (rocket) {
+            var variant = Component.translatable("hud.techguns.rocket." + techguns.modern.RocketAmmo.variant(stack).id());
+            gui.text(client.font, Component.literal(client.font.plainSubstrByWidth(variant.getString(), 138)), x, y + 35, 0xFFC5C5C5);
+            boolean safe = techguns.modern.SafeMode.enabled(client.player);
+            gui.text(client.font, Component.translatable(safe ? "hud.techguns.safe" : "hud.techguns.unsafe"), x, y + 48, safe ? 0xFF97CE8B : 0xFFEE9466);
         }
     }
 
@@ -143,6 +156,8 @@ public final class TechgunsClient {
         // The initial round uses vanilla tracer particles; a mesh renderer is part of M5.
         event.registerEntityRenderer(TGContent.BULLET.get(), NoopRenderer::new);
         event.registerEntityRenderer(TGContent.LASER_BEAM.get(), LaserBeamRenderer::new);
+        event.registerEntityRenderer(TGContent.ROCKET.get(), RocketRenderer::new);
+        event.registerEntityRenderer(TGContent.RADIATION_ZONE.get(), NoopRenderer::new);
         event.registerBlockEntityRenderer(techguns.modern.machine.charging.ChargingStationContent.ENTITY.get(), ChargingStationRenderer::new);
     }
 }

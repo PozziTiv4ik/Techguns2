@@ -1,0 +1,38 @@
+[
+  {
+    "id": "rocketlauncher",
+    "capacity": 1,
+    "fire_delay": 10,
+    "reload_ticks": 40,
+    "damage": 50.0,
+    "minimum_damage": 10.0,
+    "drop_start": 3.0,
+    "drop_end": 5.0,
+    "speed": 1.0,
+    "lifetime": 200,
+    "projectile": "rocket",
+    "accuracy": 0.05,
+    "automatic": false,
+    "extra_pellets": 0,
+    "pellet_spread": 0.0,
+    "gravity": 0.01,
+    "penetration": 0.0,
+    "zoom": 1.0,
+    "zoom_toggle": false,
+    "zoom_accuracy": 1.0,
+    "zoom_centered": false,
+    "ammo": {
+      "item": "rocket",
+      "empty_item": "",
+      "loose_item": "",
+      "bundles_per_magazine": 0,
+      "individual": false
+    },
+    "fire_sound": "guns.rocketfire",
+    "reload_sound": "guns.rocketreload",
+    "model": "ModelRocketLauncher",
+    "texture": "textures/guns/rocketlauncher",
+    "forward_axis": "+x",
+    "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java"
+  }
+]

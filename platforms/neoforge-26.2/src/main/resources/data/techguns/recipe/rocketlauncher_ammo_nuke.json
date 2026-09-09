@@ -1,0 +1,16 @@
+{
+  "type": "techguns:ammo_change_crafting",
+  "category": "misc",
+  "result": {
+    "id": "techguns:rocketlauncher",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 1,
+      "techguns:rocket_variant": "nuke"
+    }
+  },
+  "ingredients": [
+    "techguns:rocketlauncher",
+    "techguns:rocket_nuke"
+  ]
+}

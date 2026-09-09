@@ -49,13 +49,16 @@ def convert_recipe(legacy, shared, weapons):
         return item(value)
 
     kind = legacy['type'].replace('forge:ore_', 'minecraft:crafting_')
-    if kind not in STANDARD | {'techguns:copy_nbt'}: raise ValueError(f'Unsupported recipe: {kind}')
+    if kind not in STANDARD | {'techguns:copy_nbt', 'techguns:ammo_change_crafting'}: raise ValueError(f'Unsupported recipe: {kind}')
     result = {'id': item(legacy['result']), 'count': legacy['result'].get('count', 1)}
     gun = weapons.get(result['id'].removeprefix('techguns:'))
     if gun:
         rounds = gun['capacity'] - legacy['result'].get('data', 0)
         if not 0 <= rounds <= gun['capacity']: raise ValueError(f'Invalid gun recipe damage: {legacy}')
         result['components'] = {'techguns:rounds': rounds}
+        if kind == 'techguns:ammo_change_crafting':
+            ammo = next(shared[v['data']] for v in legacy['ingredients'] if v['item'] == 'techguns:itemshared')
+            result['components']['techguns:rocket_variant'] = {'rocket': 'default', 'rocket_nuke': 'nuke', 'rocket_high_velocity': 'high_velocity'}[ammo]
     recipe = {'type': 'techguns:copy_gun' if kind == 'techguns:copy_nbt' else kind,
               'category': 'misc', 'result': result}
     if 'pattern' in legacy:
@@ -75,6 +78,10 @@ def plan_crafting(weapon_list):
     ammo = {gun['ammo'][field] for gun in weapon_list for field in ('item', 'empty_item', 'loose_item') if gun['ammo'][field]}
     selected = {name: recipe for name, recipe in source_recipes.items()
                 if name in weapons or name.endswith('_alt') and name[:-4] in weapons}
+    if 'rocketlauncher' in weapons:
+        for variant in ('default', 'nuke', 'high_velocity'):
+            name = 'rocketlauncher_ammo_' + variant
+            selected[name] = source_recipes[name]
     selected['basicmachine_0_ammo_press'] = source_recipes['basicmachine_0_ammo_press']
     for name in ('basicmachine_1_metal_press', 'basicmachine_1_metal_press_alt'): selected[name] = source_recipes[name]
     selected['simplemachine_11_blast_furnace'] = source_recipes['simplemachine_11_blast_furnace']

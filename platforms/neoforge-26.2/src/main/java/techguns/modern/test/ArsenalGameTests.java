@@ -57,10 +57,15 @@ final class ArsenalGameTests {
             var bullets = helper.getLevel().getEntitiesOfClass(Bullet.class, player.getBoundingBox().inflate(3), b -> b.getOwner() == player);
             helper.assertValueEqual(bullets.size(), gun.projectileCount(), "Projectile count: " + gun.id());
             for (Bullet bullet : bullets) helper.assertValueEqual(bullet.weapon().id(), gun.id(), "Correct projectile parameters");
-        } else {
+        } else if (gun.projectile() == techguns.core.ProjectileKind.LASER) {
             var beams = helper.getLevel().getEntitiesOfClass(techguns.modern.LaserBeam.class, player.getBoundingBox().inflate(3), b -> b.getOwner() == player);
             helper.assertValueEqual(beams.size(), 1, "One beam per laser shot");
             helper.assertValueEqual(beams.getFirst().weapon().id(), gun.id(), "Correct laser parameters");
+        } else {
+            var rockets = helper.getLevel().getEntitiesOfClass(techguns.modern.RocketProjectile.class, player.getBoundingBox().inflate(3), r -> r.getOwner() == player);
+            helper.assertValueEqual(rockets.size(), 1, "One rocket per shot");
+            helper.assertValueEqual(rockets.getFirst().weapon().id(), gun.id(), "Correct rocket parameters");
+            rockets.forEach(techguns.modern.RocketProjectile::discard);
         }
         helper.assertTrue(!GunNetwork.handle(player, new GunActionPayload(false)), "Same-tick spam rejected");
         helper.succeed();

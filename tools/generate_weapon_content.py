@@ -13,6 +13,7 @@ from legacy_reactions import generate_reaction_content, reaction_translations
 from legacy_radiation import generate_radiation_content, radiation_translations
 from legacy_fabricator import generate_fabricator_content, fabricator_translations
 from legacy_charging import generate_charging_content, charging_translations
+from legacy_rockets import generate_rocket_content, rocket_item_model, rocket_translations
 from legacy_items import arguments
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -29,9 +30,10 @@ def parse_weapons():
     item_ids = dict(re.findall(r'(\w+)\s*=\s*SHARED_ITEM\.addsharedVariant\("([^"]+)"', item_source))
     selectors = dict(re.findall(r'(\w+)\s*=\s*new ProjectileSelector(?:<[^;]+?>)?\(AmmoTypes\.(\w+)', source))
     projectile_classes = dict(re.findall(r'(\w+)\s*=\s*new ProjectileSelector<([\w]+)>\(', source))
+    projectile_classes.update(dict(re.findall(r'(\w+)\s*=\s*new ProjectileSelector\(AmmoTypes\.\w+,\s*new (\w+)\.Factory\(', source)))
     render_source = strip_comments((LEGACY / 'java/techguns/client/ClientProxy.java').read_text())
     renderers = {identifier: (renderer, model) for identifier, renderer, model in re.findall(
-        r'registerItemRenderer\(TGuns\.(\w+),\s*new (RenderGunBase90|RenderGunBase)\(new (\w+)\(', render_source)}
+        r'registerItemRenderer\(TGuns\.(\w+),\s*new (RenderGunBase90|RenderGunBase|RenderRocketLauncher)\(new (\w+)\(', render_source)}
     sounds = dict(re.findall(r'(\w+)\s*=\s*createSoundEvent\("([^"]+)"\)',
                             strip_comments((LEGACY / 'java/techguns/TGSounds.java').read_text())))
     # 1.12 ResourceLocation normalizes paths to lowercase; 26.2 rejects uppercase paths.
@@ -81,7 +83,7 @@ def parse_weapons():
         inline_projectile = re.search(r'new ProjectileSelector<(\w+)>', args[1])
         projectile_class = inline_projectile[1] if inline_projectile else projectile_classes[args[1]]
         projectile = {'GenericProjectile': 'ballistic', 'StoneBulletProjectile': 'ballistic',
-                      'LaserProjectile': 'laser'}.get(projectile_class)
+                      'LaserProjectile': 'laser', 'RocketProjectile': 'rocket'}.get(projectile_class)
         if projectile is None: raise ValueError(f'Projectile factory not ported: {projectile_class}')
         lifetime = int(num(args[9]))
         if projectile == 'laser':
@@ -106,7 +108,7 @@ def parse_weapons():
             'ammo': {'item': ammo_item, 'empty_item': empty, 'loose_item': loose,
                      'bundles_per_magazine': bundles, 'individual': int(num(calls.get('setAmmoCount', ['1'])[0])) > 1},
             'fire_sound': sounds[args[7].split('.')[-1]], 'reload_sound': sounds[args[8].split('.')[-1]],
-            'model': model, 'texture': texture, 'forward_axis': '+x' if renderer == 'RenderGunBase90' else '-z',
+            'model': model, 'texture': texture, 'forward_axis': '+x' if renderer in ('RenderGunBase90', 'RenderRocketLauncher') else '-z',
             'source': 'legacy/1.12.2/src/main/java/techguns/TGuns.java'})
     return result
 
@@ -130,6 +132,7 @@ def generate():
     data('content/crafting-content.json', crafting['catalog'])
     data('content/ballistic-weapons.json', [gun for gun in weapons if gun['projectile'] == 'ballistic'])
     data('content/laser-weapons.json', [gun for gun in weapons if gun['projectile'] == 'laser'])
+    data('content/rocket-weapons.json', [gun for gun in weapons if gun['projectile'] == 'rocket'])
     definitions = []
     ammo_items = set(crafting['extra_ammo'])
     sounds_data = json.loads(resolve_asset('sounds.json').read_text())
@@ -157,7 +160,7 @@ def generate():
         source = (LEGACY / f'java/techguns/client/models/guns/{gun["model"]}.java').read_text()
         _, _, shapes = extract_shapes(source, gun['model'])
         gui_hidden = GUI_HIDDEN_PARTS.get(identifier, ())
-        mesh = gui_hidden or any(s['inflate'] != 0 or s['render_scale'] != [1, 1, 1] or s['mirror'] for s in shapes)
+        mesh = gun['projectile'] == 'rocket' or gui_hidden or any(s['inflate'] != 0 or s['render_scale'] != [1, 1, 1] or s['mirror'] for s in shapes)
         if mesh:
             model, obj, material = convert_mesh(source, gun['model'], identifier, f'techguns:item/{identifier}', gun['forward_axis'], gui_hidden)
             output(RESOURCES / f'assets/techguns/models/item/{identifier}.obj', obj)
@@ -188,6 +191,7 @@ def generate():
             files[(RESOURCES / f'assets/techguns/textures/item/{identifier}.png').as_posix()] = resolve_asset(f'textures/items/{identifier}.png').read_bytes()
     for identifier in list(SELECTION) + sorted(ammo_items | materials):
         model = {'type': 'minecraft:model', 'model': f'techguns:item/{identifier}'}
+        if identifier == 'rocketlauncher': model = rocket_item_model()
         if identifier in GUI_HIDDEN_PARTS:
             model = {'type': 'minecraft:select', 'property': 'minecraft:display_context', 'fallback': model,
                      'cases': [{'when': ['gui'], 'model': {'type': 'minecraft:model', 'model': f'techguns:item/{identifier}_gui'}}]}
@@ -195,7 +199,7 @@ def generate():
         for lang in languages:
             key = f'item.techguns.{identifier}.name'
             translated[lang][f'item.techguns.{identifier}'] = languages[lang].get(key, languages['en_us'].get(key, identifier))
-    for name in ('machines.ammopresswork1', 'machines.ammopresswork2', 'machines.metalpresswork', 'machines.chemlabwork', 'machines.rc_heatraywork', 'machines.rc_beep', 'machines.rc_warning', 'effects.geiger.low', 'effects.geiger.high', 'machines.fabricatorwork', 'machines.chargingstationwork'):
+    for name in ('machines.ammopresswork1', 'machines.ammopresswork2', 'machines.metalpresswork', 'machines.chemlabwork', 'machines.rc_heatraywork', 'machines.rc_beep', 'machines.rc_warning', 'effects.geiger.low', 'effects.geiger.high', 'machines.fabricatorwork', 'machines.chargingstationwork', 'effects.nukeexplosion'):
         selected_sounds[name] = {'sounds': sounds_data[name]['sounds']}
     for sound, value in selected_sounds.items():
         subtitle = f'subtitles.techguns.{sound}'
@@ -210,6 +214,7 @@ def generate():
                 if sound=='machines.fabricatorwork': translated[lang][subtitle]='Fabricator works' if lang=='en_us' else 'Работает фабрикатор'
                 if sound=='machines.chargingstationwork': translated[lang][subtitle]='Charging Station works' if lang=='en_us' else 'Работает зарядная станция'
             if sound.startswith('effects.geiger.'): translated[lang][subtitle]='Geiger counter clicks' if lang=='en_us' else 'Щёлкает счётчик Гейгера'
+            if sound == 'effects.nukeexplosion': translated[lang][subtitle] = 'Nuclear explosion' if lang == 'en_us' else 'Ядерный взрыв'
         for entry in value['sounds']:
             name = entry if isinstance(entry, str) else entry['name']
             path = f'sounds/{name.split(":")[-1]}.ogg'
@@ -229,6 +234,7 @@ def generate():
         values.update(radiation_translations(lang))
         values.update(fabricator_translations(lang))
         values.update(charging_translations(lang))
+        values.update(rocket_translations(lang))
         values['entity.techguns.laser_beam'] = 'Laser beam' if lang == 'en_us' else 'Лазерный луч'
         values['death.attack.techguns.laser'] = '%1$s was lasered by %2$s' if lang == 'en_us' else '%1$s убит лазером игрока %2$s'
         values['death.attack.techguns.laser.player'] = values['death.attack.techguns.laser']
@@ -279,7 +285,7 @@ public final class Weapons {
 '''
     output('core/src/main/java/techguns/core/Weapons.java', source)
     files.update(generate_machine_content())
-    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content()) for entry in domain.items()]:
+    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content()) for entry in domain.items()]:
         if path in files:
             # Several content domains contribute to the same mining/tool and common item tags.
             if '/tags/' not in path: raise ValueError(f'Colliding generated resource: {path}')

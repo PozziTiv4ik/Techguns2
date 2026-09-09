@@ -18,6 +18,8 @@ public final class ArmorDamage {
             weapon = bullet.weapon();
         } else if (event.getSource().getDirectEntity() instanceof LaserBeam beam && event.getSource().is(LaserBeam.DAMAGE_TYPE)) {
             weapon = beam.weapon();
+        } else if (event.getSource().getDirectEntity() instanceof RocketProjectile rocket && event.getSource().is(RocketDamage.TYPE)) {
+            weapon = rocket.weapon();
         } else return;
         event.addReductionModifier(DamageContainer.Reduction.ARMOR, (container, previousReduction) -> {
             float damage = container.getNewDamage();
