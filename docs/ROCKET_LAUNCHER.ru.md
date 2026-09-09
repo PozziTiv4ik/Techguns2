@@ -109,7 +109,8 @@ RocketExplosion/NukeExplosion FX, световой импульс, gore, отд�
 Windows/Linux: прошли 36 специальных GameTests ракет и один общий цикл ракетницы;
 Windows также подтвердил
 четыре новых JUnit-теста и шесть проверок исходников/ресурсов Python. Вместе с
-остальным портом — 371 GameTest, 36 JUnit и 68 Python. Журнал и Linux CI:
+остальным портом — 371 GameTest, 36 JUnit и 70 Python. Журнал и Linux CI:
 [VERIFICATION.ru.md](VERIFICATION.ru.md),
 [Linux CI](https://github.com/PozziTiv4ik/Techguns2/actions/runs/34361077262).
-Minecraft-клиент для этого этапа не запускался.
+Серверный этап выполнялся без Minecraft-клиента. Последующий запуск по просьбе
+пользователя подтвердил вход в мир в 16:11; визуальная приёмка ракет остаётся открытой.
