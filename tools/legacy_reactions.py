@@ -60,9 +60,14 @@ def generate_reaction_content():
         data(f'data/techguns/loot_table/blocks/{part}.json', {'type':'minecraft:block','pools':[{'rolls':1,'entries':[{'type':'minecraft:item','name':'techguns:'+part}], 'conditions':[{'condition':'minecraft:survives_explosion'}]}]})
     data('assets/techguns/models/block/reactionchamber_empty.json', {'parent':'minecraft:block/block','textures':{'particle':'techguns:block/reactionchamber_housing'}})
     data('assets/techguns/models/block/reactionchamber.json', {'loader':'neoforge:obj','model':'techguns:models/block/reactionchamber.obj',
-         'flip_v':True,'automatic_culling':False,'textures':{'particle':'techguns:block/reactionchamber_housing'}})
+         'flip_v':True,'automatic_culling':False,'textures':{'particle':'techguns:block/reactionchamber_housing',
+             'body':'techguns:block/reactionchamber','glass':'techguns:block/reactionchamberglass'}})
     output('assets/techguns/models/block/reactionchamber.obj', '\n'.join(line.rstrip() for line in (assets/'models/block/reactionchamber.obj').read_text().splitlines())+'\n')
-    output('assets/techguns/models/block/reactionchamber.mtl', (assets/'models/block/reactionchamber.mtl').read_text().replace('techguns:blocks/','techguns:block/'))
+    # NeoForge 26.2 resolves MTL maps as TextureSlots references, not direct resource identifiers.
+    material = (assets/'models/block/reactionchamber.mtl').read_text()
+    material = material.replace('map_Kd techguns:blocks/reactionchamberglass', 'map_Kd #glass')
+    material = material.replace('map_Kd techguns:blocks/reactionchamber', 'map_Kd #body')
+    output('assets/techguns/models/block/reactionchamber.mtl', material)
     for texture in ('reactionchamber','reactionchamberglass'):
         output(f'assets/techguns/textures/block/{texture}.png', (assets/f'textures/blocks/{texture}.png').read_bytes())
     output('assets/techguns/textures/gui/reaction_chamber_gui.png', (assets/'textures/gui/reaction_chamber_gui.png').read_bytes())

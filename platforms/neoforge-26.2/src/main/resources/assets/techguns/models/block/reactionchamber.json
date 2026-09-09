@@ -4,6 +4,8 @@
   "flip_v": true,
   "automatic_culling": false,
   "textures": {
-    "particle": "techguns:block/reactionchamber_housing"
+    "particle": "techguns:block/reactionchamber_housing",
+    "body": "techguns:block/reactionchamber",
+    "glass": "techguns:block/reactionchamberglass"
   }
 }

@@ -91,6 +91,16 @@ def extract_shapes(source, class_name, constructor_values=None):
     return width, height, shapes
 
 
+def repeat_uv_interval(first, last, period):
+    """Move a legacy GL_REPEAT interval into one atlas sprite without changing its span/direction."""
+    if min(first, last) >= 0 and max(first, last) <= period: return first, last
+    offset = math.floor(min(first, last) / period) * period
+    wrapped = first - offset, last - offset
+    if max(wrapped) > period:
+        raise ValueError('UV interval crosses a repeat seam; split the face before atlas conversion')
+    return wrapped
+
+
 def texture_faces(u, v, dx, dy, dz, width, height):
     # Derive UVs at vertices after reflection in Y, matching vanilla FaceInfo vertex order.
     # Side faces reverse U; top and bottom change places and reverse V.
@@ -103,9 +113,13 @@ def texture_faces(u, v, dx, dy, dz, width, height):
     faces = {face: [c, b, a, d] for face, (a, b, c, d) in old.items()}
     faces['up'] = [u+dz, v+dz, u+dz+dx, v]
     faces['down'] = [u+dz+dx, v, u+dz+2*dx, v+dz]
-    return {face: {'uv': [round(a*16/width, 7), round(b*16/height, 7),
-                         round(c*16/width, 7), round(d*16/height, 7)], 'texture': '#gun'}
-            for face, (a, b, c, d) in faces.items()}
+    result = {}
+    for face, (a, b, c, d) in faces.items():
+        a, c = repeat_uv_interval(a, c, width)
+        b, d = repeat_uv_interval(b, d, height)
+        result[face] = {'uv': [round(a*16/width, 7), round(b*16/height, 7),
+                              round(c*16/width, 7), round(d*16/height, 7)], 'texture': '#gun'}
+    return result
 
 
 def display_transforms(forward='+x'):

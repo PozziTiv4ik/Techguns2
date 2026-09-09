@@ -40,7 +40,7 @@ def check_item_model(definition):
         raise ValueError(f'Add validation for item model type {definition["type"]}')
 
 
-def check_mesh(path):
+def check_mesh(path, textures=None):
     require(path)
     vertices, texcoords, normals, faces = 0, 0, 0, []
     for line in path.read_text(encoding='utf-8').splitlines():
@@ -49,7 +49,11 @@ def check_mesh(path):
         if parts[0] in ('v', 'vt', 'vn'):
             if not all(math.isfinite(float(v)) for v in parts[1:]): raise ValueError(f'Invalid mesh coordinate: {path}')
             if parts[0] == 'v': vertices += 1
-            elif parts[0] == 'vt': texcoords += 1
+            elif parts[0] == 'vt':
+                texcoords += 1
+                # OBJ's optional third texture coordinate is not part of the 2D sprite UV.
+                if any(float(v) < -1e-7 or float(v) > 1+1e-7 for v in parts[1:3]):
+                    raise ValueError(f'OBJ UV outside atlas sprite: {path}')
             else: normals += 1
         elif parts[0] == 'mtllib':
             if Path(parts[1]).name != parts[1]: raise ValueError('Material library must stay with mesh')
@@ -57,7 +61,10 @@ def check_mesh(path):
             for material in (path.parent / parts[1]).read_text(encoding='utf-8').splitlines():
                 if material.startswith('map_Kd '):
                     texture=material.split()[1]
-                    if texture.startswith('techguns:'): require(local_path(texture,'textures','.png'))
+                    if not texture.startswith('#'):
+                        raise ValueError(f'26.2 OBJ texture must reference a JSON texture slot: {path}: {texture}')
+                    if textures is not None and texture[1:] not in textures:
+                        raise ValueError(f'Missing OBJ texture slot: {path}: {texture}')
         elif parts[0] == 'f': faces.append(parts[1:])
     if not faces: raise ValueError(f'Mesh has no faces: {path}')
     for face in faces:
@@ -93,7 +100,11 @@ def main():
         model = json.loads(path.read_text(encoding='utf-8'))
         if 'render_type' in model and model.get('loader') in (None,'neoforge:obj'):
             raise ValueError(f'Obsolete render_type hint in 26.2 model: {path}; transparency comes from the material and sprite alpha')
-        if model.get('loader') == 'neoforge:obj': check_mesh(local_path(model['model'], '', ''))
+        if model.get('loader') == 'neoforge:obj': check_mesh(local_path(model['model'], '', ''), model.get('textures', {}))
+        for element in model.get('elements', []):
+            for face in element['faces'].values():
+                if any(not math.isfinite(v) or v < 0 or v > 16 for v in face.get('uv', [])):
+                    raise ValueError(f'Cuboid UV outside atlas sprite: {path}: {element.get("name", "unnamed")}')
         for texture in model.get('textures', {}).values():
             if texture.startswith('#'):
                 continue

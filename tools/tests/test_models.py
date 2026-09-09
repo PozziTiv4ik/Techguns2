@@ -4,7 +4,7 @@ import math
 import sys
 import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from legacy_models import extract_shapes, convert_model, convert_mesh, display_transforms, texture_faces, shape_vertices
+from legacy_models import extract_shapes, convert_model, convert_mesh, display_transforms, texture_faces, shape_vertices, repeat_uv_interval
 from generate_weapon_content import parse_weapons, SELECTION, LEGACY, generate
 
 
@@ -35,6 +35,18 @@ class ModelPortTests(unittest.TestCase):
         model = convert_model(source, 'ModelGoldenRevolver', 'techguns:item/goldenrevolver')
         shape = next(e for e in model['elements'] if e['name'] == 'Shape1')
         self.assertAlmostEqual(shape['rotation']['x'], -math.degrees(.3626969), places=6)
+
+    def test_negative_laser_uv_keeps_repeat_span_inside_sprite(self):
+        source = (LEGACY / 'java/techguns/client/models/guns/ModelLasergun.java').read_text()
+        model = convert_model(source, 'ModelLasergun', 'techguns:item/lasergun')
+        glow = next(e for e in model['elements'] if e['name'] == 'Glow1')
+        self.assertEqual(glow['faces']['west']['uv'], [16, 13.25, 14.5, 14.25])
+        for element in model['elements']:
+            for face in element['faces'].values():
+                self.assertTrue(all(0 <= uv <= 16 for uv in face['uv']), '26.2 transparency scan requires bounded UVs')
+        self.assertEqual(repeat_uv_interval(58,64,64), (58,64))
+        self.assertEqual(repeat_uv_interval(128,134,64), (0,6))
+        with self.assertRaisesRegex(ValueError,'repeat seam'): repeat_uv_interval(-2,4,64)
 
     def test_all_selected_constructor_boxes_survive_and_fit(self):
         for identifier, class_name in SELECTION.items():

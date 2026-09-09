@@ -51,6 +51,20 @@ class ReactionPortTests(unittest.TestCase):
         cooldown=json.loads(files[RESOURCES+'data/minecraft/tags/damage_type/bypasses_cooldown.json'])['values']
         for item in ('bullet','radiation','radiation_poisoning'): self.assertIn('techguns:'+item,cooldown)
 
+    def test_obj_materials_resolve_modern_texture_slots(self):
+        files=generate_reaction_content()
+        model=json.loads(files[RESOURCES+'assets/techguns/models/block/reactionchamber.json'])
+        material=files[RESOURCES+'assets/techguns/models/block/reactionchamber.mtl'].decode()
+        maps=[line.split()[1] for line in material.splitlines() if line.startswith('map_Kd ')]
+        self.assertEqual(maps,['#body','#glass'])
+        self.assertEqual(model['textures']['body'],'techguns:block/reactionchamber')
+        self.assertEqual(model['textures']['glass'],'techguns:block/reactionchamberglass')
+        for slot in maps:
+            identifier=model['textures'][slot[1:]].split(':')[1]
+            path='assets/techguns/textures/'+identifier+'.png'
+            legacy_path=path.replace('textures/block/','textures/blocks/')
+            self.assertEqual(files[RESOURCES+path],(LEGACY/'resources'/legacy_path).read_bytes())
+
     def test_radiation_icons_use_source_pixels_and_native_atlas_regions(self):
         files=generate_radiation_content()
         self.assertEqual(files[RESOURCES+'assets/techguns/textures/gui/radiation_icons_source.png'],
