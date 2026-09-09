@@ -54,7 +54,11 @@
     "62": "techguns:copperwire",
     "63": "techguns:goldwire",
     "64": "techguns:carbonfibers",
+    "65": "techguns:circuitboard",
+    "66": "techguns:circuitboardelite",
+    "69": "techguns:cyberneticparts",
     "70": "techguns:electricengine",
+    "71": "techguns:laserfocus",
     "75": "techguns:tgx",
     "76": "techguns:nethercharge",
     "77": "techguns:treatedleather",
@@ -69,6 +73,7 @@
     "86": "techguns:nuggetcopper",
     "87": "techguns:nuggetlead",
     "88": "techguns:nuggetsteel",
+    "92": "techguns:antigravcore",
     "94": "techguns:machinestackupgrade",
     "95": "techguns:rawrubber",
     "96": "techguns:rawplastic",
@@ -77,6 +82,9 @@
     "99": "techguns:turretarmoriron",
     "100": "techguns:turretarmorsteel",
     "101": "techguns:turretarmorobsidiansteel",
+    "103": "techguns:quartzrod",
+    "104": "techguns:rcheatray",
+    "105": "techguns:rcuvemitter",
     "106": "techguns:shotgunrounds_incendiary",
     "108": "techguns:sniperrounds_incendiary",
     "109": "techguns:pistolrounds_incendiary",
@@ -91,7 +99,10 @@
     "techguns:basicmachine@0": "techguns:ammo_press",
     "techguns:basicmachine@1": "techguns:metal_press",
     "techguns:simplemachine@11": "techguns:blast_furnace",
-    "techguns:basicmachine@2": "techguns:chem_lab"
+    "techguns:basicmachine@2": "techguns:chem_lab",
+    "techguns:multiblockmachine@3": "techguns:reactionchamber_housing",
+    "techguns:multiblockmachine@4": "techguns:reactionchamber_glass",
+    "techguns:multiblockmachine@5": "techguns:reactionchamber_controller"
   },
   "recipes": [
     {
@@ -161,6 +172,18 @@
     {
       "id": "techguns:turretarmorobsidiansteel",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_101_turretarmorobsidiansteel.json"
+    },
+    {
+      "id": "techguns:quartzrod",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_103_quartzrod.json"
+    },
+    {
+      "id": "techguns:quartzrod_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_103_quartzrod_alt.json"
+    },
+    {
+      "id": "techguns:rcheatray",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_104_rcheatray.json"
     },
     {
       "id": "techguns:smgmagazineempty",
@@ -287,6 +310,14 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_62_copperwire.json"
     },
     {
+      "id": "techguns:circuitboard",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_65_circuitboard.json"
+    },
+    {
+      "id": "techguns:circuitboardelite",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_66_circuitboardelite.json"
+    },
+    {
       "id": "techguns:electricengine",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_70_electricengine.json"
     },
@@ -359,6 +390,18 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/mac10_alt.json"
     },
     {
+      "id": "techguns:reactionchamber_housing",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/multiblockmachine_3_reactionchamber_housing.json"
+    },
+    {
+      "id": "techguns:reactionchamber_glass",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/multiblockmachine_4_reactionchamber_glass.json"
+    },
+    {
+      "id": "techguns:reactionchamber_controller",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/multiblockmachine_5_reactionchamber_controller.json"
+    },
+    {
       "id": "techguns:pistol",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/pistol.json"
     },
@@ -404,6 +447,15 @@
     }
   ],
   "tags": {
+    "c:circuits/basic": [
+      "techguns:circuitboard"
+    ],
+    "c:circuits/elite": [
+      "techguns:circuitboardelite"
+    ],
+    "c:dusts/uranium": [
+      "techguns:yellowcake"
+    ],
     "c:fibers/carbon": [
       "techguns:carbonfibers"
     ],
@@ -469,14 +521,19 @@
     ],
     "c:wires/copper": [
       "techguns:copperwire"
+    ],
+    "c:wires/gold": [
+      "techguns:goldwire"
     ]
   },
   "requires_non_workbench_production": [
     "40mmgrenade",
     "advancedrounds",
+    "antigravcore",
     "biotank",
     "carbonfibers",
     "compressedairtank",
+    "cyberneticparts",
     "enricheduranium",
     "fueltank",
     "gaussrifleslugs",
@@ -485,6 +542,7 @@
     "ingotobsidiansteel",
     "ingottin",
     "ingottitanium",
+    "laserfocus",
     "mechanicalpartscarbon",
     "mechanicalpartsobsidiansteel",
     "nethercharge",
@@ -506,6 +564,7 @@
     "radpills",
     "rawplastic",
     "rawrubber",
+    "rcuvemitter",
     "rocket_high_velocity",
     "rubberbar",
     "shotgunrounds_incendiary",

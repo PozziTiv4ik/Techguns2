@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:reactionchamber_glass",
+    "count": 6
+  },
+  "pattern": [
+    "rgr",
+    "rgr",
+    "rgr"
+  ],
+  "key": {
+    "r": "techguns:reactionchamber_housing",
+    "g": {
+      "neoforge:ingredient_type": "techguns:tag_fallback",
+      "preferred": "c:glass_blocks/hardened",
+      "fallback": "c:glass_blocks"
+    }
+  }
+}

@@ -9,6 +9,8 @@ from legacy_machines import generate_machine_content, machine_translations
 from legacy_ores import generate_ore_content, ore_translations
 from legacy_fluids import generate_fluid_content, fluid_translations
 from legacy_chemistry import generate_chemical_content, chemical_translations
+from legacy_reactions import generate_reaction_content, reaction_translations
+from legacy_radiation import generate_radiation_content, radiation_translations
 from legacy_items import arguments
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -179,7 +181,7 @@ def generate():
         for lang in languages:
             key = f'item.techguns.{identifier}.name'
             translated[lang][f'item.techguns.{identifier}'] = languages[lang].get(key, languages['en_us'].get(key, identifier))
-    for name in ('machines.ammopresswork1', 'machines.ammopresswork2', 'machines.metalpresswork', 'machines.chemlabwork'):
+    for name in ('machines.ammopresswork1', 'machines.ammopresswork2', 'machines.metalpresswork', 'machines.chemlabwork', 'machines.rc_heatraywork', 'machines.rc_beep', 'machines.rc_warning', 'effects.geiger.low', 'effects.geiger.high'):
         selected_sounds[name] = {'sounds': sounds_data[name]['sounds']}
     for sound, value in selected_sounds.items():
         subtitle = f'subtitles.techguns.{sound}'
@@ -190,6 +192,8 @@ def generate():
             if sound.startswith('machines.'):
                 translated[lang][subtitle] = ('Metal Press works' if lang == 'en_us' else 'Работает металлический пресс') if sound == 'machines.metalpresswork' else ('Ammo Press works' if lang == 'en_us' else 'Работает пресс для патронов')
                 if sound=='machines.chemlabwork': translated[lang][subtitle]='Chemical Laboratory works' if lang=='en_us' else 'Работает химическая лаборатория'
+                if sound.startswith('machines.rc_'): translated[lang][subtitle]=('Reaction chamber warning' if sound.endswith('warning') else 'Reaction chamber check') if lang=='en_us' else ('Предупреждение реакционной камеры' if sound.endswith('warning') else 'Проверка реакционной камеры')
+            if sound.startswith('effects.geiger.'): translated[lang][subtitle]='Geiger counter clicks' if lang=='en_us' else 'Щёлкает счётчик Гейгера'
         for entry in value['sounds']:
             name = entry if isinstance(entry, str) else entry['name']
             path = f'sounds/{name.split(":")[-1]}.ogg'
@@ -205,8 +209,12 @@ def generate():
         values.update(ore_translations(lang))
         values.update(fluid_translations(lang))
         values.update(chemical_translations(lang))
+        values.update(reaction_translations(lang))
+        values.update(radiation_translations(lang))
         resource(f'assets/techguns/lang/{lang}.json', values)
     resource('assets/techguns/sounds.json', selected_sounds)
+    # This tag used to be a handwritten resource. Own it here before other damage domains contribute.
+    resource('data/minecraft/tags/damage_type/bypasses_cooldown.json', {'replace':False,'values':['techguns:bullet']})
     for identifier, recipe in crafting['recipes'].items():
         resource(f'data/techguns/recipe/{identifier}.json', recipe)
     for identifier, values in crafting['tags'].items():
@@ -242,12 +250,13 @@ public final class Weapons {
 '''
     output('core/src/main/java/techguns/core/Weapons.java', source)
     files.update(generate_machine_content())
-    for path, value in (generate_ore_content() | generate_fluid_content() | generate_chemical_content()).items():
+    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content()) for entry in domain.items()]:
         if path in files:
             # Several content domains contribute to the same mining/tool and common item tags.
             if '/tags/' not in path: raise ValueError(f'Colliding generated resource: {path}')
             merged = json.loads(files[path])
-            merged['values'] = sorted(set(merged['values'] + json.loads(value)['values']))
+            values = {json.dumps(v,sort_keys=True):v for v in merged['values'] + json.loads(value)['values']}
+            merged['values'] = [values[key] for key in sorted(values)]
             data(path, merged)
         else: files[path] = value
     return files

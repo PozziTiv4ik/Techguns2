@@ -9,6 +9,9 @@
     "techguns:ore_lead",
     "techguns:ore_tin",
     "techguns:ore_titanium",
-    "techguns:ore_uranium"
+    "techguns:ore_uranium",
+    "techguns:reactionchamber_controller",
+    "techguns:reactionchamber_glass",
+    "techguns:reactionchamber_housing"
   ]
 }

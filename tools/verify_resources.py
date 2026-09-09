@@ -37,24 +37,32 @@ def check_item_model(definition):
 
 def check_mesh(path):
     require(path)
-    vertices, texcoords, faces = 0, 0, []
+    vertices, texcoords, normals, faces = 0, 0, 0, []
     for line in path.read_text(encoding='utf-8').splitlines():
         parts = line.split()
         if not parts: continue
-        if parts[0] in ('v', 'vt'):
+        if parts[0] in ('v', 'vt', 'vn'):
             if not all(math.isfinite(float(v)) for v in parts[1:]): raise ValueError(f'Invalid mesh coordinate: {path}')
             if parts[0] == 'v': vertices += 1
-            else: texcoords += 1
+            elif parts[0] == 'vt': texcoords += 1
+            else: normals += 1
         elif parts[0] == 'mtllib':
             if Path(parts[1]).name != parts[1]: raise ValueError('Material library must stay with mesh')
             require(path.parent / parts[1])
+            for material in (path.parent / parts[1]).read_text(encoding='utf-8').splitlines():
+                if material.startswith('map_Kd '):
+                    texture=material.split()[1]
+                    if texture.startswith('techguns:'): require(local_path(texture,'textures','.png'))
         elif parts[0] == 'f': faces.append(parts[1:])
     if not faces: raise ValueError(f'Mesh has no faces: {path}')
     for face in faces:
-        if len(face) != 4: raise ValueError(f'Expected a quad: {path}')
+        if len(face) not in (3,4): raise ValueError(f'Expected a triangle or quad: {path}')
         for pair in face:
-            vertex, uv = map(int, pair.split('/'))
+            indices=list(map(int,pair.split('/')))
+            if len(indices) not in (2,3): raise ValueError(f'Missing mesh texture index: {path}')
+            vertex, uv = indices[:2]
             if not (1 <= vertex <= vertices and 1 <= uv <= texcoords): raise ValueError(f'Invalid face indices: {path}')
+            if len(indices)==3 and not 1<=indices[2]<=normals: raise ValueError(f'Invalid normal index: {path}')
 
 
 def main():
@@ -118,6 +126,9 @@ def main():
         if recipe['type']=='techguns:chem_lab':
             for key in ('first','second','bottle'):
                 if key in recipe: check_ingredient(recipe[key]['ingredient'])
+        if recipe['type']=='techguns:reaction_chamber':
+            for key in ('input','focus'): check_ingredient(recipe[key])
+            for result in recipe['results']: check_ingredient(result['id'])
     for path in (ROOT / 'data/c/tags/item').rglob('*.json'):
         for value in json.loads(path.read_text(encoding='utf-8'))['values']: check_ingredient(value)
     print(f'Validated {len(names)} item definitions, {texture_count} texture references, {len(sounds)} sound events and {len(recipes)} recipes')

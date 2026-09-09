@@ -1,0 +1,25 @@
+{
+  "type": "techguns:reaction_chamber",
+  "input": "minecraft:wheat_seeds",
+  "focus": "techguns:rcuvemitter",
+  "fluid": "minecraft:water",
+  "results": [
+    {
+      "id": "minecraft:wheat",
+      "count": 1
+    },
+    {
+      "id": "minecraft:wheat_seeds",
+      "count": 2
+    }
+  ],
+  "cycles": 10,
+  "required_completion": 5,
+  "intensity": 3,
+  "margin": 1,
+  "liquid_level": 1,
+  "fluid_consumption": 1000,
+  "instability": 0.5,
+  "risk": "explosion_low",
+  "energy_per_check": 50000
+}

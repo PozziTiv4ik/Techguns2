@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:rcheatray",
+    "count": 1
+  },
+  "pattern": [
+    "cwc",
+    "plp",
+    "plp"
+  ],
+  "key": {
+    "p": "#c:plates/steel",
+    "c": "#c:circuits/elite",
+    "w": "#c:wires/gold",
+    "l": "minecraft:redstone_lamp"
+  }
+}

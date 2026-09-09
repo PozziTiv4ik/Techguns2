@@ -18,9 +18,11 @@ public record MachineTanksPayload(int containerId,FluidStack input,FluidStack ou
             FluidStack.OPTIONAL_STREAM_CODEC,MachineTanksPayload::output,MachineTanksPayload::new);
     @Override public Type<MachineTanksPayload> type() { return TYPE; }
     public void apply(ChemLabMenu menu) { if(menu.containerId==containerId) menu.updateFluids(input,output); }
+    public void apply(techguns.modern.machine.reaction.ReactionChamberMenu menu) { if(menu.containerId==containerId) menu.updateFluid(input); }
     public static void register(RegisterPayloadHandlersEvent event) {
         event.registrar("1").playToClient(TYPE,CODEC,(payload,context) -> {
             if (context.player().containerMenu instanceof ChemLabMenu menu) payload.apply(menu);
+            else if (context.player().containerMenu instanceof techguns.modern.machine.reaction.ReactionChamberMenu menu) payload.apply(menu);
         });
     }
 }

@@ -57,6 +57,9 @@ public final class TGContent {
                         output.accept(techguns.modern.machine.TGMachineContent.METAL_PRESS_ITEM.get());
                         output.accept(techguns.modern.machine.TGMachineContent.BLAST_FURNACE_ITEM.get());
                         output.accept(techguns.modern.machine.TGMachineContent.CHEM_LAB_ITEM.get());
+                        output.accept(techguns.modern.machine.reaction.ReactionContent.HOUSING_ITEM.get());
+                        output.accept(techguns.modern.machine.reaction.ReactionContent.GLASS_ITEM.get());
+                        output.accept(techguns.modern.machine.reaction.ReactionContent.CONTROLLER_ITEM.get());
                         techguns.core.Ores.ALL.stream().sorted(java.util.Comparator.comparingInt(techguns.core.OreDefinition::legacyMetadata))
                                 .forEach(ore -> output.accept(techguns.modern.world.TGOreContent.ORES.get(ore.id()).get()));
                         techguns.modern.fluid.TGFluids.ALL.forEach(fluid -> output.accept(fluid.bucket.get()));
@@ -83,8 +86,9 @@ public final class TGContent {
     }
     private static Map<String, DeferredItem<Item>> registerMaterials() {
         Map<String, DeferredItem<Item>> items = new LinkedHashMap<>();
-        CraftingContent.MATERIALS.forEach(id -> items.put(id, ITEMS.registerItem(id, Item::new,
-                props -> props.stacksTo(id.equals("machinestackupgrade") ? 7 : 64))));
+        CraftingContent.MATERIALS.forEach(id -> items.put(id, ITEMS.registerItem(id, props -> id.equals("radpills") || id.equals("radaway")
+                ? new techguns.modern.radiation.RadiationMedicine(props,id.equals("radpills")) : new Item(props),
+                props -> props.stacksTo(id.equals("machinestackupgrade") ? 7 : id.equals("rcheatray") || id.equals("rcuvemitter") ? 1 : 64))));
         return Collections.unmodifiableMap(items);
     }
     private static Map<String, DeferredHolder<SoundEvent, SoundEvent>> registerSounds() {

@@ -1,0 +1,33 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:unstitch",
+      "resource": "techguns:gui/radiation_icons_source",
+      "divisor_x": 256,
+      "divisor_y": 256,
+      "regions": [
+        {
+          "sprite": "techguns:mob_effect/radiation",
+          "x": 0,
+          "y": 168,
+          "width": 16,
+          "height": 16
+        },
+        {
+          "sprite": "techguns:mob_effect/radresistance",
+          "x": 16,
+          "y": 168,
+          "width": 16,
+          "height": 16
+        },
+        {
+          "sprite": "techguns:mob_effect/radregeneration",
+          "x": 32,
+          "y": 168,
+          "width": 16,
+          "height": 16
+        }
+      ]
+    }
+  ]
+}

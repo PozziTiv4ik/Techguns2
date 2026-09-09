@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:circuitboard",
+    "count": 4
+  },
+  "pattern": [
+    "cgc",
+    "rir",
+    "cgc"
+  ],
+  "key": {
+    "r": "#c:dusts/redstone",
+    "c": "#c:wires/copper",
+    "g": "#c:dyes/green",
+    "i": "#c:plates/iron"
+  }
+}

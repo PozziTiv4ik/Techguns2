@@ -1,0 +1,25 @@
+{
+  "type": "techguns:reaction_chamber",
+  "input": "techguns:ore_titanium",
+  "focus": "techguns:rcheatray",
+  "fluid": "techguns:creeper_acid",
+  "results": [
+    {
+      "id": "techguns:oretitanium",
+      "count": 2
+    },
+    {
+      "id": "minecraft:iron_ore",
+      "count": 1
+    }
+  ],
+  "cycles": 2,
+  "required_completion": 1,
+  "intensity": 5,
+  "margin": 0,
+  "liquid_level": 3,
+  "fluid_consumption": 100,
+  "instability": 0.0,
+  "risk": "break_item",
+  "energy_per_check": 25000
+}

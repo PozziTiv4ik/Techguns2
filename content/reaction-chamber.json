@@ -1,0 +1,179 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/TGMachineRecipes.java",
+  "structure": {
+    "size": [
+      3,
+      4,
+      3
+    ],
+    "housing": 17,
+    "glass": 18,
+    "controller": 1
+  },
+  "energy_capacity": 1000000,
+  "tank_capacity": 10000,
+  "check_interval": 60,
+  "recipes": [
+    {
+      "id": "uv_wheat",
+      "input": "minecraft:wheat_seeds",
+      "focus": "techguns:rcuvemitter",
+      "fluid": "minecraft:water",
+      "results": [
+        {
+          "id": "minecraft:wheat",
+          "count": 1
+        },
+        {
+          "id": "minecraft:wheat_seeds",
+          "count": 2
+        }
+      ],
+      "cycles": 10,
+      "required_completion": 5,
+      "intensity": 3,
+      "margin": 1,
+      "liquid_level": 1,
+      "fluid_consumption": 1000,
+      "instability": 0.5,
+      "risk": "explosion_low",
+      "energy_per_check": 50000
+    },
+    {
+      "id": "laser_focus",
+      "input": "#c:gems/diamond",
+      "focus": "techguns:rcheatray",
+      "fluid": "redstone",
+      "results": [
+        {
+          "id": "techguns:laserfocus",
+          "count": 1
+        }
+      ],
+      "cycles": 10,
+      "required_completion": 5,
+      "intensity": 3,
+      "margin": 1,
+      "liquid_level": 4,
+      "fluid_consumption": 4000,
+      "instability": 0.5,
+      "risk": "break_item",
+      "energy_per_check": 100000
+    },
+    {
+      "id": "titanium",
+      "input": "techguns:ore_titanium",
+      "focus": "techguns:rcheatray",
+      "fluid": "techguns:creeper_acid",
+      "results": [
+        {
+          "id": "techguns:oretitanium",
+          "count": 2
+        },
+        {
+          "id": "minecraft:iron_ore",
+          "count": 1
+        }
+      ],
+      "cycles": 2,
+      "required_completion": 1,
+      "intensity": 5,
+      "margin": 0,
+      "liquid_level": 3,
+      "fluid_consumption": 100,
+      "instability": 0.0,
+      "risk": "break_item",
+      "energy_per_check": 25000
+    },
+    {
+      "id": "blazerod",
+      "input": "techguns:quartzrod",
+      "focus": "techguns:rcheatray",
+      "fluid": "minecraft:lava",
+      "results": [
+        {
+          "id": "minecraft:blaze_rod",
+          "count": 1
+        }
+      ],
+      "cycles": 5,
+      "required_completion": 3,
+      "intensity": 7,
+      "margin": 2,
+      "liquid_level": 4,
+      "fluid_consumption": 1000,
+      "instability": 0.5,
+      "risk": "break_item",
+      "energy_per_check": 250000
+    },
+    {
+      "id": "glowstone",
+      "input": "#c:storage_blocks/redstone",
+      "focus": "techguns:rcheatray",
+      "fluid": "minecraft:lava",
+      "results": [
+        {
+          "id": "minecraft:glowstone",
+          "count": 1
+        }
+      ],
+      "cycles": 5,
+      "required_completion": 3,
+      "intensity": 7,
+      "margin": 2,
+      "liquid_level": 4,
+      "fluid_consumption": 1000,
+      "instability": 0.5,
+      "risk": "explosion_medium",
+      "energy_per_check": 250000
+    },
+    {
+      "id": "antigrav",
+      "input": "minecraft:nether_star",
+      "focus": "techguns:rcheatray",
+      "fluid": "ender",
+      "results": [
+        {
+          "id": "techguns:antigravcore",
+          "count": 1
+        }
+      ],
+      "cycles": 10,
+      "required_completion": 7,
+      "intensity": 8,
+      "margin": 2,
+      "liquid_level": 4,
+      "fluid_consumption": 4000,
+      "instability": 1.0,
+      "risk": "explosion_low",
+      "energy_per_check": 500000
+    },
+    {
+      "id": "uranium",
+      "input": "#c:dusts/uranium",
+      "focus": "techguns:rcheatray",
+      "fluid": "minecraft:water",
+      "results": [
+        {
+          "id": "techguns:enricheduranium",
+          "count": 1
+        }
+      ],
+      "cycles": 5,
+      "required_completion": 4,
+      "intensity": 7,
+      "margin": 0,
+      "liquid_level": 3,
+      "fluid_consumption": 1000,
+      "instability": 0.0,
+      "risk": "break_item",
+      "energy_per_check": 250000
+    }
+  ],
+  "pending": [
+    "working item, liquid and beam rendering",
+    "interactive visual acceptance",
+    "survival supply of cybernetic parts from Fabricator or other original sources",
+    "UV emitter has no acquisition recipe in this source snapshot"
+  ]
+}

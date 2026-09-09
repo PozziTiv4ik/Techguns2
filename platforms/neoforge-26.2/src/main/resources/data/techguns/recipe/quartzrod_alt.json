@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:quartzrod",
+    "count": 1
+  },
+  "pattern": [
+    "  q",
+    " q ",
+    "q  "
+  ],
+  "key": {
+    "q": "#c:gems/quartz"
+  }
+}

@@ -10,6 +10,7 @@ from legacy_items import ORE_TAGS, shared_items, ammo_slot_items
 from legacy_machines import metal_press_data, blast_furnace_data
 from legacy_ores import smelting_data
 from legacy_chemistry import chemical_recipes, STANDALONE_ITEMS
+from legacy_reactions import reaction_recipes, PARTS as REACTION_PARTS
 
 ROOT = Path(__file__).resolve().parents[1]
 LEGACY = ROOT / 'legacy/1.12.2/src/main'
@@ -26,6 +27,7 @@ def convert_recipe(legacy, shared, weapons):
         if identifier == 'techguns:basicmachine':
             return 'techguns:' + {0: 'ammo_press', 1: 'metal_press', 2: 'chem_lab'}[value.get('data', 0)]
         if identifier == 'techguns:simplemachine' and value.get('data') == 11: return 'techguns:blast_furnace'
+        if identifier == 'techguns:multiblockmachine': return 'techguns:'+REACTION_PARTS[value['data']-3]
         if identifier == 'minecraft:stonebrick' and value.get('data', 0) == 0: return 'minecraft:stone_bricks'
         if identifier == 'techguns:itemshared': return 'techguns:' + shared[value['data']]
         if identifier.startswith('#'): raise ValueError('A tag cannot be a recipe result')
@@ -75,6 +77,9 @@ def plan_crafting(weapon_list):
     for name in ('basicmachine_1_metal_press', 'basicmachine_1_metal_press_alt'): selected[name] = source_recipes[name]
     selected['simplemachine_11_blast_furnace'] = source_recipes['simplemachine_11_blast_furnace']
     selected['basicmachine_2_chem_lab']=source_recipes['basicmachine_2_chem_lab']
+    for meta, part in enumerate(REACTION_PARTS, 3):
+        name = f'multiblockmachine_{meta}_{part}'
+        selected[name] = source_recipes[name]
     # These two original recipes overlap after GenericGun.onCreated resets damage to zero.
     # Keep that migration question explicit until upgrade state has its own verified rule.
     pending = {name: selected.pop(name) for name in ('m4_infiltrator', 'm4_infiltrator_alt') if name in selected}
@@ -84,6 +89,14 @@ def plan_crafting(weapon_list):
             if identifier.startswith('techguns:') and not identifier.startswith('techguns:ore_'):
                 wanted.add(by_name[identifier.split(':')[1]])
     used_tags = set()
+    for recipe in reaction_recipes():
+        for identifier in [recipe['input'], recipe['focus']] + [stack['id'] for stack in recipe['results']]:
+            if identifier.startswith('techguns:') and not identifier.startswith('techguns:ore_'):
+                wanted.add(by_name[identifier.split(':')[1]])
+            elif identifier.startswith('#'):
+                key = next(key for key, (tag, _) in ORE_TAGS.items() if tag == identifier[1:])
+                used_tags.add(key)
+                if ORE_TAGS[key][1]: wanted.add(by_name[ORE_TAGS[key][1]])
     for recipe in chemical_recipes():
         for identifier in [recipe[k]['ingredient'] for k in ('first','second','bottle') if k in recipe] + ([recipe['result']['id']] if 'result' in recipe else []):
             name=identifier.removeprefix('techguns:')
@@ -121,6 +134,7 @@ def plan_crafting(weapon_list):
         if name.startswith('basicmachine_1_metal_press'): identifier = name.removeprefix('basicmachine_1_')
         if name == 'simplemachine_11_blast_furnace': identifier = 'blast_furnace'
         if name == 'basicmachine_2_chem_lab': identifier = 'chem_lab'
+        if name.startswith('multiblockmachine_'): identifier = re.sub(r'^multiblockmachine_\d+_', '', name)
         if name.startswith('itemshared_'): identifier = re.sub(r'^itemshared_\d+_', '', name)
         if identifier in recipes: raise ValueError(f'Colliding recipe ID: {identifier}')
         recipes[identifier] = convert_recipe(recipe, shared, weapons)
@@ -139,4 +153,5 @@ def plan_crafting(weapon_list):
                'requires_non_workbench_production': sorted(names - workbench_outputs),
                'metal_packing_requires_feedstock': sorted(names & {'ingotcopper', 'ingotlead', 'ingotsteel'}),
                'pending_upgrade_recipes': [name + '.json' for name in pending]}
+    catalog['block_metadata'].update({f'techguns:multiblockmachine@{meta}':'techguns:'+part for meta,part in enumerate(REACTION_PARTS,3)})
     return {'recipes': recipes, 'materials': materials, 'extra_ammo': sorted(extra_ammo), 'tags': tags, 'catalog': catalog}

@@ -51,6 +51,7 @@ public final class TechgunsClient {
         event.register(techguns.modern.machine.TGMachineContent.METAL_PRESS_MENU.get(), MetalPressScreen::new);
         event.register(techguns.modern.machine.TGMachineContent.BLAST_FURNACE_MENU.get(), BlastFurnaceScreen::new);
         event.register(techguns.modern.machine.TGMachineContent.CHEM_LAB_MENU.get(),ChemLabScreen::new);
+        event.register(techguns.modern.machine.reaction.ReactionContent.MENU.get(),ReactionChamberScreen::new);
     }
 
     private static void tick(ClientTickEvent.Pre event) {

@@ -71,7 +71,7 @@ def generate_chemical_content():
     defaults=fluid_group_defaults()
     data('content/chem-lab.json',{'source':'legacy/1.12.2/src/main/java/techguns/TGMachineRecipes.java','energy_capacity':20000,
          'tank_capacities':[8000,16000],'duration':100,'batch_power_exponent':1,'recipes':chemical_recipes(),
-         'fluid_groups':defaults,'pending':['model animation','radiation medicine effects','special ammunition weapon behavior']})
+         'fluid_groups':defaults,'pending':['model animation','special ammunition weapon behavior']})
     files['core/src/main/java/techguns/core/ChemicalDefaults.java']=('''package techguns.core;
 
 import java.util.List;

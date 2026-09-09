@@ -1,1 +1,8 @@
-{"replace": false, "values": ["techguns:bullet"]}
+{
+  "replace": false,
+  "values": [
+    "techguns:bullet",
+    "techguns:radiation",
+    "techguns:radiation_poisoning"
+  ]
+}

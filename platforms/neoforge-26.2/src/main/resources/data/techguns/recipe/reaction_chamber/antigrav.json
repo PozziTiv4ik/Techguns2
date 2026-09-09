@@ -1,0 +1,21 @@
+{
+  "type": "techguns:reaction_chamber",
+  "input": "minecraft:nether_star",
+  "focus": "techguns:rcheatray",
+  "fluid": "ender",
+  "results": [
+    {
+      "id": "techguns:antigravcore",
+      "count": 1
+    }
+  ],
+  "cycles": 10,
+  "required_completion": 7,
+  "intensity": 8,
+  "margin": 2,
+  "liquid_level": 4,
+  "fluid_consumption": 4000,
+  "instability": 1.0,
+  "risk": "explosion_low",
+  "energy_per_check": 500000
+}

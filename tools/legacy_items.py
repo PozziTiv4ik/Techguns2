@@ -35,6 +35,11 @@ ORE_TAGS = {
     'ITEMRAWRUBBER': ('c:rubbers/raw', 'rawrubber'), 'ITEMBIOFUEL': ('c:fuels/bio', None),
     'GEMLAPIS': ('c:gems/lapis', None), 'OREURANIUM': ('c:ores/uranium', None),
     'SLIMEBALL': ('c:slime_balls', None),
+    'DUSTURANIUM': ('c:dusts/uranium', 'yellowcake'),
+    'BLOCKREDSTONE': ('c:storage_blocks/redstone', None),
+    'CIRCUITELITE': ('c:circuits/elite', 'circuitboardelite'),
+    'CIRCUITBASIC': ('c:circuits/basic', 'circuitboard'),
+    'WIREGOLD': ('c:wires/gold', 'goldwire'),
 }
 
 

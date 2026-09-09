@@ -1,0 +1,21 @@
+{
+  "type": "techguns:reaction_chamber",
+  "input": "techguns:quartzrod",
+  "focus": "techguns:rcheatray",
+  "fluid": "minecraft:lava",
+  "results": [
+    {
+      "id": "minecraft:blaze_rod",
+      "count": 1
+    }
+  ],
+  "cycles": 5,
+  "required_completion": 3,
+  "intensity": 7,
+  "margin": 2,
+  "liquid_level": 4,
+  "fluid_consumption": 1000,
+  "instability": 0.5,
+  "risk": "break_item",
+  "energy_per_check": 250000
+}

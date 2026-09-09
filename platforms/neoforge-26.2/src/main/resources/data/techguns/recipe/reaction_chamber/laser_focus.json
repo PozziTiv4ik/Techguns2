@@ -1,0 +1,21 @@
+{
+  "type": "techguns:reaction_chamber",
+  "input": "#c:gems/diamond",
+  "focus": "techguns:rcheatray",
+  "fluid": "redstone",
+  "results": [
+    {
+      "id": "techguns:laserfocus",
+      "count": 1
+    }
+  ],
+  "cycles": 10,
+  "required_completion": 5,
+  "intensity": 3,
+  "margin": 1,
+  "liquid_level": 4,
+  "fluid_consumption": 4000,
+  "instability": 0.5,
+  "risk": "break_item",
+  "energy_per_check": 100000
+}

@@ -40,6 +40,8 @@ public final class WeaponGameTests {
         SmeltingGameTests.register(FUNCTIONS);
         ChemLabGameTests.register(FUNCTIONS);
         FluidGameTests.register(FUNCTIONS);
+        ReactionChamberGameTests.register(FUNCTIONS);
+        RadiationGameTests.register(FUNCTIONS);
         FUNCTIONS.register("ammo_persists", () -> WeaponGameTests::ammoPersists);
         FUNCTIONS.register("reload_timing_and_consumption", () -> WeaponGameTests::reloadTiming);
         FUNCTIONS.register("reload_cancellation", () -> WeaponGameTests::reloadCancellation);
@@ -58,7 +60,7 @@ public final class WeaponGameTests {
         var environment = event.registerEnvironment(TGContent.id("weapons"));
         FUNCTIONS.getEntries().forEach(function -> event.registerTest(function.getId(),
                 new FunctionGameTestInstance(function.getKey(),
-                        new TestData<>(environment, TGContent.id("weapon_test"), function.getId().getPath().startsWith("blast_") ? 1200 :
+                        new TestData<>(environment, TGContent.id("weapon_test"), function.getId().getPath().startsWith("reaction_") ? 800 : function.getId().getPath().startsWith("blast_") ? 1200 :
                                 function.getId().getPath().startsWith("smelting_") || function.getId().getPath().startsWith("chem_") ? 800 :
                                 function.getId().getPath().startsWith("press_") || function.getId().getPath().startsWith("metal_") ? 300 : 100, 0, true))));
     }

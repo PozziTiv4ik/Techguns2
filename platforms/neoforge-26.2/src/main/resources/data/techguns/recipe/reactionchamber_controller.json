@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:reactionchamber_controller",
+    "count": 1
+  },
+  "pattern": [
+    " g ",
+    "crc",
+    " g "
+  ],
+  "key": {
+    "r": "techguns:reactionchamber_housing",
+    "c": "#c:circuits/elite",
+    "g": {
+      "neoforge:ingredient_type": "techguns:tag_fallback",
+      "preferred": "c:glass_blocks/hardened",
+      "fallback": "c:glass_blocks"
+    }
+  }
+}

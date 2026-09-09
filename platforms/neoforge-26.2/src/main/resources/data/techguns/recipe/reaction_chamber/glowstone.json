@@ -1,0 +1,21 @@
+{
+  "type": "techguns:reaction_chamber",
+  "input": "#c:storage_blocks/redstone",
+  "focus": "techguns:rcheatray",
+  "fluid": "minecraft:lava",
+  "results": [
+    {
+      "id": "minecraft:glowstone",
+      "count": 1
+    }
+  ],
+  "cycles": 5,
+  "required_completion": 3,
+  "intensity": 7,
+  "margin": 2,
+  "liquid_level": 4,
+  "fluid_consumption": 1000,
+  "instability": 0.5,
+  "risk": "explosion_medium",
+  "energy_per_check": 250000
+}

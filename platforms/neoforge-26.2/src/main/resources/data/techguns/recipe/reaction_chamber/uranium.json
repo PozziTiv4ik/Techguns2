@@ -1,0 +1,21 @@
+{
+  "type": "techguns:reaction_chamber",
+  "input": "#c:dusts/uranium",
+  "focus": "techguns:rcheatray",
+  "fluid": "minecraft:water",
+  "results": [
+    {
+      "id": "techguns:enricheduranium",
+      "count": 1
+    }
+  ],
+  "cycles": 5,
+  "required_completion": 4,
+  "intensity": 7,
+  "margin": 0,
+  "liquid_level": 3,
+  "fluid_consumption": 1000,
+  "instability": 0.0,
+  "risk": "break_item",
+  "energy_per_check": 250000
+}

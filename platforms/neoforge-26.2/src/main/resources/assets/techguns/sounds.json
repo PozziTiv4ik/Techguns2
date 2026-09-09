@@ -248,5 +248,37 @@
       "techguns:machines/chemlab_work_d"
     ],
     "subtitle": "subtitles.techguns.machines.chemlabwork"
+  },
+  "machines.rc_heatraywork": {
+    "sounds": [
+      "techguns:machines/rc_heatray_work"
+    ],
+    "subtitle": "subtitles.techguns.machines.rc_heatraywork"
+  },
+  "machines.rc_beep": {
+    "sounds": [
+      "techguns:machines/rc_beep"
+    ],
+    "subtitle": "subtitles.techguns.machines.rc_beep"
+  },
+  "machines.rc_warning": {
+    "sounds": [
+      "techguns:machines/rc_warning"
+    ],
+    "subtitle": "subtitles.techguns.machines.rc_warning"
+  },
+  "effects.geiger.low": {
+    "sounds": [
+      "techguns:effects/geiger1",
+      "techguns:effects/geiger4"
+    ],
+    "subtitle": "subtitles.techguns.effects.geiger.low"
+  },
+  "effects.geiger.high": {
+    "sounds": [
+      "techguns:effects/geiger2",
+      "techguns:effects/geiger3"
+    ],
+    "subtitle": "subtitles.techguns.effects.geiger.high"
   }
 }
