@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:fabricator_controller",
+    "count": 1
+  },
+  "pattern": [
+    " g ",
+    "cfc",
+    " g "
+  ],
+  "key": {
+    "c": "#c:circuits/elite",
+    "f": "techguns:fabricator_housing",
+    "g": {
+      "neoforge:ingredient_type": "techguns:tag_fallback",
+      "preferred": "c:glass_blocks/hardened",
+      "fallback": "c:glass_blocks"
+    }
+  }
+}

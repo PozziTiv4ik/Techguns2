@@ -25,6 +25,7 @@
     "26": "techguns:biotankempty",
     "27": "techguns:fueltank",
     "28": "techguns:fueltankempty",
+    "30": "techguns:energycellempty",
     "31": "techguns:nuclearpowercell",
     "32": "techguns:nuclearpowercelldepleted",
     "33": "techguns:ironreceiver",
@@ -56,9 +57,13 @@
     "64": "techguns:carbonfibers",
     "65": "techguns:circuitboard",
     "66": "techguns:circuitboardelite",
+    "67": "techguns:powerplating",
+    "68": "techguns:coil",
     "69": "techguns:cyberneticparts",
     "70": "techguns:electricengine",
     "71": "techguns:laserfocus",
+    "73": "techguns:rademitter",
+    "74": "techguns:sonicemitter",
     "75": "techguns:tgx",
     "76": "techguns:nethercharge",
     "77": "techguns:treatedleather",
@@ -100,6 +105,9 @@
     "techguns:basicmachine@1": "techguns:metal_press",
     "techguns:simplemachine@11": "techguns:blast_furnace",
     "techguns:basicmachine@2": "techguns:chem_lab",
+    "techguns:multiblockmachine@0": "techguns:fabricator_housing",
+    "techguns:multiblockmachine@1": "techguns:fabricator_glass",
+    "techguns:multiblockmachine@2": "techguns:fabricator_controller",
     "techguns:multiblockmachine@3": "techguns:reactionchamber_housing",
     "techguns:multiblockmachine@4": "techguns:reactionchamber_glass",
     "techguns:multiblockmachine@5": "techguns:reactionchamber_controller"
@@ -318,6 +326,10 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_66_circuitboardelite.json"
     },
     {
+      "id": "techguns:coil",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_68_coil.json"
+    },
+    {
       "id": "techguns:electricengine",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_70_electricengine.json"
     },
@@ -388,6 +400,18 @@
     {
       "id": "techguns:mac10_alt",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/mac10_alt.json"
+    },
+    {
+      "id": "techguns:fabricator_housing",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/multiblockmachine_0_fabricator_housing.json"
+    },
+    {
+      "id": "techguns:fabricator_glass",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/multiblockmachine_1_fabricator_glass.json"
+    },
+    {
+      "id": "techguns:fabricator_controller",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/multiblockmachine_2_fabricator_controller.json"
     },
     {
       "id": "techguns:reactionchamber_housing",
@@ -504,6 +528,9 @@
     "c:plates/iron": [
       "techguns:plateiron"
     ],
+    "c:plates/lead": [
+      "techguns:platelead"
+    ],
     "c:plates/obsidian_steel": [
       "techguns:plateobsidiansteel"
     ],
@@ -534,6 +561,7 @@
     "carbonfibers",
     "compressedairtank",
     "cyberneticparts",
+    "energycellempty",
     "enricheduranium",
     "fueltank",
     "gaussrifleslugs",
@@ -560,7 +588,9 @@
     "platesteel",
     "platetin",
     "platetitanium",
+    "powerplating",
     "radaway",
+    "rademitter",
     "radpills",
     "rawplastic",
     "rawrubber",
@@ -571,6 +601,7 @@
     "sniperrounds",
     "sniperrounds_explosive",
     "sniperrounds_incendiary",
+    "sonicemitter",
     "steamarmorplate",
     "tgx",
     "treatedleather",

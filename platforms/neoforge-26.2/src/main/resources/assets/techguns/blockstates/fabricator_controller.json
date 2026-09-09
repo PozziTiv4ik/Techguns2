@@ -1,0 +1,32 @@
+{
+  "variants": {
+    "facing=south,formed=false": {
+      "model": "techguns:block/fabricator_controller"
+    },
+    "facing=south,formed=true": {
+      "model": "techguns:block/fabricator",
+      "y": 0
+    },
+    "facing=west,formed=false": {
+      "model": "techguns:block/fabricator_controller"
+    },
+    "facing=west,formed=true": {
+      "model": "techguns:block/fabricator",
+      "y": 90
+    },
+    "facing=north,formed=false": {
+      "model": "techguns:block/fabricator_controller"
+    },
+    "facing=north,formed=true": {
+      "model": "techguns:block/fabricator",
+      "y": 180
+    },
+    "facing=east,formed=false": {
+      "model": "techguns:block/fabricator_controller"
+    },
+    "facing=east,formed=true": {
+      "model": "techguns:block/fabricator",
+      "y": 270
+    }
+  }
+}

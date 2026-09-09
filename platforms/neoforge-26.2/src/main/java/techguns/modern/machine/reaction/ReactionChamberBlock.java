@@ -29,7 +29,7 @@ import net.neoforged.neoforge.transfer.fluid.FluidUtil;
 public final class ReactionChamberBlock extends BaseEntityBlock {
     public enum Part { HOUSING, GLASS, CONTROLLER }
     public static final EnumProperty<Direction> FACING=BlockStateProperties.HORIZONTAL_FACING;
-    public static final BooleanProperty FORMED=BooleanProperty.create("formed");
+    public static final BooleanProperty FORMED=techguns.modern.machine.multiblock.MachineFormation.FORMED;
     public static final MapCodec<ReactionChamberBlock> CODEC=RecordCodecBuilder.mapCodec(i -> i.group(
             Codec.STRING.xmap(Part::valueOf,Part::name).fieldOf("part").forGetter(b -> b.part),propertiesCodec()).apply(i,ReactionChamberBlock::new));
     private final Part part;

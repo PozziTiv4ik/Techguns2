@@ -3,7 +3,6 @@
   "model": "techguns:models/block/reactionchamber.obj",
   "flip_v": true,
   "automatic_culling": false,
-  "render_type": "minecraft:cutout",
   "textures": {
     "particle": "techguns:block/reactionchamber_housing"
   }

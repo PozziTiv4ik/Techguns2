@@ -60,6 +60,9 @@ public final class TGContent {
                         output.accept(techguns.modern.machine.reaction.ReactionContent.HOUSING_ITEM.get());
                         output.accept(techguns.modern.machine.reaction.ReactionContent.GLASS_ITEM.get());
                         output.accept(techguns.modern.machine.reaction.ReactionContent.CONTROLLER_ITEM.get());
+                        output.accept(techguns.modern.machine.fabricator.FabricatorContent.HOUSING_ITEM.get());
+                        output.accept(techguns.modern.machine.fabricator.FabricatorContent.GLASS_ITEM.get());
+                        output.accept(techguns.modern.machine.fabricator.FabricatorContent.CONTROLLER_ITEM.get());
                         techguns.core.Ores.ALL.stream().sorted(java.util.Comparator.comparingInt(techguns.core.OreDefinition::legacyMetadata))
                                 .forEach(ore -> output.accept(techguns.modern.world.TGOreContent.ORES.get(ore.id()).get()));
                         techguns.modern.fluid.TGFluids.ALL.forEach(fluid -> output.accept(fluid.bucket.get()));

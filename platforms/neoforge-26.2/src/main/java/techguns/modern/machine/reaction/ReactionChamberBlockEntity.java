@@ -35,7 +35,7 @@ import techguns.core.ReactionCycle;
 import techguns.modern.TGContent;
 import techguns.modern.machine.TGMachineConfig;
 
-public final class ReactionChamberBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer {
+public final class ReactionChamberBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, techguns.modern.machine.multiblock.MultiblockController {
     public static final int CAPACITY=1000000, DATA_COUNT=15;
     private NonNullList<ItemStack> items=NonNullList.withSize(6,ItemStack.EMPTY);
     private final SimpleEnergyHandler energy=new SimpleEnergyHandler(CAPACITY) {
@@ -44,8 +44,10 @@ public final class ReactionChamberBlockEntity extends BaseContainerBlockEntity i
     private final ResourceHandler<ItemResource> automation=new WorldlyContainerWrapper(this,Direction.DOWN);
     private int intensity,liquidLevel,redstone;
     private final ReactionTank tank=new ReactionTank(() -> liquidLevel*1000,this::setChanged);
-    private UUID owner,formation;
-    private boolean ownerOnly,unforming;
+    private UUID owner;
+    private final techguns.modern.machine.multiblock.MachineFormation assembly=new techguns.modern.machine.multiblock.MachineFormation(this,
+            direction -> ReactionStructure.parts(worldPosition,direction).stream().map(p -> new techguns.modern.machine.multiblock.MachineFormation.Part(p.pos(),ReactionContent.block(p.kind()),p.connector())).toList());
+    private boolean ownerOnly;
     private ReactionChamberRecipe recipe;
     private ReactionCycle.State operation;
     private ItemStack reserved=ItemStack.EMPTY;
@@ -72,7 +74,9 @@ public final class ReactionChamberBlockEntity extends BaseContainerBlockEntity i
     public ResourceHandler<ItemResource> automation() { return automation; }
     public ReactionTank tank() { return tank; }
     public boolean working() { return operation!=null && recipe!=null; }
-    public boolean formed() { return formation!=null && getBlockState().getValue(ReactionChamberBlock.FORMED); }
+    public boolean formed() { return assembly.formed(); }
+    @Override public techguns.modern.machine.multiblock.MachineFormation formation() { return assembly; }
+    @Override public ResourceHandler<FluidResource> fluidAutomation() { return tank; }
     public Direction inward() { return getBlockState().getValue(ReactionChamberBlock.FACING); }
     public BlockPos center() { return worldPosition.relative(inward()); }
     public ReactionCycle.State operation() { return operation; }
@@ -104,53 +108,14 @@ public final class ReactionChamberBlockEntity extends BaseContainerBlockEntity i
     @Override public boolean canTakeItemThroughFace(int slot,ItemStack item,Direction side) { return slot>=2 && slot<6; }
 
     public boolean form(Direction outward,Player player) {
-        if (!(level instanceof ServerLevel) || !stillValid(player) || outward.getAxis().isVertical() || formed()) return false;
-        Direction direction=outward.getOpposite();
-        var parts=ReactionStructure.parts(worldPosition,direction);
-        for (var part:parts) {
-            if (!level.hasChunkAt(part.pos()) || !level.mayInteract(player,part.pos())) return false;
-            BlockState state=level.getBlockState(part.pos());
-            if (!state.is(ReactionContent.block(part.kind())) || state.getValue(ReactionChamberBlock.FORMED)) return false;
-            if (part.kind()!=ReactionChamberBlock.Part.CONTROLLER && !(level.getBlockEntity(part.pos()) instanceof ReactionPartBlockEntity)) return false;
-        }
-        formation=UUID.randomUUID();
-        if (owner==null) owner=player.getUUID();
-        for (var part:parts) {
-            if (level.getBlockEntity(part.pos()) instanceof ReactionPartBlockEntity slave) slave.link(worldPosition,formation,part.connector());
-            level.setBlock(part.pos(),level.getBlockState(part.pos()).setValue(ReactionChamberBlock.FORMED,true).setValue(ReactionChamberBlock.FACING,direction),3);
-            level.invalidateCapabilities(part.pos());
-        }
+        if (!(level instanceof ServerLevel) || !stillValid(player) || outward.getAxis().isVertical() || !assembly.form(outward.getOpposite(),player)) return false;
+        if(owner==null) owner=player.getUUID();
         setChanged(); return true;
     }
-    /** 0: incomplete chunk availability, -1: broken structure, 1: complete and owned by this formation. */
-    private int structureStatus() {
-        if (level==null || isRemoved() || !formed()) return -1;
-        var parts=ReactionStructure.parts(worldPosition,inward());
-        for(var part:parts) if(!level.hasChunkAt(part.pos())) return 0;
-        for(var part:parts) {
-            var state=level.getBlockState(part.pos());
-            if (!state.is(ReactionContent.block(part.kind())) || !state.getValue(ReactionChamberBlock.FORMED)
-                    || state.getValue(ReactionChamberBlock.FACING)!=inward()) return -1;
-            if (part.kind()!=ReactionChamberBlock.Part.CONTROLLER && (!(level.getBlockEntity(part.pos()) instanceof ReactionPartBlockEntity slave)
-                    || !slave.linkedTo(worldPosition,formation) || slave.connector()!=part.connector())) return -1;
-        }
-        return 1;
-    }
-    public boolean linked(UUID generation) { return generation!=null && generation.equals(formation) && !isRemoved() && formed(); }
-    public boolean portsAvailable(UUID generation) { return linked(generation) && structureStatus()==1; }
-    public void unform() {
-        if (unforming || formation==null || level==null) return;
-        unforming=true;
-        UUID old=formation; formation=null;
-        for(var part:ReactionStructure.parts(worldPosition,inward())) {
-            if (!level.hasChunkAt(part.pos())) continue;
-            if (level.getBlockEntity(part.pos()) instanceof ReactionPartBlockEntity slave && slave.linkedTo(worldPosition,old)) slave.unlink();
-        }
-        if (level.getBlockState(worldPosition).is(ReactionContent.CONTROLLER.get()))
-            level.setBlock(worldPosition,level.getBlockState(worldPosition).setValue(ReactionChamberBlock.FORMED,false),3);
-        level.invalidateCapabilities(worldPosition);
-        setChanged(); unforming=false;
-    }
+    private int structureStatus() { return assembly.status(); }
+    public boolean linked(UUID generation) { return assembly.linked(generation); }
+    public boolean portsAvailable(UUID generation) { return assembly.portsAvailable(generation); }
+    public void unform() { assembly.unform(); }
     private boolean enabled() { return redstone==0 || (redstone==1)==level.hasNeighborSignal(worldPosition); }
     private boolean pay(int amount) {
         if (TGMachineConfig.MACHINES_NEED_NO_POWER.get()) return true;
@@ -243,7 +208,7 @@ public final class ReactionChamberBlockEntity extends BaseContainerBlockEntity i
         super.saveAdditional(out); ContainerHelper.saveAllItems(out,items);
         out.putInt("energy",energy.getAmountAsInt()); out.putInt("intensity",intensity); out.putInt("liquid_level",liquidLevel); out.putInt("redstone",redstone);
         out.putBoolean("owner_only",ownerOnly);
-        if(owner!=null) out.putString("owner",owner.toString()); if(formation!=null) out.putString("formation",formation.toString());
+        if(owner!=null) out.putString("owner",owner.toString()); assembly.save(out);
         out.store("tank",FluidStack.OPTIONAL_CODEC,tank.stack());
         out.store("reserved",ItemStack.OPTIONAL_CODEC,reserved);
         if(working()) {
@@ -256,7 +221,7 @@ public final class ReactionChamberBlockEntity extends BaseContainerBlockEntity i
     @Override protected void loadAdditional(ValueInput in) {
         super.loadAdditional(in); items=NonNullList.withSize(6,ItemStack.EMPTY); ContainerHelper.loadAllItems(in,items);
         energy.set(Math.clamp(in.getIntOr("energy",0),0,CAPACITY)); intensity=Math.clamp(in.getIntOr("intensity",0),0,10); liquidLevel=Math.clamp(in.getIntOr("liquid_level",0),0,10);
-        redstone=Math.clamp(in.getIntOr("redstone",0),0,2); ownerOnly=in.getBooleanOr("owner_only",false); owner=uuid(in,"owner"); formation=uuid(in,"formation");
+        redstone=Math.clamp(in.getIntOr("redstone",0),0,2); ownerOnly=in.getBooleanOr("owner_only",false); owner=uuid(in,"owner"); assembly.load(in);
         var fluid=in.read("tank",FluidStack.OPTIONAL_CODEC).orElse(FluidStack.EMPTY); tank.set(0,FluidResource.of(fluid),Math.min(10000,fluid.getAmount()));
         reserved=in.read("reserved",ItemStack.OPTIONAL_CODEC).orElse(ItemStack.EMPTY);
         recipe=in.read("reaction",ReactionChamberRecipe.CODEC.codec()).orElse(null); operation=null;

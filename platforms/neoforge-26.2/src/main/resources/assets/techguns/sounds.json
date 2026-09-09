@@ -280,5 +280,13 @@
       "techguns:effects/geiger3"
     ],
     "subtitle": "subtitles.techguns.effects.geiger.high"
+  },
+  "machines.fabricatorwork": {
+    "sounds": [
+      "techguns:machines/fabricator_work_a",
+      "techguns:machines/fabricator_work_b",
+      "techguns:machines/fabricator_work_c"
+    ],
+    "subtitle": "subtitles.techguns.machines.fabricatorwork"
   }
 }

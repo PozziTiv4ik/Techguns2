@@ -19,6 +19,7 @@ public final class Techguns {
         techguns.modern.crafting.TGCrafting.register(modBus);
         techguns.modern.machine.TGMachineContent.register(modBus);
         techguns.modern.machine.reaction.ReactionContent.register(modBus);
+        techguns.modern.machine.fabricator.FabricatorContent.register(modBus);
         techguns.modern.radiation.RadiationSystem.register(modBus,container);
         techguns.modern.machine.TGMachineConfig.register(container);
         techguns.modern.world.TGOreContent.register(modBus);

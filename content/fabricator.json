@@ -1,0 +1,194 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/TGMachineRecipes.java",
+  "structure": {
+    "size": [
+      2,
+      2,
+      2
+    ],
+    "housing": 3,
+    "glass": 4,
+    "controller": 1
+  },
+  "energy_capacity": 100000,
+  "duration": 100,
+  "power_per_tick": 80,
+  "batch_power_exponent": 1,
+  "upgrade_limit": 7,
+  "slot_categories": {
+    "wire": [
+      "#c:wires/copper",
+      "#c:wires/gold",
+      "#c:circuits/basic",
+      "#c:circuits/elite"
+    ],
+    "powder": [
+      "#c:dusts/redstone",
+      "techguns:mechanicalpartscarbon"
+    ],
+    "plate": [
+      "#c:sheets/plastic",
+      "#c:plates/carbon",
+      "#c:plates/titanium",
+      "#c:plates/lead"
+    ]
+  },
+  "recipes": [
+    {
+      "id": "energycellempty",
+      "input": {
+        "ingredient": "#c:ingots/gold",
+        "count": 1
+      },
+      "wire": {
+        "ingredient": "#c:wires/copper",
+        "count": 1
+      },
+      "powder": {
+        "ingredient": "#c:dusts/redstone",
+        "count": 3
+      },
+      "plate": {
+        "ingredient": "#c:sheets/plastic",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:energycellempty",
+        "count": 1
+      },
+      "duration": 100,
+      "power_per_tick": 80
+    },
+    {
+      "id": "cyberneticparts",
+      "input": {
+        "ingredient": "minecraft:soul_sand",
+        "count": 1
+      },
+      "wire": {
+        "ingredient": "#c:wires/gold",
+        "count": 1
+      },
+      "powder": {
+        "ingredient": "#c:dusts/redstone",
+        "count": 1
+      },
+      "plate": {
+        "ingredient": "#c:sheets/plastic",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:cyberneticparts",
+        "count": 1
+      },
+      "duration": 100,
+      "power_per_tick": 80
+    },
+    {
+      "id": "powerplating",
+      "input": {
+        "ingredient": "#c:ingots/titanium",
+        "count": 2
+      },
+      "wire": {
+        "ingredient": "#c:circuits/basic",
+        "count": 4
+      },
+      "powder": {
+        "ingredient": "techguns:mechanicalpartscarbon",
+        "count": 1
+      },
+      "plate": {
+        "ingredient": "#c:plates/carbon",
+        "count": 4
+      },
+      "result": {
+        "id": "techguns:powerplating",
+        "count": 2
+      },
+      "duration": 100,
+      "power_per_tick": 80
+    },
+    {
+      "id": "sonicemitter",
+      "input": {
+        "ingredient": "techguns:coil",
+        "count": 1
+      },
+      "wire": {
+        "ingredient": "#c:circuits/elite",
+        "count": 2
+      },
+      "powder": {
+        "ingredient": "techguns:mechanicalpartscarbon",
+        "count": 1
+      },
+      "plate": {
+        "ingredient": "#c:plates/titanium",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:sonicemitter",
+        "count": 1
+      },
+      "duration": 100,
+      "power_per_tick": 80
+    },
+    {
+      "id": "rademitter",
+      "input": {
+        "ingredient": "techguns:enricheduranium",
+        "count": 1
+      },
+      "wire": {
+        "ingredient": "#c:circuits/elite",
+        "count": 2
+      },
+      "powder": {
+        "ingredient": "techguns:mechanicalpartscarbon",
+        "count": 2
+      },
+      "plate": {
+        "ingredient": "#c:plates/lead",
+        "count": 2
+      },
+      "result": {
+        "id": "techguns:rademitter",
+        "count": 1
+      },
+      "duration": 100,
+      "power_per_tick": 80
+    },
+    {
+      "id": "nuclearpowercelldepleted",
+      "input": {
+        "ingredient": "#c:ingots/steel",
+        "count": 1
+      },
+      "wire": {
+        "ingredient": "#c:circuits/basic",
+        "count": 1
+      },
+      "powder": {
+        "ingredient": "#c:dusts/redstone",
+        "count": 4
+      },
+      "plate": {
+        "ingredient": "#c:plates/lead",
+        "count": 2
+      },
+      "result": {
+        "id": "techguns:nuclearpowercelldepleted",
+        "count": 1
+      },
+      "duration": 100,
+      "power_per_tick": 80
+    }
+  ],
+  "pending": [
+    "moving tools and working item rendering",
+    "interactive visual acceptance",
+    "original mob sources of first cybernetic parts",
+    "advanced equipment using the manufactured components"
+  ]
+}

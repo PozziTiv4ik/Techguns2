@@ -1,0 +1,25 @@
+{
+  "type": "techguns:fabricator",
+  "input": {
+    "ingredient": "#c:ingots/titanium",
+    "count": 2
+  },
+  "wire": {
+    "ingredient": "#c:circuits/basic",
+    "count": 4
+  },
+  "powder": {
+    "ingredient": "techguns:mechanicalpartscarbon",
+    "count": 1
+  },
+  "plate": {
+    "ingredient": "#c:plates/carbon",
+    "count": 4
+  },
+  "result": {
+    "id": "techguns:powerplating",
+    "count": 2
+  },
+  "duration": 100,
+  "power_per_tick": 80
+}

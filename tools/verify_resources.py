@@ -84,6 +84,8 @@ def main():
     texture_count = 0
     for path in (ASSETS / 'models').rglob('*.json'):
         model = json.loads(path.read_text(encoding='utf-8'))
+        if 'render_type' in model and model.get('loader') in (None,'neoforge:obj'):
+            raise ValueError(f'Obsolete render_type hint in 26.2 model: {path}; transparency comes from the material and sprite alpha')
         if model.get('loader') == 'neoforge:obj': check_mesh(local_path(model['model'], '', ''))
         for texture in model.get('textures', {}).values():
             if texture.startswith('#'):
@@ -129,6 +131,8 @@ def main():
         if recipe['type']=='techguns:reaction_chamber':
             for key in ('input','focus'): check_ingredient(recipe[key])
             for result in recipe['results']: check_ingredient(result['id'])
+        if recipe['type']=='techguns:fabricator':
+            for key in ('input','wire','powder','plate'): check_ingredient(recipe[key]['ingredient'])
     for path in (ROOT / 'data/c/tags/item').rglob('*.json'):
         for value in json.loads(path.read_text(encoding='utf-8'))['values']: check_ingredient(value)
     print(f'Validated {len(names)} item definitions, {texture_count} texture references, {len(sounds)} sound events and {len(recipes)} recipes')

@@ -67,6 +67,7 @@ final class ReactionChamberGameTests {
         registry.register("reaction_missing_controller_disables_cached_ports",() -> ReactionChamberGameTests::missingController);
         registry.register("reaction_titanium_hopper_furnace_chain",() -> ReactionChamberGameTests::titaniumChain);
         registry.register("reaction_invalid_saved_fluid_recovers_input",() -> ReactionChamberGameTests::invalidSavedFluid);
+        registry.register("reaction_collision_shapes_follow_part_positions",() -> ReactionChamberGameTests::collisionShapes);
         if(Boolean.getBoolean("techguns.chemistryTest")) {
             registry.register("chem_optional_reaction_redstone",() -> h -> production(h,new Case("external_redstone","minecraft:diamond","rcheatray","minecraft:water",4,3,5,100000,"laserfocus",1,"",0,4000)));
             registry.register("chem_optional_reaction_ender",() -> h -> production(h,new Case("external_ender","minecraft:nether_star","rcheatray","minecraft:water",4,8,7,500000,"antigravcore",1,"",0,4000)));
@@ -139,6 +140,19 @@ final class ReactionChamberGameTests {
         for(var part:ReactionStructure.parts(h.absolutePos(POS),Direction.SOUTH)) if(h.getLevel().getBlockState(part.pos()).getBlock() instanceof ReactionChamberBlock)
             h.assertTrue(!h.getLevel().getBlockState(part.pos()).getValue(ReactionChamberBlock.FORMED),"Failed formation is atomic");
         h.succeed();
+    }
+    private static void collisionShapes(GameTestHelper h) {
+        var chamber=place(h); var level=h.getLevel();
+        BlockPos corner=chamber.center().offset(-1,1,-1), side=chamber.center().offset(0,1,-1), inside=chamber.center().above(), top=chamber.center().offset(-1,3,-1);
+        var cornerShape=level.getBlockState(corner).getCollisionShape(level,corner);
+        var sideShape=level.getBlockState(side).getCollisionShape(level,side);
+        var insideShape=level.getBlockState(inside).getCollisionShape(level,inside);
+        h.assertTrue(level.getBlockState(corner)==level.getBlockState(side),"Different parts share one block state");
+        h.assertTrue(Math.abs(cornerShape.min(Direction.Axis.X)-.45)<.000001 && Math.abs(cornerShape.min(Direction.Axis.Z)-.45)<.000001,"Corner uses original two-axis inset");
+        h.assertTrue(sideShape.min(Direction.Axis.X)==0 && Math.abs(sideShape.min(Direction.Axis.Z)-.45)<.000001,"Same-state side uses its own one-axis inset");
+        h.assertTrue(insideShape.min(Direction.Axis.X)==0 && insideShape.min(Direction.Axis.Z)==0,"Interior retains original full collision");
+        h.assertTrue(Math.abs(level.getBlockState(top).getCollisionShape(level,top).max(Direction.Axis.Y)-.65)<.000001,"Top housing retains original 0.65 height");
+        chamber.unform(); h.assertTrue(level.getBlockState(corner).getCollisionShape(level,corner).min(Direction.Axis.X)==0,"Unformed glass restores full cube collision"); h.succeed();
     }
     private static void connectors(GameTestHelper h) {
         var chamber=place(h); var player=WeaponGameTests.player(h); settings(chamber,player,5,3);

@@ -80,7 +80,7 @@ public abstract class ProcessingMachineBlockEntity extends BaseContainerBlockEnt
         tanks = new MachineFluidStorage(inputTankCapacity,outputTankCapacity,this::setChanged);
     }
     protected record Job(ItemStack output, List<Integer> inputCounts, int duration, int powerPerTick, FluidStack fluidInput, FluidStack fluidOutput) {
-        protected Job(ItemStack output,List<Integer> inputCounts,int duration,int powerPerTick) {
+        public Job(ItemStack output,List<Integer> inputCounts,int duration,int powerPerTick) {
             this(output,inputCounts,duration,powerPerTick,FluidStack.EMPTY,FluidStack.EMPTY);
         }
     }
@@ -89,6 +89,7 @@ public abstract class ProcessingMachineBlockEntity extends BaseContainerBlockEnt
     protected abstract int modeCount();
     protected abstract void playWorkSound(Level level, BlockPos pos, int progress, int duration);
     protected void prepareInputs(ServerLevel level) {}
+    protected boolean operational(ServerLevel level) { return true; }
     protected int batchPower(int base, int batch) { return base * batch; }
     protected boolean adjustMode(int button) {
         if (button != 0 && button != 1) return false;
@@ -108,6 +109,7 @@ public abstract class ProcessingMachineBlockEntity extends BaseContainerBlockEnt
     @Override public boolean canOpen(Player player) { return super.canOpen(player) && (!ownerOnly || owner == null || owner.equals(player.getUUID())); }
     @Override public boolean stillValid(Player player) { return super.stillValid(player) && canOpen(player); }
     public void setOwner(Player player) { owner = player.getUUID(); ownerOnly = false; setChanged(); }
+    protected void claimIfUnowned(Player player) { if(owner==null) setOwner(player); }
 
     public boolean button(Player player, int button) {
         if (!stillValid(player) || !(level instanceof ServerLevel)) return false;
@@ -182,7 +184,7 @@ public abstract class ProcessingMachineBlockEntity extends BaseContainerBlockEnt
         setChanged();
     }
     public static void tick(Level level, BlockPos pos, BlockState state, ProcessingMachineBlockEntity machine) {
-        if (!(level instanceof ServerLevel server) || !machine.redstoneEnabled()) return;
+        if (!(level instanceof ServerLevel server) || !machine.operational(server) || !machine.redstoneEnabled()) return;
         if (!machine.working()) {
             if (machine.needsRecipeCheck || level.getGameTime() % 20 == 0) machine.startOperation(server);
             return;

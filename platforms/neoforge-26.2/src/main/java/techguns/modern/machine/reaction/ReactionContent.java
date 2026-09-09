@@ -27,7 +27,7 @@ public final class ReactionContent {
     public static final DeferredItem<BlockItem> GLASS_ITEM=TGContent.ITEMS.registerSimpleBlockItem(GLASS);
     public static final DeferredItem<BlockItem> CONTROLLER_ITEM=TGContent.ITEMS.registerSimpleBlockItem(CONTROLLER);
     private static DeferredBlock<ReactionChamberBlock> part(String id,ReactionChamberBlock.Part kind) {
-        return BLOCKS.registerBlock(id,p -> new ReactionChamberBlock(kind,p),p -> p.mapColor(MapColor.METAL).strength(4).sound(SoundType.METAL).noOcclusion().requiresCorrectToolForDrops().pushReaction(PushReaction.BLOCK));
+        return BLOCKS.registerBlock(id,p -> new ReactionChamberBlock(kind,p),p -> p.mapColor(MapColor.METAL).strength(4).sound(SoundType.METAL).noOcclusion().dynamicShape().requiresCorrectToolForDrops().pushReaction(PushReaction.BLOCK));
     }
     public static Block block(ReactionChamberBlock.Part kind) { return switch(kind) { case HOUSING -> HOUSING.get(); case GLASS -> GLASS.get(); case CONTROLLER -> CONTROLLER.get(); }; }
     private static final DeferredRegister<BlockEntityType<?>> ENTITIES=DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE,Techguns.MOD_ID);

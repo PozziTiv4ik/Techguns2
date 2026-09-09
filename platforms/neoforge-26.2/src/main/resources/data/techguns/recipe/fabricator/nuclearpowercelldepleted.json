@@ -1,0 +1,25 @@
+{
+  "type": "techguns:fabricator",
+  "input": {
+    "ingredient": "#c:ingots/steel",
+    "count": 1
+  },
+  "wire": {
+    "ingredient": "#c:circuits/basic",
+    "count": 1
+  },
+  "powder": {
+    "ingredient": "#c:dusts/redstone",
+    "count": 4
+  },
+  "plate": {
+    "ingredient": "#c:plates/lead",
+    "count": 2
+  },
+  "result": {
+    "id": "techguns:nuclearpowercelldepleted",
+    "count": 1
+  },
+  "duration": 100,
+  "power_per_tick": 80
+}

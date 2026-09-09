@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#c:wires/copper",
+    "#c:wires/gold",
+    "#c:circuits/basic",
+    "#c:circuits/elite"
+  ]
+}

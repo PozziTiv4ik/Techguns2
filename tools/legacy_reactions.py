@@ -60,7 +60,7 @@ def generate_reaction_content():
         data(f'data/techguns/loot_table/blocks/{part}.json', {'type':'minecraft:block','pools':[{'rolls':1,'entries':[{'type':'minecraft:item','name':'techguns:'+part}], 'conditions':[{'condition':'minecraft:survives_explosion'}]}]})
     data('assets/techguns/models/block/reactionchamber_empty.json', {'parent':'minecraft:block/block','textures':{'particle':'techguns:block/reactionchamber_housing'}})
     data('assets/techguns/models/block/reactionchamber.json', {'loader':'neoforge:obj','model':'techguns:models/block/reactionchamber.obj',
-         'flip_v':True,'automatic_culling':False,'render_type':'minecraft:cutout','textures':{'particle':'techguns:block/reactionchamber_housing'}})
+         'flip_v':True,'automatic_culling':False,'textures':{'particle':'techguns:block/reactionchamber_housing'}})
     output('assets/techguns/models/block/reactionchamber.obj', '\n'.join(line.rstrip() for line in (assets/'models/block/reactionchamber.obj').read_text().splitlines())+'\n')
     output('assets/techguns/models/block/reactionchamber.mtl', (assets/'models/block/reactionchamber.mtl').read_text().replace('techguns:blocks/','techguns:block/'))
     for texture in ('reactionchamber','reactionchamberglass'):

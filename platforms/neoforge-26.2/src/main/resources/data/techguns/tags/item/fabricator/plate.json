@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#c:sheets/plastic",
+    "#c:plates/carbon",
+    "#c:plates/titanium",
+    "#c:plates/lead"
+  ]
+}

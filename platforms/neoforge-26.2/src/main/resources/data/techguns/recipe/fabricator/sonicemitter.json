@@ -1,0 +1,25 @@
+{
+  "type": "techguns:fabricator",
+  "input": {
+    "ingredient": "techguns:coil",
+    "count": 1
+  },
+  "wire": {
+    "ingredient": "#c:circuits/elite",
+    "count": 2
+  },
+  "powder": {
+    "ingredient": "techguns:mechanicalpartscarbon",
+    "count": 1
+  },
+  "plate": {
+    "ingredient": "#c:plates/titanium",
+    "count": 1
+  },
+  "result": {
+    "id": "techguns:sonicemitter",
+    "count": 1
+  },
+  "duration": 100,
+  "power_per_tick": 80
+}

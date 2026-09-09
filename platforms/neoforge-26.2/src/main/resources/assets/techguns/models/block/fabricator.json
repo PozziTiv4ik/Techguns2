@@ -1,0 +1,12 @@
+{
+  "loader": "neoforge:obj",
+  "model": "techguns:models/block/fabricator.obj",
+  "automatic_culling": false,
+  "flip_v": false,
+  "emissive_ambient": false,
+  "textures": {
+    "gun": "techguns:block/fabricator",
+    "particle": "techguns:block/fabricator"
+  },
+  "parent": "minecraft:block/block"
+}

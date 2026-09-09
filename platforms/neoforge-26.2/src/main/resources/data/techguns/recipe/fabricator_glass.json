@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:fabricator_glass",
+    "count": 4
+  },
+  "pattern": [
+    "fgf",
+    "g g",
+    "fgf"
+  ],
+  "key": {
+    "f": "techguns:fabricator_housing",
+    "g": {
+      "neoforge:ingredient_type": "techguns:tag_fallback",
+      "preferred": "c:glass_blocks/hardened",
+      "fallback": "c:glass_blocks"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "techguns:fabricator",
+  "input": {
+    "ingredient": "minecraft:soul_sand",
+    "count": 1
+  },
+  "wire": {
+    "ingredient": "#c:wires/gold",
+    "count": 1
+  },
+  "powder": {
+    "ingredient": "#c:dusts/redstone",
+    "count": 1
+  },
+  "plate": {
+    "ingredient": "#c:sheets/plastic",
+    "count": 1
+  },
+  "result": {
+    "id": "techguns:cyberneticparts",
+    "count": 1
+  },
+  "duration": 100,
+  "power_per_tick": 80
+}
