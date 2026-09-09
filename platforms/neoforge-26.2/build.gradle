@@ -29,6 +29,18 @@ neoForge {
             programArgument '--tests'
             programArgument 'techguns:ore_natural_chunks'
         }
+        chemistryTestServer {
+            type = 'gameTestServer'
+            systemProperty 'neoforge.enabledGameTestNamespaces', 'techguns'
+            systemProperty 'techguns.gametest', 'true'
+            systemProperty 'techguns.chemistryTest', 'true'
+            programArgument '--packs'
+            programArgument rootProject.file('tests/chemistry-packs').absolutePath
+            programArgument '--universe'
+            programArgument 'chemistry-tests'
+            programArgument '--tests'
+            programArgument 'techguns:chem_optional_*'
+        }
     }
     mods {
         techguns {

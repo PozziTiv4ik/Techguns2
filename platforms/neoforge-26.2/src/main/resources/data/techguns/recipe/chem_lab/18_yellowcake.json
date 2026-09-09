@@ -1,0 +1,19 @@
+{
+  "type": "techguns:chem_lab",
+  "allow_swap": false,
+  "duration": 100,
+  "power_per_tick": 20,
+  "activation": "always",
+  "first": {
+    "ingredient": "#c:ores/uranium",
+    "count": 1
+  },
+  "result": {
+    "id": "techguns:yellowcake",
+    "count": 3
+  },
+  "fluid_input": {
+    "ingredient": "techguns:creeper_acid",
+    "amount": 250
+  }
+}

@@ -10,6 +10,7 @@ public final class Techguns {
     public static final String MOD_ID = "techguns";
 
     public Techguns(IEventBus modBus, ModContainer container) {
+        if (Boolean.getBoolean("techguns.chemistryTest")) net.neoforged.neoforge.common.NeoForgeMod.enableMilkFluid();
         TGContent.COMPONENTS.register(modBus);
         TGContent.ITEMS.register(modBus);
         TGContent.SOUNDS.register(modBus);
@@ -20,7 +21,10 @@ public final class Techguns {
         techguns.modern.machine.TGMachineConfig.register(container);
         techguns.modern.world.TGOreContent.register(modBus);
         techguns.modern.world.TGOreConfig.register(container);
+        techguns.modern.fluid.TGFluids.register(modBus);
+        techguns.modern.machine.ChemicalRules.register(container);
         modBus.addListener(techguns.modern.network.GunNetwork::register);
+        modBus.addListener(techguns.modern.network.MachineTanksPayload::register);
         NeoForge.EVENT_BUS.register(ReloadSessions.class);
         NeoForge.EVENT_BUS.register(AimSessions.class);
         NeoForge.EVENT_BUS.addListener(ArmorDamage::onIncoming);

@@ -7,6 +7,8 @@ from legacy_models import strip_comments, numeric, convert_model, convert_mesh, 
 from legacy_crafting import plan_crafting
 from legacy_machines import generate_machine_content, machine_translations
 from legacy_ores import generate_ore_content, ore_translations
+from legacy_fluids import generate_fluid_content, fluid_translations
+from legacy_chemistry import generate_chemical_content, chemical_translations
 from legacy_items import arguments
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -119,6 +121,8 @@ def generate():
     render_source = strip_comments((LEGACY / 'java/techguns/client/ClientProxy.java').read_text())
     custom_items = {identifier: (model, empty == 'true', texture) for identifier, model, empty, texture in re.findall(
         r'addRenderForType\("([^"]+)",\s*new \w+\(new (\w+)\((true|false)\),\s*new ResourceLocation\(Techguns.MODID,\s*"([^"]+)"\)', render_source)}
+    custom_items.update({identifier:(model,None,texture) for identifier,model,texture in re.findall(
+        r'addRenderForType\("([^"]+)",\s*new \w+\(new (\w+)\(\),\s*new ResourceLocation\(Techguns.MODID,\s*"([^"]+)"\)',render_source)})
     languages = {}
     for lang in ('en_us', 'ru_ru'):
         lines = resolve_asset(f'lang/{lang}.lang').read_text(encoding='utf-8-sig').splitlines()
@@ -154,8 +158,10 @@ def generate():
     for identifier in sorted(ammo_items | materials):
         if identifier in custom_items:
             class_name, empty, texture = custom_items[identifier]
-            source = (LEGACY / f'java/techguns/client/models/items/{class_name}.java').read_text()
-            model, obj, material = convert_mesh(source, class_name, identifier, f'techguns:item/{identifier}', '-z', constructor_values={'empty': empty})
+            candidates=list((LEGACY/'java/techguns/client/models').rglob(class_name+'.java'))
+            if len(candidates)!=1: raise ValueError('Ambiguous custom item model: '+class_name)
+            source = candidates[0].read_text()
+            model, obj, material = convert_mesh(source, class_name, identifier, f'techguns:item/{identifier}', '+x' if class_name=='ModelRocket' else '-z', constructor_values={} if empty is None else {'empty': empty})
             model['display']['gui'] = {'rotation': [15, -35, 0], 'scale': [1.4,1.4,1.4]}
             resource(f'assets/techguns/models/item/{identifier}.json', model)
             output(RESOURCES / f'assets/techguns/models/item/{identifier}.obj', obj)
@@ -173,7 +179,7 @@ def generate():
         for lang in languages:
             key = f'item.techguns.{identifier}.name'
             translated[lang][f'item.techguns.{identifier}'] = languages[lang].get(key, languages['en_us'].get(key, identifier))
-    for name in ('machines.ammopresswork1', 'machines.ammopresswork2', 'machines.metalpresswork'):
+    for name in ('machines.ammopresswork1', 'machines.ammopresswork2', 'machines.metalpresswork', 'machines.chemlabwork'):
         selected_sounds[name] = {'sounds': sounds_data[name]['sounds']}
     for sound, value in selected_sounds.items():
         subtitle = f'subtitles.techguns.{sound}'
@@ -183,6 +189,7 @@ def generate():
             translated[lang][subtitle] = ('Weapon reloads' if reloading else 'Gunshot') if lang == 'en_us' else ('Перезарядка оружия' if reloading else 'Выстрел')
             if sound.startswith('machines.'):
                 translated[lang][subtitle] = ('Metal Press works' if lang == 'en_us' else 'Работает металлический пресс') if sound == 'machines.metalpresswork' else ('Ammo Press works' if lang == 'en_us' else 'Работает пресс для патронов')
+                if sound=='machines.chemlabwork': translated[lang][subtitle]='Chemical Laboratory works' if lang=='en_us' else 'Работает химическая лаборатория'
         for entry in value['sounds']:
             name = entry if isinstance(entry, str) else entry['name']
             path = f'sounds/{name.split(":")[-1]}.ogg'
@@ -196,6 +203,8 @@ def generate():
         values['death.attack.techguns.bullet.player'] = values['death.attack.techguns.bullet']
         values['death.attack.techguns.bullet.item'] = '%1$s was shot by %2$s using %3$s' if lang == 'en_us' else '%1$s застрелен игроком %2$s с помощью %3$s'
         values.update(ore_translations(lang))
+        values.update(fluid_translations(lang))
+        values.update(chemical_translations(lang))
         resource(f'assets/techguns/lang/{lang}.json', values)
     resource('assets/techguns/sounds.json', selected_sounds)
     for identifier, recipe in crafting['recipes'].items():
@@ -233,7 +242,7 @@ public final class Weapons {
 '''
     output('core/src/main/java/techguns/core/Weapons.java', source)
     files.update(generate_machine_content())
-    for path, value in generate_ore_content().items():
+    for path, value in (generate_ore_content() | generate_fluid_content() | generate_chemical_content()).items():
         if path in files:
             # Several content domains contribute to the same mining/tool and common item tags.
             if '/tags/' not in path: raise ValueError(f'Colliding generated resource: {path}')

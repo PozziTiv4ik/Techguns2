@@ -1,0 +1,23 @@
+{
+  "type": "techguns:chem_lab",
+  "allow_swap": false,
+  "duration": 100,
+  "power_per_tick": 5,
+  "activation": "always",
+  "first": {
+    "ingredient": "minecraft:gravel",
+    "count": 1
+  },
+  "second": {
+    "ingredient": "minecraft:dirt",
+    "count": 1
+  },
+  "result": {
+    "id": "minecraft:clay",
+    "count": 2
+  },
+  "fluid_input": {
+    "ingredient": "minecraft:water",
+    "amount": 250
+  }
+}

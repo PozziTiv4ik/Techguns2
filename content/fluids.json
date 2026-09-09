@@ -1,0 +1,29 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/TGFluids.java",
+  "fluids": [
+    {
+      "id": "techguns:creeper_acid",
+      "block": "techguns:block_creeper_acid",
+      "bucket": "techguns:creeper_acid_bucket",
+      "density": 100,
+      "viscosity": 1000,
+      "tick_rate": 5,
+      "infinite_sources": false,
+      "still_texture": "techguns:block/acid_still",
+      "flow_texture": "techguns:block/acid_flow"
+    },
+    {
+      "id": "techguns:milk",
+      "block": "techguns:block_milk",
+      "bucket": "techguns:milk_bucket",
+      "density": 1000,
+      "viscosity": 1000,
+      "tick_rate": 5,
+      "infinite_sources": false,
+      "still_texture": "techguns:block/milk_still",
+      "flow_texture": "techguns:block/milk_flow"
+    }
+  ],
+  "milk_collision_fix": "Milk no longer uses the original BlockFluidAcid poison collision handler",
+  "pending": "Other fluid machines, world-spawn pools, complete client visual acceptance and integrations"
+}

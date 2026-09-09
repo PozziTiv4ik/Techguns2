@@ -9,6 +9,7 @@ import re
 from legacy_items import ORE_TAGS, shared_items, ammo_slot_items
 from legacy_machines import metal_press_data, blast_furnace_data
 from legacy_ores import smelting_data
+from legacy_chemistry import chemical_recipes, STANDALONE_ITEMS
 
 ROOT = Path(__file__).resolve().parents[1]
 LEGACY = ROOT / 'legacy/1.12.2/src/main'
@@ -23,7 +24,7 @@ def convert_recipe(legacy, shared, weapons):
     def item(value):
         identifier = value['item']
         if identifier == 'techguns:basicmachine':
-            return 'techguns:' + {0: 'ammo_press', 1: 'metal_press'}[value.get('data', 0)]
+            return 'techguns:' + {0: 'ammo_press', 1: 'metal_press', 2: 'chem_lab'}[value.get('data', 0)]
         if identifier == 'techguns:simplemachine' and value.get('data') == 11: return 'techguns:blast_furnace'
         if identifier == 'minecraft:stonebrick' and value.get('data', 0) == 0: return 'minecraft:stone_bricks'
         if identifier == 'techguns:itemshared': return 'techguns:' + shared[value['data']]
@@ -73,6 +74,7 @@ def plan_crafting(weapon_list):
     selected['basicmachine_0_ammo_press'] = source_recipes['basicmachine_0_ammo_press']
     for name in ('basicmachine_1_metal_press', 'basicmachine_1_metal_press_alt'): selected[name] = source_recipes[name]
     selected['simplemachine_11_blast_furnace'] = source_recipes['simplemachine_11_blast_furnace']
+    selected['basicmachine_2_chem_lab']=source_recipes['basicmachine_2_chem_lab']
     # These two original recipes overlap after GenericGun.onCreated resets damage to zero.
     # Keep that migration question explicit until upgrade state has its own verified rule.
     pending = {name: selected.pop(name) for name in ('m4_infiltrator', 'm4_infiltrator_alt') if name in selected}
@@ -82,6 +84,13 @@ def plan_crafting(weapon_list):
             if identifier.startswith('techguns:') and not identifier.startswith('techguns:ore_'):
                 wanted.add(by_name[identifier.split(':')[1]])
     used_tags = set()
+    for recipe in chemical_recipes():
+        for identifier in [recipe[k]['ingredient'] for k in ('first','second','bottle') if k in recipe] + ([recipe['result']['id']] if 'result' in recipe else []):
+            name=identifier.removeprefix('techguns:')
+            if identifier.startswith('techguns:') and name not in STANDALONE_ITEMS: wanted.add(by_name[name])
+            elif identifier.startswith('#'):
+                key=next(key for key,(tag,_) in ORE_TAGS.items() if tag==identifier[1:]); used_tags.add(key)
+                if ORE_TAGS[key][1]: wanted.add(by_name[ORE_TAGS[key][1]])
     for recipe in metal_press_data() + blast_furnace_data():
         for identifier in (recipe['first'], recipe['second'], recipe['result']['id']):
             if identifier.startswith('techguns:'): wanted.add(by_name[identifier.split(':')[1]])
@@ -111,12 +120,13 @@ def plan_crafting(weapon_list):
         if name == 'basicmachine_0_ammo_press': identifier = 'ammo_press'
         if name.startswith('basicmachine_1_metal_press'): identifier = name.removeprefix('basicmachine_1_')
         if name == 'simplemachine_11_blast_furnace': identifier = 'blast_furnace'
+        if name == 'basicmachine_2_chem_lab': identifier = 'chem_lab'
         if name.startswith('itemshared_'): identifier = re.sub(r'^itemshared_\d+_', '', name)
         if identifier in recipes: raise ValueError(f'Colliding recipe ID: {identifier}')
         recipes[identifier] = convert_recipe(recipe, shared, weapons)
         sources.append({'id': 'techguns:' + identifier,
                         'source': 'legacy/1.12.2/src/main/resources/assets/techguns/recipes/' + name + '.json'})
-    names = {shared[meta] for meta in wanted}
+    names = {shared[meta] for meta in wanted} | STANDALONE_ITEMS
     extra_ammo = names & ammo_slot_items() - ammo
     materials = sorted(names - ammo - extra_ammo)
     tags = {ORE_TAGS[key][0]: ['techguns:' + ORE_TAGS[key][1]] for key in sorted(used_tags) if ORE_TAGS[key][1]}
@@ -124,7 +134,7 @@ def plan_crafting(weapon_list):
     workbench_outputs = {r['result']['id'].removeprefix('techguns:') for r in recipes.values()}
     catalog = {'shared_metadata': {str(meta): 'techguns:' + shared[meta] for meta in sorted(wanted)},
                'block_metadata': {'techguns:basicmachine@0': 'techguns:ammo_press', 'techguns:basicmachine@1': 'techguns:metal_press',
-                                  'techguns:simplemachine@11': 'techguns:blast_furnace'},
+                                  'techguns:simplemachine@11': 'techguns:blast_furnace', 'techguns:basicmachine@2':'techguns:chem_lab'},
                'recipes': sources, 'tags': tags,
                'requires_non_workbench_production': sorted(names - workbench_outputs),
                'metal_packing_requires_feedstock': sorted(names & {'ingotcopper', 'ingotlead', 'ingotsteel'}),

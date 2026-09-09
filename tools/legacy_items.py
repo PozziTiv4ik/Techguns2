@@ -31,6 +31,10 @@ ORE_TAGS = {
     'PLATELEAD': ('c:plates/lead', 'platelead'), 'PLATECARBON': ('c:plates/carbon', 'platecarbon'),
     'PLATETITANIUM': ('c:plates/titanium', 'platetitanium'),
     'FIBERCARBON': ('c:fibers/carbon', 'carbonfibers'), 'GEMQUARTZ': ('c:gems/quartz', None),
+    'DUSTCOAL': ('c:dusts/coal', None), 'GUNPOWDER': ('c:gunpowders', None),
+    'ITEMRAWRUBBER': ('c:rubbers/raw', 'rawrubber'), 'ITEMBIOFUEL': ('c:fuels/bio', None),
+    'GEMLAPIS': ('c:gems/lapis', None), 'OREURANIUM': ('c:ores/uranium', None),
+    'SLIMEBALL': ('c:slime_balls', None),
 }
 
 

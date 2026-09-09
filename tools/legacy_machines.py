@@ -80,7 +80,8 @@ def generate_machine_content():
         {'id': '#c:ingots/tin', 'required': False}, {'id': '#c:ingots/bronze', 'required': False}]})
     data('data/techguns/tags/item/ammo_press/powder.json', {'values': ['#c:gunpowders']})
     machines = [('ammo_press', 'ModelAmmoPress', 'ammopress', ('MetalPiece','bullet1','bullet2','bullet3')),
-                ('metal_press', 'ModelMetalPress', 'metalpress', ('MetalPiece',))]
+                ('metal_press', 'ModelMetalPress', 'metalpress', ('MetalPiece',)),
+                ('chem_lab','ModelChemLab','chemlab',('L1','L2','L3','L4','L5','L6','L7','L8'))]
     for identifier, class_name, texture_name, skip in machines:
         source = (LEGACY / f'java/techguns/client/models/machines/{class_name}.java').read_text()
         # RenderMachine: translate(.5,1.5,.5), then Rz(180)*Ry(180); winding is preserved.

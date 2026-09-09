@@ -92,7 +92,7 @@ def generate_ore_content():
          'replacement_tag': 'minecraft:stone_ore_replaceables'})
     data('content/smelting.json', {'source': 'legacy/1.12.2/src/main/java/techguns/TGMachineRecipes.java', 'recipes': smelting_data(),
          'pending_ore_processing': {'techguns:ore_titanium': 'Reaction Chamber RC_TITANIUM with acid and heat-ray focus',
-                                    'techguns:ore_uranium': 'Chemical Laboratory with acid produces yellowcake'}})
+                                    }, 'ore_processing': {'techguns:ore_uranium': 'Chemical Laboratory with 250 mB acid produces 3 yellowcake'}})
     definitions = ',\n'.join('            new OreDefinition('+', '.join([
         json.dumps(o['id']), json.dumps(o['config']), str(o['enabled_by_default']).lower(), str(o['legacy_metadata']),
         str(o['hardness'])+'f', str(o['mining_level']), str(o['light']), str(o['vein_size_min']), str(o['vein_size_max']),

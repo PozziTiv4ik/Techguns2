@@ -1,0 +1,19 @@
+{
+  "type": "techguns:chem_lab",
+  "allow_swap": false,
+  "duration": 100,
+  "power_per_tick": 20,
+  "activation": "always",
+  "first": {
+    "ingredient": "#minecraft:logs",
+    "count": 1
+  },
+  "result": {
+    "id": "techguns:rawrubber",
+    "count": 1
+  },
+  "fluid_input": {
+    "ingredient": "minecraft:water",
+    "amount": 1000
+  }
+}

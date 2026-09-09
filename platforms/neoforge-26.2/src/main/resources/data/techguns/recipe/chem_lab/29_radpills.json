@@ -1,0 +1,27 @@
+{
+  "type": "techguns:chem_lab",
+  "allow_swap": true,
+  "duration": 100,
+  "power_per_tick": 20,
+  "activation": "always",
+  "first": {
+    "ingredient": "minecraft:sugar",
+    "count": 4
+  },
+  "second": {
+    "ingredient": "minecraft:glistering_melon_slice",
+    "count": 1
+  },
+  "bottle": {
+    "ingredient": "minecraft:glass_bottle",
+    "count": 1
+  },
+  "result": {
+    "id": "techguns:radpills",
+    "count": 4
+  },
+  "fluid_input": {
+    "ingredient": "#c:milk",
+    "amount": 1000
+  }
+}

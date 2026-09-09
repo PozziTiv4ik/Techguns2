@@ -1,0 +1,23 @@
+{
+  "type": "techguns:chem_lab",
+  "allow_swap": true,
+  "duration": 100,
+  "power_per_tick": 40,
+  "activation": "always",
+  "first": {
+    "ingredient": "techguns:enricheduranium",
+    "count": 1
+  },
+  "bottle": {
+    "ingredient": "techguns:nuclearpowercelldepleted",
+    "count": 1
+  },
+  "result": {
+    "id": "techguns:nuclearpowercell",
+    "count": 1
+  },
+  "fluid_input": {
+    "ingredient": "minecraft:water",
+    "amount": 1000
+  }
+}

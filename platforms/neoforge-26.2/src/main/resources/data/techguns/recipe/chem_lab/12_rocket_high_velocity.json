@@ -1,0 +1,19 @@
+{
+  "type": "techguns:chem_lab",
+  "allow_swap": false,
+  "duration": 100,
+  "power_per_tick": 5,
+  "activation": "lava_fuel_fallback",
+  "first": {
+    "ingredient": "techguns:rocket",
+    "count": 1
+  },
+  "result": {
+    "id": "techguns:rocket_high_velocity",
+    "count": 1
+  },
+  "fluid_input": {
+    "ingredient": "minecraft:lava",
+    "amount": 250
+  }
+}

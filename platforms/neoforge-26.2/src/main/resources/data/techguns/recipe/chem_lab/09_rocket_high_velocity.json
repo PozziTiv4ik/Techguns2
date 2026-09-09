@@ -1,0 +1,19 @@
+{
+  "type": "techguns:chem_lab",
+  "allow_swap": false,
+  "duration": 100,
+  "power_per_tick": 5,
+  "activation": "fuels_present",
+  "first": {
+    "ingredient": "techguns:rocket",
+    "count": 1
+  },
+  "result": {
+    "id": "techguns:rocket_high_velocity",
+    "count": 1
+  },
+  "fluid_input": {
+    "group": "fuels",
+    "amount": 125
+  }
+}

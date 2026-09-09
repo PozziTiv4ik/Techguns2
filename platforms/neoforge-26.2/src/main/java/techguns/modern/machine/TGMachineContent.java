@@ -31,6 +31,10 @@ public final class TGMachineContent {
     public static final DeferredBlock<BlastFurnaceBlock> BLAST_FURNACE = BLOCKS.registerBlock("blast_furnace", BlastFurnaceBlock::new,
             properties -> properties.mapColor(MapColor.METAL).strength(4).sound(SoundType.METAL).requiresCorrectToolForDrops().pushReaction(PushReaction.BLOCK));
     public static final DeferredItem<BlockItem> BLAST_FURNACE_ITEM = TGContent.ITEMS.registerSimpleBlockItem(BLAST_FURNACE);
+    public static final DeferredBlock<ChemLabBlock> CHEM_LAB = BLOCKS.registerBlock("chem_lab",ChemLabBlock::new,
+            p -> p.mapColor(MapColor.METAL).strength(4).sound(SoundType.METAL).noOcclusion().requiresCorrectToolForDrops().pushReaction(PushReaction.BLOCK));
+    public static final DeferredItem<BlockItem> CHEM_LAB_ITEM = TGContent.ITEMS.registerSimpleBlockItem(CHEM_LAB);
+    public static final DeferredHolder<SoundEvent,SoundEvent> CHEM_WORK = TGContent.SOUNDS.register("machines.chemlabwork", () -> SoundEvent.createVariableRangeEvent(TGContent.id("machines.chemlabwork")));
     public static final DeferredHolder<SoundEvent, SoundEvent> PRESS_WORK1 = TGContent.SOUNDS.register("machines.ammopresswork1", () -> SoundEvent.createVariableRangeEvent(TGContent.id("machines.ammopresswork1")));
     public static final DeferredHolder<SoundEvent, SoundEvent> PRESS_WORK2 = TGContent.SOUNDS.register("machines.ammopresswork2", () -> SoundEvent.createVariableRangeEvent(TGContent.id("machines.ammopresswork2")));
     public static final DeferredHolder<SoundEvent, SoundEvent> METAL_WORK = TGContent.SOUNDS.register("machines.metalpresswork", () -> SoundEvent.createVariableRangeEvent(TGContent.id("machines.metalpresswork")));
@@ -65,6 +69,14 @@ public final class TGMachineContent {
     });
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<BlastFurnaceRecipe>> BLAST_FURNACE_SERIALIZER = SERIALIZERS.register("blast_furnace",
             () -> new RecipeSerializer<>(BlastFurnaceRecipe.CODEC, BlastFurnaceRecipe.STREAM_CODEC));
+    public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<ChemLabBlockEntity>> CHEM_LAB_ENTITY=BLOCK_ENTITIES.register("chem_lab",
+            () -> new BlockEntityType<>(ChemLabBlockEntity::new,CHEM_LAB.get()));
+    public static final DeferredHolder<MenuType<?>,MenuType<ChemLabMenu>> CHEM_LAB_MENU=MENUS.register("chem_lab", () -> new MenuType<>(ChemLabMenu::new,net.minecraft.world.flag.FeatureFlags.DEFAULT_FLAGS));
+    public static final DeferredHolder<RecipeType<?>,RecipeType<ChemLabRecipe>> CHEM_LAB_RECIPE=RECIPE_TYPES.register("chem_lab", () -> new RecipeType<>() {
+        @Override public String toString() { return "techguns:chem_lab"; }
+    });
+    public static final DeferredHolder<RecipeSerializer<?>,RecipeSerializer<ChemLabRecipe>> CHEM_LAB_SERIALIZER=SERIALIZERS.register("chem_lab",
+            () -> new RecipeSerializer<>(ChemLabRecipe.CODEC,ChemLabRecipe.STREAM_CODEC));
 
     public static void register(IEventBus bus) {
         BLOCKS.register(bus); BLOCK_ENTITIES.register(bus); MENUS.register(bus); RECIPE_TYPES.register(bus); SERIALIZERS.register(bus);
@@ -77,6 +89,9 @@ public final class TGMachineContent {
         event.registerBlockEntity(Capabilities.Item.BLOCK, METAL_PRESS_ENTITY.get(), (machine, side) -> machine.automation());
         event.registerBlockEntity(Capabilities.Energy.BLOCK, BLAST_FURNACE_ENTITY.get(), (machine, side) -> machine.energy());
         event.registerBlockEntity(Capabilities.Item.BLOCK, BLAST_FURNACE_ENTITY.get(), (machine, side) -> machine.automation());
+        event.registerBlockEntity(Capabilities.Energy.BLOCK,CHEM_LAB_ENTITY.get(),(machine,side) -> machine.energy());
+        event.registerBlockEntity(Capabilities.Item.BLOCK,CHEM_LAB_ENTITY.get(),(machine,side) -> machine.automation());
+        event.registerBlockEntity(Capabilities.Fluid.BLOCK,CHEM_LAB_ENTITY.get(),(machine,side) -> machine.fluids());
     }
     private TGMachineContent() {}
 }

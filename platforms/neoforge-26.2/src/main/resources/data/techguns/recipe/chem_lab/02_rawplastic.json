@@ -1,0 +1,19 @@
+{
+  "type": "techguns:chem_lab",
+  "allow_swap": false,
+  "duration": 100,
+  "power_per_tick": 25,
+  "activation": "oils_present",
+  "first": {
+    "ingredient": "#c:rubbers/raw",
+    "count": 1
+  },
+  "result": {
+    "id": "techguns:rawplastic",
+    "count": 1
+  },
+  "fluid_input": {
+    "group": "oils",
+    "amount": 500
+  }
+}

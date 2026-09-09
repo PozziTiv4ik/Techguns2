@@ -1,0 +1,7 @@
+{
+  "pack": {
+    "description": "Techguns conditional recipe fixtures; vanilla resources stand in for externally supplied tags and fluids",
+    "min_format": [107, 1],
+    "max_format": [107, 1]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "techguns:chem_lab",
+  "allow_swap": false,
+  "duration": 100,
+  "power_per_tick": 1,
+  "activation": "fuels_present",
+  "bottle": {
+    "ingredient": "techguns:fueltankempty",
+    "count": 1
+  },
+  "result": {
+    "id": "techguns:fueltank",
+    "count": 1
+  },
+  "fluid_input": {
+    "group": "fuels",
+    "amount": 250
+  }
+}

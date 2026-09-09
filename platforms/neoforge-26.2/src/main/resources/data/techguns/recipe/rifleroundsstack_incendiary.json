@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "result": {
+    "id": "techguns:rifleroundsstack_incendiary",
+    "count": 1
+  },
+  "ingredients": [
+    "techguns:riflerounds_incendiary",
+    "techguns:riflerounds_incendiary",
+    "techguns:riflerounds_incendiary",
+    "techguns:riflerounds_incendiary"
+  ]
+}

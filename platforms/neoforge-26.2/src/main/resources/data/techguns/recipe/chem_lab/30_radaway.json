@@ -1,0 +1,27 @@
+{
+  "type": "techguns:chem_lab",
+  "allow_swap": true,
+  "duration": 100,
+  "power_per_tick": 25,
+  "activation": "always",
+  "first": {
+    "ingredient": "minecraft:nether_wart",
+    "count": 1
+  },
+  "second": {
+    "ingredient": "minecraft:glistering_melon_slice",
+    "count": 1
+  },
+  "bottle": {
+    "ingredient": "techguns:infusionbag",
+    "count": 1
+  },
+  "result": {
+    "id": "techguns:radaway",
+    "count": 1
+  },
+  "fluid_input": {
+    "ingredient": "techguns:creeper_acid",
+    "amount": 250
+  }
+}

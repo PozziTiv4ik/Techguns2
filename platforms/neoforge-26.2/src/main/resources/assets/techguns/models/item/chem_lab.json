@@ -1,0 +1,12 @@
+{
+  "loader": "neoforge:obj",
+  "model": "techguns:models/block/chem_lab.obj",
+  "automatic_culling": false,
+  "flip_v": false,
+  "emissive_ambient": false,
+  "textures": {
+    "gun": "techguns:item/chem_lab",
+    "particle": "techguns:item/chem_lab"
+  },
+  "parent": "minecraft:block/block"
+}

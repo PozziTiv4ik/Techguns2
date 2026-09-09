@@ -1,0 +1,23 @@
+{
+  "type": "techguns:chem_lab",
+  "allow_swap": true,
+  "duration": 100,
+  "power_per_tick": 20,
+  "activation": "lava_fuel_fallback",
+  "first": {
+    "ingredient": "#c:gunpowders",
+    "count": 1
+  },
+  "second": {
+    "ingredient": "#c:gems/lapis",
+    "count": 1
+  },
+  "result": {
+    "id": "techguns:tgx",
+    "count": 1
+  },
+  "fluid_input": {
+    "ingredient": "minecraft:lava",
+    "amount": 500
+  }
+}

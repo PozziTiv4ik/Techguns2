@@ -8,6 +8,11 @@ import techguns.core.ArmorMath;
 /** Replace the armor reduction stage for Techguns bullets, leaving vanilla's other damage stages intact. */
 public final class ArmorDamage {
     public static void onIncoming(LivingIncomingDamageEvent event) {
+        if (event.getSource().is(techguns.modern.fluid.TGLiquidBlock.ACID_DAMAGE)) {
+            // Default armor contributes zero against legacy poison. Specialized TG protection is a separate port stage.
+            event.addReductionModifier(DamageContainer.Reduction.ARMOR, (container,previousReduction) -> 0);
+            return;
+        }
         if (!(event.getSource().getDirectEntity() instanceof Bullet bullet) || !event.getSource().is(Bullet.DAMAGE_TYPE)) return;
         event.addReductionModifier(DamageContainer.Reduction.ARMOR, (container, previousReduction) -> {
             float damage = container.getNewDamage();

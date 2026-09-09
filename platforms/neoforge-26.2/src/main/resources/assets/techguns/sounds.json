@@ -239,5 +239,14 @@
       "techguns:machines/metalpress_small_work_c"
     ],
     "subtitle": "subtitles.techguns.machines.metalpresswork"
+  },
+  "machines.chemlabwork": {
+    "sounds": [
+      "techguns:machines/chemlab_work_a",
+      "techguns:machines/chemlab_work_b",
+      "techguns:machines/chemlab_work_c",
+      "techguns:machines/chemlab_work_d"
+    ],
+    "subtitle": "subtitles.techguns.machines.chemlabwork"
   }
 }

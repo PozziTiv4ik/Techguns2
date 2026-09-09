@@ -1,0 +1,19 @@
+{
+  "type": "techguns:chem_lab",
+  "allow_swap": false,
+  "duration": 100,
+  "power_per_tick": 15,
+  "activation": "always",
+  "first": {
+    "ingredient": "minecraft:rotten_flesh",
+    "count": 1
+  },
+  "result": {
+    "id": "minecraft:leather",
+    "count": 1
+  },
+  "fluid_input": {
+    "ingredient": "minecraft:water",
+    "amount": 500
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "techguns:milk",
+    "techguns:flowing_milk",
+    {
+      "id": "minecraft:milk",
+      "required": false
+    },
+    {
+      "id": "minecraft:flowing_milk",
+      "required": false
+    }
+  ]
+}

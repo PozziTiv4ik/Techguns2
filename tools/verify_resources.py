@@ -28,6 +28,9 @@ def check_item_model(definition):
     elif definition['type'] == 'minecraft:select' and definition['property'] == 'minecraft:display_context':
         check_item_model(definition['fallback'])
         for case in definition['cases']: check_item_model(case['model'])
+    elif definition['type'] == 'neoforge:fluid_container':
+        if not definition.get('fluid') or not definition.get('textures'): raise ValueError('Incomplete fluid container model')
+        for texture in definition['textures'].values(): require(local_path(texture,'textures','.png'))
     else:
         raise ValueError(f'Add validation for item model type {definition["type"]}')
 
@@ -57,6 +60,11 @@ def check_mesh(path):
 def main():
     for path in ROOT.rglob('*.json'):
         json.loads(path.read_text(encoding='utf-8'))
+    fluid_catalog=json.loads((Path(__file__).resolve().parents[1]/'content/fluids.json').read_text(encoding='utf-8'))
+    for fluid in fluid_catalog['fluids']:
+        for key in ('still_texture','flow_texture'):
+            texture=local_path(fluid[key],'textures','.png'); require(texture); require(Path(str(texture)+'.mcmeta'))
+            json.loads(Path(str(texture)+'.mcmeta').read_text(encoding='utf-8'))
     names = []
     for path in (ASSETS / 'blockstates').glob('*.json'):
         for variant in json.loads(path.read_text(encoding='utf-8'))['variants'].values():
@@ -100,13 +108,16 @@ def main():
     recipes = list((ROOT / 'data/techguns/recipe').rglob('*.json'))
     for path in recipes:
         recipe = json.loads(path.read_text(encoding='utf-8'))
-        check_ingredient(recipe['result']['id'])
+        if 'result' in recipe: check_ingredient(recipe['result']['id'])
         for value in list(recipe.get('key', {}).values()) + recipe.get('ingredients', []): check_ingredient(value)
         if 'ingredient' in recipe: check_ingredient(recipe['ingredient'])
         if recipe['type'] == 'techguns:ammo_press':
             for key in ('metal1', 'metal2', 'powder'): check_ingredient(recipe[key])
         if recipe['type'] in ('techguns:metal_press', 'techguns:blast_furnace'):
             for key in ('first', 'second'): check_ingredient(recipe[key])
+        if recipe['type']=='techguns:chem_lab':
+            for key in ('first','second','bottle'):
+                if key in recipe: check_ingredient(recipe[key]['ingredient'])
     for path in (ROOT / 'data/c/tags/item').rglob('*.json'):
         for value in json.loads(path.read_text(encoding='utf-8'))['values']: check_ingredient(value)
     print(f'Validated {len(names)} item definitions, {texture_count} texture references, {len(sounds)} sound events and {len(recipes)} recipes')

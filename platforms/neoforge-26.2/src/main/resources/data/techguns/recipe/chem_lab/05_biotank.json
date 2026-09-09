@@ -1,0 +1,23 @@
+{
+  "type": "techguns:chem_lab",
+  "allow_swap": true,
+  "duration": 100,
+  "power_per_tick": 1,
+  "activation": "biofuel_present",
+  "first": {
+    "ingredient": "#c:fuels/bio",
+    "count": 4
+  },
+  "second": {
+    "ingredient": "techguns:biotankempty",
+    "count": 1
+  },
+  "result": {
+    "id": "techguns:biotank",
+    "count": 1
+  },
+  "fluid_input": {
+    "ingredient": "minecraft:water",
+    "amount": 500
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:biotankempty",
+    "count": 1
+  },
+  "pattern": [
+    "sss",
+    "sgs",
+    "sgs"
+  ],
+  "key": {
+    "s": "#c:nuggets/steel",
+    "g": "#c:glass_blocks"
+  }
+}

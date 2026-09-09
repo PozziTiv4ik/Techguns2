@@ -1,0 +1,23 @@
+{
+  "type": "techguns:chem_lab",
+  "allow_swap": false,
+  "duration": 100,
+  "power_per_tick": 25,
+  "activation": "always",
+  "first": {
+    "ingredient": "techguns:pistolrounds",
+    "count": 2
+  },
+  "second": {
+    "ingredient": "minecraft:blaze_powder",
+    "count": 1
+  },
+  "result": {
+    "id": "techguns:pistolrounds_incendiary",
+    "count": 2
+  },
+  "fluid_input": {
+    "ingredient": "minecraft:lava",
+    "amount": 250
+  }
+}

@@ -1,0 +1,729 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/TGMachineRecipes.java",
+  "energy_capacity": 20000,
+  "tank_capacities": [
+    8000,
+    16000
+  ],
+  "duration": 100,
+  "batch_power_exponent": 1,
+  "recipes": [
+    {
+      "id": "00_gunpowder",
+      "allow_swap": true,
+      "duration": 100,
+      "power_per_tick": 5,
+      "activation": "coal_dust_present",
+      "first": {
+        "ingredient": "#c:dusts/redstone",
+        "count": 1
+      },
+      "second": {
+        "ingredient": "#c:dusts/coal",
+        "count": 1
+      },
+      "result": {
+        "id": "minecraft:gunpowder",
+        "count": 1
+      },
+      "fluid_input": {
+        "ingredient": "minecraft:water",
+        "amount": 250
+      }
+    },
+    {
+      "id": "01_gunpowder",
+      "allow_swap": true,
+      "duration": 100,
+      "power_per_tick": 5,
+      "activation": "coal_dust_absent",
+      "first": {
+        "ingredient": "#c:dusts/redstone",
+        "count": 1
+      },
+      "second": {
+        "ingredient": "minecraft:coal",
+        "count": 1
+      },
+      "result": {
+        "id": "minecraft:gunpowder",
+        "count": 1
+      },
+      "fluid_input": {
+        "ingredient": "minecraft:water",
+        "amount": 250
+      }
+    },
+    {
+      "id": "02_rawplastic",
+      "allow_swap": false,
+      "duration": 100,
+      "power_per_tick": 25,
+      "activation": "oils_present",
+      "first": {
+        "ingredient": "#c:rubbers/raw",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:rawplastic",
+        "count": 1
+      },
+      "fluid_input": {
+        "group": "oils",
+        "amount": 500
+      }
+    },
+    {
+      "id": "03_rawplastic",
+      "allow_swap": true,
+      "duration": 100,
+      "power_per_tick": 25,
+      "activation": "oils_absent",
+      "first": {
+        "ingredient": "#c:rubbers/raw",
+        "count": 1
+      },
+      "second": {
+        "ingredient": "minecraft:coal",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:rawplastic",
+        "count": 1
+      },
+      "fluid_input": {
+        "ingredient": "minecraft:water",
+        "amount": 1000
+      }
+    },
+    {
+      "id": "04_creeper_acid",
+      "allow_swap": true,
+      "duration": 100,
+      "power_per_tick": 20,
+      "activation": "always",
+      "first": {
+        "ingredient": "techguns:biomass",
+        "count": 1
+      },
+      "second": {
+        "ingredient": "minecraft:gunpowder",
+        "count": 1
+      },
+      "fluid_input": {
+        "ingredient": "minecraft:water",
+        "amount": 1000
+      },
+      "fluid_output": {
+        "id": "techguns:creeper_acid",
+        "amount": 1000
+      }
+    },
+    {
+      "id": "05_biotank",
+      "allow_swap": true,
+      "duration": 100,
+      "power_per_tick": 1,
+      "activation": "biofuel_present",
+      "first": {
+        "ingredient": "#c:fuels/bio",
+        "count": 4
+      },
+      "second": {
+        "ingredient": "techguns:biotankempty",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:biotank",
+        "count": 1
+      },
+      "fluid_input": {
+        "ingredient": "minecraft:water",
+        "amount": 500
+      }
+    },
+    {
+      "id": "06_creeper_acid",
+      "allow_swap": true,
+      "duration": 100,
+      "power_per_tick": 20,
+      "activation": "biofuel_present",
+      "first": {
+        "ingredient": "#c:fuels/bio",
+        "count": 4
+      },
+      "second": {
+        "ingredient": "minecraft:gunpowder",
+        "count": 1
+      },
+      "fluid_input": {
+        "ingredient": "minecraft:water",
+        "amount": 1000
+      },
+      "fluid_output": {
+        "id": "techguns:creeper_acid",
+        "amount": 1000
+      }
+    },
+    {
+      "id": "07_tgx",
+      "allow_swap": true,
+      "duration": 100,
+      "power_per_tick": 20,
+      "activation": "fuels_present",
+      "first": {
+        "ingredient": "#c:gunpowders",
+        "count": 1
+      },
+      "second": {
+        "ingredient": "#c:gems/lapis",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:tgx",
+        "count": 1
+      },
+      "fluid_input": {
+        "group": "fuels",
+        "amount": 250
+      }
+    },
+    {
+      "id": "08_fueltank",
+      "allow_swap": false,
+      "duration": 100,
+      "power_per_tick": 1,
+      "activation": "fuels_present",
+      "bottle": {
+        "ingredient": "techguns:fueltankempty",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:fueltank",
+        "count": 1
+      },
+      "fluid_input": {
+        "group": "fuels",
+        "amount": 250
+      }
+    },
+    {
+      "id": "09_rocket_high_velocity",
+      "allow_swap": false,
+      "duration": 100,
+      "power_per_tick": 5,
+      "activation": "fuels_present",
+      "first": {
+        "ingredient": "techguns:rocket",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:rocket_high_velocity",
+        "count": 1
+      },
+      "fluid_input": {
+        "group": "fuels",
+        "amount": 125
+      }
+    },
+    {
+      "id": "10_tgx",
+      "allow_swap": true,
+      "duration": 100,
+      "power_per_tick": 20,
+      "activation": "lava_fuel_fallback",
+      "first": {
+        "ingredient": "#c:gunpowders",
+        "count": 1
+      },
+      "second": {
+        "ingredient": "#c:gems/lapis",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:tgx",
+        "count": 1
+      },
+      "fluid_input": {
+        "ingredient": "minecraft:lava",
+        "amount": 500
+      }
+    },
+    {
+      "id": "11_fueltank",
+      "allow_swap": false,
+      "duration": 100,
+      "power_per_tick": 1,
+      "activation": "lava_fuel_fallback",
+      "first": {
+        "ingredient": "techguns:fueltankempty",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:fueltank",
+        "count": 1
+      },
+      "fluid_input": {
+        "ingredient": "minecraft:lava",
+        "amount": 500
+      }
+    },
+    {
+      "id": "12_rocket_high_velocity",
+      "allow_swap": false,
+      "duration": 100,
+      "power_per_tick": 5,
+      "activation": "lava_fuel_fallback",
+      "first": {
+        "ingredient": "techguns:rocket",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:rocket_high_velocity",
+        "count": 1
+      },
+      "fluid_input": {
+        "ingredient": "minecraft:lava",
+        "amount": 250
+      }
+    },
+    {
+      "id": "13_carbonfibers",
+      "allow_swap": true,
+      "duration": 100,
+      "power_per_tick": 25,
+      "activation": "always",
+      "first": {
+        "ingredient": "#c:gems/diamond",
+        "count": 1
+      },
+      "second": {
+        "ingredient": "minecraft:blaze_powder",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:carbonfibers",
+        "count": 2
+      },
+      "fluid_input": {
+        "ingredient": "minecraft:lava",
+        "amount": 1000
+      }
+    },
+    {
+      "id": "14_rawrubber",
+      "allow_swap": false,
+      "duration": 100,
+      "power_per_tick": 20,
+      "activation": "always",
+      "first": {
+        "ingredient": "#minecraft:logs",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:rawrubber",
+        "count": 1
+      },
+      "fluid_input": {
+        "ingredient": "minecraft:water",
+        "amount": 1000
+      }
+    },
+    {
+      "id": "15_biotank",
+      "allow_swap": false,
+      "duration": 100,
+      "power_per_tick": 1,
+      "activation": "always",
+      "first": {
+        "ingredient": "techguns:biomass",
+        "count": 1
+      },
+      "bottle": {
+        "ingredient": "techguns:biotankempty",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:biotank",
+        "count": 1
+      },
+      "fluid_input": {
+        "ingredient": "minecraft:water",
+        "amount": 500
+      }
+    },
+    {
+      "id": "16_compressedairtank",
+      "allow_swap": true,
+      "duration": 100,
+      "power_per_tick": 5,
+      "activation": "always",
+      "first": {
+        "ingredient": "minecraft:coal",
+        "count": 1
+      },
+      "bottle": {
+        "ingredient": "techguns:compressedairtankempty",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:compressedairtank",
+        "count": 1
+      },
+      "fluid_input": {
+        "ingredient": "minecraft:water",
+        "amount": 250
+      }
+    },
+    {
+      "id": "17_nethercharge",
+      "allow_swap": true,
+      "duration": 100,
+      "power_per_tick": 20,
+      "activation": "always",
+      "first": {
+        "ingredient": "minecraft:netherrack",
+        "count": 1
+      },
+      "second": {
+        "ingredient": "minecraft:soul_sand",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:nethercharge",
+        "count": 4
+      },
+      "fluid_input": {
+        "ingredient": "minecraft:lava",
+        "amount": 1000
+      }
+    },
+    {
+      "id": "18_yellowcake",
+      "allow_swap": false,
+      "duration": 100,
+      "power_per_tick": 20,
+      "activation": "always",
+      "first": {
+        "ingredient": "#c:ores/uranium",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:yellowcake",
+        "count": 3
+      },
+      "fluid_input": {
+        "ingredient": "techguns:creeper_acid",
+        "amount": 250
+      }
+    },
+    {
+      "id": "19_nuclearpowercell",
+      "allow_swap": true,
+      "duration": 100,
+      "power_per_tick": 40,
+      "activation": "always",
+      "first": {
+        "ingredient": "techguns:enricheduranium",
+        "count": 1
+      },
+      "bottle": {
+        "ingredient": "techguns:nuclearpowercelldepleted",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:nuclearpowercell",
+        "count": 1
+      },
+      "fluid_input": {
+        "ingredient": "minecraft:water",
+        "amount": 1000
+      }
+    },
+    {
+      "id": "20_slime_ball",
+      "allow_swap": true,
+      "duration": 100,
+      "power_per_tick": 25,
+      "activation": "always",
+      "first": {
+        "ingredient": "minecraft:green_dye",
+        "count": 1
+      },
+      "second": {
+        "ingredient": "#c:rubbers/raw",
+        "count": 1
+      },
+      "result": {
+        "id": "minecraft:slime_ball",
+        "count": 1
+      },
+      "fluid_input": {
+        "ingredient": "#c:milk",
+        "amount": 500
+      }
+    },
+    {
+      "id": "21_treatedleather",
+      "allow_swap": true,
+      "duration": 100,
+      "power_per_tick": 20,
+      "activation": "always",
+      "first": {
+        "ingredient": "minecraft:leather",
+        "count": 2
+      },
+      "second": {
+        "ingredient": "#c:slime_balls",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:treatedleather",
+        "count": 2
+      },
+      "fluid_input": {
+        "ingredient": "techguns:creeper_acid",
+        "amount": 500
+      }
+    },
+    {
+      "id": "22_leather",
+      "allow_swap": false,
+      "duration": 100,
+      "power_per_tick": 15,
+      "activation": "always",
+      "first": {
+        "ingredient": "minecraft:rotten_flesh",
+        "count": 1
+      },
+      "result": {
+        "id": "minecraft:leather",
+        "count": 1
+      },
+      "fluid_input": {
+        "ingredient": "minecraft:water",
+        "amount": 500
+      }
+    },
+    {
+      "id": "23_light_gray_concrete",
+      "allow_swap": false,
+      "duration": 100,
+      "power_per_tick": 5,
+      "activation": "always",
+      "first": {
+        "ingredient": "minecraft:gravel",
+        "count": 1
+      },
+      "second": {
+        "ingredient": "minecraft:sand",
+        "count": 1
+      },
+      "result": {
+        "id": "minecraft:light_gray_concrete",
+        "count": 2
+      },
+      "fluid_input": {
+        "ingredient": "minecraft:water",
+        "amount": 250
+      }
+    },
+    {
+      "id": "24_clay",
+      "allow_swap": false,
+      "duration": 100,
+      "power_per_tick": 5,
+      "activation": "always",
+      "first": {
+        "ingredient": "minecraft:gravel",
+        "count": 1
+      },
+      "second": {
+        "ingredient": "minecraft:dirt",
+        "count": 1
+      },
+      "result": {
+        "id": "minecraft:clay",
+        "count": 2
+      },
+      "fluid_input": {
+        "ingredient": "minecraft:water",
+        "amount": 250
+      }
+    },
+    {
+      "id": "25_riflerounds_incendiary",
+      "allow_swap": false,
+      "duration": 100,
+      "power_per_tick": 25,
+      "activation": "always",
+      "first": {
+        "ingredient": "techguns:riflerounds",
+        "count": 1
+      },
+      "second": {
+        "ingredient": "minecraft:blaze_powder",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:riflerounds_incendiary",
+        "count": 1
+      },
+      "fluid_input": {
+        "ingredient": "minecraft:lava",
+        "amount": 250
+      }
+    },
+    {
+      "id": "26_pistolrounds_incendiary",
+      "allow_swap": false,
+      "duration": 100,
+      "power_per_tick": 25,
+      "activation": "always",
+      "first": {
+        "ingredient": "techguns:pistolrounds",
+        "count": 2
+      },
+      "second": {
+        "ingredient": "minecraft:blaze_powder",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:pistolrounds_incendiary",
+        "count": 2
+      },
+      "fluid_input": {
+        "ingredient": "minecraft:lava",
+        "amount": 250
+      }
+    },
+    {
+      "id": "27_sniperrounds_incendiary",
+      "allow_swap": false,
+      "duration": 100,
+      "power_per_tick": 25,
+      "activation": "always",
+      "first": {
+        "ingredient": "techguns:sniperrounds",
+        "count": 1
+      },
+      "second": {
+        "ingredient": "minecraft:blaze_powder",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:sniperrounds_incendiary",
+        "count": 1
+      },
+      "fluid_input": {
+        "ingredient": "minecraft:lava",
+        "amount": 250
+      }
+    },
+    {
+      "id": "28_shotgunrounds_incendiary",
+      "allow_swap": false,
+      "duration": 100,
+      "power_per_tick": 25,
+      "activation": "always",
+      "first": {
+        "ingredient": "techguns:shotgunrounds",
+        "count": 8
+      },
+      "second": {
+        "ingredient": "minecraft:blaze_powder",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:shotgunrounds_incendiary",
+        "count": 8
+      },
+      "fluid_input": {
+        "ingredient": "minecraft:lava",
+        "amount": 250
+      }
+    },
+    {
+      "id": "29_radpills",
+      "allow_swap": true,
+      "duration": 100,
+      "power_per_tick": 20,
+      "activation": "always",
+      "first": {
+        "ingredient": "minecraft:sugar",
+        "count": 4
+      },
+      "second": {
+        "ingredient": "minecraft:glistering_melon_slice",
+        "count": 1
+      },
+      "bottle": {
+        "ingredient": "minecraft:glass_bottle",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:radpills",
+        "count": 4
+      },
+      "fluid_input": {
+        "ingredient": "#c:milk",
+        "amount": 1000
+      }
+    },
+    {
+      "id": "30_radaway",
+      "allow_swap": true,
+      "duration": 100,
+      "power_per_tick": 25,
+      "activation": "always",
+      "first": {
+        "ingredient": "minecraft:nether_wart",
+        "count": 1
+      },
+      "second": {
+        "ingredient": "minecraft:glistering_melon_slice",
+        "count": 1
+      },
+      "bottle": {
+        "ingredient": "techguns:infusionbag",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:radaway",
+        "count": 1
+      },
+      "fluid_input": {
+        "ingredient": "techguns:creeper_acid",
+        "amount": 250
+      }
+    }
+  ],
+  "fluid_groups": {
+    "Oil": [
+      "oil",
+      "tree_oil",
+      "crude_oil",
+      "fluidoil",
+      "seed_oil"
+    ],
+    "Fuel": [
+      "fuel",
+      "refined_fuel",
+      "biofuel",
+      "biodiesel",
+      "diesel",
+      "gasoline",
+      "fluiddiesel",
+      "fluidnitrodiesel",
+      "fliudnitrofuel",
+      "refined_biofuel",
+      "fire_water",
+      "rocket_fuel"
+    ]
+  },
+  "pending": [
+    "model animation",
+    "radiation medicine effects",
+    "special ammunition weapon behavior"
+  ]
+}

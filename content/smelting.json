@@ -193,7 +193,9 @@
     }
   ],
   "pending_ore_processing": {
-    "techguns:ore_titanium": "Reaction Chamber RC_TITANIUM with acid and heat-ray focus",
-    "techguns:ore_uranium": "Chemical Laboratory with acid produces yellowcake"
+    "techguns:ore_titanium": "Reaction Chamber RC_TITANIUM with acid and heat-ray focus"
+  },
+  "ore_processing": {
+    "techguns:ore_uranium": "Chemical Laboratory with 250 mB acid produces 3 yellowcake"
   }
 }

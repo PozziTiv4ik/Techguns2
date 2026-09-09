@@ -1,0 +1,23 @@
+{
+  "type": "techguns:chem_lab",
+  "allow_swap": true,
+  "duration": 100,
+  "power_per_tick": 25,
+  "activation": "always",
+  "first": {
+    "ingredient": "#c:gems/diamond",
+    "count": 1
+  },
+  "second": {
+    "ingredient": "minecraft:blaze_powder",
+    "count": 1
+  },
+  "result": {
+    "id": "techguns:carbonfibers",
+    "count": 2
+  },
+  "fluid_input": {
+    "ingredient": "minecraft:lava",
+    "amount": 1000
+  }
+}

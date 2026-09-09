@@ -1,0 +1,23 @@
+{
+  "type": "techguns:chem_lab",
+  "allow_swap": true,
+  "duration": 100,
+  "power_per_tick": 20,
+  "activation": "always",
+  "first": {
+    "ingredient": "minecraft:netherrack",
+    "count": 1
+  },
+  "second": {
+    "ingredient": "minecraft:soul_sand",
+    "count": 1
+  },
+  "result": {
+    "id": "techguns:nethercharge",
+    "count": 4
+  },
+  "fluid_input": {
+    "ingredient": "minecraft:lava",
+    "amount": 1000
+  }
+}

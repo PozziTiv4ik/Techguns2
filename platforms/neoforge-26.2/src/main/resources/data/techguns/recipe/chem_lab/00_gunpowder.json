@@ -1,0 +1,23 @@
+{
+  "type": "techguns:chem_lab",
+  "allow_swap": true,
+  "duration": 100,
+  "power_per_tick": 5,
+  "activation": "coal_dust_present",
+  "first": {
+    "ingredient": "#c:dusts/redstone",
+    "count": 1
+  },
+  "second": {
+    "ingredient": "#c:dusts/coal",
+    "count": 1
+  },
+  "result": {
+    "id": "minecraft:gunpowder",
+    "count": 1
+  },
+  "fluid_input": {
+    "ingredient": "minecraft:water",
+    "amount": 250
+  }
+}
