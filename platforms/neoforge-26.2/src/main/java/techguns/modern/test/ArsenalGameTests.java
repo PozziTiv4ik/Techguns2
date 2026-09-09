@@ -53,9 +53,15 @@ final class ArsenalGameTests {
         helper.assertValueEqual(GunItem.rounds(ItemStack.CODEC.parse(ops, data).getOrThrow()), gun.stats().capacity(), "Saved ammo");
         helper.assertTrue(GunNetwork.handle(player, new GunActionPayload(false)), "Shot fires: " + gun.id());
         helper.assertValueEqual(GunItem.rounds(stack), gun.stats().capacity() - 1, "Only one charge per shot");
-        var bullets = helper.getLevel().getEntitiesOfClass(Bullet.class, player.getBoundingBox().inflate(3), b -> b.getOwner() == player);
-        helper.assertValueEqual(bullets.size(), gun.projectileCount(), "Projectile count: " + gun.id());
-        for (Bullet bullet : bullets) helper.assertValueEqual(bullet.weapon().id(), gun.id(), "Correct projectile parameters");
+        if (gun.projectile() == techguns.core.ProjectileKind.BALLISTIC) {
+            var bullets = helper.getLevel().getEntitiesOfClass(Bullet.class, player.getBoundingBox().inflate(3), b -> b.getOwner() == player);
+            helper.assertValueEqual(bullets.size(), gun.projectileCount(), "Projectile count: " + gun.id());
+            for (Bullet bullet : bullets) helper.assertValueEqual(bullet.weapon().id(), gun.id(), "Correct projectile parameters");
+        } else {
+            var beams = helper.getLevel().getEntitiesOfClass(techguns.modern.LaserBeam.class, player.getBoundingBox().inflate(3), b -> b.getOwner() == player);
+            helper.assertValueEqual(beams.size(), 1, "One beam per laser shot");
+            helper.assertValueEqual(beams.getFirst().weapon().id(), gun.id(), "Correct laser parameters");
+        }
         helper.assertTrue(!GunNetwork.handle(player, new GunActionPayload(false)), "Same-tick spam rejected");
         helper.succeed();
     }

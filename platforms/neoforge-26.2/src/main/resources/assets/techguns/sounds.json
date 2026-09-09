@@ -216,6 +216,33 @@
     ],
     "subtitle": "subtitles.techguns.guns.vectorreload"
   },
+  "guns.lasergunfire": {
+    "sounds": [
+      "techguns:guns/lasergun_shot_a",
+      "techguns:guns/lasergun_shot_b",
+      "techguns:guns/lasergun_shot_c"
+    ],
+    "subtitle": "subtitles.techguns.guns.lasergunfire"
+  },
+  "guns.lasergunreload": {
+    "sounds": [
+      "techguns:guns/lasergun_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.lasergunreload"
+  },
+  "guns.laserpistolfire": {
+    "sounds": [
+      "techguns:guns/laser_pistol_shot_a",
+      "techguns:guns/laser_pistol_shot_b"
+    ],
+    "subtitle": "subtitles.techguns.guns.laserpistolfire"
+  },
+  "guns.laserpistolreload": {
+    "sounds": [
+      "techguns:guns/laser_pistol_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.laserpistolreload"
+  },
   "machines.ammopresswork1": {
     "sounds": [
       "techguns:machines/ammopress_work1_a",

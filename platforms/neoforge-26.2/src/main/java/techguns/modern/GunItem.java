@@ -26,6 +26,15 @@ public final class GunItem extends Item {
         boolean aiming = AimSessions.active(player, stack);
         double accuracyMultiplier = aiming ? gun.aim().accuracyMultiplier() : 1;
         for (int pellet = 0; pellet < gun.projectileCount(); pellet++) {
+            if (gun.projectile() == techguns.core.ProjectileKind.LASER) {
+                LaserBeam beam = new LaserBeam(TGContent.LASER_BEAM.get(), server);
+                beam.configure(gun);
+                beam.setOwner(player);
+                beam.shootLegacy(player, gun.stats().spread() * accuracyMultiplier, aiming && gun.aim().centered());
+                if (!server.addFreshEntity(beam)) return false;
+                beam.trace();
+                continue;
+            }
             Bullet bullet = new Bullet(TGContent.BULLET.get(), server);
             bullet.configure(gun);
             bullet.setOwner(player);

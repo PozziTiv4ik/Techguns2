@@ -68,6 +68,8 @@ def check_mesh(path):
 def main():
     for path in ROOT.rglob('*.json'):
         json.loads(path.read_text(encoding='utf-8'))
+    for name in ('laser3', 'laser3_start'):
+        require(local_path(f'techguns:fx/{name}', 'textures', '.png'))
     fluid_catalog=json.loads((Path(__file__).resolve().parents[1]/'content/fluids.json').read_text(encoding='utf-8'))
     for fluid in fluid_catalog['fluids']:
         for key in ('still_texture','flow_texture'):

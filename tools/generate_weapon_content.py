@@ -27,6 +27,7 @@ def parse_weapons():
     item_source = strip_comments((LEGACY / 'java/techguns/TGItems.java').read_text())
     item_ids = dict(re.findall(r'(\w+)\s*=\s*SHARED_ITEM\.addsharedVariant\("([^"]+)"', item_source))
     selectors = dict(re.findall(r'(\w+)\s*=\s*new ProjectileSelector(?:<[^;]+?>)?\(AmmoTypes\.(\w+)', source))
+    projectile_classes = dict(re.findall(r'(\w+)\s*=\s*new ProjectileSelector<([\w]+)>\(', source))
     render_source = strip_comments((LEGACY / 'java/techguns/client/ClientProxy.java').read_text())
     renderers = {identifier: (renderer, model) for identifier, renderer, model in re.findall(
         r'registerItemRenderer\(TGuns\.(\w+),\s*new (RenderGunBase90|RenderGunBase)\(new (\w+)\(', render_source)}
@@ -76,13 +77,23 @@ def parse_weapons():
         shotgun = calls.get('setShotgunSpread', ['0', '0', 'false'])
         if shotgun[2] != 'false': raise ValueError(f'{identifier}: burst behavior not ported yet')
         ammo_item, empty, loose, bundles = ammo_for(args[1])
+        inline_projectile = re.search(r'new ProjectileSelector<(\w+)>', args[1])
+        projectile_class = inline_projectile[1] if inline_projectile else projectile_classes[args[1]]
+        projectile = {'GenericProjectile': 'ballistic', 'StoneBulletProjectile': 'ballistic',
+                      'LaserProjectile': 'laser'}.get(projectile_class)
+        if projectile is None: raise ValueError(f'Projectile factory not ported: {projectile_class}')
+        lifetime = int(num(args[9]))
+        if projectile == 'laser':
+            laser = strip_comments((LEGACY / 'java/techguns/entities/projectiles/LaserProjectile.java').read_text())
+            lifetime = int(re.search(r'return new LaserProjectile\(world, p, damage, speed, (\d+),', laser)[1])
         renderer, bound_model = renderers[identifier]
         if bound_model != model: raise ValueError(f'Model does not match original renderer for {identifier}')
         texture = (calls.get('setTexture') or calls['setTextures'])[0].strip('"')
         result.append({'id': identifier, 'capacity': int(num(args[4])), 'fire_delay': int(num(args[3])),
             'reload_ticks': int(num(args[5])), 'damage': num(args[6]), 'minimum_damage': num(drop[2]),
             'drop_start': num(drop[0]), 'drop_end': num(drop[1]),
-            'speed': num(calls.get('setBulletSpeed', ['2'])[0]), 'lifetime': int(num(args[9])),
+            'speed': num(calls.get('setBulletSpeed', ['2'])[0]), 'lifetime': lifetime,
+            'projectile': projectile,
             'accuracy': num(args[10]), 'automatic': args[2] == 'false',
             'extra_pellets': int(num(shotgun[0])), 'pellet_spread': num(shotgun[1]),
             'gravity': num(calls.get('setGravity', ['0'])[0]),
@@ -116,7 +127,8 @@ def generate():
     crafting = plan_crafting(weapons)
     materials = set(crafting['materials'])
     data('content/crafting-content.json', crafting['catalog'])
-    data('content/ballistic-weapons.json', weapons)
+    data('content/ballistic-weapons.json', [gun for gun in weapons if gun['projectile'] == 'ballistic'])
+    data('content/laser-weapons.json', [gun for gun in weapons if gun['projectile'] == 'laser'])
     definitions = []
     ammo_items = set(crafting['extra_ammo'])
     sounds_data = json.loads(resolve_asset('sounds.json').read_text())
@@ -140,11 +152,11 @@ def generate():
             f"{gun['damage']}f", f"{gun['minimum_damage']}f", str(gun['drop_start']), str(gun['drop_end']),
             str(gun['speed']), str(gun['lifetime']), str(gun['accuracy'])])
         ammo_java = f'new AmmoSpec("{ammo["item"]}", "{ammo["empty_item"]}", "{ammo["loose_item"]}", {ammo["bundles_per_magazine"]}, {str(ammo["individual"]).lower()})'
-        definitions.append(f'        new WeaponDefinition(new WeaponSpec({java_stats}), {ammo_java}, {str(gun["automatic"]).lower()}, {gun["extra_pellets"]}, {gun["pellet_spread"]}, {gun["gravity"]}, {gun["penetration"]}, new AimSpec({gun["zoom"]}f, {str(gun["zoom_toggle"]).lower()}, {gun["zoom_accuracy"]}f, {str(gun["zoom_centered"]).lower()}), "{gun["fire_sound"]}", "{gun["reload_sound"]}")')
+        definitions.append(f'        new WeaponDefinition(new WeaponSpec({java_stats}), {ammo_java}, ProjectileKind.{gun["projectile"].upper()}, {str(gun["automatic"]).lower()}, {gun["extra_pellets"]}, {gun["pellet_spread"]}, {gun["gravity"]}, {gun["penetration"]}, new AimSpec({gun["zoom"]}f, {str(gun["zoom_toggle"]).lower()}, {gun["zoom_accuracy"]}f, {str(gun["zoom_centered"]).lower()}), "{gun["fire_sound"]}", "{gun["reload_sound"]}")')
         source = (LEGACY / f'java/techguns/client/models/guns/{gun["model"]}.java').read_text()
         _, _, shapes = extract_shapes(source, gun['model'])
         gui_hidden = GUI_HIDDEN_PARTS.get(identifier, ())
-        mesh = gui_hidden or any(s['inflate'] != 0 or s['render_scale'] != [1, 1, 1] for s in shapes)
+        mesh = gui_hidden or any(s['inflate'] != 0 or s['render_scale'] != [1, 1, 1] or s['mirror'] for s in shapes)
         if mesh:
             model, obj, material = convert_mesh(source, gun['model'], identifier, f'techguns:item/{identifier}', gun['forward_axis'], gui_hidden)
             output(RESOURCES / f'assets/techguns/models/item/{identifier}.obj', obj)
@@ -214,10 +226,21 @@ def generate():
         values.update(reaction_translations(lang))
         values.update(radiation_translations(lang))
         values.update(fabricator_translations(lang))
+        values['entity.techguns.laser_beam'] = 'Laser beam' if lang == 'en_us' else 'Лазерный луч'
+        values['death.attack.techguns.laser'] = '%1$s was lasered by %2$s' if lang == 'en_us' else '%1$s убит лазером игрока %2$s'
+        values['death.attack.techguns.laser.player'] = values['death.attack.techguns.laser']
+        values['death.attack.techguns.laser.item'] = '%1$s was lasered by %2$s using %3$s' if lang == 'en_us' else '%1$s убит игроком %2$s с помощью %3$s'
         resource(f'assets/techguns/lang/{lang}.json', values)
     resource('assets/techguns/sounds.json', selected_sounds)
     # This tag used to be a handwritten resource. Own it here before other damage domains contribute.
-    resource('data/minecraft/tags/damage_type/bypasses_cooldown.json', {'replace':False,'values':['techguns:bullet']})
+    resource('data/minecraft/tags/damage_type/bypasses_cooldown.json', {'replace':False,'values':['techguns:bullet','techguns:laser']})
+    resource('data/minecraft/tags/damage_type/no_knockback.json', {'replace':False,'values':['techguns:laser']})
+    resource('data/neoforge/tags/damage_type/is_magic.json', {'replace':False,'values':['techguns:laser']})
+    resource('data/minecraft/tags/damage_type/witch_resistant_to.json', {'replace':False,'values':['techguns:laser']})
+    resource('data/techguns/damage_type/laser.json', {'message_id':'techguns.laser','scaling':'when_caused_by_living_non_player','exhaustion':0.1})
+    for texture in ('laser3', 'laser3_start'):
+        path = f'textures/fx/{texture}.png'
+        files[(RESOURCES / 'assets/techguns' / path).as_posix()] = resolve_asset(path).read_bytes()
     for identifier, recipe in crafting['recipes'].items():
         resource(f'data/techguns/recipe/{identifier}.json', recipe)
     for identifier, values in crafting['tags'].items():

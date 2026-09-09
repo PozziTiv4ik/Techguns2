@@ -11,6 +11,7 @@ ORE_TAGS = {
     'LOGWOOD': ('minecraft:logs', None), 'BLOCKWOOL': ('minecraft:wool', None),
     'BLOCKGLASS': ('c:glass_blocks', None), 'PANEGLASS': ('c:glass_panes', None),
     'HARDENEDGLASSORGLASS': ('c:glass_blocks/hardened', None),
+    'ELECTRUMORGOLD': ('c:ingots/electrum', None),
     'DUSTREDSTONE': ('c:dusts/redstone', None), 'GEMDIAMOND': ('c:gems/diamond', None),
     'INGOTIRON': ('c:ingots/iron', None), 'NUGGETIRON': ('c:nuggets/iron', None),
     'INGOTCOPPER': ('c:ingots/copper', 'ingotcopper'),

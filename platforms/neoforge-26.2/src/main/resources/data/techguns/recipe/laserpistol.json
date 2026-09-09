@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:laserpistol",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 20
+    }
+  },
+  "pattern": [
+    "obo",
+    "scr",
+    "ssp"
+  ],
+  "key": {
+    "p": "#c:sheets/plastic",
+    "b": "techguns:laserbarrel",
+    "r": "techguns:redstone_battery",
+    "s": "#c:nuggets/steel",
+    "c": "#c:circuits/elite",
+    "o": "#c:plates/obsidian_steel"
+  }
+}

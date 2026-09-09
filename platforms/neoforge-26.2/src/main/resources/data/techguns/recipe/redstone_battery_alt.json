@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "result": {
+    "id": "techguns:redstone_battery",
+    "count": 1
+  },
+  "ingredients": [
+    "techguns:redstone_battery_empty",
+    "#c:dusts/redstone"
+  ]
+}

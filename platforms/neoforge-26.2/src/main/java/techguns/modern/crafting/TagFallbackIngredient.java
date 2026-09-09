@@ -14,7 +14,7 @@ import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.neoforged.neoforge.common.crafting.ICustomIngredient;
 import net.neoforged.neoforge.common.crafting.IngredientType;
 
-/** Preserves the original hardened-glass preference while allowing standalone play. */
+/** Preserves the original hardened-glass and electrum preferences with standalone fallbacks. */
 public record TagFallbackIngredient(TagKey<Item> preferred, TagKey<Item> fallback) implements ICustomIngredient {
     public static final MapCodec<TagFallbackIngredient> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             TagKey.codec(Registries.ITEM).fieldOf("preferred").forGetter(TagFallbackIngredient::preferred),

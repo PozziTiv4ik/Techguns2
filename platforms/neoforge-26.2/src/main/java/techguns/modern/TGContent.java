@@ -46,6 +46,9 @@ public final class TGContent {
     public static final DeferredHolder<EntityType<?>, EntityType<Bullet>> BULLET = ENTITIES.register("bullet", () ->
             EntityType.Builder.<Bullet>of(Bullet::new, MobCategory.MISC).sized(0.1f, 0.1f).clientTrackingRange(8).updateInterval(1)
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, id("bullet"))));
+    public static final DeferredHolder<EntityType<?>, EntityType<LaserBeam>> LASER_BEAM = ENTITIES.register("laser_beam", () ->
+            EntityType.Builder.<LaserBeam>of(LaserBeam::new, MobCategory.MISC).sized(0.1f, 0.1f).clientTrackingRange(12).updateInterval(1)
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE, id("laser_beam"))));
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Techguns.MOD_ID);
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TAB = TABS.register("techguns", () ->
             CreativeModeTab.builder().title(Component.translatable("itemGroup.techguns")).icon(REVOLVER::toStack)

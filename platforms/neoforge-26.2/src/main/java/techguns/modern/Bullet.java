@@ -9,7 +9,6 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
@@ -32,7 +31,10 @@ public final class Bullet extends Projectile {
 
     public Bullet(EntityType<? extends Bullet> type, Level level) { super(type, level); }
 
-    public void configure(WeaponDefinition weapon) { this.weapon = weapon; }
+    public void configure(WeaponDefinition weapon) {
+        if (weapon.projectile() != techguns.core.ProjectileKind.BALLISTIC) throw new IllegalArgumentException("Expected ballistic weapon");
+        this.weapon = weapon;
+    }
     public WeaponDefinition weapon() { return weapon; }
 
     public void shootLegacy(LivingEntity source, double accuracy) {
@@ -40,20 +42,7 @@ public final class Bullet extends Projectile {
     }
 
     public void shootLegacy(LivingEntity source, double accuracy, boolean centered) {
-        float yaw = source.getYRot() + (float) (accuracy - 2 * random.nextDouble() * accuracy) * 40;
-        float pitch = source.getXRot() + (float) (accuracy - 2 * random.nextDouble() * accuracy) * 40;
-        double side = centered ? 0 : source.getMainArm() == HumanoidArm.RIGHT ? -0.16 : 0.16;
-        setPos(source.getEyePosition().add(Math.cos(Math.toRadians(yaw)) * side, -0.1,
-                Math.sin(Math.toRadians(yaw)) * side));
-        Vec3 direction = Vec3.directionFromRotation(pitch, yaw).normalize().add(
-                random.nextGaussian() * 0.007499999832361937,
-                random.nextGaussian() * 0.007499999832361937,
-                random.nextGaussian() * 0.007499999832361937);
-        // Legacy shoot(..., 1.5, 1) followed by *= speed. The discarded normalize()
-        // return in GenericProjectile leaves this 1.5 multiplier in actual gameplay.
-        setDeltaMovement(direction.scale(1.5 * weapon.stats().projectileSpeed()));
-        setYRot(yaw);
-        setXRot(pitch);
+        LegacyShot.shoot(this, source, random, accuracy, centered, weapon.stats().projectileSpeed());
     }
 
     @Override
@@ -102,7 +91,7 @@ public final class Bullet extends Projectile {
         double stored = input.getDoubleOr("distance", 0);
         distance = Double.isFinite(stored) ? Math.max(0, stored) : 0;
         try {
-            weapon = Weapons.definition(input.getStringOr("weapon", "revolver"));
+            configure(Weapons.definition(input.getStringOr("weapon", "revolver")));
         } catch (IllegalArgumentException unknownWeapon) {
             discard();
             return;

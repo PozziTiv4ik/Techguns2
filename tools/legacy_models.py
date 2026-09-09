@@ -60,8 +60,8 @@ def extract_shapes(source, class_name, constructor_values=None):
         boxes = list(re.finditer(re.escape(name) + r'\.addBox\(([^)]+)\)', chunk))
         if len(boxes) != 1:
             raise ValueError(f'{class_name}.{name}: expected one box, got {len(boxes)}')
-        if re.search(re.escape(name) + r'\.mirror\s*=\s*true', chunk[:boxes[0].start()]):
-            raise ValueError(f'{class_name}.{name}: mirrored constructor box requires UV mirroring')
+        mirror_assignments = re.findall(re.escape(name) + r'\.mirror\s*=\s*(true|false)', chunk[:boxes[0].start()])
+        mirror = bool(mirror_assignments and mirror_assignments[-1] == 'true')
         values = [numeric(v) for v in boxes[0][1].split(',')]
         if len(values) not in (6, 7):
             raise ValueError(f'{class_name}.{name}: unsupported addBox overload')
@@ -70,6 +70,7 @@ def extract_shapes(source, class_name, constructor_values=None):
         if not pivot_match:
             raise ValueError(f'{class_name}.{name}: incomplete transform')
         shapes.append({'name': name, 'uv': [int(u), int(v)], 'box': values[:6],
+                       'mirror': mirror,
                        'inflate': values[6] if len(values) == 7 else 0,
                        'pivot': [numeric(v) for v in pivot_match[1].split(',')],
                        'rotation': [numeric(v) for v in rotation_match[1].split(',')] if rotation_match else [0, 0, 0]})
@@ -136,8 +137,8 @@ def convert_model(source, class_name, texture, forward='+x', constructor_values=
 
     elements = []
     for shape in shapes:
-        if shape['inflate'] != 0 or shape['render_scale'] != [1, 1, 1]:
-            raise ValueError(f'{class_name}: use mesh conversion for grown or scaled geometry')
+        if shape['inflate'] != 0 or shape['render_scale'] != [1, 1, 1] or shape['mirror']:
+            raise ValueError(f'{class_name}: use mesh conversion for grown, scaled or mirrored geometry')
         x, y, z, dx, dy, dz = shape['box']
         px, py, pz = shape['pivot']
         element = {'name': shape['name'], 'from': point([px+x, py+y+dy, pz+z]),
@@ -176,6 +177,7 @@ def shape_vertices(shape):
     g = shape['inflate']
     x0, y0, z0 = x-g, y-g, z-g
     x1, y1, z1 = x+dx+g, y+dy+g, z+dz+g
+    if shape.get('mirror', False): x0, x1 = x1, x0
     corners = [(x0,y0,z0), (x1,y0,z0), (x1,y1,z0), (x0,y1,z0),
                (x0,y0,z1), (x1,y0,z1), (x1,y1,z1), (x0,y1,z1)]
     return [[p + value * scale for p, value, scale in zip(shape['pivot'], rotated(corner, shape['rotation']), shape['render_scale'])]
@@ -213,7 +215,9 @@ def convert_mesh(source, class_name, identifier, texture, forward, gui_hidden=()
             if sum(n*n for n in cross) < 1e-18: continue
             for vertex in vertices: lines.append('v ' + ' '.join(f'{value:.9f}' for value in vertex))
             for uv in uvs: lines.append('vt ' + ' '.join(f'{value:.9f}' for value in uv))
-            lines.append('f ' + ' '.join(f'{index+i}/{index+i}' for i in ((3,2,1,0) if reverse_winding else (0,1,2,3))))
+            # ModelBox swaps the X endpoints and flips every face for mirror=true.
+            flip = reverse_winding != shape['mirror']
+            lines.append('f ' + ' '.join(f'{index+i}/{index+i}' for i in ((3,2,1,0) if flip else (0,1,2,3))))
             index += 4
     model = {'loader': 'neoforge:obj', 'model': f'techguns:models/{model_folder}/{identifier}.obj',
              'automatic_culling': False, 'flip_v': False, 'emissive_ambient': False,

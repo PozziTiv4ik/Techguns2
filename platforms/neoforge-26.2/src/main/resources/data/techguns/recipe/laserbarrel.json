@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:laserbarrel",
+    "count": 1
+  },
+  "pattern": [
+    "fff",
+    "ggl",
+    "fff"
+  ],
+  "key": {
+    "f": {
+      "neoforge:ingredient_type": "techguns:tag_fallback",
+      "preferred": "c:ingots/electrum",
+      "fallback": "c:ingots/gold"
+    },
+    "g": {
+      "neoforge:ingredient_type": "techguns:tag_fallback",
+      "preferred": "c:glass_blocks/hardened",
+      "fallback": "c:glass_blocks"
+    },
+    "l": "techguns:laserfocus"
+  }
+}

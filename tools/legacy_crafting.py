@@ -40,8 +40,9 @@ def convert_recipe(legacy, shared, weapons):
         identifier = value['item']
         if identifier.startswith('#'):
             name = identifier[1:]
-            if name == 'HARDENEDGLASSORGLASS':
-                return {'neoforge:ingredient_type': 'techguns:tag_fallback', 'preferred': ORE_TAGS[name][0], 'fallback': 'c:glass_blocks'}
+            if name in ('HARDENEDGLASSORGLASS', 'ELECTRUMORGOLD'):
+                return {'neoforge:ingredient_type': 'techguns:tag_fallback', 'preferred': ORE_TAGS[name][0],
+                        'fallback': 'c:glass_blocks' if name == 'HARDENEDGLASSORGLASS' else 'c:ingots/gold'}
             return '#' + ORE_TAGS[name][0]
         if identifier.removeprefix('techguns:') in weapons and value.get('data', 0) not in (0, 32767):
             raise ValueError('Weapon-upgrade metadata requires a behavior-specific conversion')

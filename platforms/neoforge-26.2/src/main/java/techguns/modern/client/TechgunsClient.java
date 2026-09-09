@@ -39,6 +39,7 @@ public final class TechgunsClient {
         modBus.addListener(TechgunsClient::keys);
         modBus.addListener(TechgunsClient::screens);
         modBus.addListener(FluidRendering::register);
+        modBus.addListener(LaserBeamRenderer::pipelines);
         NeoForge.EVENT_BUS.addListener(TechgunsClient::tick);
         NeoForge.EVENT_BUS.addListener(TechgunsClient::interaction);
         NeoForge.EVENT_BUS.addListener(TechgunsClient::fov);
@@ -140,5 +141,6 @@ public final class TechgunsClient {
     private static void renderers(EntityRenderersEvent.RegisterRenderers event) {
         // The initial round uses vanilla tracer particles; a mesh renderer is part of M5.
         event.registerEntityRenderer(TGContent.BULLET.get(), NoopRenderer::new);
+        event.registerEntityRenderer(TGContent.LASER_BEAM.get(), LaserBeamRenderer::new);
     }
 }

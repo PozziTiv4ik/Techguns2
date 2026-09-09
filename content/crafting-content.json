@@ -25,6 +25,7 @@
     "26": "techguns:biotankempty",
     "27": "techguns:fueltank",
     "28": "techguns:fueltankempty",
+    "29": "techguns:energycell",
     "30": "techguns:energycellempty",
     "31": "techguns:nuclearpowercell",
     "32": "techguns:nuclearpowercelldepleted",
@@ -34,6 +35,7 @@
     "37": "techguns:stonebarrel",
     "38": "techguns:ironbarrel",
     "39": "techguns:obsidiansteelbarrel",
+    "41": "techguns:laserbarrel",
     "42": "techguns:woodstock",
     "43": "techguns:plasticstock",
     "45": "techguns:steamarmorplate",
@@ -95,6 +97,8 @@
     "109": "techguns:pistolrounds_incendiary",
     "110": "techguns:riflerounds_incendiary",
     "111": "techguns:rifleroundsstack_incendiary",
+    "125": "techguns:redstone_battery",
+    "126": "techguns:redstone_battery_empty",
     "127": "techguns:gaussrifleslugs",
     "144": "techguns:sniperrounds_explosive",
     "145": "techguns:rocket_high_velocity",
@@ -210,6 +214,14 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_11_pistolmagazine.json"
     },
     {
+      "id": "techguns:redstone_battery",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_125_redstone_battery.json"
+    },
+    {
+      "id": "techguns:redstone_battery_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_125_redstone_battery_alt.json"
+    },
+    {
       "id": "techguns:pistolmagazineempty",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_12_pistolmagazineempty.json"
     },
@@ -298,6 +310,10 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_3_riflerounds.json"
     },
     {
+      "id": "techguns:laserbarrel",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_41_laserbarrel.json"
+    },
+    {
       "id": "techguns:woodstock",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_42_woodstock.json"
     },
@@ -376,6 +392,22 @@
     {
       "id": "techguns:smgmagazine",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_9_smgmagazine.json"
+    },
+    {
+      "id": "techguns:lasergun",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/lasergun.json"
+    },
+    {
+      "id": "techguns:lasergun_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/lasergun_alt.json"
+    },
+    {
+      "id": "techguns:laserpistol",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/laserpistol.json"
+    },
+    {
+      "id": "techguns:laserpistol_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/laserpistol_alt.json"
     },
     {
       "id": "techguns:lmg",
@@ -561,6 +593,7 @@
     "carbonfibers",
     "compressedairtank",
     "cyberneticparts",
+    "energycell",
     "energycellempty",
     "enricheduranium",
     "fueltank",
@@ -595,6 +628,7 @@
     "rawplastic",
     "rawrubber",
     "rcuvemitter",
+    "redstone_battery_empty",
     "rocket_high_velocity",
     "rubberbar",
     "shotgunrounds_incendiary",

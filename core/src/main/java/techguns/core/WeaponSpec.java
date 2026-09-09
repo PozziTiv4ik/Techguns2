@@ -11,7 +11,8 @@ public record WeaponSpec(String id, int capacity, int fireDelay, int reloadTicks
         if (!Float.isFinite(damage) || !Float.isFinite(minimumDamage) || damage <= 0
                 || minimumDamage < 0 || minimumDamage > damage)
             throw new IllegalArgumentException("Invalid damage");
-        if (!Double.isFinite(dropStart) || !Double.isFinite(dropEnd) || dropStart < 0 || dropEnd <= dropStart
+        if (!Double.isFinite(dropStart) || !Double.isFinite(dropEnd) || dropStart < 0 || dropEnd < dropStart
+                || (dropEnd == dropStart && minimumDamage != damage)
                 || !Double.isFinite(projectileSpeed) || projectileSpeed <= 0
                 || !Double.isFinite(spread) || spread < 0)
             throw new IllegalArgumentException("Invalid projectile parameters");
@@ -19,6 +20,7 @@ public record WeaponSpec(String id, int capacity, int fireDelay, int reloadTicks
 
     public float damageAt(double distance) {
         if (!Double.isFinite(distance) || distance < 0) throw new IllegalArgumentException("Invalid distance");
+        if (damage == minimumDamage) return damage;
         double fraction = Math.clamp((distance - dropStart) / (dropEnd - dropStart), 0.0, 1.0);
         return (float) (damage + (minimumDamage - damage) * fraction);
     }

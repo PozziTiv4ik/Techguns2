@@ -15,5 +15,7 @@
   "as50": "ModelAS50",
   "aug": "ModelAUG",
   "scar": "ModelScar",
-  "vector": "ModelVector"
+  "vector": "ModelVector",
+  "lasergun": "ModelLasergun",
+  "laserpistol": "ModelLaserPistol"
 }

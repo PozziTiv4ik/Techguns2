@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:lasergun",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 0
+    }
+  },
+  "pattern": [
+    " gd",
+    "brs",
+    " em"
+  ],
+  "key": {
+    "b": "techguns:laserbarrel",
+    "r": "techguns:obsidiansteelreceiver",
+    "s": "techguns:plasticstock",
+    "d": "#c:dusts/redstone",
+    "e": "techguns:energycellempty",
+    "g": "#c:glass_panes",
+    "m": "techguns:mechanicalpartscarbon"
+  }
+}
