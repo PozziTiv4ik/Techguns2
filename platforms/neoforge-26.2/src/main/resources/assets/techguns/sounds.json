@@ -315,5 +315,11 @@
       "techguns:machines/fabricator_work_c"
     ],
     "subtitle": "subtitles.techguns.machines.fabricatorwork"
+  },
+  "machines.chargingstationwork": {
+    "sounds": [
+      "techguns:machines/charginstation_work"
+    ],
+    "subtitle": "subtitles.techguns.machines.chargingstationwork"
   }
 }

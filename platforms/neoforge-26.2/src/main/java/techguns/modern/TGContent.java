@@ -60,6 +60,7 @@ public final class TGContent {
                         output.accept(techguns.modern.machine.TGMachineContent.METAL_PRESS_ITEM.get());
                         output.accept(techguns.modern.machine.TGMachineContent.BLAST_FURNACE_ITEM.get());
                         output.accept(techguns.modern.machine.TGMachineContent.CHEM_LAB_ITEM.get());
+                        output.accept(techguns.modern.machine.charging.ChargingStationContent.ITEM.get());
                         output.accept(techguns.modern.machine.reaction.ReactionContent.HOUSING_ITEM.get());
                         output.accept(techguns.modern.machine.reaction.ReactionContent.GLASS_ITEM.get());
                         output.accept(techguns.modern.machine.reaction.ReactionContent.CONTROLLER_ITEM.get());

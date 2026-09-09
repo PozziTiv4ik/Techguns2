@@ -114,7 +114,8 @@
     "techguns:multiblockmachine@2": "techguns:fabricator_controller",
     "techguns:multiblockmachine@3": "techguns:reactionchamber_housing",
     "techguns:multiblockmachine@4": "techguns:reactionchamber_glass",
-    "techguns:multiblockmachine@5": "techguns:reactionchamber_controller"
+    "techguns:multiblockmachine@5": "techguns:reactionchamber_controller",
+    "techguns:simplemachine@10": "techguns:charging_station"
   },
   "recipes": [
     {
@@ -480,6 +481,10 @@
     {
       "id": "techguns:scar_alt",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/scar_alt.json"
+    },
+    {
+      "id": "techguns:charging_station",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/simplemachine_10_charging_station.json"
     },
     {
       "id": "techguns:blast_furnace",

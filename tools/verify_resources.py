@@ -135,6 +135,10 @@ def main():
             for result in recipe['results']: check_ingredient(result['id'])
         if recipe['type']=='techguns:fabricator':
             for key in ('input','wire','powder','plate'): check_ingredient(recipe[key]['ingredient'])
+        if recipe['type']=='techguns:charging_station':
+            check_ingredient(recipe['input']['ingredient'])
+            if not 1 <= recipe['input']['count'] <= 64 or not 1 <= recipe['charge_amount'] <= 57600000:
+                raise ValueError('Invalid Charging Station recipe amounts')
     for path in (ROOT / 'data/c/tags/item').rglob('*.json'):
         for value in json.loads(path.read_text(encoding='utf-8'))['values']: check_ingredient(value)
     print(f'Validated {len(names)} item definitions, {texture_count} texture references, {len(sounds)} sound events and {len(recipes)} recipes')

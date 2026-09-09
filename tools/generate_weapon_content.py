@@ -12,6 +12,7 @@ from legacy_chemistry import generate_chemical_content, chemical_translations
 from legacy_reactions import generate_reaction_content, reaction_translations
 from legacy_radiation import generate_radiation_content, radiation_translations
 from legacy_fabricator import generate_fabricator_content, fabricator_translations
+from legacy_charging import generate_charging_content, charging_translations
 from legacy_items import arguments
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -194,7 +195,7 @@ def generate():
         for lang in languages:
             key = f'item.techguns.{identifier}.name'
             translated[lang][f'item.techguns.{identifier}'] = languages[lang].get(key, languages['en_us'].get(key, identifier))
-    for name in ('machines.ammopresswork1', 'machines.ammopresswork2', 'machines.metalpresswork', 'machines.chemlabwork', 'machines.rc_heatraywork', 'machines.rc_beep', 'machines.rc_warning', 'effects.geiger.low', 'effects.geiger.high', 'machines.fabricatorwork'):
+    for name in ('machines.ammopresswork1', 'machines.ammopresswork2', 'machines.metalpresswork', 'machines.chemlabwork', 'machines.rc_heatraywork', 'machines.rc_beep', 'machines.rc_warning', 'effects.geiger.low', 'effects.geiger.high', 'machines.fabricatorwork', 'machines.chargingstationwork'):
         selected_sounds[name] = {'sounds': sounds_data[name]['sounds']}
     for sound, value in selected_sounds.items():
         subtitle = f'subtitles.techguns.{sound}'
@@ -207,6 +208,7 @@ def generate():
                 if sound=='machines.chemlabwork': translated[lang][subtitle]='Chemical Laboratory works' if lang=='en_us' else 'Работает химическая лаборатория'
                 if sound.startswith('machines.rc_'): translated[lang][subtitle]=('Reaction chamber warning' if sound.endswith('warning') else 'Reaction chamber check') if lang=='en_us' else ('Предупреждение реакционной камеры' if sound.endswith('warning') else 'Проверка реакционной камеры')
                 if sound=='machines.fabricatorwork': translated[lang][subtitle]='Fabricator works' if lang=='en_us' else 'Работает фабрикатор'
+                if sound=='machines.chargingstationwork': translated[lang][subtitle]='Charging Station works' if lang=='en_us' else 'Работает зарядная станция'
             if sound.startswith('effects.geiger.'): translated[lang][subtitle]='Geiger counter clicks' if lang=='en_us' else 'Щёлкает счётчик Гейгера'
         for entry in value['sounds']:
             name = entry if isinstance(entry, str) else entry['name']
@@ -226,6 +228,7 @@ def generate():
         values.update(reaction_translations(lang))
         values.update(radiation_translations(lang))
         values.update(fabricator_translations(lang))
+        values.update(charging_translations(lang))
         values['entity.techguns.laser_beam'] = 'Laser beam' if lang == 'en_us' else 'Лазерный луч'
         values['death.attack.techguns.laser'] = '%1$s was lasered by %2$s' if lang == 'en_us' else '%1$s убит лазером игрока %2$s'
         values['death.attack.techguns.laser.player'] = values['death.attack.techguns.laser']
@@ -276,7 +279,7 @@ public final class Weapons {
 '''
     output('core/src/main/java/techguns/core/Weapons.java', source)
     files.update(generate_machine_content())
-    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content()) for entry in domain.items()]:
+    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content()) for entry in domain.items()]:
         if path in files:
             # Several content domains contribute to the same mining/tool and common item tags.
             if '/tags/' not in path: raise ValueError(f'Colliding generated resource: {path}')

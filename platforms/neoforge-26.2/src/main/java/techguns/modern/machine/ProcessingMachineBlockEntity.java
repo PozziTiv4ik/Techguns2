@@ -89,6 +89,9 @@ public abstract class ProcessingMachineBlockEntity extends BaseContainerBlockEnt
     protected abstract int modeCount();
     protected abstract void playWorkSound(Level level, BlockPos pos, int progress, int duration);
     protected void prepareInputs(ServerLevel level) {}
+    /** Alternative processing of an input when no recipe batch is reserved. */
+    protected boolean processIdle(ServerLevel level) { return false; }
+    protected ItemStack reservedInput(int slot) { return slot < reserved.size() ? reserved.get(slot).copy() : ItemStack.EMPTY; }
     protected boolean operational(ServerLevel level) { return true; }
     protected int batchPower(int base, int batch) { return base * batch; }
     protected boolean adjustMode(int button) {
@@ -186,6 +189,7 @@ public abstract class ProcessingMachineBlockEntity extends BaseContainerBlockEnt
     public static void tick(Level level, BlockPos pos, BlockState state, ProcessingMachineBlockEntity machine) {
         if (!(level instanceof ServerLevel server) || !machine.operational(server) || !machine.redstoneEnabled()) return;
         if (!machine.working()) {
+            if (machine.processIdle(server)) return;
             if (machine.needsRecipeCheck || level.getGameTime() % 20 == 0) machine.startOperation(server);
             return;
         }

@@ -54,6 +54,7 @@ public final class TechgunsClient {
         event.register(techguns.modern.machine.TGMachineContent.CHEM_LAB_MENU.get(),ChemLabScreen::new);
         event.register(techguns.modern.machine.reaction.ReactionContent.MENU.get(),ReactionChamberScreen::new);
         event.register(techguns.modern.machine.fabricator.FabricatorContent.MENU.get(),FabricatorScreen::new);
+        event.register(techguns.modern.machine.charging.ChargingStationContent.MENU.get(), ChargingStationScreen::new);
     }
 
     private static void tick(ClientTickEvent.Pre event) {
@@ -142,5 +143,6 @@ public final class TechgunsClient {
         // The initial round uses vanilla tracer particles; a mesh renderer is part of M5.
         event.registerEntityRenderer(TGContent.BULLET.get(), NoopRenderer::new);
         event.registerEntityRenderer(TGContent.LASER_BEAM.get(), LaserBeamRenderer::new);
+        event.registerBlockEntityRenderer(techguns.modern.machine.charging.ChargingStationContent.ENTITY.get(), ChargingStationRenderer::new);
     }
 }

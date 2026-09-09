@@ -1,0 +1,39 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/tileentities/ChargingStationTileEnt.java",
+  "energy_capacity": 100000,
+  "charge_rate": 800,
+  "item_charge_rate": 1600,
+  "batch_power_exponent": 1,
+  "upgrade_limit": 7,
+  "recipes": [
+    {
+      "input": {
+        "ingredient": "techguns:energycellempty",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:energycell",
+        "count": 1
+      },
+      "charge_amount": 50000
+    },
+    {
+      "input": {
+        "ingredient": "techguns:redstone_battery_empty",
+        "count": 1
+      },
+      "result": {
+        "id": "techguns:redstone_battery",
+        "count": 1
+      },
+      "charge_amount": 20000
+    }
+  ],
+  "model": {
+    "source": "legacy/1.12.2/src/main/resources/assets/techguns/models/block/charging_station_centered.obj",
+    "parts": 22,
+    "faces": 132,
+    "flip_v": true
+  },
+  "rendering": "Original block OBJ and working item in ground display context; visual acceptance and custom flare particles pending"
+}

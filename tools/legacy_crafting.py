@@ -27,7 +27,7 @@ def convert_recipe(legacy, shared, weapons):
         identifier = value['item']
         if identifier == 'techguns:basicmachine':
             return 'techguns:' + {0: 'ammo_press', 1: 'metal_press', 2: 'chem_lab'}[value.get('data', 0)]
-        if identifier == 'techguns:simplemachine' and value.get('data') == 11: return 'techguns:blast_furnace'
+        if identifier == 'techguns:simplemachine' and value.get('data') in (10,11): return 'techguns:'+{10:'charging_station',11:'blast_furnace'}[value['data']]
         if identifier == 'techguns:multiblockmachine': return 'techguns:'+(FABRICATOR_PARTS+REACTION_PARTS)[value['data']]
         if identifier == 'minecraft:stonebrick' and value.get('data', 0) == 0: return 'minecraft:stone_bricks'
         if identifier == 'techguns:itemshared': return 'techguns:' + shared[value['data']]
@@ -78,6 +78,7 @@ def plan_crafting(weapon_list):
     selected['basicmachine_0_ammo_press'] = source_recipes['basicmachine_0_ammo_press']
     for name in ('basicmachine_1_metal_press', 'basicmachine_1_metal_press_alt'): selected[name] = source_recipes[name]
     selected['simplemachine_11_blast_furnace'] = source_recipes['simplemachine_11_blast_furnace']
+    selected['simplemachine_10_charging_station'] = source_recipes['simplemachine_10_charging_station']
     selected['basicmachine_2_chem_lab']=source_recipes['basicmachine_2_chem_lab']
     for meta, part in enumerate(FABRICATOR_PARTS+REACTION_PARTS):
         name = f'multiblockmachine_{meta}_{part}'
@@ -141,6 +142,7 @@ def plan_crafting(weapon_list):
         if name == 'basicmachine_0_ammo_press': identifier = 'ammo_press'
         if name.startswith('basicmachine_1_metal_press'): identifier = name.removeprefix('basicmachine_1_')
         if name == 'simplemachine_11_blast_furnace': identifier = 'blast_furnace'
+        if name == 'simplemachine_10_charging_station': identifier = 'charging_station'
         if name == 'basicmachine_2_chem_lab': identifier = 'chem_lab'
         if name.startswith('multiblockmachine_'): identifier = re.sub(r'^multiblockmachine_\d+_', '', name)
         if name.startswith('itemshared_'): identifier = re.sub(r'^itemshared_\d+_', '', name)
@@ -162,4 +164,5 @@ def plan_crafting(weapon_list):
                'metal_packing_requires_feedstock': sorted(names & {'ingotcopper', 'ingotlead', 'ingotsteel'}),
                'pending_upgrade_recipes': [name + '.json' for name in pending]}
     catalog['block_metadata'].update({f'techguns:multiblockmachine@{meta}':'techguns:'+part for meta,part in enumerate(FABRICATOR_PARTS+REACTION_PARTS)})
+    catalog['block_metadata']['techguns:simplemachine@10'] = 'techguns:charging_station'
     return {'recipes': recipes, 'materials': materials, 'extra_ammo': sorted(extra_ammo), 'tags': tags, 'catalog': catalog}

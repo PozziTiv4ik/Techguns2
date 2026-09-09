@@ -1,0 +1,12 @@
+{
+  "type": "techguns:charging_station",
+  "input": {
+    "ingredient": "techguns:redstone_battery_empty",
+    "count": 1
+  },
+  "result": {
+    "id": "techguns:redstone_battery",
+    "count": 1
+  },
+  "charge_amount": 20000
+}
