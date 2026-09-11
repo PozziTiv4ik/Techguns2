@@ -11,6 +11,13 @@
     "speed": 100.0,
     "lifetime": 7,
     "projectile": "laser",
+    "npc_ai": {
+      "range": 24.0,
+      "interval": 30,
+      "burst": 0,
+      "shot_delay": 0,
+      "forward_offset": 0.0
+    },
     "accuracy": 0.0,
     "automatic": true,
     "extra_pellets": 0,
@@ -47,6 +54,13 @@
     "speed": 100.0,
     "lifetime": 7,
     "projectile": "laser",
+    "npc_ai": {
+      "range": 24.0,
+      "interval": 30,
+      "burst": 0,
+      "shot_delay": 0,
+      "forward_offset": 0.0
+    },
     "accuracy": 0.025,
     "automatic": true,
     "extra_pellets": 0,

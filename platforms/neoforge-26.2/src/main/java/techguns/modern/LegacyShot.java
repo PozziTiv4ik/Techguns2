@@ -10,9 +10,10 @@ import net.minecraft.world.phys.Vec3;
 final class LegacyShot {
     static void shoot(Projectile projectile, LivingEntity source, RandomSource random,
                       double accuracy, boolean centered, double speed) {
-        float yaw = source.getYRot() + (float) (accuracy - 2 * random.nextDouble() * accuracy) * 40;
+        boolean npc = source instanceof net.minecraft.world.entity.Mob;
+        float yaw = (npc ? source.getYHeadRot() : source.getYRot()) + (float) (accuracy - 2 * random.nextDouble() * accuracy) * 40;
         float pitch = source.getXRot() + (float) (accuracy - 2 * random.nextDouble() * accuracy) * 40;
-        double side = centered ? 0 : source.getMainArm() == HumanoidArm.RIGHT ? -0.16 : 0.16;
+        double side = centered ? 0 : npc || source.getMainArm() == HumanoidArm.RIGHT ? -0.16 : 0.16;
         projectile.setPos(source.getEyePosition().add(Math.cos(Math.toRadians(yaw)) * side, -0.1,
                 Math.sin(Math.toRadians(yaw)) * side));
         Vec3 direction = Vec3.directionFromRotation(pitch, yaw).normalize().add(

@@ -14,6 +14,7 @@ from legacy_radiation import generate_radiation_content, radiation_translations
 from legacy_fabricator import generate_fabricator_content, fabricator_translations
 from legacy_charging import generate_charging_content, charging_translations
 from legacy_rockets import generate_rocket_content, rocket_item_model, rocket_translations
+from legacy_npcs import generate_npc_content, npc_translations, SOUNDS as NPC_SOUNDS
 from legacy_items import arguments
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -77,6 +78,7 @@ def parse_weapons():
         for name, values in re.findall(r'\.([\w]+)\(([^()]*)\)', statement[end:]):
             calls[name] = arguments(values)
         drop = calls.get('setDamageDrop', [args[9], args[9], args[6]])
+        npc_ai = calls.get('setAIStats', ['15', '60', '0', '0'])
         shotgun = calls.get('setShotgunSpread', ['0', '0', 'false'])
         if shotgun[2] != 'false': raise ValueError(f'{identifier}: burst behavior not ported yet')
         ammo_item, empty, loose, bundles = ammo_for(args[1])
@@ -97,6 +99,8 @@ def parse_weapons():
             'drop_start': num(drop[0]), 'drop_end': num(drop[1]),
             'speed': num(calls.get('setBulletSpeed', ['2'])[0]), 'lifetime': lifetime,
             'projectile': projectile,
+            'npc_ai': {'range':num(npc_ai[0]), 'interval':int(num(npc_ai[1])), 'burst':int(num(npc_ai[2])),
+                       'shot_delay':int(num(npc_ai[3])), 'forward_offset':num(calls.get('setForwardOffset', ['0'])[0])},
             'accuracy': num(args[10]), 'automatic': args[2] == 'false',
             'extra_pellets': int(num(shotgun[0])), 'pellet_spread': num(shotgun[1]),
             'gravity': num(calls.get('setGravity', ['0'])[0]),
@@ -127,6 +131,18 @@ def generate():
     def data(path, value): output(path, json.dumps(value, ensure_ascii=False, indent=2) + '\n')
     def resource(path, value): data(RESOURCES / path, value)
     weapons = parse_weapons()
+    output('core/src/main/java/techguns/core/NpcWeapons.java', '''package techguns.core;
+
+/** Generated from TGuns.setAIStats and GenericGun.getAIAttack. */
+public final class NpcWeapons {
+    public static NpcAttackSpec forWeapon(String id) {
+        return switch (id) {
+''' + ''.join(f'            case "{g["id"]}" -> new NpcAttackSpec({g["npc_ai"]["range"]}, {g["npc_ai"]["interval"]}, {g["npc_ai"]["burst"]}, {g["npc_ai"]["shot_delay"]}, {g["npc_ai"]["forward_offset"]});\n' for g in weapons) + '''            default -> throw new IllegalArgumentException("Unported NPC weapon: " + id);
+        };
+    }
+    private NpcWeapons() {}
+}
+''')
     crafting = plan_crafting(weapons)
     materials = set(crafting['materials'])
     data('content/crafting-content.json', crafting['catalog'])
@@ -201,6 +217,7 @@ def generate():
             translated[lang][f'item.techguns.{identifier}'] = languages[lang].get(key, languages['en_us'].get(key, identifier))
     for name in ('machines.ammopresswork1', 'machines.ammopresswork2', 'machines.metalpresswork', 'machines.chemlabwork', 'machines.rc_heatraywork', 'machines.rc_beep', 'machines.rc_warning', 'effects.geiger.low', 'effects.geiger.high', 'machines.fabricatorwork', 'machines.chargingstationwork', 'effects.nukeexplosion'):
         selected_sounds[name] = {'sounds': sounds_data[name]['sounds']}
+    for name in NPC_SOUNDS: selected_sounds[name] = {'sounds':sounds_data[name]['sounds']}
     for sound, value in selected_sounds.items():
         subtitle = f'subtitles.techguns.{sound}'
         value['subtitle'] = subtitle
@@ -215,6 +232,7 @@ def generate():
                 if sound=='machines.chargingstationwork': translated[lang][subtitle]='Charging Station works' if lang=='en_us' else 'Работает зарядная станция'
             if sound.startswith('effects.geiger.'): translated[lang][subtitle]='Geiger counter clicks' if lang=='en_us' else 'Щёлкает счётчик Гейгера'
             if sound == 'effects.nukeexplosion': translated[lang][subtitle] = 'Nuclear explosion' if lang == 'en_us' else 'Ядерный взрыв'
+            if sound in NPC_SOUNDS: translated[lang][subtitle] = 'Super Mutant' if lang == 'en_us' else 'Супермутант'
         for entry in value['sounds']:
             name = entry if isinstance(entry, str) else entry['name']
             path = f'sounds/{name.split(":")[-1]}.ogg'
@@ -235,6 +253,7 @@ def generate():
         values.update(fabricator_translations(lang))
         values.update(charging_translations(lang))
         values.update(rocket_translations(lang))
+        values.update(npc_translations(lang))
         values['entity.techguns.laser_beam'] = 'Laser beam' if lang == 'en_us' else 'Лазерный луч'
         values['death.attack.techguns.laser'] = '%1$s was lasered by %2$s' if lang == 'en_us' else '%1$s убит лазером игрока %2$s'
         values['death.attack.techguns.laser.player'] = values['death.attack.techguns.laser']
@@ -285,7 +304,7 @@ public final class Weapons {
 '''
     output('core/src/main/java/techguns/core/Weapons.java', source)
     files.update(generate_machine_content())
-    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content()) for entry in domain.items()]:
+    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_npc_content()) for entry in domain.items()]:
         if path in files:
             # Several content domains contribute to the same mining/tool and common item tags.
             if '/tags/' not in path: raise ValueError(f'Colliding generated resource: {path}')

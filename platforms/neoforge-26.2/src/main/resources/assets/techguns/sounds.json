@@ -341,5 +341,37 @@
       "techguns:effects/nukeexplosion"
     ],
     "subtitle": "subtitles.techguns.effects.nukeexplosion"
+  },
+  "npcs.cyberdemonidle": {
+    "sounds": [
+      "techguns:npcs/cyberdemon_idle_a",
+      "techguns:npcs/cyberdemon_idle_b",
+      "techguns:npcs/cyberdemon_idle_c"
+    ],
+    "subtitle": "subtitles.techguns.npcs.cyberdemonidle"
+  },
+  "npcs.cyberdemonhurt": {
+    "sounds": [
+      "techguns:npcs/cyberdemon_hurt_a",
+      "techguns:npcs/cyberdemon_hurt_b",
+      "techguns:npcs/cyberdemon_hurt_c"
+    ],
+    "subtitle": "subtitles.techguns.npcs.cyberdemonhurt"
+  },
+  "npcs.cyberdemondeath": {
+    "sounds": [
+      "techguns:npcs/cyberdemon_death_a",
+      "techguns:npcs/cyberdemon_death_b"
+    ],
+    "subtitle": "subtitles.techguns.npcs.cyberdemondeath"
+  },
+  "npcs.cyberdemonstep": {
+    "sounds": [
+      "techguns:npcs/cyberdemon_step_a",
+      "techguns:npcs/cyberdemon_step_b",
+      "techguns:npcs/cyberdemon_step_c",
+      "techguns:npcs/cyberdemon_step_d"
+    ],
+    "subtitle": "subtitles.techguns.npcs.cyberdemonstep"
   }
 }

@@ -78,7 +78,7 @@ public final class RocketExplosion {
                 var state = level.getBlockState(pos);
                 var variant = rocket.variant(); var gun = rocket.weapon().stats();
                 double power = techguns.core.ExplosionMath.band(center.distanceTo(Vec3.atCenterOf(pos)),
-                        variant.innerRadius(gun), variant.outerRadius(gun), variant.damage(gun), variant.minimumDamage(gun));
+                        variant.innerRadius(gun), variant.outerRadius(gun), variant.damage(gun), variant.minimumDamage(gun)) * rocket.shotDamage().scale();
                 if (power <= 0) break;
                 if (!state.isAir()) {
                     float resistance = state.getExplosionResistance(level, pos, context);

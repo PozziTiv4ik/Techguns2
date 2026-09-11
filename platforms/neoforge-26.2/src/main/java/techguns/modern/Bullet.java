@@ -28,6 +28,9 @@ public final class Bullet extends Projectile {
     private WeaponDefinition weapon = Weapons.definition("revolver");
     private double distance;
     private int age;
+    private ShotDamage shotDamage = ShotDamage.PLAYER;
+    public void npcDamage(float scale) { shotDamage = new ShotDamage(true, scale); }
+    public ShotDamage shotDamage() { return shotDamage; }
 
     public Bullet(EntityType<? extends Bullet> type, Level level) { super(type, level); }
 
@@ -63,9 +66,8 @@ public final class Bullet extends Projectile {
             boolean friendlyPlayer = getOwner() instanceof Player owner && entityHit.getEntity() instanceof Player target
                     && !owner.canHarmPlayer(target);
             if (!friendlyPlayer) {
-                DamageSource source = new DamageSource(server.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE)
-                        .getOrThrow(DAMAGE_TYPE), this, getOwner());
-                entityHit.getEntity().hurtServer(server, source, weapon.stats().damageAt(distance));
+                DamageSource source = shotDamage.source(server, DAMAGE_TYPE, this);
+                entityHit.getEntity().hurtServer(server, source, shotDamage.againstEntity(weapon.stats().damageAt(distance)));
             }
         }
         setPos(end);
@@ -83,6 +85,7 @@ public final class Bullet extends Projectile {
         output.putDouble("distance", distance);
         output.putInt("age", age);
         output.putString("weapon", weapon.id());
+        shotDamage.save(output);
     }
 
     @Override
@@ -91,6 +94,7 @@ public final class Bullet extends Projectile {
         double stored = input.getDoubleOr("distance", 0);
         distance = Double.isFinite(stored) ? Math.max(0, stored) : 0;
         try {
+            shotDamage = ShotDamage.load(input);
             configure(Weapons.definition(input.getStringOr("weapon", "revolver")));
         } catch (IllegalArgumentException unknownWeapon) {
             discard();

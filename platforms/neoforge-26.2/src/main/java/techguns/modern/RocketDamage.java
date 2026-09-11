@@ -15,13 +15,13 @@ public final class RocketDamage {
     // NeoForge's knockback event has no DamageSource. Keep context only for this synchronous hurt call.
     private static final ThreadLocal<Hit> ACTIVE = new ThreadLocal<>();
     public static DamageSource source(ServerLevel level, RocketProjectile rocket) {
-        return new DamageSource(level.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(TYPE), rocket, rocket.getOwner());
+        return rocket.shotDamage().source(level, TYPE, rocket);
     }
     public static boolean hurt(ServerLevel level, RocketProjectile rocket, Entity target, float amount, float knockback) {
         if (amount <= 0 || rocket.getOwner() instanceof Player owner && target instanceof Player player && !owner.canHarmPlayer(player)) return false;
         Hit previous = ACTIVE.get();
         ACTIVE.set(new Hit(target, rocket.getOwner(), knockback));
-        try { return target.hurtServer(level, source(level, rocket), amount); }
+        try { return target.hurtServer(level, source(level, rocket), rocket.shotDamage().againstEntity(amount)); }
         finally { if (previous == null) ACTIVE.remove(); else ACTIVE.set(previous); }
     }
     public static void knockback(LivingKnockBackEvent event) {

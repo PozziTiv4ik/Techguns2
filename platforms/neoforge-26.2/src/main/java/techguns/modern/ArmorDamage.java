@@ -4,29 +4,55 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import techguns.core.ArmorMath;
+import techguns.core.DamageKind;
+import techguns.core.SuperMutantRules;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 
 /** Preserve Techguns armor categories while keeping Minecraft's other damage stages. */
 public final class ArmorDamage {
     public static void onIncoming(LivingIncomingDamageEvent event) {
-        if (event.getSource().is(techguns.modern.fluid.TGLiquidBlock.ACID_DAMAGE)) {
-            // Default armor contributes zero against legacy poison. Specialized TG protection is a separate port stage.
-            event.addReductionModifier(DamageContainer.Reduction.ARMOR, (container,previousReduction) -> 0);
-            return;
-        }
-        techguns.core.WeaponDefinition weapon;
+        boolean mutant = event.getEntity() instanceof techguns.modern.npc.SuperMutant;
+        techguns.core.WeaponDefinition weapon = null;
         if (event.getSource().getDirectEntity() instanceof Bullet bullet && event.getSource().is(Bullet.DAMAGE_TYPE)) {
             weapon = bullet.weapon();
         } else if (event.getSource().getDirectEntity() instanceof LaserBeam beam && event.getSource().is(LaserBeam.DAMAGE_TYPE)) {
             weapon = beam.weapon();
         } else if (event.getSource().getDirectEntity() instanceof RocketProjectile rocket && event.getSource().is(RocketDamage.TYPE)) {
             weapon = rocket.weapon();
-        } else return;
+        }
+        DamageKind kind = weapon != null ? weapon.projectile().damageKind() : sourceKind(event.getSource());
+        if (!mutant && weapon == null && !event.getSource().is(techguns.modern.fluid.TGLiquidBlock.ACID_DAMAGE)) return;
+        float penetration = weapon == null ? 0 : (float) weapon.penetration();
+        float armor = mutant ? SuperMutantRules.armor(kind)
+                : ArmorMath.defaultArmor(kind, (float) event.getEntity().getAttributeValue(Attributes.ARMOR), false);
+        float toughness = (float) event.getEntity().getAttributeValue(Attributes.ARMOR_TOUGHNESS);
+        if (mutant && event.getSource().is(DamageTypeTags.BYPASSES_ARMOR)) {
+            // This modern tag encodes zero ordinary radiation armor; legacy TG radiation still used NPC typed armor.
+            // Preserve actual vanilla armor-bypassing sources (magic, burning, fall, etc.).
+            if (event.getSource().is(techguns.modern.radiation.RadiationSystem.DAMAGE))
+                event.setAmount(ArmorMath.afterArmor(event.getAmount(), armor, toughness, penetration));
+            return;
+        }
         event.addReductionModifier(DamageContainer.Reduction.ARMOR, (container, previousReduction) -> {
             float damage = container.getNewDamage();
-            float armor = ArmorMath.defaultArmor(weapon.projectile().damageKind(), (float) event.getEntity().getAttributeValue(Attributes.ARMOR), false);
-            float toughness = (float) event.getEntity().getAttributeValue(Attributes.ARMOR_TOUGHNESS);
-            return damage - ArmorMath.afterArmor(damage, armor, toughness, (float) weapon.penetration());
+            return damage - ArmorMath.afterArmor(damage, armor, toughness, penetration);
         });
+    }
+    private static DamageKind sourceKind(DamageSource source) {
+        if (source.is(techguns.modern.fluid.TGLiquidBlock.ACID_DAMAGE)) return DamageKind.POISON;
+        if (source.is(techguns.modern.radiation.RadiationSystem.DAMAGE)) return DamageKind.RADIATION;
+        if (source.is(techguns.modern.radiation.RadiationSystem.POISONING)) return DamageKind.UNRESISTABLE;
+        if (source.is(DamageTypeTags.IS_EXPLOSION)) return DamageKind.EXPLOSION;
+        if (source.is(net.neoforged.neoforge.common.Tags.DamageTypes.IS_MAGIC)) return DamageKind.ENERGY;
+        if (source.is(DamageTypeTags.IS_FIRE) || source.is(DamageTypes.DRAGON_BREATH)) return DamageKind.FIRE;
+        if (source.is(DamageTypeTags.IS_PROJECTILE)) return DamageKind.PROJECTILE;
+        if (source.is(DamageTypes.WITHER)) return DamageKind.POISON;
+        if (source.is(DamageTypes.LIGHTNING_BOLT)) return DamageKind.LIGHTNING;
+        if (source.is(DamageTypeTags.BYPASSES_INVULNERABILITY) || source.is(DamageTypes.FALL) || source.is(DamageTypes.DROWN)
+                || source.is(DamageTypes.IN_WALL) || source.is(DamageTypes.STARVE)) return DamageKind.UNRESISTABLE;
+        return DamageKind.PHYSICAL;
     }
     private ArmorDamage() {}
 }

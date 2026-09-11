@@ -11,6 +11,13 @@
     "speed": 1.0,
     "lifetime": 25,
     "projectile": "ballistic",
+    "npc_ai": {
+      "range": 12.0,
+      "interval": 60,
+      "burst": 0,
+      "shot_delay": 0,
+      "forward_offset": 0.0
+    },
     "accuracy": 0.035,
     "automatic": false,
     "extra_pellets": 0,
@@ -47,6 +54,13 @@
     "speed": 1.5,
     "lifetime": 10,
     "projectile": "ballistic",
+    "npc_ai": {
+      "range": 12.0,
+      "interval": 60,
+      "burst": 2,
+      "shot_delay": 20,
+      "forward_offset": 0.0
+    },
     "accuracy": 0.01,
     "automatic": false,
     "extra_pellets": 7,
@@ -83,6 +97,13 @@
     "speed": 2.0,
     "lifetime": 40,
     "projectile": "ballistic",
+    "npc_ai": {
+      "range": 18.0,
+      "interval": 90,
+      "burst": 6,
+      "shot_delay": 20,
+      "forward_offset": 0.0
+    },
     "accuracy": 0.025,
     "automatic": false,
     "extra_pellets": 0,
@@ -119,6 +140,13 @@
     "speed": 1.75,
     "lifetime": 40,
     "projectile": "ballistic",
+    "npc_ai": {
+      "range": 24.0,
+      "interval": 60,
+      "burst": 6,
+      "shot_delay": 15,
+      "forward_offset": 0.0
+    },
     "accuracy": 0.015,
     "automatic": false,
     "extra_pellets": 0,
@@ -155,6 +183,13 @@
     "speed": 1.75,
     "lifetime": 40,
     "projectile": "ballistic",
+    "npc_ai": {
+      "range": 18.0,
+      "interval": 45,
+      "burst": 3,
+      "shot_delay": 3,
+      "forward_offset": 0.0
+    },
     "accuracy": 0.05,
     "automatic": true,
     "extra_pellets": 0,
@@ -191,6 +226,13 @@
     "speed": 3.5,
     "lifetime": 90,
     "projectile": "ballistic",
+    "npc_ai": {
+      "range": 36.0,
+      "interval": 60,
+      "burst": 0,
+      "shot_delay": 0,
+      "forward_offset": 0.0
+    },
     "accuracy": 0.05,
     "automatic": false,
     "extra_pellets": 0,
@@ -227,6 +269,13 @@
     "speed": 1.5,
     "lifetime": 15,
     "projectile": "ballistic",
+    "npc_ai": {
+      "range": 12.0,
+      "interval": 30,
+      "burst": 0,
+      "shot_delay": 0,
+      "forward_offset": 0.0
+    },
     "accuracy": 0.01,
     "automatic": false,
     "extra_pellets": 7,
@@ -263,6 +312,13 @@
     "speed": 2.0,
     "lifetime": 40,
     "projectile": "ballistic",
+    "npc_ai": {
+      "range": 24.0,
+      "interval": 30,
+      "burst": 3,
+      "shot_delay": 10,
+      "forward_offset": 0.0
+    },
     "accuracy": 0.025,
     "automatic": false,
     "extra_pellets": 0,
@@ -299,6 +355,13 @@
     "speed": 2.5,
     "lifetime": 60,
     "projectile": "ballistic",
+    "npc_ai": {
+      "range": 24.0,
+      "interval": 30,
+      "burst": 3,
+      "shot_delay": 3,
+      "forward_offset": 0.0
+    },
     "accuracy": 0.03,
     "automatic": true,
     "extra_pellets": 0,
@@ -335,6 +398,13 @@
     "speed": 3.0,
     "lifetime": 60,
     "projectile": "ballistic",
+    "npc_ai": {
+      "range": 24.0,
+      "interval": 30,
+      "burst": 3,
+      "shot_delay": 3,
+      "forward_offset": 0.0
+    },
     "accuracy": 0.015,
     "automatic": true,
     "extra_pellets": 0,
@@ -371,6 +441,13 @@
     "speed": 2.0,
     "lifetime": 60,
     "projectile": "ballistic",
+    "npc_ai": {
+      "range": 24.0,
+      "interval": 30,
+      "burst": 3,
+      "shot_delay": 3,
+      "forward_offset": 0.0
+    },
     "accuracy": 0.01,
     "automatic": true,
     "extra_pellets": 0,
@@ -407,6 +484,13 @@
     "speed": 3.0,
     "lifetime": 75,
     "projectile": "ballistic",
+    "npc_ai": {
+      "range": 24.0,
+      "interval": 40,
+      "burst": 6,
+      "shot_delay": 3,
+      "forward_offset": 0.0
+    },
     "accuracy": 0.02,
     "automatic": true,
     "extra_pellets": 0,
@@ -443,6 +527,13 @@
     "speed": 1.75,
     "lifetime": 40,
     "projectile": "ballistic",
+    "npc_ai": {
+      "range": 18.0,
+      "interval": 35,
+      "burst": 3,
+      "shot_delay": 2,
+      "forward_offset": 0.0
+    },
     "accuracy": 0.05,
     "automatic": true,
     "extra_pellets": 0,
@@ -479,6 +570,13 @@
     "speed": 3.5,
     "lifetime": 90,
     "projectile": "ballistic",
+    "npc_ai": {
+      "range": 36.0,
+      "interval": 30,
+      "burst": 0,
+      "shot_delay": 0,
+      "forward_offset": 0.0
+    },
     "accuracy": 0.0625,
     "automatic": false,
     "extra_pellets": 0,
@@ -515,6 +613,13 @@
     "speed": 2.0,
     "lifetime": 60,
     "projectile": "ballistic",
+    "npc_ai": {
+      "range": 24.0,
+      "interval": 30,
+      "burst": 3,
+      "shot_delay": 3,
+      "forward_offset": 0.0
+    },
     "accuracy": 0.01,
     "automatic": true,
     "extra_pellets": 0,
@@ -551,6 +656,13 @@
     "speed": 3.0,
     "lifetime": 75,
     "projectile": "ballistic",
+    "npc_ai": {
+      "range": 24.0,
+      "interval": 30,
+      "burst": 5,
+      "shot_delay": 2,
+      "forward_offset": 0.0
+    },
     "accuracy": 0.015,
     "automatic": true,
     "extra_pellets": 0,
@@ -587,6 +699,13 @@
     "speed": 2.0,
     "lifetime": 40,
     "projectile": "ballistic",
+    "npc_ai": {
+      "range": 18.0,
+      "interval": 35,
+      "burst": 3,
+      "shot_delay": 2,
+      "forward_offset": 0.0
+    },
     "accuracy": 0.05,
     "automatic": true,
     "extra_pellets": 0,

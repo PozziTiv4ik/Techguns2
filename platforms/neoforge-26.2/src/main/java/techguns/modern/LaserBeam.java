@@ -36,6 +36,9 @@ public final class LaserBeam extends Projectile {
     private static final EntityDataAccessor<Integer> AGE = SynchedEntityData.defineId(LaserBeam.class, EntityDataSerializers.INT);
     private WeaponDefinition weapon = Weapons.definition("lasergun");
     private boolean traced;
+    private ShotDamage shotDamage = ShotDamage.PLAYER;
+    public void npcDamage(float scale) { shotDamage = new ShotDamage(true, scale); }
+    public ShotDamage shotDamage() { return shotDamage; }
 
     public LaserBeam(EntityType<? extends LaserBeam> type, Level level) { super(type, level); }
     public WeaponDefinition weapon() { return weapon; }
@@ -69,8 +72,8 @@ public final class LaserBeam extends Projectile {
         if (hit instanceof EntityHitResult targetHit) {
             boolean friendly = getOwner() instanceof Player owner && targetHit.getEntity() instanceof Player target && !owner.canHarmPlayer(target);
             if (friendly) return;
-            DamageSource source = new DamageSource(server.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DAMAGE_TYPE), this, getOwner());
-            targetHit.getEntity().hurtServer(server, source, weapon.stats().damageAt(end.length()));
+            DamageSource source = shotDamage.source(server, DAMAGE_TYPE, this);
+            targetHit.getEntity().hurtServer(server, source, shotDamage.againstEntity(weapon.stats().damageAt(end.length())));
         } else {
             Vec3 at = hit.getLocation();
             server.sendParticles(ParticleTypes.ELECTRIC_SPARK, at.x, at.y, at.z, 6, .05, .05, .05, .1);
@@ -93,6 +96,7 @@ public final class LaserBeam extends Projectile {
     @Override protected void addAdditionalSaveData(ValueOutput output) {
         super.addAdditionalSaveData(output);
         output.putString("weapon", weapon.id());
+        shotDamage.save(output);
         output.putBoolean("traced", traced);
         output.putInt("age", age());
         Vec3 end = endOffset();
@@ -100,7 +104,7 @@ public final class LaserBeam extends Projectile {
     }
     @Override protected void readAdditionalSaveData(ValueInput input) {
         super.readAdditionalSaveData(input);
-        try { configure(Weapons.definition(input.getStringOr("weapon", "lasergun"))); }
+        try { shotDamage = ShotDamage.load(input); configure(Weapons.definition(input.getStringOr("weapon", "lasergun"))); }
         catch (IllegalArgumentException invalid) { discard(); return; }
         Vec3 end = new Vec3(input.getDoubleOr("end_x", 0), input.getDoubleOr("end_y", 0), input.getDoubleOr("end_z", 0));
         int age = input.getIntOr("age", 0);

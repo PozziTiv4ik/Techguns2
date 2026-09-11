@@ -63,6 +63,7 @@ public final class TGContent {
             CreativeModeTab.builder().title(Component.translatable("itemGroup.techguns")).icon(REVOLVER::toStack)
                     .displayItems((parameters, output) -> {
                         GUNS.values().forEach(item -> output.accept(item.get()));
+                        output.accept(techguns.modern.npc.NpcContent.EGG.get());
                         AMMO.values().forEach(item -> output.accept(item.get()));
                         MATERIALS.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> output.accept(entry.getValue().get()));
                         output.accept(techguns.modern.machine.TGMachineContent.AMMO_PRESS_ITEM.get());

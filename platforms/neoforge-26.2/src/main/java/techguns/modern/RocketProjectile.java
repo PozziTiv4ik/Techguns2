@@ -25,6 +25,9 @@ public final class RocketProjectile extends Projectile {
     private Vec3 origin;
     private int age;
     private boolean blockDamage;
+    private ShotDamage shotDamage = ShotDamage.PLAYER;
+    public void npcDamage(float scale) { shotDamage = new ShotDamage(true, scale); }
+    public ShotDamage shotDamage() { return shotDamage; }
     public RocketProjectile(EntityType<? extends RocketProjectile> type, Level level) { super(type, level); }
     public void configure(WeaponDefinition weapon, RocketVariant variant, boolean blockDamage) {
         if (weapon.projectile() != ProjectileKind.ROCKET) throw new IllegalArgumentException("Expected rocket weapon");
@@ -98,12 +101,13 @@ public final class RocketProjectile extends Projectile {
     @Override protected void addAdditionalSaveData(ValueOutput output) {
         super.addAdditionalSaveData(output);
         output.putString("weapon", weapon.id()); output.putString("variant", variant().id());
+        shotDamage.save(output);
         output.putInt("age", age); output.putBoolean("block_damage", blockDamage);
         if (origin != null) output.store("origin", Vec3.CODEC, origin);
     }
     @Override protected void readAdditionalSaveData(ValueInput input) {
         super.readAdditionalSaveData(input);
-        try { configure(Weapons.definition(input.getStringOr("weapon", "rocketlauncher")), RocketVariant.fromId(input.getStringOr("variant", "default")), input.getBooleanOr("block_damage", false)); }
+        try { shotDamage = ShotDamage.load(input); configure(Weapons.definition(input.getStringOr("weapon", "rocketlauncher")), RocketVariant.fromId(input.getStringOr("variant", "default")), input.getBooleanOr("block_damage", false)); }
         catch (IllegalArgumentException invalid) { discard(); return; }
         age = Math.clamp(input.getIntOr("age", 0), 0, variant().lifetime(weapon.stats()));
         origin = input.read("origin", Vec3.CODEC).orElse(null);

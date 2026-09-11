@@ -1,0 +1,480 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/entities/npcs/SuperMutantBasic.java",
+  "weapons": [
+    "rocketlauncher",
+    "ak47",
+    "combatshotgun",
+    "lasergun",
+    "lasergun"
+  ],
+  "natural_spawn_entry": false,
+  "egg_icon": "minecraft:item/egg tinted with original primary color",
+  "original_egg_colors": [
+    13019499,
+    7427374
+  ],
+  "texture_size": [
+    64,
+    64
+  ],
+  "parts": [
+    {
+      "name": "rightBoot",
+      "uv": [
+        0,
+        33
+      ],
+      "box": [
+        -2.0,
+        0.0,
+        -2.0,
+        5.0,
+        6.0,
+        5.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        -0.6,
+        6.0,
+        -0.7
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "bipedLeftArm",
+      "uv": [
+        40,
+        16
+      ],
+      "box": [
+        -1.0,
+        -2.0,
+        -2.0,
+        4.0,
+        12.0,
+        4.0
+      ],
+      "mirror": true,
+      "inflate": 0.0,
+      "pivot": [
+        5.0,
+        2.0,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "bipedRightLeg",
+      "uv": [
+        0,
+        16
+      ],
+      "box": [
+        -2.0,
+        0.0,
+        -2.0,
+        4.0,
+        12.0,
+        4.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        -1.9,
+        11.0,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "bipedBody",
+      "uv": [
+        16,
+        16
+      ],
+      "box": [
+        -4.0,
+        0.0,
+        -2.0,
+        8.0,
+        12.0,
+        4.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "leftBoot",
+      "uv": [
+        0,
+        33
+      ],
+      "box": [
+        -2.0,
+        0.0,
+        -2.0,
+        5.0,
+        6.0,
+        5.0
+      ],
+      "mirror": true,
+      "inflate": 0.0,
+      "pivot": [
+        -0.4,
+        6.0,
+        -0.7
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "bipedHeadwear",
+      "uv": [
+        32,
+        0
+      ],
+      "box": [
+        -4.0,
+        -8.0,
+        -4.0,
+        8.0,
+        8.0,
+        8.0
+      ],
+      "mirror": false,
+      "inflate": 0.5,
+      "pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "bipedRightArm",
+      "uv": [
+        40,
+        16
+      ],
+      "box": [
+        -3.0,
+        -2.0,
+        -2.0,
+        4.0,
+        12.0,
+        4.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        -5.0,
+        2.0,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "chestarmorfront",
+      "uv": [
+        21,
+        34
+      ],
+      "box": [
+        -4.0,
+        0.0,
+        -2.0,
+        6.0,
+        7.0,
+        1.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        1.0,
+        1.0,
+        -1.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "chestarmorback",
+      "uv": [
+        21,
+        44
+      ],
+      "box": [
+        -4.0,
+        0.0,
+        -2.0,
+        6.0,
+        7.0,
+        1.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        1.0,
+        1.0,
+        4.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "belt",
+      "uv": [
+        0,
+        53
+      ],
+      "box": [
+        0.0,
+        0.0,
+        0.0,
+        9.0,
+        4.0,
+        5.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        -4.5,
+        9.0,
+        -2.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "leftarm_upper",
+      "uv": [
+        40,
+        33
+      ],
+      "box": [
+        -1.0,
+        -2.0,
+        -2.0,
+        5.0,
+        7.0,
+        5.0
+      ],
+      "mirror": true,
+      "inflate": 0.0,
+      "pivot": [
+        -0.1,
+        -0.2,
+        -0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "bipedLeftLeg",
+      "uv": [
+        0,
+        16
+      ],
+      "box": [
+        -2.0,
+        0.0,
+        -2.0,
+        4.0,
+        12.0,
+        4.0
+      ],
+      "mirror": true,
+      "inflate": 0.0,
+      "pivot": [
+        1.9,
+        11.0,
+        -0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "rightarmUpper",
+      "uv": [
+        40,
+        33
+      ],
+      "box": [
+        -3.0,
+        -2.0,
+        -2.0,
+        5.0,
+        7.0,
+        5.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        -0.9,
+        -0.2,
+        -0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "bipedHead",
+      "uv": [
+        0,
+        0
+      ],
+      "box": [
+        -4.0,
+        -8.0,
+        -4.0,
+        8.0,
+        8.0,
+        8.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "parents": {
+    "rightBoot": "bipedRightLeg",
+    "leftBoot": "bipedLeftLeg",
+    "chestarmorfront": "bipedBody",
+    "chestarmorback": "bipedBody",
+    "belt": "bipedBody",
+    "leftarm_upper": "bipedLeftArm",
+    "rightarmUpper": "bipedRightArm",
+    "bipedHeadwear": "bipedHead"
+  }
+}
