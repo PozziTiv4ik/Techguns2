@@ -155,10 +155,13 @@ public final class TechgunsClient {
     private static void renderers(EntityRenderersEvent.RegisterRenderers event) {
         // The initial round uses vanilla tracer particles; a mesh renderer is part of M5.
         event.registerEntityRenderer(TGContent.BULLET.get(), NoopRenderer::new);
+        event.registerEntityRenderer(TGContent.NETHER_BLAST.get(), NoopRenderer::new);
         event.registerEntityRenderer(TGContent.LASER_BEAM.get(), LaserBeamRenderer::new);
         event.registerEntityRenderer(TGContent.ROCKET.get(), RocketRenderer::new);
         event.registerEntityRenderer(TGContent.RADIATION_ZONE.get(), NoopRenderer::new);
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.SUPER_MUTANT.get(), SuperMutantRenderer::new);
+        event.registerEntityRenderer(techguns.modern.npc.NpcContent.CYBER_DEMON.get(), CyberDemonRenderer::new);
+        event.registerEntityRenderer(techguns.modern.npc.NetherSpawns.SELECTOR.get(), NoopRenderer::new);
         event.registerBlockEntityRenderer(techguns.modern.machine.charging.ChargingStationContent.ENTITY.get(), ChargingStationRenderer::new);
     }
 }

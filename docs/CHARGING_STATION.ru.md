@@ -80,8 +80,9 @@ ChargeFlare пока используются стандартные искры.
 
 Настоящая воронка переносит пустую ячейку из Fabricator в станцию. Заряженная ячейка
 затем загружается в лазерную винтовку и обеспечивает выстрел. Для полного пути
-Survival по-прежнему нужны первые кибернетические детали от NPC, производство
-лазерного фокуса и источники энергии. Актуальные результаты: [VERIFICATION.ru.md](VERIFICATION.ru.md).
+Survival теперь доступны первые кибернетические детали от естественно появляющегося
+[CyberDemon](CYBER_DEMON.ru.md). Собственные источники энергии и вся прогрессия
+ещё переносятся. Актуальные результаты: [VERIFICATION.ru.md](VERIFICATION.ru.md).
 
 Исходники: `legacy/1.12.2/src/main/java/techguns/tileentities/ChargingStationTileEnt.java`,
 `tileentities/operation/{ChargingStationRecipe,MachineOperation}.java`, `TGMachineRecipes.java`,

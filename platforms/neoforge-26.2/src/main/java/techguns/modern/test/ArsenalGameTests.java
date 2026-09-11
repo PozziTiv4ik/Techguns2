@@ -61,6 +61,11 @@ final class ArsenalGameTests {
             var beams = helper.getLevel().getEntitiesOfClass(techguns.modern.LaserBeam.class, player.getBoundingBox().inflate(3), b -> b.getOwner() == player);
             helper.assertValueEqual(beams.size(), 1, "One beam per laser shot");
             helper.assertValueEqual(beams.getFirst().weapon().id(), gun.id(), "Correct laser parameters");
+        } else if (gun.projectile() == techguns.core.ProjectileKind.NETHER_BLASTER) {
+            var blasts = helper.getLevel().getEntitiesOfClass(techguns.modern.NetherBlasterProjectile.class, player.getBoundingBox().inflate(3), b -> b.getOwner() == player);
+            helper.assertValueEqual(blasts.size(), 1, "One Nether Blaster charge");
+            helper.assertValueEqual(blasts.getFirst().weapon().id(), gun.id(), "Correct Nether Blaster parameters");
+            blasts.forEach(techguns.modern.NetherBlasterProjectile::discard);
         } else {
             var rockets = helper.getLevel().getEntitiesOfClass(techguns.modern.RocketProjectile.class, player.getBoundingBox().inflate(3), r -> r.getOwner() == player);
             helper.assertValueEqual(rockets.size(), 1, "One rocket per shot");

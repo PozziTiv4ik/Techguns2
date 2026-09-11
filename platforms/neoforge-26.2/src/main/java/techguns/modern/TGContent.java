@@ -48,6 +48,9 @@ public final class TGContent {
     public static final DeferredHolder<EntityType<?>, EntityType<Bullet>> BULLET = ENTITIES.register("bullet", () ->
             EntityType.Builder.<Bullet>of(Bullet::new, MobCategory.MISC).sized(0.1f, 0.1f).clientTrackingRange(8).updateInterval(1)
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, id("bullet"))));
+    public static final DeferredHolder<EntityType<?>, EntityType<NetherBlasterProjectile>> NETHER_BLAST = ENTITIES.register("nether_blast", () ->
+            EntityType.Builder.<NetherBlasterProjectile>of(NetherBlasterProjectile::new, MobCategory.MISC).sized(.25f, .25f).clientTrackingRange(8).updateInterval(1)
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE, id("nether_blast"))));
     public static final DeferredHolder<EntityType<?>, EntityType<LaserBeam>> LASER_BEAM = ENTITIES.register("laser_beam", () ->
             EntityType.Builder.<LaserBeam>of(LaserBeam::new, MobCategory.MISC).sized(0.1f, 0.1f).clientTrackingRange(12).updateInterval(1)
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, id("laser_beam"))));
@@ -64,6 +67,7 @@ public final class TGContent {
                     .displayItems((parameters, output) -> {
                         GUNS.values().forEach(item -> output.accept(item.get()));
                         output.accept(techguns.modern.npc.NpcContent.EGG.get());
+                        output.accept(techguns.modern.npc.NpcContent.CYBER_EGG.get());
                         AMMO.values().forEach(item -> output.accept(item.get()));
                         MATERIALS.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> output.accept(entry.getValue().get()));
                         output.accept(techguns.modern.machine.TGMachineContent.AMMO_PRESS_ITEM.get());

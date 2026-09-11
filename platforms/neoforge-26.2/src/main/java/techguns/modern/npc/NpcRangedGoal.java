@@ -10,10 +10,10 @@ import techguns.modern.GunItem;
 
 /** Port of EntityAIRangedAttack: approach, track visibility, then use the source weapon's burst clock. */
 public final class NpcRangedGoal extends Goal {
-    private final SuperMutant mob;
+    private final ArmedNpc mob;
     private ItemStack weapon;
     private NpcAttackCycle cycle;
-    public NpcRangedGoal(SuperMutant mob) { this.mob = mob; setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK)); }
+    public NpcRangedGoal(ArmedNpc mob) { this.mob = mob; setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK)); }
     @Override public boolean canUse() { return mob.armed() && valid(mob.getTarget()); }
     @Override public boolean canContinueToUse() { return canUse(); }
     private boolean valid(LivingEntity target) { return NpcCombat.validTarget(mob, target); }

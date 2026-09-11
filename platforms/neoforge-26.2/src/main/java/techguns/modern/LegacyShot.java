@@ -13,8 +13,10 @@ final class LegacyShot {
         boolean npc = source instanceof net.minecraft.world.entity.Mob;
         float yaw = (npc ? source.getYHeadRot() : source.getYRot()) + (float) (accuracy - 2 * random.nextDouble() * accuracy) * 40;
         float pitch = source.getXRot() + (float) (accuracy - 2 * random.nextDouble() * accuracy) * 40;
-        double side = centered ? 0 : npc || source.getMainArm() == HumanoidArm.RIGHT ? -0.16 : 0.16;
-        projectile.setPos(source.getEyePosition().add(Math.cos(Math.toRadians(yaw)) * side, -0.1,
+        double offset = .16 + (source instanceof techguns.modern.npc.ArmedNpc armed ? armed.bulletSideOffset() : 0);
+        double height = -.1 + (source instanceof techguns.modern.npc.ArmedNpc armed ? armed.bulletHeightOffset() : 0);
+        double side = centered ? 0 : npc || source.getMainArm() == HumanoidArm.RIGHT ? -offset : offset;
+        projectile.setPos(source.getEyePosition().add(Math.cos(Math.toRadians(yaw)) * side, height,
                 Math.sin(Math.toRadians(yaw)) * side));
         Vec3 direction = Vec3.directionFromRotation(pitch, yaw).normalize().add(
                 random.nextGaussian() * 0.007499999832361937,

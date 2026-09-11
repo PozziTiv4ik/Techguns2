@@ -26,6 +26,13 @@ public final class GunItem extends Item {
         boolean aiming = AimSessions.active(player, stack);
         double accuracyMultiplier = aiming ? gun.aim().accuracyMultiplier() : 1;
         for (int pellet = 0; pellet < gun.projectileCount(); pellet++) {
+            if (gun.projectile() == techguns.core.ProjectileKind.NETHER_BLASTER) {
+                var blast = new NetherBlasterProjectile(TGContent.NETHER_BLAST.get(), server);
+                blast.configure(gun); blast.setOwner(player);
+                blast.shootLegacy(player, gun.stats().spread() * accuracyMultiplier, aiming && gun.aim().centered());
+                if (!server.addFreshEntity(blast)) return false;
+                continue;
+            }
             if (gun.projectile() == techguns.core.ProjectileKind.ROCKET) {
                 RocketProjectile rocket = new RocketProjectile(TGContent.ROCKET.get(), server);
                 rocket.configure(gun, RocketAmmo.variant(stack), !SafeMode.enabled(player));

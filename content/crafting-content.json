@@ -64,6 +64,7 @@
     "69": "techguns:cyberneticparts",
     "70": "techguns:electricengine",
     "71": "techguns:laserfocus",
+    "72": "techguns:pumpmechanism",
     "73": "techguns:rademitter",
     "74": "techguns:sonicemitter",
     "75": "techguns:tgx",
@@ -361,6 +362,10 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_70_electricengine.json"
     },
     {
+      "id": "techguns:pumpmechanism",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_72_pumpmechanism.json"
+    },
+    {
       "id": "techguns:ingotcopper",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_79_ingotcopper.json"
     },
@@ -467,6 +472,10 @@
     {
       "id": "techguns:reactionchamber_controller",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/multiblockmachine_5_reactionchamber_controller.json"
+    },
+    {
+      "id": "techguns:netherblaster",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/netherblaster.json"
     },
     {
       "id": "techguns:pistol",

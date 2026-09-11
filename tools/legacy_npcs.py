@@ -24,7 +24,11 @@ def mutant_geometry():
 
 
 def mutant_loot():
-    source = json.loads((LEGACY / 'resources/assets/techguns/loot_tables/entities/supermutantbasic.json').read_text())
+    return npc_loot('supermutantbasic')
+
+
+def npc_loot(name):
+    source = json.loads((LEGACY / f'resources/assets/techguns/loot_tables/entities/{name}.json').read_text())
     pools = []
     for pool in source['pools']:
         entries = []

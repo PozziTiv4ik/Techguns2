@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "techguns:laser"
+    "techguns:laser",
+    "techguns:nether_blast"
   ]
 }

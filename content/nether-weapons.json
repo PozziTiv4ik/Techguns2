@@ -1,0 +1,45 @@
+[
+  {
+    "id": "netherblaster",
+    "capacity": 10,
+    "fire_delay": 8,
+    "reload_ticks": 35,
+    "damage": 14.0,
+    "minimum_damage": 8.0,
+    "drop_start": 15.0,
+    "drop_end": 30.0,
+    "speed": 1.5,
+    "lifetime": 60,
+    "projectile": "nether_blaster",
+    "npc_ai": {
+      "range": 24.0,
+      "interval": 40,
+      "burst": 0,
+      "shot_delay": 0,
+      "forward_offset": 0.0
+    },
+    "accuracy": 0.0,
+    "automatic": true,
+    "extra_pellets": 0,
+    "pellet_spread": 0.0,
+    "gravity": 0.0,
+    "penetration": 0.5,
+    "zoom": 1.0,
+    "zoom_toggle": false,
+    "zoom_accuracy": 1.0,
+    "zoom_centered": false,
+    "ammo": {
+      "item": "nethercharge",
+      "empty_item": "",
+      "loose_item": "",
+      "bundles_per_magazine": 0,
+      "individual": false
+    },
+    "fire_sound": "guns.cyberdemonblasterfire",
+    "reload_sound": "guns.cyberdemonblasterreload",
+    "model": "ModelNetherBlaster",
+    "texture": "textures/guns/cyberdemonblaster",
+    "forward_axis": "-z",
+    "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java"
+  }
+]

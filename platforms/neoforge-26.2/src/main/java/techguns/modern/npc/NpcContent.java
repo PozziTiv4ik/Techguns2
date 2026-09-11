@@ -19,13 +19,23 @@ public final class NpcContent {
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, TGContent.id("supermutantbasic"))));
     public static final DeferredItem<SpawnEggItem> EGG = TGContent.ITEMS.registerItem("supermutantbasic_spawn_egg", SpawnEggItem::new,
             props -> props.spawnEgg(SUPER_MUTANT.get()));
+    public static final DeferredHolder<EntityType<?>, EntityType<CyberDemon>> CYBER_DEMON = TGContent.ENTITIES.register("cyberdemon", () ->
+            EntityType.Builder.<CyberDemon>of(CyberDemon::new, MobCategory.MONSTER).sized(.6f, 1.8f).eyeHeight(1.53f).fireImmune().clientTrackingRange(5).updateInterval(3)
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE, TGContent.id("cyberdemon"))));
+    public static final DeferredItem<SpawnEggItem> CYBER_EGG = TGContent.ITEMS.registerItem("cyberdemon_spawn_egg", SpawnEggItem::new,
+            props -> props.spawnEgg(CYBER_DEMON.get()));
     public static final DeferredHolder<SoundEvent, SoundEvent> IDLE = sound("npcs.cyberdemonidle"), HURT = sound("npcs.cyberdemonhurt"),
             DEATH = sound("npcs.cyberdemondeath"), STEP = sound("npcs.cyberdemonstep");
     private static DeferredHolder<SoundEvent, SoundEvent> sound(String id) { return TGContent.SOUNDS.register(id, () -> SoundEvent.createVariableRangeEvent(TGContent.id(id))); }
     public static void register(IEventBus bus, ModContainer container) {
         NpcConfig.register(container);
+        NpcSpawnConfig.register(container);
+        NetherSpawns.register(bus);
         bus.addListener(NpcContent::attributes);
     }
-    private static void attributes(EntityAttributeCreationEvent event) { event.put(SUPER_MUTANT.get(), SuperMutant.attributes().build()); }
+    private static void attributes(EntityAttributeCreationEvent event) {
+        event.put(SUPER_MUTANT.get(), SuperMutant.attributes().build());
+        event.put(CYBER_DEMON.get(), CyberDemon.attributes().build());
+    }
     private NpcContent() {}
 }

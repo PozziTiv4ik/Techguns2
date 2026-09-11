@@ -8,11 +8,11 @@ import techguns.core.*;
 import techguns.modern.*;
 
 public final class NpcCombat {
-    static boolean validTarget(SuperMutant npc, LivingEntity target) {
+    static boolean validTarget(ArmedNpc npc, LivingEntity target) {
         return target != null && target != npc && target.isAlive() && target.level() == npc.level() && !target.isSpectator()
                 && !(target instanceof net.minecraft.world.entity.player.Player player && player.isCreative()) && npc.canAttack(target);
     }
-    public static boolean fire(SuperMutant npc, LivingEntity target) {
+    public static boolean fire(ArmedNpc npc, LivingEntity target) {
         if (!(npc.level() instanceof ServerLevel level) || !npc.isAlive() || !npc.armed() || !validTarget(npc, target)
                 || !npc.getSensing().hasLineOfSight(target)) return false;
         var stack = npc.getMainHandItem(); var gun = ((GunItem) stack.getItem()).definition(); var ai = NpcWeapons.forWeapon(gun.id());
@@ -35,6 +35,10 @@ public final class NpcCombat {
                 case ROCKET -> {
                     var rocket = new RocketProjectile(TGContent.ROCKET.get(), level); rocket.configure(gun, RocketAmmo.variant(stack), false); rocket.npcDamage(damage);
                     rocket.setOwner(npc); rocket.shootLegacy(npc, spread); projectile = rocket;
+                }
+                case NETHER_BLASTER -> {
+                    var blast = new NetherBlasterProjectile(TGContent.NETHER_BLAST.get(), level); blast.configure(gun); blast.npcDamage(damage);
+                    blast.setOwner(npc); blast.shootLegacy(npc, spread, false); projectile = blast;
                 }
                 default -> throw new IllegalStateException("Unported NPC projectile family");
             }

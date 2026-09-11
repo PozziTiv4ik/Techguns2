@@ -15,6 +15,7 @@ from legacy_fabricator import generate_fabricator_content, fabricator_translatio
 from legacy_charging import generate_charging_content, charging_translations
 from legacy_rockets import generate_rocket_content, rocket_item_model, rocket_translations
 from legacy_npcs import generate_npc_content, npc_translations, SOUNDS as NPC_SOUNDS
+from legacy_cyber import generate_cyber_content, cyber_translations
 from legacy_items import arguments
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -22,6 +23,7 @@ LEGACY = ROOT / 'legacy/1.12.2/src/main'
 RESOURCES = Path('platforms/neoforge-26.2/src/main/resources')
 SELECTION = json.loads((ROOT / 'content/weapon-ports.json').read_text())
 GUI_HIDDEN_PARTS = {'m4_infiltrator': ('LaserBeam', 'LaserBeam01')}
+MISSING_SOURCE_SOUNDS = {'guns.cyberdemonblasterreload'}  # Registered in TGSounds, absent from original sounds.json.
 
 
 def parse_weapons():
@@ -85,7 +87,8 @@ def parse_weapons():
         inline_projectile = re.search(r'new ProjectileSelector<(\w+)>', args[1])
         projectile_class = inline_projectile[1] if inline_projectile else projectile_classes[args[1]]
         projectile = {'GenericProjectile': 'ballistic', 'StoneBulletProjectile': 'ballistic',
-                      'LaserProjectile': 'laser', 'RocketProjectile': 'rocket'}.get(projectile_class)
+                      'LaserProjectile': 'laser', 'RocketProjectile': 'rocket',
+                      'CyberdemonBlasterProjectile': 'nether_blaster'}.get(projectile_class)
         if projectile is None: raise ValueError(f'Projectile factory not ported: {projectile_class}')
         lifetime = int(num(args[9]))
         if projectile == 'laser':
@@ -149,6 +152,7 @@ public final class NpcWeapons {
     data('content/ballistic-weapons.json', [gun for gun in weapons if gun['projectile'] == 'ballistic'])
     data('content/laser-weapons.json', [gun for gun in weapons if gun['projectile'] == 'laser'])
     data('content/rocket-weapons.json', [gun for gun in weapons if gun['projectile'] == 'rocket'])
+    data('content/nether-weapons.json', [gun for gun in weapons if gun['projectile'] == 'nether_blaster'])
     definitions = []
     ammo_items = set(crafting['extra_ammo'])
     sounds_data = json.loads(resolve_asset('sounds.json').read_text())
@@ -189,7 +193,7 @@ public final class NpcWeapons {
         files[(RESOURCES / f'assets/techguns/textures/item/{identifier}.png').as_posix()] = resolve_asset(gun['texture'] + '.png').read_bytes()
         for key in ('fire_sound', 'reload_sound'):
             sound = gun[key]
-            selected_sounds[sound] = {'sounds': sounds_data[sound]['sounds']}
+            selected_sounds[sound] = {'sounds': sounds_data[sound]['sounds'] if sound not in MISSING_SOURCE_SOUNDS else []}
     for identifier in sorted(ammo_items | materials):
         if identifier in custom_items:
             class_name, empty, texture = custom_items[identifier]
@@ -232,7 +236,7 @@ public final class NpcWeapons {
                 if sound=='machines.chargingstationwork': translated[lang][subtitle]='Charging Station works' if lang=='en_us' else 'Работает зарядная станция'
             if sound.startswith('effects.geiger.'): translated[lang][subtitle]='Geiger counter clicks' if lang=='en_us' else 'Щёлкает счётчик Гейгера'
             if sound == 'effects.nukeexplosion': translated[lang][subtitle] = 'Nuclear explosion' if lang == 'en_us' else 'Ядерный взрыв'
-            if sound in NPC_SOUNDS: translated[lang][subtitle] = 'Super Mutant' if lang == 'en_us' else 'Супермутант'
+            if sound in NPC_SOUNDS: translated[lang][subtitle] = 'Cyber Demon or Super Mutant' if lang == 'en_us' else 'Кибердемон или супермутант'
         for entry in value['sounds']:
             name = entry if isinstance(entry, str) else entry['name']
             path = f'sounds/{name.split(":")[-1]}.ogg'
@@ -253,6 +257,7 @@ public final class NpcWeapons {
         values.update(fabricator_translations(lang))
         values.update(charging_translations(lang))
         values.update(rocket_translations(lang))
+        values.update(cyber_translations(lang))
         values.update(npc_translations(lang))
         values['entity.techguns.laser_beam'] = 'Laser beam' if lang == 'en_us' else 'Лазерный луч'
         values['death.attack.techguns.laser'] = '%1$s was lasered by %2$s' if lang == 'en_us' else '%1$s убит лазером игрока %2$s'
@@ -304,7 +309,7 @@ public final class Weapons {
 '''
     output('core/src/main/java/techguns/core/Weapons.java', source)
     files.update(generate_machine_content())
-    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_npc_content()) for entry in domain.items()]:
+    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_npc_content(), generate_cyber_content()) for entry in domain.items()]:
         if path in files:
             # Several content domains contribute to the same mining/tool and common item tags.
             if '/tags/' not in path: raise ValueError(f'Colliding generated resource: {path}')

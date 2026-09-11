@@ -18,5 +18,6 @@
   "vector": "ModelVector",
   "lasergun": "ModelLasergun",
   "laserpistol": "ModelLaserPistol",
-  "rocketlauncher": "ModelRocketLauncher"
+  "rocketlauncher": "ModelRocketLauncher",
+  "netherblaster": "ModelNetherBlaster"
 }

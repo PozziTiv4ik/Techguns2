@@ -257,6 +257,19 @@
     ],
     "subtitle": "subtitles.techguns.guns.rocketreload"
   },
+  "guns.cyberdemonblasterfire": {
+    "sounds": [
+      "techguns:guns/cdb_shot_a",
+      "techguns:guns/cdb_shot_b",
+      "techguns:guns/cdb_shot_c",
+      "techguns:guns/cdb_shot_d"
+    ],
+    "subtitle": "subtitles.techguns.guns.cyberdemonblasterfire"
+  },
+  "guns.cyberdemonblasterreload": {
+    "sounds": [],
+    "subtitle": "subtitles.techguns.guns.cyberdemonblasterreload"
+  },
   "machines.ammopresswork1": {
     "sounds": [
       "techguns:machines/ammopress_work1_a",

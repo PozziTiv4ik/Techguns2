@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:netherblaster",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 10
+    }
+  },
+  "pattern": [
+    "cpc",
+    "bns",
+    "cpc"
+  ],
+  "key": {
+    "p": "#c:plates/obsidian_steel",
+    "b": "techguns:obsidiansteelbarrel",
+    "c": "techguns:cyberneticparts",
+    "s": "techguns:pumpmechanism",
+    "n": "techguns:nethercharge"
+  }
+}

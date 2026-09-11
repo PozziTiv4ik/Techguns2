@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:pumpmechanism",
+    "count": 1
+  },
+  "pattern": [
+    "nnn",
+    "gpg",
+    "nnn"
+  ],
+  "key": {
+    "p": "minecraft:piston",
+    "g": "#c:glass_blocks",
+    "n": "#c:nuggets/iron"
+  }
+}

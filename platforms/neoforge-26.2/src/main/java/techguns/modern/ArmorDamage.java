@@ -5,7 +5,6 @@ import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import techguns.core.ArmorMath;
 import techguns.core.DamageKind;
-import techguns.core.SuperMutantRules;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -13,7 +12,7 @@ import net.minecraft.world.damagesource.DamageTypes;
 /** Preserve Techguns armor categories while keeping Minecraft's other damage stages. */
 public final class ArmorDamage {
     public static void onIncoming(LivingIncomingDamageEvent event) {
-        boolean mutant = event.getEntity() instanceof techguns.modern.npc.SuperMutant;
+        var npc = event.getEntity() instanceof techguns.modern.npc.ArmedNpc armed ? armed : null;
         techguns.core.WeaponDefinition weapon = null;
         if (event.getSource().getDirectEntity() instanceof Bullet bullet && event.getSource().is(Bullet.DAMAGE_TYPE)) {
             weapon = bullet.weapon();
@@ -21,14 +20,16 @@ public final class ArmorDamage {
             weapon = beam.weapon();
         } else if (event.getSource().getDirectEntity() instanceof RocketProjectile rocket && event.getSource().is(RocketDamage.TYPE)) {
             weapon = rocket.weapon();
+        } else if (event.getSource().getDirectEntity() instanceof NetherBlasterProjectile blast && event.getSource().is(NetherBlasterProjectile.DAMAGE_TYPE)) {
+            weapon = blast.weapon();
         }
         DamageKind kind = weapon != null ? weapon.projectile().damageKind() : sourceKind(event.getSource());
-        if (!mutant && weapon == null && !event.getSource().is(techguns.modern.fluid.TGLiquidBlock.ACID_DAMAGE)) return;
+        if (npc == null && weapon == null && !event.getSource().is(techguns.modern.fluid.TGLiquidBlock.ACID_DAMAGE)) return;
         float penetration = weapon == null ? 0 : (float) weapon.penetration();
-        float armor = mutant ? SuperMutantRules.armor(kind)
-                : ArmorMath.defaultArmor(kind, (float) event.getEntity().getAttributeValue(Attributes.ARMOR), false);
+        float armor = npc != null ? npc.armorAgainst(kind)
+                : ArmorMath.defaultArmor(kind, (float) event.getEntity().getAttributeValue(Attributes.ARMOR), event.getEntity().fireImmune());
         float toughness = (float) event.getEntity().getAttributeValue(Attributes.ARMOR_TOUGHNESS);
-        if (mutant && event.getSource().is(DamageTypeTags.BYPASSES_ARMOR)) {
+        if (npc != null && event.getSource().is(DamageTypeTags.BYPASSES_ARMOR)) {
             // This modern tag encodes zero ordinary radiation armor; legacy TG radiation still used NPC typed armor.
             // Preserve actual vanilla armor-bypassing sources (magic, burning, fall, etc.).
             if (event.getSource().is(techguns.modern.radiation.RadiationSystem.DAMAGE))
@@ -41,6 +42,7 @@ public final class ArmorDamage {
         });
     }
     private static DamageKind sourceKind(DamageSource source) {
+        if (source.is(NetherBlasterProjectile.DAMAGE_TYPE)) return DamageKind.FIRE;
         if (source.is(techguns.modern.fluid.TGLiquidBlock.ACID_DAMAGE)) return DamageKind.POISON;
         if (source.is(techguns.modern.radiation.RadiationSystem.DAMAGE)) return DamageKind.RADIATION;
         if (source.is(techguns.modern.radiation.RadiationSystem.POISONING)) return DamageKind.UNRESISTABLE;
