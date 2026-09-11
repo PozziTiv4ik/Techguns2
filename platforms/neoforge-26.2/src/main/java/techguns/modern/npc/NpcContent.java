@@ -24,6 +24,10 @@ public final class NpcContent {
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, TGContent.id("cyberdemon"))));
     public static final DeferredItem<SpawnEggItem> CYBER_EGG = TGContent.ITEMS.registerItem("cyberdemon_spawn_egg", SpawnEggItem::new,
             props -> props.spawnEgg(CYBER_DEMON.get()));
+    public static final DeferredHolder<EntityType<?>,EntityType<ZombiePigmanSoldier>> PIGMAN = TGContent.ENTITIES.register("zombiepigmansoldier", () ->
+            EntityType.Builder.<ZombiePigmanSoldier>of(ZombiePigmanSoldier::new,MobCategory.MONSTER).sized(.6f,1.8f).eyeHeight(1.53f).fireImmune().clientTrackingRange(5).updateInterval(3)
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE,TGContent.id("zombiepigmansoldier"))));
+    public static final DeferredItem<SpawnEggItem> PIGMAN_EGG = TGContent.ITEMS.registerItem("zombiepigmansoldier_spawn_egg",SpawnEggItem::new,props -> props.spawnEgg(PIGMAN.get()));
     public static final DeferredHolder<SoundEvent, SoundEvent> IDLE = sound("npcs.cyberdemonidle"), HURT = sound("npcs.cyberdemonhurt"),
             DEATH = sound("npcs.cyberdemondeath"), STEP = sound("npcs.cyberdemonstep");
     private static DeferredHolder<SoundEvent, SoundEvent> sound(String id) { return TGContent.SOUNDS.register(id, () -> SoundEvent.createVariableRangeEvent(TGContent.id(id))); }
@@ -36,6 +40,7 @@ public final class NpcContent {
     private static void attributes(EntityAttributeCreationEvent event) {
         event.put(SUPER_MUTANT.get(), SuperMutant.attributes().build());
         event.put(CYBER_DEMON.get(), CyberDemon.attributes().build());
+        event.put(PIGMAN.get(),ZombiePigmanSoldier.attributes().build());
     }
     private NpcContent() {}
 }

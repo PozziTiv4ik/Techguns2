@@ -11,7 +11,7 @@ public final class NpcSpawnConfig {
             .defineInRange("TechgunsSpawnweightNether", 300, 0, 10000);
     public static final ModConfigSpec.IntValue CYBER_WEIGHT = BUILDER.comment("Original CyberDemon weight inside the Nether pool.")
             .defineInRange("SpawnWeightCyberDemon", 30, 0, 10000);
-    public static final ModConfigSpec.IntValue PIGMAN_WEIGHT = BUILDER.comment("Reserved original ZombiePigmanSoldier weight. This NPC is not ported yet: its draws currently spawn nothing.")
+    public static final ModConfigSpec.IntValue PIGMAN_WEIGHT = BUILDER.comment("Original ZombiePigmanSoldier weight inside the Nether pool.")
             .defineInRange("SpawnWeightZombiePigmanSoldier", 100, 0, 10000);
     public static final ModConfigSpec.ConfigValue<List<? extends String>> BIOME_BLACKLIST = BUILDER.comment("Nether biome identifiers excluded from Techguns spawns; restart required.")
             .defineListAllowEmpty("BiomeBlacklist", List.<String>of(), () -> "minecraft:nether_wastes", value -> value instanceof String text && net.minecraft.resources.Identifier.tryParse(text) != null);

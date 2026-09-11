@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "techguns:t2_combat_wood"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "techguns:t2_combat_wood"
+      }
+    ]
+  }
+}

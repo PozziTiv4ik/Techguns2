@@ -161,6 +161,7 @@ public final class TechgunsClient {
         event.registerEntityRenderer(TGContent.RADIATION_ZONE.get(), NoopRenderer::new);
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.SUPER_MUTANT.get(), SuperMutantRenderer::new);
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.CYBER_DEMON.get(), CyberDemonRenderer::new);
+        event.registerEntityRenderer(techguns.modern.npc.NpcContent.PIGMAN.get(),ZombiePigmanSoldierRenderer::new);
         event.registerEntityRenderer(techguns.modern.npc.NetherSpawns.SELECTOR.get(), NoopRenderer::new);
         event.registerBlockEntityRenderer(techguns.modern.machine.charging.ChargingStationContent.ENTITY.get(), ChargingStationRenderer::new);
     }

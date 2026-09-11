@@ -61,10 +61,15 @@ public final class NetherSpawns {
         if (!level.dimension().equals(Level.NETHER) || level.getDifficulty() == Difficulty.PEACEFUL || NpcSpawnConfig.NETHER_WEIGHT.get() <= 0
                 || !eligibleBiome(level.getBiome(selector.blockPosition()))) return;
         int pigman = NpcSpawnConfig.PIGMAN_WEIGHT.get(), cyber = NpcSpawnConfig.CYBER_WEIGHT.get();
-        if (pigman + cyber == 0 || NetherSpawnRules.choose(pigman, cyber, level.getRandom().nextInt(pigman + cyber)) != NetherSpawnRules.Choice.CYBER_DEMON) return;
-        var npc = new CyberDemon(NpcContent.CYBER_DEMON.get(), level);
+        if (pigman + cyber == 0) return;
+        ArmedNpc npc;
+        if (NetherSpawnRules.choose(pigman,cyber,level.getRandom().nextInt(pigman+cyber)) == NetherSpawnRules.Choice.CYBER_DEMON) {
+            var demon=new CyberDemon(NpcContent.CYBER_DEMON.get(),level); demon.equipBlaster(); npc=demon;
+        } else {
+            var soldier=new ZombiePigmanSoldier(NpcContent.PIGMAN.get(),level); soldier.equipForSpawn(); npc=soldier;
+        }
         npc.snapTo(selector.getX(), selector.getY(), selector.getZ(), selector.getYRot(), 0);
-        npc.setYHeadRot(selector.getYRot()); npc.equipBlaster();
+        npc.setYHeadRot(selector.getYRot());
         // onSpawnByManager equips directly; it does not reroll vanilla spawn modifiers or handedness.
         level.addFreshEntity(npc);
     }

@@ -53,6 +53,7 @@
     "57": "techguns:mechanicalpartsiron",
     "58": "techguns:mechanicalpartsobsidiansteel",
     "59": "techguns:mechanicalpartscarbon",
+    "60": "techguns:heavycloth",
     "61": "techguns:biomass",
     "62": "techguns:copperwire",
     "63": "techguns:goldwire",
@@ -338,6 +339,10 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_57_mechanicalpartsiron.json"
     },
     {
+      "id": "techguns:heavycloth",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_60_heavycloth.json"
+    },
+    {
       "id": "techguns:biomass",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_61_biomass.json"
     },
@@ -528,6 +533,22 @@
     {
       "id": "techguns:blast_furnace",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/simplemachine_11_blast_furnace.json"
+    },
+    {
+      "id": "techguns:t2_combat_boots",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t2_combat_boots.json"
+    },
+    {
+      "id": "techguns:t2_combat_chestplate",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t2_combat_chestplate.json"
+    },
+    {
+      "id": "techguns:t2_combat_helmet",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t2_combat_helmet.json"
+    },
+    {
+      "id": "techguns:t2_combat_leggings",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t2_combat_leggings.json"
     },
     {
       "id": "techguns:thompson",

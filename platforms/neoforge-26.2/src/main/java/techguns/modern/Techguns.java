@@ -24,6 +24,7 @@ public final class Techguns {
         techguns.modern.radiation.RadiationSystem.register(modBus,container);
         SafeMode.register(modBus, container);
         techguns.modern.npc.NpcContent.register(modBus, container);
+        techguns.modern.armor.ArmorContent.register(modBus);
         techguns.modern.machine.TGMachineConfig.register(container);
         techguns.modern.world.TGOreContent.register(modBus);
         techguns.modern.world.TGOreConfig.register(container);

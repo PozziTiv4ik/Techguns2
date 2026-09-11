@@ -68,6 +68,8 @@ public final class TGContent {
                         GUNS.values().forEach(item -> output.accept(item.get()));
                         output.accept(techguns.modern.npc.NpcContent.EGG.get());
                         output.accept(techguns.modern.npc.NpcContent.CYBER_EGG.get());
+                        output.accept(techguns.modern.npc.NpcContent.PIGMAN_EGG.get());
+                        techguns.modern.armor.ArmorContent.ITEMS.values().forEach(item -> output.accept(item.get()));
                         AMMO.values().forEach(item -> output.accept(item.get()));
                         MATERIALS.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> output.accept(entry.getValue().get()));
                         output.accept(techguns.modern.machine.TGMachineContent.AMMO_PRESS_ITEM.get());

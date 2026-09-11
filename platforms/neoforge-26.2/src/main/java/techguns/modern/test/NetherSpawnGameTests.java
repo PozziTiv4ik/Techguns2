@@ -66,8 +66,8 @@ final class NetherSpawnGameTests {
         var level=nether(h); var pos=location(h,level); var area=new AABB(pos).inflate(5);
         int pig=NpcSpawnConfig.PIGMAN_WEIGHT.get(), cyber=NpcSpawnConfig.CYBER_WEIGHT.get();
         // Unwatched Nether chunks can contain hidden entities, absent from spatial queries until ticking.
-        var spawned=new ArrayList<CyberDemon>();
-        Consumer<EntityJoinLevelEvent> record=e -> { if(e.getLevel()==level && e.getEntity() instanceof CyberDemon npc && area.contains(npc.position())) spawned.add(npc); };
+        var spawned=new ArrayList<ArmedNpc>();
+        Consumer<EntityJoinLevelEvent> record=e -> { if(e.getLevel()==level && e.getEntity() instanceof ArmedNpc npc && area.contains(npc.position())) spawned.add(npc); };
         NeoForge.EVENT_BUS.addListener(record);
         try {
             NpcSpawnConfig.PIGMAN_WEIGHT.set(0); NpcSpawnConfig.CYBER_WEIGHT.set(30);
@@ -76,15 +76,16 @@ final class NetherSpawnGameTests {
             var npc=spawned.getFirst(); h.assertTrue(npc.getMainHandItem().is(TGContent.GUNS.get("netherblaster").get()),"Manager equips source weapon");
             h.assertValueEqual(GunItem.rounds(npc.getMainHandItem()),10,"Manager equips full weapon"); NetherGameTests.near(h,npc.getYRot(),37,"Spawn heading preserved"); npc.discard();
             NpcSpawnConfig.PIGMAN_WEIGHT.set(100); NpcSpawnConfig.CYBER_WEIGHT.set(0); selector(level,pos);
-            h.assertValueEqual(spawned.size(),1,"Unported pigman selection is not replaced with another demon");
+            h.assertValueEqual(spawned.size(),2,"Pigman selection is now implemented");
+            h.assertTrue(spawned.getLast() instanceof ZombiePigmanSoldier,"Correct second Nether entry"); spawned.getLast().discard();
             NpcSpawnConfig.PIGMAN_WEIGHT.set(0); selector(level,pos);
-            h.assertValueEqual(spawned.size(),1,"Empty table spawns nothing");
+            h.assertValueEqual(spawned.size(),2,"Empty table spawns nothing");
             NpcSpawnConfig.CYBER_WEIGHT.set(30); var overworld=selector(h.getLevel(),h.absolutePos(new BlockPos(4,2,4)));
             h.assertTrue(overworld.isRemoved(),"Nether selector rejected in Overworld");
         } finally {
             NeoForge.EVENT_BUS.unregister(record); spawned.forEach(Entity::discard);
             NpcSpawnConfig.PIGMAN_WEIGHT.set(pig); NpcSpawnConfig.CYBER_WEIGHT.set(cyber);
-            level.getEntitiesOfClass(CyberDemon.class,area).forEach(Entity::discard);
+            level.getEntitiesOfClass(ArmedNpc.class,area).forEach(Entity::discard);
         }
         h.succeed();
     }
@@ -107,11 +108,12 @@ final class NetherSpawnGameTests {
             h.assertTrue(NetherSpawns.checkSpawnRules(NetherSpawns.SELECTOR.get(),level,EntitySpawnReason.NATURAL,pos,net.minecraft.util.RandomSource.create(5)),"Source light/ground/dimension rule accepts fixture");
             level.getRandom().setSeed(9126262L);
             List<CyberDemon> demons=List.of();
-            for(int attempt=0;attempt<128 && demons.isEmpty();attempt++) {
+            for(int attempt=0;attempt<128 && (demons.isEmpty() || level.getEntitiesOfClass(ZombiePigmanSoldier.class,area).isEmpty());attempt++) {
                 NaturalSpawner.spawnCategoryForPosition(MobCategory.MONSTER,level,pos);
                 demons=level.getEntitiesOfClass(CyberDemon.class,area);
             }
             h.assertTrue(!demons.isEmpty(),"Minecraft natural spawning creates CyberDemon with default 100/30 weights");
+            h.assertTrue(!level.getEntitiesOfClass(ZombiePigmanSoldier.class,area).isEmpty(),"Minecraft natural spawning also creates armed pigman soldiers");
             var npc=demons.getFirst(); h.assertTrue(npc.armed(),"Naturally spawned NPC is armed");
             var parts=TGContent.MATERIALS.get("cyberneticparts").get();
             var params=new LootParams.Builder(level).withParameter(LootContextParams.THIS_ENTITY,npc).withParameter(LootContextParams.ORIGIN,npc.position())

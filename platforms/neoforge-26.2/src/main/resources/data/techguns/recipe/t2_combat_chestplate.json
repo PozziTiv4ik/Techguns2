@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:t2_combat_chestplate",
+    "count": 1
+  },
+  "pattern": [
+    "h h",
+    "iii",
+    "iii"
+  ],
+  "key": {
+    "h": "techguns:heavycloth",
+    "i": "#c:ingots/obsidian_steel"
+  }
+}

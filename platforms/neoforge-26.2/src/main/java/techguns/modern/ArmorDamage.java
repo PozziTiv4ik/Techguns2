@@ -12,6 +12,7 @@ import net.minecraft.world.damagesource.DamageTypes;
 /** Preserve Techguns armor categories while keeping Minecraft's other damage stages. */
 public final class ArmorDamage {
     public static void onIncoming(LivingIncomingDamageEvent event) {
+        if (event.getEntity() instanceof net.minecraft.world.entity.player.Player player) techguns.modern.armor.T2ArmorSystem.refresh(player);
         var npc = event.getEntity() instanceof techguns.modern.npc.ArmedNpc armed ? armed : null;
         techguns.core.WeaponDefinition weapon = null;
         if (event.getSource().getDirectEntity() instanceof Bullet bullet && event.getSource().is(Bullet.DAMAGE_TYPE)) {
@@ -24,6 +25,17 @@ public final class ArmorDamage {
             weapon = blast.weapon();
         }
         DamageKind kind = weapon != null ? weapon.projectile().damageKind() : sourceKind(event.getSource());
+        if (event.getEntity() instanceof net.minecraft.world.entity.player.Player player && techguns.modern.armor.T2ArmorSystem.hasArmor(player)) {
+            if (!event.getSource().is(DamageTypeTags.BYPASSES_ARMOR)) {
+                float rawPenetration=weapon==null?0:(float)weapon.penetration();
+                event.addReductionModifier(DamageContainer.Reduction.ARMOR,(container,previousReduction) -> {
+                    if(!techguns.modern.armor.T2ArmorSystem.hasArmor(player)) return previousReduction;
+                    float damage=container.getNewDamage();
+                    return damage-techguns.modern.armor.T2ArmorSystem.absorb(player,event.getSource(),damage,kind,rawPenetration);
+                });
+            }
+            return;
+        }
         if (npc == null && weapon == null && !event.getSource().is(techguns.modern.fluid.TGLiquidBlock.ACID_DAMAGE)) return;
         float penetration = weapon == null ? 0 : (float) weapon.penetration();
         float armor = npc != null ? npc.armorAgainst(kind)

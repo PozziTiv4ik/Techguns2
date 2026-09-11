@@ -1,0 +1,101 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/TGArmors.java",
+  "items": [
+    {
+      "id": "t2_combat_helmet",
+      "slot": "HEAD",
+      "physical": 4.5,
+      "elemental": 3.375,
+      "durability": 990,
+      "toughness": 1.0,
+      "speed": 0.1,
+      "jump": 0.0,
+      "knockback": 0.1,
+      "enchantability": 0,
+      "repair_parts": 2,
+      "repair_metal_ratio": 0.5,
+      "repair_metal": "ingotobsidiansteel",
+      "repair_cloth": "heavycloth",
+      "textures": [
+        "t2_combat",
+        "t2_combat_wood",
+        "t2_combat_desert",
+        "t2_combat_arctic",
+        "t2_combat_swat",
+        "t2_combat_security"
+      ]
+    },
+    {
+      "id": "t2_combat_chestplate",
+      "slot": "CHEST",
+      "physical": 5.4,
+      "elemental": 4.05,
+      "durability": 990,
+      "toughness": 1.0,
+      "speed": 0.1,
+      "jump": 0.0,
+      "knockback": 0.25,
+      "enchantability": 0,
+      "repair_parts": 4,
+      "repair_metal_ratio": 0.5,
+      "repair_metal": "ingotobsidiansteel",
+      "repair_cloth": "heavycloth",
+      "textures": [
+        "t2_combat",
+        "t2_combat_wood",
+        "t2_combat_desert",
+        "t2_combat_arctic",
+        "t2_combat_swat",
+        "t2_combat_security"
+      ]
+    },
+    {
+      "id": "t2_combat_leggings",
+      "slot": "LEGS",
+      "physical": 4.5,
+      "elemental": 3.375,
+      "durability": 990,
+      "toughness": 1.0,
+      "speed": 0.1,
+      "jump": 0.0,
+      "knockback": 0.15,
+      "enchantability": 0,
+      "repair_parts": 3,
+      "repair_metal_ratio": 0.3333333333333333,
+      "repair_metal": "ingotobsidiansteel",
+      "repair_cloth": "heavycloth",
+      "textures": [
+        "t2_combat",
+        "t2_combat_wood",
+        "t2_combat_desert",
+        "t2_combat_arctic",
+        "t2_combat_swat",
+        "t2_combat_security"
+      ]
+    },
+    {
+      "id": "t2_combat_boots",
+      "slot": "FEET",
+      "physical": 3.6,
+      "elemental": 2.7,
+      "durability": 990,
+      "toughness": 1.0,
+      "speed": 0.1,
+      "jump": 0.1,
+      "knockback": 0.1,
+      "enchantability": 0,
+      "repair_parts": 2,
+      "repair_metal_ratio": 0.5,
+      "repair_metal": "ingotobsidiansteel",
+      "repair_cloth": "heavycloth",
+      "textures": [
+        "t2_combat",
+        "t2_combat_wood",
+        "t2_combat_desert",
+        "t2_combat_arctic",
+        "t2_combat_swat",
+        "t2_combat_security"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:t2_combat_boots",
+    "count": 1
+  },
+  "pattern": [
+    "h h",
+    "i i"
+  ],
+  "key": {
+    "h": "techguns:heavycloth",
+    "i": "#c:ingots/obsidian_steel"
+  }
+}

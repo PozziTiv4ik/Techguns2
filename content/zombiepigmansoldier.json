@@ -1,0 +1,25 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/entities/npcs/ZombiePigmanSoldier.java",
+  "weapons": [
+    "thompson",
+    "thompson",
+    "thompson",
+    "revolver",
+    "revolver",
+    "ak47",
+    "ak47",
+    "pistol",
+    "pistol"
+  ],
+  "armor": "T2_COMBAT",
+  "camo": 3,
+  "helmet_chance": 1,
+  "other_armor_chances": 0.5,
+  "spawn_weight": 100,
+  "danger_level": 0,
+  "renderer": "modern Minecraft zombified piglin geometry/skin with source humanoid gun poses",
+  "original_egg_colors": [
+    16716049,
+    7798784
+  ]
+}

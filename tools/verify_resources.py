@@ -80,6 +80,11 @@ def check_mesh(path, textures=None):
 def main():
     for path in ROOT.rglob('*.json'):
         json.loads(path.read_text(encoding='utf-8'))
+    for path in (ASSETS/'equipment').glob('*.json'):
+        for layer, entries in json.loads(path.read_text(encoding='utf-8'))['layers'].items():
+            if layer not in ('humanoid','humanoid_leggings'): raise ValueError(f'Unvalidated equipment layer: {path}: {layer}')
+            for entry in entries:
+                require(local_path(entry['texture'],f'textures/entity/equipment/{layer}','.png'))
     for name in ('laser3', 'laser3_start'):
         require(local_path(f'techguns:fx/{name}', 'textures', '.png'))
     fluid_catalog=json.loads((Path(__file__).resolve().parents[1]/'content/fluids.json').read_text(encoding='utf-8'))

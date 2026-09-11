@@ -30,6 +30,7 @@ def convert_recipe(legacy, shared, weapons):
         if identifier == 'techguns:simplemachine' and value.get('data') in (10,11): return 'techguns:'+{10:'charging_station',11:'blast_furnace'}[value['data']]
         if identifier == 'techguns:multiblockmachine': return 'techguns:'+(FABRICATOR_PARTS+REACTION_PARTS)[value['data']]
         if identifier == 'minecraft:stonebrick' and value.get('data', 0) == 0: return 'minecraft:stone_bricks'
+        if identifier == 'minecraft:wool' and value.get('data', 0) == 0: return 'minecraft:white_wool'
         if identifier == 'techguns:itemshared': return 'techguns:' + shared[value['data']]
         if identifier.startswith('#'): raise ValueError('A tag cannot be a recipe result')
         if value.get('data', 0) not in (0, 32767) and identifier.removeprefix('techguns:') not in weapons:
@@ -78,6 +79,8 @@ def plan_crafting(weapon_list):
     ammo = {gun['ammo'][field] for gun in weapon_list for field in ('item', 'empty_item', 'loose_item') if gun['ammo'][field]}
     selected = {name: recipe for name, recipe in source_recipes.items()
                 if name in weapons or name.endswith('_alt') and name[:-4] in weapons}
+    for part in ('helmet','chestplate','leggings','boots'):
+        name='t2_combat_'+part; selected[name]=source_recipes[name]
     if 'rocketlauncher' in weapons:
         for variant in ('default', 'nuke', 'high_velocity'):
             name = 'rocketlauncher_ammo_' + variant
