@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:t1_scout_boots",
+    "count": 1
+  },
+  "pattern": [
+    "c c",
+    "c c"
+  ],
+  "key": {
+    "c": "techguns:heavycloth"
+  }
+}

@@ -44,11 +44,16 @@ public final class TGArmorItem extends Item {
         lines.accept(Component.translatable("tooltip.techguns.armor.typed_defense",spec.explosion(),spec.poison(),spec.dark(),spec.radiation()));
         if (spec.radiationResistance()>0) lines.accept(Component.translatable("tooltip.techguns.armor.radiation_resistance",spec.radiationResistance()));
         if (spec.bonusesActive(stack.getDamageValue())) {
-            if (spec.speed()>0) lines.accept(Component.translatable("tooltip.techguns.armor.speed",Math.round(spec.speed()*100),Math.round(spec.speed()*200)));
+            if (spec.speed()>0) lines.accept(Component.translatable("tooltip.techguns.armor.speed",percentage(spec.speed()),percentage(spec.speed()*2)));
             if (spec.mining()>0) lines.accept(Component.translatable("tooltip.techguns.armor.mining",Math.round(spec.mining()*100)));
             if (spec.knockback()>0) lines.accept(Component.translatable("tooltip.techguns.armor.knockback",Math.round(spec.knockback()*100)));
-            if (spec.jump()>0) lines.accept(Component.translatable("tooltip.techguns.armor.jump"));
+            if (spec.jump()>0) lines.accept(Component.translatable("tooltip.techguns.armor.jump",spec.jump()));
             if (spec.fallReduction()>0 || spec.freeFallHeight()>0) lines.accept(Component.translatable("tooltip.techguns.armor.fall",spec.freeFallHeight(),Math.round(spec.fallReduction()*100)));
         } else lines.accept(Component.translatable("tooltip.techguns.armor.worn"));
+    }
+    private static Number percentage(double bonus) {
+        double value=bonus*100;
+        if(value==Math.rint(value)) return (long)value;
+        return value;
     }
 }

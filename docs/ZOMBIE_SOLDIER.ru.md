@@ -103,7 +103,7 @@ SPARSE соответствует `c:is_sparse_vegetation`. Классифика
 Farmer и Miner теперь заполняют исходный уровень опасности 0;
 см. `docs/RURAL_ZOMBIES.ru.md`. Остаются три Overworld-записи,
 спавнеры/структуры, иные измерения, полная фракционная система и визуальная приёмка.
-Следующий срез — T1 Scout как зависимость экипировки SkeletonSoldier, затем сам скелет.
+T1 Scout как зависимость экипировки готов; следующий срез — SkeletonSoldier.
 
 Исходные файлы: `ZombieSoldier.java`, `GenericNPC.java`, `GenericNPCUndead.java`,
 `TGEntities.java`, `TGConfig.java`, `TGSpawnManager.java`, `TGNpcSpawnTable.java`,

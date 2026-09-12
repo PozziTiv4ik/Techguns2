@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:t1_scout_chestplate",
+    "count": 1
+  },
+  "pattern": [
+    "c c",
+    "ccc",
+    "ccc"
+  ],
+  "key": {
+    "c": "techguns:heavycloth"
+  }
+}

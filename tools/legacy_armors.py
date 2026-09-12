@@ -6,7 +6,7 @@ from legacy_items import arguments, parse_stack
 from legacy_npcs import LEGACY, RESOURCES, npc_loot
 
 
-ARMOR_SETS = {'t2_combat':'T2_COMBAT', 'hazmat':'T2_HAZMAT', 't1_combat':'T1_COMBAT', 't1_miner':'T1_MINER'}
+ARMOR_SETS = {'t2_combat':'T2_COMBAT', 'hazmat':'T2_HAZMAT', 't1_combat':'T1_COMBAT', 't1_miner':'T1_MINER', 't1_scout':'T1_SCOUT'}
 
 
 def call_arguments(text, name):
@@ -89,6 +89,7 @@ public final class Armors {
     public static final List<ArmorSpec> HAZMAT = ALL.stream().filter(a -> a.set().equals("hazmat")).toList();
     public static final List<ArmorSpec> T1_COMBAT = ALL.stream().filter(a -> a.set().equals("t1_combat")).toList();
     public static final List<ArmorSpec> T1_MINER = ALL.stream().filter(a -> a.set().equals("t1_miner")).toList();
+    public static final List<ArmorSpec> T1_SCOUT = ALL.stream().filter(a -> a.set().equals("t1_scout")).toList();
     public static final List<String> CAMOS = T2_COMBAT.getFirst().camos();
     public static ArmorSpec forSlot(ArmorSlot slot) { return T2_COMBAT.stream().filter(a -> a.slot()==slot).findFirst().orElseThrow(); }
     public static ArmorSpec forSlot(String set, ArmorSlot slot) { return ALL.stream().filter(a -> a.set().equals(set) && a.slot()==slot).findFirst().orElseThrow(); }
@@ -124,7 +125,7 @@ def armor_translations(lang):
         'tooltip.techguns.armor.camo':'Камуфляж: %s (Shift + ПКМ для смены)' if ru else 'Camouflage: %s (sneak + use to change)',
         'tooltip.techguns.armor.defense':'Физический / пули: %s; стихии / яд: %s' if ru else 'Physical / projectile: %s; elemental / poison: %s',
         'tooltip.techguns.armor.bonuses':'Скорость: +10%% (+20%% при спринте); сопротивление отбрасыванию: +%s%%' if ru else 'Speed: +10%% (+20%% sprinting); knockback resistance: +%s%%',
-        'tooltip.techguns.armor.jump':'Прыжок: +0,1 к вертикальной скорости' if ru else 'Jump: +0.1 vertical velocity',
+        'tooltip.techguns.armor.jump':'Прыжок: +%s к вертикальной скорости' if ru else 'Jump: +%s vertical velocity',
         'tooltip.techguns.armor.worn':'Бонусы отключены из-за износа' if ru else 'Bonuses disabled by wear'})
     for i,(en,russian) in enumerate(zip(['Default','Woodland','Desert','Arctic','SWAT','Security'],['Обычный','Лесной','Пустынный','Арктический','SWAT','Охрана'])):
         result['tooltip.techguns.armor.camo.'+str(i)]=russian if ru else en
@@ -138,6 +139,11 @@ def armor_translations(lang):
         for i in range(len(item['textures'])):
             result[f'tooltip.techguns.armor.t1_miner.{suffix}camo.{i}']=source[f'techguns.item.t1_miner.{suffix}camoname.{i}']
     for i in range(4): result['tooltip.techguns.armor.hazmat.camo.'+str(i)]=source['techguns.item.hazmatsuit.camoname.'+str(i)]
+    for part in names: result['item.techguns.t1_scout_'+part]=source['techguns.item.t1_scout_'+part+'.name']
+    # The original English/Russian files omit Scout camouflage names; label its actual texture variants.
+    scout_names=['Обычный','Лесной','Снежный','Чёрный'] if ru else ['Default','Forest','Snow','Black']
+    for i,name in enumerate(scout_names):
+        result[f'tooltip.techguns.armor.t1_scout.camo.{i}']=source.get(f'techguns.item.t1_scout.camoname.{i}',name)
     result.update({
         'tooltip.techguns.armor.typed_defense':'Взрыв: %s; яд: %s; тьма: %s; радиация: %s' if ru else 'Explosion: %s; poison: %s; dark: %s; radiation: %s',
         'tooltip.techguns.armor.radiation_resistance':'Сопротивление накоплению радиации: +%s (сохраняется при износе)' if ru else 'Radiation buildup resistance: +%s (remains when worn)',

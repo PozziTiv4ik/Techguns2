@@ -603,6 +603,22 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t1_miner_leggings.json"
     },
     {
+      "id": "techguns:t1_scout_boots",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t1_scout_boots.json"
+    },
+    {
+      "id": "techguns:t1_scout_chestplate",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t1_scout_chestplate.json"
+    },
+    {
+      "id": "techguns:t1_scout_helmet",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t1_scout_helmet.json"
+    },
+    {
+      "id": "techguns:t1_scout_leggings",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t1_scout_leggings.json"
+    },
+    {
       "id": "techguns:t2_combat_boots",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t2_combat_boots.json"
     },

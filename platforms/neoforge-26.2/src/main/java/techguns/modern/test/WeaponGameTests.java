@@ -56,6 +56,7 @@ public final class WeaponGameTests {
         T1CombatGameTests.register(FUNCTIONS);
         ZombieSoldierGameTests.register(FUNCTIONS);
         T1MinerGameTests.register(FUNCTIONS);
+        T1ScoutGameTests.register(FUNCTIONS);
         RuralZombieGameTests.register(FUNCTIONS);
         FUNCTIONS.register("ammo_persists", () -> WeaponGameTests::ammoPersists);
         FUNCTIONS.register("reload_timing_and_consumption", () -> WeaponGameTests::reloadTiming);

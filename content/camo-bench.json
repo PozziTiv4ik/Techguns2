@@ -185,7 +185,8 @@
   "armor": [
     "T2_COMBAT",
     "T2_HAZMAT",
-    "T1_MINER"
+    "T1_MINER",
+    "T1_SCOUT"
   ],
   "minecraft_reference": {
     "version": "1.12.2",

@@ -28,7 +28,8 @@
     "T2_COMBAT",
     "T2_HAZMAT",
     "T1_COMBAT",
-    "T1_MINER"
+    "T1_MINER",
+    "T1_SCOUT"
   ],
   "pending_equipment": "Other original armors and shields",
   "automation": "All faces and unsided; insert/extract all ten slots, repair slot accepts supported armor",
