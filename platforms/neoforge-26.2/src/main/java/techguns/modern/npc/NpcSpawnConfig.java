@@ -16,8 +16,8 @@ public final class NpcSpawnConfig {
     public static final ModConfigSpec.IntValue OVERWORLD_WEIGHT = BUILDER.comment("Original Overworld pool weight; unported NPC selections currently spawn nothing. Restart required.")
             .defineInRange("TechgunsSpawnweightOverworld", 600, 0, 10000);
     public static final ModConfigSpec.IntValue SOLDIER_WEIGHT = BUILDER.defineInRange("SpawnWeightZombieSoldier",100,0,10000);
-    public static final ModConfigSpec.IntValue FARMER_WEIGHT = BUILDER.comment("Reserved original weight: ZombieFarmer is not ported yet.").defineInRange("SpawnWeightZombieFarmer",200,0,10000);
-    public static final ModConfigSpec.IntValue MINER_WEIGHT = BUILDER.comment("Reserved original weight: ZombieMiner is not ported yet.").defineInRange("SpawnWeightZombieMiner",200,0,10000);
+    public static final ModConfigSpec.IntValue FARMER_WEIGHT = BUILDER.comment("Original ZombieFarmer weight, available from danger level 0.").defineInRange("SpawnWeightZombieFarmer",200,0,10000);
+    public static final ModConfigSpec.IntValue MINER_WEIGHT = BUILDER.comment("Original ZombieMiner weight, available from danger level 0.").defineInRange("SpawnWeightZombieMiner",200,0,10000);
     public static final ModConfigSpec.IntValue SKELETON_WEIGHT = BUILDER.comment("Reserved original weight: SkeletonSoldier is not ported yet.").defineInRange("SpawnWeightSkeletonSoldier",100,0,10000);
     public static final ModConfigSpec.IntValue PSYCHO_WEIGHT = BUILDER.comment("Reserved original weight: PsychoSteve is not ported yet.").defineInRange("SpawnWeightPsychoSteve",3,0,10000);
     public static final ModConfigSpec.IntValue BANDIT_WEIGHT = BUILDER.comment("Reserved original weight: Bandit is not ported yet.").defineInRange("SpawnWeightBandit",50,0,10000);

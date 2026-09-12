@@ -26,13 +26,13 @@ class ZombieSoldierPortTests(unittest.TestCase):
         self.assertEqual([e['npc'] for e in table],['ZombieFarmer','ZombieMiner','ZombieSoldier','SkeletonSoldier','PsychoSteve','Bandit'])
         self.assertEqual([e['weight'] for e in table],[200,200,100,100,3,50])
         self.assertEqual([e['danger'] for e in table],[0,0,1,1,1,2])
-        self.assertEqual([e['npc'] for e in table if e['implemented']],['ZombieSoldier'])
+        self.assertEqual([e['npc'] for e in table if e['implemented']],['ZombieFarmer','ZombieMiner','ZombieSoldier'])
 
-    def test_all_three_undead_npcs_keep_merged_tags_and_translations(self):
+    def test_all_ported_undead_npcs_keep_merged_tags_and_translations(self):
         files=generate()
         for tag in ('undead','sensitive_to_smite','ignores_poison_and_regen','inverted_healing_and_harm'):
             self.assertEqual(set(json.loads(files[RESOURCES+f'data/minecraft/tags/entity_type/{tag}.json'])['values']),
-                             {'techguns:cyberdemon','techguns:zombiepigmansoldier','techguns:zombiesoldier'})
+                             {'techguns:cyberdemon','techguns:zombiepigmansoldier','techguns:zombiesoldier','techguns:zombiefarmer','techguns:zombieminer'})
         for lang in ('en_us','ru_ru'):
             self.assertIn('entity.techguns.zombiesoldier',json.loads(files[RESOURCES+f'assets/techguns/lang/{lang}.json']))
 

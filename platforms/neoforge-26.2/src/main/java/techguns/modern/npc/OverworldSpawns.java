@@ -78,10 +78,17 @@ public final class OverworldSpawns {
         int danger = danger(level,selector.getX(),selector.getZ());
         var weights = NpcSpawnConfig.overworldWeights();
         int total = weights.total(danger);
-        if (total == 0 || weights.choose(danger,level.getRandom().nextInt(total)) != OverworldSpawnRules.Choice.ZOMBIE_SOLDIER) return;
-        // Unported choices remain empty; do not renormalize their tickets onto the soldier.
-        var npc = new ZombieSoldier(NpcContent.ZOMBIE_SOLDIER.get(),level);
-        npc.equipForSpawn(); npc.snapTo(selector.getX(),selector.getY(),selector.getZ(),selector.getYRot(),0);
+        if (total == 0) return;
+        ArmedNpc npc=switch(weights.choose(danger,level.getRandom().nextInt(total))) {
+            case ZOMBIE_FARMER -> new ZombieFarmer(NpcContent.FARMER.get(),level);
+            case ZOMBIE_MINER -> new ZombieMiner(NpcContent.MINER.get(),level);
+            case ZOMBIE_SOLDIER -> new ZombieSoldier(NpcContent.ZOMBIE_SOLDIER.get(),level);
+            default -> null;
+        };
+        // The three unported choices remain empty; their tickets are not redistributed.
+        if(npc==null) return;
+        if(npc instanceof RuralZombie rural) rural.equipForSpawn(); else ((ZombieSoldier)npc).equipForSpawn();
+        npc.snapTo(selector.getX(),selector.getY(),selector.getZ(),selector.getYRot(),0);
         npc.setYHeadRot(selector.getYRot()); level.addFreshEntity(npc);
     }
     private OverworldSpawns() {}

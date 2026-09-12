@@ -11,7 +11,7 @@ def overworld_table():
     entries = []
     for name, setting, danger in re.findall(r'spawnTableOverworld.registerSpawn\(new TGNpcSpawn\((\w+)\.class, TGConfig\.(\w+)\), (\d)\)', entities):
         default = re.search(setting + r'\s*=\s*config.getInt\("([^"]+)", "NPC Spawn", (\d+)', config)
-        entries.append({'npc':name, 'config':default[1], 'weight':int(default[2]), 'danger':int(danger), 'implemented':name == 'ZombieSoldier'})
+        entries.append({'npc':name, 'config':default[1], 'weight':int(default[2]), 'danger':int(danger), 'implemented':name in ('ZombieSoldier','ZombieFarmer','ZombieMiner')})
     return sorted(entries, key=lambda entry:entry['danger'])  # Stable: bucket order, then registration order.
 
 

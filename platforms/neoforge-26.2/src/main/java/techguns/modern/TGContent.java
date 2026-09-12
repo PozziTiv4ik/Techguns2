@@ -70,6 +70,8 @@ public final class TGContent {
                         output.accept(techguns.modern.npc.NpcContent.CYBER_EGG.get());
                         output.accept(techguns.modern.npc.NpcContent.PIGMAN_EGG.get());
                         output.accept(techguns.modern.npc.NpcContent.SOLDIER_EGG.get());
+                        output.accept(techguns.modern.npc.NpcContent.FARMER_EGG.get());
+                        output.accept(techguns.modern.npc.NpcContent.MINER_EGG.get());
                         techguns.modern.armor.ArmorContent.ITEMS.values().forEach(item -> output.accept(item.get()));
                         techguns.modern.armor.ArmorContent.HAZMAT.values().forEach(item -> output.accept(item.get()));
                         techguns.modern.armor.ArmorContent.T1_COMBAT.values().forEach(item -> output.accept(item.get()));

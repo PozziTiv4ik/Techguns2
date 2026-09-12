@@ -19,14 +19,14 @@
       "config": "SpawnWeightZombieFarmer",
       "weight": 200,
       "danger": 0,
-      "implemented": false
+      "implemented": true
     },
     {
       "npc": "ZombieMiner",
       "config": "SpawnWeightZombieMiner",
       "weight": 200,
       "danger": 0,
-      "implemented": false
+      "implemented": true
     },
     {
       "npc": "ZombieSoldier",

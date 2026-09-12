@@ -1,8 +1,8 @@
 # T1 Miner — шахтёрская броня
 
 Minecraft 26.2 / NeoForge 26.2.0.81. Четвёртый перенесённый комплект брони;
-предварительная зависимость для ZombieFarmer и ZombieMiner. Эти два NPC пока
-не реализованы. Визуальная приёмка нового комплекта остаётся открытой.
+используется перенесёнными ZombieFarmer и ZombieMiner. Их экипировка описана
+в `docs/RURAL_ZOMBIES.ru.md`. Визуальная приёмка нового комплекта остаётся открытой.
 
 ## Свойства
 
@@ -95,4 +95,5 @@ Repair Bench чинит за железные слитки и ткань по т
 Исходники: `TGArmors.java`, `GenericArmor.java`, `GenericArmorMultiCamo.java`,
 `TGEventHandler.onBreakEvent`, четыре `recipes/t1_miner_*.json` и оригинальные
 текстуры в неизменном `legacy/1.12.2/src/main`. Каталог: `content/t1-miner-armor.json`.
-Лицензия и авторство Techguns сохранены. Следующий срез — ZombieFarmer и ZombieMiner.
+Лицензия и авторство Techguns сохранены. ZombieFarmer и ZombieMiner подключены;
+следующая зависимость экипировки NPC — T1 Scout для SkeletonSoldier.

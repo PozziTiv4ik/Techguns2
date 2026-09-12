@@ -1,0 +1,32 @@
+{
+  "id": "zombiefarmer",
+  "class": "ZombieFarmer",
+  "attributes": {
+    "MOVEMENT_SPEED": 0.2,
+    "MAX_HEALTH": 18.0,
+    "ATTACK_DAMAGE": 3.0,
+    "FOLLOW_RANGE": 50.0
+  },
+  "weapons": [
+    "minecraft:wooden_hoe",
+    "minecraft:iron_hoe",
+    "minecraft:stone_hoe",
+    "techguns:handcannon"
+  ],
+  "weapon_roll_bound": 4,
+  "texture": "textures/entity/zombie_soldier.png",
+  "armor": "T1_MINER",
+  "shared_equipment_camo_count": 4,
+  "always_equipped": "CHEST",
+  "never_equipped": [
+    "HEAD"
+  ],
+  "other_armor_chance": 0.5,
+  "intrinsic_armor": 0,
+  "danger_level": 0,
+  "spawn_weight": 200,
+  "burns_in_daylight": true,
+  "helmet_prevents_sun_ignition": false,
+  "custom_techguns_spawner_exemption": "Pending with the custom spawner/link system",
+  "source": "legacy/1.12.2/src/main/java/techguns/entities/npcs/ZombieFarmer.java"
+}

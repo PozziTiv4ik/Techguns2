@@ -31,6 +31,7 @@ final class OverworldSpawnGameTests {
         r.register("zombie_overworld_selector_reserved_and_disabled",() -> OverworldSpawnGameTests::replacement);
         r.register("zombie_overworld_spawn_darkness_and_ground",() -> OverworldSpawnGameTests::light);
         r.register("zombie_overworld_natural_spawn_and_death",() -> OverworldSpawnGameTests::natural);
+        r.register("rural_natural_danger_zero",() -> h -> natural(h,true));
     }
     private static void tables(GameTestHelper h) {
         var registry=h.getLevel().registryAccess().lookupOrThrow(Registries.BIOME);
@@ -43,7 +44,7 @@ final class OverworldSpawnGameTests {
                 h.assertValueEqual(selectors.getFirst().value().minCount(),1,"Original min group");
                 h.assertValueEqual(selectors.getFirst().value().maxCount(),3,"Original max group");
             } else h.assertTrue(selectors.isEmpty(),"Nether and End excluded");
-            h.assertTrue(entries.stream().noneMatch(e -> e.value().type()==NpcContent.ZOMBIE_SOLDIER.get()),"No second direct soldier entry that would bypass danger or duplicate weight");
+            h.assertTrue(entries.stream().noneMatch(e -> e.value().type()==NpcContent.ZOMBIE_SOLDIER.get() || e.value().type()==NpcContent.FARMER.get() || e.value().type()==NpcContent.MINER.get()),"No direct NPC entry bypasses danger or duplicates weight");
         }
         h.assertValueEqual(OverworldSpawns.biomeDanger(registry.getOrThrow(Biomes.PLAINS)),0,"Plains danger");
         h.assertValueEqual(OverworldSpawns.biomeDanger(registry.getOrThrow(Biomes.TAIGA)),1,"Cold danger");
@@ -61,8 +62,8 @@ final class OverworldSpawnGameTests {
     }
     private static void replacement(GameTestHelper h) {
         var level=h.getLevel(); var pos=h.absolutePos(new BlockPos(4,2,4)); var values=settings(); var saved=values.stream().map(ModConfigSpec.IntValue::get).toList();
-        var blacklist=NpcSpawnConfig.BIOME_BLACKLIST.get(); var area=new AABB(pos).inflate(4); var spawned=new ArrayList<ZombieSoldier>();
-        Consumer<EntityJoinLevelEvent> record=e -> { if(e.getLevel()==level && e.getEntity() instanceof ZombieSoldier npc && area.contains(npc.position())) spawned.add(npc); };
+        var blacklist=NpcSpawnConfig.BIOME_BLACKLIST.get(); var area=new AABB(pos).inflate(4); var spawned=new ArrayList<ArmedNpc>();
+        Consumer<EntityJoinLevelEvent> record=e -> { if(e.getLevel()==level && e.getEntity() instanceof ArmedNpc npc && area.contains(npc.position())) spawned.add(npc); };
         NeoForge.EVENT_BUS.addListener(record);
         try {
             for(int i=0;i<9;i++) values.get(i).set(0);
@@ -75,12 +76,16 @@ final class OverworldSpawnGameTests {
             h.assertValueEqual(OverworldSpawns.danger(level,pos.getX(),pos.getZ()),0,"Fixture inside safe plains radius");
             selector(level,pos); h.assertValueEqual(spawned.size(),1,"Danger zero excludes soldier");
             NpcSpawnConfig.DISTANCE_0.set(0); NpcSpawnConfig.SOLDIER_WEIGHT.set(0); NpcSpawnConfig.FARMER_WEIGHT.set(200);
-            selector(level,pos); h.assertValueEqual(spawned.size(),1,"Reserved farmer ticket is not converted into soldier");
-            NpcSpawnConfig.FARMER_WEIGHT.set(0); selector(level,pos); h.assertValueEqual(spawned.size(),1,"Empty table creates nothing");
+            selector(level,pos); h.assertValueEqual(spawned.size(),2,"Farmer ticket now creates one farmer"); h.assertTrue(spawned.getLast() instanceof ZombieFarmer,"Correct replacement class");
+            NpcSpawnConfig.FARMER_WEIGHT.set(0); NpcSpawnConfig.MINER_WEIGHT.set(200); selector(level,pos);
+            h.assertValueEqual(spawned.size(),3,"Miner ticket creates one miner"); h.assertTrue(spawned.getLast() instanceof ZombieMiner,"Correct miner replacement");
+            NpcSpawnConfig.MINER_WEIGHT.set(0); NpcSpawnConfig.SKELETON_WEIGHT.set(100); selector(level,pos);
+            h.assertValueEqual(spawned.size(),3,"Unported skeleton ticket stays empty");
+            NpcSpawnConfig.SKELETON_WEIGHT.set(0); selector(level,pos); h.assertValueEqual(spawned.size(),3,"Empty table creates nothing");
             NpcSpawnConfig.SOLDIER_WEIGHT.set(100); NpcSpawnConfig.OVERWORLD_WEIGHT.set(0); selector(level,pos);
-            h.assertValueEqual(spawned.size(),1,"Global zero disables replacement"); NpcSpawnConfig.OVERWORLD_WEIGHT.set(600);
+            h.assertValueEqual(spawned.size(),3,"Global zero disables replacement"); NpcSpawnConfig.OVERWORLD_WEIGHT.set(600);
             NpcSpawnConfig.BIOME_BLACKLIST.set(List.of(level.getBiome(pos).unwrapKey().orElseThrow().identifier().toString())); selector(level,pos);
-            h.assertValueEqual(spawned.size(),1,"Blacklisted biome creates nothing");
+            h.assertValueEqual(spawned.size(),3,"Blacklisted biome creates nothing");
             NpcSpawnConfig.BIOME_BLACKLIST.set(blacklist);
             var nether=level.getServer().getLevel(Level.NETHER); nether.getChunk(pos);
             h.assertTrue(selector(nether,pos).isRemoved(),"Overworld selector rejected outside its supported dimension");
@@ -105,7 +110,8 @@ final class OverworldSpawnGameTests {
             h.assertTrue(!OverworldSpawns.checkSpawnRules(OverworldSpawns.SELECTOR.get(),h.getLevel(),EntitySpawnReason.NATURAL,absolute,lightRoll()),"Torch brightness rejects even largest source random threshold"); h.succeed();
         });
     }
-    private static void natural(GameTestHelper h) {
+    private static void natural(GameTestHelper h) { natural(h,false); }
+    private static void natural(GameTestHelper h,boolean lowDanger) {
         var level=h.getLevel(); var base=h.absolutePos(new BlockPos(4,0,4)); var pos=new BlockPos(base.getX(),181,base.getZ());
         for(int x=-18;x<=18;x++) for(int z=-18;z<=18;z++) for(int y=-1;y<=5;y++) {
             var at=pos.offset(x,y,z); level.getChunk(at);
@@ -113,9 +119,9 @@ final class OverworldSpawnGameTests {
         }
         awaitLighting(h,pos.offset(-18,0,-18),pos.offset(18,0,18));
         h.assertValueEqual(level.getMaxLocalRawBrightness(pos),0,"Enclosed spawn room is dark");
-        naturalInRoom(h,pos);
+        naturalInRoom(h,pos,lowDanger);
     }
-    private static void awaitLighting(GameTestHelper h,BlockPos min,BlockPos max) {
+    static void awaitLighting(GameTestHelper h,BlockPos min,BlockPos max) {
         var level=h.getLevel();
         // GameTest ticks run without sleeping. Pump real server/chunk tasks while waiting for the
         // asynchronous light engine, instead of counting virtual ticks or joining on its own thread.
@@ -127,7 +133,7 @@ final class OverworldSpawnGameTests {
         level.getServer().managedBlock(() -> ready.isDone() || System.nanoTime()>=deadline);
         h.assertTrue(ready.isDone() && !ready.isCompletedExceptionally(),"Lighting task barrier completed within ten seconds");
     }
-    private static void naturalInRoom(GameTestHelper h,BlockPos pos) {
+    private static void naturalInRoom(GameTestHelper h,BlockPos pos,boolean lowDanger) {
         var level=h.getLevel(); var area=new AABB(pos).inflate(70); var values=settings(); var saved=values.stream().map(ModConfigSpec.IntValue::get).toList();
         var cookie=CommonListenerCookie.createInitial(new GameProfile(UUID.randomUUID(),"tg-soldier-test"),false);
         var player=new ServerPlayer(level.getServer(),level,cookie.gameProfile(),cookie.clientInformation()) {
@@ -138,12 +144,25 @@ final class OverworldSpawnGameTests {
         player.connection=new ServerGamePacketListenerImpl(level.getServer(),connection,player,cookie);
         player.snapTo(Vec3.atBottomCenterOf(pos.offset(35,0,0))); level.addNewPlayer(player);
         try {
-            // Keep all original table weights; force distance danger 3 for this isolated fixture only.
-            NpcSpawnConfig.DISTANCE_0.set(0); NpcSpawnConfig.DISTANCE_1.set(0); NpcSpawnConfig.DISTANCE_2.set(0);
+            // Keep every original weight; isolate the distance bucket for this fixture only.
+            NpcSpawnConfig.DISTANCE_0.set(lowDanger?Integer.MAX_VALUE:0); NpcSpawnConfig.DISTANCE_1.set(0); NpcSpawnConfig.DISTANCE_2.set(0);
             h.assertTrue(OverworldSpawns.checkSpawnRules(OverworldSpawns.SELECTOR.get(),level,EntitySpawnReason.NATURAL,pos,lightRoll()),
                     "Fixture meets real spawn placement checks: sky="+level.getBrightness(LightLayer.SKY,pos)+", raw="+level.getMaxLocalRawBrightness(pos)
                     +", ground="+level.getBlockState(pos.below())+", biome="+level.getBiome(pos).unwrapKey()+", difficulty="+level.getDifficulty());
-            level.getRandom().setSeed(912262L); List<ZombieSoldier> soldiers=List.of();
+            level.getRandom().setSeed(912262L);
+            if(lowDanger) {
+                h.assertValueEqual(OverworldSpawns.danger(level,pos.getX(),pos.getZ()),0,"Natural spawn fixture is in danger zero");
+                List<ZombieFarmer> farmers=List.of(); List<ZombieMiner> miners=List.of();
+                for(int attempt=0;attempt<256 && (farmers.isEmpty() || miners.isEmpty());attempt++) {
+                    NaturalSpawner.spawnCategoryForPosition(MobCategory.MONSTER,level,pos);
+                    farmers=level.getEntitiesOfClass(ZombieFarmer.class,area); miners=level.getEntitiesOfClass(ZombieMiner.class,area);
+                }
+                h.assertTrue(!farmers.isEmpty() && !miners.isEmpty(),"Native spawning produces both original danger-zero entries with default weights");
+                h.assertTrue(level.getEntitiesOfClass(ZombieSoldier.class,area).isEmpty(),"Soldier remains excluded from danger zero");
+                h.assertTrue(!farmers.getFirst().getMainHandItem().isEmpty() && !farmers.getFirst().getItemBySlot(EquipmentSlot.CHEST).isEmpty(),"Naturally spawned farmer has weapon and jacket");
+                h.assertTrue(!miners.getFirst().getMainHandItem().isEmpty() && !miners.getFirst().getItemBySlot(EquipmentSlot.HEAD).isEmpty(),"Naturally spawned miner has weapon and helmet");
+            } else {
+            List<ZombieSoldier> soldiers=List.of();
             for(int attempt=0;attempt<256 && soldiers.isEmpty();attempt++) {
                 NaturalSpawner.spawnCategoryForPosition(MobCategory.MONSTER,level,pos);
                 soldiers=level.getEntitiesOfClass(ZombieSoldier.class,area);
@@ -156,6 +175,7 @@ final class OverworldSpawnGameTests {
             var data=NetherGameTests.save(h,npc); data.putLong("DeathLootTableSeed",seed); NetherGameTests.load(h,npc,data);
             npc.hurtServer(level,level.damageSources().playerAttack(player),1000);
             h.assertTrue(level.getEntitiesOfClass(ItemEntity.class,npc.getBoundingBox().inflate(3)).stream().anyMatch(e -> e.getItem().is(cloth)),"Naturally spawned soldier drops source heavy cloth on actual death");
+            }
         } finally {
             for(int i=0;i<values.size();i++) values.get(i).set(saved.get(i));
             level.getEntitiesOfClass(Mob.class,area).forEach(Entity::discard); level.getEntitiesOfClass(ItemEntity.class,area).forEach(Entity::discard);

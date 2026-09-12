@@ -8,18 +8,18 @@ import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.HumanoidArm;
 import techguns.modern.TGContent;
-import techguns.modern.npc.ZombieSoldier;
+import techguns.modern.npc.ArmedNpc;
 
-/** Original 64x64 skin, ModelGenericNPC humanoid layout, held-item poses and armor layers. */
-public final class ZombieSoldierRenderer extends HumanoidMobRenderer<ZombieSoldier,HumanoidRenderState,HumanoidModel<HumanoidRenderState>> {
+/** Soldier, farmer and miner share the original 64x64 skin and ModelGenericNPC layout. */
+public final class GenericZombieRenderer<T extends ArmedNpc> extends HumanoidMobRenderer<T,HumanoidRenderState,HumanoidModel<HumanoidRenderState>> {
     private static final Identifier TEXTURE = TGContent.id("textures/entity/zombie_soldier.png");
-    public ZombieSoldierRenderer(EntityRendererProvider.Context context) {
+    public GenericZombieRenderer(EntityRendererProvider.Context context) {
         super(context,new HumanoidModel<>(context.bakeLayer(ModelLayers.ZOMBIE)),.5f);
         addLayer(new HumanoidArmorLayer<>(this,ArmorModelSet.bake(ModelLayers.ZOMBIE_ARMOR,context.getModelSet(),HumanoidModel::new),context.getEquipmentRenderer()));
     }
     @Override public HumanoidRenderState createRenderState() { return new HumanoidRenderState(); }
     @Override public Identifier getTextureLocation(HumanoidRenderState state) { return TEXTURE; }
-    @Override protected HumanoidModel.ArmPose getArmPose(ZombieSoldier entity, HumanoidArm arm) {
+    @Override protected HumanoidModel.ArmPose getArmPose(T entity, HumanoidArm arm) {
         if (arm == entity.getMainArm() && entity.armed()) return HumanoidModel.ArmPose.BOW_AND_ARROW;
         return entity.getItemHeldByArm(arm).isEmpty() ? HumanoidModel.ArmPose.EMPTY : HumanoidModel.ArmPose.ITEM;
     }
