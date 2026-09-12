@@ -49,6 +49,7 @@ public final class WeaponGameTests {
         NpcGameTests.register(FUNCTIONS);
         NetherGameTests.register(FUNCTIONS);
         ArmorGameTests.register(FUNCTIONS);
+        RepairBenchGameTests.register(FUNCTIONS);
         FUNCTIONS.register("ammo_persists", () -> WeaponGameTests::ammoPersists);
         FUNCTIONS.register("reload_timing_and_consumption", () -> WeaponGameTests::reloadTiming);
         FUNCTIONS.register("reload_cancellation", () -> WeaponGameTests::reloadCancellation);

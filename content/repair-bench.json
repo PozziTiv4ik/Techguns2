@@ -1,0 +1,31 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/tileentities/RepairBenchTileEnt.java",
+  "legacy_item": "techguns:simplemachine@9",
+  "id": "techguns:repair_bench",
+  "material_slots": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "repair_slot": 9,
+  "energy": 0,
+  "targets": [
+    "HEAD",
+    "CHEST",
+    "LEGS",
+    "FEET",
+    "OFFHAND",
+    "BENCH"
+  ],
+  "repair": "All required materials from slots 0..8, then reset damage to zero, retaining other components",
+  "implemented_equipment": "T2_COMBAT",
+  "pending_equipment": "Other original armors and shields",
+  "automation": "All faces and unsided; insert/extract all ten slots, repair slot accepts supported armor",
+  "access": "Public or owner only; team integration pending"
+}

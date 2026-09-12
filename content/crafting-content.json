@@ -119,7 +119,8 @@
     "techguns:multiblockmachine@3": "techguns:reactionchamber_housing",
     "techguns:multiblockmachine@4": "techguns:reactionchamber_glass",
     "techguns:multiblockmachine@5": "techguns:reactionchamber_controller",
-    "techguns:simplemachine@10": "techguns:charging_station"
+    "techguns:simplemachine@10": "techguns:charging_station",
+    "techguns:simplemachine@9": "techguns:repair_bench"
   },
   "recipes": [
     {
@@ -533,6 +534,10 @@
     {
       "id": "techguns:blast_furnace",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/simplemachine_11_blast_furnace.json"
+    },
+    {
+      "id": "techguns:repair_bench",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/simplemachine_9_repair_bench.json"
     },
     {
       "id": "techguns:t2_combat_boots",

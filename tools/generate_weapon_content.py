@@ -17,6 +17,7 @@ from legacy_rockets import generate_rocket_content, rocket_item_model, rocket_tr
 from legacy_npcs import generate_npc_content, npc_translations, SOUNDS as NPC_SOUNDS
 from legacy_cyber import generate_cyber_content, cyber_translations
 from legacy_armors import generate_armor_content, armor_translations
+from legacy_repair import generate_repair_content, repair_translations
 from legacy_items import arguments
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -257,6 +258,7 @@ public final class NpcWeapons {
         values.update(radiation_translations(lang))
         values.update(fabricator_translations(lang))
         values.update(charging_translations(lang))
+        values.update(repair_translations(lang))
         values.update(rocket_translations(lang))
         values.update(cyber_translations(lang))
         values.update(armor_translations(lang))
@@ -311,7 +313,7 @@ public final class Weapons {
 '''
     output('core/src/main/java/techguns/core/Weapons.java', source)
     files.update(generate_machine_content())
-    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_npc_content(), generate_cyber_content(), generate_armor_content()) for entry in domain.items()]:
+    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_npc_content(), generate_cyber_content(), generate_armor_content(), generate_repair_content()) for entry in domain.items()]:
         if path in files:
             # Several content domains contribute to the same mining/tool and common item tags.
             if '/tags/' not in path: raise ValueError(f'Colliding generated resource: {path}')

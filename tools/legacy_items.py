@@ -7,6 +7,7 @@ LEGACY = ROOT / "legacy/1.12.2/src/main"
 
 # Modern tag, and the original shared material that contributes to it (if any).
 ORE_TAGS = {
+    'WORKBENCH': ('c:player_workstations/crafting_tables', None),
     'STONE': ('c:stones', None), 'COBBLESTONE': ('c:cobblestones', None),
     'LOGWOOD': ('minecraft:logs', None), 'BLOCKWOOL': ('minecraft:wool', None),
     'BLOCKGLASS': ('c:glass_blocks', None), 'PANEGLASS': ('c:glass_panes', None),

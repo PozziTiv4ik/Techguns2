@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:repair_bench",
+    "count": 1
+  },
+  "pattern": [
+    "pmp",
+    "ici",
+    "iii"
+  ],
+  "key": {
+    "p": "#c:plates/iron",
+    "c": "#c:player_workstations/crafting_tables",
+    "i": "#c:nuggets/iron",
+    "m": "techguns:mechanicalpartsiron"
+  }
+}

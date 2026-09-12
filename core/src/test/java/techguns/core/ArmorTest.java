@@ -38,6 +38,18 @@ class ArmorTest {
                 java.util.stream.IntStream.range(0,9).mapToObj(PigmanRules::weapon).toList());
         assertThrows(IllegalArgumentException.class,() -> PigmanRules.weapon(9));
     }
+    @Test void repairCostsRoundAtSourceDamageFractions() {
+        var chest = Armors.forSlot(ArmorSlot.CHEST);
+        int[][] cases = {{1,1,0},{247,1,0},{248,1,1},{494,1,1},{495,2,1},{741,2,1},{742,2,2},{989,2,2}};
+        for (var c : cases) assertArrayEquals(new int[]{c[1],c[2]}, chest.repairBenchCosts(c[0]), "damage=" + c[0]);
+    }
+    @Test void leggingsSplitOneThirdMetalWithoutInventingAnExtraIngot() {
+        var legs = Armors.forSlot(ArmorSlot.LEGS);
+        for (int damage : new int[]{1,329}) assertArrayEquals(new int[]{1,0}, legs.repairBenchCosts(damage));
+        for (int damage : new int[]{330,659}) assertArrayEquals(new int[]{1,1}, legs.repairBenchCosts(damage));
+        for (int damage : new int[]{660,989}) assertArrayEquals(new int[]{1,2}, legs.repairBenchCosts(damage));
+        assertArrayEquals(new int[]{0,0}, legs.repairBenchCosts(0));
+    }
     @Test void helmetIsUnconditionalAndOtherPiecesHaveInclusiveHalfChance() {
         assertTrue(PigmanRules.armor(ArmorSlot.HEAD,.99));
         for(var slot:List.of(ArmorSlot.CHEST,ArmorSlot.LEGS,ArmorSlot.FEET)) {

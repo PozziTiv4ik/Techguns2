@@ -16,6 +16,7 @@
     "techguns:ore_uranium",
     "techguns:reactionchamber_controller",
     "techguns:reactionchamber_glass",
-    "techguns:reactionchamber_housing"
+    "techguns:reactionchamber_housing",
+    "techguns:repair_bench"
   ]
 }
