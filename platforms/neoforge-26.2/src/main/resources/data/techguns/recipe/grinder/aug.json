@@ -1,0 +1,25 @@
+{
+  "type": "techguns:grinder",
+  "input": "techguns:aug",
+  "outputs": [
+    {
+      "result": {
+        "id": "techguns:ingotobsidiansteel",
+        "count": 3
+      }
+    },
+    {
+      "result": {
+        "id": "techguns:ingotsteel",
+        "count": 2
+      }
+    },
+    {
+      "result": {
+        "id": "techguns:plasticsheet",
+        "count": 2
+      }
+    }
+  ],
+  "random": false
+}

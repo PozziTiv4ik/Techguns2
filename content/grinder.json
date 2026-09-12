@@ -1,0 +1,869 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/TGMachineRecipes.java",
+  "recipes": [
+    {
+      "id": "handcannon",
+      "input": "techguns:handcannon",
+      "outputs": [
+        {
+          "result": {
+            "id": "minecraft:cobblestone",
+            "count": 3
+          }
+        },
+        {
+          "result": {
+            "id": "minecraft:oak_log",
+            "count": 1
+          }
+        },
+        {
+          "result": {
+            "id": "minecraft:iron_nugget",
+            "count": 4
+          }
+        }
+      ],
+      "random": false
+    },
+    {
+      "id": "sawedoff",
+      "input": "techguns:sawedoff",
+      "outputs": [
+        {
+          "result": {
+            "id": "minecraft:iron_ingot",
+            "count": 4
+          }
+        },
+        {
+          "result": {
+            "id": "minecraft:oak_log",
+            "count": 1
+          }
+        },
+        {
+          "result": {
+            "id": "minecraft:flint",
+            "count": 1
+          }
+        }
+      ],
+      "random": false
+    },
+    {
+      "id": "revolver",
+      "input": "techguns:revolver",
+      "outputs": [
+        {
+          "result": {
+            "id": "minecraft:iron_ingot",
+            "count": 3
+          }
+        },
+        {
+          "result": {
+            "id": "minecraft:oak_log",
+            "count": 1
+          }
+        }
+      ],
+      "random": false
+    },
+    {
+      "id": "goldenrevolver",
+      "input": "techguns:goldenrevolver",
+      "outputs": [
+        {
+          "result": {
+            "id": "minecraft:iron_ingot",
+            "count": 3
+          }
+        },
+        {
+          "result": {
+            "id": "minecraft:oak_log",
+            "count": 1
+          }
+        },
+        {
+          "result": {
+            "id": "minecraft:gold_ingot",
+            "count": 4
+          }
+        }
+      ],
+      "random": false
+    },
+    {
+      "id": "thompson",
+      "input": "techguns:thompson",
+      "outputs": [
+        {
+          "result": {
+            "id": "minecraft:iron_ingot",
+            "count": 4
+          }
+        },
+        {
+          "result": {
+            "id": "minecraft:oak_log",
+            "count": 1
+          }
+        }
+      ],
+      "random": false
+    },
+    {
+      "id": "ak47",
+      "input": "techguns:ak47",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:ingotobsidiansteel",
+            "count": 3
+          }
+        },
+        {
+          "result": {
+            "id": "minecraft:iron_ingot",
+            "count": 4
+          }
+        },
+        {
+          "result": {
+            "id": "minecraft:oak_log",
+            "count": 1
+          }
+        }
+      ],
+      "random": false
+    },
+    {
+      "id": "boltaction",
+      "input": "techguns:boltaction",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:ingotobsidiansteel",
+            "count": 3
+          }
+        },
+        {
+          "result": {
+            "id": "minecraft:iron_ingot",
+            "count": 4
+          }
+        },
+        {
+          "result": {
+            "id": "minecraft:oak_log",
+            "count": 1
+          }
+        }
+      ],
+      "random": false
+    },
+    {
+      "id": "m4",
+      "input": "techguns:m4",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:ingotobsidiansteel",
+            "count": 3
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:ingotsteel",
+            "count": 2
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:plasticsheet",
+            "count": 2
+          }
+        }
+      ],
+      "random": false
+    },
+    {
+      "id": "m4_infiltrator",
+      "input": "techguns:m4_infiltrator",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:ingotobsidiansteel",
+            "count": 3
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:ingotsteel",
+            "count": 3
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:plasticsheet",
+            "count": 2
+          }
+        },
+        {
+          "result": {
+            "id": "minecraft:redstone",
+            "count": 1
+          }
+        }
+      ],
+      "random": false
+    },
+    {
+      "id": "pistol",
+      "input": "techguns:pistol",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:ingotobsidiansteel",
+            "count": 3
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:plasticsheet",
+            "count": 1
+          }
+        },
+        {
+          "result": {
+            "id": "minecraft:iron_ingot",
+            "count": 2
+          }
+        }
+      ],
+      "random": false
+    },
+    {
+      "id": "combatshotgun",
+      "input": "techguns:combatshotgun",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:ingotobsidiansteel",
+            "count": 3
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:ingotsteel",
+            "count": 2
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:plasticsheet",
+            "count": 2
+          }
+        }
+      ],
+      "random": false
+    },
+    {
+      "id": "mac10",
+      "input": "techguns:mac10",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:ingotobsidiansteel",
+            "count": 3
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:ingotsteel",
+            "count": 1
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:ingotsteel",
+            "count": 5
+          }
+        },
+        {
+          "result": {
+            "id": "minecraft:iron_ingot",
+            "count": 1
+          }
+        }
+      ],
+      "random": false
+    },
+    {
+      "id": "rocketlauncher",
+      "input": "techguns:rocketlauncher",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:ingotobsidiansteel",
+            "count": 6
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:ingotsteel",
+            "count": 1
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:ingotsteel",
+            "count": 5
+          }
+        }
+      ],
+      "random": false
+    },
+    {
+      "id": "aug",
+      "input": "techguns:aug",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:ingotobsidiansteel",
+            "count": 3
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:ingotsteel",
+            "count": 2
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:plasticsheet",
+            "count": 2
+          }
+        }
+      ],
+      "random": false
+    },
+    {
+      "id": "netherblaster",
+      "input": "techguns:netherblaster",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:ingotobsidiansteel",
+            "count": 4
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:cyberneticparts",
+            "count": 2
+          }
+        }
+      ],
+      "random": false
+    },
+    {
+      "id": "lmg",
+      "input": "techguns:lmg",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:ingotobsidiansteel",
+            "count": 6
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:ingotsteel",
+            "count": 4
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:plasticsheet",
+            "count": 2
+          }
+        }
+      ],
+      "random": false
+    },
+    {
+      "id": "as50",
+      "input": "techguns:as50",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:ingotobsidiansteel",
+            "count": 9
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:plasticsheet",
+            "count": 2
+          }
+        },
+        {
+          "result": {
+            "id": "minecraft:diamond",
+            "count": 1
+          }
+        }
+      ],
+      "random": false
+    },
+    {
+      "id": "vector",
+      "input": "techguns:vector",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:ingotobsidiansteel",
+            "count": 5
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:plasticsheet",
+            "count": 2
+          }
+        }
+      ],
+      "random": false
+    },
+    {
+      "id": "scar",
+      "input": "techguns:scar",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:ingotobsidiansteel",
+            "count": 5
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:plasticsheet",
+            "count": 2
+          }
+        }
+      ],
+      "random": false
+    },
+    {
+      "id": "lasergun",
+      "input": "techguns:lasergun",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:ingotobsidiansteel",
+            "count": 2
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:plasticsheet",
+            "count": 2
+          }
+        },
+        {
+          "result": {
+            "id": "minecraft:redstone",
+            "count": 20
+          }
+        },
+        {
+          "result": {
+            "id": "minecraft:gold_ingot",
+            "count": 3
+          },
+          "preferred_tag": "c:ingots/electrum"
+        }
+      ],
+      "random": false
+    },
+    {
+      "id": "platecarbon",
+      "input": "techguns:platecarbon",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:carbonfibers",
+            "count": 1
+          }
+        }
+      ],
+      "random": false
+    },
+    {
+      "id": "riflerounds",
+      "input": "techguns:riflerounds",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:nuggetlead",
+            "count": 1
+          },
+          "factor": 1.0
+        },
+        {
+          "result": {
+            "id": "techguns:nuggetcopper",
+            "count": 2
+          },
+          "factor": 1.0
+        },
+        {
+          "result": {
+            "id": "minecraft:gunpowder",
+            "count": 1
+          },
+          "factor": 0.125
+        }
+      ],
+      "random": true
+    },
+    {
+      "id": "pistolrounds",
+      "input": "techguns:pistolrounds",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:nuggetlead",
+            "count": 1
+          },
+          "factor": 0.75
+        },
+        {
+          "result": {
+            "id": "techguns:nuggetcopper",
+            "count": 1
+          },
+          "factor": 1.5
+        },
+        {
+          "result": {
+            "id": "minecraft:gunpowder",
+            "count": 1
+          },
+          "factor": 0.08333333333333333
+        }
+      ],
+      "random": true
+    },
+    {
+      "id": "sniperrounds",
+      "input": "techguns:sniperrounds",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:nuggetlead",
+            "count": 2
+          },
+          "factor": 1.0
+        },
+        {
+          "result": {
+            "id": "techguns:nuggetcopper",
+            "count": 4
+          },
+          "factor": 1.0
+        },
+        {
+          "result": {
+            "id": "minecraft:gunpowder",
+            "count": 1
+          },
+          "factor": 0.25
+        }
+      ],
+      "random": true
+    },
+    {
+      "id": "shotgunrounds",
+      "input": "techguns:shotgunrounds",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:nuggetlead",
+            "count": 1
+          },
+          "factor": 0.5
+        },
+        {
+          "result": {
+            "id": "techguns:nuggetcopper",
+            "count": 1
+          },
+          "factor": 1.0
+        },
+        {
+          "result": {
+            "id": "minecraft:gunpowder",
+            "count": 1
+          },
+          "factor": 0.0625
+        }
+      ],
+      "random": true
+    },
+    {
+      "id": "riflerounds_incendiary",
+      "input": "techguns:riflerounds_incendiary",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:nuggetlead",
+            "count": 1
+          },
+          "factor": 1.0
+        },
+        {
+          "result": {
+            "id": "techguns:nuggetcopper",
+            "count": 2
+          },
+          "factor": 1.0
+        },
+        {
+          "result": {
+            "id": "minecraft:gunpowder",
+            "count": 1
+          },
+          "factor": 0.125
+        },
+        {
+          "result": {
+            "id": "minecraft:blaze_powder",
+            "count": 1
+          },
+          "factor": 0.125
+        }
+      ],
+      "random": true
+    },
+    {
+      "id": "pistolrounds_incendiary",
+      "input": "techguns:pistolrounds_incendiary",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:nuggetlead",
+            "count": 1
+          },
+          "factor": 0.75
+        },
+        {
+          "result": {
+            "id": "techguns:nuggetcopper",
+            "count": 1
+          },
+          "factor": 1.5
+        },
+        {
+          "result": {
+            "id": "minecraft:gunpowder",
+            "count": 1
+          },
+          "factor": 0.08333333333333333
+        },
+        {
+          "result": {
+            "id": "minecraft:blaze_powder",
+            "count": 1
+          },
+          "factor": 0.125
+        }
+      ],
+      "random": true
+    },
+    {
+      "id": "sniperrounds_incendiary",
+      "input": "techguns:sniperrounds_incendiary",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:nuggetlead",
+            "count": 2
+          },
+          "factor": 1.0
+        },
+        {
+          "result": {
+            "id": "techguns:nuggetcopper",
+            "count": 4
+          },
+          "factor": 1.0
+        },
+        {
+          "result": {
+            "id": "minecraft:gunpowder",
+            "count": 1
+          },
+          "factor": 0.25
+        },
+        {
+          "result": {
+            "id": "minecraft:blaze_powder",
+            "count": 1
+          },
+          "factor": 0.125
+        }
+      ],
+      "random": true
+    },
+    {
+      "id": "shotgunrounds_incendiary",
+      "input": "techguns:shotgunrounds_incendiary",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:nuggetlead",
+            "count": 1
+          },
+          "factor": 0.5
+        },
+        {
+          "result": {
+            "id": "techguns:nuggetcopper",
+            "count": 1
+          },
+          "factor": 1.0
+        },
+        {
+          "result": {
+            "id": "minecraft:gunpowder",
+            "count": 1
+          },
+          "factor": 0.0625
+        },
+        {
+          "result": {
+            "id": "minecraft:blaze_powder",
+            "count": 1
+          },
+          "factor": 0.125
+        }
+      ],
+      "random": true
+    },
+    {
+      "id": "sniperrounds_explosive",
+      "input": "techguns:sniperrounds_explosive",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:nuggetlead",
+            "count": 2
+          },
+          "factor": 1.0
+        },
+        {
+          "result": {
+            "id": "techguns:nuggetcopper",
+            "count": 4
+          },
+          "factor": 1.0
+        },
+        {
+          "result": {
+            "id": "minecraft:gunpowder",
+            "count": 1
+          },
+          "factor": 0.25
+        },
+        {
+          "result": {
+            "id": "minecraft:blaze_powder",
+            "count": 1
+          },
+          "factor": 0.125
+        },
+        {
+          "result": {
+            "id": "techguns:tgx",
+            "count": 1
+          },
+          "factor": 0.5
+        }
+      ],
+      "random": true
+    },
+    {
+      "id": "t2_combat_helmet",
+      "input": "techguns:t2_combat_helmet",
+      "outputs": [],
+      "armor": true
+    },
+    {
+      "id": "t2_combat_chestplate",
+      "input": "techguns:t2_combat_chestplate",
+      "outputs": [],
+      "armor": true
+    },
+    {
+      "id": "t2_combat_leggings",
+      "input": "techguns:t2_combat_leggings",
+      "outputs": [],
+      "armor": true
+    },
+    {
+      "id": "t2_combat_boots",
+      "input": "techguns:t2_combat_boots",
+      "outputs": [],
+      "armor": true
+    }
+  ],
+  "unported_weapon_inputs": [
+    "flamethrower",
+    "grimreaper",
+    "grenadelauncher",
+    "biogun",
+    "teslagun",
+    "minigun",
+    "blasterrifle",
+    "sonicshotgun",
+    "pdw",
+    "pulserifle",
+    "mibgun",
+    "powerhammer",
+    "chainsaw",
+    "nucleardeathray",
+    "gaussrifle",
+    "guidedmissilelauncher",
+    "miningdrill",
+    "tfg"
+  ],
+  "ported_weapons_without_source_recipe": [
+    "laserpistol"
+  ],
+  "duration": 100,
+  "power_per_tick": 5,
+  "energy_capacity": 20000,
+  "input_slot": 0,
+  "upgrade_slot": 1,
+  "output_slots": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "model_parts": {
+    "block": 19,
+    "item": 21,
+    "animated_rollers": 2
+  }
+}

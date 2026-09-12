@@ -1,0 +1,19 @@
+{
+  "type": "techguns:grinder",
+  "input": "techguns:netherblaster",
+  "outputs": [
+    {
+      "result": {
+        "id": "techguns:ingotobsidiansteel",
+        "count": 4
+      }
+    },
+    {
+      "result": {
+        "id": "techguns:cyberneticparts",
+        "count": 2
+      }
+    }
+  ],
+  "random": false
+}

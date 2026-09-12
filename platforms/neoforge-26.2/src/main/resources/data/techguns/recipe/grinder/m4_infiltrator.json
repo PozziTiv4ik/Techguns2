@@ -1,0 +1,31 @@
+{
+  "type": "techguns:grinder",
+  "input": "techguns:m4_infiltrator",
+  "outputs": [
+    {
+      "result": {
+        "id": "techguns:ingotobsidiansteel",
+        "count": 3
+      }
+    },
+    {
+      "result": {
+        "id": "techguns:ingotsteel",
+        "count": 3
+      }
+    },
+    {
+      "result": {
+        "id": "techguns:plasticsheet",
+        "count": 2
+      }
+    },
+    {
+      "result": {
+        "id": "minecraft:redstone",
+        "count": 1
+      }
+    }
+  ],
+  "random": false
+}

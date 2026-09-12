@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "techguns:block/grinder",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "techguns:block/grinder",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "techguns:block/grinder",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "techguns:block/grinder",
+      "y": 270
+    }
+  }
+}

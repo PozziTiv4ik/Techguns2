@@ -1,0 +1,28 @@
+{
+  "type": "techguns:grinder",
+  "input": "techguns:sniperrounds",
+  "outputs": [
+    {
+      "result": {
+        "id": "techguns:nuggetlead",
+        "count": 2
+      },
+      "factor": 1.0
+    },
+    {
+      "result": {
+        "id": "techguns:nuggetcopper",
+        "count": 4
+      },
+      "factor": 1.0
+    },
+    {
+      "result": {
+        "id": "minecraft:gunpowder",
+        "count": 1
+      },
+      "factor": 0.25
+    }
+  ],
+  "random": true
+}

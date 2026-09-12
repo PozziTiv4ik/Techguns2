@@ -1,0 +1,35 @@
+{
+  "type": "techguns:grinder",
+  "input": "techguns:riflerounds_incendiary",
+  "outputs": [
+    {
+      "result": {
+        "id": "techguns:nuggetlead",
+        "count": 1
+      },
+      "factor": 1.0
+    },
+    {
+      "result": {
+        "id": "techguns:nuggetcopper",
+        "count": 2
+      },
+      "factor": 1.0
+    },
+    {
+      "result": {
+        "id": "minecraft:gunpowder",
+        "count": 1
+      },
+      "factor": 0.125
+    },
+    {
+      "result": {
+        "id": "minecraft:blaze_powder",
+        "count": 1
+      },
+      "factor": 0.125
+    }
+  ],
+  "random": true
+}

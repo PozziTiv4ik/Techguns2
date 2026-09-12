@@ -121,7 +121,8 @@
     "techguns:multiblockmachine@5": "techguns:reactionchamber_controller",
     "techguns:simplemachine@10": "techguns:charging_station",
     "techguns:simplemachine@9": "techguns:repair_bench",
-    "techguns:simplemachine@8": "techguns:camo_bench"
+    "techguns:simplemachine@8": "techguns:camo_bench",
+    "techguns:simplemachine2@8": "techguns:grinder"
   },
   "recipes": [
     {
@@ -527,6 +528,10 @@
     {
       "id": "techguns:scar_alt",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/scar_alt.json"
+    },
+    {
+      "id": "techguns:grinder",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/simplemachine2_8_grinder.json"
     },
     {
       "id": "techguns:charging_station",

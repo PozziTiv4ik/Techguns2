@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.BlockHitResult;
 
-/** Common full-cube workbench placement; these stations have no processing ticker. */
+/** Common horizontal placement and ownership; processing machines may supply a ticker. */
 public abstract class OwnedWorkbenchBlock extends BaseEntityBlock {
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     protected OwnedWorkbenchBlock(Properties properties) { super(properties); registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH)); }

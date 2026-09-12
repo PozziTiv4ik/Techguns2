@@ -160,6 +160,16 @@ def main():
             check_ingredient(recipe['input']['ingredient'])
             if not 1 <= recipe['input']['count'] <= 64 or not 1 <= recipe['charge_amount'] <= 57600000:
                 raise ValueError('Invalid Charging Station recipe amounts')
+        if recipe['type']=='techguns:grinder':
+            check_ingredient(recipe['input'])
+            if (not recipe.get('armor') and not recipe['outputs']) or len(recipe['outputs']) > 9:
+                raise ValueError('Invalid Grinder output slots')
+            for output in recipe['outputs']:
+                check_ingredient(output['result']['id'])
+                if not 0 <= output.get('factor',1) <= 64 or output['result'].get('count',1) < 1:
+                    raise ValueError('Invalid Grinder output factor/count')
+                if 'preferred_tag' in output and not isinstance(output['preferred_tag'],str):
+                    raise ValueError('Invalid Grinder preferred material tag')
     for path in (ROOT / 'data/c/tags/item').rglob('*.json'):
         for value in json.loads(path.read_text(encoding='utf-8'))['values']: check_ingredient(value)
     print(f'Validated {len(names)} item definitions, {texture_count} texture references, {len(sounds)} sound events and {len(recipes)} recipes')

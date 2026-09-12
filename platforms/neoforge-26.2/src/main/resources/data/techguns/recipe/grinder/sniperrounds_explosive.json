@@ -1,0 +1,42 @@
+{
+  "type": "techguns:grinder",
+  "input": "techguns:sniperrounds_explosive",
+  "outputs": [
+    {
+      "result": {
+        "id": "techguns:nuggetlead",
+        "count": 2
+      },
+      "factor": 1.0
+    },
+    {
+      "result": {
+        "id": "techguns:nuggetcopper",
+        "count": 4
+      },
+      "factor": 1.0
+    },
+    {
+      "result": {
+        "id": "minecraft:gunpowder",
+        "count": 1
+      },
+      "factor": 0.25
+    },
+    {
+      "result": {
+        "id": "minecraft:blaze_powder",
+        "count": 1
+      },
+      "factor": 0.125
+    },
+    {
+      "result": {
+        "id": "techguns:tgx",
+        "count": 1
+      },
+      "factor": 0.5
+    }
+  ],
+  "random": true
+}

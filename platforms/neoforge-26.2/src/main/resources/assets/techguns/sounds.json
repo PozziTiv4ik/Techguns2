@@ -349,6 +349,18 @@
     ],
     "subtitle": "subtitles.techguns.machines.chargingstationwork"
   },
+  "machines.grinder.start": {
+    "sounds": [
+      "techguns:machines/grind_start"
+    ],
+    "subtitle": "subtitles.techguns.machines.grinder.start"
+  },
+  "machines.grinder.work": {
+    "sounds": [
+      "techguns:machines/grind"
+    ],
+    "subtitle": "subtitles.techguns.machines.grinder.work"
+  },
   "effects.nukeexplosion": {
     "sounds": [
       "techguns:effects/nukeexplosion"

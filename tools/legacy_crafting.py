@@ -12,6 +12,7 @@ from legacy_ores import smelting_data
 from legacy_chemistry import chemical_recipes, STANDALONE_ITEMS
 from legacy_reactions import reaction_recipes, PARTS as REACTION_PARTS
 from legacy_fabricator import fabricator_recipes, PARTS as FABRICATOR_PARTS
+from legacy_grinder import grinder_data
 
 ROOT = Path(__file__).resolve().parents[1]
 LEGACY = ROOT / 'legacy/1.12.2/src/main'
@@ -29,6 +30,7 @@ def convert_recipe(legacy, shared, weapons):
             return 'techguns:' + {0: 'ammo_press', 1: 'metal_press', 2: 'chem_lab'}[value.get('data', 0)]
         if identifier == 'techguns:simplemachine' and value.get('data') in (8,9,10,11): return 'techguns:'+{8:'camo_bench',9:'repair_bench',10:'charging_station',11:'blast_furnace'}[value['data']]
         if identifier == 'techguns:multiblockmachine': return 'techguns:'+(FABRICATOR_PARTS+REACTION_PARTS)[value['data']]
+        if identifier == 'techguns:simplemachine2' and value.get('data') == 8: return 'techguns:grinder'
         if identifier == 'minecraft:stonebrick' and value.get('data', 0) == 0: return 'minecraft:stone_bricks'
         if identifier == 'minecraft:wool' and value.get('data', 0) == 0: return 'minecraft:white_wool'
         if identifier == 'techguns:itemshared': return 'techguns:' + shared[value['data']]
@@ -91,6 +93,7 @@ def plan_crafting(weapon_list):
     selected['simplemachine_10_charging_station'] = source_recipes['simplemachine_10_charging_station']
     selected['simplemachine_9_repair_bench'] = source_recipes['simplemachine_9_repair_bench']
     selected['simplemachine_8_camo_bench'] = source_recipes['simplemachine_8_camo_bench']
+    selected['simplemachine2_8_grinder'] = source_recipes['simplemachine2_8_grinder']
     selected['basicmachine_2_chem_lab']=source_recipes['basicmachine_2_chem_lab']
     for meta, part in enumerate(FABRICATOR_PARTS+REACTION_PARTS):
         name = f'multiblockmachine_{meta}_{part}'
@@ -104,6 +107,10 @@ def plan_crafting(weapon_list):
             if identifier.startswith('techguns:') and not identifier.startswith('techguns:ore_'):
                 wanted.add(by_name[identifier.split(':')[1]])
     used_tags = set()
+    for recipe in grinder_data()['recipes']:
+        for identifier in [recipe['input']] + [output['result']['id'] for output in recipe['outputs']]:
+            name=identifier.removeprefix('techguns:')
+            if identifier.startswith('techguns:') and name in by_name: wanted.add(by_name[name])
     for recipe in fabricator_recipes():
         for identifier in [recipe[key]['ingredient'] for key in ('input','wire','powder','plate')]+[recipe['result']['id']]:
             if identifier.startswith('techguns:'): wanted.add(by_name[identifier.split(':')[1]])
@@ -157,6 +164,7 @@ def plan_crafting(weapon_list):
         if name == 'simplemachine_10_charging_station': identifier = 'charging_station'
         if name == 'simplemachine_9_repair_bench': identifier = 'repair_bench'
         if name == 'simplemachine_8_camo_bench': identifier = 'camo_bench'
+        if name == 'simplemachine2_8_grinder': identifier = 'grinder'
         if name == 'basicmachine_2_chem_lab': identifier = 'chem_lab'
         if name.startswith('multiblockmachine_'): identifier = re.sub(r'^multiblockmachine_\d+_', '', name)
         if name.startswith('itemshared_'): identifier = re.sub(r'^itemshared_\d+_', '', name)
@@ -181,4 +189,5 @@ def plan_crafting(weapon_list):
     catalog['block_metadata']['techguns:simplemachine@10'] = 'techguns:charging_station'
     catalog['block_metadata']['techguns:simplemachine@9'] = 'techguns:repair_bench'
     catalog['block_metadata']['techguns:simplemachine@8'] = 'techguns:camo_bench'
+    catalog['block_metadata']['techguns:simplemachine2@8'] = 'techguns:grinder'
     return {'recipes': recipes, 'materials': materials, 'extra_ammo': sorted(extra_ammo), 'tags': tags, 'catalog': catalog}

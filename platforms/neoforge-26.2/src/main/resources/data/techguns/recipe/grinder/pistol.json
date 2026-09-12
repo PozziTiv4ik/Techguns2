@@ -1,0 +1,25 @@
+{
+  "type": "techguns:grinder",
+  "input": "techguns:pistol",
+  "outputs": [
+    {
+      "result": {
+        "id": "techguns:ingotobsidiansteel",
+        "count": 3
+      }
+    },
+    {
+      "result": {
+        "id": "techguns:plasticsheet",
+        "count": 1
+      }
+    },
+    {
+      "result": {
+        "id": "minecraft:iron_ingot",
+        "count": 2
+      }
+    }
+  ],
+  "random": false
+}

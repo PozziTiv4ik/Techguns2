@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:grinder",
+    "count": 1
+  },
+  "pattern": [
+    "imi",
+    "mem",
+    "iri"
+  ],
+  "key": {
+    "r": "#c:dusts/redstone",
+    "e": "techguns:electricengine",
+    "i": "#c:plates/iron",
+    "m": "techguns:mechanicalpartsiron"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "techguns:grinder",
+  "input": "techguns:goldenrevolver",
+  "outputs": [
+    {
+      "result": {
+        "id": "minecraft:iron_ingot",
+        "count": 3
+      }
+    },
+    {
+      "result": {
+        "id": "minecraft:oak_log",
+        "count": 1
+      }
+    },
+    {
+      "result": {
+        "id": "minecraft:gold_ingot",
+        "count": 4
+      }
+    }
+  ],
+  "random": false
+}

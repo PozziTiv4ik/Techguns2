@@ -62,6 +62,7 @@ public final class TechgunsClient {
         event.register(techguns.modern.machine.charging.ChargingStationContent.MENU.get(), ChargingStationScreen::new);
         event.register(techguns.modern.machine.repair.RepairBenchContent.MENU.get(), RepairBenchScreen::new);
         event.register(techguns.modern.machine.camo.CamoBenchContent.MENU.get(), CamoBenchScreen::new);
+        event.register(techguns.modern.machine.grinder.GrinderContent.MENU.get(), GrinderScreen::new);
     }
 
     private static void tick(ClientTickEvent.Pre event) {
@@ -166,5 +167,6 @@ public final class TechgunsClient {
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.PIGMAN.get(),ZombiePigmanSoldierRenderer::new);
         event.registerEntityRenderer(techguns.modern.npc.NetherSpawns.SELECTOR.get(), NoopRenderer::new);
         event.registerBlockEntityRenderer(techguns.modern.machine.charging.ChargingStationContent.ENTITY.get(), ChargingStationRenderer::new);
+        event.registerBlockEntityRenderer(techguns.modern.machine.grinder.GrinderContent.ENTITY.get(), GrinderRenderer::new);
     }
 }
