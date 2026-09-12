@@ -22,6 +22,7 @@ public final class Techguns {
         techguns.modern.machine.fabricator.FabricatorContent.register(modBus);
         techguns.modern.machine.charging.ChargingStationContent.register(modBus);
         techguns.modern.machine.repair.RepairBenchContent.register(modBus);
+        techguns.modern.machine.camo.CamoBenchContent.register(modBus);
         techguns.modern.radiation.RadiationSystem.register(modBus,container);
         SafeMode.register(modBus, container);
         techguns.modern.npc.NpcContent.register(modBus, container);

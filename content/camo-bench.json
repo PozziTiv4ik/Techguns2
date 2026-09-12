@@ -1,0 +1,195 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/TGMachineRecipes.java",
+  "legacy_item": "techguns:simplemachine@8",
+  "palettes": [
+    {
+      "legacy_block": "WOOL",
+      "id": "wool",
+      "items": [
+        "minecraft:white_wool",
+        "minecraft:orange_wool",
+        "minecraft:magenta_wool",
+        "minecraft:light_blue_wool",
+        "minecraft:yellow_wool",
+        "minecraft:lime_wool",
+        "minecraft:pink_wool",
+        "minecraft:gray_wool",
+        "minecraft:light_gray_wool",
+        "minecraft:cyan_wool",
+        "minecraft:purple_wool",
+        "minecraft:blue_wool",
+        "minecraft:brown_wool",
+        "minecraft:green_wool",
+        "minecraft:red_wool",
+        "minecraft:black_wool"
+      ]
+    },
+    {
+      "legacy_block": "CONCRETE",
+      "id": "concrete",
+      "items": [
+        "minecraft:white_concrete",
+        "minecraft:orange_concrete",
+        "minecraft:magenta_concrete",
+        "minecraft:light_blue_concrete",
+        "minecraft:yellow_concrete",
+        "minecraft:lime_concrete",
+        "minecraft:pink_concrete",
+        "minecraft:gray_concrete",
+        "minecraft:light_gray_concrete",
+        "minecraft:cyan_concrete",
+        "minecraft:purple_concrete",
+        "minecraft:blue_concrete",
+        "minecraft:brown_concrete",
+        "minecraft:green_concrete",
+        "minecraft:red_concrete",
+        "minecraft:black_concrete"
+      ]
+    },
+    {
+      "legacy_block": "CONCRETE_POWDER",
+      "id": "concrete_powder",
+      "items": [
+        "minecraft:white_concrete_powder",
+        "minecraft:orange_concrete_powder",
+        "minecraft:magenta_concrete_powder",
+        "minecraft:light_blue_concrete_powder",
+        "minecraft:yellow_concrete_powder",
+        "minecraft:lime_concrete_powder",
+        "minecraft:pink_concrete_powder",
+        "minecraft:gray_concrete_powder",
+        "minecraft:light_gray_concrete_powder",
+        "minecraft:cyan_concrete_powder",
+        "minecraft:purple_concrete_powder",
+        "minecraft:blue_concrete_powder",
+        "minecraft:brown_concrete_powder",
+        "minecraft:green_concrete_powder",
+        "minecraft:red_concrete_powder",
+        "minecraft:black_concrete_powder"
+      ]
+    },
+    {
+      "legacy_block": "STAINED_HARDENED_CLAY",
+      "id": "terracotta",
+      "items": [
+        "minecraft:white_terracotta",
+        "minecraft:orange_terracotta",
+        "minecraft:magenta_terracotta",
+        "minecraft:light_blue_terracotta",
+        "minecraft:yellow_terracotta",
+        "minecraft:lime_terracotta",
+        "minecraft:pink_terracotta",
+        "minecraft:gray_terracotta",
+        "minecraft:light_gray_terracotta",
+        "minecraft:cyan_terracotta",
+        "minecraft:purple_terracotta",
+        "minecraft:blue_terracotta",
+        "minecraft:brown_terracotta",
+        "minecraft:green_terracotta",
+        "minecraft:red_terracotta",
+        "minecraft:black_terracotta"
+      ]
+    },
+    {
+      "legacy_block": "STAINED_GLASS",
+      "id": "stained_glass",
+      "items": [
+        "minecraft:white_stained_glass",
+        "minecraft:orange_stained_glass",
+        "minecraft:magenta_stained_glass",
+        "minecraft:light_blue_stained_glass",
+        "minecraft:yellow_stained_glass",
+        "minecraft:lime_stained_glass",
+        "minecraft:pink_stained_glass",
+        "minecraft:gray_stained_glass",
+        "minecraft:light_gray_stained_glass",
+        "minecraft:cyan_stained_glass",
+        "minecraft:purple_stained_glass",
+        "minecraft:blue_stained_glass",
+        "minecraft:brown_stained_glass",
+        "minecraft:green_stained_glass",
+        "minecraft:red_stained_glass",
+        "minecraft:black_stained_glass"
+      ]
+    },
+    {
+      "legacy_block": "STAINED_GLASS_PANE",
+      "id": "stained_glass_pane",
+      "items": [
+        "minecraft:white_stained_glass_pane",
+        "minecraft:orange_stained_glass_pane",
+        "minecraft:magenta_stained_glass_pane",
+        "minecraft:light_blue_stained_glass_pane",
+        "minecraft:yellow_stained_glass_pane",
+        "minecraft:lime_stained_glass_pane",
+        "minecraft:pink_stained_glass_pane",
+        "minecraft:gray_stained_glass_pane",
+        "minecraft:light_gray_stained_glass_pane",
+        "minecraft:cyan_stained_glass_pane",
+        "minecraft:purple_stained_glass_pane",
+        "minecraft:blue_stained_glass_pane",
+        "minecraft:brown_stained_glass_pane",
+        "minecraft:green_stained_glass_pane",
+        "minecraft:red_stained_glass_pane",
+        "minecraft:black_stained_glass_pane"
+      ]
+    },
+    {
+      "legacy_block": "STANDING_BANNER",
+      "id": "banner",
+      "items": [
+        "minecraft:black_banner",
+        "minecraft:red_banner",
+        "minecraft:green_banner",
+        "minecraft:brown_banner",
+        "minecraft:blue_banner",
+        "minecraft:purple_banner",
+        "minecraft:cyan_banner",
+        "minecraft:light_gray_banner",
+        "minecraft:gray_banner",
+        "minecraft:pink_banner",
+        "minecraft:lime_banner",
+        "minecraft:yellow_banner",
+        "minecraft:light_blue_banner",
+        "minecraft:magenta_banner",
+        "minecraft:orange_banner",
+        "minecraft:white_banner"
+      ]
+    },
+    {
+      "legacy_block": "CARPET",
+      "id": "carpet",
+      "items": [
+        "minecraft:white_carpet",
+        "minecraft:orange_carpet",
+        "minecraft:magenta_carpet",
+        "minecraft:light_blue_carpet",
+        "minecraft:yellow_carpet",
+        "minecraft:lime_carpet",
+        "minecraft:pink_carpet",
+        "minecraft:gray_carpet",
+        "minecraft:light_gray_carpet",
+        "minecraft:cyan_carpet",
+        "minecraft:purple_carpet",
+        "minecraft:blue_carpet",
+        "minecraft:brown_carpet",
+        "minecraft:green_carpet",
+        "minecraft:red_carpet",
+        "minecraft:black_carpet"
+      ]
+    }
+  ],
+  "input_slots": 1,
+  "energy": 0,
+  "recolor_cost": 0,
+  "armor": "T2_COMBAT",
+  "minecraft_reference": {
+    "version": "1.12.2",
+    "client_sha1": "0f275bc1547d01fa5f56ba34bdc87d981ee12daf",
+    "manifest": "https://piston-meta.mojang.com/v1/packages/832d95b9f40699d4961394dcf6cf549e65f15dc5/1.12.2.json"
+  },
+  "pending": [
+    "Other Techguns armor, masks, backpacks and decorative blocks",
+    "Client acceptance and real two-client verification"
+  ]
+}

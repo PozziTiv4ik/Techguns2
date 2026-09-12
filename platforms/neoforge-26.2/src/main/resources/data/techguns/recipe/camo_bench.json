@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:camo_bench",
+    "count": 1
+  },
+  "pattern": [
+    "ddd",
+    "ici",
+    "iii"
+  ],
+  "key": {
+    "c": "#c:player_workstations/crafting_tables",
+    "d": "#c:dyes",
+    "i": "#c:nuggets/iron"
+  }
+}

@@ -61,6 +61,7 @@ public final class TechgunsClient {
         event.register(techguns.modern.machine.fabricator.FabricatorContent.MENU.get(),FabricatorScreen::new);
         event.register(techguns.modern.machine.charging.ChargingStationContent.MENU.get(), ChargingStationScreen::new);
         event.register(techguns.modern.machine.repair.RepairBenchContent.MENU.get(), RepairBenchScreen::new);
+        event.register(techguns.modern.machine.camo.CamoBenchContent.MENU.get(), CamoBenchScreen::new);
     }
 
     private static void tick(ClientTickEvent.Pre event) {
