@@ -104,6 +104,7 @@
     "125": "techguns:redstone_battery",
     "126": "techguns:redstone_battery_empty",
     "127": "techguns:gaussrifleslugs",
+    "133": "techguns:protectivefiber",
     "144": "techguns:sniperrounds_explosive",
     "145": "techguns:rocket_high_velocity",
     "146": "techguns:infusionbag"
@@ -182,6 +183,22 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/handcannon.json"
     },
     {
+      "id": "techguns:hazmat_boots",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/hazmat_boots.json"
+    },
+    {
+      "id": "techguns:hazmat_chestplate",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/hazmat_chestplate.json"
+    },
+    {
+      "id": "techguns:hazmat_helmet",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/hazmat_helmet.json"
+    },
+    {
+      "id": "techguns:hazmat_leggings",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/hazmat_leggings.json"
+    },
+    {
       "id": "techguns:stonebullets",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_0_stonebullets.json"
     },
@@ -240,6 +257,10 @@
     {
       "id": "techguns:pistolmagazineempty",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_12_pistolmagazineempty.json"
+    },
+    {
+      "id": "techguns:protectivefiber",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_133_protectivefiber.json"
     },
     {
       "id": "techguns:assaultriflemagazine",

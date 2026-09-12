@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "techguns:t2_combat_helmet"
+    "techguns:t2_combat_helmet",
+    "techguns:hazmat_helmet"
   ]
 }

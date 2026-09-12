@@ -53,7 +53,7 @@ final class ArmorGameTests {
     }
     static void near(GameTestHelper h,double actual,double expected,String text) { h.assertTrue(Math.abs(actual-expected)<.0006,text+": "+actual+" != "+expected); }
     static Player player(GameTestHelper h) { var p=WeaponGameTests.player(h); p.getAttribute(Attributes.MAX_HEALTH).setBaseValue(1000); p.setHealth(1000); return p; }
-    static ItemStack armor(ArmorSlot slot,int camo) { var item=ArmorContent.ITEMS.get(slot).toStack(); T2ArmorItem.setCamo(item,camo); return item; }
+    static ItemStack armor(ArmorSlot slot,int camo) { var item=ArmorContent.ITEMS.get(slot).toStack(); TGArmorItem.setCamo(item,camo); return item; }
     static void equipAll(Player p) { for(var slot:ArmorSlot.values()) p.setItemSlot(EquipmentSlot.valueOf(slot.name()),armor(slot,0)); p.tick(); }
     private static DamageSource physical(GameTestHelper h) { return h.getLevel().damageSources().playerAttack(WeaponGameTests.player(h)); }
     private static DamageSource source(GameTestHelper h,String type) {
@@ -69,7 +69,7 @@ final class ArmorGameTests {
     }
     private static void equip(GameTestHelper h) {
         var p=player(h);
-        for(var spec:Armors.ALL) {
+        for(var spec:Armors.T2_COMBAT) {
             var stack=armor(spec.slot(),0); var slot=EquipmentSlot.valueOf(spec.slot().name());
             h.assertValueEqual(stack.getMaxDamage(),990,"Original equal durability split"); h.assertTrue(!stack.isEnchantable(),"Original enchantability is zero");
             h.assertValueEqual(stack.get(DataComponents.EQUIPPABLE).slot(),slot,"Correct equipment slot");
@@ -82,15 +82,15 @@ final class ArmorGameTests {
         var p=player(h); var stack=armor(ArmorSlot.HEAD,0); stack.setDamageValue(300); stack.set(DataComponents.CUSTOM_NAME,Component.literal("Camo test"));
         p.setItemInHand(InteractionHand.MAIN_HAND,stack); p.setShiftKeyDown(true);
         for(int n=1;n<=6;n++) {
-            stack.getItem().use(h.getLevel(),p,InteractionHand.MAIN_HAND); h.assertValueEqual(T2ArmorItem.camo(stack),n%6,"Six source camouflage variants wrap");
+            stack.getItem().use(h.getLevel(),p,InteractionHand.MAIN_HAND); h.assertValueEqual(TGArmorItem.camo(stack),n%6,"Six source camouflage variants wrap");
             h.assertValueEqual(stack.get(DataComponents.EQUIPPABLE).assetId().orElseThrow().identifier(),TGContent.id(Armors.CAMOS.get(n%6)),"Equipment asset follows selected camouflage");
             h.assertTrue(p.getItemBySlot(EquipmentSlot.HEAD).isEmpty(),"Sneak-use changes skin without equipping");
         }
-        T2ArmorItem.setCamo(stack,3);
+        TGArmorItem.setCamo(stack,3);
         var ops=h.getLevel().registryAccess().createSerializationContext(NbtOps.INSTANCE); var saved=ItemStack.CODEC.encodeStart(ops,stack).getOrThrow(); var restored=ItemStack.CODEC.parse(ops,saved).getOrThrow();
         var buffer=new RegistryFriendlyByteBuf(Unpooled.buffer(),h.getLevel().registryAccess());
         try { ItemStack.STREAM_CODEC.encode(buffer,restored); var decoded=ItemStack.STREAM_CODEC.decode(buffer);
-            h.assertValueEqual(T2ArmorItem.camo(decoded),3,"Camouflage survives storage and networking"); h.assertValueEqual(decoded.getDamageValue(),300,"Damage retained");
+            h.assertValueEqual(TGArmorItem.camo(decoded),3,"Camouflage survives storage and networking"); h.assertValueEqual(decoded.getDamageValue(),300,"Damage retained");
             h.assertValueEqual(decoded.get(DataComponents.CUSTOM_NAME),stack.get(DataComponents.CUSTOM_NAME),"Name retained");
             h.assertValueEqual(decoded.get(DataComponents.EQUIPPABLE),stack.get(DataComponents.EQUIPPABLE),"Equipment rendering component survives packet");
         } finally { buffer.release(); }
@@ -99,7 +99,7 @@ final class ArmorGameTests {
     private static void damage(GameTestHelper h,String kind,float amount,float expected,boolean full) {
         var p=player(h); if(full) equipAll(p); else { p.setItemSlot(EquipmentSlot.HEAD,armor(ArmorSlot.HEAD,0)); p.tick(); }
         p.hurtServer(h.getLevel(),source(h,kind),amount); near(h,1000-p.getHealth(),expected,"Source special armor damage");
-        if(kind.equals("fall")) for(var slot:T2ArmorSystem.SLOTS) h.assertValueEqual(p.getItemBySlot(slot).getDamageValue(),0,"Unblockable damage does not wear armor");
+        if(kind.equals("fall")) for(var slot:TGArmorSystem.SLOTS) h.assertValueEqual(p.getItemBySlot(slot).getDamageValue(),0,"Unblockable damage does not wear armor");
         h.succeed();
     }
     private static void mixed(GameTestHelper h) {
@@ -112,7 +112,7 @@ final class ArmorGameTests {
     }
     private static void zeroDamage(GameTestHelper h) {
         var p=player(h); equipAll(p); p.hurtServer(h.getLevel(),physical(h),0);
-        for(var slot:T2ArmorSystem.SLOTS) h.assertValueEqual(p.getItemBySlot(slot).getDamageValue(),0,"Zero absorbed damage must not trigger minimum wear");
+        for(var slot:TGArmorSystem.SLOTS) h.assertValueEqual(p.getItemBySlot(slot).getDamageValue(),0,"Zero absorbed damage must not trigger minimum wear");
         near(h,p.getHealth(),1000,"Zero damage leaves health unchanged"); h.succeed();
     }
     private static void breakage(GameTestHelper h) {
@@ -122,7 +122,7 @@ final class ArmorGameTests {
     private static void cancelAttack(GameTestHelper h) {
         var p=player(h); equipAll(p); Consumer<LivingIncomingDamageEvent> cancel=e -> { if(e.getEntity()==p) e.setCanceled(true); }; NeoForge.EVENT_BUS.addListener(cancel);
         try { p.hurtServer(h.getLevel(),physical(h),10); } finally { NeoForge.EVENT_BUS.unregister(cancel); }
-        near(h,p.getHealth(),1000,"Cancelled attack does no damage"); for(var slot:T2ArmorSystem.SLOTS) h.assertValueEqual(p.getItemBySlot(slot).getDamageValue(),0,"No wear before accepted damage stage"); h.succeed();
+        near(h,p.getHealth(),1000,"Cancelled attack does no damage"); for(var slot:TGArmorSystem.SLOTS) h.assertValueEqual(p.getItemBySlot(slot).getDamageValue(),0,"No wear before accepted damage stage"); h.succeed();
     }
     private static void cancelWear(GameTestHelper h) {
         var p=player(h); var helmet=armor(ArmorSlot.HEAD,0); helmet.setDamageValue(989); p.setItemSlot(EquipmentSlot.HEAD,helmet); p.tick();
@@ -146,7 +146,7 @@ final class ArmorGameTests {
         var helmet=armor(ArmorSlot.HEAD,3); helmet.setDamageValue(989); helmet.set(DataComponents.CUSTOM_NAME,Component.literal("Repair test"));
         var menu=anvil(h,helmet,TGContent.MATERIALS.get("ingotobsidiansteel").toStack()); var result=menu.getSlot(2).getItem();
         h.assertTrue(!result.isEmpty(),"Obsidian steel repairs armor on vanilla anvil"); h.assertValueEqual(result.getDamageValue(),742,"One ingot restores floor(990/4) durability");
-        h.assertValueEqual(T2ArmorItem.camo(result),3,"Repair preserves camouflage"); h.assertValueEqual(result.get(DataComponents.CUSTOM_NAME),helmet.get(DataComponents.CUSTOM_NAME),"Repair preserves name"); h.succeed();
+        h.assertValueEqual(TGArmorItem.camo(result),3,"Repair preserves camouflage"); h.assertValueEqual(result.get(DataComponents.CUSTOM_NAME),helmet.get(DataComponents.CUSTOM_NAME),"Repair preserves name"); h.succeed();
     }
     private static void rejectCloth(GameTestHelper h) {
         var helmet=armor(ArmorSlot.HEAD,0); helmet.setDamageValue(500); var menu=anvil(h,helmet,TGContent.MATERIALS.get("heavycloth").toStack());
@@ -155,7 +155,7 @@ final class ArmorGameTests {
     private static void pairRepair(GameTestHelper h) {
         var first=armor(ArmorSlot.HEAD,3); var second=armor(ArmorSlot.HEAD,5); first.setDamageValue(600); second.setDamageValue(600);
         var input=CraftingInput.of(2,1,List.of(first,second)); var recipe=h.getLevel().getServer().getRecipeManager().getRecipeFor(RecipeType.CRAFTING,input,h.getLevel()).orElseThrow(); var result=recipe.value().assemble(input);
-        h.assertValueEqual(result.getDamageValue(),161,"Ordinary pair-repair durability bonus"); h.assertValueEqual(T2ArmorItem.camo(result),0,"Crafted armor starts at original default camouflage"); h.succeed();
+        h.assertValueEqual(result.getDamageValue(),161,"Ordinary pair-repair durability bonus"); h.assertValueEqual(TGArmorItem.camo(result),0,"Crafted armor starts at original default camouflage"); h.succeed();
     }
     private static void enchant(GameTestHelper h) {
         var helmet=armor(ArmorSlot.HEAD,3); var book=new ItemStack(Items.ENCHANTED_BOOK); var mending=h.getLevel().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.MENDING);
@@ -164,11 +164,11 @@ final class ArmorGameTests {
         h.assertValueEqual(EnchantmentHelper.getItemEnchantmentLevel(mending,result),1,"Mending retained"); h.succeed();
     }
     private static void bonuses(GameTestHelper h) {
-        var p=player(h); equipAll(p); for(int n=0;n<10;n++) T2ArmorSystem.refresh(p);
+        var p=player(h); equipAll(p); for(int n=0;n<10;n++) TGArmorSystem.refresh(p);
         near(h,p.getAttributeValue(Attributes.MOVEMENT_SPEED),.14,"Four +10% bonuses do not accumulate on repeated refresh");
         near(h,p.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE),.6,"Original per-piece knockback bonuses");
-        p.setSprinting(true); T2ArmorSystem.refresh(p); near(h,p.getAttributeValue(Attributes.MOVEMENT_SPEED),.234,"Sprint doubles gear bonus, then composes with vanilla sprint");
-        for(var slot:T2ArmorSystem.SLOTS) p.getItemBySlot(slot).setDamageValue(989); T2ArmorSystem.refresh(p);
+        p.setSprinting(true); TGArmorSystem.refresh(p); near(h,p.getAttributeValue(Attributes.MOVEMENT_SPEED),.234,"Sprint doubles gear bonus, then composes with vanilla sprint");
+        for(var slot:TGArmorSystem.SLOTS) p.getItemBySlot(slot).setDamageValue(989); TGArmorSystem.refresh(p);
         near(h,p.getAttributeValue(Attributes.MOVEMENT_SPEED),.13,"Worn gear removes speed bonus"); near(h,p.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE),0,"Worn gear removes knockback bonus"); h.succeed();
     }
     private static void jump(GameTestHelper h) {
@@ -176,7 +176,7 @@ final class ArmorGameTests {
         boots.setDamageValue(989); p.setDeltaMovement(0,0,0); p.jumpFromGround(); near(h,p.getDeltaMovement().y,.42,"Worn boots give no jump bonus"); h.succeed();
     }
     private static void unequip(GameTestHelper h) {
-        var p=player(h); equipAll(p); for(var slot:T2ArmorSystem.SLOTS) p.setItemSlot(slot,ItemStack.EMPTY);
+        var p=player(h); equipAll(p); for(var slot:TGArmorSystem.SLOTS) p.setItemSlot(slot,ItemStack.EMPTY);
         p.hurtServer(h.getLevel(),source(h,"bullet"),9); near(h,1000-p.getHealth(),9,"Unequip removes HUD modifier before same-tick incoming damage"); near(h,p.getArmorValue(),0,"No ghost armor display"); h.succeed();
     }
     private ArmorGameTests() {}

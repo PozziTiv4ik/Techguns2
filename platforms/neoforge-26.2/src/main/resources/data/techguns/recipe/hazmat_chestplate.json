@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:hazmat_chestplate",
+    "count": 1
+  },
+  "pattern": [
+    "f f",
+    "fff",
+    "fff"
+  ],
+  "key": {
+    "f": "techguns:protectivefiber"
+  }
+}

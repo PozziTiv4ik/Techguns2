@@ -182,7 +182,10 @@
   "input_slots": 1,
   "energy": 0,
   "recolor_cost": 0,
-  "armor": "T2_COMBAT",
+  "armor": [
+    "T2_COMBAT",
+    "T2_HAZMAT"
+  ],
   "minecraft_reference": {
     "version": "1.12.2",
     "client_sha1": "0f275bc1547d01fa5f56ba34bdc87d981ee12daf",

@@ -1,0 +1,6 @@
+{
+  "type": "techguns:grinder",
+  "input": "techguns:hazmat_helmet",
+  "outputs": [],
+  "armor": true
+}

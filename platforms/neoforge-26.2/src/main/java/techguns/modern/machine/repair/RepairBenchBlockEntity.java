@@ -15,13 +15,13 @@ public final class RepairBenchBlockEntity extends techguns.modern.machine.workbe
     public static final int MATERIAL_SLOTS = 9, REPAIR_SLOT = 9, SIZE = 10;
     public RepairBenchBlockEntity(BlockPos pos, BlockState state) { super(RepairBenchContent.ENTITY.get(), pos, state, SIZE); }
     @Override protected RepairBenchMenu makeMenu(int id, Inventory inventory) { return new RepairBenchMenu(id, inventory, this); }
-    public static boolean supports(ItemStack stack) { return stack.getItem() instanceof T2ArmorItem; }
+    public static boolean supports(ItemStack stack) { return stack.getItem() instanceof TGArmorItem; }
     public static List<ItemStack> costs(ItemStack stack) {
-        if (!(stack.getItem() instanceof T2ArmorItem armor) || stack.getDamageValue() <= 0 || stack.getCount() != 1) return List.of();
+        if (!(stack.getItem() instanceof TGArmorItem armor) || stack.getDamageValue() <= 0 || stack.getCount() != 1) return List.of();
         int[] amounts = armor.spec().repairBenchCosts(stack.getDamageValue());
         var result = new ArrayList<ItemStack>();
-        if (amounts[0] > 0) result.add(TGContent.MATERIALS.get("ingotobsidiansteel").toStack(amounts[0]));
-        if (amounts[1] > 0) result.add(TGContent.MATERIALS.get("heavycloth").toStack(amounts[1]));
+        if (amounts[0] > 0) result.add(armor.repairMaterial(true,amounts[0]));
+        if (amounts[1] > 0) result.add(armor.repairMaterial(false,amounts[1]));
         return List.copyOf(result);
     }
     public static int available(Container materialInventory, ItemStack wanted) {
@@ -48,7 +48,7 @@ public final class RepairBenchBlockEntity extends techguns.modern.machine.workbe
             transaction.commit();
         }
         target.setDamageValue(0);
-        T2ArmorSystem.refresh(player); publishChange(player);
+        TGArmorSystem.refresh(player); publishChange(player);
         return true;
     }
     @Override public boolean canPlaceItem(int slot, ItemStack stack) {

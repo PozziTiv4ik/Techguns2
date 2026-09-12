@@ -4,6 +4,10 @@
     "techguns:t2_combat_helmet",
     "techguns:t2_combat_chestplate",
     "techguns:t2_combat_leggings",
-    "techguns:t2_combat_boots"
+    "techguns:t2_combat_boots",
+    "techguns:hazmat_helmet",
+    "techguns:hazmat_chestplate",
+    "techguns:hazmat_leggings",
+    "techguns:hazmat_boots"
   ]
 }

@@ -1,21 +1,30 @@
 package techguns.core;
 
+import java.util.List;
+
 /** Source material values are fractional and must not be rounded to the HUD's armor points. */
 public record ArmorSpec(String id, ArmorSlot slot, float physical, float elemental, int durability,
                         float toughness, double speed, double jump, double knockback,
-                        int repairParts, double repairMetalRatio) {
+                        int repairParts, double repairMetalRatio, float explosion, float poison, float dark, float radiation,
+                        double radiationResistance, double fallReduction, double freeFallHeight,
+                        String repairMetal, String repairCloth, List<String> camos, String set) {
     public ArmorSpec {
         if (id == null || slot == null || physical < 0 || elemental < 0 || durability < 2 || toughness < 0
                 || !Float.isFinite(physical) || !Float.isFinite(elemental) || !Float.isFinite(toughness)
                 || !Double.isFinite(speed) || !Double.isFinite(jump) || !Double.isFinite(knockback)
                 || speed < 0 || jump < 0 || knockback < 0 || repairParts < 1 || !Double.isFinite(repairMetalRatio)
-                || repairMetalRatio < 0 || repairMetalRatio > 1) throw new IllegalArgumentException("Invalid armor specification");
+                || repairMetalRatio < 0 || repairMetalRatio > 1 || repairMetal == null || repairCloth == null || set == null
+                || camos == null || camos.isEmpty()) throw new IllegalArgumentException("Invalid armor specification");
+        for (double value : new double[]{explosion,poison,dark,radiation,radiationResistance,fallReduction,freeFallHeight})
+            if (!Double.isFinite(value) || value < 0) throw new IllegalArgumentException("Invalid armor protection/bonus");
+        camos = List.copyOf(camos);
     }
     public float armor(DamageKind kind) {
         return switch(kind) {
             case PHYSICAL, PROJECTILE -> physical;
-            case RADIATION, UNRESISTABLE -> 0;
-            default -> elemental; // The source constructor includes POISON despite its older comment.
+            case EXPLOSION -> explosion; case POISON -> poison; case DARK -> dark; case RADIATION -> radiation;
+            case UNRESISTABLE -> 0;
+            default -> elemental;
         };
     }
     public double absorption(DamageKind kind, float penetration) {

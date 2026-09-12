@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "result": {
+    "id": "techguns:protectivefiber",
+    "count": 3
+  },
+  "ingredients": [
+    "techguns:heavycloth",
+    "techguns:rubberbar",
+    "techguns:platelead"
+  ]
+}

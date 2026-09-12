@@ -74,7 +74,7 @@ final class CamoBenchGameTests {
     }
     private static Item item(String path) { return Objects.requireNonNull(BuiltInRegistries.ITEM.getValue(Identifier.withDefaultNamespace(path))); }
     private static ItemStack armor(EquipmentSlot slot) {
-        var stack = ArmorContent.ITEMS.get(techguns.core.ArmorSlot.valueOf(slot.name())).toStack(); stack.setDamageValue(517); T2ArmorItem.setCamo(stack,5);
+        var stack = ArmorContent.ITEMS.get(techguns.core.ArmorSlot.valueOf(slot.name())).toStack(); stack.setDamageValue(517); TGArmorItem.setCamo(stack,5);
         stack.set(DataComponents.CUSTOM_NAME,Component.literal("Field camouflage")); return stack;
     }
     private static Player other(GameTestHelper h) { var player = WeaponGameTests.player(h); player.setUUID(UUID.randomUUID()); return player; }
@@ -96,7 +96,7 @@ final class CamoBenchGameTests {
     private static void equipped(GameTestHelper h,EquipmentSlot slot) {
         var f = fixture(h); var original = armor(slot); f.player.setItemSlot(slot,original); int forward = 3 + 2 * CamoBenchMenu.ARMOR.indexOf(slot);
         h.assertTrue(f.menu.clickMenuButton(f.player,forward),"Equipped item supports forward cycle");
-        h.assertValueEqual(T2ArmorItem.camo(f.player.getItemBySlot(slot)),0,"Last camo wraps to first");
+        h.assertValueEqual(TGArmorItem.camo(f.player.getItemBySlot(slot)),0,"Last camo wraps to first");
         h.assertTrue(f.menu.clickMenuButton(f.player,forward + 1),"Equipped item supports backward cycle");
         h.assertTrue(ItemStack.matches(f.player.getItemBySlot(slot),original),"Round trip keeps wear, name and equipment asset"); h.succeed();
     }
@@ -151,8 +151,8 @@ final class CamoBenchGameTests {
         f.bench.setItem(0,new ItemStack(Items.WOOL.pick(DyeColor.WHITE),9)); f.menu.clickMenuButton(f.player,1); menu.clickMenuButton(other,1);
         h.assertTrue(f.bench.getItem(0).is(Items.WOOL.pick(DyeColor.MAGENTA)) && f.bench.getItem(0).getCount() == 9,"Both viewers act on current server stack");
         f.player.setItemSlot(EquipmentSlot.HEAD,armor(EquipmentSlot.HEAD)); other.setItemSlot(EquipmentSlot.HEAD,armor(EquipmentSlot.HEAD)); menu.clickMenuButton(other,3);
-        h.assertValueEqual(T2ArmorItem.camo(other.getItemBySlot(EquipmentSlot.HEAD)),0,"Viewer changes own worn armor");
-        h.assertValueEqual(T2ArmorItem.camo(f.player.getItemBySlot(EquipmentSlot.HEAD)),5,"Owner armor remains independent"); h.succeed();
+        h.assertValueEqual(TGArmorItem.camo(other.getItemBySlot(EquipmentSlot.HEAD)),0,"Viewer changes own worn armor");
+        h.assertValueEqual(TGArmorItem.camo(f.player.getItemBySlot(EquipmentSlot.HEAD)),5,"Owner armor remains independent"); h.succeed();
     }
     private static void access(GameTestHelper h) {
         var f = fixture(h); var other = other(h); var menu = new CamoBenchMenu(62,other.getInventory(),f.bench); other.containerMenu = menu;
@@ -236,7 +236,7 @@ final class CamoBenchGameTests {
         var f = fixture(h); var armor = armor(EquipmentSlot.HEAD); var enchants = new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
         enchants.set(h.getLevel().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.BINDING_CURSE),1); armor.set(DataComponents.ENCHANTMENTS,enchants.toImmutable()); f.player.setItemSlot(EquipmentSlot.HEAD,armor);
         h.assertTrue(f.menu.quickMoveStack(f.player,37).isEmpty(),"Binding prevents moving worn item into input");
-        h.assertTrue(f.menu.clickMenuButton(f.player,3) && T2ArmorItem.camo(f.player.getItemBySlot(EquipmentSlot.HEAD)) == 0,"Bound worn item can change camouflage without removal");
+        h.assertTrue(f.menu.clickMenuButton(f.player,3) && TGArmorItem.camo(f.player.getItemBySlot(EquipmentSlot.HEAD)) == 0,"Bound worn item can change camouflage without removal");
         h.assertValueEqual(f.player.getItemBySlot(EquipmentSlot.HEAD).get(DataComponents.ENCHANTMENTS),armor.get(DataComponents.ENCHANTMENTS),"Curse is retained"); h.succeed();
     }
     private static void fullInventory(GameTestHelper h) {

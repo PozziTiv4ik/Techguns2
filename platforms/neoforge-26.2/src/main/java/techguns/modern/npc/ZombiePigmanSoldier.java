@@ -24,7 +24,7 @@ public final class ZombiePigmanSoldier extends ArmedNpc {
         for(var slot:ArmorSlot.values()) {
             double roll=switch(slot) { case HEAD -> 0; case CHEST -> chest; case LEGS -> legs; case FEET -> boots; };
             var stack=PigmanRules.armor(slot,roll)?ArmorContent.ITEMS.get(slot).toStack():net.minecraft.world.item.ItemStack.EMPTY;
-            if(!stack.isEmpty()) T2ArmorItem.setCamo(stack,3);
+            if(!stack.isEmpty()) TGArmorItem.setCamo(stack,3);
             setItemSlot(EquipmentSlot.valueOf(slot.name()),stack);
         }
     }

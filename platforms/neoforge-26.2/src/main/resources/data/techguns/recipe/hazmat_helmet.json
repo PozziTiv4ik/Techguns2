@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:hazmat_helmet",
+    "count": 1
+  },
+  "pattern": [
+    "fff",
+    "f f"
+  ],
+  "key": {
+    "f": "techguns:protectivefiber"
+  }
+}

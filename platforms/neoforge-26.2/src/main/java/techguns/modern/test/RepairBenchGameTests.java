@@ -63,7 +63,7 @@ final class RepairBenchGameTests {
     private static ItemStack material(String id, int count) { return TGContent.MATERIALS.get(id).toStack(count); }
     private static ItemStack armor(EquipmentSlot slot, int damage) {
         var stack = ArmorContent.ITEMS.get(techguns.core.ArmorSlot.valueOf(slot.name())).toStack();
-        stack.setDamageValue(damage); T2ArmorItem.setCamo(stack, 3); return stack;
+        stack.setDamageValue(damage); TGArmorItem.setCamo(stack, 3); return stack;
     }
     private static Fixture fixture(GameTestHelper h) {
         h.setBlock(POS, RepairBenchContent.BLOCK.get());
@@ -154,7 +154,7 @@ final class RepairBenchGameTests {
         h.assertValueEqual(f.bench.getItem(0).getCount(), 7, "Only one repair charged"); h.succeed();
     }
     private static void bonuses(GameTestHelper h) {
-        var f = fixture(h); f.player.setItemSlot(EquipmentSlot.HEAD, armor(EquipmentSlot.HEAD, 989)); T2ArmorSystem.refresh(f.player);
+        var f = fixture(h); f.player.setItemSlot(EquipmentSlot.HEAD, armor(EquipmentSlot.HEAD, 989)); TGArmorSystem.refresh(f.player);
         h.assertTrue(Math.abs(f.player.getAttributeValue(Attributes.MOVEMENT_SPEED) - .1) < .00001, "Worn armor has no speed bonus");
         supply(f.bench, 1, 1); f.menu.clickMenuButton(f.player, 1);
         h.assertTrue(Math.abs(f.player.getAttributeValue(Attributes.MOVEMENT_SPEED) - .11) < .00001, "Repair immediately restores speed bonus");
@@ -297,7 +297,7 @@ final class RepairBenchGameTests {
         h.assertValueEqual(drops.stream().filter(s -> s.is(RepairBenchContent.ITEM.get())).mapToInt(ItemStack::getCount).sum(), 1, "One bench block returned");
         h.assertValueEqual(drops.stream().filter(s -> s.is(material("heavycloth", 1).getItem())).mapToInt(ItemStack::getCount).sum(), 5, "All cloth returned");
         h.assertValueEqual(drops.stream().filter(s -> s.is(material("ingotobsidiansteel", 1).getItem())).mapToInt(ItemStack::getCount).sum(), 3, "All metal returned");
-        var result = drops.stream().filter(s -> s.getItem() instanceof T2ArmorItem).toList();
+        var result = drops.stream().filter(s -> s.getItem() instanceof TGArmorItem).toList();
         h.assertTrue(result.size() == 1 && result.getFirst().getDamageValue() == 789 && result.getFirst().getHoverName().getString().equals("Dropped kit"), "Armor dropped exactly once with wear and name");
         try (var tx = Transaction.openRoot()) { h.assertValueEqual(f.bench.automation().extract(9, ItemResource.of(result.getFirst()), 1, tx), 0, "Stale handler cannot extract dropped armor again"); }
         h.succeed();

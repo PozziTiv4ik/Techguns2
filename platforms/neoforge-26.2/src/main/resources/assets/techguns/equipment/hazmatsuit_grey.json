@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "techguns:hazmatsuit_grey"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "techguns:hazmatsuit_grey"
+      }
+    ]
+  }
+}

@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ArmorTest {
     @Test void fractionalMaterialStatsAndDurabilitySurvive() {
-        assertEquals(18,Armors.ALL.stream().mapToDouble(a -> a.armor(DamageKind.PHYSICAL)).sum(),.0001);
-        assertEquals(13.5,Armors.ALL.stream().mapToDouble(a -> a.armor(DamageKind.POISON)).sum(),.0001);
-        assertEquals(0,Armors.ALL.stream().mapToDouble(a -> a.armor(DamageKind.RADIATION)).sum());
-        for(var armor:Armors.ALL) { assertEquals(990,armor.durability()); assertEquals(1,armor.toughness()); }
+        assertEquals(18,Armors.T2_COMBAT.stream().mapToDouble(a -> a.armor(DamageKind.PHYSICAL)).sum(),.0001);
+        assertEquals(13.5,Armors.T2_COMBAT.stream().mapToDouble(a -> a.armor(DamageKind.POISON)).sum(),.0001);
+        assertEquals(0,Armors.T2_COMBAT.stream().mapToDouble(a -> a.armor(DamageKind.RADIATION)).sum());
+        for(var armor:Armors.T2_COMBAT) { assertEquals(990,armor.durability()); assertEquals(1,armor.toughness()); }
         assertEquals(5.4f,Armors.forSlot(ArmorSlot.CHEST).physical());
     }
     @Test void specialArmorUsesRawPenetrationPerPiece() {
@@ -17,7 +17,7 @@ class ArmorTest {
         assertEquals(.18,helmet.absorption(DamageKind.PROJECTILE,.5f),.00001);
         assertEquals(.14,helmet.absorption(DamageKind.PROJECTILE,2),.00001);
         assertEquals(0,helmet.absorption(DamageKind.PROJECTILE,10));
-        assertEquals(.54,Armors.ALL.stream().mapToDouble(a -> a.absorption(DamageKind.FIRE,0)).sum(),.00001);
+        assertEquals(.54,Armors.T2_COMBAT.stream().mapToDouble(a -> a.absorption(DamageKind.FIRE,0)).sum(),.00001);
     }
     @Test void wearDisablesBonusesAndDisplayButNotTheSourceAbsorbRatio() {
         var helmet=Armors.forSlot(ArmorSlot.HEAD);

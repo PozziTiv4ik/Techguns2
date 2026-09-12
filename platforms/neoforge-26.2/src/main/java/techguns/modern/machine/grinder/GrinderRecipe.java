@@ -13,7 +13,7 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import techguns.core.GrinderRules;
 import techguns.modern.TGContent;
-import techguns.modern.armor.T2ArmorItem;
+import techguns.modern.armor.TGArmorItem;
 
 public record GrinderRecipe(Ingredient input, List<Output> outputs, boolean random, boolean armor) implements Recipe<SingleRecipeInput> {
     public record Output(ItemStackTemplate result, double factor, Optional<TagKey<Item>> preferredTag) {
@@ -42,14 +42,14 @@ public record GrinderRecipe(Ingredient input, List<Output> outputs, boolean rand
             Codec.BOOL.optionalFieldOf("armor",false).forGetter(GrinderRecipe::armor)
     ).apply(i,GrinderRecipe::new));
     public static final StreamCodec<RegistryFriendlyByteBuf,GrinderRecipe> STREAM_CODEC = ByteBufCodecs.fromCodecWithRegistries(CODEC.codec());
-    @Override public boolean matches(SingleRecipeInput items, Level level) { return input.test(items.item()) && (!armor || items.item().getItem() instanceof T2ArmorItem); }
+    @Override public boolean matches(SingleRecipeInput items, Level level) { return input.test(items.item()) && (!armor || items.item().getItem() instanceof TGArmorItem); }
     public List<ItemStack> results(ItemStack source, int batch, boolean maximum, DoubleSupplier rng) {
         List<ItemStack> values = new ArrayList<>();
         if (armor) {
-            if (!(source.getItem() instanceof T2ArmorItem item)) return List.of();
+            if (!(source.getItem() instanceof TGArmorItem item)) return List.of();
             int[] parts = GrinderRules.armorSalvage(item.spec(),source.getDamageValue());
-            if (parts[0] > 0) values.add(TGContent.MATERIALS.get("ingotobsidiansteel").toStack(parts[0] * batch));
-            if (parts[1] > 0) values.add(TGContent.MATERIALS.get("heavycloth").toStack(parts[1] * batch));
+            if (parts[0] > 0) values.add(item.repairMaterial(true,parts[0] * batch));
+            if (parts[1] > 0) values.add(item.repairMaterial(false,parts[1] * batch));
         } else for (var output : outputs) {
             var stack = output.resolve();
             int count = random ? (maximum ? GrinderRules.maximumCount(stack.getCount(),output.factor(),batch)

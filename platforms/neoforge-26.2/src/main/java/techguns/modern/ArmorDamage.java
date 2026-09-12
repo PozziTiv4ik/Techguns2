@@ -12,7 +12,7 @@ import net.minecraft.world.damagesource.DamageTypes;
 /** Preserve Techguns armor categories while keeping Minecraft's other damage stages. */
 public final class ArmorDamage {
     public static void onIncoming(LivingIncomingDamageEvent event) {
-        if (event.getEntity() instanceof net.minecraft.world.entity.player.Player player) techguns.modern.armor.T2ArmorSystem.refresh(player);
+        if (event.getEntity() instanceof net.minecraft.world.entity.player.Player player) techguns.modern.armor.TGArmorSystem.refresh(player);
         var npc = event.getEntity() instanceof techguns.modern.npc.ArmedNpc armed ? armed : null;
         techguns.core.WeaponDefinition weapon = null;
         if (event.getSource().getDirectEntity() instanceof Bullet bullet && event.getSource().is(Bullet.DAMAGE_TYPE)) {
@@ -25,13 +25,15 @@ public final class ArmorDamage {
             weapon = blast.weapon();
         }
         DamageKind kind = weapon != null ? weapon.projectile().damageKind() : sourceKind(event.getSource());
-        if (event.getEntity() instanceof net.minecraft.world.entity.player.Player player && techguns.modern.armor.T2ArmorSystem.hasArmor(player)) {
-            if (!event.getSource().is(DamageTypeTags.BYPASSES_ARMOR)) {
+        if (event.getEntity() instanceof net.minecraft.world.entity.player.Player player && techguns.modern.armor.TGArmorSystem.hasArmor(player)) {
+            // Legacy TG radiation is magic, not unblockable. Its modern tag must not suppress typed armor;
+            // the reduction callback still runs at the accepted armor stage, after attack cancellation.
+            if (!event.getSource().is(DamageTypeTags.BYPASSES_ARMOR) || event.getSource().is(techguns.modern.radiation.RadiationSystem.DAMAGE)) {
                 float rawPenetration=weapon==null?0:(float)weapon.penetration();
                 event.addReductionModifier(DamageContainer.Reduction.ARMOR,(container,previousReduction) -> {
-                    if(!techguns.modern.armor.T2ArmorSystem.hasArmor(player)) return previousReduction;
+                    if(!techguns.modern.armor.TGArmorSystem.hasArmor(player)) return previousReduction;
                     float damage=container.getNewDamage();
-                    return damage-techguns.modern.armor.T2ArmorSystem.absorb(player,event.getSource(),damage,kind,rawPenetration);
+                    return damage-techguns.modern.armor.TGArmorSystem.absorb(player,event.getSource(),damage,kind,rawPenetration);
                 });
             }
             return;

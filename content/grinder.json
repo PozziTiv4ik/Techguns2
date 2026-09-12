@@ -820,6 +820,30 @@
       "input": "techguns:t2_combat_boots",
       "outputs": [],
       "armor": true
+    },
+    {
+      "id": "hazmat_helmet",
+      "input": "techguns:hazmat_helmet",
+      "outputs": [],
+      "armor": true
+    },
+    {
+      "id": "hazmat_chestplate",
+      "input": "techguns:hazmat_chestplate",
+      "outputs": [],
+      "armor": true
+    },
+    {
+      "id": "hazmat_leggings",
+      "input": "techguns:hazmat_leggings",
+      "outputs": [],
+      "armor": true
+    },
+    {
+      "id": "hazmat_boots",
+      "input": "techguns:hazmat_boots",
+      "outputs": [],
+      "armor": true
     }
   ],
   "unported_weapon_inputs": [

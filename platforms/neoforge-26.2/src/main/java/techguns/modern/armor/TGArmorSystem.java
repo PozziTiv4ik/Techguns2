@@ -17,15 +17,15 @@ import techguns.core.DamageKind;
 import techguns.modern.TGContent;
 
 /** Player-specific GenericArmor/Forge 2807 stages; NPC intrinsic protection is handled separately. */
-public final class T2ArmorSystem {
+public final class TGArmorSystem {
     public static final List<EquipmentSlot> SLOTS=List.of(EquipmentSlot.HEAD,EquipmentSlot.CHEST,EquipmentSlot.LEGS,EquipmentSlot.FEET);
     private static final Identifier SPEED=TGContent.id("armor_speed"), KNOCKBACK=TGContent.id("armor_knockback"), DISPLAY=TGContent.id("armor_display");
-    public static boolean hasArmor(Player player) { return SLOTS.stream().anyMatch(slot -> player.getItemBySlot(slot).getItem() instanceof T2ArmorItem); }
+    public static boolean hasArmor(Player player) { return SLOTS.stream().anyMatch(slot -> player.getItemBySlot(slot).getItem() instanceof TGArmorItem); }
     public static void refresh(Player player) {
         double speed=0,knockback=0,display=0;
         for(var slot:SLOTS) {
             var stack=player.getItemBySlot(slot);
-            if (stack.getItem() instanceof T2ArmorItem item) {
+            if (stack.getItem() instanceof TGArmorItem item) {
                 display+=item.spec().displayedArmor(stack.getDamageValue());
                 if (item.spec().bonusesActive(stack.getDamageValue())) { speed+=item.spec().speed(); knockback+=item.spec().knockback(); }
             }
@@ -45,8 +45,19 @@ public final class T2ArmorSystem {
     @SubscribeEvent public static void jump(LivingEvent.LivingJumpEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
         double jump=0;
-        for(var slot:SLOTS) { var stack=player.getItemBySlot(slot); if(stack.getItem() instanceof T2ArmorItem item && item.spec().bonusesActive(stack.getDamageValue())) jump+=item.spec().jump(); }
+        for(var slot:SLOTS) { var stack=player.getItemBySlot(slot); if(stack.getItem() instanceof TGArmorItem item && item.spec().bonusesActive(stack.getDamageValue())) jump+=item.spec().jump(); }
         player.setDeltaMovement(player.getDeltaMovement().add(0,jump,0));
+    }
+    @SubscribeEvent public static void fall(LivingFallEvent event) {
+        if (!(event.getEntity() instanceof Player player)) return;
+        float reduction=0,freeHeight=0;
+        for (var slot:SLOTS) {
+            var stack=player.getItemBySlot(slot);
+            if (stack.getItem() instanceof TGArmorItem item && item.spec().bonusesActive(stack.getDamageValue())) {
+                reduction+=(float)item.spec().fallReduction(); freeHeight+=(float)item.spec().freeFallHeight();
+            }
+        }
+        if (reduction>0 || freeHeight>0) event.setDistance(Math.max(0,event.getDistance()-freeHeight)*Math.max(0,1-reduction));
     }
     public static float absorb(Player player,DamageSource source,float damage,DamageKind kind,float penetration) {
         var specialWear=new EnumMap<EquipmentSlot,ArmorHurtEvent.ArmorEntry>(EquipmentSlot.class);
@@ -56,12 +67,12 @@ public final class T2ArmorSystem {
         float vanillaArmor=(float)Math.max(0,player.getAttributeValue(Attributes.ARMOR)-(display==null?0:display.amount()));
         for(var slot:SLOTS) {
             var stack=player.getItemBySlot(slot);
-            if(stack.getItem() instanceof T2ArmorItem item) {
+            if(stack.getItem() instanceof TGArmorItem item) {
                 double piece=item.spec().absorption(kind,penetration); ratio+=piece;
                 if(damage>0 && piece>0) specialWear.put(slot,new ArmorHurtEvent.ArmorEntry(stack,(int)Math.max(1,damage*piece)));
             }
         }
-        // Four T2 pieces have total ratio <= .72. General high-priority/foreign special armor remains outside this set's port.
+        // Supported sets have total ratio <= .80. General high-priority/foreign special armor remains outside this port.
         float remaining=(float)(damage*(1-Math.min(1,ratio)));
         wear(player,source,specialWear,true);
         if (remaining>0 && (vanillaArmor>0 || toughness>0)) {
@@ -86,9 +97,9 @@ public final class T2ArmorSystem {
             var value=entry.getValue(); var stack=value.armorItemStack;
             if(player.getItemBySlot(entry.getKey())!=stack || !Float.isFinite(value.newDamage)) continue;
             int damage=(int)Math.clamp(value.newDamage,0,Integer.MAX_VALUE);
-            if(special && stack.getItem() instanceof T2ArmorItem item) damage=item.spec().specialWearLimit(stack.getDamageValue(),damage);
+            if(special && stack.getItem() instanceof TGArmorItem item) damage=item.spec().specialWearLimit(stack.getDamageValue(),damage);
             if(damage>0) stack.hurtAndBreak(damage,level,player,item -> player.onEquippedItemBroken(item,entry.getKey()));
         }
     }
-    private T2ArmorSystem() {}
+    private TGArmorSystem() {}
 }

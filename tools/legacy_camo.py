@@ -18,7 +18,7 @@ def camo_data():
     palettes = [{'legacy_block': block, 'id': FAMILIES[block],
                  'items': ['minecraft:' + color + '_' + FAMILIES[block] for color in (list(reversed(COLORS)) if block == 'STANDING_BANNER' else COLORS)]} for block in blocks]
     return {'source': 'legacy/1.12.2/src/main/java/techguns/TGMachineRecipes.java', 'legacy_item': 'techguns:simplemachine@8',
-            'palettes': palettes, 'input_slots': 1, 'energy': 0, 'recolor_cost': 0, 'armor': 'T2_COMBAT',
+            'palettes': palettes, 'input_slots': 1, 'energy': 0, 'recolor_cost': 0, 'armor': ['T2_COMBAT','T2_HAZMAT'],
             'minecraft_reference': {'version':'1.12.2', 'client_sha1':'0f275bc1547d01fa5f56ba34bdc87d981ee12daf',
                 'manifest':'https://piston-meta.mojang.com/v1/packages/832d95b9f40699d4961394dcf6cf549e65f15dc5/1.12.2.json'},
             'pending': ['Other Techguns armor, masks, backpacks and decorative blocks', 'Client acceptance and real two-client verification']}

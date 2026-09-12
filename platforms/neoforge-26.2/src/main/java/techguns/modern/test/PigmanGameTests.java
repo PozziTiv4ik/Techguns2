@@ -65,7 +65,7 @@ final class PigmanGameTests {
             h.assertValueEqual(GunItem.rounds(npc.getMainHandItem()),Weapons.definition(PigmanRules.weapon(n)).stats().capacity(),"NPC starts with a full weapon");
             h.assertTrue(!npc.getItemBySlot(EquipmentSlot.HEAD).isEmpty() && !npc.getItemBySlot(EquipmentSlot.LEGS).isEmpty(),"Unconditional helmet and inclusive half-chance legs");
             h.assertTrue(npc.getItemBySlot(EquipmentSlot.CHEST).isEmpty() && npc.getItemBySlot(EquipmentSlot.FEET).isEmpty(),"Other rolls fail independently");
-            h.assertValueEqual(T2ArmorItem.camo(npc.getItemBySlot(EquipmentSlot.HEAD)),3,"Original camo index, not random appearance");
+            h.assertValueEqual(TGArmorItem.camo(npc.getItemBySlot(EquipmentSlot.HEAD)),3,"Original camo index, not random appearance");
         }
         npc.discard(); h.succeed();
     }
@@ -78,7 +78,7 @@ final class PigmanGameTests {
         var restored=new ZombiePigmanSoldier(NpcContent.PIGMAN.get(),h.getLevel()); NetherGameTests.load(h,restored,NetherGameTests.save(h,npc));
         h.assertValueEqual(GunItem.rounds(restored.getMainHandItem()),7,"Load does not refill or reroll weapon");
         h.assertValueEqual(restored.getItemBySlot(EquipmentSlot.HEAD).getDamageValue(),400,"Armor damage retained");
-        h.assertValueEqual(T2ArmorItem.camo(restored.getItemBySlot(EquipmentSlot.HEAD)),3,"Camouflage retained"); h.assertValueEqual(restored.getCustomName(),npc.getCustomName(),"Name retained"); npc.discard(); h.succeed();
+        h.assertValueEqual(TGArmorItem.camo(restored.getItemBySlot(EquipmentSlot.HEAD)),3,"Camouflage retained"); h.assertValueEqual(restored.getCustomName(),npc.getCustomName(),"Name retained"); npc.discard(); h.succeed();
     }
     private static void fire(GameTestHelper h,int roll) {
         var npc=mob(h,roll,new Vec3(3,40,3)); var target=h.spawnWithNoFreeWill(EntityTypes.IRON_GOLEM,new Vec3(9,40,3)); target.setNoGravity(true);

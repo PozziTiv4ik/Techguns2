@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "techguns:t2_combat_leggings"
+    "techguns:t2_combat_leggings",
+    "techguns:hazmat_leggings"
   ]
 }

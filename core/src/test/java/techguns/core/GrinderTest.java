@@ -32,7 +32,7 @@ class GrinderTest {
     @Test void wornArmorRoundsAtInverseDamageBoundaries() {
         int[][] cases = {{1,2,2},{248,2,2},{249,2,1},{495,2,1},{496,1,1},{742,1,1},{743,1,0},{989,1,0}};
         for (var c : cases) assertArrayEquals(new int[]{c[1], c[2]}, GrinderRules.armorSalvage(Armors.forSlot(ArmorSlot.CHEST), c[0]), "damage=" + c[0]);
-        for (var armor : Armors.ALL) assertArrayEquals(new int[]{1,0}, GrinderRules.armorSalvage(armor,989));
+        for (var armor : Armors.T2_COMBAT) assertArrayEquals(new int[]{1,0}, GrinderRules.armorSalvage(armor,989));
         assertArrayEquals(new int[]{1,2}, GrinderRules.armorSalvage(Armors.forSlot(ArmorSlot.LEGS),1));
     }
     @Test void maximumSpaceNeverUnderestimatesARealRoll() {
