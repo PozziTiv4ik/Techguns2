@@ -396,6 +396,8 @@
   "tooltip.techguns.armor.fall": "Падение: −%s блока, затем −%s%% дистанции",
   "entity.techguns.supermutantbasic": "Супермутант",
   "item.techguns.supermutantbasic_spawn_egg": "Яйцо призыва супермутанта",
+  "entity.techguns.zombiesoldier": "Зомби-солдат",
+  "item.techguns.zombiesoldier_spawn_egg": "Яйцо призыва зомби-солдата",
   "entity.techguns.laser_beam": "Лазерный луч",
   "death.attack.techguns.laser": "%1$s убит лазером игрока %2$s",
   "death.attack.techguns.laser.player": "%1$s убит лазером игрока %2$s",

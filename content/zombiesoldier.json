@@ -1,0 +1,23 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/entities/npcs/ZombieSoldier.java",
+  "weapons": [
+    "techguns:revolver",
+    "techguns:thompson",
+    "minecraft:iron_shovel",
+    "minecraft:stone_shovel"
+  ],
+  "health": 25,
+  "speed": 0.25,
+  "attack": 4,
+  "follow_range": 50,
+  "intrinsic_armor": 5,
+  "armor": "T1_COMBAT",
+  "independent_armor_chance": 0.5,
+  "burns_in_daylight": false,
+  "fire_immune": false,
+  "original_egg_colors": [
+    7697512,
+    3715128
+  ],
+  "renderer": "Original 64x64 skin on the modern humanoid mesh; no zombie arm animation"
+}
