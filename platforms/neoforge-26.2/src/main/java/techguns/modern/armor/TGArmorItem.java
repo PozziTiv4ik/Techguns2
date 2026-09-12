@@ -17,7 +17,7 @@ public final class TGArmorItem extends Item {
     public TGArmorItem(Properties properties,ArmorSpec spec) { super(properties); this.spec=spec; }
     public ArmorSpec spec() { return spec; }
     public static int camo(ItemStack stack) { return stack.getItem() instanceof TGArmorItem item ? Math.floorMod(stack.getOrDefault(ArmorContent.CAMO.get(),0),item.spec.camos().size()) : 0; }
-    public static Component camoName(ItemStack stack) { return stack.getItem() instanceof TGArmorItem item && item.spec.canChangeCamo() ? Component.translatable("tooltip.techguns.armor." + item.spec.set() + ".camo." + camo(stack)) : Component.empty(); }
+    public static Component camoName(ItemStack stack) { return stack.getItem() instanceof TGArmorItem item && item.spec.canChangeCamo() ? Component.translatable(item.spec.camoTranslationKey(camo(stack))) : Component.empty(); }
     public static Item material(String id) {
         return net.minecraft.core.registries.BuiltInRegistries.ITEM.getValue(net.minecraft.resources.Identifier.parse(id.contains(":") ? id : "techguns:" + id));
     }
@@ -45,6 +45,7 @@ public final class TGArmorItem extends Item {
         if (spec.radiationResistance()>0) lines.accept(Component.translatable("tooltip.techguns.armor.radiation_resistance",spec.radiationResistance()));
         if (spec.bonusesActive(stack.getDamageValue())) {
             if (spec.speed()>0) lines.accept(Component.translatable("tooltip.techguns.armor.speed",Math.round(spec.speed()*100),Math.round(spec.speed()*200)));
+            if (spec.mining()>0) lines.accept(Component.translatable("tooltip.techguns.armor.mining",Math.round(spec.mining()*100)));
             if (spec.knockback()>0) lines.accept(Component.translatable("tooltip.techguns.armor.knockback",Math.round(spec.knockback()*100)));
             if (spec.jump()>0) lines.accept(Component.translatable("tooltip.techguns.armor.jump"));
             if (spec.fallReduction()>0 || spec.freeFallHeight()>0) lines.accept(Component.translatable("tooltip.techguns.armor.fall",spec.freeFallHeight(),Math.round(spec.fallReduction()*100)));

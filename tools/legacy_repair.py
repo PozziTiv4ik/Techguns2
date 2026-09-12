@@ -30,7 +30,7 @@ def generate_repair_content():
         'material_slots': list(range(9)), 'repair_slot': 9, 'energy': 0,
         'targets': ['HEAD', 'CHEST', 'LEGS', 'FEET', 'OFFHAND', 'BENCH'],
         'repair': 'All required materials from slots 0..8, then reset damage to zero, retaining other components',
-        'implemented_equipment': ['T2_COMBAT','T2_HAZMAT','T1_COMBAT'], 'pending_equipment': 'Other original armors and shields',
+        'implemented_equipment': ['T2_COMBAT','T2_HAZMAT','T1_COMBAT','T1_MINER'], 'pending_equipment': 'Other original armors and shields',
         'automation': 'All faces and unsided; insert/extract all ten slots, repair slot accepts supported armor',
         'access': 'Public or owner only; team integration pending'
     }, ensure_ascii=False, indent=2) + '\n').encode()

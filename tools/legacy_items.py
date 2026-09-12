@@ -27,6 +27,7 @@ ORE_TAGS = {
     'WIRECOPPER': ('c:wires/copper', 'copperwire'),
     'PLATECOPPER': ('c:plates/copper', 'platecopper'),
     'DYEGREEN': ('c:dyes/green', None),
+    'DYEYELLOW': ('c:dyes/yellow', None),
     'BLOCKIRON': ('c:storage_blocks/iron', None),
     'INGOTTIN': ('c:ingots/tin', 'ingottin'), 'INGOTBRONZE': ('c:ingots/bronze', 'ingotbronze'),
     'INGOTTITANIUM': ('c:ingots/titanium', 'ingottitanium'),

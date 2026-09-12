@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:t1_miner_chestplate",
+    "count": 1
+  },
+  "pattern": [
+    "c c",
+    "ccc",
+    "ici"
+  ],
+  "key": {
+    "c": "techguns:heavycloth",
+    "i": "#c:ingots/iron"
+  }
+}

@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.*;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.*;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import techguns.core.DamageKind;
 import techguns.modern.TGContent;
@@ -42,6 +43,16 @@ public final class TGArmorSystem {
         if (amount!=0) attribute.addTransientModifier(new AttributeModifier(id,amount,operation));
     }
     @SubscribeEvent public static void playerTick(PlayerTickEvent.Post event) { refresh(event.getEntity()); }
+    /** TGEventHandler.onBreakEvent runs at NORMAL after tool, effects and higher-priority modifiers. */
+    @SubscribeEvent(priority=EventPriority.NORMAL,receiveCanceled=false)
+    public static void mining(PlayerEvent.BreakSpeed event) {
+        float bonus=0;
+        for(var slot:SLOTS) {
+            var stack=event.getEntity().getItemBySlot(slot);
+            if(stack.getItem() instanceof TGArmorItem item && item.spec().bonusesActive(stack.getDamageValue())) bonus+=(float)item.spec().mining();
+        }
+        if(bonus!=0) event.setNewSpeed(event.getNewSpeed()*(1+bonus));
+    }
     @SubscribeEvent public static void jump(LivingEvent.LivingJumpEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
         double jump=0;

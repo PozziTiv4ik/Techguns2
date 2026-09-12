@@ -868,6 +868,30 @@
       "input": "techguns:t1_combat_boots",
       "outputs": [],
       "armor": true
+    },
+    {
+      "id": "t1_miner_helmet",
+      "input": "techguns:t1_miner_helmet",
+      "outputs": [],
+      "armor": true
+    },
+    {
+      "id": "t1_miner_chestplate",
+      "input": "techguns:t1_miner_chestplate",
+      "outputs": [],
+      "armor": true
+    },
+    {
+      "id": "t1_miner_leggings",
+      "input": "techguns:t1_miner_leggings",
+      "outputs": [],
+      "armor": true
+    },
+    {
+      "id": "t1_miner_boots",
+      "input": "techguns:t1_miner_boots",
+      "outputs": [],
+      "armor": true
     }
   ],
   "unported_weapon_inputs": [

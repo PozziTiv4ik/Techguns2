@@ -6,7 +6,7 @@ from legacy_items import arguments, parse_stack
 from legacy_npcs import LEGACY, RESOURCES, npc_loot
 
 
-ARMOR_SETS = {'t2_combat':'T2_COMBAT', 'hazmat':'T2_HAZMAT', 't1_combat':'T1_COMBAT'}
+ARMOR_SETS = {'t2_combat':'T2_COMBAT', 'hazmat':'T2_HAZMAT', 't1_combat':'T1_COMBAT', 't1_miner':'T1_MINER'}
 
 
 def call_arguments(text, name):
@@ -48,9 +48,11 @@ def armor_definitions(set_name='t2_combat'):
         def repair_id(value): return '' if value == 'ItemStack.EMPTY' else parse_stack(value)['id'].removeprefix('techguns:')
         fall, height = bonus('setFallProtection', '0,0')
         speed, jump = bonus('setSpeedBoni', '0,0')
+        suffix = re.search(r'\.setCamoNameSuffix\("([^"]+)"\)',statement)
         result.append({'id':set_name+'_'+part, 'set':set_name, 'slot':slot, 'physical':round(defense*factors[slot],6),
             **{kind:round(value*factors[slot],6) for kind,value in values.items()}, 'durability':round(.25*55*base),
-            'toughness':toughness,'speed':speed,'jump':jump,
+            'toughness':toughness,'speed':speed,'jump':jump,'mining':bonus('setMiningBoni')[0],
+            'camo_name_suffix':suffix[1] if suffix else '',
             'knockback':bonus('setKnockbackResistance')[0], 'radiation_resistance':bonus('setRADResistance')[0],
             'fall_reduction':fall, 'free_fall_height':height,
             'enchantability':int(args[2]), 'repair_parts':int(repair[3]), 'repair_metal_ratio':float(ratio[0]) / (float(ratio[1]) if len(ratio)>1 else 1),
@@ -73,7 +75,7 @@ def generate_armor_content():
         files[RESOURCES + name + f'textures/item/{identifier}.png']=(LEGACY / 'resources' / name / f'textures/items/{identifier}.png').read_bytes()
         camos = ', '.join('"'+name+'"' for name in item['textures'])
         definitions.append(f'''        new ArmorSpec("{identifier}", ArmorSlot.{item["slot"]}, {item["physical"]}f, {item["elemental"]}f, {item["durability"]}, {item["toughness"]}f, {item["speed"]}, {item["jump"]}, {item["knockback"]}, {item["repair_parts"]}, {item["repair_metal_ratio"]},
-                {item["explosion"]}f, {item["poison"]}f, {item["dark"]}f, {item["radiation"]}f, {item["radiation_resistance"]}, {item["fall_reduction"]}, {item["free_fall_height"]}, "{item["repair_metal"]}", "{item["repair_cloth"]}", List.of({camos}), "{item["set"]}")''')
+                {item["explosion"]}f, {item["poison"]}f, {item["dark"]}f, {item["radiation"]}f, {item["radiation_resistance"]}, {item["fall_reduction"]}, {item["free_fall_height"]}, "{item["repair_metal"]}", "{item["repair_cloth"]}", List.of({camos}), "{item["set"]}", {item["mining"]}, "{item["camo_name_suffix"]}")''')
     files['core/src/main/java/techguns/core/Armors.java']=('''package techguns.core;
 
 import java.util.List;
@@ -86,6 +88,7 @@ public final class Armors {
     public static final List<ArmorSpec> T2_COMBAT = ALL.stream().filter(a -> a.set().equals("t2_combat")).toList();
     public static final List<ArmorSpec> HAZMAT = ALL.stream().filter(a -> a.set().equals("hazmat")).toList();
     public static final List<ArmorSpec> T1_COMBAT = ALL.stream().filter(a -> a.set().equals("t1_combat")).toList();
+    public static final List<ArmorSpec> T1_MINER = ALL.stream().filter(a -> a.set().equals("t1_miner")).toList();
     public static final List<String> CAMOS = T2_COMBAT.getFirst().camos();
     public static ArmorSpec forSlot(ArmorSlot slot) { return T2_COMBAT.stream().filter(a -> a.slot()==slot).findFirst().orElseThrow(); }
     public static ArmorSpec forSlot(String set, ArmorSlot slot) { return ALL.stream().filter(a -> a.set().equals(set) && a.slot()==slot).findFirst().orElseThrow(); }
@@ -129,11 +132,17 @@ def armor_translations(lang):
     source = dict(line.split('=',1) for line in (LEGACY / f'resources/assets/techguns/lang/{lang}.lang').read_text(encoding='utf-8').splitlines() if '=' in line)
     for part in names: result['item.techguns.hazmat_'+part]=source['techguns.item.hazmat_'+part+'.name']
     for part in names: result['item.techguns.t1_combat_'+part]=source['techguns.item.t1_combat_'+part+'.name']
+    for item in armor_definitions('t1_miner'):
+        result['item.techguns.'+item['id']]=source['techguns.item.'+item['id']+'.name']
+        suffix = item['camo_name_suffix']+'.' if item['camo_name_suffix'] else ''
+        for i in range(len(item['textures'])):
+            result[f'tooltip.techguns.armor.t1_miner.{suffix}camo.{i}']=source[f'techguns.item.t1_miner.{suffix}camoname.{i}']
     for i in range(4): result['tooltip.techguns.armor.hazmat.camo.'+str(i)]=source['techguns.item.hazmatsuit.camoname.'+str(i)]
     result.update({
         'tooltip.techguns.armor.typed_defense':'Взрыв: %s; яд: %s; тьма: %s; радиация: %s' if ru else 'Explosion: %s; poison: %s; dark: %s; radiation: %s',
         'tooltip.techguns.armor.radiation_resistance':'Сопротивление накоплению радиации: +%s (сохраняется при износе)' if ru else 'Radiation buildup resistance: +%s (remains when worn)',
         'tooltip.techguns.armor.speed':'Скорость: +%s%% (+%s%% при спринте)' if ru else 'Speed: +%s%% (+%s%% sprinting)',
+        'tooltip.techguns.armor.mining':'Скорость добычи: +%s%%' if ru else 'Mining speed: +%s%%',
         'tooltip.techguns.armor.knockback':'Сопротивление отбрасыванию: +%s%%' if ru else 'Knockback resistance: +%s%%',
         'tooltip.techguns.armor.fall':'Падение: −%s блока, затем −%s%% дистанции' if ru else 'Falling: −%s blocks, then −%s%% distance',
         'tooltip.techguns.armor.defense':'Физический / пули: %s; стихии: %s' if ru else 'Physical / projectile: %s; elemental: %s'})

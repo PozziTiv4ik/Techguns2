@@ -587,6 +587,22 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t1_combat_leggings.json"
     },
     {
+      "id": "techguns:t1_miner_boots",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t1_miner_boots.json"
+    },
+    {
+      "id": "techguns:t1_miner_chestplate",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t1_miner_chestplate.json"
+    },
+    {
+      "id": "techguns:t1_miner_helmet",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t1_miner_helmet.json"
+    },
+    {
+      "id": "techguns:t1_miner_leggings",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t1_miner_leggings.json"
+    },
+    {
       "id": "techguns:t2_combat_boots",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t2_combat_boots.json"
     },

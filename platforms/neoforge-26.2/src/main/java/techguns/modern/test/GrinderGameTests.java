@@ -219,7 +219,7 @@ final class GrinderGameTests {
         var m=place(h); h.assertTrue(m.getBlockState().canOcclude(),"Source full opaque block"); h.assertValueEqual(m.getBlockState().getCollisionShape(h.getLevel(),m.getBlockPos()).bounds(),new AABB(0,0,0,1,1,1),"Original collision"); h.succeed();
     }
     private static void codec(GameTestHelper h) {
-        var manager=h.getLevel().getServer().getRecipeManager(); var records=manager.recipeMap().byType(GrinderContent.RECIPE.get()); h.assertValueEqual(records.size(),42,"All selected source records loaded");
+        var manager=h.getLevel().getServer().getRecipeManager(); var records=manager.recipeMap().byType(GrinderContent.RECIPE.get()); h.assertValueEqual(records.size(),46,"All selected source records loaded");
         for(var holder:records) {
             var buffer=new RegistryFriendlyByteBuf(Unpooled.buffer(),h.getLevel().registryAccess());
             try { GrinderRecipe.STREAM_CODEC.encode(buffer,holder.value()); var copy=GrinderRecipe.STREAM_CODEC.decode(buffer); h.assertValueEqual(copy.outputs(),holder.value().outputs(),"Output counts/factors/preferred tag survive codec"); } finally { buffer.release(); }

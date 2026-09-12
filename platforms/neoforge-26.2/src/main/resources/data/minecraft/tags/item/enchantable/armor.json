@@ -12,6 +12,10 @@
     "techguns:t1_combat_helmet",
     "techguns:t1_combat_chestplate",
     "techguns:t1_combat_leggings",
-    "techguns:t1_combat_boots"
+    "techguns:t1_combat_boots",
+    "techguns:t1_miner_helmet",
+    "techguns:t1_miner_chestplate",
+    "techguns:t1_miner_leggings",
+    "techguns:t1_miner_boots"
   ]
 }

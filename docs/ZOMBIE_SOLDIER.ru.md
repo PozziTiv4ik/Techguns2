@@ -103,7 +103,8 @@ SPARSE соответствует `c:is_sparse_vegetation`. Классифика
 Остаются остальные пять Overworld-записей, спавнеры/структуры, иные измерения,
 полная фракционная система и визуальная приёмка. Следующий срез — ZombieFarmer
 и ZombieMiner, чтобы заполнить исходный уровень опасности 0. Их предварительная
-зависимость — ещё не перенесённая броня T1 Miner с бонусом добычи и четырьмя цветами.
+зависимость — броня T1 Miner с бонусом добычи и четырьмя цветами — уже перенесена;
+см. `docs/T1_MINER.ru.md`.
 
 Исходные файлы: `ZombieSoldier.java`, `GenericNPC.java`, `GenericNPCUndead.java`,
 `TGEntities.java`, `TGConfig.java`, `TGSpawnManager.java`, `TGNpcSpawnTable.java`,
