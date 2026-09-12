@@ -571,6 +571,22 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/simplemachine_9_repair_bench.json"
     },
     {
+      "id": "techguns:t1_combat_boots",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t1_combat_boots.json"
+    },
+    {
+      "id": "techguns:t1_combat_chestplate",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t1_combat_chestplate.json"
+    },
+    {
+      "id": "techguns:t1_combat_helmet",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t1_combat_helmet.json"
+    },
+    {
+      "id": "techguns:t1_combat_leggings",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t1_combat_leggings.json"
+    },
+    {
       "id": "techguns:t2_combat_boots",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t2_combat_boots.json"
     },

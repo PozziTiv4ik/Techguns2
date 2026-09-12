@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "techguns:t2_combat_chestplate",
-    "techguns:hazmat_chestplate"
+    "techguns:hazmat_chestplate",
+    "techguns:t1_combat_chestplate"
   ]
 }

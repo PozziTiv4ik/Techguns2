@@ -58,6 +58,6 @@ public final class CamoBenchScreen extends AbstractContainerScreen<CamoBenchMenu
         var stack = menu.target(0); int count = CamoCycling.count(stack);
         if (count > 0) graphics.text(font, (CamoCycling.index(stack) + 1) + "/" + count, 10, 40, 0xFF404040);
         graphics.text(font, font.substrByWidth(CamoCycling.variantName(stack), 88).getString(), 10, 50, 0xFF404040);
-        for (int i = 1; i <= 4; i++) graphics.text(font, Integer.toString(CamoCycling.index(menu.target(i)) + 1), 104 + (i - 1) * 18, 38, 0xFF404040);
+        for (int i = 1; i <= 4; i++) if (CamoCycling.count(menu.target(i)) > 0) graphics.text(font, Integer.toString(CamoCycling.index(menu.target(i)) + 1), 104 + (i - 1) * 18, 38, 0xFF404040);
     }
 }

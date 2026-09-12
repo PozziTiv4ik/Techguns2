@@ -1,0 +1,113 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/TGArmors.java",
+  "items": [
+    {
+      "id": "t1_combat_helmet",
+      "set": "t1_combat",
+      "slot": "HEAD",
+      "physical": 3.75,
+      "elemental": 2.8125,
+      "explosion": 2.8125,
+      "poison": 2.8125,
+      "dark": 2.8125,
+      "radiation": 0.0,
+      "durability": 825,
+      "toughness": 0.5,
+      "speed": 0.0,
+      "jump": 0.0,
+      "knockback": 0.05,
+      "radiation_resistance": 0.0,
+      "fall_reduction": 0.0,
+      "free_fall_height": 0.0,
+      "enchantability": 0,
+      "repair_parts": 2,
+      "repair_metal_ratio": 0.5,
+      "repair_metal": "minecraft:iron_ingot",
+      "repair_cloth": "heavycloth",
+      "textures": [
+        "t1_combat"
+      ]
+    },
+    {
+      "id": "t1_combat_chestplate",
+      "set": "t1_combat",
+      "slot": "CHEST",
+      "physical": 4.5,
+      "elemental": 3.375,
+      "explosion": 3.375,
+      "poison": 3.375,
+      "dark": 3.375,
+      "radiation": 0.0,
+      "durability": 825,
+      "toughness": 0.5,
+      "speed": 0.0,
+      "jump": 0.0,
+      "knockback": 0.2,
+      "radiation_resistance": 0.0,
+      "fall_reduction": 0.0,
+      "free_fall_height": 0.0,
+      "enchantability": 0,
+      "repair_parts": 4,
+      "repair_metal_ratio": 0.5,
+      "repair_metal": "minecraft:iron_ingot",
+      "repair_cloth": "heavycloth",
+      "textures": [
+        "t1_combat"
+      ]
+    },
+    {
+      "id": "t1_combat_leggings",
+      "set": "t1_combat",
+      "slot": "LEGS",
+      "physical": 3.75,
+      "elemental": 2.8125,
+      "explosion": 2.8125,
+      "poison": 2.8125,
+      "dark": 2.8125,
+      "radiation": 0.0,
+      "durability": 825,
+      "toughness": 0.5,
+      "speed": 0.0,
+      "jump": 0.0,
+      "knockback": 0.1,
+      "radiation_resistance": 0.0,
+      "fall_reduction": 0.0,
+      "free_fall_height": 0.0,
+      "enchantability": 0,
+      "repair_parts": 3,
+      "repair_metal_ratio": 0.3333333333333333,
+      "repair_metal": "minecraft:iron_ingot",
+      "repair_cloth": "heavycloth",
+      "textures": [
+        "t1_combat"
+      ]
+    },
+    {
+      "id": "t1_combat_boots",
+      "set": "t1_combat",
+      "slot": "FEET",
+      "physical": 3.0,
+      "elemental": 2.25,
+      "explosion": 2.25,
+      "poison": 2.25,
+      "dark": 2.25,
+      "radiation": 0.0,
+      "durability": 825,
+      "toughness": 0.5,
+      "speed": 0.0,
+      "jump": 0.0,
+      "knockback": 0.05,
+      "radiation_resistance": 0.0,
+      "fall_reduction": 0.0,
+      "free_fall_height": 0.0,
+      "enchantability": 0,
+      "repair_parts": 2,
+      "repair_metal_ratio": 0.5,
+      "repair_metal": "minecraft:iron_ingot",
+      "repair_cloth": "heavycloth",
+      "textures": [
+        "t1_combat"
+      ]
+    }
+  ]
+}

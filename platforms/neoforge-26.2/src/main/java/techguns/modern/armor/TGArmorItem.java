@@ -17,18 +17,21 @@ public final class TGArmorItem extends Item {
     public TGArmorItem(Properties properties,ArmorSpec spec) { super(properties); this.spec=spec; }
     public ArmorSpec spec() { return spec; }
     public static int camo(ItemStack stack) { return stack.getItem() instanceof TGArmorItem item ? Math.floorMod(stack.getOrDefault(ArmorContent.CAMO.get(),0),item.spec.camos().size()) : 0; }
-    public static Component camoName(ItemStack stack) { return stack.getItem() instanceof TGArmorItem item ? Component.translatable("tooltip.techguns.armor." + item.spec.set() + ".camo." + camo(stack)) : Component.empty(); }
+    public static Component camoName(ItemStack stack) { return stack.getItem() instanceof TGArmorItem item && item.spec.canChangeCamo() ? Component.translatable("tooltip.techguns.armor." + item.spec.set() + ".camo." + camo(stack)) : Component.empty(); }
+    public static Item material(String id) {
+        return net.minecraft.core.registries.BuiltInRegistries.ITEM.getValue(net.minecraft.resources.Identifier.parse(id.contains(":") ? id : "techguns:" + id));
+    }
     public ItemStack repairMaterial(boolean metal, int count) {
         String id = metal ? spec.repairMetal() : spec.repairCloth();
-        return id.isEmpty() || count <= 0 ? ItemStack.EMPTY : new ItemStack(net.minecraft.core.registries.BuiltInRegistries.ITEM.getValue(net.minecraft.resources.Identifier.parse(id.contains(":") ? id : "techguns:" + id)), count);
+        return id.isEmpty() || count <= 0 ? ItemStack.EMPTY : new ItemStack(material(id), count);
     }
     public static void setCamo(ItemStack stack,int camo) {
-        if (!(stack.getItem() instanceof TGArmorItem item) || camo<0 || camo>=item.spec.camos().size()) throw new IllegalArgumentException("Invalid armor camouflage");
+        if (!(stack.getItem() instanceof TGArmorItem item) || !item.spec.canChangeCamo() || camo<0 || camo>=item.spec.camos().size()) throw new IllegalArgumentException("Invalid armor camouflage");
         stack.set(ArmorContent.CAMO.get(),camo);
         stack.set(DataComponents.EQUIPPABLE,ArmorContent.equippable(item.spec,camo));
     }
     @Override public InteractionResult use(Level level,Player player,InteractionHand hand) {
-        if (player.isShiftKeyDown()) {
+        if (spec.canChangeCamo() && player.isShiftKeyDown()) {
             if (level instanceof ServerLevel) { var stack=player.getItemInHand(hand); setCamo(stack,(camo(stack)+1)%spec.camos().size()); }
             return InteractionResult.SUCCESS;
         }
@@ -36,12 +39,13 @@ public final class TGArmorItem extends Item {
     }
     @Override public void appendHoverText(ItemStack stack,TooltipContext context,TooltipDisplay display,Consumer<Component> lines,TooltipFlag flag) {
         super.appendHoverText(stack,context,display,lines,flag);
-        lines.accept(Component.translatable("tooltip.techguns.armor.camo",camoName(stack)));
+        if (spec.canChangeCamo()) lines.accept(Component.translatable("tooltip.techguns.armor.camo",camoName(stack)));
         lines.accept(Component.translatable("tooltip.techguns.armor.defense",spec.physical(),spec.elemental()));
         lines.accept(Component.translatable("tooltip.techguns.armor.typed_defense",spec.explosion(),spec.poison(),spec.dark(),spec.radiation()));
         if (spec.radiationResistance()>0) lines.accept(Component.translatable("tooltip.techguns.armor.radiation_resistance",spec.radiationResistance()));
         if (spec.bonusesActive(stack.getDamageValue())) {
-            if (spec.speed()>0 || spec.knockback()>0) lines.accept(Component.translatable("tooltip.techguns.armor.bonuses",Math.round(spec.knockback()*100)));
+            if (spec.speed()>0) lines.accept(Component.translatable("tooltip.techguns.armor.speed",Math.round(spec.speed()*100),Math.round(spec.speed()*200)));
+            if (spec.knockback()>0) lines.accept(Component.translatable("tooltip.techguns.armor.knockback",Math.round(spec.knockback()*100)));
             if (spec.jump()>0) lines.accept(Component.translatable("tooltip.techguns.armor.jump"));
             if (spec.fallReduction()>0 || spec.freeFallHeight()>0) lines.accept(Component.translatable("tooltip.techguns.armor.fall",spec.freeFallHeight(),Math.round(spec.fallReduction()*100)));
         } else lines.accept(Component.translatable("tooltip.techguns.armor.worn"));

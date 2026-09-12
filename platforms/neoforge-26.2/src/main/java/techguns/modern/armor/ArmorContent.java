@@ -22,6 +22,7 @@ public final class ArmorContent {
             builder -> builder.persistent(Codec.intRange(0,5)).networkSynchronized(ByteBufCodecs.VAR_INT));
     public static final Map<ArmorSlot,DeferredItem<TGArmorItem>> ITEMS = items(Armors.T2_COMBAT);
     public static final Map<ArmorSlot,DeferredItem<TGArmorItem>> HAZMAT = items(Armors.HAZMAT);
+    public static final Map<ArmorSlot,DeferredItem<TGArmorItem>> T1_COMBAT = items(Armors.T1_COMBAT);
     private static Map<ArmorSlot,DeferredItem<TGArmorItem>> items(List<ArmorSpec> specifications) {
         var items=new EnumMap<ArmorSlot,DeferredItem<TGArmorItem>>(ArmorSlot.class);
         for(var spec:specifications) {
@@ -33,7 +34,7 @@ public final class ArmorContent {
                 // GenericArmor's radiation attribute has no wear guard and applies to any wearer.
                 if(spec.radiationResistance()>0) modifiers.add(techguns.modern.radiation.RadiationSystem.RESISTANCE,
                         new AttributeModifier(TGContent.id("armor_radiation."+spec.slot().name().toLowerCase(Locale.ROOT)),spec.radiationResistance(),AttributeModifier.Operation.ADD_VALUE),EquipmentSlotGroup.bySlot(slot));
-                return props.durability(spec.durability()).repairable(TGContent.MATERIALS.get(spec.repairMetal().isEmpty()?spec.repairCloth():spec.repairMetal()).get())
+                return props.durability(spec.durability()).repairable(TGArmorItem.material(spec.repairMetal().isEmpty()?spec.repairCloth():spec.repairMetal()))
                         .component(CAMO.get(),0).component(DataComponents.EQUIPPABLE,equippable(spec,0)).attributes(modifiers.build());
             }));
         }

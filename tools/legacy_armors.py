@@ -6,7 +6,20 @@ from legacy_items import arguments, parse_stack
 from legacy_npcs import LEGACY, RESOURCES, npc_loot
 
 
-ARMOR_SETS = {'t2_combat':'T2_COMBAT', 'hazmat':'T2_HAZMAT'}
+ARMOR_SETS = {'t2_combat':'T2_COMBAT', 'hazmat':'T2_HAZMAT', 't1_combat':'T1_COMBAT'}
+
+
+def call_arguments(text, name):
+    """Read one Java call including nested ItemStack constructors."""
+    start=text.index(name+'(')+len(name)+1; depth=1; quoted=False
+    for index in range(start,len(text)):
+        char=text[index]
+        if char=='"': quoted=not quoted
+        if not quoted:
+            if char=='(': depth+=1
+            elif char==')': depth-=1
+            if depth==0: return arguments(text[start:index])
+    raise ValueError('Unclosed armor call: '+name)
 
 
 def armor_definitions(set_name='t2_combat'):
@@ -14,7 +27,6 @@ def armor_definitions(set_name='t2_combat'):
     declaration = re.search(ARMOR_SETS[set_name] + r'\s*=\s*new TGArmorMaterial\(([^)]+)\)([^;]*);', source)
     args = arguments(declaration[1])
     base, defense, toughness = int(args[1]), numeric(args[3]), numeric(args[5])
-    textures = re.findall(r'"([^"]+)"', re.search(r'String\[\] ' + set_name + r'_textures\s*=\s*\{([^}]+)\}', source)[1])
     material = strip_comments((LEGACY / 'java/techguns/items/armors/TGArmorMaterial.java').read_text())
     factors = {slot: numeric(re.search(r'factor' + name + r'\s*=\s*([^;]+);', material)[1]) for slot,name in [('HEAD','Head'),('CHEST','Chest'),('LEGS','Legs'),('FEET','Boots')]}
     elemental = numeric(re.search(r'float f\s*=\s*([^;]+);', material)[1])
@@ -24,15 +36,18 @@ def armor_definitions(set_name='t2_combat'):
         values[kind.lower()] = numeric(value)
     result = []
     for slot, part in [('HEAD','helmet'),('CHEST','chestplate'),('LEGS','leggings'),('FEET','boots')]:
-        statement = re.search(set_name + '_' + part.capitalize() + r'\s*=\s*new GenericArmorMultiCamo\(([^;]+);', source)[1]
-        speed, jump = map(numeric, re.search(r'\.setSpeedBoni\(([^)]+)\)', statement)[1].split(','))
-        repair = arguments(re.search(r'\.setRepairMats\(([^)]+)\)', statement)[1])
+        declaration=re.search(set_name+'_'+part.capitalize()+r'\s*=\s*new (GenericArmor(?:MultiCamo)?)\(([^;]+);', source)
+        constructor=declaration[1]; statement=constructor+'('+declaration[2]
+        constructor_args=call_arguments(statement,constructor)
+        textures = re.findall(r'"([^"]+)"', re.search(r'String\[\] '+constructor_args[2]+r'\s*=\s*\{([^}]+)\}',source)[1]) if constructor=='GenericArmorMultiCamo' else [json.loads(constructor_args[2])]
+        repair = call_arguments(statement,'.setRepairMats')
         ratio = repair[2].replace('f','').split('/')
         def bonus(name, default='0'):
             match = re.search(r'\.' + name + r'\(([^)]+)\)', statement)
             return [numeric(value) for value in (match[1] if match else default).split(',')]
         def repair_id(value): return '' if value == 'ItemStack.EMPTY' else parse_stack(value)['id'].removeprefix('techguns:')
         fall, height = bonus('setFallProtection', '0,0')
+        speed, jump = bonus('setSpeedBoni', '0,0')
         result.append({'id':set_name+'_'+part, 'set':set_name, 'slot':slot, 'physical':round(defense*factors[slot],6),
             **{kind:round(value*factors[slot],6) for kind,value in values.items()}, 'durability':round(.25*55*base),
             'toughness':toughness,'speed':speed,'jump':jump,
@@ -49,7 +64,7 @@ def generate_armor_content():
     sets = {name:armor_definitions(name) for name in ARMOR_SETS}
     armor = [item for items in sets.values() for item in items]
     for set_name, items in sets.items():
-        data('content/'+('t2-combat-armor' if set_name=='t2_combat' else 'hazmat-armor')+'.json', {'source':'legacy/1.12.2/src/main/java/techguns/TGArmors.java','items':items})
+        data('content/'+set_name.replace('_','-')+'-armor.json', {'source':'legacy/1.12.2/src/main/java/techguns/TGArmors.java','items':items})
     definitions=[]
     for item in armor:
         identifier=item['id']; name='assets/techguns/'
@@ -70,6 +85,7 @@ public final class Armors {
     );
     public static final List<ArmorSpec> T2_COMBAT = ALL.stream().filter(a -> a.set().equals("t2_combat")).toList();
     public static final List<ArmorSpec> HAZMAT = ALL.stream().filter(a -> a.set().equals("hazmat")).toList();
+    public static final List<ArmorSpec> T1_COMBAT = ALL.stream().filter(a -> a.set().equals("t1_combat")).toList();
     public static final List<String> CAMOS = T2_COMBAT.getFirst().camos();
     public static ArmorSpec forSlot(ArmorSlot slot) { return T2_COMBAT.stream().filter(a -> a.slot()==slot).findFirst().orElseThrow(); }
     public static ArmorSpec forSlot(String set, ArmorSlot slot) { return ALL.stream().filter(a -> a.set().equals(set) && a.slot()==slot).findFirst().orElseThrow(); }
@@ -112,10 +128,13 @@ def armor_translations(lang):
         result['tooltip.techguns.armor.t2_combat.camo.'+str(i)]=russian if ru else en
     source = dict(line.split('=',1) for line in (LEGACY / f'resources/assets/techguns/lang/{lang}.lang').read_text(encoding='utf-8').splitlines() if '=' in line)
     for part in names: result['item.techguns.hazmat_'+part]=source['techguns.item.hazmat_'+part+'.name']
+    for part in names: result['item.techguns.t1_combat_'+part]=source['techguns.item.t1_combat_'+part+'.name']
     for i in range(4): result['tooltip.techguns.armor.hazmat.camo.'+str(i)]=source['techguns.item.hazmatsuit.camoname.'+str(i)]
     result.update({
         'tooltip.techguns.armor.typed_defense':'Взрыв: %s; яд: %s; тьма: %s; радиация: %s' if ru else 'Explosion: %s; poison: %s; dark: %s; radiation: %s',
         'tooltip.techguns.armor.radiation_resistance':'Сопротивление накоплению радиации: +%s (сохраняется при износе)' if ru else 'Radiation buildup resistance: +%s (remains when worn)',
+        'tooltip.techguns.armor.speed':'Скорость: +%s%% (+%s%% при спринте)' if ru else 'Speed: +%s%% (+%s%% sprinting)',
+        'tooltip.techguns.armor.knockback':'Сопротивление отбрасыванию: +%s%%' if ru else 'Knockback resistance: +%s%%',
         'tooltip.techguns.armor.fall':'Падение: −%s блока, затем −%s%% дистанции' if ru else 'Falling: −%s blocks, then −%s%% distance',
         'tooltip.techguns.armor.defense':'Физический / пули: %s; стихии: %s' if ru else 'Physical / projectile: %s; elemental: %s'})
     return result

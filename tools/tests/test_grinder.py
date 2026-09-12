@@ -12,9 +12,9 @@ from generate_weapon_content import parse_weapons, generate
 class GrinderPortTests(unittest.TestCase):
     def test_selected_recipes_and_missing_source_are_explicit(self):
         data = grinder_data(); recipes = data['recipes']
-        self.assertEqual(len(recipes), 38)
+        self.assertEqual(len(recipes), 42)
         self.assertEqual(sum(r.get('random', False) for r in recipes), 9)
-        self.assertEqual(sum(r.get('armor', False) for r in recipes), 8)
+        self.assertEqual(sum(r.get('armor', False) for r in recipes), 12)
         self.assertEqual(data['ported_weapons_without_source_recipe'], ['laserpistol'])
         self.assertEqual(len(data['unported_weapon_inputs']), 18)
         self.assertEqual((data['duration'], data['power_per_tick'], data['energy_capacity']), (100, 5, 20000))

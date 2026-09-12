@@ -20,10 +20,19 @@ public final class Armors {
         new ArmorSpec("hazmat_leggings", ArmorSlot.LEGS, 2.5f, 4.0f, 1100, 0.0f, 0.0, 0.0, 0.0, 3, 0.0,
                 2.5f, 5.0f, 1.875f, 5.0f, 1.0, 0.0, 0.0, "", "protectivefiber", List.of("hazmatsuit", "hazmatsuit_grey", "hazmatsuit_orange", "hazmatsuit_blue"), "hazmat"),
         new ArmorSpec("hazmat_boots", ArmorSlot.FEET, 2.0f, 3.2f, 1100, 0.0f, 0.0, 0.0, 0.0, 2, 0.0,
-                2.0f, 4.0f, 1.5f, 4.0f, 1.0, 0.1, 0.5, "", "protectivefiber", List.of("hazmatsuit", "hazmatsuit_grey", "hazmatsuit_orange", "hazmatsuit_blue"), "hazmat")
+                2.0f, 4.0f, 1.5f, 4.0f, 1.0, 0.1, 0.5, "", "protectivefiber", List.of("hazmatsuit", "hazmatsuit_grey", "hazmatsuit_orange", "hazmatsuit_blue"), "hazmat"),
+        new ArmorSpec("t1_combat_helmet", ArmorSlot.HEAD, 3.75f, 2.8125f, 825, 0.5f, 0.0, 0.0, 0.05, 2, 0.5,
+                2.8125f, 2.8125f, 2.8125f, 0.0f, 0.0, 0.0, 0.0, "minecraft:iron_ingot", "heavycloth", List.of("t1_combat"), "t1_combat"),
+        new ArmorSpec("t1_combat_chestplate", ArmorSlot.CHEST, 4.5f, 3.375f, 825, 0.5f, 0.0, 0.0, 0.2, 4, 0.5,
+                3.375f, 3.375f, 3.375f, 0.0f, 0.0, 0.0, 0.0, "minecraft:iron_ingot", "heavycloth", List.of("t1_combat"), "t1_combat"),
+        new ArmorSpec("t1_combat_leggings", ArmorSlot.LEGS, 3.75f, 2.8125f, 825, 0.5f, 0.0, 0.0, 0.1, 3, 0.3333333333333333,
+                2.8125f, 2.8125f, 2.8125f, 0.0f, 0.0, 0.0, 0.0, "minecraft:iron_ingot", "heavycloth", List.of("t1_combat"), "t1_combat"),
+        new ArmorSpec("t1_combat_boots", ArmorSlot.FEET, 3.0f, 2.25f, 825, 0.5f, 0.0, 0.0, 0.05, 2, 0.5,
+                2.25f, 2.25f, 2.25f, 0.0f, 0.0, 0.0, 0.0, "minecraft:iron_ingot", "heavycloth", List.of("t1_combat"), "t1_combat")
     );
     public static final List<ArmorSpec> T2_COMBAT = ALL.stream().filter(a -> a.set().equals("t2_combat")).toList();
     public static final List<ArmorSpec> HAZMAT = ALL.stream().filter(a -> a.set().equals("hazmat")).toList();
+    public static final List<ArmorSpec> T1_COMBAT = ALL.stream().filter(a -> a.set().equals("t1_combat")).toList();
     public static final List<String> CAMOS = T2_COMBAT.getFirst().camos();
     public static ArmorSpec forSlot(ArmorSlot slot) { return T2_COMBAT.stream().filter(a -> a.slot()==slot).findFirst().orElseThrow(); }
     public static ArmorSpec forSlot(String set, ArmorSlot slot) { return ALL.stream().filter(a -> a.set().equals(set) && a.slot()==slot).findFirst().orElseThrow(); }

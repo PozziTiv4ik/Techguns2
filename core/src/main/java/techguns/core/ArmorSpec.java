@@ -33,6 +33,7 @@ public record ArmorSpec(String id, ArmorSlot slot, float physical, float element
         return Math.clamp(armor(kind) - Math.max(penetration - toughness, 0), 0, 24) / 25.0;
     }
     public boolean bonusesActive(int damage) { return damage < durability - 1; }
+    public boolean canChangeCamo() { return camos.size() > 1; }
     public int displayedArmor(int damage) { return bonusesActive(damage) ? Math.round(physical) : 0; }
     public int specialWearLimit(int damage, int requested) { return Math.clamp(requested, 0, Math.max(0, durability - 1 - damage)); }
     public int[] repairBenchCosts(int damage) {

@@ -50,6 +50,6 @@ class HazmatTest {
         var helmet=Armors.forSlot("hazmat",ArmorSlot.HEAD); var chest=Armors.forSlot(ArmorSlot.CHEST);
         assertEquals(.316,helmet.absorption(DamageKind.PHYSICAL,0)+chest.absorption(DamageKind.PHYSICAL,0),.00001);
         assertEquals(.2,helmet.absorption(DamageKind.RADIATION,0)+chest.absorption(DamageKind.RADIATION,0),.00001);
-        assertEquals("heavycloth",chest.repairCloth()); assertEquals(6,chest.camos().size()); assertEquals(8,Armors.ALL.size());
+        assertEquals("heavycloth",chest.repairCloth()); assertEquals(6,chest.camos().size()); assertEquals(12,Armors.ALL.size());
     }
 }
