@@ -76,7 +76,7 @@ SPARSE соответствует `c:is_sparse_vegetation`. Классифика
 | ZombieSoldier | 1 | 100 | Реализован |
 | SkeletonSoldier | 1 | 100 | Реализован |
 | PsychoSteve | 1 | 3 | Зарезервирован, пока без появления |
-| Bandit | 2 | 50 | Зарезервирован, пока без появления |
+| Bandit | 2 | 50 | Реализован |
 
 Сохранены порядок бакетов/записей и исходное сравнение накопленного веса `>= roll`
 при `nextInt(total)`. Вес 0 исключает запись. При стандартных весах солдат получает
@@ -101,9 +101,9 @@ SPARSE соответствует `c:is_sparse_vegetation`. Классифика
 Общие результаты и конкретная проверенная ревизия — `docs/VERIFICATION.ru.md`.
 
 Farmer и Miner теперь заполняют исходный уровень опасности 0;
-см. `docs/RURAL_ZOMBIES.ru.md`. Остаются две Overworld-записи,
+см. `docs/RURAL_ZOMBIES.ru.md`. В Overworld остаётся PsychoSteve,
 спавнеры/структуры, иные измерения, полная фракционная система и визуальная приёмка.
-SkeletonSoldier также перенесён; следующий срез — Bandit. См. `docs/SKELETON_SOLDIER.ru.md`.
+SkeletonSoldier и Bandit также перенесены; следующий срез — бензопила для PsychoSteve. См. `docs/SKELETON_SOLDIER.ru.md`.
 
 Исходные файлы: `ZombieSoldier.java`, `GenericNPC.java`, `GenericNPCUndead.java`,
 `TGEntities.java`, `TGConfig.java`, `TGSpawnManager.java`, `TGNpcSpawnTable.java`,

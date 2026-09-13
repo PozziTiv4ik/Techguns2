@@ -78,7 +78,7 @@ Grinder получил четыре рецепта, всего их теперь
 
 SkeletonSoldier подключён к этому комплекту: обязательные шлем и ботинки
 независимо выбирают Scout либо T1 Combat. См. `docs/SKELETON_SOLDIER.ru.md`.
-Следующий срез — Bandit, также использующий T1 Scout.
+Bandit также подключён к Scout. Следующий срез — бензопила для PsychoSteve.
 Полный мод, остальные комплекты, специальные спавнеры и визуальная приёмка остаются.
 
 Источники: `TGArmors.java`, `TGArmorMaterial.java`, `GenericArmor.java`,

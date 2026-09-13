@@ -55,7 +55,7 @@ class RuralZombiePortTests(unittest.TestCase):
             values=json.loads(files[RESOURCES+f'data/minecraft/tags/entity_type/{tag}.json'])['values']
             self.assertEqual(set(values),{'techguns:cyberdemon','techguns:zombiepigmansoldier','techguns:zombiesoldier','techguns:zombiefarmer','techguns:zombieminer','techguns:skeletonsoldier'})
         table=overworld_table()
-        self.assertEqual([e['npc'] for e in table if e['implemented']],['ZombieFarmer','ZombieMiner','ZombieSoldier','SkeletonSoldier'])
+        self.assertEqual([e['npc'] for e in table if e['implemented']],['ZombieFarmer','ZombieMiner','ZombieSoldier','SkeletonSoldier','Bandit'])
         self.assertEqual([e['weight'] for e in table],[200,200,100,100,3,50])
 
     def test_original_entity_names_and_both_eggs(self):

@@ -52,10 +52,10 @@ class SkeletonPortTests(unittest.TestCase):
             source=dict(line.split('=',1) for line in (LEGACY/f'resources/assets/techguns/lang/{lang}.lang').read_text(encoding='utf-8').splitlines() if '=' in line)
             self.assertEqual(skeleton_translations(lang)['entity.techguns.skeletonsoldier'],source['entity.techguns.SkeletonSoldier.name'])
 
-    def test_danger_table_keeps_original_weights_and_two_reserved_choices(self):
+    def test_danger_table_keeps_original_weights_and_remaining_reserved_choice(self):
         entries=overworld_table()
         self.assertEqual([e['weight'] for e in entries],[200,200,100,100,3,50])
-        self.assertEqual([e['npc'] for e in entries if not e['implemented']],['PsychoSteve','Bandit'])
+        self.assertEqual([e['npc'] for e in entries if not e['implemented']],['PsychoSteve'])
         self.assertEqual(next(e['danger'] for e in entries if e['npc']=='SkeletonSoldier'),1)
 
     def test_all_six_undead_tags_are_preserved(self):

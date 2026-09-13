@@ -1,0 +1,51 @@
+{
+  "id": "bandit",
+  "source": "legacy/1.12.2/src/main/java/techguns/entities/npcs/Bandit.java",
+  "attributes": {
+    "MOVEMENT_SPEED": 0.3,
+    "MAX_HEALTH": 20.0,
+    "ATTACK_DAMAGE": 5.0,
+    "FOLLOW_RANGE": 40.0
+  },
+  "intrinsic_armor": 5.0,
+  "weapons": [
+    "pistol",
+    "ak47",
+    "sawedoff",
+    "thompson",
+    "revolver",
+    "boltaction"
+  ],
+  "weapon_roll_bound": 6,
+  "armor": "T1_SCOUT",
+  "always_equipped": [
+    "CHEST",
+    "LEGS",
+    "FEET"
+  ],
+  "helmet_chance": 0.5,
+  "equipment_camo": 0,
+  "undead": false,
+  "burns_in_daylight": false,
+  "fire_immune": false,
+  "danger_level": 2,
+  "spawn_weight": 50,
+  "source_loot_id": "entities/Bandit",
+  "loot_id": "entities/bandit",
+  "texture": "textures/entity/bandit.png",
+  "texture_size": [
+    64,
+    64
+  ],
+  "model": "ModelGenericNPC; shared modern humanoid renderer with source skin",
+  "sounds": {
+    "ambient": "minecraft:entity.villager.ambient",
+    "hurt": "minecraft:entity.villager.hurt",
+    "death": "minecraft:entity.villager.death",
+    "step": "Native block step sound"
+  },
+  "egg_colors": [
+    9411929,
+    2896151
+  ]
+}

@@ -20,7 +20,7 @@ public final class NpcSpawnConfig {
     public static final ModConfigSpec.IntValue MINER_WEIGHT = BUILDER.comment("Original ZombieMiner weight, available from danger level 0.").defineInRange("SpawnWeightZombieMiner",200,0,10000);
     public static final ModConfigSpec.IntValue SKELETON_WEIGHT = BUILDER.comment("Original SkeletonSoldier weight; available at danger level 1 or above.").defineInRange("SpawnWeightSkeletonSoldier",100,0,10000);
     public static final ModConfigSpec.IntValue PSYCHO_WEIGHT = BUILDER.comment("Reserved original weight: PsychoSteve is not ported yet.").defineInRange("SpawnWeightPsychoSteve",3,0,10000);
-    public static final ModConfigSpec.IntValue BANDIT_WEIGHT = BUILDER.comment("Reserved original weight: Bandit is not ported yet.").defineInRange("SpawnWeightBandit",50,0,10000);
+    public static final ModConfigSpec.IntValue BANDIT_WEIGHT = BUILDER.comment("Original Bandit weight; available at danger level 2 or above.").defineInRange("SpawnWeightBandit",50,0,10000);
     public static final ModConfigSpec.IntValue DISTANCE_0 = BUILDER.defineInRange("DistanceSpawnLevel0",500,0,Integer.MAX_VALUE);
     public static final ModConfigSpec.IntValue DISTANCE_1 = BUILDER.defineInRange("DistanceSpawnLevel1",1000,0,Integer.MAX_VALUE);
     public static final ModConfigSpec.IntValue DISTANCE_2 = BUILDER.defineInRange("DistanceSpawnLevel2",2500,0,Integer.MAX_VALUE);

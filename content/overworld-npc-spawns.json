@@ -54,7 +54,7 @@
       "config": "SpawnWeightBandit",
       "weight": 50,
       "danger": 2,
-      "implemented": false
+      "implemented": true
     }
   ],
   "selection": "nextInt(total); inclusive cumulative >= roll; zero-weight entries excluded",

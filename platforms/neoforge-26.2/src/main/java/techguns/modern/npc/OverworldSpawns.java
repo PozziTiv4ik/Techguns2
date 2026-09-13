@@ -84,12 +84,14 @@ public final class OverworldSpawns {
             case ZOMBIE_MINER -> new ZombieMiner(NpcContent.MINER.get(),level);
             case ZOMBIE_SOLDIER -> new ZombieSoldier(NpcContent.ZOMBIE_SOLDIER.get(),level);
             case SKELETON_SOLDIER -> new SkeletonSoldier(NpcContent.SKELETON.get(),level);
+            case BANDIT -> new Bandit(NpcContent.BANDIT.get(),level);
             default -> null;
         };
-        // PsychoSteve and Bandit remain empty; their tickets are not redistributed.
+        // PsychoSteve remains empty; its tickets are not redistributed.
         if(npc==null) return;
         if(npc instanceof RuralZombie rural) rural.equipForSpawn();
         else if(npc instanceof SkeletonSoldier skeleton) skeleton.equipForSpawn();
+        else if(npc instanceof Bandit bandit) bandit.equipForSpawn();
         else ((ZombieSoldier)npc).equipForSpawn();
         npc.snapTo(selector.getX(),selector.getY(),selector.getZ(),selector.getYRot(),0);
         npc.setYHeadRot(selector.getYRot()); level.addFreshEntity(npc);
