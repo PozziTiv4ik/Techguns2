@@ -74,7 +74,7 @@ SPARSE соответствует `c:is_sparse_vegetation`. Классифика
 | ZombieFarmer | 0 | 200 | Реализован |
 | ZombieMiner | 0 | 200 | Реализован |
 | ZombieSoldier | 1 | 100 | Реализован |
-| SkeletonSoldier | 1 | 100 | Зарезервирован, пока без появления |
+| SkeletonSoldier | 1 | 100 | Реализован |
 | PsychoSteve | 1 | 3 | Зарезервирован, пока без появления |
 | Bandit | 2 | 50 | Зарезервирован, пока без появления |
 
@@ -101,9 +101,9 @@ SPARSE соответствует `c:is_sparse_vegetation`. Классифика
 Общие результаты и конкретная проверенная ревизия — `docs/VERIFICATION.ru.md`.
 
 Farmer и Miner теперь заполняют исходный уровень опасности 0;
-см. `docs/RURAL_ZOMBIES.ru.md`. Остаются три Overworld-записи,
+см. `docs/RURAL_ZOMBIES.ru.md`. Остаются две Overworld-записи,
 спавнеры/структуры, иные измерения, полная фракционная система и визуальная приёмка.
-T1 Scout как зависимость экипировки готов; следующий срез — SkeletonSoldier.
+SkeletonSoldier также перенесён; следующий срез — Bandit. См. `docs/SKELETON_SOLDIER.ru.md`.
 
 Исходные файлы: `ZombieSoldier.java`, `GenericNPC.java`, `GenericNPCUndead.java`,
 `TGEntities.java`, `TGConfig.java`, `TGSpawnManager.java`, `TGNpcSpawnTable.java`,

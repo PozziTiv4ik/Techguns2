@@ -168,6 +168,7 @@ public final class TechgunsClient {
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.ZOMBIE_SOLDIER.get(),GenericZombieRenderer::new);
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.FARMER.get(),GenericZombieRenderer::new);
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.MINER.get(),GenericZombieRenderer::new);
+        event.registerEntityRenderer(techguns.modern.npc.NpcContent.SKELETON.get(),SkeletonSoldierRenderer::new);
         event.registerEntityRenderer(techguns.modern.npc.OverworldSpawns.SELECTOR.get(), NoopRenderer::new);
         event.registerEntityRenderer(techguns.modern.npc.NetherSpawns.SELECTOR.get(), NoopRenderer::new);
         event.registerBlockEntityRenderer(techguns.modern.machine.charging.ChargingStationContent.ENTITY.get(), ChargingStationRenderer::new);

@@ -40,7 +40,7 @@
       "config": "SpawnWeightSkeletonSoldier",
       "weight": 100,
       "danger": 1,
-      "implemented": false
+      "implemented": true
     },
     {
       "npc": "PsychoSteve",

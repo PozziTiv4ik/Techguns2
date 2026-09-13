@@ -26,7 +26,7 @@ public final class RuralZombieRules {
         return kind==Kind.FARMER && slot==ArmorSlot.CHEST || roll<=.5;
     }
     public static boolean sunIgnites(float brightness,float roll) {
-        return brightness>.5f && roll*30f<(brightness-.4f)*2f;
+        return UndeadRules.sunIgnites(brightness,roll);
     }
     private RuralZombieRules() {}
 }

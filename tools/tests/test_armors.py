@@ -50,7 +50,7 @@ class ArmorPortTests(unittest.TestCase):
     def test_entity_tags_merge_with_existing_cyberdemon(self):
         files=generate()
         for tag in ('undead','sensitive_to_smite','ignores_poison_and_regen','inverted_healing_and_harm'):
-            self.assertEqual(set(json.loads(files[RESOURCES+f'data/minecraft/tags/entity_type/{tag}.json'])['values']),{'techguns:cyberdemon','techguns:zombiepigmansoldier','techguns:zombiesoldier','techguns:zombiefarmer','techguns:zombieminer'})
+            self.assertEqual(set(json.loads(files[RESOURCES+f'data/minecraft/tags/entity_type/{tag}.json'])['values']),{'techguns:cyberdemon','techguns:zombiepigmansoldier','techguns:zombiesoldier','techguns:zombiefarmer','techguns:zombieminer','techguns:skeletonsoldier'})
         self.assertNotIn(RESOURCES+'assets/minecraft/textures/entity/piglin/zombified_piglin.png',files)
 
     def test_pigman_defaults_and_source_control_flow(self):

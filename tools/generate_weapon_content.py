@@ -19,6 +19,7 @@ from legacy_cyber import generate_cyber_content, cyber_translations
 from legacy_armors import generate_armor_content, armor_translations
 from legacy_zombie_soldier import generate_zombie_soldier_content, zombie_soldier_translations
 from legacy_rural_zombies import generate_rural_content, rural_translations
+from legacy_skeleton import generate_skeleton_content, skeleton_translations
 from legacy_repair import generate_repair_content, repair_translations
 from legacy_camo import generate_camo_content, camo_translations
 from legacy_grinder import generate_grinder_content, grinder_translations
@@ -271,6 +272,7 @@ public final class NpcWeapons {
         values.update(npc_translations(lang))
         values.update(zombie_soldier_translations(lang))
         values.update(rural_translations(lang))
+        values.update(skeleton_translations(lang))
         values['entity.techguns.laser_beam'] = 'Laser beam' if lang == 'en_us' else 'Лазерный луч'
         values['death.attack.techguns.laser'] = '%1$s was lasered by %2$s' if lang == 'en_us' else '%1$s убит лазером игрока %2$s'
         values['death.attack.techguns.laser.player'] = values['death.attack.techguns.laser']
@@ -321,7 +323,7 @@ public final class Weapons {
 '''
     output('core/src/main/java/techguns/core/Weapons.java', source)
     files.update(generate_machine_content())
-    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_npc_content(), generate_cyber_content(), generate_armor_content(), generate_repair_content(), generate_camo_content(), generate_grinder_content(), generate_zombie_soldier_content(), generate_rural_content()) for entry in domain.items()]:
+    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_npc_content(), generate_cyber_content(), generate_armor_content(), generate_repair_content(), generate_camo_content(), generate_grinder_content(), generate_zombie_soldier_content(), generate_rural_content(), generate_skeleton_content()) for entry in domain.items()]:
         if path in files:
             # Several content domains contribute to the same mining/tool and common item tags.
             if '/tags/' not in path:

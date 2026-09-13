@@ -423,6 +423,8 @@
   "item.techguns.zombiefarmer_spawn_egg": "Яйцо призыва зомби-фермера",
   "entity.techguns.zombieminer": "Зомби Шахтер",
   "item.techguns.zombieminer_spawn_egg": "Яйцо призыва зомби-шахтёра",
+  "entity.techguns.skeletonsoldier": "Скелет Солдат",
+  "item.techguns.skeletonsoldier_spawn_egg": "Яйцо призыва скелета-солдата",
   "entity.techguns.laser_beam": "Лазерный луч",
   "death.attack.techguns.laser": "%1$s убит лазером игрока %2$s",
   "death.attack.techguns.laser.player": "%1$s убит лазером игрока %2$s",

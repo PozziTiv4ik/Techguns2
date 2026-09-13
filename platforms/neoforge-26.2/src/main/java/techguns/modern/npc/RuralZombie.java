@@ -5,7 +5,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.*;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
@@ -17,7 +16,7 @@ import techguns.core.*;
 import techguns.modern.armor.*;
 
 /** Shared source behavior of the two danger-zero NPCs; custom Techguns spawner links remain pending. */
-public abstract class RuralZombie extends ArmedNpc {
+public abstract class RuralZombie extends BurningUndeadNpc {
     private final RuralZombieRules.Kind kind;
     protected RuralZombie(EntityType<? extends RuralZombie> type,Level level,RuralZombieRules.Kind kind) { super(type,level); this.kind=kind; }
     public RuralZombieRules.Kind kind() { return kind; }
@@ -43,15 +42,6 @@ public abstract class RuralZombie extends ArmedNpc {
     }
     @Override public SpawnGroupData finalizeSpawn(ServerLevelAccessor level,DifficultyInstance difficulty,EntitySpawnReason reason,SpawnGroupData data) {
         var result=super.finalizeSpawn(level,difficulty,reason,data); equipForSpawn(); setCanPickUpLoot(false); return result;
-    }
-    @Override public void aiStep() {
-        if(!level().isClientSide() && isAlive() && level().environmentAttributes().getValue(EnvironmentAttributes.MONSTERS_BURN,position())) {
-            float brightness=getLightLevelDependentMagicValue();
-            // GenericNPCUndead ignites the body regardless of headgear, without the vanilla helmet-wear stage.
-            if(brightness>.5f && RuralZombieRules.sunIgnites(brightness,random.nextFloat())
-                    && level().canSeeSky(BlockPos.containing(getX(),getEyeY(),getZ()))) igniteForSeconds(8);
-        }
-        super.aiStep();
     }
     @Override public SoundEvent getAmbientSound() { return SoundEvents.ZOMBIE_AMBIENT; }
     @Override protected SoundEvent getHurtSound(DamageSource source) { return SoundEvents.ZOMBIE_HURT; }

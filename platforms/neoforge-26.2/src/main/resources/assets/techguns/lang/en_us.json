@@ -423,6 +423,8 @@
   "item.techguns.zombiefarmer_spawn_egg": "Zombie Farmer Spawn Egg",
   "entity.techguns.zombieminer": "Zombie Miner",
   "item.techguns.zombieminer_spawn_egg": "Zombie Miner Spawn Egg",
+  "entity.techguns.skeletonsoldier": "Skeleton Soldier",
+  "item.techguns.skeletonsoldier_spawn_egg": "Skeleton Soldier Spawn Egg",
   "entity.techguns.laser_beam": "Laser beam",
   "death.attack.techguns.laser": "%1$s was lasered by %2$s",
   "death.attack.techguns.laser.player": "%1$s was lasered by %2$s",

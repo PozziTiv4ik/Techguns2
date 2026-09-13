@@ -96,4 +96,4 @@ Repair Bench чинит за железные слитки и ткань по т
 `TGEventHandler.onBreakEvent`, четыре `recipes/t1_miner_*.json` и оригинальные
 текстуры в неизменном `legacy/1.12.2/src/main`. Каталог: `content/t1-miner-armor.json`.
 Лицензия и авторство Techguns сохранены. ZombieFarmer и ZombieMiner подключены;
-T1 Scout также перенесён, следующий срез — SkeletonSoldier.
+T1 Scout и SkeletonSoldier также перенесены; следующий срез — Bandit.

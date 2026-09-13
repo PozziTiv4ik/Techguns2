@@ -44,7 +44,7 @@ final class OverworldSpawnGameTests {
                 h.assertValueEqual(selectors.getFirst().value().minCount(),1,"Original min group");
                 h.assertValueEqual(selectors.getFirst().value().maxCount(),3,"Original max group");
             } else h.assertTrue(selectors.isEmpty(),"Nether and End excluded");
-            h.assertTrue(entries.stream().noneMatch(e -> e.value().type()==NpcContent.ZOMBIE_SOLDIER.get() || e.value().type()==NpcContent.FARMER.get() || e.value().type()==NpcContent.MINER.get()),"No direct NPC entry bypasses danger or duplicates weight");
+            h.assertTrue(entries.stream().noneMatch(e -> e.value().type()==NpcContent.ZOMBIE_SOLDIER.get() || e.value().type()==NpcContent.FARMER.get() || e.value().type()==NpcContent.MINER.get() || e.value().type()==NpcContent.SKELETON.get()),"No direct NPC entry bypasses danger or duplicates weight");
         }
         h.assertValueEqual(OverworldSpawns.biomeDanger(registry.getOrThrow(Biomes.PLAINS)),0,"Plains danger");
         h.assertValueEqual(OverworldSpawns.biomeDanger(registry.getOrThrow(Biomes.TAIGA)),1,"Cold danger");
@@ -80,12 +80,15 @@ final class OverworldSpawnGameTests {
             NpcSpawnConfig.FARMER_WEIGHT.set(0); NpcSpawnConfig.MINER_WEIGHT.set(200); selector(level,pos);
             h.assertValueEqual(spawned.size(),3,"Miner ticket creates one miner"); h.assertTrue(spawned.getLast() instanceof ZombieMiner,"Correct miner replacement");
             NpcSpawnConfig.MINER_WEIGHT.set(0); NpcSpawnConfig.SKELETON_WEIGHT.set(100); selector(level,pos);
-            h.assertValueEqual(spawned.size(),3,"Unported skeleton ticket stays empty");
-            NpcSpawnConfig.SKELETON_WEIGHT.set(0); selector(level,pos); h.assertValueEqual(spawned.size(),3,"Empty table creates nothing");
+            h.assertValueEqual(spawned.size(),4,"Skeleton ticket now creates one skeleton"); h.assertTrue(spawned.getLast() instanceof SkeletonSoldier,"Correct skeleton replacement");
+            NpcSpawnConfig.DISTANCE_0.set(Integer.MAX_VALUE); selector(level,pos); h.assertValueEqual(spawned.size(),4,"Danger zero excludes skeleton"); NpcSpawnConfig.DISTANCE_0.set(0);
+            NpcSpawnConfig.SKELETON_WEIGHT.set(0); NpcSpawnConfig.PSYCHO_WEIGHT.set(3); selector(level,pos); h.assertValueEqual(spawned.size(),4,"Unported PsychoSteve remains empty");
+            NpcSpawnConfig.PSYCHO_WEIGHT.set(0); NpcSpawnConfig.BANDIT_WEIGHT.set(50); selector(level,pos); h.assertValueEqual(spawned.size(),4,"Unported Bandit remains empty");
+            NpcSpawnConfig.BANDIT_WEIGHT.set(0); selector(level,pos); h.assertValueEqual(spawned.size(),4,"Empty table creates nothing");
             NpcSpawnConfig.SOLDIER_WEIGHT.set(100); NpcSpawnConfig.OVERWORLD_WEIGHT.set(0); selector(level,pos);
-            h.assertValueEqual(spawned.size(),3,"Global zero disables replacement"); NpcSpawnConfig.OVERWORLD_WEIGHT.set(600);
+            h.assertValueEqual(spawned.size(),4,"Global zero disables replacement"); NpcSpawnConfig.OVERWORLD_WEIGHT.set(600);
             NpcSpawnConfig.BIOME_BLACKLIST.set(List.of(level.getBiome(pos).unwrapKey().orElseThrow().identifier().toString())); selector(level,pos);
-            h.assertValueEqual(spawned.size(),3,"Blacklisted biome creates nothing");
+            h.assertValueEqual(spawned.size(),4,"Blacklisted biome creates nothing");
             NpcSpawnConfig.BIOME_BLACKLIST.set(blacklist);
             var nether=level.getServer().getLevel(Level.NETHER); nether.getChunk(pos);
             h.assertTrue(selector(nether,pos).isRemoved(),"Overworld selector rejected outside its supported dimension");
@@ -158,16 +161,19 @@ final class OverworldSpawnGameTests {
                     farmers=level.getEntitiesOfClass(ZombieFarmer.class,area); miners=level.getEntitiesOfClass(ZombieMiner.class,area);
                 }
                 h.assertTrue(!farmers.isEmpty() && !miners.isEmpty(),"Native spawning produces both original danger-zero entries with default weights");
-                h.assertTrue(level.getEntitiesOfClass(ZombieSoldier.class,area).isEmpty(),"Soldier remains excluded from danger zero");
+                h.assertTrue(level.getEntitiesOfClass(ZombieSoldier.class,area).isEmpty() && level.getEntitiesOfClass(SkeletonSoldier.class,area).isEmpty(),"Both soldiers remain excluded from danger zero");
                 h.assertTrue(!farmers.getFirst().getMainHandItem().isEmpty() && !farmers.getFirst().getItemBySlot(EquipmentSlot.CHEST).isEmpty(),"Naturally spawned farmer has weapon and jacket");
                 h.assertTrue(!miners.getFirst().getMainHandItem().isEmpty() && !miners.getFirst().getItemBySlot(EquipmentSlot.HEAD).isEmpty(),"Naturally spawned miner has weapon and helmet");
             } else {
-            List<ZombieSoldier> soldiers=List.of();
-            for(int attempt=0;attempt<256 && soldiers.isEmpty();attempt++) {
+            List<ZombieSoldier> soldiers=List.of(); List<SkeletonSoldier> skeletons=List.of();
+            for(int attempt=0;attempt<256 && (soldiers.isEmpty() || skeletons.isEmpty());attempt++) {
                 NaturalSpawner.spawnCategoryForPosition(MobCategory.MONSTER,level,pos);
                 soldiers=level.getEntitiesOfClass(ZombieSoldier.class,area);
+                skeletons=level.getEntitiesOfClass(SkeletonSoldier.class,area);
             }
             h.assertTrue(!soldiers.isEmpty(),"Minecraft natural spawning reaches the original soldier ticket with reserved weights intact");
+            h.assertTrue(!skeletons.isEmpty(),"Native spawning also reaches the original skeleton ticket with unchanged weights");
+            var skeleton=skeletons.getFirst(); h.assertTrue(skeleton.armed() && !skeleton.getItemBySlot(EquipmentSlot.HEAD).isEmpty() && !skeleton.getItemBySlot(EquipmentSlot.FEET).isEmpty(),"Naturally spawned skeleton has a gun and both mandatory armor parts");
             var npc=soldiers.getFirst(); h.assertTrue(!npc.getMainHandItem().isEmpty(),"Natural spawn initializes equipment");
             var cloth=TGContent.MATERIALS.get("heavycloth").get(); long seed=1;
             while(seed<10000 && ZombieSoldierGameTests.table(h).getRandomItems(ZombieSoldierGameTests.params(h,npc,player),seed).stream().noneMatch(s -> s.is(cloth))) seed++;

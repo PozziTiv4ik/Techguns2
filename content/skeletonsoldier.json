@@ -1,0 +1,143 @@
+{
+  "id": "skeletonsoldier",
+  "source": "legacy/1.12.2/src/main/java/techguns/entities/npcs/SkeletonSoldier.java",
+  "attributes": {
+    "MOVEMENT_SPEED": 0.25,
+    "MAX_HEALTH": 25.0,
+    "ATTACK_DAMAGE": 4.0,
+    "FOLLOW_RANGE": 50.0
+  },
+  "weapons": [
+    "revolver",
+    "thompson",
+    "handcannon"
+  ],
+  "weapon_roll_bound": 3,
+  "unreachable_default": "minecraft:stone_shovel",
+  "always_equipped": [
+    "HEAD",
+    "FEET"
+  ],
+  "empty_slots": [
+    "CHEST",
+    "LEGS"
+  ],
+  "armor_choices": [
+    "T1_SCOUT",
+    "T1_COMBAT"
+  ],
+  "independent_scout_chance": 0.5,
+  "equipment_camo": 0,
+  "intrinsic_armor": 0,
+  "height": 1.95,
+  "danger_level": 1,
+  "spawn_weight": 100,
+  "burns_in_daylight": true,
+  "helmet_prevents_sun_ignition": false,
+  "custom_techguns_spawner_exemption": "Pending with the custom spawner/link system",
+  "texture": "minecraft:textures/entity/skeleton/skeleton.png",
+  "texture_size": [
+    64,
+    32
+  ],
+  "body_inflation": 0.0625,
+  "armor_inflations": [
+    0.5,
+    1.0
+  ],
+  "limbs": [
+    {
+      "name": "right_arm",
+      "uv": [
+        40,
+        16
+      ],
+      "box": [
+        -1.0,
+        -2.0,
+        -1.0,
+        2.0,
+        12.0,
+        2.0
+      ],
+      "pivot": [
+        -5.0,
+        2.0,
+        0.0
+      ],
+      "mirror": false
+    },
+    {
+      "name": "left_arm",
+      "uv": [
+        40,
+        16
+      ],
+      "box": [
+        -1.0,
+        -2.0,
+        -1.0,
+        2.0,
+        12.0,
+        2.0
+      ],
+      "pivot": [
+        5.0,
+        2.0,
+        0.0
+      ],
+      "mirror": true
+    },
+    {
+      "name": "right_leg",
+      "uv": [
+        0,
+        16
+      ],
+      "box": [
+        -1.0,
+        0.0,
+        -1.0,
+        2.0,
+        12.0,
+        2.0
+      ],
+      "pivot": [
+        -2.0,
+        12.0,
+        0.0
+      ],
+      "mirror": false
+    },
+    {
+      "name": "left_leg",
+      "uv": [
+        0,
+        16
+      ],
+      "box": [
+        -1.0,
+        0.0,
+        -1.0,
+        2.0,
+        12.0,
+        2.0
+      ],
+      "pivot": [
+        2.0,
+        12.0,
+        0.0
+      ],
+      "mirror": true
+    }
+  ],
+  "held_item_offsets": [
+    -0.06,
+    -0.06
+  ],
+  "offset_scope": "Held-item render only; mirror X in the left hand. Projectile origin is unchanged.",
+  "egg_colors": [
+    4210752,
+    15790320
+  ]
+}
