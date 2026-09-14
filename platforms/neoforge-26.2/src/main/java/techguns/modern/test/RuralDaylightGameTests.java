@@ -29,7 +29,10 @@ final class RuralDaylightGameTests {
         while(seed<10000 && !RuralZombieRules.sunIgnites(1,RandomSource.create(seed).nextFloat())) seed++;
         h.assertTrue(seed<10000,"Passing source sunlight draw found");
         try {
-            h.setTime(6000); OverworldSpawnGameTests.awaitLighting(h,pos,pos);
+            // Reproduce a test starting with last tick's night brightness. GameTestHelper.setTime
+            // changes the clock only; Level normally refreshes skyDarken on the next world tick.
+            time(h,18000); h.assertTrue(level.getSkyDarken()>0,"Night brightness cache prepared");
+            time(h,6000); OverworldSpawnGameTests.awaitLighting(h,pos,pos);
             for(int variant=0;variant<2;variant++) {
                 ArmedNpc npc;
                 if(mode==Mode.BANDIT) {
@@ -47,14 +50,15 @@ final class RuralDaylightGameTests {
                 if(mode==Mode.BANDIT) h.assertTrue(!npc.isOnFire(),"Living bandit does not ignite in daylight with or without a mask");
                 else h.assertValueEqual(npc.getRemainingFireTicks(),160,"Source eight-second body ignition");
                 h.assertValueEqual(npc.getItemBySlot(EquipmentSlot.HEAD).getDamageValue(),0,"Sunlight does not wear headgear");
-                npc.clearFire(); h.setTime(18000); npc.getRandom().setSeed(seed); npc.aiStep(); h.assertTrue(!npc.isOnFire(),"Night prevents ignition"); h.setTime(6000);
+                npc.clearFire(); time(h,18000); npc.getRandom().setSeed(seed); npc.aiStep(); h.assertTrue(!npc.isOnFire(),"Night prevents ignition"); time(h,6000);
                 var roof=pos.above(3); level.setBlock(roof,Blocks.STONE.defaultBlockState(),3); OverworldSpawnGameTests.awaitLighting(h,roof,roof);
                 npc.getRandom().setSeed(seed); npc.aiStep(); h.assertTrue(!npc.isOnFire(),"Opaque shelter prevents ignition");
                 level.setBlock(roof,Blocks.AIR.defaultBlockState(),3); OverworldSpawnGameTests.awaitLighting(h,roof,roof);
                 npc.getRandom().setSeed(seed); npc.aiStep(); h.assertValueEqual(npc.isOnFire(),mode!=Mode.BANDIT,"Removing shelter preserves each NPC's source sunlight behavior"); npc.discard();
             }
-        } finally { h.setTime(savedTime); npcs.forEach(Entity::discard); level.setBlock(pos.above(3),Blocks.AIR.defaultBlockState(),3); }
+        } finally { time(h,savedTime); npcs.forEach(Entity::discard); level.setBlock(pos.above(3),Blocks.AIR.defaultBlockState(),3); }
         h.succeed();
     }
+    private static void time(GameTestHelper h,long ticks) { h.setTime(ticks); h.getLevel().updateSkyBrightness(); }
     private RuralDaylightGameTests() {}
 }
