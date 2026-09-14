@@ -101,6 +101,8 @@
     "111": "techguns:rifleroundsstack_incendiary",
     "117": "techguns:rocket_nuke",
     "118": "techguns:tacticalnukewarhead",
+    "123": "techguns:chainsawblades_obsidian",
+    "124": "techguns:chainsawblades_carbon",
     "125": "techguns:redstone_battery",
     "126": "techguns:redstone_battery_empty",
     "127": "techguns:gaussrifleslugs",
@@ -169,6 +171,22 @@
     {
       "id": "techguns:boltaction",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/boltaction.json"
+    },
+    {
+      "id": "techguns:chainsaw",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/chainsaw.json"
+    },
+    {
+      "id": "techguns:chainsaw_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/chainsaw_alt.json"
+    },
+    {
+      "id": "techguns:chainsaw_upgrade_item.techguns.itemshared",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/chainsaw_upgrade_item.techguns.itemshared.json"
+    },
+    {
+      "id": "techguns:chainsaw_upgrade_item.techguns.itemshared_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/chainsaw_upgrade_item.techguns.itemshared_alt.json"
     },
     {
       "id": "techguns:combatshotgun",
@@ -245,6 +263,14 @@
     {
       "id": "techguns:pistolmagazine",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_11_pistolmagazine.json"
+    },
+    {
+      "id": "techguns:chainsawblades_obsidian",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_123_chainsawblades_obsidian.json"
+    },
+    {
+      "id": "techguns:chainsawblades_carbon",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_124_chainsawblades_carbon.json"
     },
     {
       "id": "techguns:redstone_battery",

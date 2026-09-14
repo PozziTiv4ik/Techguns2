@@ -198,8 +198,25 @@ def shape_vertices(shape):
             for corner in corners]
 
 
+def wrapped_quads(vertices, uvs):
+    """Split legacy repeating texture faces at integer UV seams before atlas sampling."""
+    u0,v0=uvs[0]; u1,v1=uvs[2]
+    def cuts(a,b):
+        if a==b: return [0,1]
+        return sorted({0,1} | {(i-a)/(b-a) for i in range(math.floor(min(a,b))+1,math.ceil(max(a,b))) if 0<(i-a)/(b-a)<1})
+    ss,ts=cuts(u0,u1),cuts(v0,v1)
+    for s0,s1 in zip(ss,ss[1:]):
+        for t0,t1 in zip(ts,ts[1:]):
+            ou=math.floor(u0+(u1-u0)*(s0+s1)/2); ov=math.floor(v0+(v1-v0)*(t0+t1)/2)
+            points=[]; tex=[]
+            for s,t in ((s0,t0),(s1,t0),(s1,t1),(s0,t1)):
+                points.append([(1-t)*((1-s)*vertices[0][i]+s*vertices[1][i])+t*((1-s)*vertices[3][i]+s*vertices[2][i]) for i in range(3)])
+                tex.append((u0+(u1-u0)*s-ou,v0+(v1-v0)*t-ov))
+            yield points,tex
+
+
 def convert_mesh(source, class_name, identifier, texture, forward, gui_hidden=(), constructor_values=None,
-                 coordinate_transform=None, reverse_winding=True, model_folder='item', skip_parts=()):
+                 coordinate_transform=None, reverse_winding=True, model_folder='item', skip_parts=(), repeat_texture=False):
     width, height, shapes = extract_shapes(source, class_name, constructor_values)
     shapes = [shape for shape in shapes if shape['name'] not in skip_parts]
     geometry = {shape['name']: shape_vertices(shape) for shape in shapes}
@@ -227,12 +244,13 @@ def convert_mesh(source, class_name, identifier, texture, forward, gui_hidden=()
             e2 = [vertices[2][i]-vertices[0][i] for i in range(3)]
             cross = [e1[1]*e2[2]-e1[2]*e2[1], e1[2]*e2[0]-e1[0]*e2[2], e1[0]*e2[1]-e1[1]*e2[0]]
             if sum(n*n for n in cross) < 1e-18: continue
-            for vertex in vertices: lines.append('v ' + ' '.join(f'{value:.9f}' for value in vertex))
-            for uv in uvs: lines.append('vt ' + ' '.join(f'{value:.9f}' for value in uv))
-            # ModelBox swaps the X endpoints and flips every face for mirror=true.
-            flip = reverse_winding != shape['mirror']
-            lines.append('f ' + ' '.join(f'{index+i}/{index+i}' for i in ((3,2,1,0) if flip else (0,1,2,3))))
-            index += 4
+            for positions,coords in (wrapped_quads(vertices,uvs) if repeat_texture else [(vertices,uvs)]):
+                for vertex in positions: lines.append('v ' + ' '.join(f'{value:.9f}' for value in vertex))
+                for uv in coords: lines.append('vt ' + ' '.join(f'{value:.9f}' for value in uv))
+                # ModelBox swaps the X endpoints and flips every face for mirror=true.
+                flip = reverse_winding != shape['mirror']
+                lines.append('f ' + ' '.join(f'{index+i}/{index+i}' for i in ((3,2,1,0) if flip else (0,1,2,3))))
+                index += 4
     model = {'loader': 'neoforge:obj', 'model': f'techguns:models/{model_folder}/{identifier}.obj',
              'automatic_culling': False, 'flip_v': False, 'emissive_ambient': False,
              'textures': {'gun': texture, 'particle': texture}, 'display': display_transforms(forward)}

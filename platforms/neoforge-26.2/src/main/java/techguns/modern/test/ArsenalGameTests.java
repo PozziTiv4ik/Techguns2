@@ -61,6 +61,9 @@ final class ArsenalGameTests {
             var beams = helper.getLevel().getEntitiesOfClass(techguns.modern.LaserBeam.class, player.getBoundingBox().inflate(3), b -> b.getOwner() == player);
             helper.assertValueEqual(beams.size(), 1, "One beam per laser shot");
             helper.assertValueEqual(beams.getFirst().weapon().id(), gun.id(), "Correct laser parameters");
+        } else if (gun.projectile() == techguns.core.ProjectileKind.CHAINSAW) {
+            var attacks=helper.getLevel().getEntitiesOfClass(techguns.modern.ChainsawAttack.class,player.getBoundingBox().inflate(3),a -> a.getOwner()==player);
+            helper.assertValueEqual(attacks.size(),1,"One physical chain attack"); attacks.forEach(techguns.modern.ChainsawAttack::discard);
         } else if (gun.projectile() == techguns.core.ProjectileKind.NETHER_BLASTER) {
             var blasts = helper.getLevel().getEntitiesOfClass(techguns.modern.NetherBlasterProjectile.class, player.getBoundingBox().inflate(3), b -> b.getOwner() == player);
             helper.assertValueEqual(blasts.size(), 1, "One Nether Blaster charge");

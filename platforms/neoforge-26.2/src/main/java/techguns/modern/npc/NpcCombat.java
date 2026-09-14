@@ -40,6 +40,10 @@ public final class NpcCombat {
                     var blast = new NetherBlasterProjectile(TGContent.NETHER_BLAST.get(), level); blast.configure(gun); blast.npcDamage(damage);
                     blast.setOwner(npc); blast.shootLegacy(npc, spread, false); projectile = blast;
                 }
+                case CHAINSAW -> {
+                    var attack = new ChainsawAttack(TGContent.CHAINSAW_ATTACK.get(),level); attack.configure(gun); attack.npcDamage(damage);
+                    attack.setOwner(npc); attack.shootLegacy(npc,spread); projectile=attack;
+                }
                 default -> throw new IllegalStateException("Unported NPC projectile family");
             }
             projectile.setPos(projectile.position().add(projectile.getDeltaMovement().scale(ai.forwardOffset() / gun.stats().projectileSpeed())));

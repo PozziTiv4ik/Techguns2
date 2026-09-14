@@ -53,7 +53,7 @@ def convert_recipe(legacy, shared, weapons):
         return item(value)
 
     kind = legacy['type'].replace('forge:ore_', 'minecraft:crafting_')
-    if kind not in STANDARD | {'techguns:copy_nbt', 'techguns:ammo_change_crafting'}: raise ValueError(f'Unsupported recipe: {kind}')
+    if kind not in STANDARD | {'techguns:copy_nbt', 'techguns:ammo_change_crafting', 'techguns:miningtool_upgrade'}: raise ValueError(f'Unsupported recipe: {kind}')
     result = {'id': item(legacy['result']), 'count': legacy['result'].get('count', 1)}
     gun = weapons.get(result['id'].removeprefix('techguns:'))
     if gun:
@@ -89,6 +89,9 @@ def plan_crafting(weapon_list):
         for variant in ('default', 'nuke', 'high_velocity'):
             name = 'rocketlauncher_ammo_' + variant
             selected[name] = source_recipes[name]
+    if 'chainsaw' in weapons:
+        selected.update({name: recipe for name, recipe in source_recipes.items()
+                         if name.startswith('chainsaw') and recipe['type'] == 'techguns:miningtool_upgrade'})
     selected['basicmachine_0_ammo_press'] = source_recipes['basicmachine_0_ammo_press']
     for name in ('basicmachine_1_metal_press', 'basicmachine_1_metal_press_alt'): selected[name] = source_recipes[name]
     selected['simplemachine_11_blast_furnace'] = source_recipes['simplemachine_11_blast_furnace']

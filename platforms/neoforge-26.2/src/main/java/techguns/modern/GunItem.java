@@ -8,7 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import techguns.core.Magazine;
 import techguns.core.WeaponDefinition;
 
-public final class GunItem extends Item {
+public class GunItem extends Item {
     private final WeaponDefinition definition;
     public GunItem(Properties properties, WeaponDefinition definition) { super(properties); this.definition = definition; }
     public WeaponDefinition definition() { return definition; }
@@ -26,6 +26,12 @@ public final class GunItem extends Item {
         boolean aiming = AimSessions.active(player, stack);
         double accuracyMultiplier = aiming ? gun.aim().accuracyMultiplier() : 1;
         for (int pellet = 0; pellet < gun.projectileCount(); pellet++) {
+            if (gun.projectile() == techguns.core.ProjectileKind.CHAINSAW) {
+                var attack = new ChainsawAttack(TGContent.CHAINSAW_ATTACK.get(), server);
+                attack.configure(gun); attack.setOwner(player); attack.shootLegacy(player, gun.stats().spread());
+                if (!server.addFreshEntity(attack)) return false;
+                continue;
+            }
             if (gun.projectile() == techguns.core.ProjectileKind.NETHER_BLASTER) {
                 var blast = new NetherBlasterProjectile(TGContent.NETHER_BLAST.get(), server);
                 blast.configure(gun); blast.setOwner(player);
@@ -59,9 +65,11 @@ public final class GunItem extends Item {
             // cancellation suppresses that pellet but does not refund an already fired shot.
             if (!server.addFreshEntity(bullet) && pellet == 0) return false;
         }
-        stack.set(TGContent.ROUNDS.get(), Magazine.afterShot(gun.stats(), rounds(stack)));
+        if (!(item instanceof ChainsawItem) || !player.getAbilities().instabuild)
+            stack.set(TGContent.ROUNDS.get(), Magazine.afterShot(gun.stats(), rounds(stack)));
         player.getCooldowns().addCooldown(stack, gun.stats().fireDelay());
-        server.playSound(null, player.getX(), player.getY(), player.getZ(),
+        if (item instanceof ChainsawItem) ChainsawItem.playChain(server,player);
+        else server.playSound(null, player.getX(), player.getY(), player.getZ(),
                 TGContent.SOUND_EVENTS.get(gun.fireSound()).get(), SoundSource.PLAYERS, 2, 1);
         return true;
     }

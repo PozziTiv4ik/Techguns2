@@ -1,0 +1,8 @@
+newmtl gun
+Ka 0 0 0
+Kd 1 1 1
+map_Kd #gun
+newmtl blade
+Ka 0 0 0
+Kd 0.4 0.4 0.4
+map_Kd #gun

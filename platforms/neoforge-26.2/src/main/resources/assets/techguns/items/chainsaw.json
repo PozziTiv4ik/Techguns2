@@ -1,0 +1,24 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "techguns:mining_head",
+    "level": 2,
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "techguns:item/chainsaw_carbon"
+    },
+    "on_false": {
+      "type": "minecraft:condition",
+      "property": "techguns:mining_head",
+      "level": 1,
+      "on_true": {
+        "type": "minecraft:model",
+        "model": "techguns:item/chainsaw_obsidian"
+      },
+      "on_false": {
+        "type": "minecraft:model",
+        "model": "techguns:item/chainsaw"
+      }
+    }
+  }
+}

@@ -21,6 +21,7 @@ from legacy_zombie_soldier import generate_zombie_soldier_content, zombie_soldie
 from legacy_rural_zombies import generate_rural_content, rural_translations
 from legacy_skeleton import generate_skeleton_content, skeleton_translations
 from legacy_bandit import generate_bandit_content, bandit_translations
+from legacy_chainsaw import generate_chainsaw_content, chainsaw_item_model, chainsaw_translations
 from legacy_repair import generate_repair_content, repair_translations
 from legacy_camo import generate_camo_content, camo_translations
 from legacy_grinder import generate_grinder_content, grinder_translations
@@ -39,12 +40,12 @@ def parse_weapons():
     ammo_source = strip_comments((LEGACY / 'java/techguns/items/guns/ammo/AmmoTypes.java').read_text())
     item_source = strip_comments((LEGACY / 'java/techguns/TGItems.java').read_text())
     item_ids = dict(re.findall(r'(\w+)\s*=\s*SHARED_ITEM\.addsharedVariant\("([^"]+)"', item_source))
-    selectors = dict(re.findall(r'(\w+)\s*=\s*new ProjectileSelector(?:<[^;]+?>)?\(AmmoTypes\.(\w+)', source))
-    projectile_classes = dict(re.findall(r'(\w+)\s*=\s*new ProjectileSelector<([\w]+)>\(', source))
+    selectors = dict(re.findall(r'(\w+)\s*=\s*new (?:Charged)?ProjectileSelector(?:<[^;]+?>)?\(AmmoTypes\.(\w+)', source))
+    projectile_classes = dict(re.findall(r'(\w+)\s*=\s*new (?:Charged)?ProjectileSelector<([\w]+)>\(', source))
     projectile_classes.update(dict(re.findall(r'(\w+)\s*=\s*new ProjectileSelector\(AmmoTypes\.\w+,\s*new (\w+)\.Factory\(', source)))
     render_source = strip_comments((LEGACY / 'java/techguns/client/ClientProxy.java').read_text())
     renderers = {identifier: (renderer, model) for identifier, renderer, model in re.findall(
-        r'registerItemRenderer\(TGuns\.(\w+),\s*new (RenderGunBase90|RenderGunBase|RenderRocketLauncher)\(new (\w+)\(', render_source)}
+        r'registerItemRenderer\(TGuns\.(\w+),\s*new (RenderGunBase90|RenderGunBase|RenderRocketLauncher|RenderGunChainsaw)\(new (\w+)\(', render_source)}
     sounds = dict(re.findall(r'(\w+)\s*=\s*createSoundEvent\("([^"]+)"\)',
                             strip_comments((LEGACY / 'java/techguns/TGSounds.java').read_text())))
     # 1.12 ResourceLocation normalizes paths to lowercase; 26.2 rejects uppercase paths.
@@ -71,7 +72,7 @@ def parse_weapons():
 
     result = []
     for identifier, model in SELECTION.items():
-        match = re.search(r'\b' + identifier + r'\s*=\s*new GenericGun\(', source)
+        match = re.search(r'\b' + identifier + r'\s*=\s*new ' + ('Chainsaw' if identifier == 'chainsaw' else 'GenericGun') + r'\(', source)
         if not match: raise ValueError(f'No GenericGun definition: {identifier}')
         statement = source[match.end():source.index(';', match.end())]
         depth, end, quoted = 1, 0, False
@@ -83,7 +84,7 @@ def parse_weapons():
                 if char == ')': depth -= 1
             end += 1
         args = arguments(statement[:end-1])
-        if len(args) != 11: raise ValueError(f'Unexpected gun constructor: {identifier}')
+        if len(args) != (13 if identifier == 'chainsaw' else 11): raise ValueError(f'Unexpected gun constructor: {identifier}')
         calls = {}
         for name, values in re.findall(r'\.([\w]+)\(([^()]*)\)', statement[end:]):
             calls[name] = arguments(values)
@@ -96,7 +97,7 @@ def parse_weapons():
         projectile_class = inline_projectile[1] if inline_projectile else projectile_classes[args[1]]
         projectile = {'GenericProjectile': 'ballistic', 'StoneBulletProjectile': 'ballistic',
                       'LaserProjectile': 'laser', 'RocketProjectile': 'rocket',
-                      'CyberdemonBlasterProjectile': 'nether_blaster'}.get(projectile_class)
+                      'CyberdemonBlasterProjectile': 'nether_blaster', 'ChainsawProjectile': 'chainsaw'}.get(projectile_class)
         if projectile is None: raise ValueError(f'Projectile factory not ported: {projectile_class}')
         lifetime = int(num(args[9]))
         if projectile == 'laser':
@@ -123,7 +124,7 @@ def parse_weapons():
             'ammo': {'item': ammo_item, 'empty_item': empty, 'loose_item': loose,
                      'bundles_per_magazine': bundles, 'individual': int(num(calls.get('setAmmoCount', ['1'])[0])) > 1},
             'fire_sound': sounds[args[7].split('.')[-1]], 'reload_sound': sounds[args[8].split('.')[-1]],
-            'model': model, 'texture': texture, 'forward_axis': '+x' if renderer in ('RenderGunBase90', 'RenderRocketLauncher') else '-z',
+            'model': model, 'texture': texture, 'forward_axis': '+x' if renderer in ('RenderGunBase90', 'RenderRocketLauncher', 'RenderGunChainsaw') else '-z',
             'source': 'legacy/1.12.2/src/main/java/techguns/TGuns.java'})
     return result
 
@@ -161,6 +162,7 @@ public final class NpcWeapons {
     data('content/laser-weapons.json', [gun for gun in weapons if gun['projectile'] == 'laser'])
     data('content/rocket-weapons.json', [gun for gun in weapons if gun['projectile'] == 'rocket'])
     data('content/nether-weapons.json', [gun for gun in weapons if gun['projectile'] == 'nether_blaster'])
+    data('content/chainsaw-weapons.json', [gun for gun in weapons if gun['projectile'] == 'chainsaw'])
     definitions = []
     ammo_items = set(crafting['extra_ammo'])
     sounds_data = json.loads(resolve_asset('sounds.json').read_text())
@@ -189,7 +191,11 @@ public final class NpcWeapons {
         _, _, shapes = extract_shapes(source, gun['model'])
         gui_hidden = GUI_HIDDEN_PARTS.get(identifier, ())
         mesh = gun['projectile'] == 'rocket' or gui_hidden or any(s['inflate'] != 0 or s['render_scale'] != [1, 1, 1] or s['mirror'] for s in shapes)
-        if mesh:
+        if identifier == 'chainsaw':
+            model, obj, material = convert_mesh(source, gun['model'], identifier, f'techguns:item/{identifier}', gun['forward_axis'], skip_parts=('blade2',), repeat_texture=True)
+            output(RESOURCES / f'assets/techguns/models/item/{identifier}.obj', obj)
+            output(RESOURCES / f'assets/techguns/models/item/{identifier}.mtl', material)
+        elif mesh:
             model, obj, material = convert_mesh(source, gun['model'], identifier, f'techguns:item/{identifier}', gun['forward_axis'], gui_hidden)
             output(RESOURCES / f'assets/techguns/models/item/{identifier}.obj', obj)
             output(RESOURCES / f'assets/techguns/models/item/{identifier}.mtl', material)
@@ -220,6 +226,7 @@ public final class NpcWeapons {
     for identifier in list(SELECTION) + sorted(ammo_items | materials):
         model = {'type': 'minecraft:model', 'model': f'techguns:item/{identifier}'}
         if identifier == 'rocketlauncher': model = rocket_item_model()
+        if identifier == 'chainsaw': model = chainsaw_item_model()
         if identifier in GUI_HIDDEN_PARTS:
             model = {'type': 'minecraft:select', 'property': 'minecraft:display_context', 'fallback': model,
                      'cases': [{'when': ['gui'], 'model': {'type': 'minecraft:model', 'model': f'techguns:item/{identifier}_gui'}}]}
@@ -230,6 +237,8 @@ public final class NpcWeapons {
     for name in ('machines.ammopresswork1', 'machines.ammopresswork2', 'machines.metalpresswork', 'machines.chemlabwork', 'machines.rc_heatraywork', 'machines.rc_beep', 'machines.rc_warning', 'effects.geiger.low', 'effects.geiger.high', 'machines.fabricatorwork', 'machines.chargingstationwork', 'machines.grinder.start', 'machines.grinder.work', 'effects.nukeexplosion'):
         selected_sounds[name] = {'sounds': sounds_data[name]['sounds']}
     for name in NPC_SOUNDS: selected_sounds[name] = {'sounds':sounds_data[name]['sounds']}
+    for name in ('guns.chainsawhit', 'guns.chainsawloopstart', 'guns.powerhammerimpactground'):
+        selected_sounds[name] = {'sounds':sounds_data[name]['sounds']}
     for sound, value in selected_sounds.items():
         subtitle = f'subtitles.techguns.{sound}'
         value['subtitle'] = subtitle
@@ -275,6 +284,7 @@ public final class NpcWeapons {
         values.update(rural_translations(lang))
         values.update(skeleton_translations(lang))
         values.update(bandit_translations(lang))
+        values.update(chainsaw_translations(lang))
         values['entity.techguns.laser_beam'] = 'Laser beam' if lang == 'en_us' else 'Лазерный луч'
         values['death.attack.techguns.laser'] = '%1$s was lasered by %2$s' if lang == 'en_us' else '%1$s убит лазером игрока %2$s'
         values['death.attack.techguns.laser.player'] = values['death.attack.techguns.laser']
@@ -325,7 +335,7 @@ public final class Weapons {
 '''
     output('core/src/main/java/techguns/core/Weapons.java', source)
     files.update(generate_machine_content())
-    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_npc_content(), generate_cyber_content(), generate_armor_content(), generate_repair_content(), generate_camo_content(), generate_grinder_content(), generate_zombie_soldier_content(), generate_rural_content(), generate_skeleton_content(), generate_bandit_content()) for entry in domain.items()]:
+    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_npc_content(), generate_cyber_content(), generate_armor_content(), generate_repair_content(), generate_camo_content(), generate_grinder_content(), generate_zombie_soldier_content(), generate_rural_content(), generate_skeleton_content(), generate_bandit_content(), generate_chainsaw_content()) for entry in domain.items()]:
         if path in files:
             # Several content domains contribute to the same mining/tool and common item tags.
             if '/tags/' not in path:

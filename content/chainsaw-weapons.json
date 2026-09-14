@@ -1,0 +1,45 @@
+[
+  {
+    "id": "chainsaw",
+    "capacity": 300,
+    "fire_delay": 3,
+    "reload_ticks": 45,
+    "damage": 10.0,
+    "minimum_damage": 10.0,
+    "drop_start": 2.0,
+    "drop_end": 2.0,
+    "speed": 2.0,
+    "lifetime": 2,
+    "projectile": "chainsaw",
+    "npc_ai": {
+      "range": 3.0,
+      "interval": 10,
+      "burst": 0,
+      "shot_delay": 0,
+      "forward_offset": 0.0
+    },
+    "accuracy": 0.0,
+    "automatic": true,
+    "extra_pellets": 0,
+    "pellet_spread": 0.0,
+    "gravity": 0.0,
+    "penetration": 1.0,
+    "zoom": 1.0,
+    "zoom_toggle": false,
+    "zoom_accuracy": 1.0,
+    "zoom_centered": false,
+    "ammo": {
+      "item": "fueltank",
+      "empty_item": "fueltankempty",
+      "loose_item": "",
+      "bundles_per_magazine": 0,
+      "individual": false
+    },
+    "fire_sound": "guns.chainsawloop",
+    "reload_sound": "guns.powerhammerreload",
+    "model": "ModelChainsaw",
+    "texture": "textures/guns/chainsaw",
+    "forward_axis": "+x",
+    "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java"
+  }
+]

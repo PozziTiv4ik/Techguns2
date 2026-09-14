@@ -30,6 +30,8 @@ public final class TGContent {
     public static final DeferredRegister.DataComponents COMPONENTS = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, Techguns.MOD_ID);
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ROUNDS = COMPONENTS.registerComponentType(
             "rounds", builder -> builder.persistent(Codec.intRange(0, 10000)).networkSynchronized(ByteBufCodecs.VAR_INT).ignoreSwapAnimation());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> MINING_HEAD = COMPONENTS.registerComponentType(
+            "mining_head", builder -> builder.persistent(Codec.intRange(0, 2)).networkSynchronized(ByteBufCodecs.VAR_INT));
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> AIMING = COMPONENTS.registerComponentType(
             "aiming", builder -> builder.networkSynchronized(ByteBufCodecs.BOOL).ignoreSwapAnimation());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> RELOAD_TICKS = COMPONENTS.registerComponentType(
@@ -61,6 +63,12 @@ public final class TGContent {
             EntityType.Builder.<techguns.modern.radiation.RadiationZone>of(techguns.modern.radiation.RadiationZone::new, MobCategory.MISC).sized(.1f, .1f).clientTrackingRange(0).updateInterval(Integer.MAX_VALUE)
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, id("radiation_zone"))));
     public static final DeferredHolder<SoundEvent, SoundEvent> NUKE_EXPLOSION = SOUNDS.register("effects.nukeexplosion", () -> SoundEvent.createVariableRangeEvent(id("effects.nukeexplosion")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> CHAINSAW_HIT = SOUNDS.register("guns.chainsawhit", () -> SoundEvent.createVariableRangeEvent(id("guns.chainsawhit")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> CHAINSAW_START = SOUNDS.register("guns.chainsawloopstart", () -> SoundEvent.createVariableRangeEvent(id("guns.chainsawloopstart")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> CHAINSAW_IMPACT = SOUNDS.register("guns.powerhammerimpactground", () -> SoundEvent.createVariableRangeEvent(id("guns.powerhammerimpactground")));
+    public static final DeferredHolder<EntityType<?>, EntityType<ChainsawAttack>> CHAINSAW_ATTACK = ENTITIES.register("chainsaw_attack", () ->
+            EntityType.Builder.<ChainsawAttack>of(ChainsawAttack::new, MobCategory.MISC).sized(.25f,.25f).clientTrackingRange(5).updateInterval(1)
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE,id("chainsaw_attack"))));
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Techguns.MOD_ID);
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TAB = TABS.register("techguns", () ->
             CreativeModeTab.builder().title(Component.translatable("itemGroup.techguns")).icon(REVOLVER::toStack)
@@ -102,7 +110,7 @@ public final class TGContent {
 
     private static Map<String, DeferredItem<GunItem>> registerGuns() {
         Map<String, DeferredItem<GunItem>> items = new LinkedHashMap<>();
-        for (WeaponDefinition gun : Weapons.ALL) items.put(gun.id(), ITEMS.registerItem(gun.id(), props -> new GunItem(props, gun),
+        for (WeaponDefinition gun : Weapons.ALL) items.put(gun.id(), ITEMS.registerItem(gun.id(), props -> gun.projectile()==techguns.core.ProjectileKind.CHAINSAW ? new ChainsawItem(props,gun) : new GunItem(props, gun),
                 props -> props.stacksTo(1).component(ROUNDS.get(), 0).component(DataComponents.USE_COOLDOWN,
                         new UseCooldown(gun.stats().fireDelay() / 20f, Optional.of(id("firearms"))))));
         return Collections.unmodifiableMap(items);

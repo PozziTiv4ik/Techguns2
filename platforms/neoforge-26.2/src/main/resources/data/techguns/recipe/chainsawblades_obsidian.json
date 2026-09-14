@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:chainsawblades_obsidian",
+    "count": 1
+  },
+  "pattern": [
+    " pm",
+    "m  ",
+    " pm"
+  ],
+  "key": {
+    "p": "#c:plates/steel",
+    "m": "techguns:mechanicalpartsobsidiansteel"
+  }
+}

@@ -30,7 +30,8 @@ def check_item_model(definition):
         for case in definition['cases']: check_item_model(case['model'])
     elif definition['type'] == 'minecraft:composite':
         for model in definition['models']: check_item_model(model)
-    elif definition['type'] == 'minecraft:condition' and definition['property'] == 'techguns:rocket_loaded':
+    elif definition['type'] == 'minecraft:condition' and definition['property'] in ('techguns:rocket_loaded', 'techguns:mining_head'):
+        if definition['property']=='techguns:mining_head' and definition.get('level') not in (0,1,2): raise ValueError('Invalid mining head model level')
         check_item_model(definition['on_true']); check_item_model(definition['on_false'])
     elif definition['type'] == 'minecraft:empty': pass
     elif definition['type'] == 'neoforge:fluid_container':

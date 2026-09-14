@@ -52,9 +52,10 @@ class ModelPortTests(unittest.TestCase):
         for identifier, class_name in SELECTION.items():
             source = (LEGACY / f'java/techguns/client/models/guns/{class_name}.java').read_text()
             _, _, shapes = extract_shapes(source, class_name)
-            if any(s['inflate'] != 0 or s['render_scale'] != [1,1,1] or s['mirror'] for s in shapes) or identifier == 'm4_infiltrator':
-                _, mesh, _ = convert_mesh(source, class_name, identifier, 'techguns:item/'+identifier, '-z')
-                self.assertEqual(mesh.count('\no '), len(shapes), identifier)
+            if any(s['inflate'] != 0 or s['render_scale'] != [1,1,1] or s['mirror'] for s in shapes) or identifier in ('m4_infiltrator','chainsaw'):
+                _, mesh, _ = convert_mesh(source, class_name, identifier, 'techguns:item/'+identifier, '-z',
+                                          skip_parts=('blade2',) if identifier=='chainsaw' else (),repeat_texture=identifier=='chainsaw')
+                self.assertEqual(mesh.count('\no '), len(shapes)-(1 if identifier=='chainsaw' else 0), identifier)
                 continue
             model = convert_model(source, class_name, f'techguns:item/{identifier}')
             self.assertEqual(len(model['elements']), len(shapes), identifier)

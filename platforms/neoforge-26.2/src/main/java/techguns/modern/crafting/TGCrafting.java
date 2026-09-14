@@ -12,6 +12,8 @@ import techguns.modern.Techguns;
 public final class TGCrafting {
     private static final DeferredRegister<RecipeSerializer<?>> RECIPES = DeferredRegister.create(Registries.RECIPE_SERIALIZER, Techguns.MOD_ID);
     private static final DeferredRegister<IngredientType<?>> INGREDIENTS = DeferredRegister.create(NeoForgeRegistries.Keys.INGREDIENT_TYPES, Techguns.MOD_ID);
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<MiningHeadRecipe>> MINING_HEAD = RECIPES.register("miningtool_upgrade",
+            () -> new RecipeSerializer<>(MiningHeadRecipe.CODEC, MiningHeadRecipe.STREAM_CODEC));
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<CopyGunRecipe>> COPY_GUN = RECIPES.register("copy_gun",
             () -> new RecipeSerializer<>(CopyGunRecipe.CODEC, CopyGunRecipe.STREAM_CODEC));
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<AmmoChangeRecipe>> AMMO_CHANGE = RECIPES.register("ammo_change_crafting",

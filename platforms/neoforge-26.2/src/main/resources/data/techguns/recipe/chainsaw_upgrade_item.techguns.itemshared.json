@@ -1,0 +1,15 @@
+{
+  "type": "techguns:miningtool_upgrade",
+  "category": "misc",
+  "result": {
+    "id": "techguns:chainsaw",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 300
+    }
+  },
+  "ingredients": [
+    "techguns:chainsaw",
+    "techguns:chainsawblades_obsidian"
+  ]
+}

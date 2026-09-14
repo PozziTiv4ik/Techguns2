@@ -51,6 +51,7 @@ public final class TechgunsClient {
     private static void keys(RegisterKeyMappingsEvent event) { event.register(RELOAD); event.register(SAFE_MODE); }
     private static void itemProperties(net.neoforged.neoforge.client.event.RegisterConditionalItemModelPropertyEvent event) {
         event.register(TGContent.id("rocket_loaded"), RocketLoadedProperty.CODEC);
+        event.register(TGContent.id("mining_head"), MiningHeadProperty.CODEC);
     }
     private static void screens(RegisterMenuScreensEvent event) {
         event.register(techguns.modern.machine.TGMachineContent.AMMO_PRESS_MENU.get(), AmmoPressScreen::new);
@@ -82,7 +83,9 @@ public final class TechgunsClient {
             boolean aimBlocked = client.player.isUsingItem() || client.player.getMainHandItem().getOrDefault(TGContent.RELOAD_TICKS.get(), 0) > 0;
             if (aimBlocked) requestedAim = false;
             if (!aimBlocked && gun.definition().aim().supported() && !gun.definition().aim().toggle() && useDown != requestedAim) requestAim(useDown);
-            if (down && attackWasDown && gun.definition().automatic()) ClientPacketDistributor.sendToServer(new GunActionPayload(false));
+            if (gun instanceof techguns.modern.ChainsawItem) {
+                if (useDown && aimWasDown) ClientPacketDistributor.sendToServer(new GunActionPayload(false));
+            } else if (down && attackWasDown && gun.definition().automatic()) ClientPacketDistributor.sendToServer(new GunActionPayload(false));
             while (RELOAD.consumeClick()) {
                 requestedAim = false;
                 ClientPacketDistributor.sendToServer(new GunActionPayload(true));
@@ -100,6 +103,15 @@ public final class TechgunsClient {
 
     private static void interaction(InputEvent.InteractionKeyMappingTriggered event) {
         Minecraft client = Minecraft.getInstance();
+        if (client.player != null && client.player.getMainHandItem().getItem() instanceof techguns.modern.ChainsawItem) {
+            if (event.isUseItem()) {
+                event.setCanceled(true); event.setSwingHand(false);
+                if (event.getHand()==InteractionHand.MAIN_HAND && !aimWasDown) {
+                    ClientPacketDistributor.sendToServer(new GunActionPayload(false)); aimWasDown=true;
+                }
+            }
+            return; // LMB must reach native block breaking and melee attacks.
+        }
         if (event.isUseItem() && client.player != null && !client.player.isShiftKeyDown()
                 && client.player.getMainHandItem().getItem() instanceof GunItem gun && gun.definition().aim().supported()) {
             event.setCanceled(true);
@@ -158,6 +170,7 @@ public final class TechgunsClient {
     private static void renderers(EntityRenderersEvent.RegisterRenderers event) {
         // The initial round uses vanilla tracer particles; a mesh renderer is part of M5.
         event.registerEntityRenderer(TGContent.BULLET.get(), NoopRenderer::new);
+        event.registerEntityRenderer(TGContent.CHAINSAW_ATTACK.get(), NoopRenderer::new);
         event.registerEntityRenderer(TGContent.NETHER_BLAST.get(), NoopRenderer::new);
         event.registerEntityRenderer(TGContent.LASER_BEAM.get(), LaserBeamRenderer::new);
         event.registerEntityRenderer(TGContent.ROCKET.get(), RocketRenderer::new);

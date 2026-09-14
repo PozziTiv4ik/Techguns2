@@ -15,6 +15,7 @@ public final class ArmorDamage {
         if (event.getEntity() instanceof net.minecraft.world.entity.player.Player player) techguns.modern.armor.TGArmorSystem.refresh(player);
         var npc = event.getEntity() instanceof techguns.modern.npc.ArmedNpc armed ? armed : null;
         techguns.core.WeaponDefinition weapon = null;
+        if (event.getSource().getDirectEntity() instanceof ChainsawAttack attack && event.getSource().is(ChainsawItem.DAMAGE)) weapon = attack.weapon();
         if (event.getSource().getDirectEntity() instanceof Bullet bullet && event.getSource().is(Bullet.DAMAGE_TYPE)) {
             weapon = bullet.weapon();
         } else if (event.getSource().getDirectEntity() instanceof LaserBeam beam && event.getSource().is(LaserBeam.DAMAGE_TYPE)) {
@@ -29,7 +30,7 @@ public final class ArmorDamage {
             // Legacy TG radiation is magic, not unblockable. Its modern tag must not suppress typed armor;
             // the reduction callback still runs at the accepted armor stage, after attack cancellation.
             if (!event.getSource().is(DamageTypeTags.BYPASSES_ARMOR) || event.getSource().is(techguns.modern.radiation.RadiationSystem.DAMAGE)) {
-                float rawPenetration=weapon==null?0:(float)weapon.penetration();
+                float rawPenetration=event.getSource() instanceof ChainsawItem.MeleeDamage melee ? melee.penetration() : weapon==null?0:(float)weapon.penetration();
                 event.addReductionModifier(DamageContainer.Reduction.ARMOR,(container,previousReduction) -> {
                     if(!techguns.modern.armor.TGArmorSystem.hasArmor(player)) return previousReduction;
                     float damage=container.getNewDamage();
@@ -38,8 +39,8 @@ public final class ArmorDamage {
             }
             return;
         }
-        if (npc == null && weapon == null && !event.getSource().is(techguns.modern.fluid.TGLiquidBlock.ACID_DAMAGE)) return;
-        float penetration = weapon == null ? 0 : (float) weapon.penetration();
+        if (npc == null && weapon == null && !(event.getSource() instanceof ChainsawItem.MeleeDamage) && !event.getSource().is(techguns.modern.fluid.TGLiquidBlock.ACID_DAMAGE)) return;
+        float penetration = event.getSource() instanceof ChainsawItem.MeleeDamage melee ? melee.penetration() : weapon == null ? 0 : (float) weapon.penetration();
         float armor = npc != null ? npc.armorAgainst(kind)
                 : ArmorMath.defaultArmor(kind, (float) event.getEntity().getAttributeValue(Attributes.ARMOR), event.getEntity().fireImmune());
         float toughness = (float) event.getEntity().getAttributeValue(Attributes.ARMOR_TOUGHNESS);

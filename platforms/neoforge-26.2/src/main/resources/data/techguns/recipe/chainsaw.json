@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:chainsaw",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 300
+    }
+  },
+  "pattern": [
+    "ccp",
+    "mmr",
+    "ccf"
+  ],
+  "key": {
+    "p": "techguns:plasticsheet",
+    "r": "techguns:ironreceiver",
+    "c": "techguns:mechanicalpartsiron",
+    "f": "techguns:fueltank",
+    "m": "#c:plates/iron"
+  }
+}

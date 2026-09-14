@@ -270,6 +270,20 @@
     "sounds": [],
     "subtitle": "subtitles.techguns.guns.cyberdemonblasterreload"
   },
+  "guns.chainsawloop": {
+    "sounds": [
+      "techguns:guns/chainsaw_loop_a",
+      "techguns:guns/chainsaw_loop_b",
+      "techguns:guns/chainsaw_loop_c"
+    ],
+    "subtitle": "subtitles.techguns.guns.chainsawloop"
+  },
+  "guns.powerhammerreload": {
+    "sounds": [
+      "techguns:guns/powerhammer_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.powerhammerreload"
+  },
   "machines.ammopresswork1": {
     "sounds": [
       "techguns:machines/ammopress_work1_a",
@@ -398,5 +412,31 @@
       "techguns:npcs/cyberdemon_step_d"
     ],
     "subtitle": "subtitles.techguns.npcs.cyberdemonstep"
+  },
+  "guns.chainsawhit": {
+    "sounds": [
+      "techguns:guns/chainsaw_hit_a",
+      "techguns:guns/chainsaw_hit_b",
+      "techguns:guns/chainsaw_hit_c",
+      "techguns:guns/chainsaw_hit_d",
+      "techguns:guns/chainsaw_hit_e",
+      "techguns:guns/chainsaw_hit_f"
+    ],
+    "subtitle": "subtitles.techguns.guns.chainsawhit"
+  },
+  "guns.chainsawloopstart": {
+    "sounds": [
+      "techguns:guns/chainsaw_loopstart"
+    ],
+    "subtitle": "subtitles.techguns.guns.chainsawloopstart"
+  },
+  "guns.powerhammerimpactground": {
+    "sounds": [
+      "techguns:guns/powerhammer_impactground_a",
+      "techguns:guns/powerhammer_impactground_b",
+      "techguns:guns/powerhammer_impactground_c",
+      "techguns:guns/powerhammer_impactground_d"
+    ],
+    "subtitle": "subtitles.techguns.guns.powerhammerimpactground"
   }
 }
