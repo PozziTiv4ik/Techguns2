@@ -207,6 +207,11 @@ final class ChainsawGameTests {
             int drops=level.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,new net.minecraft.world.phys.AABB(h.absolutePos(pos)).inflate(1),e->e.getItem().is(Items.OAK_LOG)).stream().mapToInt(e->e.getItem().getCount()).sum();
             h.assertValueEqual(drops,1,"Native block drop survives last fuel and empty tool");
             near(h,stack.getDestroySpeed(Blocks.OAK_LOG.defaultBlockState()),1,"Next block loses powered speed");
+            h.setBlock(pos,Blocks.CHEST); p.setShiftKeyDown(true);
+            var hit=new net.minecraft.world.phys.BlockHitResult(Vec3.atCenterOf(h.absolutePos(pos)),net.minecraft.core.Direction.NORTH,h.absolutePos(pos),false);
+            h.assertTrue(mode.useItemOn(p,level,stack,InteractionHand.MAIN_HAND,hit).consumesAction(),"Sneak use reaches native chest interaction");
+            h.assertTrue(p.containerMenu!=p.inventoryMenu,"Chest menu opens with chainsaw and empty offhand");
+            h.assertValueEqual(GunItem.rounds(stack),0,"Opening chest spends no fuel"); p.closeContainer();
         } finally { channel.finishAndReleaseAll(); } h.succeed();
     }
 }

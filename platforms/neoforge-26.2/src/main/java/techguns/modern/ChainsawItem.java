@@ -28,6 +28,7 @@ public final class ChainsawItem extends GunItem {
     private static final java.util.Map<Player,Long> LAST_SOUND = new java.util.WeakHashMap<>();
     public static final ResourceKey<DamageType> DAMAGE = ResourceKey.create(Registries.DAMAGE_TYPE,TGContent.id("chainsaw"));
     public ChainsawItem(Properties properties, WeaponDefinition gun) { super(properties,gun); }
+    @Override public boolean doesSneakBypassUse(ItemStack stack,net.minecraft.world.level.LevelReader level,BlockPos pos,Player player) { return true; }
     @Override public void appendHoverText(ItemStack stack, TooltipContext context, net.minecraft.world.item.component.TooltipDisplay display,
             java.util.function.Consumer<net.minecraft.network.chat.Component> out, net.minecraft.world.item.TooltipFlag flag) {
         out.accept(net.minecraft.network.chat.Component.translatable("tooltip.techguns.chainsaw.controls"));

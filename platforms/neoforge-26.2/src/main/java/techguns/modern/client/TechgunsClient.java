@@ -84,7 +84,7 @@ public final class TechgunsClient {
             if (aimBlocked) requestedAim = false;
             if (!aimBlocked && gun.definition().aim().supported() && !gun.definition().aim().toggle() && useDown != requestedAim) requestAim(useDown);
             if (gun instanceof techguns.modern.ChainsawItem) {
-                if (useDown && aimWasDown) ClientPacketDistributor.sendToServer(new GunActionPayload(false));
+                if (useDown && aimWasDown && !client.player.isShiftKeyDown()) ClientPacketDistributor.sendToServer(new GunActionPayload(false));
             } else if (down && attackWasDown && gun.definition().automatic()) ClientPacketDistributor.sendToServer(new GunActionPayload(false));
             while (RELOAD.consumeClick()) {
                 requestedAim = false;
@@ -104,7 +104,7 @@ public final class TechgunsClient {
     private static void interaction(InputEvent.InteractionKeyMappingTriggered event) {
         Minecraft client = Minecraft.getInstance();
         if (client.player != null && client.player.getMainHandItem().getItem() instanceof techguns.modern.ChainsawItem) {
-            if (event.isUseItem()) {
+            if (event.isUseItem() && !client.player.isShiftKeyDown()) {
                 event.setCanceled(true); event.setSwingHand(false);
                 if (event.getHand()==InteractionHand.MAIN_HAND && !aimWasDown) {
                     ClientPacketDistributor.sendToServer(new GunActionPayload(false)); aimWasDown=true;
