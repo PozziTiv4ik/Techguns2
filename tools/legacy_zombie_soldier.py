@@ -11,7 +11,7 @@ def overworld_table():
     entries = []
     for name, setting, danger in re.findall(r'spawnTableOverworld.registerSpawn\(new TGNpcSpawn\((\w+)\.class, TGConfig\.(\w+)\), (\d)\)', entities):
         default = re.search(setting + r'\s*=\s*config.getInt\("([^"]+)", "NPC Spawn", (\d+)', config)
-        entries.append({'npc':name, 'config':default[1], 'weight':int(default[2]), 'danger':int(danger), 'implemented':name in ('ZombieSoldier','ZombieFarmer','ZombieMiner','SkeletonSoldier','Bandit')})
+        entries.append({'npc':name, 'config':default[1], 'weight':int(default[2]), 'danger':int(danger), 'implemented':name in ('ZombieSoldier','ZombieFarmer','ZombieMiner','SkeletonSoldier','PsychoSteve','Bandit')})
     return sorted(entries, key=lambda entry:entry['danger'])  # Stable: bucket order, then registration order.
 
 
@@ -28,7 +28,7 @@ def generate_zombie_soldier_content():
         'source':['legacy/1.12.2/src/main/java/techguns/TGEntities.java','legacy/1.12.2/src/main/java/techguns/entities/spawn/TGSpawnManager.java'],
         'pool_weight':600, 'group':[1,3], 'distance_thresholds':[500,1000,2500], 'entries':overworld_table(),
         'selection':'nextInt(total); inclusive cumulative >= roll; zero-weight entries excluded',
-        'unported_selection':'No replacement entity; original tickets retained',
+        'unported_selection':'All six source entries implemented; original weights and inclusive boundaries retained',
         'dimension_scope':'minecraft:overworld only; original other-dimension fallback remains pending',
         'biome_mapping':'Legacy BiomeDictionary categories use corresponding NeoForge c: tags; SPARSE becomes is_sparse_vegetation'})
     data(RESOURCES+'data/techguns/loot_table/entities/zombiesoldier.json',npc_loot('zombiesoldier'))

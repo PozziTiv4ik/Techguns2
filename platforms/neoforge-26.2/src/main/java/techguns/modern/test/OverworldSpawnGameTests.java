@@ -26,7 +26,7 @@ import techguns.modern.*;
 import techguns.modern.npc.*;
 
 final class OverworldSpawnGameTests {
-    private enum Danger { ZERO, ONE, HIGH }
+    private enum Danger { ZERO, ONE, HIGH, PSYCHO }
     static void register(DeferredRegister<Consumer<GameTestHelper>> r) {
         r.register("zombie_overworld_spawn_biome_tables",() -> OverworldSpawnGameTests::tables);
         r.register("zombie_overworld_selector_reserved_and_disabled",() -> OverworldSpawnGameTests::replacement);
@@ -34,6 +34,7 @@ final class OverworldSpawnGameTests {
         r.register("zombie_overworld_natural_spawn_and_death",() -> OverworldSpawnGameTests::natural);
         r.register("rural_natural_danger_zero",() -> h -> natural(h,Danger.ZERO));
         r.register("bandit_natural_danger_one_exclusion",() -> h -> natural(h,Danger.ONE));
+        r.register("psycho_natural_spawn_and_survival_loot",() -> h -> natural(h,Danger.PSYCHO));
     }
     private static void tables(GameTestHelper h) {
         var registry=h.getLevel().registryAccess().lookupOrThrow(Registries.BIOME);
@@ -84,17 +85,19 @@ final class OverworldSpawnGameTests {
             NpcSpawnConfig.MINER_WEIGHT.set(0); NpcSpawnConfig.SKELETON_WEIGHT.set(100); selector(level,pos);
             h.assertValueEqual(spawned.size(),4,"Skeleton ticket now creates one skeleton"); h.assertTrue(spawned.getLast() instanceof SkeletonSoldier,"Correct skeleton replacement");
             NpcSpawnConfig.DISTANCE_0.set(Integer.MAX_VALUE); selector(level,pos); h.assertValueEqual(spawned.size(),4,"Danger zero excludes skeleton"); NpcSpawnConfig.DISTANCE_0.set(0);
-            NpcSpawnConfig.SKELETON_WEIGHT.set(0); NpcSpawnConfig.PSYCHO_WEIGHT.set(3); selector(level,pos); h.assertValueEqual(spawned.size(),4,"Unported PsychoSteve remains empty");
+            NpcSpawnConfig.SKELETON_WEIGHT.set(0); NpcSpawnConfig.PSYCHO_WEIGHT.set(3); selector(level,pos); h.assertValueEqual(spawned.size(),5,"PsychoSteve ticket creates its original NPC");
+            h.assertTrue(spawned.getLast() instanceof PsychoSteve && spawned.getLast().getMainHandItem().is(TGContent.GUNS.get("chainsaw").get()),"PsychoSteve spawns with his own weapon");
+            NpcSpawnConfig.DISTANCE_0.set(Integer.MAX_VALUE); selector(level,pos); h.assertValueEqual(spawned.size(),5,"Danger zero excludes PsychoSteve"); NpcSpawnConfig.DISTANCE_0.set(0);
             NpcSpawnConfig.PSYCHO_WEIGHT.set(0); NpcSpawnConfig.BANDIT_WEIGHT.set(50); selector(level,pos);
-            h.assertValueEqual(spawned.size(),5,"Bandit ticket creates a bandit"); h.assertTrue(spawned.getLast() instanceof Bandit,"Correct Bandit replacement");
-            NpcSpawnConfig.DISTANCE_0.set(Integer.MAX_VALUE); selector(level,pos); h.assertValueEqual(spawned.size(),5,"Danger zero excludes Bandit");
+            h.assertValueEqual(spawned.size(),6,"Bandit ticket creates a bandit"); h.assertTrue(spawned.getLast() instanceof Bandit,"Correct Bandit replacement");
+            NpcSpawnConfig.DISTANCE_0.set(Integer.MAX_VALUE); selector(level,pos); h.assertValueEqual(spawned.size(),6,"Danger zero excludes Bandit");
             NpcSpawnConfig.DISTANCE_0.set(0); NpcSpawnConfig.DISTANCE_1.set(Integer.MAX_VALUE);
-            h.assertValueEqual(OverworldSpawns.danger(level,pos.getX(),pos.getZ()),1,"Fixture in danger one"); selector(level,pos); h.assertValueEqual(spawned.size(),5,"Danger one also excludes Bandit");
-            NpcSpawnConfig.DISTANCE_1.set(0); NpcSpawnConfig.BANDIT_WEIGHT.set(0); selector(level,pos); h.assertValueEqual(spawned.size(),5,"Empty table creates nothing");
+            h.assertValueEqual(OverworldSpawns.danger(level,pos.getX(),pos.getZ()),1,"Fixture in danger one"); selector(level,pos); h.assertValueEqual(spawned.size(),6,"Danger one also excludes Bandit");
+            NpcSpawnConfig.DISTANCE_1.set(0); NpcSpawnConfig.BANDIT_WEIGHT.set(0); selector(level,pos); h.assertValueEqual(spawned.size(),6,"Empty table creates nothing");
             NpcSpawnConfig.SOLDIER_WEIGHT.set(100); NpcSpawnConfig.OVERWORLD_WEIGHT.set(0); selector(level,pos);
-            h.assertValueEqual(spawned.size(),5,"Global zero disables replacement"); NpcSpawnConfig.OVERWORLD_WEIGHT.set(600);
+            h.assertValueEqual(spawned.size(),6,"Global zero disables replacement"); NpcSpawnConfig.OVERWORLD_WEIGHT.set(600);
             NpcSpawnConfig.BIOME_BLACKLIST.set(List.of(level.getBiome(pos).unwrapKey().orElseThrow().identifier().toString())); selector(level,pos);
-            h.assertValueEqual(spawned.size(),5,"Blacklisted biome creates nothing");
+            h.assertValueEqual(spawned.size(),6,"Blacklisted biome creates nothing");
             NpcSpawnConfig.BIOME_BLACKLIST.set(blacklist);
             var nether=level.getServer().getLevel(Level.NETHER); nether.getChunk(pos);
             h.assertTrue(selector(nether,pos).isRemoved(),"Overworld selector rejected outside its supported dimension");
@@ -153,13 +156,34 @@ final class OverworldSpawnGameTests {
         player.connection=new ServerGamePacketListenerImpl(level.getServer(),connection,player,cookie);
         player.snapTo(Vec3.atBottomCenterOf(pos.offset(35,0,0))); level.addNewPlayer(player);
         try {
+            // The GameTest server defaults to creative abilities even if gameMode() is overridden.
+            player.gameMode.changeGameModeForPlayer(GameType.SURVIVAL); GameType.SURVIVAL.updatePlayerAbilities(player.getAbilities());
+            h.assertTrue(!player.getAbilities().instabuild && !player.gameMode.isCreative(),"Native loot user has real survival abilities");
             // Keep every original weight; isolate the distance bucket for this fixture only.
-            NpcSpawnConfig.DISTANCE_0.set(danger==Danger.ZERO?Integer.MAX_VALUE:0); NpcSpawnConfig.DISTANCE_1.set(danger==Danger.ONE?Integer.MAX_VALUE:0); NpcSpawnConfig.DISTANCE_2.set(0);
+            NpcSpawnConfig.DISTANCE_0.set(danger==Danger.ZERO?Integer.MAX_VALUE:0); NpcSpawnConfig.DISTANCE_1.set(danger==Danger.ONE || danger==Danger.PSYCHO?Integer.MAX_VALUE:0); NpcSpawnConfig.DISTANCE_2.set(0);
             h.assertTrue(OverworldSpawns.checkSpawnRules(OverworldSpawns.SELECTOR.get(),level,EntitySpawnReason.NATURAL,pos,lightRoll()),
                     "Fixture meets real spawn placement checks: sky="+level.getBrightness(LightLayer.SKY,pos)+", raw="+level.getMaxLocalRawBrightness(pos)
                     +", ground="+level.getBlockState(pos.below())+", biome="+level.getBiome(pos).unwrapKey()+", difficulty="+level.getDifficulty());
             level.getRandom().setSeed(912262L);
-            if(danger==Danger.ZERO) {
+            if(danger==Danger.PSYCHO) {
+                h.assertValueEqual(OverworldSpawns.danger(level,pos.getX(),pos.getZ()),1,"PsychoSteve appears at minimum source danger");
+                h.assertValueEqual(NpcSpawnConfig.overworldWeights().total(1),603,"All original danger-one weights retained");
+                List<PsychoSteve> psychos=List.of();
+                for(int attempt=0;attempt<4096 && psychos.isEmpty();attempt++) {
+                    NaturalSpawner.spawnCategoryForPosition(MobCategory.MONSTER,level,pos);
+                    psychos=level.getEntitiesOfClass(PsychoSteve.class,area);
+                    if(psychos.isEmpty()) level.getEntitiesOfClass(Mob.class,area).forEach(Entity::discard);
+                }
+                h.assertTrue(!psychos.isEmpty(),"Native natural spawning reaches rare PsychoSteve without boosting weight");
+                var psycho=psychos.getFirst(); h.assertTrue(psycho.getMainHandItem().is(TGContent.GUNS.get("chainsaw").get()),"Natural spawn equipped Chainsaw");
+                int camo=techguns.modern.armor.TGArmorItem.camo(psycho.getItemBySlot(EquipmentSlot.CHEST));
+                for(var slot:techguns.core.ArmorSlot.values()) {
+                    var part=psycho.getItemBySlot(EquipmentSlot.valueOf(slot.name()));
+                    h.assertTrue(part.is(techguns.modern.armor.ArmorContent.T1_MINER.get(slot).get()),"Natural spawn equipped full miner suit");
+                    h.assertValueEqual(techguns.modern.armor.TGArmorItem.camo(part),camo,"Naturally spawned suit shares one camouflage");
+                }
+                PsychoSteveGameTests.deathChain(h,psycho,player);
+            } else if(danger==Danger.ZERO) {
                 h.assertValueEqual(OverworldSpawns.danger(level,pos.getX(),pos.getZ()),0,"Natural spawn fixture is in danger zero");
                 List<ZombieFarmer> farmers=List.of(); List<ZombieMiner> miners=List.of();
                 for(int attempt=0;attempt<256 && (farmers.isEmpty() || miners.isEmpty());attempt++) {
@@ -167,7 +191,7 @@ final class OverworldSpawnGameTests {
                     farmers=level.getEntitiesOfClass(ZombieFarmer.class,area); miners=level.getEntitiesOfClass(ZombieMiner.class,area);
                 }
                 h.assertTrue(!farmers.isEmpty() && !miners.isEmpty(),"Native spawning produces both original danger-zero entries with default weights");
-                h.assertTrue(level.getEntitiesOfClass(ZombieSoldier.class,area).isEmpty() && level.getEntitiesOfClass(SkeletonSoldier.class,area).isEmpty() && level.getEntitiesOfClass(Bandit.class,area).isEmpty(),"Soldiers and bandits remain excluded from danger zero");
+                h.assertTrue(level.getEntitiesOfClass(ZombieSoldier.class,area).isEmpty() && level.getEntitiesOfClass(SkeletonSoldier.class,area).isEmpty() && level.getEntitiesOfClass(Bandit.class,area).isEmpty() && level.getEntitiesOfClass(PsychoSteve.class,area).isEmpty(),"Soldiers, PsychoSteve and bandits remain excluded from danger zero");
                 h.assertTrue(!farmers.getFirst().getMainHandItem().isEmpty() && !farmers.getFirst().getItemBySlot(EquipmentSlot.CHEST).isEmpty(),"Naturally spawned farmer has weapon and jacket");
                 h.assertTrue(!miners.getFirst().getMainHandItem().isEmpty() && !miners.getFirst().getItemBySlot(EquipmentSlot.HEAD).isEmpty(),"Naturally spawned miner has weapon and helmet");
             } else {

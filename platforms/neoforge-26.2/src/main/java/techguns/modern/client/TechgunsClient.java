@@ -183,6 +183,7 @@ public final class TechgunsClient {
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.MINER.get(),GenericNpcRenderer::new);
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.SKELETON.get(),SkeletonSoldierRenderer::new);
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.BANDIT.get(),context -> new GenericNpcRenderer<>(context,TGContent.id("textures/entity/bandit.png")));
+        event.registerEntityRenderer(techguns.modern.npc.NpcContent.PSYCHO.get(),context -> new GenericNpcRenderer<>(context,TGContent.id("textures/entity/army_soldier.png")));
         event.registerEntityRenderer(techguns.modern.npc.OverworldSpawns.SELECTOR.get(), NoopRenderer::new);
         event.registerEntityRenderer(techguns.modern.npc.NetherSpawns.SELECTOR.get(), NoopRenderer::new);
         event.registerBlockEntityRenderer(techguns.modern.machine.charging.ChargingStationContent.ENTITY.get(), ChargingStationRenderer::new);

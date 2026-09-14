@@ -47,7 +47,7 @@
       "config": "SpawnWeightPsychoSteve",
       "weight": 3,
       "danger": 1,
-      "implemented": false
+      "implemented": true
     },
     {
       "npc": "Bandit",
@@ -58,7 +58,7 @@
     }
   ],
   "selection": "nextInt(total); inclusive cumulative >= roll; zero-weight entries excluded",
-  "unported_selection": "No replacement entity; original tickets retained",
+  "unported_selection": "All six source entries implemented; original weights and inclusive boundaries retained",
   "dimension_scope": "minecraft:overworld only; original other-dimension fallback remains pending",
   "biome_mapping": "Legacy BiomeDictionary categories use corresponding NeoForge c: tags; SPARSE becomes is_sparse_vegetation"
 }

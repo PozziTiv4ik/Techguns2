@@ -435,6 +435,8 @@
   "item.techguns.skeletonsoldier_spawn_egg": "Skeleton Soldier Spawn Egg",
   "entity.techguns.bandit": "Bandit",
   "item.techguns.bandit_spawn_egg": "Bandit Spawn Egg",
+  "entity.techguns.psychosteve": "Psycho Steve",
+  "item.techguns.psychosteve_spawn_egg": "Psycho Steve Spawn Egg",
   "tooltip.techguns.chainsaw.controls": "LMB: chop / melee. RMB: chain attack. R: refuel.",
   "tooltip.techguns.chainsaw.head": "Blade level: %s. Mining speed: %s",
   "death.attack.techguns.chainsaw": "%1$s was cut apart",

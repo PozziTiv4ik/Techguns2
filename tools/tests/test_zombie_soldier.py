@@ -26,7 +26,7 @@ class ZombieSoldierPortTests(unittest.TestCase):
         self.assertEqual([e['npc'] for e in table],['ZombieFarmer','ZombieMiner','ZombieSoldier','SkeletonSoldier','PsychoSteve','Bandit'])
         self.assertEqual([e['weight'] for e in table],[200,200,100,100,3,50])
         self.assertEqual([e['danger'] for e in table],[0,0,1,1,1,2])
-        self.assertEqual([e['npc'] for e in table if e['implemented']],['ZombieFarmer','ZombieMiner','ZombieSoldier','SkeletonSoldier','Bandit'])
+        self.assertEqual([e['npc'] for e in table if e['implemented']],['ZombieFarmer','ZombieMiner','ZombieSoldier','SkeletonSoldier','PsychoSteve','Bandit'])
 
     def test_all_ported_undead_npcs_keep_merged_tags_and_translations(self):
         files=generate()

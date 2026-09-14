@@ -1,0 +1,44 @@
+{
+  "id": "psychosteve",
+  "source": "legacy/1.12.2/src/main/java/techguns/entities/npcs/PsychoSteve.java",
+  "attributes": {
+    "MOVEMENT_SPEED": 0.6,
+    "MAX_HEALTH": 75.0,
+    "ATTACK_DAMAGE": 7.0,
+    "FOLLOW_RANGE": 60.0,
+    "ARMOR_TOUGHNESS": 1.0
+  },
+  "intrinsic_armor": 5.0,
+  "declared_base_experience": 25,
+  "weapon": "chainsaw",
+  "armor": "T1_MINER",
+  "always_equipped": [
+    "HEAD",
+    "CHEST",
+    "LEGS",
+    "FEET"
+  ],
+  "shared_random_camo": true,
+  "undead": false,
+  "burns_in_daylight": false,
+  "fire_immune": false,
+  "danger_level": 1,
+  "spawn_weight": 3,
+  "loot_id": "entities/psychosteve",
+  "texture": "textures/entity/army_soldier.png",
+  "texture_size": [
+    128,
+    128
+  ],
+  "model": "ModelGenericNPC; shared modern humanoid renderer with source skin",
+  "sounds": {
+    "ambient": "minecraft:entity.villager.ambient",
+    "hurt": "minecraft:entity.villager.hurt",
+    "death": "minecraft:entity.villager.death",
+    "step": "minecraft:entity.zombie.step"
+  },
+  "egg_colors": [
+    7697512,
+    15790320
+  ]
+}

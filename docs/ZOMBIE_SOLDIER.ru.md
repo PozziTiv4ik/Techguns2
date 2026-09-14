@@ -75,7 +75,7 @@ SPARSE соответствует `c:is_sparse_vegetation`. Классифика
 | ZombieMiner | 0 | 200 | Реализован |
 | ZombieSoldier | 1 | 100 | Реализован |
 | SkeletonSoldier | 1 | 100 | Реализован |
-| PsychoSteve | 1 | 3 | Зарезервирован, пока без появления |
+| PsychoSteve | 1 | 3 | Перенесён: бензопила, T1 Miner и исходный лут |
 | Bandit | 2 | 50 | Реализован |
 
 Сохранены порядок бакетов/записей и исходное сравнение накопленного веса `>= roll`
@@ -101,9 +101,11 @@ SPARSE соответствует `c:is_sparse_vegetation`. Классифика
 Общие результаты и конкретная проверенная ревизия — `docs/VERIFICATION.ru.md`.
 
 Farmer и Miner теперь заполняют исходный уровень опасности 0;
-см. `docs/RURAL_ZOMBIES.ru.md`. В Overworld остаётся PsychoSteve,
-спавнеры/структуры, иные измерения, полная фракционная система и визуальная приёмка.
-SkeletonSoldier и Bandit также перенесены; следующий срез — бензопила для PsychoSteve. См. `docs/SKELETON_SOLDIER.ru.md`.
+см. `docs/RURAL_ZOMBIES.ru.md`. SkeletonSoldier, Bandit и PsychoSteve также
+перенесены: обычная таблица Overworld полностью заполнена исходными NPC.
+Остаются спавнеры/структуры, иные измерения, полная фракционная система и
+визуальная приёмка. Следующий срез — NPC-спавнер Techguns.
+См. `docs/SKELETON_SOLDIER.ru.md` и `docs/PSYCHO_STEVE.ru.md`.
 
 Исходные файлы: `ZombieSoldier.java`, `GenericNPC.java`, `GenericNPCUndead.java`,
 `TGEntities.java`, `TGConfig.java`, `TGSpawnManager.java`, `TGNpcSpawnTable.java`,

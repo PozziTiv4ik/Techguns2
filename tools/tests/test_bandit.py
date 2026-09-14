@@ -56,7 +56,7 @@ class BanditPortTests(unittest.TestCase):
 
     def test_spawn_pool_keeps_weights_and_bandit_is_not_tagged_undead(self):
         entries=overworld_table(); self.assertEqual([e['weight'] for e in entries],[200,200,100,100,3,50])
-        self.assertEqual([e['npc'] for e in entries if not e['implemented']],['PsychoSteve'])
+        self.assertEqual([e['npc'] for e in entries if not e['implemented']],[])
         self.assertEqual(next(e['danger'] for e in entries if e['npc']=='Bandit'),2)
         files=generate()
         for tag in ('undead','ignores_poison_and_regen','inverted_healing_and_harm','sensitive_to_smite'):

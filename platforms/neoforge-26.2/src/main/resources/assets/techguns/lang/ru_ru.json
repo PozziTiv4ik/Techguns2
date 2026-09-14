@@ -435,6 +435,8 @@
   "item.techguns.skeletonsoldier_spawn_egg": "Яйцо призыва скелета-солдата",
   "entity.techguns.bandit": "Разбойник",
   "item.techguns.bandit_spawn_egg": "Яйцо призыва бандита",
+  "entity.techguns.psychosteve": "Психопат Стив",
+  "item.techguns.psychosteve_spawn_egg": "Яйцо призыва Стива-психа",
   "tooltip.techguns.chainsaw.controls": "ЛКМ: рубка / удар. ПКМ: атака цепью. R: заправка.",
   "tooltip.techguns.chainsaw.head": "Уровень лезвий: %s. Скорость рубки: %s",
   "death.attack.techguns.chainsaw": "%1$s был распилен",

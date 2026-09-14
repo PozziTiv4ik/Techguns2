@@ -60,6 +60,7 @@ public final class WeaponGameTests {
         SkeletonSoldierGameTests.register(FUNCTIONS);
         BanditGameTests.register(FUNCTIONS);
         ChainsawGameTests.register(FUNCTIONS);
+        PsychoSteveGameTests.register(FUNCTIONS);
         RuralZombieGameTests.register(FUNCTIONS);
         FUNCTIONS.register("ammo_persists", () -> WeaponGameTests::ammoPersists);
         FUNCTIONS.register("reload_timing_and_consumption", () -> WeaponGameTests::reloadTiming);
