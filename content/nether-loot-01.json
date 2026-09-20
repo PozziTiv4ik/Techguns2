@@ -966,7 +966,7 @@
       {
         "id": "nether_soul_platform",
         "weight": 10,
-        "implemented": false
+        "implemented": true
       },
       {
         "id": "nether_loot_01",

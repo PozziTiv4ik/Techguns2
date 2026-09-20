@@ -116,7 +116,9 @@ ArmySoldier, размещение/смерти/сохранение военно
 Малый адский алтарь и NetherLoot01 перенесены: второй использует
 ZombiePigmanSoldier 2/1/200/1 рядом с исходным сундуком.
 NetherAcidHole перенесён без спавнера, как в оригинале.
-Следующий срез — Ghastling и его спавнер в NetherSoulPlatform.
+Ghastling и его спавнер в NetherSoulPlatform перенесены следующим срезом.
+Общая основа SpawnerNpc поддерживает одиннадцать типов NPC независимо от оружия;
+NBT-поля существующих владельцев/мобов сохранены. Дальше — рудные кластеры.
 Computer Use и интерактивный Minecraft не использовались.
 
 Источники: `BlockTGSpawner.java`, `TGSpawnerTileEnt.java`, `ITGSpawnerNPC.java`,

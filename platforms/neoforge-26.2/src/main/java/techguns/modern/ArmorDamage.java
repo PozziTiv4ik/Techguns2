@@ -13,7 +13,8 @@ import net.minecraft.world.damagesource.DamageTypes;
 public final class ArmorDamage {
     public static void onIncoming(LivingIncomingDamageEvent event) {
         if (event.getEntity() instanceof net.minecraft.world.entity.player.Player player) techguns.modern.armor.TGArmorSystem.refresh(player);
-        var npc = event.getEntity() instanceof techguns.modern.npc.ArmedNpc armed ? armed : null;
+        var npc = event.getEntity() instanceof techguns.modern.npc.NpcTypedArmor typed ? typed : null;
+        boolean alien=event.getSource().getDirectEntity() instanceof AlienBlasterProjectile && event.getSource().is(AlienBlasterProjectile.DAMAGE_TYPE);
         techguns.core.WeaponDefinition weapon = null;
         if (event.getSource().getDirectEntity() instanceof ChainsawAttack attack && event.getSource().is(ChainsawItem.DAMAGE)) weapon = attack.weapon();
         if (event.getSource().getDirectEntity() instanceof Bullet bullet && event.getSource().is(Bullet.DAMAGE_TYPE)) {
@@ -39,7 +40,7 @@ public final class ArmorDamage {
             }
             return;
         }
-        if (npc == null && weapon == null && !(event.getSource() instanceof ChainsawItem.MeleeDamage) && !event.getSource().is(techguns.modern.fluid.TGLiquidBlock.ACID_DAMAGE)) return;
+        if (npc == null && weapon == null && !alien && !(event.getSource() instanceof ChainsawItem.MeleeDamage) && !event.getSource().is(techguns.modern.fluid.TGLiquidBlock.ACID_DAMAGE)) return;
         float penetration = event.getSource() instanceof ChainsawItem.MeleeDamage melee ? melee.penetration() : weapon == null ? 0 : (float) weapon.penetration();
         float armor = npc != null ? npc.armorAgainst(kind)
                 : ArmorMath.defaultArmor(kind, (float) event.getEntity().getAttributeValue(Attributes.ARMOR), event.getEntity().fireImmune());
@@ -57,7 +58,7 @@ public final class ArmorDamage {
         });
     }
     private static DamageKind sourceKind(DamageSource source) {
-        if (source.is(NetherBlasterProjectile.DAMAGE_TYPE)) return DamageKind.FIRE;
+        if (source.is(NetherBlasterProjectile.DAMAGE_TYPE) || source.is(AlienBlasterProjectile.DAMAGE_TYPE)) return DamageKind.FIRE;
         if (source.is(techguns.modern.fluid.TGLiquidBlock.ACID_DAMAGE)) return DamageKind.POISON;
         if (source.is(techguns.modern.radiation.RadiationSystem.DAMAGE)) return DamageKind.RADIATION;
         if (source.is(techguns.modern.radiation.RadiationSystem.POISONING)) return DamageKind.UNRESISTABLE;

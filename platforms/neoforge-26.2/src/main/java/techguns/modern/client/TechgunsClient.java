@@ -173,6 +173,8 @@ public final class TechgunsClient {
         event.registerEntityRenderer(TGContent.BULLET.get(), NoopRenderer::new);
         event.registerEntityRenderer(TGContent.CHAINSAW_ATTACK.get(), NoopRenderer::new);
         event.registerEntityRenderer(TGContent.NETHER_BLAST.get(), NoopRenderer::new);
+        event.registerEntityRenderer(TGContent.ALIEN_BLAST.get(), NoopRenderer::new);
+        event.registerEntityRenderer(techguns.modern.npc.NpcContent.GHASTLING.get(), GhastlingRenderer::new);
         event.registerEntityRenderer(TGContent.LASER_BEAM.get(), LaserBeamRenderer::new);
         event.registerEntityRenderer(TGContent.ROCKET.get(), RocketRenderer::new);
         event.registerEntityRenderer(TGContent.RADIATION_ZONE.get(), NoopRenderer::new);

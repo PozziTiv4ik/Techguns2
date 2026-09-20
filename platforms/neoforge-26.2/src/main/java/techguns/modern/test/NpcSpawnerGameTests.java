@@ -27,7 +27,7 @@ import techguns.modern.npc.spawner.*;
 
 final class NpcSpawnerGameTests {
     private static final BlockPos POS=new BlockPos(4,2,4);
-    private static final List<String> NPCS=List.of("supermutantbasic","cyberdemon","zombiepigmansoldier","zombiesoldier","zombiefarmer","zombieminer","skeletonsoldier","bandit","psychosteve","armysoldier");
+    private static final List<String> NPCS=List.of("supermutantbasic","cyberdemon","zombiepigmansoldier","zombiesoldier","zombiefarmer","zombieminer","skeletonsoldier","bandit","psychosteve","armysoldier","ghastling");
     static void register(DeferredRegister<Consumer<GameTestHelper>> r) {
         r.register("spawner_default_placement_shape_and_permissions",()->NpcSpawnerGameTests::placement);
         r.register("spawner_military_placement_save_and_death_budget",()->NpcSpawnerGameTests::military);
@@ -62,14 +62,14 @@ final class NpcSpawnerGameTests {
     private static void tick(GameTestHelper h,NpcSpawnerBlockEntity b,int count) {
         for(int i=0;i<count && !b.isRemoved();i++) NpcSpawnerBlockEntity.serverTick(h.getLevel(),b.getBlockPos(),b.getBlockState(),b);
     }
-    private static ArmedNpc first(GameTestHelper h,NpcSpawnerBlockEntity b) {
-        var npc=(ArmedNpc)h.getLevel().getEntity(b.activeIds().iterator().next()); npc.removeFreeWill(); npc.setNoGravity(true); return npc;
+    private static SpawnerNpc first(GameTestHelper h,NpcSpawnerBlockEntity b) {
+        var npc=(SpawnerNpc)h.getLevel().getEntity(b.activeIds().iterator().next()); npc.removeFreeWill(); npc.setNoGravity(true); return npc;
     }
     private static void cleanup(GameTestHelper h,NpcSpawnerBlockEntity b) {
         for(UUID id:b.activeIds()) { var entity=h.getLevel().getEntity(id); if(entity!=null) entity.discard(); }
         h.getLevel().setBlock(b.getBlockPos(),Blocks.AIR.defaultBlockState(),3);
     }
-    private static void kill(GameTestHelper h,ArmedNpc npc) { npc.invulnerableTime=0; npc.hurtServer(h.getLevel(),h.getLevel().damageSources().genericKill(),10000); }
+    private static void kill(GameTestHelper h,SpawnerNpc npc) { npc.invulnerableTime=0; npc.hurtServer(h.getLevel(),h.getLevel().damageSources().genericKill(),10000); }
     private static CompoundTag save(GameTestHelper h,NpcSpawnerBlockEntity b) { return b.saveWithFullMetadata(h.getLevel().registryAccess()); }
     private static void load(GameTestHelper h,NpcSpawnerBlockEntity b,CompoundTag tag) { b.loadWithComponents(TagValueInput.create(ProblemReporter.DISCARDING,h.getLevel().registryAccess(),tag)); }
     private static void placement(GameTestHelper h) {
@@ -109,7 +109,7 @@ final class NpcSpawnerGameTests {
     private static void npc(GameTestHelper h,String id) {
         var b=place(h,5,1,1,id); tick(h,b,1); var npc=first(h,b);
         h.assertValueEqual(net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.getKey(npc.getType()),TGContent.id(id),"Configured original NPC type");
-        h.assertTrue(!npc.getMainHandItem().isEmpty(),"Native finalizeSpawn initializes source equipment");
+        h.assertTrue(npc instanceof Ghastling?npc.getMainHandItem().isEmpty():!npc.getMainHandItem().isEmpty(),"Native finalizeSpawn preserves species equipment, including unarmed Ghastling");
         h.assertValueEqual(npc.spawnerLink(),b.link(),"NPC receives this instance's persistent origin");
         h.assertValueEqual(npc.getHomePosition(),b.getBlockPos(),"Original home center"); h.assertValueEqual(npc.getHomeRadius(),10,"Original home radius");
         cleanup(h,b); h.succeed();

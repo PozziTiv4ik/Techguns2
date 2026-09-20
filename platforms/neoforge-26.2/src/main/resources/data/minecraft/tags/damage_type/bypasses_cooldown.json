@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "techguns:alien_blast",
     "techguns:bullet",
     "techguns:laser",
     "techguns:nether_blast",

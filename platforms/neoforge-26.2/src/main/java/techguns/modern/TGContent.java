@@ -50,6 +50,9 @@ public final class TGContent {
     public static final DeferredHolder<EntityType<?>, EntityType<Bullet>> BULLET = ENTITIES.register("bullet", () ->
             EntityType.Builder.<Bullet>of(Bullet::new, MobCategory.MISC).sized(0.1f, 0.1f).clientTrackingRange(8).updateInterval(1)
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, id("bullet"))));
+    public static final DeferredHolder<EntityType<?>,EntityType<AlienBlasterProjectile>> ALIEN_BLAST=ENTITIES.register("alien_blast",()->
+            EntityType.Builder.<AlienBlasterProjectile>of(AlienBlasterProjectile::new,MobCategory.MISC).sized(.25f,.25f).clientTrackingRange(8).updateInterval(1)
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE,id("alien_blast"))));
     public static final DeferredHolder<EntityType<?>, EntityType<NetherBlasterProjectile>> NETHER_BLAST = ENTITIES.register("nether_blast", () ->
             EntityType.Builder.<NetherBlasterProjectile>of(NetherBlasterProjectile::new, MobCategory.MISC).sized(.25f, .25f).clientTrackingRange(8).updateInterval(1)
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, id("nether_blast"))));

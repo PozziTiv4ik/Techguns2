@@ -41,7 +41,8 @@ UUID живых мобов или заранее заданного владел
   Точки средней сетки 32 и большой 64 зарезервированы для своих категорий.
 - В малой Nether-таблице пять исходных кандидатов с весами по 10: малый алтарь,
   Soul Platform, NetherLoot01, Acid Hole и малый рудный кластер. Сейчас размещаются
-  алтарь, [NetherLoot01](NETHER_LOOT.ru.md) и [NetherAcidHole](NETHER_ACID.ru.md).
+  алтарь, [NetherLoot01](NETHER_LOOT.ru.md), [NetherAcidHole](NETHER_ACID.ru.md)
+  и [NetherSoulPlatform](GHASTLING_SOUL_PLATFORM.ru.md).
   Остальные варианты пропускают попытку, сохраняя свой вес.
   Отключение рудных кластеров убирает только их десять билетов: итог 40 вместо 50.
 - Выбирается один из четырёх поворотов. Сохранены исходные преобразования
@@ -127,10 +128,9 @@ locate. В обычном GameTestServer структуры отключены �
 
 После этого среза перенесён [NetherLoot01](NETHER_LOOT.ru.md) с сундуком
 и исходной таблицей лута, затем [NetherAcidHole](NETHER_ACID.ru.md).
-Все три локации размещаются после ванильных дельт на `top_layer_modification`.
-Следующий срез — Ghastling и NetherSoulPlatform.
-Soul Platform требует неперенесённого Ghastling; военные базы — в том числе
-AttackHelicopter и другие блоки.
+Все четыре локации размещаются после ванильных дельт на `top_layer_modification`.
+Ghastling и NetherSoulPlatform перенесены следующим срезом. Следующий этап —
+рудные кластеры; военные базы требуют в том числе AttackHelicopter и другие блоки.
 
 Источники в неизменном `legacy/1.12.2`: `NetherAltarSmall.java`,
 `WorldGenTGStructureSpawn.java`, `TGStructureSpawnRegister.java`,

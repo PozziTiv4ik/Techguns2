@@ -56,6 +56,10 @@ public final class NpcContent {
             EntityType.Builder.<ArmySoldier>of(ArmySoldier::new,MobCategory.MONSTER).sized(.6f,1.8f).eyeHeight(1.53f).clientTrackingRange(5).updateInterval(3)
                     .build(ResourceKey.create(Registries.ENTITY_TYPE,TGContent.id("armysoldier"))));
     public static final DeferredItem<SpawnEggItem> ARMY_EGG = TGContent.ITEMS.registerItem("armysoldier_spawn_egg",SpawnEggItem::new,props -> props.spawnEgg(ARMY.get()));
+    public static final DeferredHolder<EntityType<?>,EntityType<Ghastling>> GHASTLING=TGContent.ENTITIES.register("ghastling",()->
+            EntityType.Builder.<Ghastling>of(Ghastling::new,MobCategory.MONSTER).sized(1,2.1f).eyeHeight(1.5f).fireImmune().clientTrackingRange(5).updateInterval(3)
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE,TGContent.id("ghastling"))));
+    public static final DeferredItem<SpawnEggItem> GHASTLING_EGG=TGContent.ITEMS.registerItem("ghastling_spawn_egg",SpawnEggItem::new,props->props.spawnEgg(GHASTLING.get()));
     public static final DeferredHolder<SoundEvent, SoundEvent> IDLE = sound("npcs.cyberdemonidle"), HURT = sound("npcs.cyberdemonhurt"),
             DEATH = sound("npcs.cyberdemondeath"), STEP = sound("npcs.cyberdemonstep");
     private static DeferredHolder<SoundEvent, SoundEvent> sound(String id) { return TGContent.SOUNDS.register(id, () -> SoundEvent.createVariableRangeEvent(TGContent.id(id))); }
@@ -77,6 +81,7 @@ public final class NpcContent {
         event.put(BANDIT.get(),Bandit.attributes().build());
         event.put(PSYCHO.get(),PsychoSteve.attributes().build());
         event.put(ARMY.get(),ArmySoldier.attributes().build());
+        event.put(GHASTLING.get(),Ghastling.attributes().build());
     }
     private NpcContent() {}
 }

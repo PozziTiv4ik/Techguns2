@@ -1,0 +1,9 @@
+{
+  "type": "techguns:nether_soul_platform",
+  "biomes": "#techguns:has_nether_soul_platform",
+  "step": "top_layer_modification",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none",
+  "reserved_medium_grid": 32,
+  "reserved_big_grid": 64
+}

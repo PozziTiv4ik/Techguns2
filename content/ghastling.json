@@ -1,0 +1,260 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/entities/npcs/Ghastling.java",
+  "base": "EntityMob; ground navigation, no flying or slow-fall behavior",
+  "health": 20,
+  "movement_speed": 0.7,
+  "attack_damage": 2,
+  "follow_range": 64,
+  "armor_attribute": 10,
+  "typed_armor": 0,
+  "toughness": 0,
+  "size": [
+    1,
+    2.1
+  ],
+  "eye_height": 1.5,
+  "xp": 10,
+  "fire_immune": true,
+  "undead": false,
+  "natural_spawn_entry": false,
+  "faction": "not GenericNPC / ITGNpcTeam",
+  "original_egg_colors": [
+    11447982,
+    13533695
+  ],
+  "registered_goal": "AIFireballAttack",
+  "warmup": 30,
+  "burst_shots": 3,
+  "burst_interval": 6,
+  "rest": 50,
+  "melee_interval": 20,
+  "line_of_sight_in_attack_goal": false,
+  "projectile": {
+    "damage": 6,
+    "speed": 1.5,
+    "spread": 0.05,
+    "lifetime": 200,
+    "ignite_seconds": 3,
+    "block_damage": false,
+    "kind": "FIRE"
+  },
+  "model": {
+    "seed": 1660,
+    "texture_size": [
+      64,
+      32
+    ],
+    "translation": [
+      0,
+      -0.6,
+      0
+    ],
+    "parts": [
+      {
+        "name": "body",
+        "uv": [
+          0,
+          0
+        ],
+        "box": [
+          -8,
+          -8,
+          -8,
+          16,
+          16,
+          16
+        ],
+        "pivot": [
+          0,
+          8,
+          0
+        ]
+      },
+      {
+        "name": "tentacle0",
+        "uv": [
+          0,
+          0
+        ],
+        "box": [
+          -1,
+          0,
+          -1,
+          2,
+          8,
+          2
+        ],
+        "pivot": [
+          -3.75,
+          15,
+          -5.0
+        ]
+      },
+      {
+        "name": "tentacle1",
+        "uv": [
+          0,
+          0
+        ],
+        "box": [
+          -1,
+          0,
+          -1,
+          2,
+          13,
+          2
+        ],
+        "pivot": [
+          1.25,
+          15,
+          -5.0
+        ]
+      },
+      {
+        "name": "tentacle2",
+        "uv": [
+          0,
+          0
+        ],
+        "box": [
+          -1,
+          0,
+          -1,
+          2,
+          9,
+          2
+        ],
+        "pivot": [
+          6.25,
+          15,
+          -5.0
+        ]
+      },
+      {
+        "name": "tentacle3",
+        "uv": [
+          0,
+          0
+        ],
+        "box": [
+          -1,
+          0,
+          -1,
+          2,
+          11,
+          2
+        ],
+        "pivot": [
+          -6.25,
+          15,
+          0.0
+        ]
+      },
+      {
+        "name": "tentacle4",
+        "uv": [
+          0,
+          0
+        ],
+        "box": [
+          -1,
+          0,
+          -1,
+          2,
+          11,
+          2
+        ],
+        "pivot": [
+          -1.25,
+          15,
+          0.0
+        ]
+      },
+      {
+        "name": "tentacle5",
+        "uv": [
+          0,
+          0
+        ],
+        "box": [
+          -1,
+          0,
+          -1,
+          2,
+          10,
+          2
+        ],
+        "pivot": [
+          3.75,
+          15,
+          0.0
+        ]
+      },
+      {
+        "name": "tentacle6",
+        "uv": [
+          0,
+          0
+        ],
+        "box": [
+          -1,
+          0,
+          -1,
+          2,
+          12,
+          2
+        ],
+        "pivot": [
+          -3.75,
+          15,
+          5.0
+        ]
+      },
+      {
+        "name": "tentacle7",
+        "uv": [
+          0,
+          0
+        ],
+        "box": [
+          -1,
+          0,
+          -1,
+          2,
+          9,
+          2
+        ],
+        "pivot": [
+          1.25,
+          15,
+          5.0
+        ]
+      },
+      {
+        "name": "tentacle8",
+        "uv": [
+          0,
+          0
+        ],
+        "box": [
+          -1,
+          0,
+          -1,
+          2,
+          12,
+          2
+        ],
+        "pivot": [
+          6.25,
+          15,
+          5.0
+        ]
+      }
+    ],
+    "tentacle_animation": ".2*sin(age*.3+index)+.4"
+  },
+  "textures": [
+    "minecraft:textures/entity/ghast/ghast.png",
+    "minecraft:textures/entity/ghast/ghast_shooting.png"
+  ]
+}

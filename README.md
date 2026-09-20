@@ -38,6 +38,7 @@
 - [Малый адский алтарь и десять блоков Nether Metal](docs/NETHER_ALTAR.ru.md)
 - [NetherLoot01: сундук с исходными ресурсами и охрана](docs/NETHER_LOOT.ru.md)
 - [NetherAcidHole: природная кислота и её использование](docs/NETHER_ACID.ru.md)
+- [Ghastling: зажигательная очередь и NetherSoulPlatform](docs/GHASTLING_SOUL_PLATFORM.ru.md)
 - [ZombieSoldier: оружие, лут и первый срез спавна Верхнего мира](docs/ZOMBIE_SOLDIER.ru.md)
 - [Repair Bench: ремонт надетой брони за материалы](docs/REPAIR_BENCH.ru.md)
 - [Camo Bench: камуфляж T2 и перекраска блоков](docs/CAMO_BENCH.ru.md)
@@ -224,6 +225,12 @@ RadAway и таблетки работают с перенесённой сис�
 в реакционной камере. Поиск: `/locate structure techguns:nether_acid_hole`.
 Локации размещаются после ванильных дельт, чтобы те не перезаписывали их лавой.
 См. `docs/NETHER_ACID.ru.md`.
+
+Ghastling (`techguns:ghastling`) — исходный наземный гастёныш с тремя
+зажигательными снарядами в очереди, ванильными текстурами и лутом.
+Четвёртая локация `/locate structure techguns:nether_soul_platform`
+использует его конечный спавнер: три смерти, максимум два живых.
+См. `docs/GHASTLING_SOUL_PLATFORM.ru.md`.
 
 Доступны четыре части `t2_combat_*`: типовая защита, износ, ремонт обсидиановой
 сталью на наковальне и шесть исходных камуфляжей. Shift + ПКМ с бронёй в руке

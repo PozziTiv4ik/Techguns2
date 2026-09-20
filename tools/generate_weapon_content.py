@@ -24,6 +24,7 @@ from legacy_bandit import generate_bandit_content, bandit_translations
 from legacy_psychosteve import generate_psycho_content, psycho_translations
 from legacy_spawner import generate_spawner_content, spawner_translations
 from legacy_army import generate_army_content, army_translations
+from legacy_ghastling import generate_ghastling_content, ghastling_translations
 from legacy_locations import generate_location_content, location_translations
 from legacy_chainsaw import generate_chainsaw_content, chainsaw_item_model, chainsaw_translations
 from legacy_repair import generate_repair_content, repair_translations
@@ -291,6 +292,7 @@ public final class NpcWeapons {
         values.update(psycho_translations(lang))
         values.update(spawner_translations(lang))
         values.update(army_translations(lang))
+        values.update(ghastling_translations(lang))
         values.update(location_translations(lang))
         values.update(chainsaw_translations(lang))
         values['entity.techguns.laser_beam'] = 'Laser beam' if lang == 'en_us' else 'Лазерный луч'
@@ -343,7 +345,7 @@ public final class Weapons {
 '''
     output('core/src/main/java/techguns/core/Weapons.java', source)
     files.update(generate_machine_content())
-    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_npc_content(), generate_cyber_content(), generate_armor_content(), generate_repair_content(), generate_camo_content(), generate_grinder_content(), generate_zombie_soldier_content(), generate_rural_content(), generate_skeleton_content(), generate_bandit_content(), generate_chainsaw_content(), generate_psycho_content(), generate_spawner_content(), generate_army_content(), generate_location_content()) for entry in domain.items()]:
+    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_npc_content(), generate_cyber_content(), generate_armor_content(), generate_repair_content(), generate_camo_content(), generate_grinder_content(), generate_zombie_soldier_content(), generate_rural_content(), generate_skeleton_content(), generate_bandit_content(), generate_chainsaw_content(), generate_psycho_content(), generate_spawner_content(), generate_army_content(), generate_location_content(), generate_ghastling_content()) for entry in domain.items()]:
         if path in files:
             # Several content domains contribute to the same mining/tool and common item tags.
             if '/tags/' not in path:

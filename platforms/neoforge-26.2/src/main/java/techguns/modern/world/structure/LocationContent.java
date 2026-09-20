@@ -16,6 +16,8 @@ public final class LocationContent {
     public static final DeferredHolder<StructurePieceType,StructurePieceType> LOOT_PIECE=PIECES.register("nether_loot_01",()->(context,tag)->new NetherLootPiece(context.structureTemplateManager(),tag));
     public static final DeferredHolder<StructureType<?>,StructureType<NetherAcidStructure>> ACID=TYPES.register("nether_acid_hole",()->()->NetherAcidStructure.CODEC);
     public static final DeferredHolder<StructurePieceType,StructurePieceType> ACID_PIECE=PIECES.register("nether_acid_hole",()->(context,tag)->new NetherAcidPiece(context.structureTemplateManager(),tag));
+    public static final DeferredHolder<StructureType<?>,StructureType<NetherSoulStructure>> SOUL=TYPES.register("nether_soul_platform",()->()->NetherSoulStructure.CODEC);
+    public static final DeferredHolder<StructurePieceType,StructurePieceType> SOUL_PIECE=PIECES.register("nether_soul_platform",()->(context,tag)->new NetherSoulPiece(context.structureTemplateManager(),tag));
     public static void register(IEventBus bus) { TYPES.register(bus); PIECES.register(bus); }
     private LocationContent() {}
 }

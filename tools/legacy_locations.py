@@ -47,7 +47,7 @@ def altar_definition():
             'palette':palette,'spawners':spawners,'cells':cells,
             'generation':{'dimension':'minecraft:the_nether','small_grid':16,'medium_grid':32,'big_grid':64,
                           'min_y':20,'max_y':100,'clearance':10,'corner_height_spread':10,
-                          'candidates':[{'id':name,'weight':10,'implemented':name in ('nether_altar_small','nether_loot_01','nether_acid_hole')} for name in
+                          'candidates':[{'id':name,'weight':10,'implemented':name!='nether_ore_cluster_small'} for name in
                                         ('nether_altar_small','nether_soul_platform','nether_loot_01','nether_acid_hole','nether_ore_cluster_small')],
                           'ore_cluster_candidate_conditional':True,'native_rng':'Minecraft 26.2 structure seed; not identical to 1.12.2 population RNG'}}
 
@@ -93,6 +93,38 @@ def loot_location_definition():
             'worldgen_floor_offset':-1,'foundation_cells':sum(c[1]==0 for c in cells),
             'palette':palette,'block_entities':entities,'cells':cells,'generation':altar_definition()['generation'],
             'loot_table_source':'legacy/1.12.2/src/main/resources/assets/techguns/loot_tables/chests/factory_building.json'}
+
+
+def soul_location_definition():
+    raw=(LEGACY/'resources/assets/techguns/structures/nether_soul_platform').read_bytes().replace(b'\r\n',b'\n')
+    lines=raw.decode().splitlines(); cells=[list(map(int,line.split(','))) for line in lines[1:] if line]
+    assert len(cells)==int(lines[0]) and len({tuple(c[:3]) for c in cells})==len(cells)
+    source=strip_comments((LEGACY/'java/techguns/world/structures/NetherSoulPlatform.java').read_text())
+    palette=[]; entities={}
+    for index,entry in enumerate(re.findall(r'blockList.add\((.*)\);',source)):
+        metal=re.fullmatch(r'new MBlock\(TGBlocks.NETHER_METAL, (\d+)\)',entry)
+        vanilla=re.fullmatch(r'new MBlock\(Blocks.(\w+), (\d+)\)',entry)
+        spawner=re.fullmatch(r'new MBlockTGSpawner\(EnumMonsterSpawnerType.HOLE,(\d+),(\d+),(\d+),(\d+)\).addMobType\(Ghastling.class, (\d+)\)',entry)
+        if metal: state={'Name':'techguns:'+metal_definitions()[int(metal[1])]['id']}
+        elif vanilla:
+            name,meta=vanilla[1],int(vanilla[2]); state={'Name':'minecraft:'+{'AIR':'air','SKULL':'skeleton_skull','SOUL_SAND':'soul_sand','GLOWSTONE':'glowstone','NETHER_BRICK_FENCE':'nether_brick_fence'}[name]}
+            if name=='SKULL':
+                assert meta==1; state['Properties']={'rotation':'0','powered':'false'}
+            else: assert meta==0
+        elif spawner:
+            left,active,delay,radius,weight=map(int,spawner.groups()); state={'Name':'techguns:tg_spawner'}
+            entities[index]={'id':'techguns:tg_spawner','mobsLeft':left,'maxActive':active,'spawnDelay':delay,'delay':200,'spawnRange':float(radius),'spawnHeightOffset':0,'mobtypes':[{'id':'techguns:ghastling','weight':weight}]}
+        else: raise ValueError('Unmapped NetherSoulPlatform palette entry: '+entry)
+        palette.append(state)
+    registration=strip_comments((LEGACY/'java/techguns/world/TGStructureSpawnRegister.java').read_text())
+    worldgen_size=list(map(int,re.search(r'new NetherSoulPlatform\(\).setXZSize\((\d+), (\d+)\)',registration).groups()))
+    return {'source':'legacy/1.12.2/src/main/java/techguns/world/structures/NetherSoulPlatform.java',
+            'scan_sha256':hashlib.sha256(raw).hexdigest(),'size':[max(c[i] for c in cells)+1 for i in range(3)],
+            'declared_size':list(map(int,re.search(r'super\((\d+),(\d+),(\d+),',source).groups())),
+            'registered_xz_size':worldgen_size,'pivot':[worldgen_size[0]//2,0,worldgen_size[1]//2],
+            'height_offset':int(re.search(r'int hoffset = (-?\d+);',source)[1]),'worldgen_floor_offset':-1,
+            'foundation_cells':sum(c[1]==0 for c in cells),'foundation_depth':16,'foundation_stop_after_solids':2,
+            'palette':palette,'block_entities':entities,'cells':cells,'generation':altar_definition()['generation']}
 
 
 def acid_location_definition():
@@ -239,6 +271,13 @@ def generate_location_content():
     data(RESOURCES+'data/techguns/worldgen/structure/nether_acid_hole.json',{'type':'techguns:nether_acid_hole','biomes':'#techguns:has_nether_acid_hole',
          'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none','reserved_medium_grid':32,'reserved_big_grid':64})
     data(RESOURCES+'data/techguns/worldgen/structure_set/nether_acid_hole.json',{'structures':[{'structure':'techguns:nether_acid_hole','weight':1}],
+         'placement':{'type':'minecraft:random_spread','spacing':16,'separation':15,'salt':1337262}})
+    data('content/nether-soul-platform.json',soul_location_definition())
+    files[RESOURCES+'data/techguns/structure/nether_soul_platform.nbt']=location_nbt(soul_location_definition())
+    data(RESOURCES+'data/techguns/tags/worldgen/biome/has_nether_soul_platform.json',{'replace':False,'values':['#minecraft:is_nether']})
+    data(RESOURCES+'data/techguns/worldgen/structure/nether_soul_platform.json',{'type':'techguns:nether_soul_platform','biomes':'#techguns:has_nether_soul_platform',
+         'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none','reserved_medium_grid':32,'reserved_big_grid':64})
+    data(RESOURCES+'data/techguns/worldgen/structure_set/nether_soul_platform.json',{'structures':[{'structure':'techguns:nether_soul_platform','weight':1}],
          'placement':{'type':'minecraft:random_spread','spacing':16,'separation':15,'salt':1337262}})
     entries=',\n'.join(f'        new Variant("{m["id"]}", {m["metadata"]}, {m["light"]})' for m in metals)
     files['core/src/main/java/techguns/core/NetherMetal.java']=('''package techguns.core;

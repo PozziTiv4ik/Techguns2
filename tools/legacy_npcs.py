@@ -46,7 +46,7 @@ def npc_loot(name):
                     functions.append(modern)
                 else: raise ValueError('Unported loot function: ' + kind)
             conditions = []
-            for condition in entry['conditions']:
+            for condition in entry.get('conditions',[]):
                 if condition['condition'] != 'random_chance_with_looting': raise ValueError('Unported loot condition')
                 chance, bonus = condition['chance'], condition['looting_multiplier']
                 conditions.append({'condition':'minecraft:random_chance_with_enchanted_bonus', 'enchantment':'minecraft:looting',
