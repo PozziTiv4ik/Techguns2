@@ -1613,8 +1613,17 @@ Legacy-tree: `270b27b1cc52019733bb79facda68ce29aa038be`, без изменени
 
 Журналы: `.tools/nether-loot-games-first.log`, `.tools/nether-loot-python-full.log`,
 `.tools/nether-loot-audit-result.json`. Первые compile/Python-диагностики
-исправлены до полного прогона. Linux CI этого среза ещё не запускался;
-предыдущий успешный Linux checkpoint выше относится к алтарю.
+исправлены до полного прогона.
+
+Linux CI завершился **2026-09-20 16:24 Europe/Zurich**:
+[запуск 35516101388](https://github.com/PozziTiv4ik/Techguns2/actions/runs/35516101388),
+точная исходная ревизия `012ddaeb82b9b056512c7df9a2cb7d30b8057aca`. Все 13 шагов успешны;
+проверены генератор (1488), Python (204), ресурсы, сборка/ядро и все
+956 GameTests (939 + 5 + 12). Linux повторил обе точки NetherLoot01
+и прежний алтарь на seed 0; `/ERROR]` в журнале нет.
+Журналы: `.tools/nether-loot-ci-result.json`, `.tools/nether-loot-ci-full.log`.
+Следующий коммит меняет только протокол/статус; тестировалась указанная
+исходная ревизия.
 
 Computer Use и интерактивный клиент не использовались. Визуальная приёмка,
 перезапуск настоящего сервера, полные миры на нескольких seed,
