@@ -83,6 +83,7 @@ public final class TGContent {
                         output.accept(techguns.modern.npc.NpcContent.SKELETON_EGG.get());
                         output.accept(techguns.modern.npc.NpcContent.BANDIT_EGG.get());
                         output.accept(techguns.modern.npc.NpcContent.PSYCHO_EGG.get());
+                        output.accept(techguns.modern.npc.spawner.NpcSpawnerContent.ITEM.get());
                         techguns.modern.armor.ArmorContent.ITEMS.values().forEach(item -> output.accept(item.get()));
                         techguns.modern.armor.ArmorContent.HAZMAT.values().forEach(item -> output.accept(item.get()));
                         techguns.modern.armor.ArmorContent.T1_COMBAT.values().forEach(item -> output.accept(item.get()));

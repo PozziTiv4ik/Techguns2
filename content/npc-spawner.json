@@ -1,0 +1,52 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/tileentities/TGSpawnerTileEnt.java",
+  "defaults": {
+    "delay": 200.0,
+    "spawndelay": 200.0,
+    "mobsLeft": 5.0,
+    "maxActive": 3.0,
+    "spawnHeightOffset": 0.0,
+    "spawnrange": 2.0
+  },
+  "variants": [
+    {
+      "id": "hole",
+      "legacy_metadata": 0,
+      "npc": "techguns:zombiesoldier",
+      "implemented": true
+    },
+    {
+      "id": "soldier_spawn",
+      "legacy_metadata": 1,
+      "npc": "techguns:armysoldier",
+      "implemented": false,
+      "requires": [
+        "ArmySoldier",
+        "T2 beret"
+      ]
+    }
+  ],
+  "home_radius": 10,
+  "outline": [
+    2,
+    0,
+    2,
+    14,
+    2,
+    14
+  ],
+  "collision": false,
+  "survival_breaking": false,
+  "loot": [],
+  "quota": "Only registered deaths decrement mobsLeft; despawn frees a slot; active limit min(maxActive,mobsLeft)",
+  "selection": "WeightedRandom uses strict cumulative > roll; unported types retain their weight and skip their attempt",
+  "checks": {
+    "peaceful": true,
+    "nearby_player": false,
+    "daylight": false,
+    "supporting_ground": false,
+    "collision": false
+  },
+  "modern_persistence": "Instance UUID + NPC reservations + per-dimension SavedData notification mailbox; no forced chunk loading",
+  "origin_daylight_exemption": "Persistent origin marker, including after the original block is removed, as in TGSpawnerNPCData.hasSpawner"
+}

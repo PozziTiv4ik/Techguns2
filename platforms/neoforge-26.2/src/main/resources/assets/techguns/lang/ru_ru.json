@@ -437,6 +437,8 @@
   "item.techguns.bandit_spawn_egg": "Яйцо призыва бандита",
   "entity.techguns.psychosteve": "Психопат Стив",
   "item.techguns.psychosteve_spawn_egg": "Яйцо призыва Стива-психа",
+  "block.techguns.tg_spawner": "Дыра с монстрами",
+  "item.techguns.tg_spawner": "Дыра с монстрами",
   "tooltip.techguns.chainsaw.controls": "ЛКМ: рубка / удар. ПКМ: атака цепью. R: заправка.",
   "tooltip.techguns.chainsaw.head": "Уровень лезвий: %s. Скорость рубки: %s",
   "death.attack.techguns.chainsaw": "%1$s был распилен",
