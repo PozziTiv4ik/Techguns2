@@ -3,6 +3,18 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StructureRulesTest {
+    @Test void allCandidateTicketsRetainSourceOrderWithAndWithoutOres() {
+        for(boolean ores:new boolean[]{false,true}) for(int roll=0;roll<StructureRules.smallNetherTotal(ores);roll++)
+            assertEquals(roll/10,StructureRules.smallNetherCandidate(roll,ores));
+        assertThrows(IllegalArgumentException.class,()->StructureRules.smallNetherCandidate(-1,true));
+        assertThrows(IllegalArgumentException.class,()->StructureRules.smallNetherCandidate(40,false));
+    }
+    @Test void evenSizedLootScanRotatesAboutThreeWithoutTheOddAltarShift() {
+        for(int turn=0;turn<4;turn++) assertArrayEquals(new int[]{0,0},StructureRules.originShift(turn,6,6));
+        assertArrayEquals(new int[]{2,4},StructureRules.rotate(2,2,1,3,3));
+        assertArrayEquals(new int[]{4,4},StructureRules.rotate(2,2,2,3,3));
+        assertArrayEquals(new int[]{4,2},StructureRules.rotate(2,2,3,3,3));
+    }
     @Test void positiveAndNegativeModuloGridKeepsLargeSitePriority() {
         for(int sign:new int[]{-1,1}) {
             assertTrue(StructureRules.smallSite(sign*16,sign*16,16,32,64));

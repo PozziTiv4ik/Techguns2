@@ -39,15 +39,6 @@ public final class NetherAltarPiece extends TemplateStructurePiece {
     private void foundation(WorldGenLevel level,BoundingBox clip) {
         var materials=new ArrayList<Block>(); NetherMetalContent.BLOCKS.values().forEach(b->materials.add(b.get()));
         materials.addAll(List.of(Blocks.AIR,Blocks.NETHER_BRICK_STAIRS,Blocks.NETHER_BRICK_FENCE,NpcSpawnerContent.BLOCK.get()));
-        var settings=placeSettings.copy().setBoundingBox(null);
-        for(var material:materials) for(var cell:template.filterBlocks(templatePosition,settings,material)) {
-            if(cell.pos().getY()!=templatePosition.getY() || !clip.isInside(cell.pos())) continue;
-            int solid=0;
-            for(int depth=1;depth<=16;depth++) {
-                var p=cell.pos().below(depth); if(p.getY()<1 || !clip.isInside(p)) break;
-                if(level.getBlockState(p).canBeReplaced()) { level.setBlock(p,cell.state(),2); solid=0; }
-                else if(++solid>=2) break;
-            }
-        }
+        NetherFoundation.place(template,templatePosition,placeSettings,materials,level,clip);
     }
 }

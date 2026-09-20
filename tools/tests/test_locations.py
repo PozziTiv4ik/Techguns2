@@ -7,6 +7,7 @@ import unittest
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from legacy_locations import metal_definitions, altar_definition, altar_nbt, generate_location_content, location_translations
+from legacy_locations import loot_location_definition, location_nbt, factory_chest_loot
 from legacy_spawner import generate_spawner_content
 from legacy_npcs import LEGACY, RESOURCES
 from legacy_crafting import plan_crafting
@@ -34,6 +35,57 @@ def read_nbt(data):
 
 
 class LocationPortTests(unittest.TestCase):
+    def test_loot_scan_all_cells_and_ten_foundation_columns(self):
+        d=loot_location_definition(); raw=(LEGACY/'resources/assets/techguns/structures/nether_loot_01').read_text().splitlines()
+        self.assertEqual(len(d['cells']),146); self.assertEqual(d['cells'],[list(map(int,line.split(','))) for line in raw[1:]])
+        self.assertEqual(d['size'],[6,10,6]); self.assertEqual(d['declared_size'],[6,10,6])
+        self.assertEqual(d['foundation_cells'],10); self.assertEqual([c for c in d['cells'] if c[1]==0],[[x,0,z,4] for x in (1,2,3) for z in (1,2,3)]+[[4,0,4,4]])
+        self.assertEqual((d['height_offset'],d['worldgen_floor_offset']),(1,-1))
+
+    def test_loot_palette_preserves_upright_skeleton_and_chest_facing(self):
+        d=loot_location_definition(); p=d['palette']
+        self.assertEqual(p[0],{'Name':'minecraft:netherrack'}); self.assertEqual(p[4],p[0])
+        self.assertEqual(p[1],{'Name':'techguns:nethermetal_grey_dark'})
+        self.assertEqual(p[5],{'Name':'minecraft:skeleton_skull','Properties':{'rotation':'0','powered':'false'}})
+        self.assertEqual(p[6],{'Name':'minecraft:chest','Properties':{'facing':'east','type':'single','waterlogged':'false'}})
+        self.assertEqual([c for c in d['cells'] if c[3]>=5],[[1,3,1,5],[2,2,2,6],[3,2,3,7]])
+        register=(LEGACY/'java/techguns/world/structures/MBlockRegister.java').read_text()
+        self.assertRegex(register,r'NETHERRACK_ROCKY\s*=\s*new MBlock\(Blocks.NETHERRACK,\s*0\)')
+
+    def test_loot_nbt_is_deferred_and_keeps_exact_guard(self):
+        d=loot_location_definition(); first=location_nbt(d); self.assertEqual(first,location_nbt(d)); nbt=read_nbt(first)
+        self.assertEqual(nbt['palette'],d['palette']); self.assertEqual([b['pos']+[b['state']] for b in nbt['blocks']],d['cells'])
+        entities={b['state']:b['nbt'] for b in nbt['blocks'] if 'nbt' in b}
+        self.assertEqual(entities[6],{'id':'minecraft:chest','LootTable':'techguns:chests/factory_building'})
+        self.assertEqual(entities[7],{'id':'techguns:tg_spawner','mobsLeft':2,'maxActive':1,'spawnDelay':200,'delay':200,'spawnRange':1.0,'spawnHeightOffset':0,'mobtypes':[{'id':'techguns:zombiepigmansoldier','weight':1}]})
+
+    def test_factory_loot_weights_counts_and_all_thirteen_original_entries(self):
+        source=json.loads((LEGACY/'resources/assets/techguns/loot_tables/chests/factory_building.json').read_text())['pools'][0]
+        modern=factory_chest_loot(); self.assertEqual(modern['type'],'minecraft:chest'); pool=modern['pools'][0]
+        self.assertEqual(len(modern['pools']),1); self.assertEqual(pool['rolls'],{'type':'minecraft:uniform',**source['rolls']})
+        self.assertEqual([e['weight'] for e in pool['entries']],[15,15,10,10,5,1,1,10,10,5,5,5,5]); self.assertEqual(sum(e['weight'] for e in pool['entries']),97)
+        for original,converted in zip(source['entries'],pool['entries'],strict=True):
+            count=[f['count'] for f in original.get('functions',[]) if f['function']=='set_count']
+            self.assertEqual(converted.get('functions',[]),[{'function':'minecraft:set_count','count':{'type':'minecraft:uniform',**c}} for c in count])
+            self.assertNotIn('conditions',converted)
+
+    def test_factory_loot_resolves_metadata_to_real_existing_materials(self):
+        entries=factory_chest_loot()['pools'][0]['entries']; actual=[e['name'] for e in entries if e['name'].startswith('techguns:')]
+        self.assertEqual(actual,['techguns:'+n for n in ('heavycloth','mechanicalpartsiron','mechanicalpartsobsidiansteel','plasticsheet','rubberbar','ingotobsidiansteel')])
+        graph=plan_crafting(parse_weapons())
+        self.assertTrue(set(n.removeprefix('techguns:') for n in actual).issubset(graph['materials']))
+
+    def test_two_native_sets_share_grid_and_preserve_original_tickets(self):
+        files=generate_location_content()
+        placements=[]
+        for name in ('nether_altar_small','nether_loot_01'):
+            definition=json.loads(files[RESOURCES+f'data/techguns/worldgen/structure/{name}.json'])
+            self.assertEqual(definition['type'],'techguns:'+name); self.assertEqual(definition['biomes'],'#techguns:has_'+name)
+            self.assertEqual(definition['spawn_overrides'],{}); self.assertEqual((definition['reserved_medium_grid'],definition['reserved_big_grid']),(32,64))
+            setting=json.loads(files[RESOURCES+f'data/techguns/worldgen/structure_set/{name}.json']); self.assertEqual(setting['structures'],[{'structure':'techguns:'+name,'weight':1}]); placements.append(setting['placement'])
+        self.assertEqual(placements[0],placements[1])
+        self.assertEqual(loot_location_definition()['generation'],altar_definition()['generation'])
+
     def test_metal_enum_order_light_and_original_names(self):
         values=metal_definitions()
         self.assertEqual([v['id'] for v in values],['nethermetal_'+n for n in ('panel','grate1','grate2','grey_dark','grey','grey_tiles','border_red','plate_black','plate_red','border_lava')])
@@ -97,7 +149,7 @@ class LocationPortTests(unittest.TestCase):
 
     def test_natural_set_grid_and_unported_tickets_remain_explicit(self):
         d=altar_definition(); g=d['generation']; self.assertEqual([e['weight'] for e in g['candidates']],[10]*5)
-        self.assertEqual([e['implemented'] for e in g['candidates']],[True,False,False,False,False])
+        self.assertEqual([e['implemented'] for e in g['candidates']],[True,False,True,False,False])
         files=generate_location_content(); structure=json.loads(files[RESOURCES+'data/techguns/worldgen/structure/nether_altar_small.json'])
         self.assertEqual((structure['reserved_medium_grid'],structure['reserved_big_grid']),(32,64)); self.assertEqual(structure['spawn_overrides'],{})
         placement=json.loads(files[RESOURCES+'data/techguns/worldgen/structure_set/nether_altar_small.json'])['placement']

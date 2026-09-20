@@ -1,4 +1,4 @@
-"""Original Nether Metal family and first native structure, preserving scanned cells and spawner NBT."""
+"""Original Nether Metal and small Nether locations, preserving scanned cells and encounter/loot NBT."""
 import gzip
 import hashlib
 import json
@@ -6,6 +6,7 @@ import re
 import struct
 from legacy_models import strip_comments
 from legacy_npcs import LEGACY, RESOURCES
+from legacy_items import shared_items
 
 
 def metal_definitions():
@@ -46,9 +47,75 @@ def altar_definition():
             'palette':palette,'spawners':spawners,'cells':cells,
             'generation':{'dimension':'minecraft:the_nether','small_grid':16,'medium_grid':32,'big_grid':64,
                           'min_y':20,'max_y':100,'clearance':10,'corner_height_spread':10,
-                          'candidates':[{'id':name,'weight':10,'implemented':name=='nether_altar_small'} for name in
+                          'candidates':[{'id':name,'weight':10,'implemented':name in ('nether_altar_small','nether_loot_01')} for name in
                                         ('nether_altar_small','nether_soul_platform','nether_loot_01','nether_acid_hole','nether_ore_cluster_small')],
                           'ore_cluster_candidate_conditional':True,'native_rng':'Minecraft 26.2 structure seed; not identical to 1.12.2 population RNG'}}
+
+
+def loot_location_definition():
+    raw=(LEGACY/'resources/assets/techguns/structures/nether_loot_01').read_bytes().replace(b'\r\n',b'\n')
+    lines=raw.decode().splitlines(); cells=[list(map(int,line.split(','))) for line in lines[1:] if line]
+    assert len(cells)==int(lines[0]) and len({tuple(c[:3]) for c in cells})==len(cells)
+    source=strip_comments((LEGACY/'java/techguns/world/structures/NetherLoot01.java').read_text())
+    palette=[]; entities={}
+    for index,entry in enumerate(re.findall(r'blockList.add\((.*)\);',source)):
+        metal=re.fullmatch(r'new MBlock\(TGBlocks.NETHER_METAL, (\d+)\)',entry)
+        vanilla=re.fullmatch(r'new MBlock\(Blocks.(\w+), (\d+)\)',entry)
+        chest=re.fullmatch(r'new MBlockChestLoottable\(Blocks.CHEST, (\d+), CHEST_LOOT\)',entry)
+        spawner=re.fullmatch(r'new MBlockTGSpawner\(EnumMonsterSpawnerType.HOLE,(\d+),(\d+),(\d+),(\d+)\).addMobType\(ZombiePigmanSoldier.class, (\d+)\)',entry)
+        if entry=='MBlockRegister.NETHERRACK_ROCKY': state={'Name':'minecraft:netherrack'}
+        elif entry=='MBlockRegister.AIR': state={'Name':'minecraft:air'}
+        elif metal: state={'Name':'techguns:'+metal_definitions()[int(metal[1])]['id']}
+        elif vanilla:
+            block,meta=vanilla[1],int(vanilla[2])
+            state={'Name':'minecraft:'+{'NETHERRACK':'netherrack','NETHER_BRICK_FENCE':'nether_brick_fence','SKULL':'skeleton_skull'}[block]}
+            # Block metadata 1 means UP; type/yaw live in TileEntitySkull and default to zero.
+            if block=='SKULL':
+                assert meta==1
+                state['Properties']={'rotation':'0','powered':'false'}
+            else: assert meta==0
+        elif chest:
+            assert int(chest[1])==5
+            state={'Name':'minecraft:chest','Properties':{'facing':'east','type':'single','waterlogged':'false'}}
+            table=re.search(r'CHEST_LOOT = new ResourceLocation\(Techguns.MODID,"([^"]+)"\)',source)[1]
+            entities[index]={'id':'minecraft:chest','LootTable':'techguns:'+table}
+        elif spawner:
+            left,active,delay,radius,weight=map(int,spawner.groups()); state={'Name':'techguns:tg_spawner'}
+            entities[index]={'id':'techguns:tg_spawner','mobsLeft':left,'maxActive':active,'spawnDelay':delay,'delay':200,
+                             'spawnRange':float(radius),'spawnHeightOffset':0,'mobtypes':[{'id':'techguns:zombiepigmansoldier','weight':weight}]}
+        else: raise ValueError('Unmapped NetherLoot01 palette entry: '+entry)
+        palette.append(state)
+    assert all(0<=c[3]<len(palette) for c in cells)
+    declared=list(map(int,re.search(r'super\((\d+),(\d+),(\d+),',source).groups()))
+    return {'source':'legacy/1.12.2/src/main/java/techguns/world/structures/NetherLoot01.java',
+            'scan_sha256':hashlib.sha256(raw).hexdigest(),'size':[max(c[i] for c in cells)+1 for i in range(3)],
+            'declared_size':declared,'height_offset':int(re.search(r'int hoffset = (-?\d+);',source)[1]),
+            'worldgen_floor_offset':-1,'foundation_cells':sum(c[1]==0 for c in cells),
+            'palette':palette,'block_entities':entities,'cells':cells,'generation':altar_definition()['generation'],
+            'loot_table_source':'legacy/1.12.2/src/main/resources/assets/techguns/loot_tables/chests/factory_building.json'}
+
+
+def factory_chest_loot():
+    source=json.loads((LEGACY/'resources/assets/techguns/loot_tables/chests/factory_building.json').read_text())
+    pools=[]
+    for pool in source['pools']:
+        assert set(pool)<= {'name','rolls','entries'}
+        entries=[]
+        for entry in pool['entries']:
+            assert entry['type']=='item' and set(entry)<={'type','weight','name','entryName','functions'}
+            name=entry['name']; functions=[]
+            for function in entry.get('functions',[]):
+                if function['function']=='set_data':
+                    assert name=='techguns:itemshared'
+                    name='techguns:'+shared_items()[function['data']]
+                elif function['function']=='set_count':
+                    functions.append({'function':'minecraft:set_count','count':{'type':'minecraft:uniform',**function['count']}})
+                else: raise ValueError('Unported chest loot function: '+function['function'])
+            modern={'type':'minecraft:item','name':name,'weight':entry['weight']}
+            if functions: modern['functions']=functions
+            entries.append(modern)
+        pools.append({'rolls':{'type':'minecraft:uniform',**pool['rolls']},'entries':entries})
+    return {'type':'minecraft:chest','pools':pools}
 
 
 def nbt_payload(value):
@@ -69,10 +136,14 @@ def nbt_payload(value):
 
 
 def altar_nbt():
-    d=altar_definition(); blocks=[]
+    return location_nbt(altar_definition())
+
+
+def location_nbt(d):
+    blocks=[]; entities=d.get('block_entities',d.get('spawners',{}))
     for x,y,z,state in d['cells']:
         block={'pos':[x,y,z],'state':state}
-        if state in d['spawners']: block['nbt']=d['spawners'][state]
+        if state in entities: block['nbt']=entities[state]
         blocks.append(block)
     # Pinned Minecraft 26.2 SharedConstants.WORLD_VERSION. All palette names/properties are modern.
     tree={'DataVersion':4903,'size':d['size'],'palette':d['palette'],'blocks':blocks,'entities':[]}
@@ -119,6 +190,16 @@ def generate_location_content():
          'step':'surface_structures','spawn_overrides':{},'terrain_adaptation':'none','reserved_medium_grid':32,'reserved_big_grid':64})
     # separation=spacing-1 removes the vanilla random offset: exactly the original modulo lattice.
     data(RESOURCES+'data/techguns/worldgen/structure_set/nether_altar_small.json',{'structures':[{'structure':'techguns:nether_altar_small','weight':1}],
+         'placement':{'type':'minecraft:random_spread','spacing':16,'separation':15,'salt':1337262}})
+    data('content/nether-loot-01.json',loot_location_definition())
+    files[RESOURCES+'data/techguns/structure/nether_loot_01.nbt']=location_nbt(loot_location_definition())
+    data(RESOURCES+'data/techguns/loot_table/chests/factory_building.json',factory_chest_loot())
+    data(RESOURCES+'data/techguns/tags/worldgen/biome/has_nether_loot_01.json',{'replace':False,'values':['#minecraft:is_nether']})
+    data(RESOURCES+'data/techguns/worldgen/structure/nether_loot_01.json',{'type':'techguns:nether_loot_01','biomes':'#techguns:has_nether_loot_01',
+         'step':'surface_structures','spawn_overrides':{},'terrain_adaptation':'none','reserved_medium_grid':32,'reserved_big_grid':64})
+    # Separate native IDs keep /locate useful. Both structures read the same chunk-seeded candidate roll,
+    # so their disjoint original tickets can never place both locations on the same site.
+    data(RESOURCES+'data/techguns/worldgen/structure_set/nether_loot_01.json',{'structures':[{'structure':'techguns:nether_loot_01','weight':1}],
          'placement':{'type':'minecraft:random_spread','spacing':16,'separation':15,'salt':1337262}})
     entries=',\n'.join(f'        new Variant("{m["id"]}", {m["metadata"]}, {m["light"]})' for m in metals)
     files['core/src/main/java/techguns/core/NetherMetal.java']=('''package techguns.core;

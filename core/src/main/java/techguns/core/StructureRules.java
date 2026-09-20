@@ -11,8 +11,11 @@ public final class StructureRules {
     }
     public static int smallNetherTotal(boolean oreClusters) { return oreClusters?50:40; }
     public static boolean altarSelected(int roll,boolean oreClusters) {
+        return smallNetherCandidate(roll,oreClusters)==0;
+    }
+    public static int smallNetherCandidate(int roll,boolean oreClusters) {
         if(roll<0 || roll>=smallNetherTotal(oreClusters)) throw new IllegalArgumentException("Invalid structure roll");
-        return roll<10; // Four unported candidates retain their own ten tickets; ore cluster is conditional.
+        return roll/10; // Altar, soul platform, loot, acid hole, conditional ore cluster; no reweighting.
     }
     public static int airFloor(IntPredicate air) {
         int count=0;
@@ -36,8 +39,11 @@ public final class StructureRules {
     }
     /** Source samples corners using size=11, while real template cells end at 10. Keep its one-block shift. */
     public static int[] altarOriginShift(int turns) {
-        int minX=0,minZ=0;
-        for(int x:new int[]{0,11}) for(int z:new int[]{0,11}) { var p=rotate(x,z,turns,5,5); minX=Math.min(minX,p[0]); minZ=Math.min(minZ,p[1]); }
+        return originShift(turns,11,11);
+    }
+    public static int[] originShift(int turns,int sizeX,int sizeZ) {
+        int minX=Integer.MAX_VALUE,minZ=Integer.MAX_VALUE;
+        for(int x:new int[]{0,sizeX}) for(int z:new int[]{0,sizeZ}) { var p=rotate(x,z,turns,sizeX/2,sizeZ/2); minX=Math.min(minX,p[0]); minZ=Math.min(minZ,p[1]); }
         return new int[]{minX,minZ};
     }
     private StructureRules() {}

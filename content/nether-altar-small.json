@@ -4730,7 +4730,7 @@
       {
         "id": "nether_loot_01",
         "weight": 10,
-        "implemented": false
+        "implemented": true
       },
       {
         "id": "nether_acid_hole",

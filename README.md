@@ -35,7 +35,8 @@
 - [PsychoSteve: бой, редкий спавн, пилы и топливо](docs/PSYCHO_STEVE.ru.md)
 - [ArmySoldier, берет T2 и военная точка появления](docs/ARMY_SOLDIER_BERET.ru.md)
 - [NPC-спавнер: HOLE / SOLDIER_SPAWN, лимиты и сохранение связей](docs/NPC_SPAWNER.ru.md)
-- [Первая локация: малый адский алтарь и десять блоков Nether Metal](docs/NETHER_ALTAR.ru.md)
+- [Малый адский алтарь и десять блоков Nether Metal](docs/NETHER_ALTAR.ru.md)
+- [NetherLoot01: сундук с исходными ресурсами и охрана](docs/NETHER_LOOT.ru.md)
 - [ZombieSoldier: оружие, лут и первый срез спавна Верхнего мира](docs/ZOMBIE_SOLDIER.ru.md)
 - [Repair Bench: ремонт надетой брони за материалы](docs/REPAIR_BENCH.ru.md)
 - [Camo Bench: камуфляж T2 и перекраска блоков](docs/CAMO_BENCH.ru.md)
@@ -205,11 +206,17 @@ RadAway и таблетки работают с перенесённой сис�
 +10% скорости ходьбы/+20% при спринте, крафт из четырёх плотных тканей и ремонт
 тканью. См. `docs/ARMY_SOLDIER_BERET.ru.md`.
 
-В новых чанках Nether работает первая исходная локация — малый адский алтарь
+В новых чанках Nether работает малый адский алтарь
 с CyberDemon: исходный шаблон, фундамент, повороты, ограниченный спавнер и native
 `/locate structure techguns:nether_altar_small`. Веса остальных локаций сохранены;
 неперенесённые исходы пропускаются. Добавлены десять блоков Nether Metal,
 крафт 16 панелей и их перекраска на Camo Bench. См. `docs/NETHER_ALTAR.ru.md`.
+
+Вторая локация — `NetherLoot01`: 146 исходных ячеек, фундамент из незерака,
+сундук с 13 исходными ресурсами и спавнер на два ZombiePigmanSoldier.
+Поиск: `/locate structure techguns:nether_loot_01`. Сундук сохраняет отложенный
+лут, работает с воронками и не пополняется после опустошения.
+См. `docs/NETHER_LOOT.ru.md`.
 
 Доступны четыре части `t2_combat_*`: типовая защита, износ, ремонт обсидиановой
 сталью на наковальне и шесть исходных камуфляжей. Shift + ПКМ с бронёй в руке
