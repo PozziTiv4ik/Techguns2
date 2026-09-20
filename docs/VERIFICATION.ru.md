@@ -1378,7 +1378,14 @@ Computer Use и интерактивный Minecraft не использовал
 
 Локальные журналы: `.tools/spawner-game-verification.log`,
 `.tools/spawner-python-full.log`, `.tools/spawner-audit-result.json`.
-Linux CI точной исходной ревизии ещё ожидается; результат будет добавлен после push.
+Linux CI завершился **2026-09-20 14:35 Europe/Zurich**:
+[запуск 35510835091](https://github.com/PozziTiv4ik/Techguns2/actions/runs/35510835091), коммит `b53f4cf4b3d32c9b9a35ad306de4875aed789e66`.
+Проверены точный headSha, успешный итог всех шагов, 1370 генерируемых файлов,
+179 Python-проверок, ресурсный граф, сборка/тесты ядра и все 887 GameTests:
+874 основных, один обычного мира и 12 условных. Ошибок `/ERROR]` в полном
+журнале нет. Журналы: `.tools/spawner-ci-result.json`, `.tools/spawner-ci-full.log`.
+Следующий коммит меняет только протокол и сводный статус; тестировалась именно
+указанная исходная ревизия.
 
 Это серверный срез HOLE и жизненного цикла девяти NPC. SOLDIER_SPAWN требует
 ArmySoldier и берета T2. Остаются локации, остальные NPC, произвольный entity-NBT,
