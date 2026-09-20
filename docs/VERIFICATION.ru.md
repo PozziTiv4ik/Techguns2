@@ -1694,8 +1694,17 @@ JAR **6 100 463 байта**; **1438** сгенерированных ресур
 
 Журналы: `.tools/nether-acid-game-verification.log`, `.tools/nether-acid-python-full.log`,
 `.tools/nether-acid-audit-result.json`. Первые диагностические попытки сохранены
-отдельно. Linux CI текущего среза ещё не запускался; прежний Linux checkpoint
-выше относится к NetherLoot01.
+отдельно.
+
+Linux CI завершился **2026-09-20 16:51 Europe/Zurich**:
+[запуск 35517529886](https://github.com/PozziTiv4ik/Techguns2/actions/runs/35517529886),
+точная исходная ревизия `2e239f4e72c6731e24e9d9cbda3b3ea2562a9fea`. Все 13 шагов успешны;
+проверены генератор (1493), Python (210), ресурсы, сборка/ядро и все
+972 GameTests (953 + 7 + 12). Linux повторил обе кислотные ямы в basalt_deltas,
+включая MixtureSeed, две точки NetherLoot01 и прежний алтарь на seed 0.
+`/ERROR]` в журнале нет. Журналы: `.tools/nether-acid-ci-result.json`,
+`.tools/nether-acid-ci-full.log`. Следующий коммит меняет только
+протокол/статус; тестировалась указанная исходная ревизия.
 
 Computer Use и интерактивный клиент не использовались. Визуальная приёмка,
 несколько seed полной генерации, настоящий restart/crash, multiplayer,
