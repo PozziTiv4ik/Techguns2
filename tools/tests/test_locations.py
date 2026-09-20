@@ -82,6 +82,7 @@ class LocationPortTests(unittest.TestCase):
             definition=json.loads(files[RESOURCES+f'data/techguns/worldgen/structure/{name}.json'])
             self.assertEqual(definition['type'],'techguns:'+name); self.assertEqual(definition['biomes'],'#techguns:has_'+name)
             self.assertEqual(definition['spawn_overrides'],{}); self.assertEqual((definition['reserved_medium_grid'],definition['reserved_big_grid']),(32,64))
+            self.assertEqual(definition['step'],'top_layer_modification')
             setting=json.loads(files[RESOURCES+f'data/techguns/worldgen/structure_set/{name}.json']); self.assertEqual(setting['structures'],[{'structure':'techguns:'+name,'weight':1}]); placements.append(setting['placement'])
         self.assertEqual(placements[0],placements[1])
         self.assertEqual(loot_location_definition()['generation'],altar_definition()['generation'])
@@ -149,7 +150,7 @@ class LocationPortTests(unittest.TestCase):
 
     def test_natural_set_grid_and_unported_tickets_remain_explicit(self):
         d=altar_definition(); g=d['generation']; self.assertEqual([e['weight'] for e in g['candidates']],[10]*5)
-        self.assertEqual([e['implemented'] for e in g['candidates']],[True,False,True,False,False])
+        self.assertEqual([e['implemented'] for e in g['candidates']],[True,False,True,True,False])
         files=generate_location_content(); structure=json.loads(files[RESOURCES+'data/techguns/worldgen/structure/nether_altar_small.json'])
         self.assertEqual((structure['reserved_medium_grid'],structure['reserved_big_grid']),(32,64)); self.assertEqual(structure['spawn_overrides'],{})
         placement=json.loads(files[RESOURCES+'data/techguns/worldgen/structure_set/nether_altar_small.json'])['placement']

@@ -3,6 +3,16 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StructureRulesTest {
+    @Test void originalMixtureKeepsInclusiveThreeWayRollInsteadOfEqualOdds() {
+        assertTrue(StructureRules.acidMixture(0)); assertTrue(StructureRules.acidMixture(1)); assertFalse(StructureRules.acidMixture(2));
+        assertThrows(IllegalArgumentException.class,()->StructureRules.acidMixture(-1));
+        assertThrows(IllegalArgumentException.class,()->StructureRules.acidMixture(3));
+    }
+    @Test void oddAcidPoolKeepsSourceNineWideCornerShift() {
+        int[][] shifts={{0,0},{0,-1},{-1,-1},{-1,0}};
+        for(int turn=0;turn<4;turn++) assertArrayEquals(shifts[turn],StructureRules.originShift(turn,9,9));
+        assertArrayEquals(new int[]{3,6},StructureRules.rotate(2,3,1,4,4));
+    }
     @Test void allCandidateTicketsRetainSourceOrderWithAndWithoutOres() {
         for(boolean ores:new boolean[]{false,true}) for(int roll=0;roll<StructureRules.smallNetherTotal(ores);roll++)
             assertEquals(roll/10,StructureRules.smallNetherCandidate(roll,ores));

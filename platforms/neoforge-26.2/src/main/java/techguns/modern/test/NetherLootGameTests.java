@@ -214,14 +214,16 @@ final class NetherLootGameTests {
     }
     private static void exclusive(GameTestHelper h) {
         var l=h.getLevel().getServer().getLevel(Level.NETHER); var loot=structure(l); var altar=(NetherAltarStructure)l.registryAccess().lookupOrThrow(Registries.STRUCTURE).getValue(NetherAltarPiece.TEMPLATE);
+        var acid=(NetherAcidStructure)l.registryAccess().lookupOrThrow(Registries.STRUCTURE).getValue(NetherAcidPiece.TEMPLATE);
         boolean original=LocationConfig.ORE_CLUSTERS.get(); int[] hits=new int[5];
         try { for(boolean ores:new boolean[]{false,true}) { LocationConfig.ORE_CLUSTERS.set(ores);
             for(long seed:new long[]{0,1,42}) for(int n=1;n<=64;n++) {
                 var pos=new ChunkPos(16,16*n); int roll=context(l,pos,seed).random().nextInt(StructureRules.smallNetherTotal(ores)); int candidate=StructureRules.smallNetherCandidate(roll,ores); hits[candidate]++;
-                boolean a=altar.findGenerationPoint(context(l,pos,seed)).isPresent(),b=loot.findGenerationPoint(context(l,pos,seed)).isPresent();
-                h.assertTrue(!(a&&b),"Native context restarts the same RNG for both IDs; tickets are mutually exclusive");
+                boolean a=altar.findGenerationPoint(context(l,pos,seed)).isPresent(),b=loot.findGenerationPoint(context(l,pos,seed)).isPresent(),c=acid.findGenerationPoint(context(l,pos,seed)).isPresent();
+                h.assertTrue((a?1:0)+(b?1:0)+(c?1:0)<=1,"Native context restarts the same RNG for all three IDs; tickets are mutually exclusive");
                 h.assertTrue(!a || candidate==0,"Altar only consumes original tickets"); h.assertTrue(!b || candidate==2,"Loot only consumes original tickets");
-                if(candidate==1 || candidate>=3) h.assertTrue(!a && !b,"Unported choice stays a skipped site");
+                h.assertTrue(!c || candidate==3,"Acid hole only consumes original tickets");
+                if(candidate==1 || candidate==4) h.assertTrue(!a && !b && !c,"Unported choice stays a skipped site");
             }
         } } finally { LocationConfig.ORE_CLUSTERS.set(original); }
         for(int hit:hits) h.assertTrue(hit>0,"All original candidate ranges exercised across native seeds"); h.succeed();

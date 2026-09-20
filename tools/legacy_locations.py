@@ -47,7 +47,7 @@ def altar_definition():
             'palette':palette,'spawners':spawners,'cells':cells,
             'generation':{'dimension':'minecraft:the_nether','small_grid':16,'medium_grid':32,'big_grid':64,
                           'min_y':20,'max_y':100,'clearance':10,'corner_height_spread':10,
-                          'candidates':[{'id':name,'weight':10,'implemented':name in ('nether_altar_small','nether_loot_01')} for name in
+                          'candidates':[{'id':name,'weight':10,'implemented':name in ('nether_altar_small','nether_loot_01','nether_acid_hole')} for name in
                                         ('nether_altar_small','nether_soul_platform','nether_loot_01','nether_acid_hole','nether_ore_cluster_small')],
                           'ore_cluster_candidate_conditional':True,'native_rng':'Minecraft 26.2 structure seed; not identical to 1.12.2 population RNG'}}
 
@@ -93,6 +93,36 @@ def loot_location_definition():
             'worldgen_floor_offset':-1,'foundation_cells':sum(c[1]==0 for c in cells),
             'palette':palette,'block_entities':entities,'cells':cells,'generation':altar_definition()['generation'],
             'loot_table_source':'legacy/1.12.2/src/main/resources/assets/techguns/loot_tables/chests/factory_building.json'}
+
+
+def acid_location_definition():
+    raw=(LEGACY/'resources/assets/techguns/structures/nether_acid_hole').read_bytes().replace(b'\r\n',b'\n')
+    lines=raw.decode().splitlines(); cells=[list(map(int,line.split(','))) for line in lines[1:] if line]
+    assert len(cells)==int(lines[0]) and len({tuple(c[:3]) for c in cells})==len(cells)
+    source=strip_comments((LEGACY/'java/techguns/world/structures/NetherAcidHole.java').read_text())
+    palette=[]; entities={}; weighted=[]
+    for index,entry in enumerate(re.findall(r'blockList.add\((.*)\);',source)):
+        if entry=='MBlockRegister.NETHERRACK_ROCKY': state={'Name':'minecraft:netherrack'}
+        elif entry=='MBlockRegister.AIR': state={'Name':'minecraft:air'}
+        elif entry=='new MBlock(Blocks.SOUL_SAND, 0)': state={'Name':'minecraft:soul_sand'}
+        elif entry=='new MBlock(TGFluids.BLOCK_FLUID_ACID, 0)': state={'Name':'techguns:block_creeper_acid','Properties':{'level':'0'}}
+        elif entry=='new MultiMBlock(new Block[]{TGFluids.BLOCK_FLUID_ACID,Blocks.NETHERRACK},new int[]{0,0}, new int[]{1,1})':
+            state={'Name':'minecraft:structure_block','Properties':{'mode':'data'}}
+            entities[index]={'id':'minecraft:structure_block','mode':'DATA','metadata':'techguns:acid_or_netherrack'}
+            weighted.append({'palette_index':index,'states':['techguns:block_creeper_acid','minecraft:netherrack'],
+                             'weights':[1,1],'roll_bound':3,'acid_rolls':[0,1],'netherrack_rolls':[2]})
+        else: raise ValueError('Unmapped NetherAcidHole palette entry: '+entry)
+        palette.append(state)
+    assert all(0<=c[3]<len(palette) for c in cells)
+    declared=list(map(int,re.search(r'super\((\d+),(\d+),(\d+),',source).groups()))
+    return {'source':'legacy/1.12.2/src/main/java/techguns/world/structures/NetherAcidHole.java',
+            'scan_sha256':hashlib.sha256(raw).hexdigest(),'size':[max(c[i] for c in cells)+1 for i in range(3)],
+            'declared_size':declared,'height_offset':int(re.search(r'int hoffset = (-?\d+);',source)[1]),
+            'worldgen_floor_offset':-1,'foundation_cells':sum(c[1]==0 for c in cells),
+            'foundation_depth':16,'foundation_stop_after_solids':2,
+            'palette':palette,'block_entities':entities,'weighted_cells':weighted,'cells':cells,
+            'generation':altar_definition()['generation'],
+            'mixture_rng':'Saved per-piece seed + absolute block position; exact source roll probabilities, not legacy world.rand sequence'}
 
 
 def factory_chest_loot():
@@ -186,8 +216,10 @@ def generate_location_content():
     data('content/nether-altar-small.json',altar_definition())
     files[RESOURCES+'data/techguns/structure/nether_altar_small.nbt']=altar_nbt()
     data(RESOURCES+'data/techguns/tags/worldgen/biome/has_nether_altar_small.json',{'replace':False,'values':['#minecraft:is_nether']})
+    # Vanilla DELTA is a SURFACE_STRUCTURES feature, after native structures in that step.
+    # Place these locations later so lava deltas/basalt cannot overwrite their acid or metal.
     data(RESOURCES+'data/techguns/worldgen/structure/nether_altar_small.json',{'type':'techguns:nether_altar_small','biomes':'#techguns:has_nether_altar_small',
-         'step':'surface_structures','spawn_overrides':{},'terrain_adaptation':'none','reserved_medium_grid':32,'reserved_big_grid':64})
+         'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none','reserved_medium_grid':32,'reserved_big_grid':64})
     # separation=spacing-1 removes the vanilla random offset: exactly the original modulo lattice.
     data(RESOURCES+'data/techguns/worldgen/structure_set/nether_altar_small.json',{'structures':[{'structure':'techguns:nether_altar_small','weight':1}],
          'placement':{'type':'minecraft:random_spread','spacing':16,'separation':15,'salt':1337262}})
@@ -196,10 +228,17 @@ def generate_location_content():
     data(RESOURCES+'data/techguns/loot_table/chests/factory_building.json',factory_chest_loot())
     data(RESOURCES+'data/techguns/tags/worldgen/biome/has_nether_loot_01.json',{'replace':False,'values':['#minecraft:is_nether']})
     data(RESOURCES+'data/techguns/worldgen/structure/nether_loot_01.json',{'type':'techguns:nether_loot_01','biomes':'#techguns:has_nether_loot_01',
-         'step':'surface_structures','spawn_overrides':{},'terrain_adaptation':'none','reserved_medium_grid':32,'reserved_big_grid':64})
+         'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none','reserved_medium_grid':32,'reserved_big_grid':64})
     # Separate native IDs keep /locate useful. Both structures read the same chunk-seeded candidate roll,
     # so their disjoint original tickets can never place both locations on the same site.
     data(RESOURCES+'data/techguns/worldgen/structure_set/nether_loot_01.json',{'structures':[{'structure':'techguns:nether_loot_01','weight':1}],
+         'placement':{'type':'minecraft:random_spread','spacing':16,'separation':15,'salt':1337262}})
+    data('content/nether-acid-hole.json',acid_location_definition())
+    files[RESOURCES+'data/techguns/structure/nether_acid_hole.nbt']=location_nbt(acid_location_definition())
+    data(RESOURCES+'data/techguns/tags/worldgen/biome/has_nether_acid_hole.json',{'replace':False,'values':['#minecraft:is_nether']})
+    data(RESOURCES+'data/techguns/worldgen/structure/nether_acid_hole.json',{'type':'techguns:nether_acid_hole','biomes':'#techguns:has_nether_acid_hole',
+         'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none','reserved_medium_grid':32,'reserved_big_grid':64})
+    data(RESOURCES+'data/techguns/worldgen/structure_set/nether_acid_hole.json',{'structures':[{'structure':'techguns:nether_acid_hole','weight':1}],
          'placement':{'type':'minecraft:random_spread','spacing':16,'separation':15,'salt':1337262}})
     entries=',\n'.join(f'        new Variant("{m["id"]}", {m["metadata"]}, {m["light"]})' for m in metals)
     files['core/src/main/java/techguns/core/NetherMetal.java']=('''package techguns.core;

@@ -3,7 +3,6 @@ package techguns.modern.world.structure;
 import java.util.Optional;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.levelgen.structure.*;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
 import techguns.core.StructureRules;
 
 /** Shared original candidate roll and cave search; separate native IDs never reroll on a failed candidate. */
@@ -16,7 +15,7 @@ public abstract class SmallNetherStructure extends Structure {
     }
     public int mediumGrid() { return medium; }
     public int bigGrid() { return big; }
-    protected abstract TemplateStructurePiece createPiece(StructureTemplateManager manager,BlockPos origin,int direction);
+    protected abstract TemplateStructurePiece createPiece(GenerationContext context,BlockPos origin,int direction);
     @Override public StructureStart generate(net.minecraft.core.Holder<Structure> selected,
             net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level> dimension,
             net.minecraft.core.RegistryAccess registries, net.minecraft.world.level.chunk.ChunkGenerator generator,
@@ -42,6 +41,6 @@ public abstract class SmallNetherStructure extends Structure {
         var shift=StructureRules.originShift(direction,width,width);
         var origin=new BlockPos(chunk.getMinBlockX()+shift[0],floor+floorOffset,chunk.getMinBlockZ()+shift[1]);
         if(origin.getY()-foundationDepth<context.heightAccessor().getMinY() || origin.getY()+10>=context.heightAccessor().getMaxY()) return Optional.empty();
-        return Optional.of(new GenerationStub(origin.offset(width/2,5,width/2),pieces->pieces.addPiece(createPiece(context.structureTemplateManager(),origin,direction))));
+        return Optional.of(new GenerationStub(origin.offset(width/2,5,width/2),pieces->pieces.addPiece(createPiece(context,origin,direction))));
     }
 }

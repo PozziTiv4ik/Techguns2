@@ -234,7 +234,7 @@ Grinder возвращает исходные материалы. Одноцве
 поддерживает вложенный ItemStack и необязательные бонусы. 35 GameTests, пять
 JUnit и шесть Python проверяют новую броню; визуальная приёмка остаётся.
 См. `docs/T1_COMBAT.ru.md`. ZombieSoldier подключён к T1 Combat, Farmer/Miner — к T1 Miner;
-Scout, SkeletonSoldier, Bandit, бензопила и PsychoSteve перенесены; HOLE, SOLDIER_SPAWN, берет T2 и ArmySoldier подключены; малый адский алтарь и NetherLoot01 подключены; следующий срез — NetherAcidHole.
+Scout, SkeletonSoldier, Bandit, бензопила и PsychoSteve перенесены; HOLE, SOLDIER_SPAWN, берет T2 и ArmySoldier подключены; малый адский алтарь, NetherLoot01 и NetherAcidHole подключены; следующий срез — Ghastling и NetherSoulPlatform.
 
 ### M7 — блоки, материалы и жидкости
 
@@ -295,7 +295,7 @@ Repair Bench проходят после рефакторинга. В GUI ест
 57 основных GameTests и один условный проверяют циклы, сохранение, вместимость,
 воронки и пакеты. Шесть JUnit и семь Python проверяют математику/исходники/ресурсы.
 Визуальная приёмка и реальные сторонние FE-моды остаются. См. `docs/GRINDER.ru.md`.
-Малый адский алтарь и NetherLoot01 с исходным сундуком подключены; следующий срез — NetherAcidHole (M10).
+Малый адский алтарь, NetherLoot01 с сундуком и NetherAcidHole подключены; следующий срез — Ghastling и NetherSoulPlatform (M10).
 
 Критерий готовности: воспроизводимая survival-цепочка от сырья до боеприпасов/оружия;
 проверены нехватка энергии, заполненный выход и разборка работающего станка.
@@ -481,7 +481,7 @@ Bolt Action, независимыми шансами частей T2 и обяз
 +10%/+20%, четыре ткани для крафта, тканевый ремонт и Grinder.
 Добавлены 31 GameTest, два JUnit и девять Python; см. `docs/ARMY_SOLDIER_BERET.ru.md`.
 
-Малый адский алтарь и NetherLoot01 с исходным сундуком подключены; следующий срез — NetherAcidHole.
+Малый адский алтарь, NetherLoot01 с сундуком и NetherAcidHole подключены; следующий срез — Ghastling и NetherSoulPlatform.
 Остальные NPC, произвольный entity-NBT, структуры и импорт 1.12.2 остаются.
 
 **T1 Scout (M6) перенесён**: бандитские маска/жилет/штаны/ботинки, 825 прочности,
@@ -510,6 +510,7 @@ Bolt Action, независимыми шансами частей T2 и обяз
 - [x] Руды через configured/placed features и biome modifiers.
 - [x] Первый native Structure/StructureSet/TemplateStructurePiece: NetherAltarSmall и десять Nether Metal.
 - [x] NetherLoot01, исходный factory_building chest loot и конечная охрана.
+- [x] NetherAcidHole: природная кислота, исходная вероятность и сохранённый seed заполнения.
 - [ ] Военные базы, данжи и остальные структуры — новый structure pipeline.
 - [ ] Конверсия шаблонов/метаданных блоков и палитр; проверка высоты мира.
 - [ ] Флаги спавна, защита баз, отряды подкрепления и уровни опасности.
@@ -535,6 +536,11 @@ headless-запуске. Также перенесён **NetherAltarSmall**: 769
 ZombiePigmanSoldier 2/1/200/1. Сохранение сундука, автоматизация, все веса,
 две реальные точки на seed 0 и исключение наложения с алтарём проверены.
 Добавлены 17 GameTests, два JUnit и шесть Python. См. `docs/NETHER_LOOT.ru.md`.
+Следом добавлен **NetherAcidHole**: 269 ячеек, 60 колонн фундамента,
+девять источников кислоты и двенадцать случайных клеток с исходным шансом 2/3.
+Seed смеси сохраняется; размещение частей не меняет рисунок. Три локации
+перенесены на поздний этап, чтобы vanilla DELTA не заменяла кислоту лавой.
+См. `docs/NETHER_ACID.ru.md`. Следующий срез — Ghastling и NetherSoulPlatform.
 Остальные структуры, несколько seed полной генерации,
 сосуществование со сторонними структурами и визуальная приёмка остаются открытыми.
 

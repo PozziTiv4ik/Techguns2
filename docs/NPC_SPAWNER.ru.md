@@ -115,7 +115,8 @@ ArmySoldier, размещение/смерти/сохранение военно
 произвольный entity-NBT в таблице типов, импорт миров 1.12.2 и визуальная приёмка.
 Малый адский алтарь и NetherLoot01 перенесены: второй использует
 ZombiePigmanSoldier 2/1/200/1 рядом с исходным сундуком.
-Следующий срез — NetherAcidHole и остальные локации.
+NetherAcidHole перенесён без спавнера, как в оригинале.
+Следующий срез — Ghastling и его спавнер в NetherSoulPlatform.
 Computer Use и интерактивный Minecraft не использовались.
 
 Источники: `BlockTGSpawner.java`, `TGSpawnerTileEnt.java`, `ITGSpawnerNPC.java`,

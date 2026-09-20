@@ -17,6 +17,11 @@ public final class StructureRules {
         if(roll<0 || roll>=smallNetherTotal(oreClusters)) throw new IllegalArgumentException("Invalid structure roll");
         return roll/10; // Altar, soul platform, loot, acid hole, conditional ore cluster; no reweighting.
     }
+    /** MultiMBlock rolls nextInt(totalWeight+1), then uses <= cumulative weight: [1,1] means 2/3 acid. */
+    public static boolean acidMixture(int roll) {
+        if(roll<0 || roll>2) throw new IllegalArgumentException("Invalid original mixture roll");
+        return roll<=1;
+    }
     public static int airFloor(IntPredicate air) {
         int count=0;
         for(int y=MAX_Y;y>MIN_Y;y--) {
