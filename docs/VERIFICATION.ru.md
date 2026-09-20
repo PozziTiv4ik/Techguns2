@@ -1784,8 +1784,17 @@ JAR **6 149 089 байт**, **1445** сгенерированных ресурс
 Legacy-tree неизменен: `270b27b1cc52019733bb79facda68ce29aa038be`.
 
 Журналы: `.tools/ghast-game-final.log`, `.tools/ghast-python-full.log`,
-`.tools/ghast-audit-result.json`. Linux CI текущего среза ещё не запускался;
-предыдущий Linux checkpoint относится к кислотной яме.
+`.tools/ghast-audit-result.json`.
+
+Linux CI завершился **2026-09-20 17:25 Europe/Zurich**:
+[запуск 35519300940](https://github.com/PozziTiv4ik/Techguns2/actions/runs/35519300940),
+точная исходная ревизия `145db8a6b8819e621af94c2ac22e3407640305e8`. Все 13 шагов успешны;
+проверены генератор (1503), Python (218), ресурсы, сборка/ядро и все
+1006 GameTests (985 + 9 + 12). Linux повторил обе Soul Platform,
+обе кислотные ямы, две точки NetherLoot01 и прежний алтарь на seed 0.
+`/ERROR]` в журнале нет. Журналы: `.tools/ghast-ci-result.json`,
+`.tools/ghast-ci-full.log`. Следующий коммит меняет только
+протокол/статус; тестировалась указанная исходная ревизия.
 
 Computer Use и интерактивный клиент не использовались. Визуальная приёмка,
 несколько seed полной генерации, настоящий restart/crash, multiplayer,
