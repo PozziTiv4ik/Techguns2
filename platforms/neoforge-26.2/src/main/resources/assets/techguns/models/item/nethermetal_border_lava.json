@@ -1,0 +1,7 @@
+{
+  "parent": "techguns:item/cube_glow_frame_all",
+  "textures": {
+    "all": "techguns:item/nethermetal_border_alpha",
+    "glow": "minecraft:block/lava_still"
+  }
+}

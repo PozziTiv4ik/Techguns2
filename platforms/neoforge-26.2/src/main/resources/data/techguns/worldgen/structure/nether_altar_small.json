@@ -1,0 +1,9 @@
+{
+  "type": "techguns:nether_altar_small",
+  "biomes": "#techguns:has_nether_altar_small",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none",
+  "reserved_medium_grid": 32,
+  "reserved_big_grid": 64
+}

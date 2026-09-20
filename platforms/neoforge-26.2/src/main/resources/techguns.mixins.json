@@ -4,7 +4,8 @@
   "package": "techguns.modern.mixin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
-    "PlayerArmorWearMixin"
+    "PlayerArmorWearMixin",
+    "WorldgenTestOptionsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

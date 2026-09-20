@@ -30,7 +30,7 @@ jobs:
         run: ./gradlew build --console=plain
       - name: Test in Minecraft dedicated GameTest server
         run: ./gradlew :neoforge-26.2:runGameTestServer --console=plain
-      - name: Test ore generation in new normal-terrain chunks
+      - name: Test ores and structures in new normal-terrain chunks
         run: ./gradlew :neoforge-26.2:runOreWorldTestServer --console=plain
       - name: Test conditional Chemical Laboratory recipes
         run: ./gradlew :neoforge-26.2:runChemistryTestServer --console=plain

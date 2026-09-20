@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:nethermetal_panel",
+    "count": 16
+  },
+  "pattern": [
+    "nsn",
+    "sis",
+    "nsn"
+  ],
+  "key": {
+    "s": "#c:stones",
+    "i": "#c:ingots/iron",
+    "n": "#c:netherracks"
+  }
+}

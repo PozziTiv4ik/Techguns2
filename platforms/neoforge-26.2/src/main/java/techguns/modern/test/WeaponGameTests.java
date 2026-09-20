@@ -64,6 +64,7 @@ public final class WeaponGameTests {
         ArmyGameTests.register(FUNCTIONS);
         BeretGameTests.register(FUNCTIONS);
         NpcSpawnerGameTests.register(FUNCTIONS);
+        LocationGameTests.register(FUNCTIONS);
         RuralZombieGameTests.register(FUNCTIONS);
         FUNCTIONS.register("ammo_persists", () -> WeaponGameTests::ammoPersists);
         FUNCTIONS.register("reload_timing_and_consumption", () -> WeaponGameTests::reloadTiming);
@@ -84,7 +85,7 @@ public final class WeaponGameTests {
         FUNCTIONS.getEntries().forEach(function -> event.registerTest(function.getId(),
                 new FunctionGameTestInstance(function.getKey(),
                         new TestData<>(environment, TGContent.id("weapon_test"), function.getId().getPath().startsWith("zombie_overworld_") || function.getId().getPath().startsWith("grinder_") || function.getId().getPath().startsWith("charging_") || function.getId().getPath().startsWith("fabricator_") ? 400 : function.getId().getPath().startsWith("chainsaw_") ? 300 : function.getId().getPath().startsWith("reaction_") ? 800 : function.getId().getPath().startsWith("blast_") ? 1200 :
-                                function.getId().getPath().startsWith("smelting_") || function.getId().getPath().startsWith("chem_") ? 800 :
+                                function.getId().getPath().startsWith("structure_") || function.getId().getPath().startsWith("smelting_") || function.getId().getPath().startsWith("chem_") ? 800 :
                                 function.getId().getPath().startsWith("press_") || function.getId().getPath().startsWith("metal_") ? 300 : 100, 0, true))));
     }
 

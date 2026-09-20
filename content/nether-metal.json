@@ -1,0 +1,70 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/blocks/EnumNetherMetalType.java",
+  "hardness": 8,
+  "blast_resistance": 8,
+  "variants": [
+    {
+      "id": "nethermetal_panel",
+      "metadata": 0,
+      "light": 0
+    },
+    {
+      "id": "nethermetal_grate1",
+      "metadata": 1,
+      "light": 0
+    },
+    {
+      "id": "nethermetal_grate2",
+      "metadata": 2,
+      "light": 0
+    },
+    {
+      "id": "nethermetal_grey_dark",
+      "metadata": 3,
+      "light": 0
+    },
+    {
+      "id": "nethermetal_grey",
+      "metadata": 4,
+      "light": 0
+    },
+    {
+      "id": "nethermetal_grey_tiles",
+      "metadata": 5,
+      "light": 0
+    },
+    {
+      "id": "nethermetal_border_red",
+      "metadata": 6,
+      "light": 0
+    },
+    {
+      "id": "nethermetal_plate_black",
+      "metadata": 7,
+      "light": 0
+    },
+    {
+      "id": "nethermetal_plate_red",
+      "metadata": 8,
+      "light": 0
+    },
+    {
+      "id": "nethermetal_border_lava",
+      "metadata": 9,
+      "light": 15
+    }
+  ],
+  "camo_order": [
+    "nethermetal_panel",
+    "nethermetal_grate1",
+    "nethermetal_grate2",
+    "nethermetal_grey_dark",
+    "nethermetal_grey",
+    "nethermetal_grey_tiles",
+    "nethermetal_border_red",
+    "nethermetal_plate_black",
+    "nethermetal_plate_red",
+    "nethermetal_border_lava"
+  ],
+  "ctm_integration": "pending; source base pixels retained"
+}

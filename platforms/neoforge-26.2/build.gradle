@@ -27,7 +27,7 @@ neoForge {
             programArgument '--universe'
             programArgument 'ore-worldgen-tests'
             programArgument '--tests'
-            programArgument 'techguns:ore_natural_chunks'
+            programArgument 'techguns:*_natural_chunks'
         }
         chemistryTestServer {
             type = 'gameTestServer'

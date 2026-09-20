@@ -125,7 +125,17 @@
     "techguns:simplemachine@10": "techguns:charging_station",
     "techguns:simplemachine@9": "techguns:repair_bench",
     "techguns:simplemachine@8": "techguns:camo_bench",
-    "techguns:simplemachine2@8": "techguns:grinder"
+    "techguns:simplemachine2@8": "techguns:grinder",
+    "techguns:nethermetal@0": "techguns:nethermetal_panel",
+    "techguns:nethermetal@1": "techguns:nethermetal_grate1",
+    "techguns:nethermetal@2": "techguns:nethermetal_grate2",
+    "techguns:nethermetal@3": "techguns:nethermetal_grey_dark",
+    "techguns:nethermetal@4": "techguns:nethermetal_grey",
+    "techguns:nethermetal@5": "techguns:nethermetal_grey_tiles",
+    "techguns:nethermetal@6": "techguns:nethermetal_border_red",
+    "techguns:nethermetal@7": "techguns:nethermetal_plate_black",
+    "techguns:nethermetal@8": "techguns:nethermetal_plate_red",
+    "techguns:nethermetal@9": "techguns:nethermetal_border_lava"
   },
   "recipes": [
     {
@@ -531,6 +541,10 @@
     {
       "id": "techguns:netherblaster",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/netherblaster.json"
+    },
+    {
+      "id": "techguns:nethermetal_panel",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/nethermetal_0.json"
     },
     {
       "id": "techguns:pistol",

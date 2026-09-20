@@ -14,6 +14,7 @@ from legacy_reactions import reaction_recipes, PARTS as REACTION_PARTS
 from legacy_fabricator import fabricator_recipes, PARTS as FABRICATOR_PARTS
 from legacy_grinder import grinder_data
 from legacy_armors import ARMOR_SETS, armor_definitions
+from legacy_locations import metal_definitions
 
 ROOT = Path(__file__).resolve().parents[1]
 LEGACY = ROOT / 'legacy/1.12.2/src/main'
@@ -27,6 +28,7 @@ def inputs(recipe):
 def convert_recipe(legacy, shared, weapons):
     def item(value):
         identifier = value['item']
+        if identifier == 'techguns:nethermetal': return 'techguns:'+metal_definitions()[value.get('data',0)]['id']
         if identifier == 'techguns:basicmachine':
             return 'techguns:' + {0: 'ammo_press', 1: 'metal_press', 2: 'chem_lab'}[value.get('data', 0)]
         if identifier == 'techguns:simplemachine' and value.get('data') in (8,9,10,11): return 'techguns:'+{8:'camo_bench',9:'repair_bench',10:'charging_station',11:'blast_furnace'}[value['data']]
@@ -99,6 +101,7 @@ def plan_crafting(weapon_list):
     selected['simplemachine_9_repair_bench'] = source_recipes['simplemachine_9_repair_bench']
     selected['simplemachine_8_camo_bench'] = source_recipes['simplemachine_8_camo_bench']
     selected['simplemachine2_8_grinder'] = source_recipes['simplemachine2_8_grinder']
+    selected['nethermetal_0'] = source_recipes['nethermetal_0']
     selected['basicmachine_2_chem_lab']=source_recipes['basicmachine_2_chem_lab']
     for meta, part in enumerate(FABRICATOR_PARTS+REACTION_PARTS):
         name = f'multiblockmachine_{meta}_{part}'
@@ -170,6 +173,7 @@ def plan_crafting(weapon_list):
         if name == 'simplemachine_9_repair_bench': identifier = 'repair_bench'
         if name == 'simplemachine_8_camo_bench': identifier = 'camo_bench'
         if name == 'simplemachine2_8_grinder': identifier = 'grinder'
+        if name == 'nethermetal_0': identifier = 'nethermetal_panel'
         if name == 'basicmachine_2_chem_lab': identifier = 'chem_lab'
         if name.startswith('multiblockmachine_'): identifier = re.sub(r'^multiblockmachine_\d+_', '', name)
         if name.startswith('itemshared_'): identifier = re.sub(r'^itemshared_\d+_', '', name)
@@ -195,4 +199,5 @@ def plan_crafting(weapon_list):
     catalog['block_metadata']['techguns:simplemachine@9'] = 'techguns:repair_bench'
     catalog['block_metadata']['techguns:simplemachine@8'] = 'techguns:camo_bench'
     catalog['block_metadata']['techguns:simplemachine2@8'] = 'techguns:grinder'
+    catalog['block_metadata'].update({f'techguns:nethermetal@{m["metadata"]}':'techguns:'+m['id'] for m in metal_definitions()})
     return {'recipes': recipes, 'materials': materials, 'extra_ammo': sorted(extra_ammo), 'tags': tags, 'catalog': catalog}

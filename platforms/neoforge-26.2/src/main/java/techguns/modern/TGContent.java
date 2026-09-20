@@ -86,6 +86,7 @@ public final class TGContent {
                         output.accept(techguns.modern.npc.NpcContent.ARMY_EGG.get());
                         output.accept(techguns.modern.npc.spawner.NpcSpawnerContent.ITEM.get());
                         output.accept(techguns.modern.npc.spawner.NpcSpawnerContent.SOLDIER_ITEM.get());
+                        techguns.modern.world.NetherMetalContent.BLOCKS.values().forEach(block -> output.accept(block.get()));
                         output.accept(techguns.modern.armor.ArmorContent.BERET.get());
                         techguns.modern.armor.ArmorContent.ITEMS.values().forEach(item -> output.accept(item.get()));
                         techguns.modern.armor.ArmorContent.HAZMAT.values().forEach(item -> output.accept(item.get()));

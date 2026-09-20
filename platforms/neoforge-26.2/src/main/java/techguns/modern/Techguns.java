@@ -32,6 +32,9 @@ public final class Techguns {
         techguns.modern.machine.TGMachineConfig.register(container);
         techguns.modern.world.TGOreContent.register(modBus);
         techguns.modern.world.TGOreConfig.register(container);
+        techguns.modern.world.NetherMetalContent.register(modBus);
+        techguns.modern.world.structure.LocationContent.register(modBus);
+        techguns.modern.world.structure.LocationConfig.register(container);
         techguns.modern.fluid.TGFluids.register(modBus);
         techguns.modern.machine.ChemicalRules.register(container);
         modBus.addListener(techguns.modern.network.GunNetwork::register);

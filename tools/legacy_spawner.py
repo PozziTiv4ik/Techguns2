@@ -28,11 +28,12 @@ def generate_spawner_content():
         model['parent']='minecraft:block/block'; model.pop('groups',None)
         model['textures']={key:value.replace(':blocks/',':block/') for key,value in model['textures'].items()}
         data(RESOURCES+f'assets/techguns/models/block/{identifier}.json',model)
-        data(RESOURCES+f'assets/techguns/models/item/{identifier}.json',{'parent':'techguns:block/'+identifier})
+        data(RESOURCES+f'assets/techguns/models/item/{identifier}.json',{**model,'textures':{key:value.replace(':block/',':item/') for key,value in model['textures'].items()}})
         data(RESOURCES+f'assets/techguns/items/{identifier}.json',{'model':{'type':'minecraft:model','model':'techguns:item/'+identifier}})
         data(RESOURCES+f'assets/techguns/blockstates/{identifier}.json',{'variants':{'':{'model':'techguns:block/'+identifier}}})
         data(RESOURCES+f'data/techguns/loot_table/blocks/{identifier}.json',{'type':'minecraft:block','pools':[]})
         files[RESOURCES+f'assets/techguns/textures/block/{legacy_model}.png']=(LEGACY/f'resources/assets/techguns/textures/blocks/{legacy_model}.png').read_bytes()
+        files[RESOURCES+f'assets/techguns/textures/item/{legacy_model}.png']=(LEGACY/f'resources/assets/techguns/textures/blocks/{legacy_model}.png').read_bytes()
     return files
 
 
