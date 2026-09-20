@@ -14,11 +14,23 @@ class NpcSpawnerPortTests(unittest.TestCase):
         self.assertEqual(d['defaults'],{'delay':200,'spawndelay':200,'mobsLeft':5,'maxActive':3,'spawnHeightOffset':0,'spawnrange':2})
         self.assertEqual(d['home_radius'],10)
 
-    def test_hole_and_unported_army_preset_are_distinct(self):
+    def test_hole_and_military_preset_are_distinct(self):
         d=spawner_definition(); self.assertEqual([v['legacy_metadata'] for v in d['variants']],[0,1])
         self.assertEqual(d['variants'][0]['npc'],'techguns:zombiesoldier'); self.assertTrue(d['variants'][0]['implemented'])
-        self.assertEqual(d['variants'][1]['npc'],'techguns:armysoldier'); self.assertFalse(d['variants'][1]['implemented'])
-        self.assertNotIn(RESOURCES+'assets/techguns/items/soldier_spawn.json',generate_spawner_content())
+        self.assertEqual(d['variants'][1]['npc'],'techguns:armysoldier'); self.assertTrue(d['variants'][1]['implemented'])
+        self.assertIn(RESOURCES+'assets/techguns/items/soldier_spawn.json',generate_spawner_content())
+
+    def test_military_original_geometry_texture_and_names(self):
+        files=generate_spawner_content()
+        legacy=json.loads((LEGACY/'resources/assets/techguns/models/block/soldier_spawn.json').read_text())
+        model=json.loads(files[RESOURCES+'assets/techguns/models/block/soldier_spawn.json'])
+        self.assertEqual(model['elements'],legacy['elements'])
+        self.assertEqual(model['textures'],{'0':'techguns:block/soldier_spawn','particle':'techguns:block/soldier_spawn'})
+        self.assertEqual(files[RESOURCES+'assets/techguns/textures/block/soldier_spawn.png'],(LEGACY/'resources/assets/techguns/textures/blocks/soldier_spawn.png').read_bytes())
+        self.assertEqual(json.loads(files[RESOURCES+'data/techguns/loot_table/blocks/soldier_spawn.json'])['pools'],[])
+        for lang in ('en_us','ru_ru'):
+            source=dict(line.split('=',1) for line in (LEGACY/f'resources/assets/techguns/lang/{lang}.lang').read_text(encoding='utf-8').splitlines() if '=' in line)
+            self.assertEqual(spawner_translations(lang)['block.techguns.soldier_spawn'],source['tile.techguns.tg_spawner.1.name'])
 
     def test_original_cuboids_and_uvs_are_unmodified(self):
         legacy=json.loads((LEGACY/'resources/assets/techguns/models/block/hole.json').read_text())

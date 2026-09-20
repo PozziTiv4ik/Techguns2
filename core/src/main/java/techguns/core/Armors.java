@@ -44,13 +44,16 @@ public final class Armors {
         new ArmorSpec("t1_scout_leggings", ArmorSlot.LEGS, 3.25f, 2.4375f, 825, 0.0f, 0.125, 0.02, 0.0, 3, 0.0,
                 2.4375f, 2.4375f, 2.4375f, 0.0f, 0.0, 0.0, 0.0, "", "heavycloth", List.of("t1_scout", "t1_scout_forest", "t1_scout_snow", "t1_scout_black"), "t1_scout", 0.0, ""),
         new ArmorSpec("t1_scout_boots", ArmorSlot.FEET, 2.6f, 1.95f, 825, 0.0f, 0.125, 0.1, 0.0, 2, 0.0,
-                1.95f, 1.95f, 1.95f, 0.0f, 0.0, 0.2, 1.0, "", "heavycloth", List.of("t1_scout", "t1_scout_forest", "t1_scout_snow", "t1_scout_black"), "t1_scout", 0.0, "")
+                1.95f, 1.95f, 1.95f, 0.0f, 0.0, 0.2, 1.0, "", "heavycloth", List.of("t1_scout", "t1_scout_forest", "t1_scout_snow", "t1_scout_black"), "t1_scout", 0.0, ""),
+        new ArmorSpec("t2_beret", ArmorSlot.HEAD, 2.0f, 1.5f, 825, 0.0f, 0.1, 0.0, 0.0, 2, 1.0,
+                1.5f, 1.5f, 1.5f, 0.0f, 0.0, 0.0, 0.0, "heavycloth", "heavycloth", List.of("beret_texture", "beret_texture_black", "beret_texture_green"), "t2_beret", 0.0, "")
     );
     public static final List<ArmorSpec> T2_COMBAT = ALL.stream().filter(a -> a.set().equals("t2_combat")).toList();
     public static final List<ArmorSpec> HAZMAT = ALL.stream().filter(a -> a.set().equals("hazmat")).toList();
     public static final List<ArmorSpec> T1_COMBAT = ALL.stream().filter(a -> a.set().equals("t1_combat")).toList();
     public static final List<ArmorSpec> T1_MINER = ALL.stream().filter(a -> a.set().equals("t1_miner")).toList();
     public static final List<ArmorSpec> T1_SCOUT = ALL.stream().filter(a -> a.set().equals("t1_scout")).toList();
+    public static final List<ArmorSpec> T2_BERET = ALL.stream().filter(a -> a.set().equals("t2_beret")).toList();
     public static final List<String> CAMOS = T2_COMBAT.getFirst().camos();
     public static ArmorSpec forSlot(ArmorSlot slot) { return T2_COMBAT.stream().filter(a -> a.slot()==slot).findFirst().orElseThrow(); }
     public static ArmorSpec forSlot(String set, ArmorSlot slot) { return ALL.stream().filter(a -> a.set().equals(set) && a.slot()==slot).findFirst().orElseThrow(); }

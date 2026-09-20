@@ -83,7 +83,7 @@ def main():
         json.loads(path.read_text(encoding='utf-8'))
     for path in (ASSETS/'equipment').glob('*.json'):
         for layer, entries in json.loads(path.read_text(encoding='utf-8'))['layers'].items():
-            if layer not in ('humanoid','humanoid_leggings'): raise ValueError(f'Unvalidated equipment layer: {path}: {layer}')
+            if layer not in ('humanoid','humanoid_leggings','humanoid_baby'): raise ValueError(f'Unvalidated equipment layer: {path}: {layer}')
             for entry in entries:
                 require(local_path(entry['texture'],f'textures/entity/equipment/{layer}','.png'))
     for name in ('laser3', 'laser3_start'):

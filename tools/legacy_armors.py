@@ -6,7 +6,7 @@ from legacy_items import arguments, parse_stack
 from legacy_npcs import LEGACY, RESOURCES, npc_loot
 
 
-ARMOR_SETS = {'t2_combat':'T2_COMBAT', 'hazmat':'T2_HAZMAT', 't1_combat':'T1_COMBAT', 't1_miner':'T1_MINER', 't1_scout':'T1_SCOUT'}
+ARMOR_SETS = {'t2_combat':'T2_COMBAT', 'hazmat':'T2_HAZMAT', 't1_combat':'T1_COMBAT', 't1_miner':'T1_MINER', 't1_scout':'T1_SCOUT', 't2_beret':'T2_BERET'}
 
 
 def call_arguments(text, name):
@@ -35,8 +35,11 @@ def armor_definitions(set_name='t2_combat'):
     for kind, value in re.findall(r'\.setArmor(Elemental|Explosion|Poison|Radiation)\(([^)]+)\)', declaration[2]):
         values[kind.lower()] = numeric(value)
     result = []
-    for slot, part in [('HEAD','helmet'),('CHEST','chestplate'),('LEGS','leggings'),('FEET','boots')]:
-        declaration=re.search(set_name+'_'+part.capitalize()+r'\s*=\s*new (GenericArmor(?:MultiCamo)?)\(([^;]+);', source)
+    parts = [('HEAD','')] if set_name == 't2_beret' else [('HEAD','helmet'),('CHEST','chestplate'),('LEGS','leggings'),('FEET','boots')]
+    for slot, part in parts:
+        identifier = set_name + ('_' + part if part else '')
+        field = set_name + ('_' + part.capitalize() if part else '')
+        declaration=re.search(field+r'\s*=\s*new (GenericArmor(?:MultiCamo)?)\(([^;]+);', source)
         constructor=declaration[1]; statement=constructor+'('+declaration[2]
         constructor_args=call_arguments(statement,constructor)
         textures = re.findall(r'"([^"]+)"', re.search(r'String\[\] '+constructor_args[2]+r'\s*=\s*\{([^}]+)\}',source)[1]) if constructor=='GenericArmorMultiCamo' else [json.loads(constructor_args[2])]
@@ -49,7 +52,7 @@ def armor_definitions(set_name='t2_combat'):
         fall, height = bonus('setFallProtection', '0,0')
         speed, jump = bonus('setSpeedBoni', '0,0')
         suffix = re.search(r'\.setCamoNameSuffix\("([^"]+)"\)',statement)
-        result.append({'id':set_name+'_'+part, 'set':set_name, 'slot':slot, 'physical':round(defense*factors[slot],6),
+        result.append({'id':identifier, 'set':set_name, 'slot':slot, 'physical':round(defense*factors[slot],6),
             **{kind:round(value*factors[slot],6) for kind,value in values.items()}, 'durability':round(.25*55*base),
             'toughness':toughness,'speed':speed,'jump':jump,'mining':bonus('setMiningBoni')[0],
             'camo_name_suffix':suffix[1] if suffix else '',
@@ -90,6 +93,7 @@ public final class Armors {
     public static final List<ArmorSpec> T1_COMBAT = ALL.stream().filter(a -> a.set().equals("t1_combat")).toList();
     public static final List<ArmorSpec> T1_MINER = ALL.stream().filter(a -> a.set().equals("t1_miner")).toList();
     public static final List<ArmorSpec> T1_SCOUT = ALL.stream().filter(a -> a.set().equals("t1_scout")).toList();
+    public static final List<ArmorSpec> T2_BERET = ALL.stream().filter(a -> a.set().equals("t2_beret")).toList();
     public static final List<String> CAMOS = T2_COMBAT.getFirst().camos();
     public static ArmorSpec forSlot(ArmorSlot slot) { return T2_COMBAT.stream().filter(a -> a.slot()==slot).findFirst().orElseThrow(); }
     public static ArmorSpec forSlot(String set, ArmorSlot slot) { return ALL.stream().filter(a -> a.set().equals(set) && a.slot()==slot).findFirst().orElseThrow(); }
@@ -97,6 +101,11 @@ public final class Armors {
 }
 ''').encode()
     for texture in dict.fromkeys(texture for item in armor for texture in item['textures']):
+        if texture in sets['t2_beret'][0]['textures']:
+            data(RESOURCES + f'assets/techguns/equipment/{texture}.json', {'layers':{layer:[{'texture':'techguns:'+texture}] for layer in ('humanoid','humanoid_baby')}})
+            for layer in ('humanoid','humanoid_baby'):
+                files[RESOURCES + f'assets/techguns/textures/entity/equipment/{layer}/{texture}.png']=(LEGACY / f'resources/assets/techguns/textures/models/armor/{texture}.png').read_bytes()
+            continue
         data(RESOURCES + f'assets/techguns/equipment/{texture}.json', {'layers':{'humanoid':[{'texture':'techguns:'+texture}], 'humanoid_leggings':[{'texture':'techguns:'+texture}]}})
         for number, layer in [(1,'humanoid'),(2,'humanoid_leggings')]:
             files[RESOURCES + f'assets/techguns/textures/entity/equipment/{layer}/{texture}.png']=(LEGACY / f'resources/assets/techguns/textures/models/armor/{texture}_layer_{number}.png').read_bytes()
@@ -140,6 +149,8 @@ def armor_translations(lang):
             result[f'tooltip.techguns.armor.t1_miner.{suffix}camo.{i}']=source[f'techguns.item.t1_miner.{suffix}camoname.{i}']
     for i in range(4): result['tooltip.techguns.armor.hazmat.camo.'+str(i)]=source['techguns.item.hazmatsuit.camoname.'+str(i)]
     for part in names: result['item.techguns.t1_scout_'+part]=source['techguns.item.t1_scout_'+part+'.name']
+    result['item.techguns.t2_beret']=source['techguns.item.t2_beret.name']
+    for i in range(3): result[f'tooltip.techguns.armor.t2_beret.camo.{i}']=source[f'techguns.item.beret_texture.camoname.{i}']
     # The original English/Russian files omit Scout camouflage names; label its actual texture variants.
     scout_names=['Обычный','Лесной','Снежный','Чёрный'] if ru else ['Default','Forest','Snow','Black']
     for i,name in enumerate(scout_names):

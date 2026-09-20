@@ -1,0 +1,36 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/TGArmors.java",
+  "items": [
+    {
+      "id": "t2_beret",
+      "set": "t2_beret",
+      "slot": "HEAD",
+      "physical": 2.0,
+      "elemental": 1.5,
+      "explosion": 1.5,
+      "poison": 1.5,
+      "dark": 1.5,
+      "radiation": 0.0,
+      "durability": 825,
+      "toughness": 0.0,
+      "speed": 0.1,
+      "jump": 0.0,
+      "mining": 0.0,
+      "camo_name_suffix": "",
+      "knockback": 0.0,
+      "radiation_resistance": 0.0,
+      "fall_reduction": 0.0,
+      "free_fall_height": 0.0,
+      "enchantability": 0,
+      "repair_parts": 2,
+      "repair_metal_ratio": 1.0,
+      "repair_metal": "heavycloth",
+      "repair_cloth": "heavycloth",
+      "textures": [
+        "beret_texture",
+        "beret_texture_black",
+        "beret_texture_green"
+      ]
+    }
+  ]
+}

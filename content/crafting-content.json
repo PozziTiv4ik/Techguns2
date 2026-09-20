@@ -645,6 +645,10 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t1_scout_leggings.json"
     },
     {
+      "id": "techguns:t2_beret",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t2_beret.json"
+    },
+    {
       "id": "techguns:t2_combat_boots",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t2_combat_boots.json"
     },

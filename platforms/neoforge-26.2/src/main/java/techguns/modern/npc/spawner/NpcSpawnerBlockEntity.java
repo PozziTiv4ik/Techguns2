@@ -50,10 +50,11 @@ public final class NpcSpawnerBlockEntity extends BlockEntity implements IOwnedSp
     public ItemStack weaponOverride() { return weapon.copy(); }
     public SpawnerLink link() { return new SpawnerLink(GlobalPos.of(level.dimension(),worldPosition),instance); }
     @Override public Either<BlockEntity,Entity> getOwner() { return Either.left(this); }
-    public void defaultHole() {
+    public void defaultHole() { defaultPreset(TGContent.id("zombiesoldier")); }
+    public void defaultPreset(Identifier npc) {
         // Placing a copied block item copies configuration, not live NPC ownership.
         instance=UUID.randomUUID(); active.clear();
-        if(entries.isEmpty()) { entries=List.of(new Entry(TGContent.id("zombiesoldier"),1)); setChanged(); }
+        if(entries.isEmpty()) entries=List.of(new Entry(npc,1));
         setChanged();
     }
     public void configure(int remaining,int maximum,int interval,double range,int height,List<Entry> entries,ItemStack weapon) {

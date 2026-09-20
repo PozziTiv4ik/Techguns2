@@ -15,9 +15,12 @@ public final class NpcSpawnerContent {
     public static final DeferredBlock<NpcSpawnerBlock> BLOCK=BLOCKS.registerBlock("tg_spawner",NpcSpawnerBlock::new,
             p->p.mapColor(MapColor.STONE).strength(-1,0).sound(SoundType.STONE).noOcclusion().pushReaction(PushReaction.BLOCK));
     public static final DeferredItem<BlockItem> ITEM=TGContent.ITEMS.registerSimpleBlockItem(BLOCK);
+    public static final DeferredBlock<NpcSpawnerBlock> SOLDIER_BLOCK=BLOCKS.registerBlock("soldier_spawn",NpcSpawnerBlock::new,
+            p->p.mapColor(MapColor.STONE).strength(-1,0).sound(SoundType.STONE).noOcclusion().pushReaction(PushReaction.BLOCK));
+    public static final DeferredItem<BlockItem> SOLDIER_ITEM=TGContent.ITEMS.registerSimpleBlockItem(SOLDIER_BLOCK);
     private static final DeferredRegister<BlockEntityType<?>> ENTITIES=DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE,Techguns.MOD_ID);
     public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<NpcSpawnerBlockEntity>> ENTITY=ENTITIES.register("tg_spawner",
-            ()->new BlockEntityType<>(NpcSpawnerBlockEntity::new,true,BLOCK.get()));
+            ()->new BlockEntityType<>(NpcSpawnerBlockEntity::new,true,BLOCK.get(),SOLDIER_BLOCK.get()));
     public static void register(IEventBus bus) { BLOCKS.register(bus); ENTITIES.register(bus); NeoForge.EVENT_BUS.addListener(SpawnerMailbox::cleanLoadedPositions); }
     private NpcSpawnerContent() {}
 }

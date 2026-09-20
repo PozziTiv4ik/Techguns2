@@ -1,0 +1,73 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/client/models/armor/ModelBeret.java",
+  "texture_size": [
+    32,
+    32
+  ],
+  "parts": [
+    {
+      "name": "berettop",
+      "uv": [
+        0,
+        0
+      ],
+      "box": [
+        -2.0,
+        -8.7,
+        -4.0,
+        6.0,
+        2.0,
+        8.0
+      ],
+      "mirror": false,
+      "inflate": 0.7,
+      "pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "beretside",
+      "uv": [
+        0,
+        11
+      ],
+      "box": [
+        -3.0,
+        0.0,
+        0.0,
+        3.0,
+        2.0,
+        8.0
+      ],
+      "mirror": false,
+      "inflate": 0.65,
+      "pivot": [
+        -2.7,
+        -8.5,
+        -4.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        -0.6108652381980153
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  ]
+}

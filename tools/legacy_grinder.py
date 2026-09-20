@@ -4,7 +4,7 @@ import re
 from pathlib import Path
 from legacy_items import LEGACY, parse_stack
 from legacy_models import strip_comments, numeric
-from legacy_armors import ARMOR_SETS
+from legacy_armors import ARMOR_SETS, armor_definitions
 
 ROOT = Path(__file__).resolve().parents[1]
 RESOURCES = 'platforms/neoforge-26.2/src/main/resources/'
@@ -69,8 +69,8 @@ def grinder_data():
             for result,factor in zip(results,chances): result['factor']=factor
         recipes.append({'id':identifier,'input':input_id,'outputs':results,'random':chances is not None})
     for armor_set in ARMOR_SETS:
-        for part in ('helmet','chestplate','leggings','boots'):
-            recipes.append({'id':armor_set+'_'+part,'input':'techguns:'+armor_set+'_'+part,'outputs':[],'armor':True})
+        for armor in armor_definitions(armor_set):
+            recipes.append({'id':armor['id'],'input':'techguns:'+armor['id'],'outputs':[],'armor':True})
     machine=strip_comments((LEGACY/'java/techguns/tileentities/GrinderTileEnt.java').read_text())
     operation=strip_comments((LEGACY/'java/techguns/tileentities/operation/MachineOperation.java').read_text())
     return {'source':'legacy/1.12.2/src/main/java/techguns/TGMachineRecipes.java','recipes':recipes,

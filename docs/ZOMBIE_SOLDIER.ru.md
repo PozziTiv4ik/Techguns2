@@ -104,7 +104,7 @@ Farmer и Miner теперь заполняют исходный уровень 
 см. `docs/RURAL_ZOMBIES.ru.md`. SkeletonSoldier, Bandit и PsychoSteve также
 перенесены: обычная таблица Overworld полностью заполнена исходными NPC.
 Остаются спавнеры/структуры, иные измерения, полная фракционная система и
-визуальная приёмка. HOLE-спавнер подключён; следующий срез — берет T2 / ArmySoldier.
+визуальная приёмка. HOLE-спавнер подключён; ArmySoldier, берет и военный спавнер также подключены; следующий срез — локации.
 См. `docs/SKELETON_SOLDIER.ru.md` и `docs/PSYCHO_STEVE.ru.md`.
 
 Исходные файлы: `ZombieSoldier.java`, `GenericNPC.java`, `GenericNPCUndead.java`,

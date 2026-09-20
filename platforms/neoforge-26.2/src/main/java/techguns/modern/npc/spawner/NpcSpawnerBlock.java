@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.*;
 
-/** Original HOLE: small outline, no collision, no survival drops. Soldier preset awaits ArmySoldier. */
+/** Original HOLE and SOLDIER_SPAWN: shared outline/lifecycle with distinct item placement presets. */
 public final class NpcSpawnerBlock extends BaseEntityBlock {
     private static final MapCodec<NpcSpawnerBlock> CODEC=simpleCodec(NpcSpawnerBlock::new);
     private static final VoxelShape OUTLINE=Block.box(2,0,2,14,2,14);
@@ -21,7 +21,8 @@ public final class NpcSpawnerBlock extends BaseEntityBlock {
     @Override protected VoxelShape getCollisionShape(BlockState state,BlockGetter level,BlockPos pos,CollisionContext context) { return Shapes.empty(); }
     @Override public void setPlacedBy(Level level,BlockPos pos,BlockState state,LivingEntity placer,ItemStack stack) {
         super.setPlacedBy(level,pos,state,placer,stack);
-        if(!level.isClientSide() && level.getBlockEntity(pos) instanceof NpcSpawnerBlockEntity spawner) spawner.defaultHole();
+        if(!level.isClientSide() && level.getBlockEntity(pos) instanceof NpcSpawnerBlockEntity spawner)
+            spawner.defaultPreset(techguns.modern.TGContent.id(state.is(NpcSpawnerContent.SOLDIER_BLOCK.get())?"armysoldier":"zombiesoldier"));
     }
     @Override public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level,BlockState state,BlockEntityType<T> type) {
         return level.isClientSide()?null:createTickerHelper(type,NpcSpawnerContent.ENTITY.get(),NpcSpawnerBlockEntity::serverTick);

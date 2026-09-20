@@ -1,0 +1,42 @@
+{
+  "id": "armysoldier",
+  "source": "legacy/1.12.2/src/main/java/techguns/entities/npcs/ArmySoldier.java",
+  "attributes": {
+    "MOVEMENT_SPEED": 0.3,
+    "MAX_HEALTH": 25.0,
+    "ATTACK_DAMAGE": 4.0,
+    "FOLLOW_RANGE": 75.0
+  },
+  "intrinsic_armor": 8.0,
+  "weapons": [
+    "m4",
+    "combatshotgun",
+    "boltaction"
+  ],
+  "armor_chance": 0.5,
+  "head_fallback": "t2_beret",
+  "armor": "T2_COMBAT",
+  "camo": 0,
+  "undead": false,
+  "burns_in_daylight": false,
+  "fire_immune": false,
+  "natural_spawn_entry": false,
+  "faction": "HOSTILE",
+  "loot_id": "entities/armysoldier",
+  "texture": "textures/entity/army_soldier.png",
+  "texture_size": [
+    128,
+    128
+  ],
+  "model": "ModelGenericNPC; shared modern humanoid renderer with source skin",
+  "sounds": {
+    "ambient": "minecraft:entity.villager.ambient",
+    "hurt": "minecraft:entity.villager.hurt",
+    "death": "minecraft:entity.villager.death",
+    "step": "minecraft:entity.zombie_villager.step"
+  },
+  "egg_colors": [
+    7635054,
+    1643794
+  ]
+}

@@ -62,6 +62,7 @@ final class GrinderGameTests {
         for (var c : GUNS) r.register("grinder_gun_" + c.input, () -> h -> gun(h,c));
         for (var ammo : AMMO) r.register("grinder_ammo_" + ammo, () -> h -> ammo(h,ammo));
         for (var slot : ArmorSlot.values()) for (int damage : new int[]{0,1,989}) r.register("grinder_armor_" + slot.name().toLowerCase(Locale.ROOT) + "_" + damage, () -> h -> armor(h,slot,damage));
+        for (int damage : new int[]{0,1,824}) r.register("grinder_beret_"+damage, () -> h -> beret(h,damage));
         r.register("grinder_power_pause", () -> GrinderGameTests::powerPause);
         r.register("grinder_redstone_and_upgrade_snapshot", () -> GrinderGameTests::redstone);
         r.register("grinder_batch_space_limit", () -> GrinderGameTests::space);
@@ -136,6 +137,13 @@ final class GrinderGameTests {
         };
         var wanted=new HashMap<Item,Integer>(); wanted.put(item("ingotobsidiansteel").getItem(),parts[0]); if(parts[1]>0) wanted.put(item("heavycloth").getItem(),parts[1]);
         h.succeedWhen(() -> { h.assertTrue(!m.working() && m.getItem(0).isEmpty(),"Armor operation completed"); h.assertValueEqual(counts(output(m)),wanted,"Original inverse-damage salvage including healthy rounding"); });
+    }
+    private static void beret(GameTestHelper h,int damage) {
+        var m=place(h); var stack=ArmorContent.BERET.toStack(); stack.setDamageValue(damage); TGArmorItem.setCamo(stack,2); m.setItem(0,stack); charge(m,500);
+        int cloth=damage==0?3:damage==1?2:1;
+        h.succeedWhen(()-> { h.assertTrue(!m.working() && m.getItem(0).isEmpty(),"Beret fully processed");
+            h.assertValueEqual(counts(output(m)),expected("heavycloth="+cloth),"Original healthy/used/worn rounding returns only heavy cloth");
+            h.assertValueEqual(m.energy().getAmountAsInt(),0,"Source 500 FE cost"); });
     }
     private static void powerPause(GameTestHelper h) {
         var m=place(h); m.setItem(0,item("platecarbon")); charge(m,4); tick(h,m,10);
@@ -220,7 +228,7 @@ final class GrinderGameTests {
         var m=place(h); h.assertTrue(m.getBlockState().canOcclude(),"Source full opaque block"); h.assertValueEqual(m.getBlockState().getCollisionShape(h.getLevel(),m.getBlockPos()).bounds(),new AABB(0,0,0,1,1,1),"Original collision"); h.succeed();
     }
     private static void codec(GameTestHelper h) {
-        var manager=h.getLevel().getServer().getRecipeManager(); var records=manager.recipeMap().byType(GrinderContent.RECIPE.get()); h.assertValueEqual(records.size(),51,"All selected source records loaded");
+        var manager=h.getLevel().getServer().getRecipeManager(); var records=manager.recipeMap().byType(GrinderContent.RECIPE.get()); h.assertValueEqual(records.size(),52,"All selected source records loaded");
         for(var holder:records) {
             var buffer=new RegistryFriendlyByteBuf(Unpooled.buffer(),h.getLevel().registryAccess());
             try { GrinderRecipe.STREAM_CODEC.encode(buffer,holder.value()); var copy=GrinderRecipe.STREAM_CODEC.decode(buffer); h.assertValueEqual(copy.outputs(),holder.value().outputs(),"Output counts/factors/preferred tag survive codec"); } finally { buffer.release(); }

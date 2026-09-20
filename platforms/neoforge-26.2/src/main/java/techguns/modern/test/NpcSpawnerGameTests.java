@@ -27,9 +27,11 @@ import techguns.modern.npc.spawner.*;
 
 final class NpcSpawnerGameTests {
     private static final BlockPos POS=new BlockPos(4,2,4);
-    private static final List<String> NPCS=List.of("supermutantbasic","cyberdemon","zombiepigmansoldier","zombiesoldier","zombiefarmer","zombieminer","skeletonsoldier","bandit","psychosteve");
+    private static final List<String> NPCS=List.of("supermutantbasic","cyberdemon","zombiepigmansoldier","zombiesoldier","zombiefarmer","zombieminer","skeletonsoldier","bandit","psychosteve","armysoldier");
     static void register(DeferredRegister<Consumer<GameTestHelper>> r) {
         r.register("spawner_default_placement_shape_and_permissions",()->NpcSpawnerGameTests::placement);
+        r.register("spawner_military_placement_save_and_death_budget",()->NpcSpawnerGameTests::military);
+        r.register("spawner_military_copied_configuration_new_ownership",()->NpcSpawnerGameTests::militaryCopy);
         r.register("spawner_delay_capacity_and_death_budget",()->NpcSpawnerGameTests::budget);
         r.register("spawner_despawn_releases_without_kill",()->NpcSpawnerGameTests::despawn);
         r.register("spawner_canceled_death_keeps_reservation",()->NpcSpawnerGameTests::canceledDeath);
@@ -132,9 +134,41 @@ final class NpcSpawnerGameTests {
         b.configure(5,1,1,0,0,List.of(),ItemStack.EMPTY); tick(h,b,5); h.assertValueEqual(b.activeCount(),0,"Empty configured pool remains empty"); cleanup(h,b); h.succeed();
     }
     private static void unsupported(GameTestHelper h) {
-        var b=place(h,5,1,1,"armysoldier"); tick(h,b,1); h.assertValueEqual(b.activeCount(),0,"Pending ArmySoldier is never replaced with ZombieSoldier");
-        h.assertValueEqual(b.entries(),List.of(entry("armysoldier",1)),"Unported ID retained in configuration"); h.assertValueEqual(b.delay(),1,"Invalid source choice resets interval");
+        var b=place(h,5,1,1,"commando"); tick(h,b,1); h.assertValueEqual(b.activeCount(),0,"Pending Commando is never replaced with ArmySoldier");
+        h.assertValueEqual(b.entries(),List.of(entry("commando",1)),"Unported ID retained in configuration"); h.assertValueEqual(b.delay(),1,"Invalid source choice resets interval");
         b.configure(5,1,1,0,0,List.of(entry("minecraft:zombie",1)),ItemStack.EMPTY); tick(h,b,1); h.assertValueEqual(b.activeCount(),0,"Vanilla mobs do not implement Techguns lifecycle"); cleanup(h,b); h.succeed();
+    }
+    private static NpcSpawnerBlockEntity placeMilitary(GameTestHelper h) {
+        var p=WeaponGameTests.player(h); p.setItemInHand(InteractionHand.MAIN_HAND,NpcSpawnerContent.SOLDIER_ITEM.toStack(2)); h.setBlock(POS.below(),Blocks.STONE);
+        h.useBlock(POS.below(),p,new BlockHitResult(Vec3.atCenterOf(h.absolutePos(POS.below())),Direction.UP,h.absolutePos(POS.below()),false));
+        h.assertValueEqual(p.getMainHandItem().getCount(),1,"Military item consumed on placement");
+        return h.getBlockEntity(POS,NpcSpawnerBlockEntity.class);
+    }
+    private static void military(GameTestHelper h) {
+        var b=placeMilitary(h); h.assertTrue(b.getBlockState().is(NpcSpawnerContent.SOLDIER_BLOCK.get()),"Distinct military block survives placement");
+        h.assertValueEqual(b.entries(),List.of(entry("armysoldier",1)),"Source military preset is ArmySoldier");
+        h.assertValueEqual(b.remaining(),5,"Source quota"); h.assertValueEqual(b.maximum(),3,"Source active cap"); h.assertValueEqual(b.delay(),200,"Source delay");
+        var state=b.getBlockState(); h.assertTrue(state.getCollisionShape(h.getLevel(),b.getBlockPos()).isEmpty(),"Military variant has no collision");
+        h.assertValueEqual(state.getShape(h.getLevel(),b.getBlockPos()).bounds(),new AABB(.125,0,.125,.875,.125,.875),"Source outline shared even though military mesh is different");
+        h.assertTrue(state.getDestroySpeed(h.getLevel(),b.getBlockPos())<0,"Military spawner is unmineable in Survival");
+        b.configure(2,1,1,0,0,b.entries(),ItemStack.EMPTY); tick(h,b,1); var soldier=first(h,b);
+        h.assertTrue(soldier instanceof ArmySoldier,"Correct living soldier type"); ArmyGameTests.checkEquipment(h,(ArmySoldier)soldier);
+        h.assertValueEqual(soldier.getHomePosition(),b.getBlockPos(),"Military home assigned"); var origin=b.link(); var snapshot=save(h,b); load(h,b,snapshot);
+        h.assertValueEqual(b.link(),origin,"Military owner UUID survives NBT"); tick(h,b,5); h.assertValueEqual(b.activeCount(),1,"Restored military cap remains occupied");
+        kill(h,soldier); h.assertValueEqual(b.remaining(),1,"First real death counted"); tick(h,b,1); kill(h,first(h,b)); tick(h,b,1);
+        h.assertTrue(h.getLevel().getBlockState(b.getBlockPos()).isAir(),"Last death removes military point");
+        h.assertTrue(h.getLevel().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,new AABB(b.getBlockPos()).inflate(4)).stream()
+                .noneMatch(e->e.getItem().is(NpcSpawnerContent.SOLDIER_ITEM.get())),"No military block drop"); h.succeed();
+    }
+    private static void militaryCopy(GameTestHelper h) {
+        var b=placeMilitary(h); b.configure(4,2,1,0,0,List.of(entry("bandit",2)),ItemStack.EMPTY); tick(h,b,1);
+        var old=first(h,b); var original=b.link(); var data=save(h,b); var pos=b.getBlockPos();
+        h.getLevel().setBlock(pos,Blocks.AIR.defaultBlockState(),3); h.getLevel().setBlock(pos,NpcSpawnerContent.SOLDIER_BLOCK.get().defaultBlockState(),3);
+        var copy=(NpcSpawnerBlockEntity)h.getLevel().getBlockEntity(pos); load(h,copy,data);
+        NpcSpawnerContent.SOLDIER_BLOCK.get().setPlacedBy(h.getLevel(),pos,copy.getBlockState(),WeaponGameTests.player(h),NpcSpawnerContent.SOLDIER_ITEM.toStack());
+        h.assertTrue(!copy.link().equals(original),"Copied placement creates new ownership"); h.assertValueEqual(copy.activeCount(),0,"No copied live reservations");
+        h.assertValueEqual(copy.entries(),List.of(entry("bandit",2)),"Explicit custom pool retained instead of default ArmySoldier");
+        kill(h,old); h.assertValueEqual(copy.remaining(),4,"Previous NPC death cannot charge copied point"); cleanup(h,copy); h.succeed();
     }
     private static void veto(GameTestHelper h,int kind) {
         var b=place(h,2,1,1,"zombiesoldier");

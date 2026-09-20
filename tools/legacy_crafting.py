@@ -13,7 +13,7 @@ from legacy_chemistry import chemical_recipes, STANDALONE_ITEMS
 from legacy_reactions import reaction_recipes, PARTS as REACTION_PARTS
 from legacy_fabricator import fabricator_recipes, PARTS as FABRICATOR_PARTS
 from legacy_grinder import grinder_data
-from legacy_armors import ARMOR_SETS
+from legacy_armors import ARMOR_SETS, armor_definitions
 
 ROOT = Path(__file__).resolve().parents[1]
 LEGACY = ROOT / 'legacy/1.12.2/src/main'
@@ -83,8 +83,8 @@ def plan_crafting(weapon_list):
     selected = {name: recipe for name, recipe in source_recipes.items()
                 if name in weapons or name.endswith('_alt') and name[:-4] in weapons}
     for armor_set in ARMOR_SETS:
-        for part in ('helmet','chestplate','leggings','boots'):
-            name=armor_set+'_'+part; selected[name]=source_recipes[name]
+        for armor in armor_definitions(armor_set):
+            name=armor['id']; selected[name]=source_recipes[name]
     if 'rocketlauncher' in weapons:
         for variant in ('default', 'nuke', 'high_velocity'):
             name = 'rocketlauncher_ammo_' + variant

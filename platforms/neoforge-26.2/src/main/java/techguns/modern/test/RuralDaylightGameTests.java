@@ -15,7 +15,7 @@ import techguns.core.RuralZombieRules;
 import techguns.modern.npc.*;
 
 final class RuralDaylightGameTests {
-    private enum Mode { RURAL, SKELETON, BANDIT, PSYCHO }
+    private enum Mode { RURAL, SKELETON, BANDIT, PSYCHO, ARMY }
     static void register(DeferredRegister<Consumer<GameTestHelper>> r) { r.register("rural_sun_night_roof_and_helmet",() -> RuralDaylightGameTests::sunlight); }
     private static void sunlight(GameTestHelper h) {
         sunlight(h,Mode.RURAL);
@@ -23,11 +23,12 @@ final class RuralDaylightGameTests {
     static void skeletonSunlight(GameTestHelper h) { sunlight(h,Mode.SKELETON); }
     static void banditSunlight(GameTestHelper h) { sunlight(h,Mode.BANDIT); }
     static void psychoSunlight(GameTestHelper h) { sunlight(h,Mode.PSYCHO); }
+    static void armySunlight(GameTestHelper h) { sunlight(h,Mode.ARMY); }
     private static void sunlight(GameTestHelper h,Mode mode) {
         var level=h.getLevel(); var clock=level.dimensionType().defaultClock().orElseThrow(); long savedTime=level.clockManager().getTotalTicks(clock);
         var base=h.absolutePos(new BlockPos(4,0,4)); var pos=new BlockPos(base.getX(),181,base.getZ()); level.getChunk(pos);
         var npcs=new ArrayList<ArmedNpc>(); long seed=1;
-        boolean living=mode==Mode.BANDIT || mode==Mode.PSYCHO;
+        boolean living=mode==Mode.BANDIT || mode==Mode.PSYCHO || mode==Mode.ARMY;
         while(seed<10000 && !RuralZombieRules.sunIgnites(1,RandomSource.create(seed).nextFloat())) seed++;
         h.assertTrue(seed<10000,"Passing source sunlight draw found");
         try {
@@ -37,7 +38,10 @@ final class RuralDaylightGameTests {
             time(h,6000); OverworldSpawnGameTests.awaitLighting(h,pos,pos);
             for(int variant=0;variant<2;variant++) {
                 ArmedNpc npc;
-                if(mode==Mode.PSYCHO) {
+                if(mode==Mode.ARMY) {
+                    var soldier=new ArmySoldier(NpcContent.ARMY.get(),level); soldier.equipLoadout(0,false,false,false,false);
+                    if(variant==1) soldier.setItemSlot(EquipmentSlot.HEAD,net.minecraft.world.item.ItemStack.EMPTY); npc=soldier;
+                } else if(mode==Mode.PSYCHO) {
                     var psycho=new PsychoSteve(NpcContent.PSYCHO.get(),level); psycho.equipCamo(variant==0?0:3);
                     if(variant==1) psycho.setItemSlot(EquipmentSlot.HEAD,net.minecraft.world.item.ItemStack.EMPTY); npc=psycho;
                 } else if(mode==Mode.BANDIT) {

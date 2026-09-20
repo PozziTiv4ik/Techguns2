@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "techguns:beret_texture"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "techguns:beret_texture"
+      }
+    ]
+  }
+}

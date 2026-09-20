@@ -935,6 +935,12 @@
       "input": "techguns:t1_scout_boots",
       "outputs": [],
       "armor": true
+    },
+    {
+      "id": "t2_beret",
+      "input": "techguns:t2_beret",
+      "outputs": [],
+      "armor": true
     }
   ],
   "unported_weapon_inputs": [

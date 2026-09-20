@@ -19,11 +19,7 @@
       "id": "soldier_spawn",
       "legacy_metadata": 1,
       "npc": "techguns:armysoldier",
-      "implemented": false,
-      "requires": [
-        "ArmySoldier",
-        "T2 beret"
-      ]
+      "implemented": true
     }
   ],
   "home_radius": 10,

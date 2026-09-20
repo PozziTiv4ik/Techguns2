@@ -61,6 +61,8 @@ public final class WeaponGameTests {
         BanditGameTests.register(FUNCTIONS);
         ChainsawGameTests.register(FUNCTIONS);
         PsychoSteveGameTests.register(FUNCTIONS);
+        ArmyGameTests.register(FUNCTIONS);
+        BeretGameTests.register(FUNCTIONS);
         NpcSpawnerGameTests.register(FUNCTIONS);
         RuralZombieGameTests.register(FUNCTIONS);
         FUNCTIONS.register("ammo_persists", () -> WeaponGameTests::ammoPersists);
