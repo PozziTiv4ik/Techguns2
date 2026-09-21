@@ -107,6 +107,15 @@
     "126": "techguns:redstone_battery_empty",
     "127": "techguns:gaussrifleslugs",
     "133": "techguns:protectivefiber",
+    "134": "techguns:oredrillsmall_steel",
+    "135": "techguns:oredrillsmall_obsidiansteel",
+    "136": "techguns:oredrillsmall_carbon",
+    "137": "techguns:oredrillmedium_steel",
+    "138": "techguns:oredrillmedium_obsidiansteel",
+    "139": "techguns:oredrillmedium_carbon",
+    "140": "techguns:oredrilllarge_steel",
+    "141": "techguns:oredrilllarge_obsidiansteel",
+    "142": "techguns:oredrilllarge_carbon",
     "144": "techguns:sniperrounds_explosive",
     "145": "techguns:rocket_high_velocity",
     "146": "techguns:infusionbag"
@@ -122,6 +131,11 @@
     "techguns:multiblockmachine@3": "techguns:reactionchamber_housing",
     "techguns:multiblockmachine@4": "techguns:reactionchamber_glass",
     "techguns:multiblockmachine@5": "techguns:reactionchamber_controller",
+    "techguns:oredrill@0": "techguns:oredrill_frame",
+    "techguns:oredrill@1": "techguns:oredrill_scaffold",
+    "techguns:oredrill@2": "techguns:oredrill_rod",
+    "techguns:oredrill@3": "techguns:oredrill_engine",
+    "techguns:oredrill@4": "techguns:oredrill_controller",
     "techguns:simplemachine@10": "techguns:charging_station",
     "techguns:simplemachine@9": "techguns:repair_bench",
     "techguns:simplemachine@8": "techguns:camo_bench",
@@ -299,8 +313,44 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_133_protectivefiber.json"
     },
     {
+      "id": "techguns:oredrillsmall_steel",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_134_oredrillsmall_steel.json"
+    },
+    {
+      "id": "techguns:oredrillsmall_obsidiansteel",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_135_oredrillsmall_obsidiansteel.json"
+    },
+    {
+      "id": "techguns:oredrillsmall_carbon",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_136_oredrillsmall_carbon.json"
+    },
+    {
+      "id": "techguns:oredrillmedium_steel",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_137_oredrillmedium_steel.json"
+    },
+    {
+      "id": "techguns:oredrillmedium_obsidiansteel",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_138_oredrillmedium_obsidiansteel.json"
+    },
+    {
+      "id": "techguns:oredrillmedium_carbon",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_139_oredrillmedium_carbon.json"
+    },
+    {
       "id": "techguns:assaultriflemagazine",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_13_assaultriflemagazine.json"
+    },
+    {
+      "id": "techguns:oredrilllarge_steel",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_140_oredrilllarge_steel.json"
+    },
+    {
+      "id": "techguns:oredrilllarge_obsidiansteel",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_141_oredrilllarge_obsidiansteel.json"
+    },
+    {
+      "id": "techguns:oredrilllarge_carbon",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_142_oredrilllarge_carbon.json"
     },
     {
       "id": "techguns:infusionbag",
@@ -545,6 +595,26 @@
     {
       "id": "techguns:nethermetal_panel",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/nethermetal_0.json"
+    },
+    {
+      "id": "techguns:oredrill_frame",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/oredrill_0_frame.json"
+    },
+    {
+      "id": "techguns:oredrill_scaffold",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/oredrill_1_scaffold.json"
+    },
+    {
+      "id": "techguns:oredrill_rod",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/oredrill_2_rod.json"
+    },
+    {
+      "id": "techguns:oredrill_engine",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/oredrill_3_engine.json"
+    },
+    {
+      "id": "techguns:oredrill_controller",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/oredrill_4_controller.json"
     },
     {
       "id": "techguns:pistol",

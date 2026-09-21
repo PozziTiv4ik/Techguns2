@@ -130,8 +130,8 @@ locate. В обычном GameTestServer структуры отключены �
 и исходной таблицей лута, затем [NetherAcidHole](NETHER_ACID.ru.md).
 Все пять малых локаций размещаются после ванильных дельт на `top_layer_modification`.
 Ghastling и NetherSoulPlatform перенесены следующим срезом, затем
-[рудные кластеры и NetherOreClusterSmall](ORE_CLUSTERS.ru.md). Следующий этап —
-Ore Drill; военные базы требуют в том числе AttackHelicopter и другие блоки.
+[рудные кластеры и NetherOreClusterSmall](ORE_CLUSTERS.ru.md) и
+[Ore Drill](ORE_DRILL.ru.md); военные базы требуют в том числе AttackHelicopter и другие блоки.
 
 Источники в неизменном `legacy/1.12.2`: `NetherAltarSmall.java`,
 `WorldGenTGStructureSpawn.java`, `TGStructureSpawnRegister.java`,

@@ -23,17 +23,20 @@ public final class MachineFluidStorage extends FluidStacksResourceHandler {
     public FluidStack stack(int slot) { return FluidUtil.getStack(this,slot); }
     public int capacity(int slot) { return getCapacity(slot,FluidResource.EMPTY); }
     public ResourceHandler<FluidResource> automation(BooleanSupplier drainInput) {
+        return automation(drainInput,()->true);
+    }
+    public ResourceHandler<FluidResource> automation(BooleanSupplier drainInput,BooleanSupplier available) {
         return new ResourceHandler<>() {
             @Override public int size() { return 2; }
-            @Override public FluidResource getResource(int slot) { return MachineFluidStorage.this.getResource(slot); }
-            @Override public long getAmountAsLong(int slot) { return MachineFluidStorage.this.getAmountAsLong(slot); }
-            @Override public long getCapacityAsLong(int slot,FluidResource resource) { return MachineFluidStorage.this.getCapacityAsLong(slot,resource); }
-            @Override public boolean isValid(int slot,FluidResource resource) { Objects.checkIndex(slot,2); return slot==0; }
+            @Override public FluidResource getResource(int slot) { Objects.checkIndex(slot,2); return available.getAsBoolean()?MachineFluidStorage.this.getResource(slot):FluidResource.EMPTY; }
+            @Override public long getAmountAsLong(int slot) { Objects.checkIndex(slot,2); return available.getAsBoolean()?MachineFluidStorage.this.getAmountAsLong(slot):0; }
+            @Override public long getCapacityAsLong(int slot,FluidResource resource) { Objects.checkIndex(slot,2); return available.getAsBoolean()?MachineFluidStorage.this.getCapacityAsLong(slot,resource):0; }
+            @Override public boolean isValid(int slot,FluidResource resource) { Objects.checkIndex(slot,2); return slot==0 && available.getAsBoolean(); }
             @Override public int insert(int slot,FluidResource resource,int amount,TransactionContext tx) {
-                Objects.checkIndex(slot,2); return slot==0 ? MachineFluidStorage.this.insert(slot,resource,amount,tx) : 0;
+                Objects.checkIndex(slot,2); return slot==0 && available.getAsBoolean() ? MachineFluidStorage.this.insert(slot,resource,amount,tx) : 0;
             }
             @Override public int extract(int slot,FluidResource resource,int amount,TransactionContext tx) {
-                Objects.checkIndex(slot,2); return slot==(drainInput.getAsBoolean() ? 0 : 1) ? MachineFluidStorage.this.extract(slot,resource,amount,tx) : 0;
+                Objects.checkIndex(slot,2); return slot==(drainInput.getAsBoolean() ? 0 : 1) && available.getAsBoolean() ? MachineFluidStorage.this.extract(slot,resource,amount,tx) : 0;
             }
         };
     }

@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "facing=north,formed=false,end_cap=false": {
+      "model": "techguns:block/oredrill_scaffold"
+    },
+    "facing=north,formed=false,end_cap=true": {
+      "model": "techguns:block/oredrill_scaffold"
+    },
+    "facing=north,formed=true,end_cap=false": {
+      "model": "techguns:block/oredrill_scaffold_c"
+    },
+    "facing=north,formed=true,end_cap=true": {
+      "model": "techguns:block/oredrill_scaffold_h"
+    },
+    "facing=south,formed=false,end_cap=false": {
+      "model": "techguns:block/oredrill_scaffold"
+    },
+    "facing=south,formed=false,end_cap=true": {
+      "model": "techguns:block/oredrill_scaffold"
+    },
+    "facing=south,formed=true,end_cap=false": {
+      "model": "techguns:block/oredrill_scaffold_c"
+    },
+    "facing=south,formed=true,end_cap=true": {
+      "model": "techguns:block/oredrill_scaffold_h"
+    },
+    "facing=east,formed=false,end_cap=false": {
+      "model": "techguns:block/oredrill_scaffold"
+    },
+    "facing=east,formed=false,end_cap=true": {
+      "model": "techguns:block/oredrill_scaffold"
+    },
+    "facing=east,formed=true,end_cap=false": {
+      "model": "techguns:block/oredrill_scaffold_c"
+    },
+    "facing=east,formed=true,end_cap=true": {
+      "model": "techguns:block/oredrill_scaffold_h"
+    },
+    "facing=west,formed=false,end_cap=false": {
+      "model": "techguns:block/oredrill_scaffold"
+    },
+    "facing=west,formed=false,end_cap=true": {
+      "model": "techguns:block/oredrill_scaffold"
+    },
+    "facing=west,formed=true,end_cap=false": {
+      "model": "techguns:block/oredrill_scaffold_c"
+    },
+    "facing=west,formed=true,end_cap=true": {
+      "model": "techguns:block/oredrill_scaffold_h"
+    }
+  }
+}

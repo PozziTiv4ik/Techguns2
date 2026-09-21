@@ -27,6 +27,7 @@ from legacy_army import generate_army_content, army_translations
 from legacy_ghastling import generate_ghastling_content, ghastling_translations
 from legacy_locations import generate_location_content, location_translations
 from legacy_clusters import generate_cluster_content, cluster_translations
+from legacy_drill import generate_drill_content, drill_translations, SOUNDS as DRILL_SOUNDS
 from legacy_chainsaw import generate_chainsaw_content, chainsaw_item_model, chainsaw_translations
 from legacy_repair import generate_repair_content, repair_translations
 from legacy_camo import generate_camo_content, camo_translations
@@ -243,6 +244,7 @@ public final class NpcWeapons {
     for name in ('machines.ammopresswork1', 'machines.ammopresswork2', 'machines.metalpresswork', 'machines.chemlabwork', 'machines.rc_heatraywork', 'machines.rc_beep', 'machines.rc_warning', 'effects.geiger.low', 'effects.geiger.high', 'machines.fabricatorwork', 'machines.chargingstationwork', 'machines.grinder.start', 'machines.grinder.work', 'effects.nukeexplosion'):
         selected_sounds[name] = {'sounds': sounds_data[name]['sounds']}
     for name in NPC_SOUNDS: selected_sounds[name] = {'sounds':sounds_data[name]['sounds']}
+    for name in DRILL_SOUNDS: selected_sounds[name] = {'sounds':sounds_data[name]['sounds']}
     for name in ('guns.chainsawhit', 'guns.chainsawloopstart', 'guns.powerhammerimpactground'):
         selected_sounds[name] = {'sounds':sounds_data[name]['sounds']}
     for sound, value in selected_sounds.items():
@@ -257,6 +259,7 @@ public final class NpcWeapons {
                 if sound.startswith('machines.rc_'): translated[lang][subtitle]=('Reaction chamber warning' if sound.endswith('warning') else 'Reaction chamber check') if lang=='en_us' else ('Предупреждение реакционной камеры' if sound.endswith('warning') else 'Проверка реакционной камеры')
                 if sound=='machines.fabricatorwork': translated[lang][subtitle]='Fabricator works' if lang=='en_us' else 'Работает фабрикатор'
                 if sound=='machines.chargingstationwork': translated[lang][subtitle]='Charging Station works' if lang=='en_us' else 'Работает зарядная станция'
+                if sound in DRILL_SOUNDS: translated[lang][subtitle]='Ore Drill works' if lang=='en_us' else 'Работает рудный бур'
             if sound.startswith('effects.geiger.'): translated[lang][subtitle]='Geiger counter clicks' if lang=='en_us' else 'Щёлкает счётчик Гейгера'
             if sound == 'effects.nukeexplosion': translated[lang][subtitle] = 'Nuclear explosion' if lang == 'en_us' else 'Ядерный взрыв'
             if sound in NPC_SOUNDS: translated[lang][subtitle] = 'Cyber Demon or Super Mutant' if lang == 'en_us' else 'Кибердемон или супермутант'
@@ -296,6 +299,7 @@ public final class NpcWeapons {
         values.update(ghastling_translations(lang))
         values.update(location_translations(lang))
         values.update(cluster_translations(lang))
+        values.update(drill_translations(lang))
         values.update(chainsaw_translations(lang))
         values['entity.techguns.laser_beam'] = 'Laser beam' if lang == 'en_us' else 'Лазерный луч'
         values['death.attack.techguns.laser'] = '%1$s was lasered by %2$s' if lang == 'en_us' else '%1$s убит лазером игрока %2$s'
@@ -347,7 +351,7 @@ public final class Weapons {
 '''
     output('core/src/main/java/techguns/core/Weapons.java', source)
     files.update(generate_machine_content())
-    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_npc_content(), generate_cyber_content(), generate_armor_content(), generate_repair_content(), generate_camo_content(), generate_grinder_content(), generate_zombie_soldier_content(), generate_rural_content(), generate_skeleton_content(), generate_bandit_content(), generate_chainsaw_content(), generate_psycho_content(), generate_spawner_content(), generate_army_content(), generate_location_content(), generate_ghastling_content(), generate_cluster_content()) for entry in domain.items()]:
+    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_npc_content(), generate_cyber_content(), generate_armor_content(), generate_repair_content(), generate_camo_content(), generate_grinder_content(), generate_zombie_soldier_content(), generate_rural_content(), generate_skeleton_content(), generate_bandit_content(), generate_chainsaw_content(), generate_psycho_content(), generate_spawner_content(), generate_army_content(), generate_location_content(), generate_ghastling_content(), generate_cluster_content(), generate_drill_content()) for entry in domain.items()]:
         if path in files:
             # Several content domains contribute to the same mining/tool and common item tags.
             if '/tags/' not in path:

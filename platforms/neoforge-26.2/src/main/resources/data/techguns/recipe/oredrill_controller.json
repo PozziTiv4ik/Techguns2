@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:oredrill_controller",
+    "count": 1
+  },
+  "pattern": [
+    "pcp",
+    "cec",
+    "pcp"
+  ],
+  "key": {
+    "p": "#c:plates/iron",
+    "c": "#c:circuits/basic",
+    "e": "techguns:electricengine"
+  }
+}

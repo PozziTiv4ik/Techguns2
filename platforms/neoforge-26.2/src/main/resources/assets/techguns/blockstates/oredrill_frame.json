@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "facing=north,formed=false,end_cap=false": {
+      "model": "techguns:block/oredrill_frame"
+    },
+    "facing=north,formed=false,end_cap=true": {
+      "model": "techguns:block/oredrill_frame"
+    },
+    "facing=north,formed=true,end_cap=false": {
+      "model": "techguns:block/oredrill_frame_c"
+    },
+    "facing=north,formed=true,end_cap=true": {
+      "model": "techguns:block/oredrill_frame_c"
+    },
+    "facing=south,formed=false,end_cap=false": {
+      "model": "techguns:block/oredrill_frame"
+    },
+    "facing=south,formed=false,end_cap=true": {
+      "model": "techguns:block/oredrill_frame"
+    },
+    "facing=south,formed=true,end_cap=false": {
+      "model": "techguns:block/oredrill_frame_c"
+    },
+    "facing=south,formed=true,end_cap=true": {
+      "model": "techguns:block/oredrill_frame_c"
+    },
+    "facing=east,formed=false,end_cap=false": {
+      "model": "techguns:block/oredrill_frame"
+    },
+    "facing=east,formed=false,end_cap=true": {
+      "model": "techguns:block/oredrill_frame"
+    },
+    "facing=east,formed=true,end_cap=false": {
+      "model": "techguns:block/oredrill_frame_c"
+    },
+    "facing=east,formed=true,end_cap=true": {
+      "model": "techguns:block/oredrill_frame_c"
+    },
+    "facing=west,formed=false,end_cap=false": {
+      "model": "techguns:block/oredrill_frame"
+    },
+    "facing=west,formed=false,end_cap=true": {
+      "model": "techguns:block/oredrill_frame"
+    },
+    "facing=west,formed=true,end_cap=false": {
+      "model": "techguns:block/oredrill_frame_c"
+    },
+    "facing=west,formed=true,end_cap=true": {
+      "model": "techguns:block/oredrill_frame_c"
+    }
+  }
+}

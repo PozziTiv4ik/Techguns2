@@ -1,0 +1,214 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/tileentities/OreDrillTileEntMaster.java",
+  "energy_capacity": 500000,
+  "input_tank": 16000,
+  "output_tank": 32000,
+  "inventory_size": 11,
+  "output_slots": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "max_length": 16,
+  "max_engine_radius": 3,
+  "heads": [
+    {
+      "id": "oredrillsmall_steel",
+      "size": 0,
+      "level": 1
+    },
+    {
+      "id": "oredrillsmall_obsidiansteel",
+      "size": 0,
+      "level": 2
+    },
+    {
+      "id": "oredrillsmall_carbon",
+      "size": 0,
+      "level": 3
+    },
+    {
+      "id": "oredrillmedium_steel",
+      "size": 1,
+      "level": 1
+    },
+    {
+      "id": "oredrillmedium_obsidiansteel",
+      "size": 1,
+      "level": 2
+    },
+    {
+      "id": "oredrillmedium_carbon",
+      "size": 1,
+      "level": 3
+    },
+    {
+      "id": "oredrilllarge_steel",
+      "size": 2,
+      "level": 1
+    },
+    {
+      "id": "oredrilllarge_obsidiansteel",
+      "size": 2,
+      "level": 2
+    },
+    {
+      "id": "oredrilllarge_carbon",
+      "size": 2,
+      "level": 3
+    }
+  ],
+  "cluster_outputs": {
+    "coal": [
+      {
+        "kind": "item",
+        "id": "minecraft:coal_ore",
+        "weight": 99
+      },
+      {
+        "kind": "item",
+        "id": "minecraft:diamond",
+        "weight": 1
+      }
+    ],
+    "common_metal": [
+      {
+        "kind": "item",
+        "id": "minecraft:iron_ore",
+        "weight": 45
+      },
+      {
+        "kind": "item",
+        "id": "techguns:ore_copper",
+        "weight": 30
+      },
+      {
+        "kind": "item",
+        "id": "techguns:ore_tin",
+        "weight": 25
+      }
+    ],
+    "rare_metal": [
+      {
+        "kind": "item",
+        "id": "techguns:ore_lead",
+        "weight": 50
+      },
+      {
+        "kind": "tag",
+        "id": "c:ores/osmium",
+        "legacy_ore_dictionary": "oreOsmium",
+        "weight": 50
+      },
+      {
+        "kind": "tag",
+        "id": "c:ores/aluminum",
+        "legacy_ore_dictionary": "oreAluminium",
+        "weight": 50
+      }
+    ],
+    "shiny_metal": [
+      {
+        "kind": "item",
+        "id": "techguns:ore_titanium",
+        "weight": 20
+      },
+      {
+        "kind": "item",
+        "id": "minecraft:gold_ore",
+        "weight": 40
+      },
+      {
+        "kind": "tag",
+        "id": "c:ores/silver",
+        "legacy_ore_dictionary": "oreSilver",
+        "weight": 40
+      }
+    ],
+    "common_gem": [
+      {
+        "kind": "item",
+        "id": "minecraft:redstone_ore",
+        "weight": 40
+      },
+      {
+        "kind": "item",
+        "id": "minecraft:lapis_ore",
+        "weight": 20
+      },
+      {
+        "kind": "tag",
+        "id": "c:ores/certus_quartz",
+        "legacy_ore_dictionary": "oreCertusQuartz",
+        "weight": 40
+      },
+      {
+        "kind": "tag",
+        "id": "c:ores/charged_certus_quartz",
+        "legacy_ore_dictionary": "oreChargedCertusQuartz",
+        "weight": 5
+      }
+    ],
+    "shiny_gem": [
+      {
+        "kind": "item",
+        "id": "minecraft:diamond_ore",
+        "weight": 40
+      },
+      {
+        "kind": "item",
+        "id": "minecraft:emerald_ore",
+        "weight": 20
+      }
+    ],
+    "uranium": [
+      {
+        "kind": "item",
+        "id": "techguns:ore_uranium",
+        "weight": 50
+      }
+    ],
+    "nether_crystal": [
+      {
+        "kind": "item",
+        "id": "minecraft:nether_quartz_ore",
+        "weight": 50
+      },
+      {
+        "kind": "item",
+        "id": "minecraft:glowstone",
+        "weight": 40
+      },
+      {
+        "kind": "item",
+        "id": "minecraft:blaze_rod",
+        "weight": 10
+      }
+    ],
+    "oil": [
+      {
+        "kind": "oil",
+        "id": "",
+        "weight": 10
+      }
+    ]
+  },
+  "source_item_overflow": "eject at controller",
+  "source_fluid_overflow": "excess discarded",
+  "compatibility_changes": [
+    "unloaded chunks never forced",
+    "zero-cost ticks do not make fuel buffer negative",
+    "one-rod-per-connected-cluster enforced for formed rods too"
+  ],
+  "pending": [
+    "interactive visual acceptance",
+    "real third-party oil/ore integrations",
+    "CraftTweaker/JEI integration"
+  ]
+}

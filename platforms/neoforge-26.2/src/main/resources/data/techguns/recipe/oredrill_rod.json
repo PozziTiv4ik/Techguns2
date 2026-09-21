@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:oredrill_rod",
+    "count": 4
+  },
+  "pattern": [
+    "ipi",
+    "ipi",
+    "ipi"
+  ],
+  "key": {
+    "p": "#c:plates/iron",
+    "i": "#c:ingots/iron"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:oredrillsmall_obsidiansteel",
+    "count": 1
+  },
+  "pattern": [
+    "sps",
+    "sps",
+    " s "
+  ],
+  "key": {
+    "p": "#c:plates/obsidian_steel",
+    "s": "#c:ingots/obsidian_steel"
+  }
+}

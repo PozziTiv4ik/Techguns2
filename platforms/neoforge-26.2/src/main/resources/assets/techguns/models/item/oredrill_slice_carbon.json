@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/block",
+  "loader": "neoforge:obj",
+  "model": "techguns:models/item/oredrill_slice.obj",
+  "automatic_culling": false,
+  "flip_v": false,
+  "emissive_ambient": false,
+  "textures": {
+    "slice": "techguns:item/drillhead_carbon",
+    "particle": "techguns:item/drillhead_carbon"
+  }
+}

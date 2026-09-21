@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:oredrillsmall_carbon",
+    "count": 1
+  },
+  "pattern": [
+    "sss",
+    "sss",
+    " s "
+  ],
+  "key": {
+    "s": "#c:plates/carbon"
+  }
+}

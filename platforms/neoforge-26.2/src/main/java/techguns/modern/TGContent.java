@@ -90,6 +90,8 @@ public final class TGContent {
                         output.accept(techguns.modern.npc.spawner.NpcSpawnerContent.ITEM.get());
                         output.accept(techguns.modern.npc.spawner.NpcSpawnerContent.SOLDIER_ITEM.get());
                         techguns.modern.world.NetherMetalContent.BLOCKS.values().forEach(block -> output.accept(block.get()));
+                        techguns.modern.world.OreClusterContent.BLOCKS.values().forEach(block -> output.accept(block.get()));
+                        techguns.modern.machine.drill.OreDrillContent.BLOCKS.values().forEach(block -> output.accept(block.get()));
                         output.accept(techguns.modern.armor.ArmorContent.BERET.get());
                         techguns.modern.armor.ArmorContent.ITEMS.values().forEach(item -> output.accept(item.get()));
                         techguns.modern.armor.ArmorContent.HAZMAT.values().forEach(item -> output.accept(item.get()));
@@ -139,7 +141,7 @@ public final class TGContent {
     private static Map<String, DeferredItem<Item>> registerMaterials() {
         Map<String, DeferredItem<Item>> items = new LinkedHashMap<>();
         CraftingContent.MATERIALS.forEach(id -> items.put(id, ITEMS.registerItem(id, props -> id.equals("radpills") || id.equals("radaway")
-                ? new techguns.modern.radiation.RadiationMedicine(props,id.equals("radpills")) : new Item(props),
+                ? new techguns.modern.radiation.RadiationMedicine(props,id.equals("radpills")) : id.startsWith("oredrill") ? new techguns.modern.machine.drill.OreDrillHeadItem(props,id) : new Item(props),
                 props -> props.stacksTo(id.equals("machinestackupgrade") ? 7 : id.equals("rcheatray") || id.equals("rcuvemitter") ? 1 : 64))));
         return Collections.unmodifiableMap(items);
     }

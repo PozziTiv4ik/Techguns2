@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:oredrill_frame",
+    "count": 8
+  },
+  "pattern": [
+    "pbp",
+    "bpb",
+    "pbp"
+  ],
+  "key": {
+    "p": "#c:plates/iron",
+    "b": "minecraft:iron_bars"
+  }
+}

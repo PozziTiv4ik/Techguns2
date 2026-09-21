@@ -6,7 +6,7 @@
   "blast_resistance": 3600000,
   "drops": [],
   "depletion": false,
-  "ore_drill": "not ported; no resource extraction yet",
+  "ore_drill": "techguns:oredrill_controller; see content/ore-drill.json",
   "variants": [
     {
       "id": "ore_cluster_coal",

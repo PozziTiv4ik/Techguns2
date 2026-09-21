@@ -15,6 +15,7 @@ from legacy_fabricator import fabricator_recipes, PARTS as FABRICATOR_PARTS
 from legacy_grinder import grinder_data
 from legacy_armors import ARMOR_SETS, armor_definitions
 from legacy_locations import metal_definitions
+from legacy_drill import PARTS as DRILL_PARTS, drill_heads
 
 ROOT = Path(__file__).resolve().parents[1]
 LEGACY = ROOT / 'legacy/1.12.2/src/main'
@@ -29,6 +30,7 @@ def convert_recipe(legacy, shared, weapons):
     def item(value):
         identifier = value['item']
         if identifier == 'techguns:nethermetal': return 'techguns:'+metal_definitions()[value.get('data',0)]['id']
+        if identifier == 'techguns:oredrill': return 'techguns:oredrill_'+DRILL_PARTS[value['data']]
         if identifier == 'techguns:basicmachine':
             return 'techguns:' + {0: 'ammo_press', 1: 'metal_press', 2: 'chem_lab'}[value.get('data', 0)]
         if identifier == 'techguns:simplemachine' and value.get('data') in (8,9,10,11): return 'techguns:'+{8:'camo_bench',9:'repair_bench',10:'charging_station',11:'blast_furnace'}[value['data']]
@@ -106,10 +108,13 @@ def plan_crafting(weapon_list):
     for meta, part in enumerate(FABRICATOR_PARTS+REACTION_PARTS):
         name = f'multiblockmachine_{meta}_{part}'
         selected[name] = source_recipes[name]
+    for meta,part in enumerate(DRILL_PARTS):
+        name=f'oredrill_{meta}_{part}'; selected[name]=source_recipes[name]
     # These two original recipes overlap after GenericGun.onCreated resets damage to zero.
     # Keep that migration question explicit until upgrade state has its own verified rule.
     pending = {name: selected.pop(name) for name in ('m4_infiltrator', 'm4_infiltrator_alt') if name in selected}
     wanted = {by_name[name] for name in ammo | {'stonebarrel', 'woodstock', 'machinestackupgrade'}}
+    wanted.update(by_name[h['id']] for h in drill_heads())
     for recipe in smelting_data():
         for identifier in (recipe['ingredient'], recipe['result']['id']):
             if identifier.startswith('techguns:') and not identifier.startswith('techguns:ore_'):
@@ -176,6 +181,7 @@ def plan_crafting(weapon_list):
         if name == 'nethermetal_0': identifier = 'nethermetal_panel'
         if name == 'basicmachine_2_chem_lab': identifier = 'chem_lab'
         if name.startswith('multiblockmachine_'): identifier = re.sub(r'^multiblockmachine_\d+_', '', name)
+        if name.startswith('oredrill_'): identifier = re.sub(r'^oredrill_\d+_', 'oredrill_', name)
         if name.startswith('itemshared_'): identifier = re.sub(r'^itemshared_\d+_', '', name)
         if identifier in recipes: raise ValueError(f'Colliding recipe ID: {identifier}')
         recipes[identifier] = convert_recipe(recipe, shared, weapons)
@@ -195,6 +201,7 @@ def plan_crafting(weapon_list):
                'metal_packing_requires_feedstock': sorted(names & {'ingotcopper', 'ingotlead', 'ingotsteel'}),
                'pending_upgrade_recipes': [name + '.json' for name in pending]}
     catalog['block_metadata'].update({f'techguns:multiblockmachine@{meta}':'techguns:'+part for meta,part in enumerate(FABRICATOR_PARTS+REACTION_PARTS)})
+    catalog['block_metadata'].update({f'techguns:oredrill@{meta}':'techguns:oredrill_'+part for meta,part in enumerate(DRILL_PARTS)})
     catalog['block_metadata']['techguns:simplemachine@10'] = 'techguns:charging_station'
     catalog['block_metadata']['techguns:simplemachine@9'] = 'techguns:repair_bench'
     catalog['block_metadata']['techguns:simplemachine@8'] = 'techguns:camo_bench'

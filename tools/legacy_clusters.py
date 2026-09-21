@@ -27,7 +27,7 @@ def generate_cluster_content():
     data('content/ore-clusters.json',{'source':'legacy/1.12.2/src/main/java/techguns/blocks/BlockOreCluster.java',
          'defaults_source':'legacy/1.12.2/src/main/java/techguns/TGConfig.java','hardness':-1,
          'legacy_resistance_argument':6000000,'blast_resistance':3600000,'drops':[],
-         'depletion':False,'ore_drill':'not ported; no resource extraction yet','variants':variants})
+         'depletion':False,'ore_drill':'techguns:oredrill_controller; see content/ore-drill.json','variants':variants})
     for variant in variants:
         name=variant['id']; model=json.loads((assets/f'models/block/{name}.json').read_text())
         model['textures']={k:v.replace(':blocks/',':block/') for k,v in model['textures'].items()}

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "techguns:item/drill_rod",
+    "north": "techguns:item/drill_rod",
+    "south": "techguns:item/drill_rod",
+    "east": "techguns:item/drill_rod",
+    "west": "techguns:item/drill_rod",
+    "up": "techguns:item/drill_rod_top",
+    "down": "techguns:item/drill_rod_top"
+  }
+}

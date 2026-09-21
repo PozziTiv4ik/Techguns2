@@ -115,7 +115,7 @@ Ghastling с весом 1. Общий сохранённый жизненный 
 оригинальные FX, другие NPC/структуры, полные миры на нескольких seed,
 сторонняя генерация, длительный multiplayer/restart и импорт 1.12.2.
 Следом перенесены [блоки рудных кластеров и NetherOreClusterSmall](ORE_CLUSTERS.ru.md).
-Следующий этап — Ore Drill и добыча из кластеров.
+Затем добавлен [Ore Drill с добычей из кластеров](ORE_DRILL.ru.md).
 
 Источники в неизменном `legacy/1.12.2`: `Ghastling.java`,
 `AlienBlasterProjectile.java`, `GenericProjectile.java`, `DamageSystem.java`,

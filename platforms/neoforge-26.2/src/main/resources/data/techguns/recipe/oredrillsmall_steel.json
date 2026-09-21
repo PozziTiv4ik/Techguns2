@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:oredrillsmall_steel",
+    "count": 1
+  },
+  "pattern": [
+    "sps",
+    "sps",
+    " s "
+  ],
+  "key": {
+    "p": "#c:plates/steel",
+    "s": "#c:ingots/steel"
+  }
+}

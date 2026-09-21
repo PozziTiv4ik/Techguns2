@@ -413,6 +413,33 @@
     ],
     "subtitle": "subtitles.techguns.npcs.cyberdemonstep"
   },
+  "machines.oredrillsmallwork": {
+    "sounds": [
+      "techguns:machines/oredrill_s_work_a",
+      "techguns:machines/oredrill_s_work_b",
+      "techguns:machines/oredrill_s_work_c",
+      "techguns:machines/oredrill_s_work_d"
+    ],
+    "subtitle": "subtitles.techguns.machines.oredrillsmallwork"
+  },
+  "machines.oredrillmediumwork": {
+    "sounds": [
+      "techguns:machines/oredrill_m_work_a",
+      "techguns:machines/oredrill_m_work_b",
+      "techguns:machines/oredrill_m_work_c",
+      "techguns:machines/oredrill_m_work_d"
+    ],
+    "subtitle": "subtitles.techguns.machines.oredrillmediumwork"
+  },
+  "machines.oredrilllargework": {
+    "sounds": [
+      "techguns:machines/oredrill_l_work_a",
+      "techguns:machines/oredrill_l_work_b",
+      "techguns:machines/oredrill_l_work_c",
+      "techguns:machines/oredrill_l_work_d"
+    ],
+    "subtitle": "subtitles.techguns.machines.oredrilllargework"
+  },
   "guns.chainsawhit": {
     "sounds": [
       "techguns:guns/chainsaw_hit_a",

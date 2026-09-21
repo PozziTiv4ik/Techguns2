@@ -20,6 +20,8 @@ public final class Techguns {
         techguns.modern.machine.TGMachineContent.register(modBus);
         techguns.modern.machine.reaction.ReactionContent.register(modBus);
         techguns.modern.machine.fabricator.FabricatorContent.register(modBus);
+        techguns.modern.machine.drill.OreDrillContent.register(modBus);
+        techguns.modern.machine.drill.OreDrillConfig.register(container);
         techguns.modern.machine.charging.ChargingStationContent.register(modBus);
         techguns.modern.machine.repair.RepairBenchContent.register(modBus);
         techguns.modern.machine.camo.CamoBenchContent.register(modBus);
