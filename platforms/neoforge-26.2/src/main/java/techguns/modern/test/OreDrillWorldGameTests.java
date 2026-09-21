@@ -38,10 +38,14 @@ final class OreDrillWorldGameTests {
         h.assertValueEqual(d.energy().getAmountAsInt(),0,"All paid energy used once"); h.assertTrue(l.getBlockState(target).is(OreClusterContent.netherCrystal()),"Generated source remains infinite");
         var output=result.getItem(); l.setBlock(origin.below(),Blocks.HOPPER.defaultBlockState(),3); var hopper=(HopperBlockEntity)l.getBlockEntity(origin.below());
         h.runAfterDelay(12,()->{
-            // Remote chunks need not be entity-ticking; drive the native hopper tick explicitly.
-            for(int i=0;i<12;i++) HopperBlockEntity.pushItemsTick(l,origin.below(),l.getBlockState(origin.below()),hopper);
-            h.assertTrue(d.getItem(2).isEmpty() && java.util.stream.IntStream.range(0,5).anyMatch(i->hopper.getItem(i).is(output)),"Native hopper completes exploration-to-resource chain");
-            com.mojang.logging.LogUtils.getLogger().info("Techguns native Ore Drill chain: origin={}, target={}, output={}",origin,target,output); h.succeed();
+            // The GameTest ticks in the Overworld, with no player ticket holding this remote Nether chunk.
+            // Resolve live instances after the delay; cached handlers intentionally reject unloaded block entities.
+            l.getChunk(origin);
+            var liveDrill=(OreDrillBlockEntity)l.getBlockEntity(origin); var liveHopper=(HopperBlockEntity)l.getBlockEntity(origin.below());
+            h.assertTrue(liveDrill!=null && liveHopper!=null,"Remote machine and hopper survive chunk reload");
+            for(int i=0;i<12;i++) HopperBlockEntity.pushItemsTick(l,origin.below(),l.getBlockState(origin.below()),liveHopper);
+            h.assertTrue(liveDrill.getItem(2).isEmpty() && java.util.stream.IntStream.range(0,5).anyMatch(i->liveHopper.getItem(i).is(output)),"Native hopper completes exploration-to-resource chain; controller reloaded="+(liveDrill!=d)+", hopper reloaded="+(liveHopper!=hopper));
+            com.mojang.logging.LogUtils.getLogger().info("Techguns native Ore Drill chain: origin={}, target={}, output={}, controllerReloaded={}, hopperReloaded={}",origin,target,output,liveDrill!=d,liveHopper!=hopper); h.succeed();
         });
     }
     private OreDrillWorldGameTests() {}
