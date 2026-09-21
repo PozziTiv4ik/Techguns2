@@ -71,7 +71,7 @@ UUID живых мобов или заранее заданного владел
 
 - `SpawnStructures = true` — разрешить Techguns-локации в новых чанках.
 - `SpawnOreClusterStructures = true` — учитывать исходный вес рудных кластеров.
-  Сами кластеры в этом срезе ещё не реализованы.
+  Кластеры добавлены позднее; см. [рудные кластеры](ORE_CLUSTERS.ru.md).
 
 Сетки перенесены в штатные JSON-настройки datapack:
 `worldgen/structure_set/nether_altar_small.json` задаёт `spacing=16` и
@@ -128,9 +128,10 @@ locate. В обычном GameTestServer структуры отключены �
 
 После этого среза перенесён [NetherLoot01](NETHER_LOOT.ru.md) с сундуком
 и исходной таблицей лута, затем [NetherAcidHole](NETHER_ACID.ru.md).
-Все четыре локации размещаются после ванильных дельт на `top_layer_modification`.
-Ghastling и NetherSoulPlatform перенесены следующим срезом. Следующий этап —
-рудные кластеры; военные базы требуют в том числе AttackHelicopter и другие блоки.
+Все пять малых локаций размещаются после ванильных дельт на `top_layer_modification`.
+Ghastling и NetherSoulPlatform перенесены следующим срезом, затем
+[рудные кластеры и NetherOreClusterSmall](ORE_CLUSTERS.ru.md). Следующий этап —
+Ore Drill; военные базы требуют в том числе AttackHelicopter и другие блоки.
 
 Источники в неизменном `legacy/1.12.2`: `NetherAltarSmall.java`,
 `WorldGenTGStructureSpawn.java`, `TGStructureSpawnRegister.java`,
