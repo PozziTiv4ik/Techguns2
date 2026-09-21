@@ -47,7 +47,7 @@ def altar_definition():
             'palette':palette,'spawners':spawners,'cells':cells,
             'generation':{'dimension':'minecraft:the_nether','small_grid':16,'medium_grid':32,'big_grid':64,
                           'min_y':20,'max_y':100,'clearance':10,'corner_height_spread':10,
-                          'candidates':[{'id':name,'weight':10,'implemented':name!='nether_ore_cluster_small'} for name in
+                          'candidates':[{'id':name,'weight':10,'implemented':True} for name in
                                         ('nether_altar_small','nether_soul_platform','nether_loot_01','nether_acid_hole','nether_ore_cluster_small')],
                           'ore_cluster_candidate_conditional':True,'native_rng':'Minecraft 26.2 structure seed; not identical to 1.12.2 population RNG'}}
 
@@ -155,6 +155,35 @@ def acid_location_definition():
             'palette':palette,'block_entities':entities,'weighted_cells':weighted,'cells':cells,
             'generation':altar_definition()['generation'],
             'mixture_rng':'Saved per-piece seed + absolute block position; exact source roll probabilities, not legacy world.rand sequence'}
+
+
+def cluster_location_definition():
+    raw=(LEGACY/'resources/assets/techguns/structures/nether_orecluster_small').read_bytes().replace(b'\r\n',b'\n')
+    lines=raw.decode().splitlines(); cells=[list(map(int,line.split(','))) for line in lines[1:] if line]
+    assert len(cells)==int(lines[0]) and len({tuple(c[:3]) for c in cells})==len(cells)
+    source=strip_comments((LEGACY/'java/techguns/world/structures/NetherOreClusterSmall.java').read_text())
+    palette=[]; entities={}; weighted=[]
+    for index,entry in enumerate(re.findall(r'blockList.add\((.*)\);',source)):
+        if entry=='new MBlock(Blocks.MAGMA, 0)': state={'Name':'minecraft:magma_block'}
+        elif entry=='MBlockRegister.AIR': state={'Name':'minecraft:air'}
+        elif entry=='new MBlock(TGBlocks.ORE_CLUSTER, 7)': state={'Name':'techguns:ore_cluster_nether_crystal'}
+        else:
+            match=re.fullmatch(r'new MultiMBlock\(new Block\[\] \{TGBlocks.ORE_CLUSTER, Blocks.(NETHERRACK|AIR)\}, new int\[\] \{7,0\}, new int\[\] \{50,50\}\)',entry)
+            if not match: raise ValueError('Unmapped NetherOreClusterSmall entry: '+entry)
+            other=match[1].lower(); state={'Name':'minecraft:structure_block','Properties':{'mode':'data'}}
+            entities[index]={'id':'minecraft:structure_block','mode':'DATA','metadata':'techguns:cluster_or_'+other}
+            weighted.append({'palette_index':index,'states':['techguns:ore_cluster_nether_crystal','minecraft:'+other],
+                             'weights':[50,50],'roll_bound':101,'cluster_roll_max':50})
+        palette.append(state)
+    assert all(0<=c[3]<len(palette) for c in cells)
+    return {'source':'legacy/1.12.2/src/main/java/techguns/world/structures/NetherOreClusterSmall.java',
+            'scan_sha256':hashlib.sha256(raw).hexdigest(),'size':[max(c[i] for c in cells)+1 for i in range(3)],
+            'declared_size':list(map(int,re.search(r'super\((\d+),(\d+),(\d+),',source).groups())),
+            'height_offset':int(re.search(r'int hoffset = (-?\d+);',source)[1]),'worldgen_floor_offset':-1,
+            'foundation_cells':sum(c[1]==0 for c in cells),'foundation_depth':2,'foundation_stop_after_solids':2,
+            'palette':palette,'block_entities':entities,'weighted_cells':weighted,'cells':cells,
+            'generation':altar_definition()['generation'],
+            'mixture_rng':'Saved per-piece seed + absolute position, including two independent foundation rolls; not legacy world.rand sequence'}
 
 
 def factory_chest_loot():
@@ -278,6 +307,13 @@ def generate_location_content():
     data(RESOURCES+'data/techguns/worldgen/structure/nether_soul_platform.json',{'type':'techguns:nether_soul_platform','biomes':'#techguns:has_nether_soul_platform',
          'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none','reserved_medium_grid':32,'reserved_big_grid':64})
     data(RESOURCES+'data/techguns/worldgen/structure_set/nether_soul_platform.json',{'structures':[{'structure':'techguns:nether_soul_platform','weight':1}],
+         'placement':{'type':'minecraft:random_spread','spacing':16,'separation':15,'salt':1337262}})
+    data('content/nether-ore-cluster-small.json',cluster_location_definition())
+    files[RESOURCES+'data/techguns/structure/nether_ore_cluster_small.nbt']=location_nbt(cluster_location_definition())
+    data(RESOURCES+'data/techguns/tags/worldgen/biome/has_nether_ore_cluster_small.json',{'replace':False,'values':['#minecraft:is_nether']})
+    data(RESOURCES+'data/techguns/worldgen/structure/nether_ore_cluster_small.json',{'type':'techguns:nether_ore_cluster_small','biomes':'#techguns:has_nether_ore_cluster_small',
+         'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none','reserved_medium_grid':32,'reserved_big_grid':64})
+    data(RESOURCES+'data/techguns/worldgen/structure_set/nether_ore_cluster_small.json',{'structures':[{'structure':'techguns:nether_ore_cluster_small','weight':1}],
          'placement':{'type':'minecraft:random_spread','spacing':16,'separation':15,'salt':1337262}})
     entries=',\n'.join(f'        new Variant("{m["id"]}", {m["metadata"]}, {m["light"]})' for m in metals)
     files['core/src/main/java/techguns/core/NetherMetal.java']=('''package techguns.core;

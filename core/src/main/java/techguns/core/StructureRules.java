@@ -22,6 +22,11 @@ public final class StructureRules {
         if(roll<0 || roll>2) throw new IllegalArgumentException("Invalid original mixture roll");
         return roll<=1;
     }
+    /** Original MultiMBlock [50,50]: rolls 0..50 select the cluster, 51..100 its alternative. */
+    public static boolean clusterMixture(int roll) {
+        if(roll<0 || roll>100) throw new IllegalArgumentException("Invalid original cluster mixture roll");
+        return roll<=50;
+    }
     public static int airFloor(IntPredicate air) {
         int count=0;
         for(int y=MAX_Y;y>MIN_Y;y--) {

@@ -69,6 +69,7 @@ public final class WeaponGameTests {
         NetherAcidGameTests.register(FUNCTIONS);
         GhastlingGameTests.register(FUNCTIONS);
         NetherSoulGameTests.register(FUNCTIONS);
+        OreClusterGameTests.register(FUNCTIONS);
         RuralZombieGameTests.register(FUNCTIONS);
         FUNCTIONS.register("ammo_persists", () -> WeaponGameTests::ammoPersists);
         FUNCTIONS.register("reload_timing_and_consumption", () -> WeaponGameTests::reloadTiming);

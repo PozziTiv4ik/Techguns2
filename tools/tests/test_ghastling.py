@@ -58,7 +58,7 @@ class GhastlingPortTests(unittest.TestCase):
         self.assertEqual(spawners[0]['nbt'],{'id':'techguns:tg_spawner','mobsLeft':3,'maxActive':2,'spawnDelay':200,'delay':200,'spawnRange':1.0,'spawnHeightOffset':0,'mobtypes':[{'id':'techguns:ghastling','weight':1}]})
 
     def test_soul_uses_original_second_ticket_and_late_native_placement(self):
-        d=soul_location_definition(); self.assertEqual([c['implemented'] for c in d['generation']['candidates']],[True,True,True,True,False]); self.assertEqual(d['generation']['candidates'][1]['id'],'nether_soul_platform')
+        d=soul_location_definition(); self.assertEqual([c['implemented'] for c in d['generation']['candidates']],[True,True,True,True,True]); self.assertEqual(d['generation']['candidates'][1]['id'],'nether_soul_platform')
         files=generate_location_content(); s=json.loads(files[RESOURCES+'data/techguns/worldgen/structure/nether_soul_platform.json']); self.assertEqual(s['step'],'top_layer_modification'); self.assertEqual(s['spawn_overrides'],{})
         grid=json.loads(files[RESOURCES+'data/techguns/worldgen/structure_set/nether_soul_platform.json'])['placement']; self.assertEqual((grid['spacing'],grid['separation']),(16,15))
 

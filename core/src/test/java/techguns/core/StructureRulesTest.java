@@ -35,13 +35,19 @@ class StructureRulesTest {
         }
         assertFalse(StructureRules.smallSite(0,0,16,32,64));
     }
-    @Test void unportedChoicesRetainTheirTickets() {
+    @Test void choicesRetainTheirTickets() {
         for(boolean ores:new boolean[]{false,true}) { int hits=0;
             for(int roll=0;roll<StructureRules.smallNetherTotal(ores);roll++) if(StructureRules.altarSelected(roll,ores)) hits++;
             assertEquals(10,hits); assertFalse(StructureRules.altarSelected(10,ores));
         }
         assertEquals(40,StructureRules.smallNetherTotal(false)); assertEquals(50,StructureRules.smallNetherTotal(true));
         assertThrows(IllegalArgumentException.class,()->StructureRules.altarSelected(50,true));
+    }
+    @Test void clusterHalfWeightsHaveInclusiveFirstBoundary() {
+        int count=0; for(int roll=0;roll<=100;roll++) if(StructureRules.clusterMixture(roll)) count++;
+        assertEquals(51,count); assertTrue(StructureRules.clusterMixture(50)); assertFalse(StructureRules.clusterMixture(51));
+        assertThrows(IllegalArgumentException.class,()->StructureRules.clusterMixture(-1));
+        assertThrows(IllegalArgumentException.class,()->StructureRules.clusterMixture(101));
     }
     @Test void caveFloorUsesDescendingTenAirRunAndExcludesBottomEndpoint() {
         assertEquals(90,StructureRules.airFloor(y->y>90));

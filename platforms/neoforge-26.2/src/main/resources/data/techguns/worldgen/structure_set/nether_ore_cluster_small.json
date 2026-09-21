@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "techguns:nether_ore_cluster_small",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 16,
+    "separation": 15,
+    "salt": 1337262
+  }
+}

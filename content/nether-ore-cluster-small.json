@@ -1,0 +1,286 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/world/structures/NetherOreClusterSmall.java",
+  "scan_sha256": "5143a7fbf0641471a910dec2906d4207b7ee290b3cc2c6d57ad8ac18cf121b2c",
+  "size": [
+    3,
+    3,
+    3
+  ],
+  "declared_size": [
+    3,
+    3,
+    3
+  ],
+  "height_offset": 1,
+  "worldgen_floor_offset": -1,
+  "foundation_cells": 9,
+  "foundation_depth": 2,
+  "foundation_stop_after_solids": 2,
+  "palette": [
+    {
+      "Name": "minecraft:magma_block"
+    },
+    {
+      "Name": "minecraft:air"
+    },
+    {
+      "Name": "minecraft:structure_block",
+      "Properties": {
+        "mode": "data"
+      }
+    },
+    {
+      "Name": "techguns:ore_cluster_nether_crystal"
+    },
+    {
+      "Name": "minecraft:structure_block",
+      "Properties": {
+        "mode": "data"
+      }
+    }
+  ],
+  "block_entities": {
+    "2": {
+      "id": "minecraft:structure_block",
+      "mode": "DATA",
+      "metadata": "techguns:cluster_or_netherrack"
+    },
+    "4": {
+      "id": "minecraft:structure_block",
+      "mode": "DATA",
+      "metadata": "techguns:cluster_or_air"
+    }
+  },
+  "weighted_cells": [
+    {
+      "palette_index": 2,
+      "states": [
+        "techguns:ore_cluster_nether_crystal",
+        "minecraft:netherrack"
+      ],
+      "weights": [
+        50,
+        50
+      ],
+      "roll_bound": 101,
+      "cluster_roll_max": 50
+    },
+    {
+      "palette_index": 4,
+      "states": [
+        "techguns:ore_cluster_nether_crystal",
+        "minecraft:air"
+      ],
+      "weights": [
+        50,
+        50
+      ],
+      "roll_bound": 101,
+      "cluster_roll_max": 50
+    }
+  ],
+  "cells": [
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      2,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      1
+    ],
+    [
+      0,
+      1,
+      1,
+      2
+    ],
+    [
+      0,
+      1,
+      2,
+      1
+    ],
+    [
+      0,
+      2,
+      0,
+      1
+    ],
+    [
+      0,
+      2,
+      1,
+      1
+    ],
+    [
+      0,
+      2,
+      2,
+      1
+    ],
+    [
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      1,
+      2
+    ],
+    [
+      1,
+      0,
+      2,
+      0
+    ],
+    [
+      1,
+      1,
+      0,
+      2
+    ],
+    [
+      1,
+      1,
+      1,
+      3
+    ],
+    [
+      1,
+      1,
+      2,
+      2
+    ],
+    [
+      1,
+      2,
+      0,
+      1
+    ],
+    [
+      1,
+      2,
+      1,
+      4
+    ],
+    [
+      1,
+      2,
+      2,
+      1
+    ],
+    [
+      2,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      0,
+      1,
+      0
+    ],
+    [
+      2,
+      0,
+      2,
+      0
+    ],
+    [
+      2,
+      1,
+      0,
+      1
+    ],
+    [
+      2,
+      1,
+      1,
+      2
+    ],
+    [
+      2,
+      1,
+      2,
+      1
+    ],
+    [
+      2,
+      2,
+      0,
+      1
+    ],
+    [
+      2,
+      2,
+      1,
+      1
+    ],
+    [
+      2,
+      2,
+      2,
+      1
+    ]
+  ],
+  "generation": {
+    "dimension": "minecraft:the_nether",
+    "small_grid": 16,
+    "medium_grid": 32,
+    "big_grid": 64,
+    "min_y": 20,
+    "max_y": 100,
+    "clearance": 10,
+    "corner_height_spread": 10,
+    "candidates": [
+      {
+        "id": "nether_altar_small",
+        "weight": 10,
+        "implemented": true
+      },
+      {
+        "id": "nether_soul_platform",
+        "weight": 10,
+        "implemented": true
+      },
+      {
+        "id": "nether_loot_01",
+        "weight": 10,
+        "implemented": true
+      },
+      {
+        "id": "nether_acid_hole",
+        "weight": 10,
+        "implemented": true
+      },
+      {
+        "id": "nether_ore_cluster_small",
+        "weight": 10,
+        "implemented": true
+      }
+    ],
+    "ore_cluster_candidate_conditional": true,
+    "native_rng": "Minecraft 26.2 structure seed; not identical to 1.12.2 population RNG"
+  },
+  "mixture_rng": "Saved per-piece seed + absolute position, including two independent foundation rolls; not legacy world.rand sequence"
+}

@@ -150,7 +150,7 @@ class LocationPortTests(unittest.TestCase):
 
     def test_natural_set_grid_and_unported_tickets_remain_explicit(self):
         d=altar_definition(); g=d['generation']; self.assertEqual([e['weight'] for e in g['candidates']],[10]*5)
-        self.assertEqual([e['implemented'] for e in g['candidates']],[True,True,True,True,False])
+        self.assertEqual([e['implemented'] for e in g['candidates']],[True,True,True,True,True])
         files=generate_location_content(); structure=json.loads(files[RESOURCES+'data/techguns/worldgen/structure/nether_altar_small.json'])
         self.assertEqual((structure['reserved_medium_grid'],structure['reserved_big_grid']),(32,64)); self.assertEqual(structure['spawn_overrides'],{})
         placement=json.loads(files[RESOURCES+'data/techguns/worldgen/structure_set/nether_altar_small.json'])['placement']

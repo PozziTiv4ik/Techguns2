@@ -44,7 +44,7 @@ class AcidLocationTests(unittest.TestCase):
 
     def test_natural_set_keeps_shared_grid_and_conditional_candidates(self):
         files=generate_location_content(); d=acid_location_definition()
-        self.assertEqual([v['implemented'] for v in d['generation']['candidates']],[True,True,True,True,False])
+        self.assertEqual([v['implemented'] for v in d['generation']['candidates']],[True,True,True,True,True])
         self.assertEqual(d['generation'],altar_definition()['generation'])
         structure=json.loads(files[RESOURCES+'data/techguns/worldgen/structure/nether_acid_hole.json'])
         self.assertEqual((structure['reserved_medium_grid'],structure['reserved_big_grid']),(32,64)); self.assertEqual(structure['spawn_overrides'],{})

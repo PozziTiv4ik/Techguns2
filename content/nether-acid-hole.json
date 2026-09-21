@@ -1716,7 +1716,7 @@
       {
         "id": "nether_ore_cluster_small",
         "weight": 10,
-        "implemented": false
+        "implemented": true
       }
     ],
     "ore_cluster_candidate_conditional": true,

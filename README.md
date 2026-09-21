@@ -39,6 +39,7 @@
 - [NetherLoot01: сундук с исходными ресурсами и охрана](docs/NETHER_LOOT.ru.md)
 - [NetherAcidHole: природная кислота и её использование](docs/NETHER_ACID.ru.md)
 - [Ghastling: зажигательная очередь и NetherSoulPlatform](docs/GHASTLING_SOUL_PLATFORM.ru.md)
+- [Рудные кластеры и пятая малая локация Незера](docs/ORE_CLUSTERS.ru.md)
 - [ZombieSoldier: оружие, лут и первый срез спавна Верхнего мира](docs/ZOMBIE_SOLDIER.ru.md)
 - [Repair Bench: ремонт надетой брони за материалы](docs/REPAIR_BENCH.ru.md)
 - [Camo Bench: камуфляж T2 и перекраска блоков](docs/CAMO_BENCH.ru.md)
@@ -231,6 +232,12 @@ Ghastling (`techguns:ghastling`) — исходный наземный гаст�
 Четвёртая локация `/locate structure techguns:nether_soul_platform`
 использует его конечный спавнер: три смерти, максимум два живых.
 См. `docs/GHASTLING_SOUL_PLATFORM.ru.md`.
+
+Девять рудных кластеров `techguns:ore_cluster_*` доступны в творческой вкладке.
+Они не добываются киркой, не истощаются и не дают дропа, как в оригинале.
+Пятая малая локация `/locate structure techguns:nether_ore_cluster_small`
+содержит адские кластеры на магмовом основании. **Бур пока не перенесён:
+получать ресурсы из кластеров ещё нельзя.** См. `docs/ORE_CLUSTERS.ru.md`.
 
 Доступны четыре части `t2_combat_*`: типовая защита, износ, ремонт обсидиановой
 сталью на наковальне и шесть исходных камуфляжей. Shift + ПКМ с бронёй в руке

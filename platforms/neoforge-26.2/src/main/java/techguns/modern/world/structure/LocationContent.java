@@ -19,5 +19,7 @@ public final class LocationContent {
     public static final DeferredHolder<StructureType<?>,StructureType<NetherSoulStructure>> SOUL=TYPES.register("nether_soul_platform",()->()->NetherSoulStructure.CODEC);
     public static final DeferredHolder<StructurePieceType,StructurePieceType> SOUL_PIECE=PIECES.register("nether_soul_platform",()->(context,tag)->new NetherSoulPiece(context.structureTemplateManager(),tag));
     public static void register(IEventBus bus) { TYPES.register(bus); PIECES.register(bus); }
+    public static final DeferredHolder<StructureType<?>,StructureType<NetherClusterStructure>> CLUSTER=TYPES.register("nether_ore_cluster_small",()->()->NetherClusterStructure.CODEC);
+    public static final DeferredHolder<StructurePieceType,StructurePieceType> CLUSTER_PIECE=PIECES.register("nether_ore_cluster_small",()->(context,tag)->new NetherClusterPiece(context.structureTemplateManager(),tag));
     private LocationContent() {}
 }

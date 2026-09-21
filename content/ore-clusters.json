@@ -1,0 +1,84 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/blocks/BlockOreCluster.java",
+  "defaults_source": "legacy/1.12.2/src/main/java/techguns/TGConfig.java",
+  "hardness": -1,
+  "legacy_resistance_argument": 6000000,
+  "blast_resistance": 3600000,
+  "drops": [],
+  "depletion": false,
+  "ore_drill": "not ported; no resource extraction yet",
+  "variants": [
+    {
+      "id": "ore_cluster_coal",
+      "type": "coal",
+      "metadata": 0,
+      "mining_level": 0,
+      "ore_multiplier": 10.0,
+      "power_multiplier": 0.1
+    },
+    {
+      "id": "ore_cluster_common_metal",
+      "type": "common_metal",
+      "metadata": 1,
+      "mining_level": 0,
+      "ore_multiplier": 5.0,
+      "power_multiplier": 0.2
+    },
+    {
+      "id": "ore_cluster_rare_metal",
+      "type": "rare_metal",
+      "metadata": 2,
+      "mining_level": 1,
+      "ore_multiplier": 2.5,
+      "power_multiplier": 0.4
+    },
+    {
+      "id": "ore_cluster_shiny_metal",
+      "type": "shiny_metal",
+      "metadata": 3,
+      "mining_level": 2,
+      "ore_multiplier": 1.0,
+      "power_multiplier": 1.0
+    },
+    {
+      "id": "ore_cluster_uranium",
+      "type": "uranium",
+      "metadata": 4,
+      "mining_level": 3,
+      "ore_multiplier": 0.5,
+      "power_multiplier": 1.0
+    },
+    {
+      "id": "ore_cluster_common_gem",
+      "type": "common_gem",
+      "metadata": 5,
+      "mining_level": 1,
+      "ore_multiplier": 5.0,
+      "power_multiplier": 0.2
+    },
+    {
+      "id": "ore_cluster_shiny_gem",
+      "type": "shiny_gem",
+      "metadata": 6,
+      "mining_level": 3,
+      "ore_multiplier": 0.2,
+      "power_multiplier": 1.0
+    },
+    {
+      "id": "ore_cluster_nether_crystal",
+      "type": "nether_crystal",
+      "metadata": 7,
+      "mining_level": 2,
+      "ore_multiplier": 4.0,
+      "power_multiplier": 0.5
+    },
+    {
+      "id": "ore_cluster_oil",
+      "type": "oil",
+      "metadata": 8,
+      "mining_level": 2,
+      "ore_multiplier": 4.0,
+      "power_multiplier": 1.0
+    }
+  ]
+}

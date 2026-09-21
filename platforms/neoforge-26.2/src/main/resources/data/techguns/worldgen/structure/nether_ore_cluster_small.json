@@ -1,0 +1,9 @@
+{
+  "type": "techguns:nether_ore_cluster_small",
+  "biomes": "#techguns:has_nether_ore_cluster_small",
+  "step": "top_layer_modification",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none",
+  "reserved_medium_grid": 32,
+  "reserved_big_grid": 64
+}
