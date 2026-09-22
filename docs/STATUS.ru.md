@@ -316,6 +316,9 @@
 Последние результаты записываются в `docs/VERIFICATION.ru.md`.
 `build` и `runGameTestServer` — разные проверки; отсутствие ошибок компиляции
 само по себе не подтверждает игровой цикл или готовность полного мода.
+Для OreClusterMeteorBasis Linux CI прошёл на source commit
+`65437fa74bd5d73da48f658a8ec5d17ec97df8a7`: 269 Python и
+1368 GameTests, включая 16 проверок природной генерации.
 
 ## Следующий этап
 
