@@ -1,6 +1,10 @@
 {
   "replace": false,
   "values": [
+    "techguns:ladder_carbon",
+    "techguns:ladder_metal",
+    "techguns:ladder_rusty",
+    "techguns:ladder_shiny",
     "techguns:slimyladder"
   ]
 }

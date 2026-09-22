@@ -1,0 +1,6 @@
+{
+  "parent": "techguns:item/ladder_base",
+  "textures": {
+    "texture": "techguns:item/metal_ladder"
+  }
+}

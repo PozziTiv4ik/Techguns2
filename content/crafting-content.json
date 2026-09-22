@@ -149,7 +149,25 @@
     "techguns:nethermetal@6": "techguns:nethermetal_border_red",
     "techguns:nethermetal@7": "techguns:nethermetal_plate_black",
     "techguns:nethermetal@8": "techguns:nethermetal_plate_red",
-    "techguns:nethermetal@9": "techguns:nethermetal_border_lava"
+    "techguns:nethermetal@9": "techguns:nethermetal_border_lava",
+    "techguns:metalpanel@0": "techguns:metalpanel_container_red",
+    "techguns:metalpanel@1": "techguns:metalpanel_container_green",
+    "techguns:metalpanel@2": "techguns:metalpanel_container_blue",
+    "techguns:metalpanel@3": "techguns:metalpanel_container_orange",
+    "techguns:metalpanel@4": "techguns:metalpanel_panel_large_border",
+    "techguns:metalpanel@5": "techguns:metalpanel_steelframe_blue",
+    "techguns:metalpanel@6": "techguns:metalpanel_steelframe_dark",
+    "techguns:metalpanel@7": "techguns:metalpanel_steelframe_scaffold",
+    "techguns:concrete@0": "techguns:concrete_brown",
+    "techguns:concrete@1": "techguns:concrete_brown_light",
+    "techguns:concrete@2": "techguns:concrete_grey",
+    "techguns:concrete@3": "techguns:concrete_grey_dark",
+    "techguns:concrete@4": "techguns:concrete_brown_pipes",
+    "techguns:concrete@5": "techguns:concrete_brown_light_scaff",
+    "techguns:ladder0@8": "techguns:ladder_metal",
+    "techguns:ladder0@9": "techguns:ladder_shiny",
+    "techguns:ladder0@10": "techguns:ladder_rusty",
+    "techguns:ladder0@11": "techguns:ladder_carbon"
   },
   "recipes": [
     {
@@ -215,6 +233,10 @@
     {
       "id": "techguns:combatshotgun",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/combatshotgun.json"
+    },
+    {
+      "id": "techguns:concrete_0",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/concrete_0.json"
     },
     {
       "id": "techguns:goldenrevolver",
@@ -525,6 +547,14 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_9_smgmagazine.json"
     },
     {
+      "id": "techguns:ladder0_8",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/ladder0_8.json"
+    },
+    {
+      "id": "techguns:ladder0_8_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/ladder0_8_alt.json"
+    },
+    {
       "id": "techguns:lasergun",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/lasergun.json"
     },
@@ -563,6 +593,14 @@
     {
       "id": "techguns:mac10_alt",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/mac10_alt.json"
+    },
+    {
+      "id": "techguns:metalpanel_0",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/metalpanel_0.json"
+    },
+    {
+      "id": "techguns:metalpanel_0_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/metalpanel_0_alt.json"
     },
     {
       "id": "techguns:fabricator_housing",

@@ -1,0 +1,181 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/TGBlocks.java",
+  "variants": [
+    {
+      "id": "metalpanel_container_red",
+      "family": "metalpanel",
+      "index": 0,
+      "metadata": 0,
+      "model": "container_red",
+      "hardness": 8
+    },
+    {
+      "id": "metalpanel_container_green",
+      "family": "metalpanel",
+      "index": 1,
+      "metadata": 1,
+      "model": "container_green",
+      "hardness": 8
+    },
+    {
+      "id": "metalpanel_container_blue",
+      "family": "metalpanel",
+      "index": 2,
+      "metadata": 2,
+      "model": "container_blue",
+      "hardness": 8
+    },
+    {
+      "id": "metalpanel_container_orange",
+      "family": "metalpanel",
+      "index": 3,
+      "metadata": 3,
+      "model": "container_orange",
+      "hardness": 8
+    },
+    {
+      "id": "metalpanel_panel_large_border",
+      "family": "metalpanel",
+      "index": 4,
+      "metadata": 4,
+      "model": "panel_large_border",
+      "hardness": 8
+    },
+    {
+      "id": "metalpanel_steelframe_blue",
+      "family": "metalpanel",
+      "index": 5,
+      "metadata": 5,
+      "model": "steelframe_blue",
+      "hardness": 8
+    },
+    {
+      "id": "metalpanel_steelframe_dark",
+      "family": "metalpanel",
+      "index": 6,
+      "metadata": 6,
+      "model": "steelframe_dark",
+      "hardness": 8
+    },
+    {
+      "id": "metalpanel_steelframe_scaffold",
+      "family": "metalpanel",
+      "index": 7,
+      "metadata": 7,
+      "model": "steelframe_scaffold",
+      "hardness": 8
+    },
+    {
+      "id": "concrete_brown",
+      "family": "concrete",
+      "index": 0,
+      "metadata": 0,
+      "model": "concrete_brown",
+      "hardness": 8
+    },
+    {
+      "id": "concrete_brown_light",
+      "family": "concrete",
+      "index": 1,
+      "metadata": 1,
+      "model": "concrete_brown_light",
+      "hardness": 8
+    },
+    {
+      "id": "concrete_grey",
+      "family": "concrete",
+      "index": 2,
+      "metadata": 2,
+      "model": "concrete_grey",
+      "hardness": 8
+    },
+    {
+      "id": "concrete_grey_dark",
+      "family": "concrete",
+      "index": 3,
+      "metadata": 3,
+      "model": "concrete_grey_dark",
+      "hardness": 8
+    },
+    {
+      "id": "concrete_brown_pipes",
+      "family": "concrete",
+      "index": 4,
+      "metadata": 4,
+      "model": "concrete_brown_pipes",
+      "hardness": 8
+    },
+    {
+      "id": "concrete_brown_light_scaff",
+      "family": "concrete",
+      "index": 5,
+      "metadata": 5,
+      "model": "concrete_brown_light_scaff",
+      "hardness": 8
+    },
+    {
+      "id": "ladder_metal",
+      "family": "ladder0",
+      "index": 0,
+      "metadata": 8,
+      "model": "ladder_metal",
+      "hardness": 6
+    },
+    {
+      "id": "ladder_shiny",
+      "family": "ladder0",
+      "index": 1,
+      "metadata": 9,
+      "model": "ladder_shiny",
+      "hardness": 6
+    },
+    {
+      "id": "ladder_rusty",
+      "family": "ladder0",
+      "index": 2,
+      "metadata": 10,
+      "model": "ladder_rusty",
+      "hardness": 6
+    },
+    {
+      "id": "ladder_carbon",
+      "family": "ladder0",
+      "index": 3,
+      "metadata": 11,
+      "model": "ladder_carbon",
+      "hardness": 6
+    }
+  ],
+  "recipes": [
+    "metalpanel_0",
+    "metalpanel_0_alt",
+    "concrete_0",
+    "ladder0_8",
+    "ladder0_8_alt"
+  ],
+  "pending_stair_return_recipes": [
+    "metalpanel_4",
+    "metalpanel_6",
+    "concrete_1",
+    "concrete_3"
+  ],
+  "ladder": {
+    "thickness": 0.125,
+    "default_facing": "north",
+    "support_required": false,
+    "vertical_precedence": [
+      "below",
+      "above",
+      "opposite_player"
+    ],
+    "world_metadata_facing": [
+      "south",
+      "west",
+      "north",
+      "east"
+    ],
+    "waterlogging": false
+  },
+  "ctm_integration": "pending; source base pixels retained",
+  "client_acceptance": "pending"
+}

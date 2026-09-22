@@ -96,6 +96,7 @@ public final class TGContent {
                         output.accept(techguns.modern.npc.spawner.NpcSpawnerContent.ITEM.get());
                         output.accept(techguns.modern.npc.spawner.NpcSpawnerContent.SOLDIER_ITEM.get());
                         techguns.modern.world.NetherMetalContent.BLOCKS.values().forEach(block -> output.accept(block.get()));
+                        techguns.modern.world.BuildingContent.BLOCKS.values().forEach(block -> output.accept(block.get()));
                         techguns.modern.world.OreClusterContent.BLOCKS.values().forEach(block -> output.accept(block.get()));
                         techguns.modern.machine.drill.OreDrillContent.BLOCKS.values().forEach(block -> output.accept(block.get()));
                         output.accept(techguns.modern.armor.ArmorContent.BERET.get());

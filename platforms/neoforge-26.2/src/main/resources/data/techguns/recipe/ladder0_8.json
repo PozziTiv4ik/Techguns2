@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:ladder_metal",
+    "count": 16
+  },
+  "pattern": [
+    "iii",
+    " i ",
+    "iii"
+  ],
+  "key": {
+    "i": "#c:plates/iron"
+  }
+}

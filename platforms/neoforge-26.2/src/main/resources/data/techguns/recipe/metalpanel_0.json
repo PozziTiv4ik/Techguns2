@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:metalpanel_container_red",
+    "count": 32
+  },
+  "pattern": [
+    "sss",
+    "psp",
+    "sss"
+  ],
+  "key": {
+    "p": "#c:plates/iron",
+    "s": "#c:stones"
+  }
+}

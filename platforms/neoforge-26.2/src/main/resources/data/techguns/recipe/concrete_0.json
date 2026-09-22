@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:concrete_brown",
+    "count": 16
+  },
+  "pattern": [
+    "ccc",
+    "cbc",
+    "ccc"
+  ],
+  "key": {
+    "b": "minecraft:iron_bars",
+    "c": "#techguns:legacy_concrete"
+  }
+}

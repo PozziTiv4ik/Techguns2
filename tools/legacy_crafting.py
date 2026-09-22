@@ -16,6 +16,7 @@ from legacy_grinder import grinder_data
 from legacy_armors import ARMOR_SETS, armor_definitions
 from legacy_locations import metal_definitions
 from legacy_drill import PARTS as DRILL_PARTS, drill_heads
+from legacy_building import FAMILIES as BUILDING_FAMILIES, RECIPES as BUILDING_RECIPES, building_id, building_definitions
 
 ROOT = Path(__file__).resolve().parents[1]
 LEGACY = ROOT / 'legacy/1.12.2/src/main'
@@ -29,6 +30,8 @@ def inputs(recipe):
 def convert_recipe(legacy, shared, weapons):
     def item(value):
         identifier = value['item']
+        if identifier.removeprefix('techguns:') in BUILDING_FAMILIES and identifier.startswith('techguns:'):
+            return 'techguns:'+building_id(identifier.split(':')[1], value.get('data', 0))
         if identifier == 'techguns:nethermetal': return 'techguns:'+metal_definitions()[value.get('data',0)]['id']
         if identifier == 'techguns:oredrill': return 'techguns:oredrill_'+DRILL_PARTS[value['data']]
         if identifier == 'techguns:basicmachine':
@@ -46,6 +49,7 @@ def convert_recipe(legacy, shared, weapons):
 
     def ingredient(value):
         identifier = value['item']
+        if identifier == 'minecraft:concrete' and value.get('data') == 32767: return '#techguns:legacy_concrete'
         if identifier.startswith('#'):
             name = identifier[1:]
             if name in ('HARDENEDGLASSORGLASS', 'ELECTRUMORGOLD'):
@@ -104,6 +108,7 @@ def plan_crafting(weapon_list):
     selected['simplemachine_8_camo_bench'] = source_recipes['simplemachine_8_camo_bench']
     selected['simplemachine2_8_grinder'] = source_recipes['simplemachine2_8_grinder']
     selected['nethermetal_0'] = source_recipes['nethermetal_0']
+    for name in BUILDING_RECIPES: selected[name] = source_recipes[name]
     selected['basicmachine_2_chem_lab']=source_recipes['basicmachine_2_chem_lab']
     for meta, part in enumerate(FABRICATOR_PARTS+REACTION_PARTS):
         name = f'multiblockmachine_{meta}_{part}'
@@ -207,4 +212,5 @@ def plan_crafting(weapon_list):
     catalog['block_metadata']['techguns:simplemachine@8'] = 'techguns:camo_bench'
     catalog['block_metadata']['techguns:simplemachine2@8'] = 'techguns:grinder'
     catalog['block_metadata'].update({f'techguns:nethermetal@{m["metadata"]}':'techguns:'+m['id'] for m in metal_definitions()})
+    catalog['block_metadata'].update({f'techguns:{v["family"]}@{v["metadata"]}':'techguns:'+v['id'] for v in building_definitions()})
     return {'recipes': recipes, 'materials': materials, 'extra_ammo': sorted(extra_ammo), 'tags': tags, 'catalog': catalog}

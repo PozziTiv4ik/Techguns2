@@ -190,7 +190,10 @@
     "T2_BERET"
   ],
   "decorative": [
-    "NETHER_METAL"
+    "NETHER_METAL",
+    "METAL_PANEL",
+    "CONCRETE",
+    "LADDER_0"
   ],
   "minecraft_reference": {
     "version": "1.12.2",
