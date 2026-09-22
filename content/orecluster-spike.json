@@ -1,0 +1,684 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/world/structures/OreClusterSpike.java",
+  "scan_sha256": "2c22becfd2c1307ddccc5cde1578d08a04e17440178dacbc22cfd614a58c9434",
+  "size": [
+    8,
+    7,
+    8
+  ],
+  "pivot": [
+    4,
+    0,
+    4
+  ],
+  "palette": [
+    {
+      "Name": "minecraft:air"
+    },
+    {
+      "Name": "techguns:tg_spawner"
+    },
+    {
+      "Name": "minecraft:structure_block",
+      "Properties": {
+        "mode": "data"
+      }
+    },
+    {
+      "Name": "techguns:slimyladder",
+      "Properties": {
+        "facing": "west",
+        "waterlogged": "false"
+      }
+    },
+    {
+      "Name": "techguns:bugnest_eggs"
+    },
+    {
+      "Name": "minecraft:stone"
+    },
+    {
+      "Name": "minecraft:structure_block",
+      "Properties": {
+        "mode": "data"
+      }
+    },
+    {
+      "Name": "techguns:slimyladder",
+      "Properties": {
+        "facing": "north",
+        "waterlogged": "false"
+      }
+    },
+    {
+      "Name": "minecraft:structure_block",
+      "Properties": {
+        "mode": "data"
+      }
+    },
+    {
+      "Name": "techguns:slimyladder",
+      "Properties": {
+        "facing": "south",
+        "waterlogged": "false"
+      }
+    },
+    {
+      "Name": "minecraft:structure_block",
+      "Properties": {
+        "mode": "data"
+      }
+    }
+  ],
+  "block_entities": {
+    "1": {
+      "id": "techguns:tg_spawner",
+      "mobsLeft": 4,
+      "maxActive": 2,
+      "spawnDelay": 200,
+      "delay": 200,
+      "spawnRange": 1.0,
+      "spawnHeightOffset": 0,
+      "mobtypes": [
+        {
+          "id": "techguns:alienbug",
+          "weight": 1
+        }
+      ]
+    },
+    "2": {
+      "id": "minecraft:structure_block",
+      "mode": "DATA",
+      "metadata": "techguns:spike_stone_air"
+    },
+    "6": {
+      "id": "minecraft:structure_block",
+      "mode": "DATA",
+      "metadata": "techguns:spike_stone_ore"
+    },
+    "8": {
+      "id": "minecraft:structure_block",
+      "mode": "DATA",
+      "metadata": "techguns:spike_cluster_ore"
+    },
+    "10": {
+      "id": "minecraft:structure_block",
+      "mode": "DATA",
+      "metadata": "techguns:spike_cluster"
+    }
+  },
+  "cells": [
+    [
+      0,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      2,
+      0
+    ],
+    [
+      0,
+      2,
+      0,
+      0
+    ],
+    [
+      0,
+      2,
+      1,
+      0
+    ],
+    [
+      0,
+      2,
+      2,
+      0
+    ],
+    [
+      1,
+      0,
+      1,
+      1
+    ],
+    [
+      1,
+      1,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      1,
+      1,
+      2,
+      0
+    ],
+    [
+      1,
+      1,
+      4,
+      2
+    ],
+    [
+      1,
+      2,
+      0,
+      0
+    ],
+    [
+      1,
+      2,
+      1,
+      0
+    ],
+    [
+      1,
+      2,
+      2,
+      0
+    ],
+    [
+      1,
+      2,
+      4,
+      3
+    ],
+    [
+      1,
+      3,
+      4,
+      3
+    ],
+    [
+      2,
+      0,
+      3,
+      4
+    ],
+    [
+      2,
+      0,
+      4,
+      5
+    ],
+    [
+      2,
+      0,
+      5,
+      6
+    ],
+    [
+      2,
+      1,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      1,
+      0
+    ],
+    [
+      2,
+      1,
+      2,
+      0
+    ],
+    [
+      2,
+      1,
+      3,
+      6
+    ],
+    [
+      2,
+      1,
+      4,
+      5
+    ],
+    [
+      2,
+      1,
+      5,
+      6
+    ],
+    [
+      2,
+      2,
+      0,
+      0
+    ],
+    [
+      2,
+      2,
+      1,
+      0
+    ],
+    [
+      2,
+      2,
+      2,
+      7
+    ],
+    [
+      2,
+      2,
+      3,
+      6
+    ],
+    [
+      2,
+      2,
+      4,
+      8
+    ],
+    [
+      2,
+      2,
+      5,
+      4
+    ],
+    [
+      2,
+      3,
+      2,
+      7
+    ],
+    [
+      2,
+      3,
+      3,
+      6
+    ],
+    [
+      2,
+      3,
+      4,
+      8
+    ],
+    [
+      3,
+      0,
+      2,
+      2
+    ],
+    [
+      3,
+      0,
+      3,
+      5
+    ],
+    [
+      3,
+      0,
+      4,
+      5
+    ],
+    [
+      3,
+      0,
+      5,
+      6
+    ],
+    [
+      3,
+      1,
+      3,
+      6
+    ],
+    [
+      3,
+      1,
+      4,
+      8
+    ],
+    [
+      3,
+      1,
+      5,
+      2
+    ],
+    [
+      3,
+      1,
+      6,
+      9
+    ],
+    [
+      3,
+      2,
+      2,
+      2
+    ],
+    [
+      3,
+      2,
+      3,
+      8
+    ],
+    [
+      3,
+      2,
+      4,
+      10
+    ],
+    [
+      3,
+      2,
+      5,
+      8
+    ],
+    [
+      3,
+      3,
+      3,
+      8
+    ],
+    [
+      3,
+      3,
+      4,
+      10
+    ],
+    [
+      3,
+      3,
+      5,
+      8
+    ],
+    [
+      3,
+      4,
+      4,
+      8
+    ],
+    [
+      3,
+      4,
+      5,
+      9
+    ],
+    [
+      3,
+      5,
+      4,
+      5
+    ],
+    [
+      3,
+      5,
+      5,
+      9
+    ],
+    [
+      3,
+      6,
+      4,
+      2
+    ],
+    [
+      4,
+      0,
+      3,
+      6
+    ],
+    [
+      4,
+      0,
+      4,
+      5
+    ],
+    [
+      4,
+      0,
+      5,
+      5
+    ],
+    [
+      4,
+      1,
+      3,
+      6
+    ],
+    [
+      4,
+      1,
+      4,
+      6
+    ],
+    [
+      4,
+      1,
+      5,
+      6
+    ],
+    [
+      4,
+      2,
+      3,
+      7
+    ],
+    [
+      4,
+      2,
+      4,
+      8
+    ],
+    [
+      4,
+      3,
+      3,
+      7
+    ],
+    [
+      4,
+      3,
+      4,
+      8
+    ],
+    [
+      4,
+      4,
+      3,
+      7
+    ],
+    [
+      4,
+      4,
+      4,
+      2
+    ],
+    [
+      5,
+      0,
+      4,
+      4
+    ],
+    [
+      5,
+      1,
+      4,
+      2
+    ],
+    [
+      5,
+      1,
+      5,
+      0
+    ],
+    [
+      5,
+      1,
+      6,
+      0
+    ],
+    [
+      5,
+      1,
+      7,
+      0
+    ],
+    [
+      5,
+      2,
+      4,
+      6
+    ],
+    [
+      5,
+      2,
+      5,
+      0
+    ],
+    [
+      5,
+      2,
+      6,
+      0
+    ],
+    [
+      5,
+      2,
+      7,
+      0
+    ],
+    [
+      6,
+      0,
+      6,
+      1
+    ],
+    [
+      6,
+      1,
+      5,
+      0
+    ],
+    [
+      6,
+      1,
+      6,
+      0
+    ],
+    [
+      6,
+      1,
+      7,
+      0
+    ],
+    [
+      6,
+      2,
+      5,
+      0
+    ],
+    [
+      6,
+      2,
+      6,
+      0
+    ],
+    [
+      6,
+      2,
+      7,
+      0
+    ],
+    [
+      7,
+      1,
+      5,
+      0
+    ],
+    [
+      7,
+      1,
+      6,
+      0
+    ],
+    [
+      7,
+      1,
+      7,
+      0
+    ],
+    [
+      7,
+      2,
+      5,
+      0
+    ],
+    [
+      7,
+      2,
+      6,
+      0
+    ],
+    [
+      7,
+      2,
+      7,
+      0
+    ]
+  ],
+  "cluster_types": [
+    "coal",
+    "common_metal",
+    "common_gem",
+    "rare_metal",
+    "shiny_metal",
+    "shiny_gem",
+    "uranium"
+  ],
+  "cluster_weights": [
+    5,
+    10,
+    10,
+    10,
+    5,
+    2,
+    3
+  ],
+  "cluster_roll_bound": 46,
+  "clear_bottom_columns": 13,
+  "clear_above": [
+    1,
+    6
+  ],
+  "foundation_depth": 0,
+  "generation": {
+    "dimension": "minecraft:overworld",
+    "medium_grid": 32,
+    "reserved_big_grid": 64,
+    "height_samples": [
+      0,
+      4,
+      8
+    ],
+    "maximum_height_spread": 3,
+    "ordinary_land_total": 35,
+    "sandy_wasteland_total": 55,
+    "sandy_wasteland_with_block_oil_total": 70,
+    "spike_weight": 10,
+    "unported_candidates_retain_weight": true,
+    "ocean_excluded": true,
+    "native_rng": "26.2 chunk seed; saved type and per-position mixture seed",
+    "native_surface": "Nine noise terrain columns; reject liquid above solid floor. Modern negative heights supported."
+  }
+}

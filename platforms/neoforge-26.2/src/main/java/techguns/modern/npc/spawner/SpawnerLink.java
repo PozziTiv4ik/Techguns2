@@ -6,7 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.server.level.ServerLevel;
-import techguns.modern.npc.SpawnerNpc;
+import net.minecraft.world.entity.Mob;
 
 /** Origin remains on the NPC for the original daylight exemption; instance IDs prevent adopting an old NPC after replacement. */
 public record SpawnerLink(GlobalPos origin,UUID instance) {
@@ -16,13 +16,13 @@ public record SpawnerLink(GlobalPos origin,UUID instance) {
         if(!origin.dimension().equals(level.dimension()) || !level.hasChunkAt(origin.pos())) return null;
         return level.getBlockEntity(origin.pos()) instanceof NpcSpawnerBlockEntity block && !block.isRemoved() && instance.equals(block.instance()) ? block : null;
     }
-    public void relink(SpawnerNpc npc) {
+    public void relink(Mob npc) {
         if(npc.level() instanceof ServerLevel level) {
             var owner=loadedOwner(level);
             if(owner!=null && npc.isAlive()) owner.relink(npc);
         }
     }
-    public void removed(SpawnerNpc npc,boolean killed) {
+    public void removed(Mob npc,boolean killed) {
         if(!(npc.level() instanceof ServerLevel level)) return;
         var ownerLevel=level.getServer().getLevel(origin.dimension());
         if(ownerLevel==null) return;

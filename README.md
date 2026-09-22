@@ -41,6 +41,7 @@
 - [Ghastling: зажигательная очередь и NetherSoulPlatform](docs/GHASTLING_SOUL_PLATFORM.ru.md)
 - [Рудные кластеры и пятая малая локация Незера](docs/ORE_CLUSTERS.ru.md)
 - [Ore Drill: добыча из кластеров, размеры, головки и питание](docs/ORE_DRILL.ru.md)
+- [Рудный выступ Верхнего мира, AlienBug и слизистые блоки](docs/ORE_SPIKE_ALIENBUG.ru.md)
 - [ZombieSoldier: оружие, лут и первый срез спавна Верхнего мира](docs/ZOMBIE_SOLDIER.ru.md)
 - [Repair Bench: ремонт надетой брони за материалы](docs/REPAIR_BENCH.ru.md)
 - [Camo Bench: камуфляж T2 и перекраска блоков](docs/CAMO_BENCH.ru.md)
@@ -243,6 +244,12 @@ Ghastling (`techguns:ghastling`) — исходный наземный гаст�
 Для малого бура на адском кластере нужна обсидиановая или карбоновая головка.
 Поддерживаются большие установки, шесть направлений, баки и воронки.
 См. `docs/ORE_CLUSTERS.ru.md` и `docs/ORE_DRILL.ru.md`.
+
+В новых чанках Верхнего мира появился `OreClusterSpike` с семью вариантами
+кластера и двумя конечными спавнерами AlienBug. Поиск:
+`/locate structure techguns:orecluster_spike`. Жук лазает по стенам и
+атакует днём; слизистые яйца и лестницы сохраняют исходные модели.
+См. `docs/ORE_SPIKE_ALIENBUG.ru.md`.
 
 Доступны четыре части `t2_combat_*`: типовая защита, износ, ремонт обсидиановой
 сталью на наковальне и шесть исходных камуфляжей. Shift + ПКМ с бронёй в руке

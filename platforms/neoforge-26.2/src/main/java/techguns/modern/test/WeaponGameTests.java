@@ -68,6 +68,8 @@ public final class WeaponGameTests {
         NetherLootGameTests.register(FUNCTIONS);
         NetherAcidGameTests.register(FUNCTIONS);
         GhastlingGameTests.register(FUNCTIONS);
+        AlienBugGameTests.register(FUNCTIONS);
+        OreSpikeGameTests.register(FUNCTIONS);
         NetherSoulGameTests.register(FUNCTIONS);
         OreClusterGameTests.register(FUNCTIONS);
         OreDrillGameTests.register(FUNCTIONS);

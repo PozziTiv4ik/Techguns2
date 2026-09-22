@@ -87,6 +87,10 @@ public final class TGContent {
                         output.accept(techguns.modern.npc.NpcContent.BANDIT_EGG.get());
                         output.accept(techguns.modern.npc.NpcContent.PSYCHO_EGG.get());
                         output.accept(techguns.modern.npc.NpcContent.ARMY_EGG.get());
+                        output.accept(techguns.modern.npc.NpcContent.GHASTLING_EGG.get());
+                        output.accept(techguns.modern.npc.NpcContent.BUG_EGG.get());
+                        output.accept(techguns.modern.world.SlimyContent.EGGS.get());
+                        output.accept(techguns.modern.world.SlimyContent.TRAIL.get());
                         output.accept(techguns.modern.npc.spawner.NpcSpawnerContent.ITEM.get());
                         output.accept(techguns.modern.npc.spawner.NpcSpawnerContent.SOLDIER_ITEM.get());
                         techguns.modern.world.NetherMetalContent.BLOCKS.values().forEach(block -> output.accept(block.get()));

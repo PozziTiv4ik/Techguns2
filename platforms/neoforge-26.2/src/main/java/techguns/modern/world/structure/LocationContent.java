@@ -21,5 +21,7 @@ public final class LocationContent {
     public static void register(IEventBus bus) { TYPES.register(bus); PIECES.register(bus); }
     public static final DeferredHolder<StructureType<?>,StructureType<NetherClusterStructure>> CLUSTER=TYPES.register("nether_ore_cluster_small",()->()->NetherClusterStructure.CODEC);
     public static final DeferredHolder<StructurePieceType,StructurePieceType> CLUSTER_PIECE=PIECES.register("nether_ore_cluster_small",()->(context,tag)->new NetherClusterPiece(context.structureTemplateManager(),tag));
+    public static final DeferredHolder<StructureType<?>,StructureType<OreSpikeStructure>> SPIKE=TYPES.register("orecluster_spike",()->()->OreSpikeStructure.CODEC);
+    public static final DeferredHolder<StructurePieceType,StructurePieceType> SPIKE_PIECE=PIECES.register("orecluster_spike",()->(context,tag)->new OreSpikePiece(context.structureTemplateManager(),tag));
     private LocationContent() {}
 }

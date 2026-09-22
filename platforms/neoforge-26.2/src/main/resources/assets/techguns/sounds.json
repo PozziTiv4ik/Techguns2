@@ -381,6 +381,59 @@
     ],
     "subtitle": "subtitles.techguns.effects.nukeexplosion"
   },
+  "npcs.alienbugidle": {
+    "sounds": [
+      "techguns:npcs/alienbug_idle-01",
+      "techguns:npcs/alienbug_idle-02",
+      "techguns:npcs/alienbug_idle-03",
+      "techguns:npcs/alienbug_idle-04",
+      "techguns:npcs/alienbug_idle-05",
+      "techguns:npcs/alienbug_idle-06"
+    ],
+    "subtitle": "subtitles.techguns.npcs.alienbugidle"
+  },
+  "npcs.alienbughurt": {
+    "sounds": [
+      "techguns:npcs/alienbug_hit-01",
+      "techguns:npcs/alienbug_hit-02",
+      "techguns:npcs/alienbug_hit-03",
+      "techguns:npcs/alienbug_hit-04"
+    ],
+    "subtitle": "subtitles.techguns.npcs.alienbughurt"
+  },
+  "npcs.alienbugdeath": {
+    "sounds": [
+      "techguns:npcs/alienbug_death_a",
+      "techguns:npcs/alienbug_death_b"
+    ],
+    "subtitle": "subtitles.techguns.npcs.alienbugdeath"
+  },
+  "npcs.alienbugstep": {
+    "sounds": [
+      "techguns:npcs/alienbug_step_a",
+      "techguns:npcs/alienbug_step_b",
+      "techguns:npcs/alienbug_step_c"
+    ],
+    "subtitle": "subtitles.techguns.npcs.alienbugstep"
+  },
+  "npcs.alienbugaggro": {
+    "sounds": [
+      "techguns:npcs/alienbug_aggro_a",
+      "techguns:npcs/alienbug_aggro_b",
+      "techguns:npcs/alienbug_aggro_c",
+      "techguns:npcs/alienbug_aggro_d"
+    ],
+    "subtitle": "subtitles.techguns.npcs.alienbugaggro"
+  },
+  "npcs.alienbugbite": {
+    "sounds": [
+      "techguns:npcs/alienbug_bite_a",
+      "techguns:npcs/alienbug_bite_b",
+      "techguns:npcs/alienbug_bite_c",
+      "techguns:npcs/alienbug_bite_d"
+    ],
+    "subtitle": "subtitles.techguns.npcs.alienbugbite"
+  },
   "npcs.cyberdemonidle": {
     "sounds": [
       "techguns:npcs/cyberdemon_idle_a",

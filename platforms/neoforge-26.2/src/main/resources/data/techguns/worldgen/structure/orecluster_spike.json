@@ -1,0 +1,8 @@
+{
+  "type": "techguns:orecluster_spike",
+  "biomes": "#techguns:has_orecluster_spike",
+  "step": "top_layer_modification",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none",
+  "reserved_big_grid": 64
+}

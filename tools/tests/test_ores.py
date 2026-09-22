@@ -50,7 +50,8 @@ class OrePortTests(unittest.TestCase):
     def test_source_copper_and_tool_tags_survive_domain_merge(self):
         files = generate()
         pickaxes = json.loads(files[RESOURCES+'data/minecraft/tags/block/mineable/pickaxe.json'])['values']
-        self.assertEqual(len(pickaxes),34)
+        self.assertEqual(len(pickaxes),35)
+        self.assertIn("techguns:bugnest_eggs",pickaxes)
         for part in ('frame','scaffold','rod','engine','controller'):
             self.assertIn('techguns:oredrill_'+part,pickaxes)
         self.assertFalse(any('ore_cluster_' in block for block in pickaxes))

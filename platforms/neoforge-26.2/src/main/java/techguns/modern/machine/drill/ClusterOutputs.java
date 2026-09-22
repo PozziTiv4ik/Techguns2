@@ -37,6 +37,7 @@ public final class ClusterOutputs {
         for(var e:entries) { roll-=e.weight(); if(roll<0) return new Output(e.item().copy(),e.fluid().copy(),e.weight()); }
         throw new IllegalArgumentException("Weighted roll outside total");
     }
+    public static boolean hasWorldOil() { var oil=oil(); return oil!=Fluids.EMPTY && !oil.defaultFluidState().createLegacyBlock().is(Blocks.AIR); }
     private static Fluid oil() {
         var oils=new ArrayList<Fluid>();
         for(var name:ChemicalRules.OILS.get()) BuiltInRegistries.FLUID.stream().filter(f->source(f) && ChemicalRules.groupMatches("oils",f))

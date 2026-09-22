@@ -20,7 +20,7 @@ import net.neoforged.neoforge.common.extensions.IOwnedSpawner;
 import net.neoforged.neoforge.event.EventHooks;
 import techguns.core.SpawnerRules;
 import techguns.modern.TGContent;
-import techguns.modern.npc.SpawnerNpc;
+
 
 /** Source finite-death spawner, with persistent reservations and unloaded-owner delivery. No FE or GUI. */
 public final class NpcSpawnerBlockEntity extends BlockEntity implements IOwnedSpawner {
@@ -64,8 +64,8 @@ public final class NpcSpawnerBlockEntity extends BlockEntity implements IOwnedSp
         this.remaining=remaining; this.maximum=maximum; this.interval=interval; delay=interval; this.range=range; this.height=height;
         this.entries=List.copyOf(entries); this.weapon=weapon.copy(); setChanged();
     }
-    public void relink(SpawnerNpc npc) {
-        if(level instanceof ServerLevel && !isRemoved() && npc.level()==level && npc.isAlive() && link().equals(npc.spawnerLink()) && active.add(npc.getUUID())) {
+    public void relink(Mob npc) {
+        if(level instanceof ServerLevel && !isRemoved() && npc.level()==level && npc.isAlive() && npc instanceof SpawnerLinked linked && link().equals(linked.spawnerLink()) && active.add(npc.getUUID())) {
             npc.setHomeTo(worldPosition,SpawnerRules.HOME_RADIUS); setChanged();
         }
     }
@@ -91,14 +91,16 @@ public final class NpcSpawnerBlockEntity extends BlockEntity implements IOwnedSp
         // but do not load a neighboring chunk merely to make a configured spawn attempt.
         if(!server.hasChunkAt(at) || !server.isInsideBuildHeight(at) || !BuiltInRegistries.ENTITY_TYPE.containsKey(entry.id())) { resetDelay(); return; }
         Entity entity=BuiltInRegistries.ENTITY_TYPE.getValue(entry.id()).create(server,EntitySpawnReason.SPAWNER);
-        if(!(entity instanceof SpawnerNpc npc)) { resetDelay(); return; }
+        if(!(entity instanceof Mob npc) || !(npc instanceof SpawnerLinked linked)) { resetDelay(); return; }
         npc.setPos(x,y,z);
         var event=EventHooks.finalizeMobSpawnSpawner(npc,server,server.getCurrentDifficultyAt(at),EntitySpawnReason.SPAWNER,null,this,true);
         if(event.isCanceled() || event.isSpawnCancelled()) return; // Source special-spawn veto retries on the next tick.
         npc.setHomeTo(worldPosition,SpawnerRules.HOME_RADIUS);
         if(!weapon.isEmpty()) npc.setItemSlot(EquipmentSlot.MAINHAND,weapon.copy());
-        npc.bindSpawner(link());
+        linked.bindSpawner(link());
         if(!server.addFreshEntity(npc) || !npc.isAlive()) { npc.discard(); return; }
+        // Spider.finalizeSpawn can attach a skeleton jockey; adding just the root loses it.
+        for(var passenger:npc.getIndirectPassengers()) if(!server.addFreshEntity(passenger)) passenger.discard();
         active.add(npc.getUUID()); delay=interval; setChanged();
         server.levelEvent(2004,worldPosition,0); npc.spawnAnim();
     }

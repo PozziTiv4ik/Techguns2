@@ -270,6 +270,7 @@ final class OreDrillGameTests {
         var menu=new OreDrillMenu(62,WeaponGameTests.player(h).getInventory()); decoded.apply(menu); h.assertTrue(FluidStack.matches(menu.fluid(0),in) && FluidStack.matches(menu.fluid(1),out),"Both full fluid stacks survive packet"); new MachineTanksPayload(63,FluidStack.EMPTY,FluidStack.EMPTY).apply(menu); h.assertValueEqual(menu.fluid(0).getAmount(),15000,"Stale container ID ignored"); h.succeed();
     }
     private static void oil(GameTestHelper h,boolean full) {
+        h.assertTrue(ClusterOutputs.hasWorldOil(),"Block-backed oil also enables the original desert location ticket");
         var d=fixture(h,tiny(),Direction.UP,"oil",true,false).drill; d.setItem(0,head("oredrillsmall_obsidiansteel")); d.tanks().set(0,FluidResource.of(Fluids.LAVA),1000);
         if(full) d.tanks().set(1,FluidResource.of(Fluids.WATER),31500);
         tick(d,2001); h.assertValueEqual(d.data.get(3),96,"Original oil power multiplier"); var restored=reload(h,d); tick(restored,4000);

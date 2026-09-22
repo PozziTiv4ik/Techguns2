@@ -1,0 +1,603 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/entities/npcs/AlienBug.java",
+  "attributes": {
+    "ATTACK_DAMAGE": 4.0,
+    "MAX_HEALTH": 20.0,
+    "MOVEMENT_SPEED": 1.0
+  },
+  "size": [
+    1.1,
+    1.2
+  ],
+  "eye_height": 0.65,
+  "faction": "HOSTILE",
+  "retaliation": "vanilla HurtByTarget; GenericNPC allies ignore AlienBug attacks",
+  "natural_spawn_entry": false,
+  "loot": [],
+  "original_egg_colors": [
+    13019499,
+    7427374
+  ],
+  "attack_timer": 10,
+  "attack_reach_squared": "4.0f + target.width",
+  "typed_armor": {
+    "PHYSICAL": 10,
+    "PROJECTILE": 10,
+    "ENERGY": 5,
+    "EXPLOSION": 5,
+    "ICE": 5,
+    "LIGHTNING": 5,
+    "POISON": 20,
+    "RADIATION": 20,
+    "FIRE": 0,
+    "UNRESISTABLE": 0
+  },
+  "sounds": [
+    "npcs.alienbugidle",
+    "npcs.alienbughurt",
+    "npcs.alienbugdeath",
+    "npcs.alienbugstep",
+    "npcs.alienbugaggro",
+    "npcs.alienbugbite"
+  ],
+  "texture_size": [
+    64,
+    64
+  ],
+  "parts": [
+    {
+      "name": "L1_A_1",
+      "uv": [
+        0,
+        4
+      ],
+      "box": [
+        0.0,
+        -1.5,
+        -1.5,
+        9.0,
+        3.0,
+        3.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        1.5,
+        17.0,
+        4.0
+      ],
+      "rotation": [
+        0.0,
+        -0.3490658503988659,
+        -0.5235987755982988
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "b4",
+      "uv": [
+        56,
+        30
+      ],
+      "box": [
+        0.0,
+        0.0,
+        0.0,
+        2.0,
+        2.0,
+        2.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        -1.0,
+        10.5,
+        14.2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "b1",
+      "uv": [
+        0,
+        33
+      ],
+      "box": [
+        0.0,
+        0.0,
+        0.0,
+        5.0,
+        5.0,
+        9.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        -2.5,
+        14.0,
+        -2.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "h1",
+      "uv": [
+        20,
+        9
+      ],
+      "box": [
+        -2.5,
+        -2.5,
+        -3.0,
+        5.0,
+        5.0,
+        6.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        0.0,
+        11.5,
+        -1.0
+      ],
+      "rotation": [
+        0.136659280431156,
+        0.0,
+        0.0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "b2",
+      "uv": [
+        23,
+        33
+      ],
+      "box": [
+        0.0,
+        0.0,
+        0.0,
+        6.0,
+        4.0,
+        4.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        -3.0,
+        13.0,
+        6.0
+      ],
+      "rotation": [
+        0.5918411493512771,
+        0.0,
+        0.0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "b3",
+      "uv": [
+        43,
+        31
+      ],
+      "box": [
+        0.0,
+        0.0,
+        0.0,
+        4.0,
+        3.0,
+        4.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        -2.0,
+        11.0,
+        10.0
+      ],
+      "rotation": [
+        0.22759093446006054,
+        0.0,
+        0.0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "L1_A_3",
+      "uv": [
+        0,
+        4
+      ],
+      "box": [
+        0.0,
+        -1.5,
+        -1.5,
+        9.0,
+        3.0,
+        3.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        1.5,
+        17.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.3490658503988659,
+        -0.5235987755982988
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "h2",
+      "uv": [
+        36,
+        18
+      ],
+      "box": [
+        0.0,
+        0.0,
+        -7.0,
+        6.0,
+        3.0,
+        8.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        -3.0,
+        -6.5,
+        3.5
+      ],
+      "rotation": [
+        0.3490658503988659,
+        0.0,
+        0.0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "JAW_U",
+      "uv": [
+        2,
+        15
+      ],
+      "box": [
+        0.0,
+        -2.5,
+        -10.0,
+        4.0,
+        4.0,
+        10.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        -2.0,
+        -1.0,
+        -2.0
+      ],
+      "rotation": [
+        -0.18203784098300857,
+        0.0,
+        0.0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "L1_B_3",
+      "uv": [
+        0,
+        0
+      ],
+      "box": [
+        0.0,
+        -1.0,
+        -1.0,
+        11.0,
+        2.0,
+        2.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        7.5,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        1.7453292519943295
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "L1_A_2",
+      "uv": [
+        0,
+        4
+      ],
+      "box": [
+        0.0,
+        -1.5,
+        -1.5,
+        9.0,
+        3.0,
+        3.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        -1.5,
+        17.0,
+        4.0
+      ],
+      "rotation": [
+        0.0,
+        -2.792526803190927,
+        0.5235987755982988
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "JAW_L",
+      "uv": [
+        21,
+        20
+      ],
+      "box": [
+        0.0,
+        0.0,
+        -9.0,
+        3.0,
+        4.0,
+        9.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        -1.5,
+        -1.5,
+        -2.5
+      ],
+      "rotation": [
+        0.4553564018453205,
+        0.0,
+        0.0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "h3",
+      "uv": [
+        22,
+        0
+      ],
+      "box": [
+        -4.0,
+        1.0,
+        -7.0,
+        14.0,
+        0.0,
+        14.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        -3.0,
+        -6.5,
+        3.5
+      ],
+      "rotation": [
+        0.3490658503988659,
+        0.0,
+        0.0
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "L1_A",
+      "uv": [
+        0,
+        4
+      ],
+      "box": [
+        0.0,
+        -1.5,
+        -1.5,
+        9.0,
+        3.0,
+        3.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        -1.5,
+        17.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        2.792526803190927,
+        0.5235987755982988
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "L1_B_1",
+      "uv": [
+        0,
+        0
+      ],
+      "box": [
+        0.0,
+        -1.0,
+        -1.0,
+        11.0,
+        2.0,
+        2.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        7.5,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        1.7453292519943295
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "L1_B",
+      "uv": [
+        0,
+        0
+      ],
+      "box": [
+        0.0,
+        -1.0,
+        -1.0,
+        11.0,
+        2.0,
+        2.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        7.5,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        1.7453292519943295
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "L1_B_2",
+      "uv": [
+        0,
+        0
+      ],
+      "box": [
+        0.0,
+        -1.0,
+        -1.0,
+        11.0,
+        2.0,
+        2.0
+      ],
+      "mirror": false,
+      "inflate": 0.0,
+      "pivot": [
+        7.5,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        1.7453292519943295
+      ],
+      "render_scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "parents": {
+    "h2": "h1",
+    "JAW_U": "h1",
+    "L1_B_3": "L1_A_3",
+    "JAW_L": "h1",
+    "h3": "h1",
+    "L1_B_1": "L1_A_1",
+    "L1_B": "L1_A",
+    "L1_B_2": "L1_A_2"
+  }
+}
