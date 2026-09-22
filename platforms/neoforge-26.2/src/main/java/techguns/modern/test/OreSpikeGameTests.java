@@ -128,9 +128,9 @@ final class OreSpikeGameTests {
             var target=cells(p,Blocks.STRUCTURE_BLOCK).stream().filter(c->c.nbt().getStringOr("metadata","").equals("techguns:spike_cluster")).findFirst().orElseThrow().pos();
             var origin=target.west(2); l.setBlock(origin,OreDrillContent.BLOCKS.get("controller").get().defaultBlockState(),3); l.setBlock(origin.east(),OreDrillContent.BLOCKS.get("rod").get().defaultBlockState(),3);
             var d=(OreDrillBlockEntity)l.getBlockEntity(origin); var player=FakePlayerFactory.getMinecraft(l); player.setPos(Vec3.atCenterOf(origin).add(0,2,0)); h.assertTrue(d.form(player),"Tiny drill forms against naturally generated coal cluster");
-            d.setItem(0,TGContent.MATERIALS.get("oredrillsmall_steel").toStack()); try(Transaction tx=Transaction.openRoot()) { d.energy().insert(57596,tx); tx.commit(); }
+            d.setItem(0,TGContent.MATERIALS.get("oredrillsmall_steel").toStack()); try(Transaction tx=Transaction.openRoot()) { h.assertValueEqual(d.energy().insert(57596,tx),57596,"Full original coal-cycle energy inserted"); tx.commit(); }
             for(int i=0;i<2058;i++) OreDrillBlockEntity.tick(l,origin,d.getBlockState(),d);
-            h.assertTrue(d.getItem(2).is(Items.COAL_ORE) && d.getItem(2).getCount()==1,"Natural Overworld cluster completes real powered production"); h.assertValueEqual(d.energy().getAmountAsInt(),0,"Exact source cycle energy"); h.assertTrue(l.getBlockState(target).is(OreClusterContent.BLOCKS.get("ore_cluster_coal").get()),"Infinite cluster preserved");
+            var output=d.getItem(2); h.assertTrue(output.getCount()==1 && (output.is(Items.COAL_ORE) || output.is(Items.DIAMOND)),"Natural Overworld coal cluster produces an original 99:1 weighted output: "+output); h.assertValueEqual(d.energy().getAmountAsInt(),0,"Exact source cycle energy"); h.assertTrue(l.getBlockState(target).is(OreClusterContent.BLOCKS.get("ore_cluster_coal").get()),"Infinite cluster preserved");
         }
         com.mojang.logging.LogUtils.getLogger().info("Techguns native OreClusterSpike: chunk={}, origin={}, rotation={}, type={}, mixtureSeed={}, drill={}",chosen,p.templatePosition(),p.getRotation(),p.clusterType(),p.mixtureSeed(),sign>0); h.succeed();
     }
