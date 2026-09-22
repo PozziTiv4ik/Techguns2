@@ -48,7 +48,7 @@ final class CommandoArmorGameTests {
         r.register("commando_armor_movement_jump_fall_radiation_wear",()->CommandoArmorGameTests::bonuses);
         for(String kind:List.of("physical","bullet","fire","explosion","acid","radiation")) r.register("commando_armor_damage_"+kind,()->h->damage(h,kind));
         r.register("commando_armor_anvil_and_repair_shortage",()->CommandoArmorGameTests::anvil);
-        for(boolean lava:new boolean[]{false,true}) for(boolean eyes:new boolean[]{false,true}) r.register("commando_water_mining_"+lava+"_"+eyes,()->h->waterMining(h,lava,eyes));
+        for(int f=0;f<4;f++) for(boolean eyes:new boolean[]{false,true}) { int fluid=f; r.register("commando_water_mining_"+f+"_"+eyes,()->h->waterMining(h,fluid,eyes)); }
         r.register("commando_accuracy_partial_worn_and_inventory",()->CommandoArmorGameTests::accuracy);
         for(String gun:List.of("ak47","combatshotgun","lasergun","netherblaster","rocketlauncher","chainsaw")) r.register("commando_actual_shot_spread_"+gun,()->h->shotSpread(h,gun));
         r.register("commando_helmet_does_not_generate_oxygen",()->CommandoArmorGameTests::oxygen);
@@ -120,14 +120,14 @@ final class CommandoArmorGameTests {
             for(int i=2;i<11;i++) { var s=b.getItem(i); if(s.is(metal(1).getItem())) metalCount+=s.getCount(); else if(s.is(rubber(1).getItem())) rubberCount+=s.getCount(); else h.assertTrue(s.isEmpty(),"No unrelated salvage"); }
             h.assertValueEqual(metalCount,expected[0],"Obsidian steel salvage"); h.assertValueEqual(rubberCount,expected[1],"Rubber salvage"); h.assertValueEqual(b.energy().getAmountAsInt(),0,"Exactly 500 FE"); });
     }
-    private static void immerse(GameTestHelper h,Player p,boolean lava,boolean eyes) {
-        var center=h.absolutePos(new BlockPos(4,0,4)).atY(120); var fluid=lava?Blocks.LAVA:Blocks.WATER;
+    private static void immerse(GameTestHelper h,Player p,int liquid,boolean eyes) {
+        var center=h.absolutePos(new BlockPos(4,0,4)).atY(120); var fluid=switch(liquid) { case 0->Blocks.WATER; case 1->Blocks.LAVA; case 2->techguns.modern.fluid.TGFluids.ACID.block.get(); default->techguns.modern.fluid.TGFluids.MILK.block.get(); };
         for(int x=-2;x<=2;x++) for(int y=0;y<4;y++) for(int z=-2;z<=2;z++) h.getLevel().setBlock(center.offset(x,y,z),(y<(eyes?4:1)?fluid:Blocks.AIR).defaultBlockState(),2);
         p.setPos(Vec3.atBottomCenterOf(center)); p.setDeltaMovement(Vec3.ZERO); p.tick(); p.setPos(Vec3.atBottomCenterOf(center)); p.setDeltaMovement(Vec3.ZERO); p.tick(); p.setOnGround(true);
-        h.assertTrue(p.isEyeInFluid(lava?FluidTags.LAVA:FluidTags.WATER)==eyes,"Fixture measures actual eye immersion");
+        h.assertTrue(p.isEyeInFluid(fluid.defaultBlockState().getFluidState().getFluidType())==eyes,"Fixture measures actual eye immersion");
     }
-    private static void waterMining(GameTestHelper h,boolean lava,boolean eyes) {
-        var p=player(h); p.setInvulnerable(true); p.setItemInHand(InteractionHand.MAIN_HAND,new ItemStack(Items.IRON_PICKAXE)); immerse(h,p,lava,eyes);
+    private static void waterMining(GameTestHelper h,int liquid,boolean eyes) {
+        var p=player(h); p.setInvulnerable(true); p.setItemInHand(InteractionHand.MAIN_HAND,new ItemStack(Items.IRON_PICKAXE)); immerse(h,p,liquid,eyes);
         var pos=h.absolutePos(POS); float base=p.getDestroySpeed(Blocks.STONE.defaultBlockState(),pos); int pieces=0;
         for(var slot:ArmorSlot.values()) { p.setItemSlot(EquipmentSlot.valueOf(slot.name()),armor(slot,0)); near(h,p.getDestroySpeed(Blocks.STONE.defaultBlockState(),pos),base*(1+(eyes?1.25:0)*++pieces),"Each piece adds source bonus only with submerged eyes"); }
         p.getItemBySlot(EquipmentSlot.HEAD).setDamageValue(989); near(h,p.getDestroySpeed(Blocks.STONE.defaultBlockState(),pos),base*(eyes?4.75:1),"Worn piece immediately stops contributing");
@@ -161,7 +161,7 @@ final class CommandoArmorGameTests {
         } finally { NeoForge.EVENT_BUS.unregister(observe); AimSessions.cancel(p); shots.forEach(Entity::discard); } h.succeed();
     }
     private static void oxygen(GameTestHelper h) {
-        var p=player(h); p.setInvulnerable(true); p.setItemSlot(EquipmentSlot.HEAD,armor(ArmorSlot.HEAD,0)); immerse(h,p,false,true); near(h,TGArmorSystem.oxygenGear(p),1,"Original helmet eligibility");
+        var p=player(h); p.setInvulnerable(true); p.setItemSlot(EquipmentSlot.HEAD,armor(ArmorSlot.HEAD,0)); immerse(h,p,0,true); near(h,TGArmorSystem.oxygenGear(p),1,"Original helmet eligibility");
         p.setAirSupply(280); for(int i=0;i<5;i++) p.tick(); h.assertTrue(p.getAirSupply()<280,"Helmet alone does not replenish air without original SCUBA supply");
         p.getItemBySlot(EquipmentSlot.HEAD).setDamageValue(989); near(h,TGArmorSystem.oxygenGear(p),0,"Worn helmet cannot enable supply"); h.succeed();
     }

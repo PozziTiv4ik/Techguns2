@@ -443,7 +443,7 @@
   "tooltip.techguns.armor.t1_scout.camo.1": "Лесной",
   "tooltip.techguns.armor.t1_scout.camo.2": "Снежный",
   "tooltip.techguns.armor.t1_scout.camo.3": "Чёрный",
-  "tooltip.techguns.armor.water_mining": "Добыча при погружении головы в воду или лаву: +%s%%",
+  "tooltip.techguns.armor.water_mining": "Подводная добыча: +%s%%",
   "tooltip.techguns.armor.gun_accuracy": "Снижение разброса оружия: %s%%",
   "tooltip.techguns.armor.oxygen_gear": "Совместим с кислородным снаряжением",
   "tooltip.techguns.armor.typed_defense": "Взрыв: %s; яд: %s; тьма: %s; радиация: %s",

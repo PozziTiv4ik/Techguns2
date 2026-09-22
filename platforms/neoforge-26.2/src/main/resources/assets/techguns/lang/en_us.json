@@ -443,7 +443,7 @@
   "tooltip.techguns.armor.t1_scout.camo.1": "Forest",
   "tooltip.techguns.armor.t1_scout.camo.2": "Snow",
   "tooltip.techguns.armor.t1_scout.camo.3": "Black",
-  "tooltip.techguns.armor.water_mining": "Mining with eyes in water or lava: +%s%%",
+  "tooltip.techguns.armor.water_mining": "Underwater mining: +%s%%",
   "tooltip.techguns.armor.gun_accuracy": "Weapon spread reduction: %s%%",
   "tooltip.techguns.armor.oxygen_gear": "Oxygen equipment compatible",
   "tooltip.techguns.armor.typed_defense": "Explosion: %s; poison: %s; dark: %s; radiation: %s",

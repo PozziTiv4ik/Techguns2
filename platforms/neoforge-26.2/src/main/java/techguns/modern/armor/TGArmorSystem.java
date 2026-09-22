@@ -48,7 +48,10 @@ public final class TGArmorSystem {
     @SubscribeEvent(priority=EventPriority.NORMAL,receiveCanceled=false)
     public static void mining(PlayerEvent.BreakSpeed event) {
         float bonus=0,waterBonus=0;
-        boolean submerged=event.getEntity().isEyeInFluid(FluidTags.WATER) || event.getEntity().isEyeInFluid(FluidTags.LAVA);
+        // Both source Techguns liquids use Material.WATER in 1.12.2.
+        var player=event.getEntity();
+        boolean submerged=player.isEyeInFluid(FluidTags.WATER) || player.isEyeInFluid(FluidTags.LAVA)
+                || player.isEyeInFluid(techguns.modern.fluid.TGFluids.ACID.type.get()) || player.isEyeInFluid(techguns.modern.fluid.TGFluids.MILK.type.get());
         for(var slot:SLOTS) {
             var stack=event.getEntity().getItemBySlot(slot);
             if(stack.getItem() instanceof TGArmorItem item && item.spec().bonusesActive(stack.getDamageValue())) {

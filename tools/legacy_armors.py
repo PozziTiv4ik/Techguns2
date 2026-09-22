@@ -159,7 +159,7 @@ def armor_translations(lang):
     for i,name in enumerate(scout_names):
         result[f'tooltip.techguns.armor.t1_scout.camo.{i}']=source.get(f'techguns.item.t1_scout.camoname.{i}',name)
     result.update({
-        'tooltip.techguns.armor.water_mining':'Добыча при погружении головы в воду или лаву: +%s%%' if ru else 'Mining with eyes in water or lava: +%s%%',
+        'tooltip.techguns.armor.water_mining':'Подводная добыча: +%s%%' if ru else 'Underwater mining: +%s%%',
         'tooltip.techguns.armor.gun_accuracy':'Снижение разброса оружия: %s%%' if ru else 'Weapon spread reduction: %s%%',
         'tooltip.techguns.armor.oxygen_gear':'Совместим с кислородным снаряжением' if ru else 'Oxygen equipment compatible',
         'tooltip.techguns.armor.typed_defense':'Взрыв: %s; яд: %s; тьма: %s; радиация: %s' if ru else 'Explosion: %s; poison: %s; dark: %s; radiation: %s',
