@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:t2_commando_leggings",
+    "count": 1
+  },
+  "pattern": [
+    "hih",
+    "i i",
+    "h h"
+  ],
+  "key": {
+    "h": "#c:rubbers",
+    "i": "#c:ingots/obsidian_steel"
+  }
+}

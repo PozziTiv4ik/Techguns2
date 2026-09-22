@@ -1,0 +1,34 @@
+{
+  "id": "commando",
+  "source": "legacy/1.12.2/src/main/java/techguns/entities/npcs/Commando.java",
+  "attributes": {
+    "MOVEMENT_SPEED": 0.35,
+    "MAX_HEALTH": 30.0,
+    "ATTACK_DAMAGE": 5.0,
+    "FOLLOW_RANGE": 75.0
+  },
+  "intrinsic_armor": 8.0,
+  "weapon": "m4_infiltrator",
+  "armor": [
+    "t2_commando_Helmet",
+    "t2_commando_Chestplate",
+    "t2_commando_Leggings",
+    "t2_commando_Boots"
+  ],
+  "armor_chance": 1,
+  "undead": false,
+  "fire_immune": false,
+  "natural_spawn_entry": false,
+  "faction": "HOSTILE",
+  "loot_id": "entities/commando",
+  "texture": "textures/entity/army_soldier.png",
+  "texture_size": [
+    128,
+    128
+  ],
+  "model": "Original shared ModelGenericNPC humanoid and armor layers",
+  "egg_colors": [
+    1643794,
+    7635054
+  ]
+}

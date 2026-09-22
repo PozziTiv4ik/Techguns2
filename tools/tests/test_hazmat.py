@@ -54,10 +54,10 @@ class HazmatPortTests(unittest.TestCase):
         for part,tag in [('helmet','head'),('chestplate','chest'),('leggings','leg'),('boots','foot')]:
             for path in (tag+'_armor','enchantable/'+tag+'_armor'):
                 values=json.loads(files[RESOURCES+'data/minecraft/tags/item/'+path+'.json'])['values']
-                expected={'techguns:hazmat_'+part,'techguns:t2_combat_'+part,'techguns:t1_combat_'+part,'techguns:t1_miner_'+part,'techguns:t1_scout_'+part}
+                expected={'techguns:hazmat_'+part,'techguns:t2_combat_'+part,'techguns:t1_combat_'+part,'techguns:t1_miner_'+part,'techguns:t1_scout_'+part,'techguns:t2_commando_'+part}
                 if tag=='head': expected.add('techguns:t2_beret')
                 self.assertEqual(set(values),expected)
-        self.assertEqual(len(json.loads(files[RESOURCES+'data/minecraft/tags/item/enchantable/durability.json'])['values']),21)
+        self.assertEqual(len(json.loads(files[RESOURCES+'data/minecraft/tags/item/enchantable/durability.json'])['values']),25)
 
     def test_original_names_and_camouflage_colors(self):
         for lang in ('en_us','ru_ru'):

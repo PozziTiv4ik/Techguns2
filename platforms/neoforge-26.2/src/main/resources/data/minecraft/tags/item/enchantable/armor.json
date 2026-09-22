@@ -21,6 +21,10 @@
     "techguns:t1_scout_chestplate",
     "techguns:t1_scout_leggings",
     "techguns:t1_scout_boots",
-    "techguns:t2_beret"
+    "techguns:t2_beret",
+    "techguns:t2_commando_helmet",
+    "techguns:t2_commando_chestplate",
+    "techguns:t2_commando_leggings",
+    "techguns:t2_commando_boots"
   ]
 }

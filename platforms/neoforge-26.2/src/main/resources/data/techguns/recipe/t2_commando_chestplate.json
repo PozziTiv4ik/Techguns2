@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:t2_commando_chestplate",
+    "count": 1
+  },
+  "pattern": [
+    "h h",
+    "hih",
+    "iii"
+  ],
+  "key": {
+    "h": "#c:rubbers",
+    "i": "#c:ingots/obsidian_steel"
+  }
+}

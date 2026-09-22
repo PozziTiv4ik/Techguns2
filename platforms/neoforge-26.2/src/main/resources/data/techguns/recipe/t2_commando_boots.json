@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:t2_commando_boots",
+    "count": 1
+  },
+  "pattern": [
+    "i i",
+    "h h"
+  ],
+  "key": {
+    "h": "#c:rubbers",
+    "i": "#c:ingots/obsidian_steel"
+  }
+}

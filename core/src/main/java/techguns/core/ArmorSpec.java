@@ -8,7 +8,7 @@ public record ArmorSpec(String id, ArmorSlot slot, float physical, float element
                         int repairParts, double repairMetalRatio, float explosion, float poison, float dark, float radiation,
                         double radiationResistance, double fallReduction, double freeFallHeight,
                         String repairMetal, String repairCloth, List<String> camos, String set,
-                        double mining, String camoNameSuffix) {
+                        double mining, String camoNameSuffix, double waterMining, double gunAccuracy, double oxygenGear) {
     public ArmorSpec {
         if (id == null || slot == null || physical < 0 || elemental < 0 || durability < 2 || toughness < 0
                 || !Float.isFinite(physical) || !Float.isFinite(elemental) || !Float.isFinite(toughness)
@@ -16,7 +16,7 @@ public record ArmorSpec(String id, ArmorSlot slot, float physical, float element
                 || speed < 0 || jump < 0 || knockback < 0 || repairParts < 1 || !Double.isFinite(repairMetalRatio)
                 || repairMetalRatio < 0 || repairMetalRatio > 1 || repairMetal == null || repairCloth == null || set == null
                 || camos == null || camos.isEmpty() || camoNameSuffix == null) throw new IllegalArgumentException("Invalid armor specification");
-        for (double value : new double[]{explosion,poison,dark,radiation,radiationResistance,fallReduction,freeFallHeight,mining})
+        for (double value : new double[]{explosion,poison,dark,radiation,radiationResistance,fallReduction,freeFallHeight,mining,waterMining,gunAccuracy,oxygenGear})
             if (!Double.isFinite(value) || value < 0) throw new IllegalArgumentException("Invalid armor protection/bonus");
         camos = List.copyOf(camos);
     }

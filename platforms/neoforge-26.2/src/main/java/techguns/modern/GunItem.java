@@ -24,11 +24,12 @@ public class GunItem extends Item {
                 || !Magazine.canFire(item.definition.stats(), rounds(stack), 0, player.isUsingItem())) return false;
         WeaponDefinition gun = item.definition;
         boolean aiming = AimSessions.active(player, stack);
-        double accuracyMultiplier = aiming ? gun.aim().accuracyMultiplier() : 1;
+        float accuracyMultiplier = techguns.modern.armor.TGArmorSystem.gunAccuracyMultiplier(player);
+        if (aiming) accuracyMultiplier *= gun.aim().accuracyMultiplier();
         for (int pellet = 0; pellet < gun.projectileCount(); pellet++) {
             if (gun.projectile() == techguns.core.ProjectileKind.CHAINSAW) {
                 var attack = new ChainsawAttack(TGContent.CHAINSAW_ATTACK.get(), server);
-                attack.configure(gun); attack.setOwner(player); attack.shootLegacy(player, gun.stats().spread());
+                attack.configure(gun); attack.setOwner(player); attack.shootLegacy(player, gun.stats().spread() * accuracyMultiplier);
                 if (!server.addFreshEntity(attack)) return false;
                 continue;
             }
@@ -43,7 +44,7 @@ public class GunItem extends Item {
                 RocketProjectile rocket = new RocketProjectile(TGContent.ROCKET.get(), server);
                 rocket.configure(gun, RocketAmmo.variant(stack), !SafeMode.enabled(player));
                 rocket.setOwner(player);
-                rocket.shootLegacy(player, gun.stats().spread());
+                rocket.shootLegacy(player, gun.stats().spread() * accuracyMultiplier);
                 if (!server.addFreshEntity(rocket)) return false;
                 continue;
             }

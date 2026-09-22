@@ -83,6 +83,7 @@ public final class NpcContent {
         event.put(ARMY.get(),ArmySoldier.attributes().build());
         event.put(GHASTLING.get(),Ghastling.attributes().build());
         event.put(ALIEN_BUG.get(),AlienBug.attributes().build());
+        event.put(COMMANDO.get(),Commando.attributes().build());
     }
     public static final DeferredHolder<EntityType<?>,EntityType<AlienBug>> ALIEN_BUG=TGContent.ENTITIES.register("alienbug",()->
             EntityType.Builder.<AlienBug>of(AlienBug::new,MobCategory.MONSTER).sized(1.1f,1.2f).eyeHeight(.65f).clientTrackingRange(5).updateInterval(3)
@@ -91,5 +92,9 @@ public final class NpcContent {
     public static final DeferredHolder<SoundEvent,SoundEvent> BUG_IDLE=sound("npcs.alienbugidle"), BUG_HURT=sound("npcs.alienbughurt"),
             BUG_DEATH=sound("npcs.alienbugdeath"), BUG_STEP=sound("npcs.alienbugstep"), BUG_AGGRO=bugRangeSound("npcs.alienbugaggro"), BUG_BITE=bugRangeSound("npcs.alienbugbite");
     private static DeferredHolder<SoundEvent,SoundEvent> bugRangeSound(String id) { return TGContent.SOUNDS.register(id,()->SoundEvent.createFixedRangeEvent(TGContent.id(id),24)); }
+    public static final DeferredHolder<EntityType<?>,EntityType<Commando>> COMMANDO=TGContent.ENTITIES.register("commando",()->
+            EntityType.Builder.<Commando>of(Commando::new,MobCategory.MONSTER).sized(.6f,1.8f).eyeHeight(1.53f).clientTrackingRange(5).updateInterval(3)
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE,TGContent.id("commando"))));
+    public static final DeferredItem<SpawnEggItem> COMMANDO_EGG=TGContent.ITEMS.registerItem("commando_spawn_egg",SpawnEggItem::new,props->props.spawnEgg(COMMANDO.get()));
     private NpcContent() {}
 }

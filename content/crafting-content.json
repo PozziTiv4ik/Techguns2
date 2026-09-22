@@ -749,6 +749,22 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t2_combat_leggings.json"
     },
     {
+      "id": "techguns:t2_commando_boots",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t2_commando_boots.json"
+    },
+    {
+      "id": "techguns:t2_commando_chestplate",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t2_commando_chestplate.json"
+    },
+    {
+      "id": "techguns:t2_commando_helmet",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t2_commando_helmet.json"
+    },
+    {
+      "id": "techguns:t2_commando_leggings",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/t2_commando_leggings.json"
+    },
+    {
       "id": "techguns:thompson",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/thompson.json"
     },
@@ -804,6 +820,9 @@
     ],
     "c:rubbers/raw": [
       "techguns:rawrubber"
+    ],
+    "c:rubbers": [
+      "techguns:rubberbar"
     ],
     "c:nuggets/copper": [
       "techguns:nuggetcopper"

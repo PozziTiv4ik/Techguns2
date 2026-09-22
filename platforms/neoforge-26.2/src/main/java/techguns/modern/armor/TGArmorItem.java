@@ -46,6 +46,9 @@ public final class TGArmorItem extends Item {
         if (spec.bonusesActive(stack.getDamageValue())) {
             if (spec.speed()>0) lines.accept(Component.translatable("tooltip.techguns.armor.speed",percentage(spec.speed()),percentage(spec.speed()*2)));
             if (spec.mining()>0) lines.accept(Component.translatable("tooltip.techguns.armor.mining",Math.round(spec.mining()*100)));
+            if (spec.waterMining()>0) lines.accept(Component.translatable("tooltip.techguns.armor.water_mining",percentage(spec.waterMining())));
+            if (spec.gunAccuracy()>0) lines.accept(Component.translatable("tooltip.techguns.armor.gun_accuracy",percentage(spec.gunAccuracy())));
+            if (spec.oxygenGear()>0) lines.accept(Component.translatable("tooltip.techguns.armor.oxygen_gear"));
             if (spec.knockback()>0) lines.accept(Component.translatable("tooltip.techguns.armor.knockback",Math.round(spec.knockback()*100)));
             if (spec.jump()>0) lines.accept(Component.translatable("tooltip.techguns.armor.jump",spec.jump()));
             if (spec.fallReduction()>0 || spec.freeFallHeight()>0) lines.accept(Component.translatable("tooltip.techguns.armor.fall",spec.freeFallHeight(),Math.round(spec.fallReduction()*100)));

@@ -25,6 +25,7 @@ public final class ArmorContent {
     public static final Map<ArmorSlot,DeferredItem<TGArmorItem>> T1_COMBAT = items(Armors.T1_COMBAT);
     public static final Map<ArmorSlot,DeferredItem<TGArmorItem>> T1_MINER = items(Armors.T1_MINER);
     public static final Map<ArmorSlot,DeferredItem<TGArmorItem>> T1_SCOUT = items(Armors.T1_SCOUT);
+    public static final Map<ArmorSlot,DeferredItem<TGArmorItem>> COMMANDO = items(Armors.T2_COMMANDO);
     public static final DeferredItem<TGArmorItem> BERET = items(Armors.T2_BERET).get(ArmorSlot.HEAD);
     private static Map<ArmorSlot,DeferredItem<TGArmorItem>> items(List<ArmorSpec> specifications) {
         var items=new EnumMap<ArmorSlot,DeferredItem<TGArmorItem>>(ArmorSlot.class);

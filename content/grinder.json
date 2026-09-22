@@ -941,6 +941,30 @@
       "input": "techguns:t2_beret",
       "outputs": [],
       "armor": true
+    },
+    {
+      "id": "t2_commando_helmet",
+      "input": "techguns:t2_commando_helmet",
+      "outputs": [],
+      "armor": true
+    },
+    {
+      "id": "t2_commando_chestplate",
+      "input": "techguns:t2_commando_chestplate",
+      "outputs": [],
+      "armor": true
+    },
+    {
+      "id": "t2_commando_leggings",
+      "input": "techguns:t2_commando_leggings",
+      "outputs": [],
+      "armor": true
+    },
+    {
+      "id": "t2_commando_boots",
+      "input": "techguns:t2_commando_boots",
+      "outputs": [],
+      "armor": true
     }
   ],
   "unported_weapon_inputs": [

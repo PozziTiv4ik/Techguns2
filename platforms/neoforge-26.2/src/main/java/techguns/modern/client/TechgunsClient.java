@@ -177,6 +177,7 @@ public final class TechgunsClient {
         event.registerEntityRenderer(TGContent.ALIEN_BLAST.get(), NoopRenderer::new);
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.GHASTLING.get(), GhastlingRenderer::new);
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.ALIEN_BUG.get(), AlienBugRenderer::new);
+        event.registerEntityRenderer(techguns.modern.npc.NpcContent.COMMANDO.get(), ctx->new GenericNpcRenderer<>(ctx,TGContent.id("textures/entity/army_soldier.png")));
         event.registerEntityRenderer(TGContent.LASER_BEAM.get(), LaserBeamRenderer::new);
         event.registerEntityRenderer(TGContent.ROCKET.get(), RocketRenderer::new);
         event.registerEntityRenderer(TGContent.RADIATION_ZONE.get(), NoopRenderer::new);

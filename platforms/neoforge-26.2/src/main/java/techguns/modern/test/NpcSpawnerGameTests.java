@@ -27,7 +27,7 @@ import techguns.modern.npc.spawner.*;
 
 final class NpcSpawnerGameTests {
     private static final BlockPos POS=new BlockPos(4,2,4);
-    private static final List<String> NPCS=List.of("supermutantbasic","cyberdemon","zombiepigmansoldier","zombiesoldier","zombiefarmer","zombieminer","skeletonsoldier","bandit","psychosteve","armysoldier","ghastling");
+    private static final List<String> NPCS=List.of("supermutantbasic","cyberdemon","zombiepigmansoldier","zombiesoldier","zombiefarmer","zombieminer","skeletonsoldier","bandit","psychosteve","armysoldier","ghastling","commando");
     static void register(DeferredRegister<Consumer<GameTestHelper>> r) {
         r.register("spawner_default_placement_shape_and_permissions",()->NpcSpawnerGameTests::placement);
         r.register("spawner_military_placement_save_and_death_budget",()->NpcSpawnerGameTests::military);
@@ -134,8 +134,8 @@ final class NpcSpawnerGameTests {
         b.configure(5,1,1,0,0,List.of(),ItemStack.EMPTY); tick(h,b,5); h.assertValueEqual(b.activeCount(),0,"Empty configured pool remains empty"); cleanup(h,b); h.succeed();
     }
     private static void unsupported(GameTestHelper h) {
-        var b=place(h,5,1,1,"commando"); tick(h,b,1); h.assertValueEqual(b.activeCount(),0,"Pending Commando is never replaced with ArmySoldier");
-        h.assertValueEqual(b.entries(),List.of(entry("commando",1)),"Unported ID retained in configuration"); h.assertValueEqual(b.delay(),1,"Invalid source choice resets interval");
+        var b=place(h,5,1,1,"supermutantheavy"); tick(h,b,1); h.assertValueEqual(b.activeCount(),0,"Pending SuperMutantHeavy is never replaced with ArmySoldier");
+        h.assertValueEqual(b.entries(),List.of(entry("supermutantheavy",1)),"Unported ID retained in configuration"); h.assertValueEqual(b.delay(),1,"Invalid source choice resets interval");
         b.configure(5,1,1,0,0,List.of(entry("minecraft:zombie",1)),ItemStack.EMPTY); tick(h,b,1); h.assertValueEqual(b.activeCount(),0,"Vanilla mobs do not implement Techguns lifecycle"); cleanup(h,b); h.succeed();
     }
     private static NpcSpawnerBlockEntity placeMilitary(GameTestHelper h) {

@@ -3,6 +3,7 @@ package techguns.modern.armor;
 import java.util.*;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
@@ -46,12 +47,27 @@ public final class TGArmorSystem {
     /** TGEventHandler.onBreakEvent runs at NORMAL after tool, effects and higher-priority modifiers. */
     @SubscribeEvent(priority=EventPriority.NORMAL,receiveCanceled=false)
     public static void mining(PlayerEvent.BreakSpeed event) {
-        float bonus=0;
+        float bonus=0,waterBonus=0;
+        boolean submerged=event.getEntity().isEyeInFluid(FluidTags.WATER) || event.getEntity().isEyeInFluid(FluidTags.LAVA);
         for(var slot:SLOTS) {
             var stack=event.getEntity().getItemBySlot(slot);
-            if(stack.getItem() instanceof TGArmorItem item && item.spec().bonusesActive(stack.getDamageValue())) bonus+=(float)item.spec().mining();
+            if(stack.getItem() instanceof TGArmorItem item && item.spec().bonusesActive(stack.getDamageValue())) {
+                bonus+=(float)item.spec().mining();
+                if(submerged) waterBonus+=(float)item.spec().waterMining();
+            }
         }
-        if(bonus!=0) event.setNewSpeed(event.getNewSpeed()*(1+bonus));
+        if(bonus!=0 || waterBonus!=0) event.setNewSpeed(event.getNewSpeed()*(1+bonus)*(1+waterBonus));
+    }
+    public static float gunAccuracyMultiplier(Player player) {
+        float bonus=0;
+        for(var slot:SLOTS) { var stack=player.getItemBySlot(slot); if(stack.getItem() instanceof TGArmorItem item && item.spec().bonusesActive(stack.getDamageValue())) bonus+=(float)item.spec().gunAccuracy(); }
+        return Math.clamp(1-bonus,0,1);
+    }
+    /** Eligibility only: original oxygen supply belongs to SCUBA tanks in the extra back slot. */
+    public static float oxygenGear(Player player) {
+        float bonus=0;
+        for(var slot:SLOTS) { var stack=player.getItemBySlot(slot); if(stack.getItem() instanceof TGArmorItem item && item.spec().bonusesActive(stack.getDamageValue())) bonus+=(float)item.spec().oxygenGear(); }
+        return bonus;
     }
     @SubscribeEvent public static void jump(LivingEvent.LivingJumpEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
