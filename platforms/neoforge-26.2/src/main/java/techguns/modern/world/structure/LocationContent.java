@@ -23,5 +23,7 @@ public final class LocationContent {
     public static final DeferredHolder<StructurePieceType,StructurePieceType> CLUSTER_PIECE=PIECES.register("nether_ore_cluster_small",()->(context,tag)->new NetherClusterPiece(context.structureTemplateManager(),tag));
     public static final DeferredHolder<StructureType<?>,StructureType<OreSpikeStructure>> SPIKE=TYPES.register("orecluster_spike",()->()->OreSpikeStructure.CODEC);
     public static final DeferredHolder<StructurePieceType,StructurePieceType> SPIKE_PIECE=PIECES.register("orecluster_spike",()->(context,tag)->new OreSpikePiece(context.structureTemplateManager(),tag));
+    public static final DeferredHolder<StructureType<?>,StructureType<MeteorStructure>> METEOR=TYPES.register("orecluster_meteor_basis",()->()->MeteorStructure.CODEC);
+    public static final DeferredHolder<StructurePieceType,StructurePieceType> METEOR_PIECE=PIECES.register("orecluster_meteor_basis",()->(context,tag)->new MeteorPiece(context.structureTemplateManager(),tag));
     private LocationContent() {}
 }

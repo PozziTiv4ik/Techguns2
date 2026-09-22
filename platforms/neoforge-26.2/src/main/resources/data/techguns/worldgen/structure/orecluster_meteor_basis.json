@@ -1,0 +1,8 @@
+{
+  "type": "techguns:orecluster_meteor_basis",
+  "biomes": "#techguns:has_orecluster_meteor_basis",
+  "step": "top_layer_modification",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none",
+  "reserved_big_grid": 64
+}

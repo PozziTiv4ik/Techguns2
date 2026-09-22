@@ -72,6 +72,7 @@ public final class WeaponGameTests {
         GhastlingGameTests.register(FUNCTIONS);
         AlienBugGameTests.register(FUNCTIONS);
         OreSpikeGameTests.register(FUNCTIONS);
+        MeteorGameTests.register(FUNCTIONS);
         BuildingGameTests.register(FUNCTIONS);
         FortificationGameTests.register(FUNCTIONS);
         NetherSoulGameTests.register(FUNCTIONS);
