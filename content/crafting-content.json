@@ -167,7 +167,11 @@
     "techguns:ladder0@8": "techguns:ladder_metal",
     "techguns:ladder0@9": "techguns:ladder_shiny",
     "techguns:ladder0@10": "techguns:ladder_rusty",
-    "techguns:ladder0@11": "techguns:ladder_carbon"
+    "techguns:ladder0@11": "techguns:ladder_carbon",
+    "techguns:lamp0@0": "techguns:lamp_yellow",
+    "techguns:lamp0@6": "techguns:lamp_white",
+    "techguns:lamp0@12": "techguns:lantern_yellow",
+    "techguns:lamp0@13": "techguns:lantern_white"
   },
   "recipes": [
     {
@@ -261,6 +265,10 @@
     {
       "id": "techguns:hazmat_leggings",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/hazmat_leggings.json"
+    },
+    {
+      "id": "techguns:item_bunkerdoor",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/item_bunkerdoor.json"
     },
     {
       "id": "techguns:stonebullets",
@@ -555,6 +563,30 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/ladder0_8_alt.json"
     },
     {
+      "id": "techguns:lamp0_0",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/lamp0_0.json"
+    },
+    {
+      "id": "techguns:lamp0_0_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/lamp0_0_alt.json"
+    },
+    {
+      "id": "techguns:lamp0_12",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/lamp0_12.json"
+    },
+    {
+      "id": "techguns:lamp0_12_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/lamp0_12_alt.json"
+    },
+    {
+      "id": "techguns:lamp0_13",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/lamp0_13.json"
+    },
+    {
+      "id": "techguns:lamp0_6",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/lamp0_6.json"
+    },
+    {
       "id": "techguns:lasergun",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/lasergun.json"
     },
@@ -685,6 +717,10 @@
     {
       "id": "techguns:rocketlauncher_ammo_nuke",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/rocketlauncher_ammo_nuke.json"
+    },
+    {
+      "id": "techguns:sandbags",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/sandbags.json"
     },
     {
       "id": "techguns:sawedoff",

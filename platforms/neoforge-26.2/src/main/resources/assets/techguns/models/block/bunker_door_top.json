@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_left",
+  "textures": {
+    "bottom": "techguns:block/bunker_door_lower",
+    "top": "techguns:block/bunker_door_upper"
+  }
+}

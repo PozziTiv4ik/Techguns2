@@ -1,0 +1,69 @@
+{
+  "textures": {
+    "0": "techguns:block/sandbags-side",
+    "1": "techguns:block/sandbags-top",
+    "particle": "techguns:block/sandbags-side"
+  },
+  "elements": [
+    {
+      "name": "Side_North",
+      "from": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "to": [
+        12.0,
+        16.0,
+        4.0
+      ],
+      "faces": {
+        "north": {
+          "texture": "#0",
+          "uv": [
+            4.0,
+            0.0,
+            12.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#0",
+          "uv": [
+            12.0,
+            0.0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#0",
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#1",
+          "uv": [
+            4.0,
+            0.0,
+            12.0,
+            4.0
+          ]
+        },
+        "down": {
+          "texture": "#1",
+          "uv": [
+            4.0,
+            0.0,
+            12.0,
+            4.0
+          ]
+        }
+      }
+    }
+  ]
+}

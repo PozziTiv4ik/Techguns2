@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:lantern_yellow",
+    "count": 16
+  },
+  "pattern": [
+    "iii",
+    "grg",
+    "iii"
+  ],
+  "key": {
+    "r": "#c:dusts/redstone",
+    "g": "#c:glass_panes",
+    "i": "#c:nuggets/iron"
+  }
+}

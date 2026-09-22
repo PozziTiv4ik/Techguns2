@@ -95,8 +95,12 @@ def main():
             json.loads(Path(str(texture)+'.mcmeta').read_text(encoding='utf-8'))
     names = []
     for path in (ASSETS / 'blockstates').glob('*.json'):
-        for variant in json.loads(path.read_text(encoding='utf-8'))['variants'].values():
-            require(local_path(variant['model'], 'models', '.json'))
+        state = json.loads(path.read_text(encoding='utf-8'))
+        if ('variants' in state) == ('multipart' in state): raise ValueError(f'Expected variants or multipart: {path}')
+        entries = state['variants'].values() if 'variants' in state else [part['apply'] for part in state['multipart']]
+        for entry in entries:
+            for variant in entry if isinstance(entry,list) else [entry]:
+                require(local_path(variant['model'], 'models', '.json'))
     for path in (ASSETS / 'items').glob('*.json'):
         definition = json.loads(path.read_text(encoding='utf-8'))['model']
         check_item_model(definition)

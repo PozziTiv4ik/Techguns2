@@ -44,6 +44,7 @@
 - [Рудный выступ Верхнего мира, AlienBug и слизистые блоки](docs/ORE_SPIKE_ALIENBUG.ru.md)
 - [Commando, броня T2 Commando и подводные бонусы](docs/COMMANDO.ru.md)
 - [Панели, армированный бетон и металлические лестницы](docs/BUILDING_BLOCKS.ru.md)
+- [Мешки с песком, лампы и бункерная дверь](docs/FORTIFICATIONS.ru.md)
 - [ZombieSoldier: оружие, лут и первый срез спавна Верхнего мира](docs/ZOMBIE_SOLDIER.ru.md)
 - [Repair Bench: ремонт надетой брони за материалы](docs/REPAIR_BENCH.ru.md)
 - [Camo Bench: камуфляж T2 и перекраска блоков](docs/CAMO_BENCH.ru.md)

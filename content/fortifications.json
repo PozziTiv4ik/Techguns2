@@ -1,0 +1,65 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/TGBlocks.java",
+  "sandbags": {
+    "hardness": 6,
+    "blast_resistance": 9,
+    "collision": "center and cardinal arms; no corner collision",
+    "fence_connection": "fence extends to sandbags; sandbags do not extend to fence"
+  },
+  "lamps": [
+    {
+      "id": "lamp_yellow",
+      "metadata": 0,
+      "source_type": "yellow"
+    },
+    {
+      "id": "lamp_white",
+      "metadata": 6,
+      "source_type": "white"
+    },
+    {
+      "id": "lantern_yellow",
+      "metadata": 12,
+      "source_type": "yellow_lantern"
+    },
+    {
+      "id": "lantern_white",
+      "metadata": 13,
+      "source_type": "white_lantern"
+    }
+  ],
+  "lamp_rules": {
+    "hardness": 4,
+    "blast_resistance": 4,
+    "light": 15,
+    "camo_bench": false,
+    "color_change": "original shapeless recipes",
+    "support": "selected face, vertical checks support top even on ceiling",
+    "lantern_attachment_save": "modern FACING persists; legacy metadata 12/13 lost attachment direction"
+  },
+  "door": {
+    "hardness": 8,
+    "blast_resistance": 8,
+    "manual_sound": "blocks.metaldooropen",
+    "manual_pitch": 1,
+    "manual_volume": 1,
+    "paired_toggle": "same block and same previous open state",
+    "piston": "block",
+    "placement_face": "up"
+  },
+  "recipes": [
+    "sandbags",
+    "item_bunkerdoor",
+    "lamp0_0",
+    "lamp0_0_alt",
+    "lamp0_6",
+    "lamp0_12",
+    "lamp0_12_alt",
+    "lamp0_13"
+  ],
+  "pending": [
+    "Visual acceptance",
+    "Other-mod block attachment compatibility",
+    "OreClusterMeteorBasis placement"
+  ]
+}

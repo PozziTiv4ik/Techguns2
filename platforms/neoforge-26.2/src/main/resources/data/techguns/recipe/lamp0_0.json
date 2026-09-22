@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:lamp_yellow",
+    "count": 16
+  },
+  "pattern": [
+    "iii",
+    "grg",
+    "ggg"
+  ],
+  "key": {
+    "r": "#c:dusts/redstone",
+    "g": "#c:glass_panes",
+    "i": "#c:nuggets/iron"
+  }
+}

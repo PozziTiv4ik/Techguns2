@@ -493,6 +493,14 @@
     ],
     "subtitle": "subtitles.techguns.machines.oredrilllargework"
   },
+  "blocks.metaldooropen": {
+    "sounds": [
+      "techguns:blocks/metaldoor_open_a",
+      "techguns:blocks/metaldoor_open_b",
+      "techguns:blocks/metaldoor_open_c"
+    ],
+    "subtitle": "subtitles.techguns.blocks.metaldooropen"
+  },
   "guns.chainsawhit": {
     "sounds": [
       "techguns:guns/chainsaw_hit_a",
