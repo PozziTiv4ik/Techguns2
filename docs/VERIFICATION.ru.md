@@ -19,10 +19,11 @@ Minecraft 26.2, NeoForge 26.2.0.81, ModDevGradle 2.0.146.
   условного сервера, после успешных 1524 + 28 тестов. Оставшиеся 15 и сборка
   повторены отдельной командой, завершившейся `BUILD SUCCESSFUL` с кодом 0.
   Minecraft-клиент не использовался.
-- Linux CI текущего среза ожидается. Предыдущий срез PoliceStation проверен в
-  [#56](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36262011805)
-  на source commit `f01f814061ff56c6aeeb617491354f651a156a7a`: 298 Python,
-  сборка/ядро и 1454 GameTests. Эти результаты не подменяют проверку нового среза.
+- Linux CI [#57](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36264230110)
+  завершился успешно 2026-09-26 в 21:02 Europe/Zurich для source commit
+  `b570fca304dbf7ae3dc0f0e98be3b357db947824`: все 13 шагов, 307 Python
+  единым запуском за 211,549 секунды, сборка/ядро и все 1567 GameTests.
+  Три серверных набора выполнялись раздельными командами и завершились штатно.
 - Все **172 рецепта верстака, 19 обычной печи, четыре Ammo Press, 19 Metal Press, четыре Blast Furnace, 31 Chemical Laboratory, семь Reaction Chamber, шесть Fabricator, два Charging Station и 56 Grinder** загружаются через Minecraft RecipeManager;
   в последнем журнале нет ошибок разбора данных.
 - По прямой просьбе пользователя 2026-09-09 запущен клиент предыдущего среза
@@ -2656,3 +2657,15 @@ GameTest-наборов. Отдельная `build runChemistryTestServer` пр�
 стрельба, затем перенос исходной структуры с полной добычей. Отдельные
 зажигательные патроны уже существуют как продукция лаборатории/сырьё Grinder.
 См. `docs/CAMOUFLAGE_NETS.ru.md`. Рабочий стол и интерактивный клиент не использовались.
+
+Linux CI завершился успешно 2026-09-26 в 21:02 Europe/Zurich:
+[запуск #57 / 36264230110](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36264230110),
+точный source commit `b570fca304dbf7ae3dc0f0e98be3b357db947824`.
+Все 13 шагов успешны: 307 Python единым запуском за 211,549 секунды,
+сборка/ядро, 1524 основных GameTests, 28 природных/выбора и 15 условных —
+всего **1567**. Ресурсный граф совпал с Windows: 2093 generated files,
+269 item definitions, 557 texture references, 72 sound events и 320 рецептов.
+Два контрольных участка PoliceStation совпали по координатам, поворотам,
+трём постам и трём блокам сундуков. Все серверы завершились штатно отдельными
+Gradle-командами. Полный журнал: `.tools/camonets-ci-full.log`.
+Следующий коммит изменяет только документацию: фиксирует этот результат CI.

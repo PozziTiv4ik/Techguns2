@@ -67,6 +67,9 @@ metadata, локализации и добычу. 113 GameTests проверяю
 добычу, соседние панели/заборы, оба цикла Camo Bench, RecipeManager и
 восстановление соединений после размещения структуры. Полный протокол
 регрессии приведён в [VERIFICATION.ru.md](VERIFICATION.ru.md).
+[Linux CI #57](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36264230110)
+успешен на source commit `b570fca304dbf7ae3dc0f0e98be3b357db947824`:
+307 Python, сборка/ядро и 1567 GameTests; локально также проверены 172 JUnit.
 
 Клиентская визуальная приёмка и необязательная интеграция Chisel остаются.
 Интерактивный клиент и управление рабочим столом не использовались.
