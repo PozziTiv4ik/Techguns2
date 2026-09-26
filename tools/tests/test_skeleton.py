@@ -58,9 +58,9 @@ class SkeletonPortTests(unittest.TestCase):
         self.assertEqual([e['npc'] for e in entries if not e['implemented']],[])
         self.assertEqual(next(e['danger'] for e in entries if e['npc']=='SkeletonSoldier'),1)
 
-    def test_all_six_undead_tags_are_preserved(self):
+    def test_all_ported_undead_tags_are_preserved(self):
         files=generate()
-        expected={'techguns:'+n for n in ('cyberdemon','zombiepigmansoldier','zombiesoldier','zombiefarmer','zombieminer','skeletonsoldier')}
+        expected={'techguns:'+n for n in ('cyberdemon','zombiepigmansoldier','zombiesoldier','zombiefarmer','zombieminer','skeletonsoldier','zombiepoliceman')}
         for tag in ('undead','ignores_poison_and_regen','inverted_healing_and_harm','sensitive_to_smite'):
             self.assertEqual(set(json.loads(files[RESOURCES+f'data/minecraft/tags/entity_type/{tag}.json'])['values']),expected)
 

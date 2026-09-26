@@ -63,6 +63,8 @@ public final class WeaponGameTests {
         PsychoSteveGameTests.register(FUNCTIONS);
         ArmyGameTests.register(FUNCTIONS);
         CommandoGameTests.register(FUNCTIONS);
+        PolicemanGameTests.register(FUNCTIONS);
+        PoliceStationGameTests.register(FUNCTIONS);
         CommandoArmorGameTests.register(FUNCTIONS);
         BeretGameTests.register(FUNCTIONS);
         NpcSpawnerGameTests.register(FUNCTIONS);

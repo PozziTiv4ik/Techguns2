@@ -80,7 +80,7 @@ class ArmyPortTests(unittest.TestCase):
         files=generate()
         for tag in ('undead','ignores_poison_and_regen','inverted_healing_and_harm','sensitive_to_smite'):
             values=json.loads(files[RESOURCES+f'data/minecraft/tags/entity_type/{tag}.json'])['values']
-            self.assertEqual(len(values),6); self.assertNotIn('techguns:armysoldier',values)
+            self.assertEqual(len(values),7); self.assertNotIn('techguns:armysoldier',values)
         self.assertEqual(files[RESOURCES+'assets/techguns/textures/entity/army_soldier.png'],(LEGACY/'resources/assets/techguns/textures/entity/army_soldier.png').read_bytes())
 
 

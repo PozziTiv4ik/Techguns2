@@ -50,6 +50,7 @@
 - [Адская крепость с рудным кластером и охраной](docs/NETHER_CLUSTER_CASTLE.ru.md)
 - [Средний адский алтарь и четыре встречи с CyberDemon](docs/NETHER_MEDIUM_ALTAR.ru.md)
 - [Клетка Ghastling с обычным спавнером и сундуком](docs/NETHER_GHAST_SPAWNER.ru.md)
+- [ZombiePoliceman, охрана и полицейский участок](docs/POLICE_STATION.ru.md)
 - [ZombieSoldier: оружие, лут и первый срез спавна Верхнего мира](docs/ZOMBIE_SOLDIER.ru.md)
 - [Repair Bench: ремонт надетой брони за материалы](docs/REPAIR_BENCH.ru.md)
 - [Camo Bench: камуфляж T2 и перекраска блоков](docs/CAMO_BENCH.ru.md)

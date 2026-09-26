@@ -84,6 +84,7 @@ public final class NpcContent {
         event.put(GHASTLING.get(),Ghastling.attributes().build());
         event.put(ALIEN_BUG.get(),AlienBug.attributes().build());
         event.put(COMMANDO.get(),Commando.attributes().build());
+        event.put(POLICEMAN.get(),ZombiePoliceman.attributes().build());
     }
     public static final DeferredHolder<EntityType<?>,EntityType<AlienBug>> ALIEN_BUG=TGContent.ENTITIES.register("alienbug",()->
             EntityType.Builder.<AlienBug>of(AlienBug::new,MobCategory.MONSTER).sized(1.1f,1.2f).eyeHeight(.65f).clientTrackingRange(5).updateInterval(3)
@@ -96,5 +97,9 @@ public final class NpcContent {
             EntityType.Builder.<Commando>of(Commando::new,MobCategory.MONSTER).sized(.6f,1.8f).eyeHeight(1.53f).clientTrackingRange(5).updateInterval(3)
                     .build(ResourceKey.create(Registries.ENTITY_TYPE,TGContent.id("commando"))));
     public static final DeferredItem<SpawnEggItem> COMMANDO_EGG=TGContent.ITEMS.registerItem("commando_spawn_egg",SpawnEggItem::new,props->props.spawnEgg(COMMANDO.get()));
+    public static final DeferredHolder<EntityType<?>,EntityType<ZombiePoliceman>> POLICEMAN=TGContent.ENTITIES.register("zombiepoliceman",()->
+            EntityType.Builder.<ZombiePoliceman>of(ZombiePoliceman::new,MobCategory.MONSTER).sized(.6f,1.8f).eyeHeight(1.53f).clientTrackingRange(5).updateInterval(3)
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE,TGContent.id("zombiepoliceman"))));
+    public static final DeferredItem<SpawnEggItem> POLICEMAN_EGG=TGContent.ITEMS.registerItem("zombiepoliceman_spawn_egg",SpawnEggItem::new,props->props.spawnEgg(POLICEMAN.get()));
     private NpcContent() {}
 }

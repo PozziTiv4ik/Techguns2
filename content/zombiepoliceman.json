@@ -1,0 +1,39 @@
+{
+  "id": "zombiepoliceman",
+  "source": "legacy/1.12.2/src/main/java/techguns/entities/npcs/ZombiePoliceman.java",
+  "attributes": {
+    "MOVEMENT_SPEED": 0.25,
+    "MAX_HEALTH": 25.0,
+    "ATTACK_DAMAGE": 4.0,
+    "FOLLOW_RANGE": 50.0
+  },
+  "intrinsic_armor": 5.0,
+  "weapons": [
+    "revolver",
+    "pistol"
+  ],
+  "armor": [
+    "t2_combat_Helmet",
+    "t2_combat_Chestplate",
+    "t2_combat_Leggings",
+    "t2_combat_Boots"
+  ],
+  "armor_chance": 0.5,
+  "armor_inclusive": true,
+  "camo": 5,
+  "undead": true,
+  "burns_in_daylight": true,
+  "spawner_origin_prevents_sunlight": true,
+  "fire_immune": false,
+  "natural_spawn_entry": false,
+  "faction": "HOSTILE",
+  "texture": "textures/entity/zombie_policeman.png",
+  "texture_size": [
+    128,
+    128
+  ],
+  "egg_colors": [
+    3158064,
+    255
+  ]
+}

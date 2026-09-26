@@ -114,7 +114,10 @@ final class RuralZombieGameTests {
     private static void ai(GameTestHelper h,Kind kind,int roll) {
         for(int x=1;x<11;x++) for(int z=1;z<11;z++) h.setBlock(new BlockPos(x,0,z),Blocks.STONE);
         var npc=create(h,kind); npc.setPos(h.absoluteVec(new Vec3(3,1,3))); npc.equipRoll(roll,2,0,0,0); h.getLevel().addFreshEntity(npc);
-        var target=h.spawnWithNoFreeWill(EntityTypes.IRON_GOLEM,new Vec3(8,1,3)); target.setNoGravity(true); npc.setTarget(target);
+        // The hand cannon has wide, unseeded projectile dispersion: both scheduled shots can
+        // legitimately miss at five blocks. Keep its AI/collision check at close range; tool
+        // cases retain the longer approach. Weapon spread itself is verified separately.
+        var target=h.spawnWithNoFreeWill(EntityTypes.IRON_GOLEM,new Vec3(npc.armed()?6:8,1,3)); target.setNoGravity(true); npc.setTarget(target);
         h.runAfterDelay(75,() -> {
             h.assertTrue(target.getHealth()<100,"Real ranged/melee goal damages target with source weapon "+kind.weapon(roll));
             h.getLevel().getEntitiesOfClass(Bullet.class,npc.getBoundingBox().inflate(120),b -> b.getOwner()==npc).forEach(Entity::discard);

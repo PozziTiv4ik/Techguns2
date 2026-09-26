@@ -528,6 +528,8 @@
   "item.techguns.armysoldier_spawn_egg": "Army Soldier Spawn Egg",
   "entity.techguns.commando": "Commando",
   "item.techguns.commando_spawn_egg": "Commando Spawn Egg",
+  "entity.techguns.zombiepoliceman": "Zombie Policeman",
+  "item.techguns.zombiepoliceman_spawn_egg": "Zombie Policeman Spawn Egg",
   "entity.techguns.ghastling": "Ghastling",
   "item.techguns.ghastling_spawn_egg": "Ghastling Spawn Egg",
   "entity.techguns.alien_blast": "Ghastling Incendiary Charge",

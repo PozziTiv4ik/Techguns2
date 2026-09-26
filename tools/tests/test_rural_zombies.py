@@ -49,11 +49,11 @@ class RuralZombiePortTests(unittest.TestCase):
         self.assertIn('this.setFire(8)',source); self.assertNotIn('getItemStackFromSlot(',source)
         for npc in rural_definitions(): self.assertFalse(npc['helmet_prevents_sun_ignition'])
 
-    def test_five_undead_types_merge_and_three_overworld_entries_are_available(self):
+    def test_undead_types_merge_and_overworld_entries_are_available(self):
         files=generate()
         for tag in ('undead','sensitive_to_smite','ignores_poison_and_regen','inverted_healing_and_harm'):
             values=json.loads(files[RESOURCES+f'data/minecraft/tags/entity_type/{tag}.json'])['values']
-            self.assertEqual(set(values),{'techguns:cyberdemon','techguns:zombiepigmansoldier','techguns:zombiesoldier','techguns:zombiefarmer','techguns:zombieminer','techguns:skeletonsoldier'})
+            self.assertEqual(set(values),{'techguns:cyberdemon','techguns:zombiepigmansoldier','techguns:zombiesoldier','techguns:zombiefarmer','techguns:zombieminer','techguns:skeletonsoldier','techguns:zombiepoliceman'})
         table=overworld_table()
         self.assertEqual([e['npc'] for e in table if e['implemented']],['ZombieFarmer','ZombieMiner','ZombieSoldier','SkeletonSoldier','PsychoSteve','Bandit'])
         self.assertEqual([e['weight'] for e in table],[200,200,100,100,3,50])

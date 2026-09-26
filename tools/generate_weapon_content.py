@@ -24,6 +24,8 @@ from legacy_bandit import generate_bandit_content, bandit_translations
 from legacy_psychosteve import generate_psycho_content, psycho_translations
 from legacy_spawner import generate_spawner_content, spawner_translations
 from legacy_commando import generate_commando_content, commando_translations
+from legacy_policeman import generate_policeman_content, policeman_translations
+from legacy_police_station import generate_police_station_content
 from legacy_army import generate_army_content, army_translations
 from legacy_alienbug import generate_alienbug_content, alienbug_translations, SOUNDS as BUG_SOUNDS
 from legacy_spike import generate_spike_content, spike_translations
@@ -313,6 +315,7 @@ public final class NpcWeapons {
         values.update(spawner_translations(lang))
         values.update(army_translations(lang))
         values.update(commando_translations(lang))
+        values.update(policeman_translations(lang))
         values.update(ghastling_translations(lang))
         values.update(alienbug_translations(lang))
         values.update(spike_translations(lang))
@@ -371,7 +374,7 @@ public final class Weapons {
 '''
     output('core/src/main/java/techguns/core/Weapons.java', source)
     files.update(generate_machine_content())
-    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_npc_content(), generate_cyber_content(), generate_armor_content(), generate_repair_content(), generate_camo_content(), generate_grinder_content(), generate_zombie_soldier_content(), generate_rural_content(), generate_skeleton_content(), generate_bandit_content(), generate_chainsaw_content(), generate_psycho_content(), generate_spawner_content(), generate_army_content(), generate_commando_content(), generate_location_content(), generate_ghastling_content(), generate_alienbug_content(), generate_spike_content(), generate_cluster_content(), generate_drill_content(), generate_building_content(), generate_fortification_content(), generate_meteor_content(), generate_bugnest_content(), generate_nether_castle_content(), generate_medium_altar_content(), generate_ghast_spawner_content()) for entry in domain.items()]:
+    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_npc_content(), generate_cyber_content(), generate_armor_content(), generate_repair_content(), generate_camo_content(), generate_grinder_content(), generate_zombie_soldier_content(), generate_rural_content(), generate_skeleton_content(), generate_bandit_content(), generate_chainsaw_content(), generate_psycho_content(), generate_spawner_content(), generate_army_content(), generate_commando_content(), generate_policeman_content(), generate_police_station_content(), generate_location_content(), generate_ghastling_content(), generate_alienbug_content(), generate_spike_content(), generate_cluster_content(), generate_drill_content(), generate_building_content(), generate_fortification_content(), generate_meteor_content(), generate_bugnest_content(), generate_nether_castle_content(), generate_medium_altar_content(), generate_ghast_spawner_content()) for entry in domain.items()]:
         if path in files:
             # Several content domains contribute to the same mining/tool and common item tags.
             if '/tags/' not in path:

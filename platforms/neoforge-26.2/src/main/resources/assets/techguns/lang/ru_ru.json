@@ -528,6 +528,8 @@
   "item.techguns.armysoldier_spawn_egg": "Яйцо призыва военного",
   "entity.techguns.commando": "Коммандос",
   "item.techguns.commando_spawn_egg": "Яйцо призыва спецназовца",
+  "entity.techguns.zombiepoliceman": "Зомби-Полицейский",
+  "item.techguns.zombiepoliceman_spawn_egg": "Яйцо призыва зомби-полицейского",
   "entity.techguns.ghastling": "Гастёныш",
   "item.techguns.ghastling_spawn_egg": "Яйцо призыва гастёныша",
   "entity.techguns.alien_blast": "Зажигательный заряд гастёныша",

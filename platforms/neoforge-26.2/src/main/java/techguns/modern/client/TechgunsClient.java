@@ -185,6 +185,7 @@ public final class TechgunsClient {
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.CYBER_DEMON.get(), CyberDemonRenderer::new);
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.PIGMAN.get(),ZombiePigmanSoldierRenderer::new);
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.ZOMBIE_SOLDIER.get(),GenericNpcRenderer::new);
+        event.registerEntityRenderer(techguns.modern.npc.NpcContent.POLICEMAN.get(),ctx->new GenericNpcRenderer<>(ctx,TGContent.id("textures/entity/zombie_policeman.png")));
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.FARMER.get(),GenericNpcRenderer::new);
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.MINER.get(),GenericNpcRenderer::new);
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.SKELETON.get(),SkeletonSoldierRenderer::new);

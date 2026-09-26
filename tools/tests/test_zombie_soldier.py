@@ -32,7 +32,7 @@ class ZombieSoldierPortTests(unittest.TestCase):
         files=generate()
         for tag in ('undead','sensitive_to_smite','ignores_poison_and_regen','inverted_healing_and_harm'):
             self.assertEqual(set(json.loads(files[RESOURCES+f'data/minecraft/tags/entity_type/{tag}.json'])['values']),
-                             {'techguns:cyberdemon','techguns:zombiepigmansoldier','techguns:zombiesoldier','techguns:zombiefarmer','techguns:zombieminer','techguns:skeletonsoldier'})
+                             {'techguns:cyberdemon','techguns:zombiepigmansoldier','techguns:zombiesoldier','techguns:zombiefarmer','techguns:zombieminer','techguns:skeletonsoldier','techguns:zombiepoliceman'})
         for lang in ('en_us','ru_ru'):
             self.assertIn('entity.techguns.zombiesoldier',json.loads(files[RESOURCES+f'assets/techguns/lang/{lang}.json']))
 

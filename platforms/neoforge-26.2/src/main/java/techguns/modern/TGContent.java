@@ -90,6 +90,7 @@ public final class TGContent {
                         output.accept(techguns.modern.npc.NpcContent.GHASTLING_EGG.get());
                         output.accept(techguns.modern.npc.NpcContent.BUG_EGG.get());
                         output.accept(techguns.modern.npc.NpcContent.COMMANDO_EGG.get());
+                        output.accept(techguns.modern.npc.NpcContent.POLICEMAN_EGG.get());
                         techguns.modern.armor.ArmorContent.COMMANDO.values().forEach(item->output.accept(item.get()));
                         output.accept(techguns.modern.world.SlimyContent.EGGS.get());
                         output.accept(techguns.modern.world.SlimyContent.SAND.get());
