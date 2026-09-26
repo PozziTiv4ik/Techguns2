@@ -51,7 +51,7 @@ def generate_incendiary_content(weapons):
         'flight': {'air_drag': .99, 'water_drag': .85, 'falloff': 'origin displacement at start of impact tick', 'gravity': 0},
         'block_fire': 'air cell on hit face, roll <= modified initial damage / 40, firing-time unsafe policy',
         'pending': ['Original FX engine and visual acceptance', 'Minigun weapon and its incendiary drum',
-                    'Explosive AS50 ammunition', 'SurvivorHideout placement']})
+                    'Explosive AS50 ammunition']})
     for key in ('incendiary', 'incendiary_knockback'):
         data(RESOURCES + f'data/techguns/damage_type/{key}.json',
              {'message_id': 'techguns.' + key, 'scaling': 'when_caused_by_living_non_player', 'exhaustion': .1})

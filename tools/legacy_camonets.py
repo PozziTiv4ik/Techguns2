@@ -104,7 +104,7 @@ def generate_camonet_content():
         'recipes': list(RECIPES), 'dirt_ingredient': 'techguns:legacy_dirt (minecraft:dirt only by default)',
         'minecraft_reference': {'version': '1.12.2', 'client_sha1': '0f275bc1547d01fa5f56ba34bdc87d981ee12daf',
                                 'forge': '1.12.2-14.23.5.2807', 'details': 'Block collision/strength, BlockPane face shape, OreDictionary dirt'},
-        'pending': ['Client visual acceptance', 'SurvivorHideout placement', 'Optional Chisel integration']})
+        'pending': ['Client visual acceptance', 'Optional Chisel integration']})
     variants_java = ',\n'.join(f'        new Variant("{v["id"]}", "{v["family"]}", {v["metadata"]})' for v in definitions)
     boxes_java = ',\n'.join('        new Box(' + ', '.join(map(str, box)) + ')' for box in boxes)
     files['core/src/main/java/techguns/core/CamouflageNets.java'] = ('''package techguns.core;

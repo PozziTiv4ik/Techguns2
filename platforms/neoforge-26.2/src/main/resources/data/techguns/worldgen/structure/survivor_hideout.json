@@ -1,0 +1,8 @@
+{
+  "type": "techguns:survivor_hideout",
+  "biomes": "#techguns:has_survivor_hideout",
+  "step": "top_layer_modification",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none",
+  "reserved_big_grid": 64
+}
