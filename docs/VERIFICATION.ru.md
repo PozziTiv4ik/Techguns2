@@ -17,7 +17,10 @@ Minecraft 26.2, NeoForge 26.2.0.81, ModDevGradle 2.0.146.
   в 00:48, генерация в 00:55 и условный сервер в 00:55 Europe/Zurich.
   Всего **1780 GameTests**. Текущий срез: SmallTrainstation, сохранённые
   разрушения и общий выбор малых локаций. Minecraft-клиент не использовался.
-- Linux CI текущего среза ожидает проверки после source push.
+- Linux CI [#62](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36277938464)
+  завершился успешно 2026-09-27 в 01:06 Europe/Zurich для source commit
+  `d146be674d409914be1c4fb749f17597367a3463`: все 13 шагов, 341 Python
+  единым запуском за 181,064 секунды, сборка/ядро и все 1780 GameTests.
 - Все **210 рецептов верстака, 19 обычной печи, четыре Ammo Press, 19 Metal Press, четыре Blast Furnace, 31 Chemical Laboratory, семь Reaction Chamber, шесть Fabricator, два Charging Station и 56 Grinder** загружаются через Minecraft RecipeManager;
   в последнем журнале нет ошибок разбора данных.
 - По прямой просьбе пользователя 2026-09-09 запущен клиент предыдущего среза
@@ -3050,5 +3053,18 @@ LICENSE.txt совпал с исходником, дерево legacy
 и `git diff --check` прошли. Бинарный релиз не публиковался.
 
 Визуальная приёмка, другие природные seed, FactoryHouseSmall, SmallMine
-и дальнейшие системы остаются. Результат Linux CI будет добавлен отдельной
-контрольной записью.
+и дальнейшие системы остаются.
+
+### Контрольная запись Linux CI #62 — 2026-09-27
+
+[Verify development port #62](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36277938464)
+успешно завершился 2026-09-27 в 01:06 Europe/Zurich для source commit
+`d146be674d409914be1c4fb749f17597367a3463`. Подтверждены все 13 шагов:
+341 Python единым запуском за 181,064 секунды, сборка/ядро, 1724 основных
+GameTests, 40 природных/выборочных и 16 условных — всего **1780**.
+Генератор и ресурсный граф совпали с Windows: 2180 файлов, 274 item definitions,
+565 texture references, 72 sound events и 358 рецептов. Обе природные точки
+SmallTrainstation, их повороты и 64-битные DamageSeed совпали с локальными
+результатами; обе GasStation сохранили прежние координаты и содержимое.
+Ошибок в финальном серверном журнале нет. Последующий коммит меняет только
+документацию; JAR не публикуется.
