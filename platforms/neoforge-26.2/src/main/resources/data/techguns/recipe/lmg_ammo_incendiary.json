@@ -1,0 +1,16 @@
+{
+  "type": "techguns:ammo_change_crafting",
+  "category": "misc",
+  "result": {
+    "id": "techguns:lmg",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 100,
+      "techguns:ballistic_variant": "incendiary"
+    }
+  },
+  "ingredients": [
+    "techguns:lmg",
+    "techguns:lmgmagazine_incendiary"
+  ]
+}

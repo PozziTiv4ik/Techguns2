@@ -38,6 +38,8 @@ public final class TGContent {
             "reload_ticks", builder -> builder.networkSynchronized(ByteBufCodecs.VAR_INT).ignoreSwapAnimation());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<techguns.core.RocketVariant>> ROCKET_VARIANT = COMPONENTS.registerComponentType(
             "rocket_variant", builder -> builder.persistent(RocketAmmo.CODEC).networkSynchronized(ByteBufCodecs.STRING_UTF8.map(techguns.core.RocketVariant::fromId, techguns.core.RocketVariant::id)));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<techguns.core.BallisticVariant>> BALLISTIC_VARIANT = COMPONENTS.registerComponentType(
+            "ballistic_variant", builder -> builder.persistent(BallisticAmmo.CODEC).networkSynchronized(ByteBufCodecs.STRING_UTF8.map(techguns.core.BallisticVariant::fromId, techguns.core.BallisticVariant::id)));
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Techguns.MOD_ID);
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, Techguns.MOD_ID);
     public static final Map<String, DeferredItem<Item>> AMMO = registerAmmo();
@@ -50,6 +52,9 @@ public final class TGContent {
     public static final DeferredHolder<EntityType<?>, EntityType<Bullet>> BULLET = ENTITIES.register("bullet", () ->
             EntityType.Builder.<Bullet>of(Bullet::new, MobCategory.MISC).sized(0.1f, 0.1f).clientTrackingRange(8).updateInterval(1)
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, id("bullet"))));
+    public static final DeferredHolder<EntityType<?>, EntityType<IncendiaryBullet>> INCENDIARY_BULLET = ENTITIES.register("incendiary_bullet", () ->
+            EntityType.Builder.<IncendiaryBullet>of(IncendiaryBullet::new, MobCategory.MISC).sized(.25f, .25f).clientTrackingRange(8).updateInterval(1)
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE, id("incendiary_bullet"))));
     public static final DeferredHolder<EntityType<?>,EntityType<AlienBlasterProjectile>> ALIEN_BLAST=ENTITIES.register("alien_blast",()->
             EntityType.Builder.<AlienBlasterProjectile>of(AlienBlasterProjectile::new,MobCategory.MISC).sized(.25f,.25f).clientTrackingRange(8).updateInterval(1)
                     .build(ResourceKey.create(Registries.ENTITY_TYPE,id("alien_blast"))));

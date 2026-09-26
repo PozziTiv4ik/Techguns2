@@ -25,8 +25,13 @@ public final class NpcCombat {
             Projectile projectile;
             switch (gun.projectile()) {
                 case BALLISTIC -> {
-                    var bullet = new Bullet(TGContent.BULLET.get(), level); bullet.configure(gun); bullet.npcDamage(damage);
-                    bullet.setOwner(npc); bullet.shootLegacy(npc, spread, false); projectile = bullet;
+                    if (BallisticAmmo.variant(stack) == BallisticVariant.INCENDIARY) {
+                        var bullet = new IncendiaryBullet(TGContent.INCENDIARY_BULLET.get(), level); bullet.configure(gun, false); bullet.npcDamage(damage);
+                        bullet.setOwner(npc); bullet.shootLegacy(npc, spread, false); projectile = bullet;
+                    } else {
+                        var bullet = new Bullet(TGContent.BULLET.get(), level); bullet.configure(gun); bullet.npcDamage(damage);
+                        bullet.setOwner(npc); bullet.shootLegacy(npc, spread, false); projectile = bullet;
+                    }
                 }
                 case LASER -> {
                     var beam = new LaserBeam(TGContent.LASER_BEAM.get(), level); beam.configure(gun); beam.npcDamage(damage);

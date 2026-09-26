@@ -1,0 +1,16 @@
+{
+  "type": "techguns:ammo_change_crafting",
+  "category": "misc",
+  "result": {
+    "id": "techguns:thompson",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 20,
+      "techguns:ballistic_variant": "default"
+    }
+  },
+  "ingredients": [
+    "techguns:thompson",
+    "techguns:smgmagazine"
+  ]
+}

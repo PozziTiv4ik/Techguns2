@@ -1,0 +1,16 @@
+{
+  "type": "techguns:ammo_change_crafting",
+  "category": "misc",
+  "result": {
+    "id": "techguns:boltaction",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 6,
+      "techguns:ballistic_variant": "incendiary"
+    }
+  },
+  "ingredients": [
+    "techguns:boltaction",
+    "techguns:riflerounds_incendiary"
+  ]
+}

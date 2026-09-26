@@ -1,0 +1,16 @@
+{
+  "type": "techguns:ammo_change_crafting",
+  "category": "misc",
+  "result": {
+    "id": "techguns:m4",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 30,
+      "techguns:ballistic_variant": "incendiary"
+    }
+  },
+  "ingredients": [
+    "techguns:m4",
+    "techguns:assaultriflemagazine_incendiary"
+  ]
+}

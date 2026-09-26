@@ -1,0 +1,16 @@
+{
+  "type": "techguns:ammo_change_crafting",
+  "category": "misc",
+  "result": {
+    "id": "techguns:pistol",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 18,
+      "techguns:ballistic_variant": "default"
+    }
+  },
+  "ingredients": [
+    "techguns:pistol",
+    "techguns:pistolmagazine"
+  ]
+}

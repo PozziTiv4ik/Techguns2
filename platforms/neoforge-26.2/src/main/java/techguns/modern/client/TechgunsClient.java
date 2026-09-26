@@ -153,16 +153,18 @@ public final class TechgunsClient {
         WeaponHud state = WeaponHud.of(gun.definition(), GunItem.rounds(stack), remaining);
         var gui = event.getGuiGraphics();
         boolean rocket = gun.definition().projectile() == techguns.core.ProjectileKind.ROCKET;
-        int x = Math.max(6, gui.guiWidth() - 154), y = Math.max(6, gui.guiHeight() - (rocket ? 94 : 68));
-        gui.fill(x - 5, y - 5, x + 144, y + (rocket ? 62 : 36), 0xA0181C20);
+        boolean variantWeapon = rocket || techguns.core.IncendiaryAmmo.supported(gun.definition());
+        int x = Math.max(6, gui.guiWidth() - 154), y = Math.max(6, gui.guiHeight() - (variantWeapon ? 94 : 68));
+        gui.fill(x - 5, y - 5, x + 144, y + (variantWeapon ? 62 : 36), 0xA0181C20);
         gui.text(client.font, Component.literal(client.font.plainSubstrByWidth(stack.getHoverName().getString(), 138)), x, y, 0xFFE7E7E7);
         gui.text(client.font, Component.translatable("hud.techguns.ammo", state.rounds(), state.capacity()), x, y + 13, 0xFFE9A63B);
         if (state.reloading()) {
             gui.text(client.font, Component.translatable("hud.techguns.reloading"), x + 60, y + 13, 0xFFC5C5C5);
             gui.fill(x, y + 28, x + Math.round(138 * state.reloadProgress()), y + 31, 0xFFE9A63B);
         }
-        if (rocket) {
-            var variant = Component.translatable("hud.techguns.rocket." + techguns.modern.RocketAmmo.variant(stack).id());
+        if (variantWeapon) {
+            var variant = Component.translatable(rocket ? "hud.techguns.rocket." + techguns.modern.RocketAmmo.variant(stack).id()
+                    : "hud.techguns.ballistic." + techguns.modern.BallisticAmmo.variant(stack).id());
             gui.text(client.font, Component.literal(client.font.plainSubstrByWidth(variant.getString(), 138)), x, y + 35, 0xFFC5C5C5);
             boolean safe = techguns.modern.SafeMode.enabled(client.player);
             gui.text(client.font, Component.translatable(safe ? "hud.techguns.safe" : "hud.techguns.unsafe"), x, y + 48, safe ? 0xFF97CE8B : 0xFFEE9466);
@@ -172,6 +174,7 @@ public final class TechgunsClient {
     private static void renderers(EntityRenderersEvent.RegisterRenderers event) {
         // The initial round uses vanilla tracer particles; a mesh renderer is part of M5.
         event.registerEntityRenderer(TGContent.BULLET.get(), NoopRenderer::new);
+        event.registerEntityRenderer(TGContent.INCENDIARY_BULLET.get(), NoopRenderer::new);
         event.registerEntityRenderer(TGContent.CHAINSAW_ATTACK.get(), NoopRenderer::new);
         event.registerEntityRenderer(TGContent.NETHER_BLAST.get(), NoopRenderer::new);
         event.registerEntityRenderer(TGContent.ALIEN_BLAST.get(), NoopRenderer::new);

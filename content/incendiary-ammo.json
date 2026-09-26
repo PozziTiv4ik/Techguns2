@@ -1,0 +1,110 @@
+{
+  "sources": [
+    "legacy/1.12.2/src/main/java/techguns/items/guns/ammo/AmmoTypes.java",
+    "legacy/1.12.2/src/main/java/techguns/entities/projectiles/GenericProjectileIncendiary.java",
+    "legacy/1.12.2/src/main/java/techguns/recipes/AmmoSwitchRecipeFactory.java"
+  ],
+  "damage_multiplier": 1.1,
+  "burn_seconds": 3,
+  "ignition_divisor": 40.0,
+  "families": [
+    {
+      "family": "PISTOL_ROUNDS",
+      "default": "pistolrounds",
+      "item": "pistolrounds_incendiary",
+      "empty": "",
+      "loose": "",
+      "bundles": 0
+    },
+    {
+      "family": "RIFLE_ROUNDS",
+      "default": "riflerounds",
+      "item": "riflerounds_incendiary",
+      "empty": "",
+      "loose": "",
+      "bundles": 0
+    },
+    {
+      "family": "SHOTGUN_ROUNDS",
+      "default": "shotgunrounds",
+      "item": "shotgunrounds_incendiary",
+      "empty": "",
+      "loose": "",
+      "bundles": 0
+    },
+    {
+      "family": "SMG_MAGAZINE",
+      "default": "smgmagazine",
+      "item": "smgmagazine_incendiary",
+      "empty": "smgmagazineempty",
+      "loose": "pistolrounds_incendiary",
+      "bundles": 2
+    },
+    {
+      "family": "ASSAULT_RIFLE_MAGAZINE",
+      "default": "assaultriflemagazine",
+      "item": "assaultriflemagazine_incendiary",
+      "empty": "assaultriflemagazineempty",
+      "loose": "riflerounds_incendiary",
+      "bundles": 3
+    },
+    {
+      "family": "PISTOL_MAGAZINE",
+      "default": "pistolmagazine",
+      "item": "pistolmagazine_incendiary",
+      "empty": "pistolmagazineempty",
+      "loose": "pistolrounds_incendiary",
+      "bundles": 3
+    },
+    {
+      "family": "LMG_MAGAZINE",
+      "default": "lmgmagazine",
+      "item": "lmgmagazine_incendiary",
+      "empty": "lmgmagazineempty",
+      "loose": "riflerounds_incendiary",
+      "bundles": 8
+    },
+    {
+      "family": "AS50_MAGAZINE",
+      "default": "as50magazine",
+      "item": "as50magazine_incendiary",
+      "empty": "as50magazineempty",
+      "loose": "sniperrounds_incendiary",
+      "bundles": 2
+    }
+  ],
+  "weapons": [
+    "sawedoff",
+    "revolver",
+    "goldenrevolver",
+    "thompson",
+    "boltaction",
+    "combatshotgun",
+    "pistol",
+    "ak47",
+    "m4",
+    "m4_infiltrator",
+    "lmg",
+    "mac10",
+    "as50",
+    "aug",
+    "scar",
+    "vector"
+  ],
+  "crafting_rounds": "1 for individual shotgun shells, full capacity for bundles/magazines; old rounds consumed",
+  "damage_kind": "FIRE, magic flag, not vanilla is_fire; ordinary hurt cooldown bypassed",
+  "knockback": "inherited 0.01 PHYSICAL preliminary hit; main FIRE hit adds no knockback",
+  "flight": {
+    "air_drag": 0.99,
+    "water_drag": 0.85,
+    "falloff": "origin displacement at start of impact tick",
+    "gravity": 0
+  },
+  "block_fire": "air cell on hit face, roll <= modified initial damage / 40, firing-time unsafe policy",
+  "pending": [
+    "Original FX engine and visual acceptance",
+    "Minigun weapon and its incendiary drum",
+    "Explosive AS50 ammunition",
+    "SurvivorHideout placement"
+  ]
+}

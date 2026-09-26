@@ -10,6 +10,7 @@
 - [Текущий статус и ограничения](docs/STATUS.ru.md)
 - [Каталог 761 исходного Java-файла и 44 записей оружия](content/legacy-inventory.json)
 - [Исходные параметры 17 баллистических образцов](content/ballistic-weapons.json)
+- [Зажигательные патроны: магазины, смена боеприпаса, броня и поджог](docs/INCENDIARY_AMMO.ru.md)
 - [Два лазера: попадания, батареи, модели и ограничения](docs/LASERS.ru.md)
 - [Ракетница: три боеприпаса, взрывы, безопасный режим и радиация](docs/ROCKET_LAUNCHER.ru.md)
 - [Соответствие metadata, рецептов и материалов](content/crafting-content.json)

@@ -95,10 +95,15 @@
     "104": "techguns:rcheatray",
     "105": "techguns:rcuvemitter",
     "106": "techguns:shotgunrounds_incendiary",
+    "107": "techguns:as50magazine_incendiary",
     "108": "techguns:sniperrounds_incendiary",
     "109": "techguns:pistolrounds_incendiary",
     "110": "techguns:riflerounds_incendiary",
     "111": "techguns:rifleroundsstack_incendiary",
+    "112": "techguns:smgmagazine_incendiary",
+    "113": "techguns:pistolmagazine_incendiary",
+    "115": "techguns:assaultriflemagazine_incendiary",
+    "116": "techguns:lmgmagazine_incendiary",
     "117": "techguns:rocket_nuke",
     "118": "techguns:tacticalnukewarhead",
     "123": "techguns:chainsawblades_obsidian",
@@ -189,6 +194,14 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/ak47_alt.json"
     },
     {
+      "id": "techguns:ak47_ammo_default",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/ak47_ammo_default.json"
+    },
+    {
+      "id": "techguns:ak47_ammo_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/ak47_ammo_incendiary.json"
+    },
+    {
       "id": "techguns:as50",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/as50.json"
     },
@@ -197,12 +210,28 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/as50_alt.json"
     },
     {
+      "id": "techguns:as50_ammo_default",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/as50_ammo_default.json"
+    },
+    {
+      "id": "techguns:as50_ammo_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/as50_ammo_incendiary.json"
+    },
+    {
       "id": "techguns:aug",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/aug.json"
     },
     {
       "id": "techguns:aug_alt",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/aug_alt.json"
+    },
+    {
+      "id": "techguns:aug_ammo_default",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/aug_ammo_default.json"
+    },
+    {
+      "id": "techguns:aug_ammo_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/aug_ammo_incendiary.json"
     },
     {
       "id": "techguns:ammo_press",
@@ -223,6 +252,14 @@
     {
       "id": "techguns:boltaction",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/boltaction.json"
+    },
+    {
+      "id": "techguns:boltaction_ammo_default",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/boltaction_ammo_default.json"
+    },
+    {
+      "id": "techguns:boltaction_ammo_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/boltaction_ammo_incendiary.json"
     },
     {
       "id": "techguns:camonet_0",
@@ -253,12 +290,28 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/combatshotgun.json"
     },
     {
+      "id": "techguns:combatshotgun_ammo_default",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/combatshotgun_ammo_default.json"
+    },
+    {
+      "id": "techguns:combatshotgun_ammo_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/combatshotgun_ammo_incendiary.json"
+    },
+    {
       "id": "techguns:concrete_0",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/concrete_0.json"
     },
     {
       "id": "techguns:goldenrevolver",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/goldenrevolver.json"
+    },
+    {
+      "id": "techguns:goldenrevolver_ammo_default",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/goldenrevolver_ammo_default.json"
+    },
+    {
+      "id": "techguns:goldenrevolver_ammo_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/goldenrevolver_ammo_incendiary.json"
     },
     {
       "id": "techguns:handcannon",
@@ -309,6 +362,10 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_104_rcheatray.json"
     },
     {
+      "id": "techguns:as50magazine_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_107_as50magazine_incendiary.json"
+    },
+    {
       "id": "techguns:smgmagazineempty",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_10_smgmagazineempty.json"
     },
@@ -319,6 +376,26 @@
     {
       "id": "techguns:rifleroundsstack_incendiary",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_111_rifleroundsstack_incendiary.json"
+    },
+    {
+      "id": "techguns:smgmagazine_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_112_smgmagazine_incendiary.json"
+    },
+    {
+      "id": "techguns:pistolmagazine_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_113_pistolmagazine_incendiary.json"
+    },
+    {
+      "id": "techguns:assaultriflemagazine_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_115_assaultriflemagazine_incendiary.json"
+    },
+    {
+      "id": "techguns:lmgmagazine_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_116_lmgmagazine_incendiary.json"
+    },
+    {
+      "id": "techguns:lmgmagazine_incendiary_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_116_lmgmagazine_incendiary_alt.json"
     },
     {
       "id": "techguns:rocket_nuke",
@@ -625,6 +702,14 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/lmg_alt.json"
     },
     {
+      "id": "techguns:lmg_ammo_default",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/lmg_ammo_default.json"
+    },
+    {
+      "id": "techguns:lmg_ammo_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/lmg_ammo_incendiary.json"
+    },
+    {
       "id": "techguns:m4",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/m4.json"
     },
@@ -633,12 +718,36 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/m4_alt.json"
     },
     {
+      "id": "techguns:m4_ammo_default",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/m4_ammo_default.json"
+    },
+    {
+      "id": "techguns:m4_ammo_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/m4_ammo_incendiary.json"
+    },
+    {
+      "id": "techguns:m4_infiltrator_ammo_default",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/m4_infiltrator_ammo_default.json"
+    },
+    {
+      "id": "techguns:m4_infiltrator_ammo_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/m4_infiltrator_ammo_incendiary.json"
+    },
+    {
       "id": "techguns:mac10",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/mac10.json"
     },
     {
       "id": "techguns:mac10_alt",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/mac10_alt.json"
+    },
+    {
+      "id": "techguns:mac10_ammo_default",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/mac10_ammo_default.json"
+    },
+    {
+      "id": "techguns:mac10_ammo_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/mac10_ammo_incendiary.json"
     },
     {
       "id": "techguns:metalpanel_0",
@@ -709,8 +818,24 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/pistol_alt.json"
     },
     {
+      "id": "techguns:pistol_ammo_default",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/pistol_ammo_default.json"
+    },
+    {
+      "id": "techguns:pistol_ammo_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/pistol_ammo_incendiary.json"
+    },
+    {
       "id": "techguns:revolver",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/revolver.json"
+    },
+    {
+      "id": "techguns:revolver_ammo_default",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/revolver_ammo_default.json"
+    },
+    {
+      "id": "techguns:revolver_ammo_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/revolver_ammo_incendiary.json"
     },
     {
       "id": "techguns:rocketlauncher",
@@ -741,12 +866,28 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/sawedoff.json"
     },
     {
+      "id": "techguns:sawedoff_ammo_default",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/sawedoff_ammo_default.json"
+    },
+    {
+      "id": "techguns:sawedoff_ammo_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/sawedoff_ammo_incendiary.json"
+    },
+    {
       "id": "techguns:scar",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/scar.json"
     },
     {
       "id": "techguns:scar_alt",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/scar_alt.json"
+    },
+    {
+      "id": "techguns:scar_ammo_default",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/scar_ammo_default.json"
+    },
+    {
+      "id": "techguns:scar_ammo_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/scar_ammo_incendiary.json"
     },
     {
       "id": "techguns:grinder",
@@ -861,12 +1002,28 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/thompson_alt.json"
     },
     {
+      "id": "techguns:thompson_ammo_default",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/thompson_ammo_default.json"
+    },
+    {
+      "id": "techguns:thompson_ammo_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/thompson_ammo_incendiary.json"
+    },
+    {
       "id": "techguns:vector",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/vector.json"
     },
     {
       "id": "techguns:vector_alt",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/vector_alt.json"
+    },
+    {
+      "id": "techguns:vector_ammo_default",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/vector_ammo_default.json"
+    },
+    {
+      "id": "techguns:vector_ammo_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/vector_ammo_incendiary.json"
     }
   ],
   "tags": {

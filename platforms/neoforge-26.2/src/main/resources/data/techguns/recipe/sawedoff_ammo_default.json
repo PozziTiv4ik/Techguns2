@@ -1,0 +1,16 @@
+{
+  "type": "techguns:ammo_change_crafting",
+  "category": "misc",
+  "result": {
+    "id": "techguns:sawedoff",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 1,
+      "techguns:ballistic_variant": "default"
+    }
+  },
+  "ingredients": [
+    "techguns:sawedoff",
+    "techguns:shotgunrounds"
+  ]
+}

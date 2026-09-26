@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "result": {
+    "id": "techguns:lmgmagazine_incendiary",
+    "count": 1
+  },
+  "ingredients": [
+    "techguns:lmgmagazineempty",
+    "techguns:rifleroundsstack_incendiary",
+    "techguns:rifleroundsstack_incendiary"
+  ]
+}

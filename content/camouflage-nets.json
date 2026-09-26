@@ -195,7 +195,7 @@
   },
   "pending": [
     "Client visual acceptance",
-    "SurvivorHideout placement and incendiary magazine/firing dependencies",
+    "SurvivorHideout placement",
     "Optional Chisel integration"
   ]
 }

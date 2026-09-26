@@ -82,6 +82,7 @@ public final class WeaponGameTests {
         BuildingGameTests.register(FUNCTIONS);
         FortificationGameTests.register(FUNCTIONS);
         CamouflageNetGameTests.register(FUNCTIONS);
+        IncendiaryGameTests.register(FUNCTIONS);
         NetherSoulGameTests.register(FUNCTIONS);
         OreClusterGameTests.register(FUNCTIONS);
         OreDrillGameTests.register(FUNCTIONS);

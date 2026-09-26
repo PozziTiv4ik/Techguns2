@@ -57,6 +57,14 @@ public class GunItem extends Item {
                 beam.trace();
                 continue;
             }
+            if (BallisticAmmo.variant(stack) == techguns.core.BallisticVariant.INCENDIARY) {
+                var incendiary = new IncendiaryBullet(TGContent.INCENDIARY_BULLET.get(), server);
+                incendiary.configure(gun, !SafeMode.enabled(player)); incendiary.setOwner(player);
+                incendiary.shootLegacy(player, (pellet == 0 ? gun.stats().spread() : gun.pelletSpread()) * accuracyMultiplier,
+                        aiming && gun.aim().centered());
+                if (!server.addFreshEntity(incendiary) && pellet == 0) return false;
+                continue;
+            }
             Bullet bullet = new Bullet(TGContent.BULLET.get(), server);
             bullet.configure(gun);
             bullet.setOwner(player);
@@ -78,11 +86,12 @@ public class GunItem extends Item {
     public static int availableAmmo(Player player, WeaponDefinition gun) {
         return availableAmmo(player, gun.ammo().item());
     }
-    private static String ammoId(ItemStack stack, WeaponDefinition gun) {
-        return gun.projectile() == techguns.core.ProjectileKind.ROCKET ? RocketAmmo.variant(stack).ammo() : gun.ammo().item();
+    public static String ammoId(ItemStack stack) {
+        if (!(stack.getItem() instanceof GunItem gun)) return "";
+        return gun.definition.projectile() == techguns.core.ProjectileKind.ROCKET ? RocketAmmo.variant(stack).ammo() : BallisticAmmo.ammo(stack).item();
     }
     public static int availableAmmo(Player player, ItemStack stack) {
-        return stack.getItem() instanceof GunItem gun ? availableAmmo(player, ammoId(stack, gun.definition)) : 0;
+        return stack.getItem() instanceof GunItem ? availableAmmo(player, ammoId(stack)) : 0;
     }
     private static int availableAmmo(Player player, String id) {
         Item ammo = TGContent.AMMO.get(id).get();
@@ -104,7 +113,7 @@ public class GunItem extends Item {
         WeaponDefinition gun = item.definition;
         Magazine.Plan plan = Magazine.plan(gun, rounds(stack), availableAmmo(player, stack), player.getAbilities().instabuild);
         int pending = plan.consumedItems();
-        Item ammo = TGContent.AMMO.get(ammoId(stack, gun)).get();
+        Item ammo = TGContent.AMMO.get(ammoId(stack)).get();
         for (int slot = 0; slot < player.getInventory().getContainerSize() && pending > 0; slot++) {
             ItemStack candidate = player.getInventory().getItem(slot);
             if (candidate.is(ammo)) {
@@ -114,8 +123,9 @@ public class GunItem extends Item {
             }
         }
         stack.set(TGContent.ROUNDS.get(), plan.rounds());
-        giveRemainder(player, gun.ammo().emptyItem(), plan.emptyMagazines());
-        giveRemainder(player, gun.ammo().looseItem(), plan.looseBundles());
+        var selectedAmmo = BallisticAmmo.ammo(stack);
+        giveRemainder(player, selectedAmmo.emptyItem(), plan.emptyMagazines());
+        giveRemainder(player, selectedAmmo.looseItem(), plan.looseBundles());
     }
 
     private static void giveRemainder(Player player, String id, int count) {
@@ -132,4 +142,10 @@ public class GunItem extends Item {
     @Override public boolean isBarVisible(ItemStack stack) { return rounds(stack) < definition.stats().capacity(); }
     @Override public int getBarWidth(ItemStack stack) { return Math.round(13f * rounds(stack) / definition.stats().capacity()); }
     @Override public int getBarColor(ItemStack stack) { return 0xE9A63B; }
+    @Override public void appendHoverText(ItemStack stack, TooltipContext context, net.minecraft.world.item.component.TooltipDisplay display,
+                                         java.util.function.Consumer<net.minecraft.network.chat.Component> lines, net.minecraft.world.item.TooltipFlag flag) {
+        super.appendHoverText(stack, context, display, lines, flag);
+        if (techguns.core.IncendiaryAmmo.supported(definition)) lines.accept(net.minecraft.network.chat.Component.translatable("tooltip.techguns.loaded_ammo",
+                net.minecraft.network.chat.Component.translatable("hud.techguns.ballistic." + BallisticAmmo.variant(stack).id())));
+    }
 }

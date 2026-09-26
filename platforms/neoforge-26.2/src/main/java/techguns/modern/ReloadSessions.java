@@ -12,7 +12,7 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 /** Server-only R-key reloads. Sessions are transient and never follow an item to another player. */
 public final class ReloadSessions {
-    private record Pending(ItemStack stack, ServerLevel level, int remaining) {}
+    private record Pending(ItemStack stack, ServerLevel level, int remaining, String ammoId) {}
     private static final Map<Player, Pending> PENDING = new IdentityHashMap<>();
 
     public static boolean active(Player player) { return PENDING.containsKey(player); }
@@ -23,7 +23,7 @@ public final class ReloadSessions {
         ItemStack stack = player.getMainHandItem();
         if (!(stack.getItem() instanceof GunItem gun) || player.getCooldowns().isOnCooldown(stack)
                 || !GunItem.canReload(player, stack)) return false;
-        PENDING.put(player, new Pending(stack, level, gun.definition().stats().reloadTicks()));
+        PENDING.put(player, new Pending(stack, level, gun.definition().stats().reloadTicks(), GunItem.ammoId(stack)));
         AimSessions.cancel(player);
         stack.set(TGContent.RELOAD_TICKS.get(), gun.definition().stats().reloadTicks());
         GunItem.playReload(player, gun.definition());
@@ -34,10 +34,10 @@ public final class ReloadSessions {
         Pending pending = PENDING.get(player);
         if (pending == null) return;
         if (!player.isAlive() || player.isSpectator() || player.level() != pending.level()
-                || player.getMainHandItem() != pending.stack() || player.isUsingItem()) {
+                || player.getMainHandItem() != pending.stack() || player.isUsingItem() || !pending.ammoId().equals(GunItem.ammoId(pending.stack()))) {
             cancel(player);
         } else if (pending.remaining() > 1) {
-            PENDING.put(player, new Pending(pending.stack(), pending.level(), pending.remaining() - 1));
+            PENDING.put(player, new Pending(pending.stack(), pending.level(), pending.remaining() - 1, pending.ammoId()));
             pending.stack().set(TGContent.RELOAD_TICKS.get(), pending.remaining() - 1);
         } else {
             GunItem.completeReload(player, pending.stack());

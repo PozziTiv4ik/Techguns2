@@ -19,6 +19,7 @@ from legacy_drill import PARTS as DRILL_PARTS, drill_heads
 from legacy_building import FAMILIES as BUILDING_FAMILIES, RECIPES as BUILDING_RECIPES, building_id, building_definitions
 from legacy_fortifications import RECIPES as FORTIFICATION_RECIPES, LAMPS, lamp_id
 from legacy_camonets import RECIPES as CAMONET_RECIPES, FAMILIES as CAMONET_FAMILIES, net_id, net_definitions
+from legacy_incendiary import incendiary_for
 
 ROOT = Path(__file__).resolve().parents[1]
 LEGACY = ROOT / 'legacy/1.12.2/src/main'
@@ -75,7 +76,12 @@ def convert_recipe(legacy, shared, weapons):
         result['components'] = {'techguns:rounds': rounds}
         if kind == 'techguns:ammo_change_crafting':
             ammo = next(shared[v['data']] for v in legacy['ingredients'] if v['item'] == 'techguns:itemshared')
-            result['components']['techguns:rocket_variant'] = {'rocket': 'default', 'rocket_nuke': 'nuke', 'rocket_high_velocity': 'high_velocity'}[ammo]
+            if gun['projectile'] == 'rocket':
+                result['components']['techguns:rocket_variant'] = {'rocket': 'default', 'rocket_nuke': 'nuke', 'rocket_high_velocity': 'high_velocity'}[ammo]
+            elif family := incendiary_for(gun):
+                result['components']['techguns:ballistic_variant'] = {family['default']: 'default', family['item']: 'incendiary'}[ammo]
+                if gun['ammo']['individual']: result['components']['techguns:rounds'] = 1
+            else: raise ValueError('Unsupported ammunition change')
     recipe = {'type': 'techguns:copy_gun' if kind == 'techguns:copy_nbt' else kind,
               'category': 'misc', 'result': result}
     if 'pattern' in legacy:
@@ -98,6 +104,11 @@ def plan_crafting(weapon_list):
     for armor_set in ARMOR_SETS:
         for armor in armor_definitions(armor_set):
             name=armor['id']; selected[name]=source_recipes[name]
+    for gun in weapon_list:
+        if incendiary_for(gun):
+            for variant in ('default', 'incendiary'):
+                name = gun['id'] + '_ammo_' + variant
+                selected[name] = source_recipes[name]
     if 'rocketlauncher' in weapons:
         for variant in ('default', 'nuke', 'high_velocity'):
             name = 'rocketlauncher_ammo_' + variant

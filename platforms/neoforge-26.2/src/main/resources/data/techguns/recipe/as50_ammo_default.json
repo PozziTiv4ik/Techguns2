@@ -1,0 +1,16 @@
+{
+  "type": "techguns:ammo_change_crafting",
+  "category": "misc",
+  "result": {
+    "id": "techguns:as50",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 10,
+      "techguns:ballistic_variant": "default"
+    }
+  },
+  "ingredients": [
+    "techguns:as50",
+    "techguns:as50magazine"
+  ]
+}

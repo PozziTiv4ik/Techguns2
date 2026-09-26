@@ -1,0 +1,16 @@
+{
+  "type": "techguns:ammo_change_crafting",
+  "category": "misc",
+  "result": {
+    "id": "techguns:vector",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 25,
+      "techguns:ballistic_variant": "incendiary"
+    }
+  },
+  "ingredients": [
+    "techguns:vector",
+    "techguns:smgmagazine_incendiary"
+  ]
+}
