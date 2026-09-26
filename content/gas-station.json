@@ -8997,7 +8997,7 @@
       {
         "id": "small_trainstation",
         "weight": 10,
-        "implemented": false
+        "implemented": true
       },
       {
         "id": "small_mine",

@@ -186,8 +186,8 @@ def cluster_location_definition():
             'mixture_rng':'Saved per-piece seed + absolute position, including two independent foundation rolls; not legacy world.rand sequence'}
 
 
-def factory_chest_loot():
-    source=json.loads((LEGACY/'resources/assets/techguns/loot_tables/chests/factory_building.json').read_text())
+def factory_chest_loot(name='factory_building'):
+    source=json.loads((LEGACY/f'resources/assets/techguns/loot_tables/chests/{name}.json').read_text(encoding='utf-8'))
     pools=[]
     for pool in source['pools']:
         assert set(pool)<= {'name','rolls','entries'}
