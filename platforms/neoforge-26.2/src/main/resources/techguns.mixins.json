@@ -9,6 +9,7 @@
     "SandbagFenceMixin",
     "CamouflagePaneMixin",
     "HideoutDecorationProtectionMixin",
+    "GasStationTreeProtectionMixin",
     "NetherDeltaProtectionMixin",
     "NetherBasaltProtectionMixin",
     "WorldgenTestOptionsMixin"
