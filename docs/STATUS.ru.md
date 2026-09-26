@@ -7,7 +7,7 @@
 |---|---|---|
 | Форк, исходная история, лицензия | Готово | Оригинал сохранён в `legacy/1.12.2`; upstream-коммит зафиксирован |
 | План и каталог | Готово | 15 этапов, 761 Java-файл, 44 записи оружия |
-| Современная сборка | ZombiePoliceman и PoliceStation проверены на Windows; Linux CI этого среза ожидается | Gradle 9.2.1, Java 25, ModDevGradle 2.0.146; JAR, 1411 основных GameTests, пятнадцать условных и двадцать восемь проверок генерации/выбора |
+| Современная сборка | ZombiePoliceman и PoliceStation проверены на Windows и Linux CI [#56](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36262011805), source commit `f01f814` | Gradle 9.2.1, Java 25, ModDevGradle 2.0.146; JAR, 1411 основных GameTests, пятнадцать условных и двадцать восемь проверок генерации/выбора |
 | Общее ядро | Проверено unit-тестами | Ёмкость, расход, запрет выстрела, bundle reload, падение урона |
 | Защита и пробитие | Частично | Исходная формула пуль и пробития; ENERGY/EXPLOSION учитывают половину обычной брони и сопротивление ведьм магии; обычная броня не защищает от кислоты, как от legacy poison; собственная защита четырнадцати NPC, включая нулевую у Farmer/Miner/SkeletonSoldier/Ghastling, и FIRE-урон бластера; для T1 Combat/T1 Miner/T1 Scout/T2 Combat/T2 Commando/Hazmat и берета игрока отдельное поглощение по частям, износ и смешанная обычная броня. Остальные комплекты/системы ещё переносятся |
 | Обычный баллистический арсенал | Частично, 17 серверных циклов проверены | Ручная пушка, обрез, два револьвера, Thompson, болтовая винтовка, боевой дробовик, пистолет, AK-47, M4, Infiltrator, LMG, MAC-10, AS50, AUG, SCAR, Vector |
@@ -336,7 +336,9 @@ NetherAltarMedium проверен в [Linux CI #54](https://github.com/PozziTiv
 Текущий срез ZombiePoliceman / PoliceStation прошёл локально: **172 JUnit,
 298 Python и 1454 GameTests (1411 + 28 + 15)**. Python-набор проверен тремя
 непересекающимися пакетами 99/99/100; все 298 тестов обнаружения учтены.
-Linux CI этого среза ожидается.
+[Linux CI #56](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36262011805)
+подтвердил все 13 шагов на source commit `f01f814061ff56c6aeeb617491354f651a156a7a`;
+298 Python-проверок на Linux прошли единым запуском.
 
 ## Следующий этап
 
