@@ -194,7 +194,7 @@ final class MediumAltarGameTests {
         for(int x=(box.minX()>>4)-1;x<=(box.maxX()>>4)+1;x++) for(int z=(box.minZ()>>4)-1;z<=(box.maxZ()>>4)+1;z++) l.getChunk(x,z);
         for(int x=box.minX()>>4;x<=box.maxX()>>4;x++) for(int z=box.minZ()>>4;z<=box.maxZ()>>4;z++) l.getChunk(x,z).postProcessGeneration(l);
         verify(h,l,p);
-        for(var id:List.of(NetherCastlePiece.TEMPLATE,NetherAltarPiece.TEMPLATE,NetherLootPiece.TEMPLATE,NetherAcidPiece.TEMPLATE,NetherSoulPiece.TEMPLATE,NetherClusterPiece.TEMPLATE)) {
+        for(var id:List.of(NetherGhastPiece.TEMPLATE,NetherCastlePiece.TEMPLATE,NetherAltarPiece.TEMPLATE,NetherLootPiece.TEMPLATE,NetherAcidPiece.TEMPLATE,NetherSoulPiece.TEMPLATE,NetherClusterPiece.TEMPLATE)) {
             var other=chunk.getStartForStructure(l.registryAccess().lookupOrThrow(Registries.STRUCTURE).getValue(id)); h.assertTrue(other==null || !other.isValid(),"Castle and small structures cannot replace this medium ticket");
         }
         var holder=l.registryAccess().lookupOrThrow(Registries.STRUCTURE).getOrThrow(ResourceKey.create(Registries.STRUCTURE,NetherMediumAltarPiece.TEMPLATE));

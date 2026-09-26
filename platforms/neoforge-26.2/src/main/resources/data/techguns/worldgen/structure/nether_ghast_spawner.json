@@ -1,0 +1,8 @@
+{
+  "type": "techguns:nether_ghast_spawner",
+  "biomes": "#techguns:has_nether_ghast_spawner",
+  "step": "top_layer_modification",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none",
+  "reserved_big_grid": 64
+}

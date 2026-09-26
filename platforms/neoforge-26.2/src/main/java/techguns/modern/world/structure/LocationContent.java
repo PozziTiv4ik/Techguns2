@@ -25,6 +25,8 @@ public final class LocationContent {
     public static final DeferredHolder<StructurePieceType,StructurePieceType> SPIKE_PIECE=PIECES.register("orecluster_spike",()->(context,tag)->new OreSpikePiece(context.structureTemplateManager(),tag));
     public static final DeferredHolder<StructureType<?>,StructureType<MeteorStructure>> METEOR=TYPES.register("orecluster_meteor_basis",()->()->MeteorStructure.CODEC);
     public static final DeferredHolder<StructurePieceType,StructurePieceType> METEOR_PIECE=PIECES.register("orecluster_meteor_basis",()->(context,tag)->new MeteorPiece(context.structureTemplateManager(),tag));
+    public static final DeferredHolder<StructureType<?>,StructureType<NetherGhastStructure>> GHAST=TYPES.register("nether_ghast_spawner",()->()->NetherGhastStructure.CODEC);
+    public static final DeferredHolder<StructurePieceType,StructurePieceType> GHAST_PIECE=PIECES.register("nether_ghast_spawner",()->(context,tag)->new NetherGhastPiece(context.structureTemplateManager(),tag));
     private LocationContent() {}
     public static final DeferredHolder<StructureType<?>,StructureType<NetherMediumAltarStructure>> MEDIUM_ALTAR=TYPES.register("nether_altar_medium",()->()->NetherMediumAltarStructure.CODEC);
     public static final DeferredHolder<StructurePieceType,StructurePieceType> MEDIUM_ALTAR_PIECE=PIECES.register("nether_altar_medium",()->(context,tag)->new NetherMediumAltarPiece(context.structureTemplateManager(),tag));

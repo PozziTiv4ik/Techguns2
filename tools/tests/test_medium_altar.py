@@ -39,7 +39,7 @@ class MediumAltarPortTests(unittest.TestCase):
     def test_shared_medium_table_and_native_set_keep_original_chances(self):
         d=medium_altar_definition(); self.assertFalse(d['generation']['ore_toggle_required'])
         self.assertEqual(d['generation']['candidates'],nether_castle_definition()['generation']['candidates'])
-        self.assertEqual([(c['weight'],c['implemented']) for c in d['generation']['candidates']],[(10,True),(10,False),(1000,True)])
+        self.assertEqual([(c['weight'],c['implemented']) for c in d['generation']['candidates']],[(10,True),(10,True),(1000,True)])
         files=generate_medium_altar_content(); s=json.loads(files[RESOURCES+'data/techguns/worldgen/structure/nether_altar_medium.json'])
         self.assertEqual((s['step'],s['reserved_big_grid']),('top_layer_modification',64))
         placement=json.loads(files[RESOURCES+'data/techguns/worldgen/structure_set/nether_altar_medium.json'])['placement']

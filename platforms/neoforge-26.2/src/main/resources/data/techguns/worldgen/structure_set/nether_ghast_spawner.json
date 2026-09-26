@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "techguns:nether_ghast_spawner",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 32,
+    "separation": 31,
+    "salt": 1337262
+  }
+}

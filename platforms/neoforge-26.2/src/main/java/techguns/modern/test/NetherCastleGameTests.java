@@ -145,7 +145,7 @@ final class NetherCastleGameTests {
         h.assertTrue(chosen!=null,"Find a medium castle in native Nether caves"); var chunk=l.getChunk(chosen.x(),chosen.z()); var start=chunk.getStartForStructure(s);
         h.assertTrue(start!=null && start.isValid(),"Native structure start saved"); var p=(NetherCastlePiece)start.getPieces().getFirst(); var box=p.getBoundingBox();
         for(int x=box.minX()>>4;x<=box.maxX()>>4;x++) for(int z=box.minZ()>>4;z<=box.maxZ()>>4;z++) l.getChunk(x,z); verify(h,l,p);
-        for(var id:List.of(NetherMediumAltarPiece.TEMPLATE,NetherAltarPiece.TEMPLATE,NetherLootPiece.TEMPLATE,NetherAcidPiece.TEMPLATE,NetherSoulPiece.TEMPLATE,NetherClusterPiece.TEMPLATE)) {
+        for(var id:List.of(NetherGhastPiece.TEMPLATE,NetherMediumAltarPiece.TEMPLATE,NetherAltarPiece.TEMPLATE,NetherLootPiece.TEMPLATE,NetherAcidPiece.TEMPLATE,NetherSoulPiece.TEMPLATE,NetherClusterPiece.TEMPLATE)) {
             var other=chunk.getStartForStructure(l.registryAccess().lookupOrThrow(Registries.STRUCTURE).getValue(id)); h.assertTrue(other==null || !other.isValid(),"Other medium candidates and small locations never occupy this castle site");
         }
         var holder=l.registryAccess().lookupOrThrow(Registries.STRUCTURE).getOrThrow(ResourceKey.create(Registries.STRUCTURE,NetherCastlePiece.TEMPLATE));
