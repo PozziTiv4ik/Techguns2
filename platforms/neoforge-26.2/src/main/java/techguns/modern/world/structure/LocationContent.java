@@ -26,6 +26,8 @@ public final class LocationContent {
     public static final DeferredHolder<StructureType<?>,StructureType<MeteorStructure>> METEOR=TYPES.register("orecluster_meteor_basis",()->()->MeteorStructure.CODEC);
     public static final DeferredHolder<StructurePieceType,StructurePieceType> METEOR_PIECE=PIECES.register("orecluster_meteor_basis",()->(context,tag)->new MeteorPiece(context.structureTemplateManager(),tag));
     private LocationContent() {}
+    public static final DeferredHolder<StructureType<?>,StructureType<NetherMediumAltarStructure>> MEDIUM_ALTAR=TYPES.register("nether_altar_medium",()->()->NetherMediumAltarStructure.CODEC);
+    public static final DeferredHolder<StructurePieceType,StructurePieceType> MEDIUM_ALTAR_PIECE=PIECES.register("nether_altar_medium",()->(context,tag)->new NetherMediumAltarPiece(context.structureTemplateManager(),tag));
     public static final DeferredHolder<StructureType<?>,StructureType<NetherCastleStructure>> NETHER_CASTLE=TYPES.register("nether_ore_cluster_castle",()->()->NetherCastleStructure.CODEC);
     public static final DeferredHolder<StructurePieceType,StructurePieceType> NETHER_CASTLE_PIECE=PIECES.register("nether_ore_cluster_castle",()->(context,tag)->new NetherCastlePiece(context.structureTemplateManager(),tag));
     public static final DeferredHolder<StructureType<?>,StructureType<BugNestStructure>> BUGNEST=TYPES.register("alienbug_nest",()->()->BugNestStructure.CODEC);

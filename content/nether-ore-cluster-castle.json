@@ -3954,7 +3954,7 @@
       {
         "id": "nether_altar_medium",
         "weight": 10,
-        "implemented": false
+        "implemented": true
       },
       {
         "id": "nether_ghast_spawner",

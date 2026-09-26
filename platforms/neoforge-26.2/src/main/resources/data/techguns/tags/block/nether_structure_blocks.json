@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "techguns:nethermetal_panel",
+    "techguns:nethermetal_grate1",
+    "techguns:nethermetal_grate2",
+    "techguns:nethermetal_grey_dark",
+    "techguns:nethermetal_grey",
+    "techguns:nethermetal_grey_tiles",
+    "techguns:nethermetal_border_red",
+    "techguns:nethermetal_plate_black",
+    "techguns:nethermetal_plate_red",
+    "techguns:nethermetal_border_lava",
+    "techguns:tg_spawner",
+    "techguns:ore_cluster_coal",
+    "techguns:ore_cluster_common_metal",
+    "techguns:ore_cluster_rare_metal",
+    "techguns:ore_cluster_shiny_metal",
+    "techguns:ore_cluster_uranium",
+    "techguns:ore_cluster_common_gem",
+    "techguns:ore_cluster_shiny_gem",
+    "techguns:ore_cluster_nether_crystal",
+    "techguns:ore_cluster_oil"
+  ]
+}

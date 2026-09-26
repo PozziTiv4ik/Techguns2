@@ -132,7 +132,13 @@ final class OreClusterGameTests {
     }
     private static void variation(GameTestHelper h) {
         var combinations=new HashSet<List<BlockState>>();
-        for(int seed=0;seed<64;seed++) { var p=piece(h,0,seed); clear(h,p); place(h,p,p.getBoundingBox(),1); var c=p.templatePosition().offset(1,0,1); combinations.add(List.of(h.getLevel().getBlockState(c),h.getLevel().getBlockState(c.below()),h.getLevel().getBlockState(c.below(2)))); }
+        // The harness randomizes test coordinates. Sixty-four seeds at an arbitrary position
+        // need not cover all eight results; use a reproducible site and bounded complete search.
+        for(int seed=0;seed<4096 && combinations.size()<8;seed++) {
+            var p=new NetherClusterPiece(h.getLevel().getServer().getStructureManager(),new BlockPos(1700000,120,-1700000),0,seed);
+            clear(h,p); place(h,p,p.getBoundingBox(),1); var c=p.templatePosition().offset(1,0,1);
+            combinations.add(List.of(h.getLevel().getBlockState(c),h.getLevel().getBlockState(c.below()),h.getLevel().getBlockState(c.below(2))));
+        }
         h.assertValueEqual(combinations.size(),8,"All eight independent mixtures of centre and two foundation cells occur"); h.succeed();
     }
     private static void natural(GameTestHelper h,int sign) {

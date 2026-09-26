@@ -44,7 +44,7 @@ class NetherCastlePortTests(unittest.TestCase):
 
     def test_medium_nether_registry_and_original_unported_weights(self):
         d=nether_castle_definition(); files=generate_nether_castle_content(); name='nether_ore_cluster_castle'
-        self.assertEqual([(c['weight'],c['implemented']) for c in d['generation']['candidates']],[(10,False),(10,False),(1000,True)])
+        self.assertEqual([(c['weight'],c['implemented']) for c in d['generation']['candidates']],[(10,True),(10,False),(1000,True)])
         self.assertTrue(d['generation']['ore_toggle_required'])
         placement=json.loads(files[RESOURCES+f'data/techguns/worldgen/structure_set/{name}.json'])['placement']
         self.assertEqual((placement['spacing'],placement['separation'],placement['salt']),(32,31,1337262))

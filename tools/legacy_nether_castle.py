@@ -43,7 +43,7 @@ def nether_castle_definition():
             'generation':{'dimension':'minecraft:the_nether','medium_grid':32,'reserved_big_grid':64,'min_y':20,'max_y':100,
                           'clearance':10,'corner_height_spread':10,'ore_toggle_required':True,
                           'candidates':[{'id':name,'weight':weight,'implemented':done} for name,weight,done in
-                                        [('nether_altar_medium',10,False),('nether_ghast_spawner',10,False),('nether_ore_cluster_castle',1000,True)]],
+                                        [('nether_altar_medium',10,True),('nether_ghast_spawner',10,False),('nether_ore_cluster_castle',1000,True)]],
                           'native_rng':'Native structure seed; per-piece 64-bit mixture seed plus absolute position replaces legacy world.rand'}}
 
 
