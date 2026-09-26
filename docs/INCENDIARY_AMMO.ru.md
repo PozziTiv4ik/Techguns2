@@ -88,7 +88,10 @@ B и `techguns.allowunsafemode` / `RestrictUnsafeModeToOP` определяют 
 сохранение/воду/TTL, позолоту, шесть граней поджога, вероятность и права B.
 Пять JUnit проверяют таблицу боеприпасов, формулу урона и границы вероятности;
 семь Python сверяют исходные рецепты, metadata, модели, PNG, теги и локализации.
-Полная регрессия фиксируется в [VERIFICATION.ru.md](VERIFICATION.ru.md).
+Полная регрессия: 177 JUnit, 314 Python, 1671 GameTest (1628 + 28 + 15).
+[Linux CI #58](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36266939597)
+успешен на source commit `f0ebd34c400b857cf33f69dfef4cb9e885f8a1f3`;
+см. [VERIFICATION.ru.md](VERIFICATION.ru.md).
 
 Исходные FX `IncendiaryShotgunTrail` / `Impact_IncendiaryBullet` ещё требуют
 общего движка эффектов; сейчас используются временные серверные частицы FLAME.

@@ -17,10 +17,10 @@ Minecraft 26.2, NeoForge 26.2.0.81, ModDevGradle 2.0.146.
   с кодом 0, последний — 2026-09-26 21:39 Europe/Zurich.
   Всего **1671 GameTest**. Текущий срез: зажигательные патроны и магазины.
   Minecraft-клиент не использовался.
-- Linux CI текущего среза ожидается. Предыдущий срез сетей проверен в
-  [#57](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36264230110)
-  на source commit `b570fca304dbf7ae3dc0f0e98be3b357db947824`: 307 Python,
-  сборка/ядро и 1567 GameTests. Эти результаты не подменяют новый срез.
+- Linux CI [#58](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36266939597)
+  завершился успешно 2026-09-26 в 21:50 Europe/Zurich для source commit
+  `f0ebd34c400b857cf33f69dfef4cb9e885f8a1f3`: все 13 шагов, 314 Python
+  единым запуском за 236,602 секунды, сборка/ядро и все 1671 GameTest.
 - Все **210 рецептов верстака, 19 обычной печи, четыре Ammo Press, 19 Metal Press, четыре Blast Furnace, 31 Chemical Laboratory, семь Reaction Chamber, шесть Fabricator, два Charging Station и 56 Grinder** загружаются через Minecraft RecipeManager;
   в последнем журнале нет ошибок разбора данных.
 - По прямой просьбе пользователя 2026-09-09 запущен клиент предыдущего среза
@@ -2716,3 +2716,15 @@ Safe Mode и OP/permission-политика проверяются в момен
 SurvivorHideout закрыта; следующей остаётся сама структура с исходной
 добычей, окраской по биому, поворотами и природной генерацией.
 См. `docs/INCENDIARY_AMMO.ru.md`. Рабочий стол и интерактивный клиент не использовались.
+
+Linux CI завершился успешно 2026-09-26 в 21:50 Europe/Zurich:
+[запуск #58 / 36266939597](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36266939597),
+точный source commit `f0ebd34c400b857cf33f69dfef4cb9e885f8a1f3`.
+Все 13 шагов успешны: 314 Python единым запуском за 236,602 секунды,
+сборка/ядро, 1628 основных GameTests, 28 природных/выбора и 15 условных —
+всего **1671**. Ресурсный граф совпал с Windows: 2156 generated files,
+274 item definitions, 565 texture references, 72 sound events и 358 рецептов.
+Прежние системы прошли регрессию; два контрольных участка PoliceStation
+совпали по координатам, поворотам, постам и сундукам.
+Полный журнал: `.tools/incendiary-ci-full.log`.
+Последующий коммит меняет только документацию и фиксирует результат CI.
