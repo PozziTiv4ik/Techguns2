@@ -171,7 +171,13 @@
     "techguns:lamp0@0": "techguns:lamp_yellow",
     "techguns:lamp0@6": "techguns:lamp_white",
     "techguns:lamp0@12": "techguns:lantern_yellow",
-    "techguns:lamp0@13": "techguns:lantern_white"
+    "techguns:lamp0@13": "techguns:lantern_white",
+    "techguns:camonet@0": "techguns:camonet_wood",
+    "techguns:camonet@1": "techguns:camonet_desert",
+    "techguns:camonet@2": "techguns:camonet_snow",
+    "techguns:camonet_top@0": "techguns:camonet_top_wood",
+    "techguns:camonet_top@1": "techguns:camonet_top_desert",
+    "techguns:camonet_top@2": "techguns:camonet_top_snow"
   },
   "recipes": [
     {
@@ -217,6 +223,14 @@
     {
       "id": "techguns:boltaction",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/boltaction.json"
+    },
+    {
+      "id": "techguns:camonet_0",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/camonet_0.json"
+    },
+    {
+      "id": "techguns:camonet_top_0",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/camonet_top_0.json"
     },
     {
       "id": "techguns:chainsaw",

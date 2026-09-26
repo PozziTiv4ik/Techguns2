@@ -1,0 +1,201 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/blocks/",
+  "variants": [
+    {
+      "id": "camonet_wood",
+      "family": "camonet",
+      "color": "wood",
+      "metadata": 0
+    },
+    {
+      "id": "camonet_desert",
+      "family": "camonet",
+      "color": "desert",
+      "metadata": 1
+    },
+    {
+      "id": "camonet_snow",
+      "family": "camonet",
+      "color": "snow",
+      "metadata": 2
+    },
+    {
+      "id": "camonet_top_wood",
+      "family": "camonet_top",
+      "color": "wood",
+      "metadata": 0
+    },
+    {
+      "id": "camonet_top_desert",
+      "family": "camonet_top",
+      "color": "desert",
+      "metadata": 1
+    },
+    {
+      "id": "camonet_top_snow",
+      "family": "camonet_top",
+      "color": "snow",
+      "metadata": 2
+    }
+  ],
+  "hardness": 2,
+  "blast_resistance": 2,
+  "sound": "wool",
+  "legacy_render_layer": "cutout",
+  "modern_rendering": "material and sprite alpha; original PNG bytes retained",
+  "connection_bits": {
+    "north": 8,
+    "east": 4,
+    "south": 2,
+    "west": 1
+  },
+  "connections": "same family, any camouflage; no attachment requirement",
+  "vertical_collision": "2/16 center pole plus separate cardinal arms; outline is enclosing box",
+  "canopy_boxes_sixteenths": [
+    [
+      4,
+      0,
+      4,
+      12,
+      1,
+      12
+    ],
+    [
+      0,
+      0,
+      4,
+      9,
+      1,
+      12
+    ],
+    [
+      4,
+      0,
+      7,
+      12,
+      1,
+      16
+    ],
+    [
+      0,
+      0,
+      7,
+      9,
+      1,
+      16
+    ],
+    [
+      7,
+      0,
+      4,
+      16,
+      1,
+      12
+    ],
+    [
+      0,
+      0,
+      4,
+      16,
+      1,
+      12
+    ],
+    [
+      7,
+      0,
+      7,
+      16,
+      1,
+      16
+    ],
+    [
+      0,
+      0,
+      7,
+      16,
+      1,
+      16
+    ],
+    [
+      4,
+      0,
+      0,
+      12,
+      1,
+      9
+    ],
+    [
+      0,
+      0,
+      0,
+      9,
+      1,
+      9
+    ],
+    [
+      4,
+      0,
+      0,
+      12,
+      1,
+      16
+    ],
+    [
+      0,
+      0,
+      0,
+      9,
+      1,
+      16
+    ],
+    [
+      7,
+      0,
+      0,
+      16,
+      1,
+      9
+    ],
+    [
+      0,
+      0,
+      0,
+      16,
+      1,
+      9
+    ],
+    [
+      7,
+      0,
+      0,
+      16,
+      1,
+      16
+    ],
+    [
+      0,
+      0,
+      0,
+      16,
+      1,
+      16
+    ]
+  ],
+  "pane_connection": "glass panes and iron bars extend to vertical nets; nets do not extend back",
+  "recipes": [
+    "camonet_0",
+    "camonet_top_0"
+  ],
+  "dirt_ingredient": "techguns:legacy_dirt (minecraft:dirt only by default)",
+  "minecraft_reference": {
+    "version": "1.12.2",
+    "client_sha1": "0f275bc1547d01fa5f56ba34bdc87d981ee12daf",
+    "forge": "1.12.2-14.23.5.2807",
+    "details": "Block collision/strength, BlockPane face shape, OreDictionary dirt"
+  },
+  "pending": [
+    "Client visual acceptance",
+    "SurvivorHideout placement and incendiary magazine/firing dependencies",
+    "Optional Chisel integration"
+  ]
+}

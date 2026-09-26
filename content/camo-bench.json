@@ -193,7 +193,9 @@
     "NETHER_METAL",
     "METAL_PANEL",
     "CONCRETE",
-    "LADDER_0"
+    "LADDER_0",
+    "CAMONET",
+    "CAMONET_TOP"
   ],
   "minecraft_reference": {
     "version": "1.12.2",

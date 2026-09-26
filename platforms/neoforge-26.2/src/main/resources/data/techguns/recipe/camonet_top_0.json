@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:camonet_top_wood",
+    "count": 16
+  },
+  "pattern": [
+    "wdw",
+    "dsd",
+    "wdw"
+  ],
+  "key": {
+    "s": "#c:strings",
+    "d": "#techguns:legacy_dirt",
+    "w": "#c:rods/wooden"
+  }
+}

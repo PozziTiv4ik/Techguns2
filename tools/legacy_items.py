@@ -7,6 +7,8 @@ LEGACY = ROOT / "legacy/1.12.2/src/main"
 
 # Modern tag, and the original shared material that contributes to it (if any).
 ORE_TAGS = {
+    'STICKWOOD': ('c:rods/wooden', None), 'STRING': ('c:strings', None),
+    'DIRT': ('techguns:legacy_dirt', None),
     'WORKBENCH': ('c:player_workstations/crafting_tables', None),
     'DYE': ('c:dyes', None),
     'STONE': ('c:stones', None), 'COBBLESTONE': ('c:cobblestones', None),
