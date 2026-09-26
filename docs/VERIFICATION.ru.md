@@ -18,9 +18,10 @@ Minecraft 26.2, NeoForge 26.2.0.81, ModDevGradle 2.0.146.
   повторно прошёл 2026-09-26 в 23:19 Europe/Zurich.
   Всего **1734 GameTests**. Текущий срез: DesertOilCluster и отдельный выбор
   worldgen/cluster oil. Minecraft-клиент не использовался.
-- Linux CI этого source-среза ожидает проверки. Последний подтверждённый
-  предыдущий срез — SurvivorHideout, [CI #59](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36269738761)
-  на `ded089720c6ab1ad8813df9bfe5c8f594542cd7d`.
+- Linux CI [#60](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36272772935)
+  завершился успешно 2026-09-26 в 23:32 Europe/Zurich для source commit
+  `6e4a53fa8b2993821f7f8de901bcbe04aac19929`: все 13 шагов, 327 Python
+  единым запуском за 192,422 секунды, сборка/ядро и все 1734 GameTests.
 - Все **210 рецептов верстака, 19 обычной печи, четыре Ammo Press, 19 Metal Press, четыре Blast Furnace, 31 Chemical Laboratory, семь Reaction Chamber, шесть Fabricator, два Charging Station и 56 Grinder** загружаются через Minecraft RecipeManager;
   в последнем журнале нет ошибок разбора данных.
 - По прямой просьбе пользователя 2026-09-09 запущен клиент предыдущего среза
@@ -2883,3 +2884,20 @@ legacy-классы и тестовые паки не включены. Гене
 Реальные сторонние нефтяные моды, другие природные seed, сторонняя генерация
 и визуальная приёмка остаются. Клиент не запускался, бинарные сборки не публиковались.
 Подробности: `docs/DESERT_OIL_CLUSTER.ru.md`.
+
+### Linux CI того же source commit
+
+[Verify development port #60](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36272772935)
+для **`6e4a53fa8b2993821f7f8de901bcbe04aac19929`** завершился успешно
+2026-09-26 в **23:32 Europe/Zurich**. Подтверждены все 13 шагов:
+327 Python единым запуском за 192,422 секунды, сборка/ядро, 1684 основных
+GameTests, 34 природные/выборочные и 16 условных — всего **1734**.
+Генератор и ресурсный граф совпали с Windows: 2168 файлов, 274 item definitions,
+565 texture references, 72 sound events, 358 рецептов. Обе природные точки
+DesertOilCluster, seed смеси и реальная добыча 1000 mB совпали с Windows.
+Условный тег `minecraft:milk`, приоритет блочной жидкости и прежние сценарии
+химии/бура проверены. Ошибок в полном журнале не обнаружено.
+
+Доказательства: `.tools/desert-oil-ci.json` и `.tools/desert-oil-ci-full.log`.
+Последующий коммит меняет только документацию: фиксирует CI и обновляет
+старые описания общего среднего пула у Spike и MeteorBasis.
