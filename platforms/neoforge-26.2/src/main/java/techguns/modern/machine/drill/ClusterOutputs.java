@@ -37,13 +37,18 @@ public final class ClusterOutputs {
         for(var e:entries) { roll-=e.weight(); if(roll<0) return new Output(e.item().copy(),e.fluid().copy(),e.weight()); }
         throw new IllegalArgumentException("Weighted roll outside total");
     }
-    public static boolean hasWorldOil() { var oil=oil(); return oil!=Fluids.EMPTY && !oil.defaultFluidState().createLegacyBlock().is(Blocks.AIR); }
+    public static boolean hasWorldOil() { return worldOil()!=Fluids.EMPTY; }
+    public static Fluid worldOil() { var oil=oil(); return blockBacked(oil)?oil:Fluids.EMPTY; }
+    private static boolean blockBacked(Fluid oil) { return oil!=Fluids.EMPTY && !oil.defaultFluidState().createLegacyBlock().is(Blocks.AIR); }
     private static Fluid oil() {
         var oils=new ArrayList<Fluid>();
-        for(var name:ChemicalRules.OILS.get()) BuiltInRegistries.FLUID.stream().filter(f->source(f) && ChemicalRules.groupMatches("oils",f))
+        // TGFluids.worldspawn_oils feeds both the structure and TGOreClusters. Chemical oils
+        // (tree_oil, seed_oil, etc.) alone must not change the medium structure table.
+        for(var name:ChemicalRules.WORLD_OILS.get()) BuiltInRegistries.FLUID.stream().filter(ClusterOutputs::source)
                 .filter(f->name.contains(":")?BuiltInRegistries.FLUID.getKey(f).toString().equals(name):BuiltInRegistries.FLUID.getKey(f).getPath().equals(name)).forEach(f->{ if(!oils.contains(f)) oils.add(f); });
-        BuiltInRegistries.FLUID.stream().filter(f->source(f) && ChemicalRules.groupMatches("oils",f)).forEach(f->{ if(!oils.contains(f)) oils.add(f); });
-        return oils.stream().filter(f->!f.defaultFluidState().createLegacyBlock().is(Blocks.AIR)).findFirst().orElse(oils.isEmpty()?Fluids.EMPTY:oils.getFirst());
+        var tag=TagKey.create(Registries.FLUID,Identifier.parse("techguns:worldgen_oils"));
+        BuiltInRegistries.FLUID.stream().filter(f->source(f) && f.builtInRegistryHolder().is(tag)).forEach(f->{ if(!oils.contains(f)) oils.add(f); });
+        return oils.stream().filter(ClusterOutputs::blockBacked).findFirst().orElse(oils.isEmpty()?Fluids.EMPTY:oils.getFirst());
     }
     private static boolean source(Fluid f) { return f!=Fluids.EMPTY && (!(f instanceof FlowingFluid flow) || flow.getSource()==f); }
     private ClusterOutputs() {}

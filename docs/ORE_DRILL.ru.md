@@ -88,9 +88,14 @@ Float-настроек; число тиков округляется вниз, �
   оригинала исправлен. Общий `machinesNeedNoPower` также поддерживается.
 
 Настройки: `techguns-ore-drill-server.toml`, настройки отдельных кластеров —
-`techguns-ore-clusters-server.toml`. Имена/теги нефти и топлива используют
-уже существующие `techguns-chemistry-server.toml` и `chemical_oils` / `chemical_fuels`.
-Для нефти предпочтителен зарегистрированный источник с блоком в мире.
+`techguns-ore-clusters-server.toml`. В `techguns-chemistry-server.toml` нефть
+для бура и worldgen выбирается отдельным исходным `FluidListOilWorldspawn`
+(`oil`, `crude_oil`) и дополнительным тегом `techguns:worldgen_oils`.
+Список/тег лабораторных масел (`FluidListOil`, `chemical_oils`) на этот выбор
+не влияет. Топливо продолжает использовать `FluidListFuel` / `chemical_fuels`.
+Для нефти предпочтителен зарегистрированный источник с блоком в мире;
+без блочного варианта бур может использовать первую подходящую жидкость,
+но природное месторождение не генерируется. См. `DESERT_OIL_CLUSTER.ru.md`.
 Пять необязательных ore dictionary-записей отображаются на `c:ores/*`:
 серебро, осмий, алюминий, обычный и заряженный кварц Certus. Пустые теги
 не добавляют вес; из непустого выбирается первый представитель.

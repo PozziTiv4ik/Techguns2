@@ -706,6 +706,10 @@
       "fluidoil",
       "seed_oil"
     ],
+    "OilWorldspawn": [
+      "oil",
+      "crude_oil"
+    ],
     "Fuel": [
       "fuel",
       "refined_fuel",

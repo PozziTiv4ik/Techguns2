@@ -57,7 +57,7 @@ def chemical_recipes():
 
 def fluid_group_defaults():
     source=(LEGACY/'java/techguns/TGConfig.java').read_text()
-    return {name:re.findall('"([^"]+)"',re.search(rf'fluidList{name}\s*=.*?new String\[\]\{{([^}}]+)\}}',source)[1]) for name in ('Oil','Fuel')}
+    return {name:re.findall('"([^"]+)"',re.search(rf'fluidList{name}\s*=.*?new String\[\]\{{([^}}]+)\}}',source)[1]) for name in ('Oil','OilWorldspawn','Fuel')}
 
 
 def generate_chemical_content():
@@ -78,7 +78,7 @@ import java.util.List;
 
 /** Generated original fluid-name lists, including their historical spelling. */
 public final class ChemicalDefaults {
-'''+''.join('    public static final List<String> '+name.upper()+' = List.of('+', '.join(json.dumps(n) for n in values)+');\n' for name,values in defaults.items())+'''    private ChemicalDefaults() {}
+'''+''.join('    public static final List<String> '+name.replace('OilWorldspawn','Oil_Worldspawn').upper()+' = List.of('+', '.join(json.dumps(n) for n in values)+');\n' for name,values in defaults.items())+'''    private ChemicalDefaults() {}
 }
 ''').encode('utf-8')
     return files

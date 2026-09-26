@@ -1,0 +1,8 @@
+{
+  "type": "techguns:desert_oil_cluster",
+  "biomes": "#techguns:has_desert_oil_cluster",
+  "step": "top_layer_modification",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none",
+  "reserved_big_grid": 64
+}

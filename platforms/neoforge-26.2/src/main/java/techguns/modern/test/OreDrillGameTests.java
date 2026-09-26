@@ -270,6 +270,7 @@ final class OreDrillGameTests {
         var menu=new OreDrillMenu(62,WeaponGameTests.player(h).getInventory()); decoded.apply(menu); h.assertTrue(FluidStack.matches(menu.fluid(0),in) && FluidStack.matches(menu.fluid(1),out),"Both full fluid stacks survive packet"); new MachineTanksPayload(63,FluidStack.EMPTY,FluidStack.EMPTY).apply(menu); h.assertValueEqual(menu.fluid(0).getAmount(),15000,"Stale container ID ignored"); h.succeed();
     }
     private static void oil(GameTestHelper h,boolean full) {
+        var previous=ChemicalRules.WORLD_OILS.get(); try { ChemicalRules.WORLD_OILS.set(List.of("minecraft:water"));
         h.assertTrue(ClusterOutputs.hasWorldOil(),"Block-backed oil also enables the original desert location ticket");
         var d=fixture(h,tiny(),Direction.UP,"oil",true,false).drill; d.setItem(0,head("oredrillsmall_obsidiansteel")); d.tanks().set(0,FluidResource.of(Fluids.LAVA),1000);
         if(full) d.tanks().set(1,FluidResource.of(Fluids.WATER),31500);
@@ -277,6 +278,7 @@ final class OreDrillGameTests {
         h.assertTrue(restored.tanks().stack(1).getFluid()==Fluids.WATER,"Test datapack oil representative survives saved operation");
         h.assertValueEqual(restored.tanks().stack(1).getAmount(),full?32000:1000,"Source oil yields one bucket; overflowing tank discards excess");
         h.assertValueEqual(restored.data.get(4),14000,"Saved fuel pays exactly six thousand ticks"); h.assertValueEqual(outputs(restored),0,"No duplicate item output"); h.succeed();
+        } finally { ChemicalRules.WORLD_OILS.set(previous); }
     }
     private static void optionalOres(GameTestHelper h) {
         var rare=ClusterOutputs.entries("rare_metal"); h.assertValueEqual(rare.size(),3,"Lead, tagged osmium and tagged aluminium");

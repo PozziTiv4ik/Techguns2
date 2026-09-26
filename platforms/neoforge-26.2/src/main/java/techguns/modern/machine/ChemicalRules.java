@@ -17,6 +17,8 @@ public final class ChemicalRules {
     private static final ModConfigSpec.Builder BUILDER=new ModConfigSpec.Builder();
     public static final ModConfigSpec.ConfigValue<List<? extends String>> OILS=BUILDER.defineListAllowEmpty("FluidListOil",ChemicalDefaults.OIL,
             () -> "oil",value -> value instanceof String text && !text.isBlank());
+    public static final ModConfigSpec.ConfigValue<List<? extends String>> WORLD_OILS=BUILDER.comment("Original world-generation and oil-cluster list, separate from Chemical Laboratory oils. Ordered names or namespace:name; source fluids only. Datapacks can additionally use techguns:worldgen_oils.")
+            .defineListAllowEmpty("FluidListOilWorldspawn",ChemicalDefaults.OIL_WORLDSPAWN,() -> "oil",value -> value instanceof String text && !text.isBlank());
     public static final ModConfigSpec.ConfigValue<List<? extends String>> FUELS=BUILDER.defineListAllowEmpty("FluidListFuel",ChemicalDefaults.FUEL,
             () -> "fuel",value -> value instanceof String text && !text.isBlank());
     public static final ModConfigSpec.BooleanValue KEEP_LAVA=BUILDER.define("keepLavaRecipesWhenFuelIsPresent",false);

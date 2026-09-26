@@ -66,6 +66,7 @@ public final class WeaponGameTests {
         PolicemanGameTests.register(FUNCTIONS);
         PoliceStationGameTests.register(FUNCTIONS);
         SurvivorHideoutGameTests.register(FUNCTIONS);
+        DesertOilGameTests.register(FUNCTIONS);
         CommandoArmorGameTests.register(FUNCTIONS);
         BeretGameTests.register(FUNCTIONS);
         NpcSpawnerGameTests.register(FUNCTIONS);

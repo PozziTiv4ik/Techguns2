@@ -31,6 +31,8 @@ public final class LocationContent {
     public static final DeferredHolder<StructurePieceType,StructurePieceType> POLICE_PIECE=PIECES.register("policestation",()->(context,tag)->new PoliceStationPiece(context.structureTemplateManager(),tag));
     public static final DeferredHolder<StructureType<?>,StructureType<SurvivorHideoutStructure>> SURVIVOR=TYPES.register("survivor_hideout",()->()->SurvivorHideoutStructure.CODEC);
     public static final DeferredHolder<StructurePieceType,StructurePieceType> SURVIVOR_PIECE=PIECES.register("survivor_hideout",()->(context,tag)->new SurvivorHideoutPiece(context.structureTemplateManager(),tag));
+    public static final DeferredHolder<StructureType<?>,StructureType<DesertOilStructure>> DESERT_OIL=TYPES.register("desert_oil_cluster",()->()->DesertOilStructure.CODEC);
+    public static final DeferredHolder<StructurePieceType,StructurePieceType> DESERT_OIL_PIECE=PIECES.register("desert_oil_cluster",()->(context,tag)->new DesertOilPiece(context.structureTemplateManager(),tag));
     private LocationContent() {}
     public static final DeferredHolder<StructureType<?>,StructureType<NetherMediumAltarStructure>> MEDIUM_ALTAR=TYPES.register("nether_altar_medium",()->()->NetherMediumAltarStructure.CODEC);
     public static final DeferredHolder<StructurePieceType,StructurePieceType> MEDIUM_ALTAR_PIECE=PIECES.register("nether_altar_medium",()->(context,tag)->new NetherMediumAltarPiece(context.structureTemplateManager(),tag));

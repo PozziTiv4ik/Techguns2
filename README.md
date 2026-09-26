@@ -12,6 +12,7 @@
 - [Исходные параметры 17 баллистических образцов](content/ballistic-weapons.json)
 - [Зажигательные патроны: магазины, смена боеприпаса, броня и поджог](docs/INCENDIARY_AMMO.ru.md)
 - [SurvivorHideout: убежище, охрана, полный лут и природная генерация](docs/SURVIVOR_HIDEOUT.ru.md)
+- [DesertOilCluster: нефтяное месторождение, охрана и добыча буром](docs/DESERT_OIL_CLUSTER.ru.md)
 - [Два лазера: попадания, батареи, модели и ограничения](docs/LASERS.ru.md)
 - [Ракетница: три боеприпаса, взрывы, безопасный режим и радиация](docs/ROCKET_LAUNCHER.ru.md)
 - [Соответствие metadata, рецептов и материалов](content/crafting-content.json)
