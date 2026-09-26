@@ -26,4 +26,6 @@ public final class LocationContent {
     public static final DeferredHolder<StructureType<?>,StructureType<MeteorStructure>> METEOR=TYPES.register("orecluster_meteor_basis",()->()->MeteorStructure.CODEC);
     public static final DeferredHolder<StructurePieceType,StructurePieceType> METEOR_PIECE=PIECES.register("orecluster_meteor_basis",()->(context,tag)->new MeteorPiece(context.structureTemplateManager(),tag));
     private LocationContent() {}
+    public static final DeferredHolder<StructureType<?>,StructureType<BugNestStructure>> BUGNEST=TYPES.register("alienbug_nest",()->()->BugNestStructure.CODEC);
+    public static final DeferredHolder<StructurePieceType,StructurePieceType> BUGNEST_PIECE=PIECES.register("alienbug_nest",()->(context,tag)->new BugNestPiece(tag));
 }

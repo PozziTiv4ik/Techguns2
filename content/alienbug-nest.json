@@ -1,0 +1,75 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/world/structures/AlienBugNest.java",
+  "source_sha256": "d54e0c35395534f8252665181e461e4e24a09b0c5d1676167c8491f48194061b",
+  "main_radius": 5,
+  "primary_branches": 5,
+  "extra_room_chance": 0.5,
+  "room_radius_range": [
+    3,
+    5
+  ],
+  "width_depth_range": [
+    16,
+    31
+  ],
+  "height_argument": 0,
+  "surface_offset": -2,
+  "main_drop_range": [
+    10,
+    16
+  ],
+  "sphere_weights": [
+    16,
+    1,
+    2
+  ],
+  "sphere_effective_tickets": [
+    17,
+    1,
+    2
+  ],
+  "tunnel_weights": [
+    12,
+    1
+  ],
+  "tunnel_effective_tickets": [
+    13,
+    1
+  ],
+  "spawner": {
+    "mobsLeft": 7,
+    "maxActive": 3,
+    "spawnDelay": 150,
+    "delay": 200,
+    "spawnRange": 1,
+    "mobtypes": [
+      {
+        "id": "techguns:alienbug",
+        "weight": 1
+      }
+    ]
+  },
+  "generation": {
+    "dimension": "minecraft:overworld",
+    "biomes": [
+      "c:is_sandy",
+      "c:is_wasteland"
+    ],
+    "medium_grid": 32,
+    "reserved_big_grid": 64,
+    "weight": 20,
+    "four_surface_corners": [
+      0,
+      4
+    ],
+    "maximum_corner_delta_exclusive": 256,
+    "ore_toggle_independent": true,
+    "native_difference": "Saved layout and decoration seeds replace global world RNG; complete voxel plan and attachments are persisted from noise terrain before clipping.",
+    "source_quirks": [
+      "Inclusive palette weights",
+      "Absolute-coordinate truncation toward zero",
+      "Half-open infinite-line cylinder bounds",
+      "Entrance slime box uses self-cross-product distance zero"
+    ]
+  }
+}

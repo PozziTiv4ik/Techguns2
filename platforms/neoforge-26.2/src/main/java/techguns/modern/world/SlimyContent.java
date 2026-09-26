@@ -12,11 +12,13 @@ import techguns.modern.*;
 
 public final class SlimyContent {
     private static final DeferredRegister.Blocks REGISTRY=DeferredRegister.createBlocks(Techguns.MOD_ID);
+    public static final DeferredBlock<Block> SAND=REGISTRY.registerBlock("bugnest_sand",Block::new,
+            p->p.mapColor(MapColor.SAND).strength(3,3).sound(SoundType.SAND));
     public static final DeferredBlock<Block> EGGS=REGISTRY.registerBlock("bugnest_eggs",Block::new,
             p->p.mapColor(MapColor.COLOR_GREEN).strength(4,4).sound(SoundType.SLIME_BLOCK).requiresCorrectToolForDrops());
     public static final DeferredBlock<Trail> TRAIL=REGISTRY.registerBlock("slimyladder",Trail::new,
             p->p.forceSolidOff().strength(0).sound(SoundType.SLIME_BLOCK).noOcclusion().pushReaction(PushReaction.DESTROY));
-    static { TGContent.ITEMS.registerSimpleBlockItem(EGGS); TGContent.ITEMS.registerSimpleBlockItem(TRAIL); }
+    static { TGContent.ITEMS.registerSimpleBlockItem(EGGS); TGContent.ITEMS.registerSimpleBlockItem(TRAIL); TGContent.ITEMS.registerSimpleBlockItem(SAND); }
     public static final class Trail extends LadderBlock {
         public static final MapCodec<LadderBlock> CODEC=simpleCodec(Trail::new);
         public Trail(Properties properties) { super(properties); registerDefaultState(defaultBlockState().setValue(FACING,Direction.SOUTH)); }

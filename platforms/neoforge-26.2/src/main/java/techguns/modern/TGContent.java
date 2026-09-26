@@ -92,6 +92,7 @@ public final class TGContent {
                         output.accept(techguns.modern.npc.NpcContent.COMMANDO_EGG.get());
                         techguns.modern.armor.ArmorContent.COMMANDO.values().forEach(item->output.accept(item.get()));
                         output.accept(techguns.modern.world.SlimyContent.EGGS.get());
+                        output.accept(techguns.modern.world.SlimyContent.SAND.get());
                         output.accept(techguns.modern.world.SlimyContent.TRAIL.get());
                         output.accept(techguns.modern.npc.spawner.NpcSpawnerContent.ITEM.get());
                         output.accept(techguns.modern.npc.spawner.NpcSpawnerContent.SOLDIER_ITEM.get());

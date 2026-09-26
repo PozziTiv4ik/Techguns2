@@ -46,6 +46,7 @@
 - [Панели, армированный бетон и металлические лестницы](docs/BUILDING_BLOCKS.ru.md)
 - [Мешки с песком, лампы и бункерная дверь](docs/FORTIFICATIONS.ru.md)
 - [Метеоритная база и её генерация](docs/METEOR_BASE.ru.md)
+- [Процедурное гнездо AlienBug и закалённый песок](docs/ALIENBUG_NEST.ru.md)
 - [ZombieSoldier: оружие, лут и первый срез спавна Верхнего мира](docs/ZOMBIE_SOLDIER.ru.md)
 - [Repair Bench: ремонт надетой брони за материалы](docs/REPAIR_BENCH.ru.md)
 - [Camo Bench: камуфляж T2 и перекраска блоков](docs/CAMO_BENCH.ru.md)
