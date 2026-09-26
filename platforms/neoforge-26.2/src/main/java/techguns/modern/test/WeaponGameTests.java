@@ -74,6 +74,7 @@ public final class WeaponGameTests {
         OreSpikeGameTests.register(FUNCTIONS);
         MeteorGameTests.register(FUNCTIONS);
         BugNestGameTests.register(FUNCTIONS);
+        NetherCastleGameTests.register(FUNCTIONS);
         BuildingGameTests.register(FUNCTIONS);
         FortificationGameTests.register(FUNCTIONS);
         NetherSoulGameTests.register(FUNCTIONS);
