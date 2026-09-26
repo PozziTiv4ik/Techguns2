@@ -17,10 +17,10 @@ Minecraft 26.2, NeoForge 26.2.0.81, ModDevGradle 2.0.146.
   с кодом 0, последний — 2026-09-26 22:27 Europe/Zurich.
   Всего **1705 GameTests**. Текущий срез: SurvivorHideout, полный лут и охрана.
   Minecraft-клиент не использовался.
-- Linux CI нового среза ожидает проверки после отправки source commit.
-  Последний подтверждённый предыдущий срез — зажигательные боеприпасы,
-  [CI #58](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36266939597)
-  на `f0ebd34c400b857cf33f69dfef4cb9e885f8a1f3`.
+- Linux CI [#59](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36269738761)
+  завершился успешно 2026-09-26 в 22:39 Europe/Zurich для source commit
+  `ded089720c6ab1ad8813df9bfe5c8f594542cd7d`: все 13 шагов, 321 Python
+  единым запуском за 228,155 секунды, сборка/ядро и все 1705 GameTests.
 - Все **210 рецептов верстака, 19 обычной печи, четыре Ammo Press, 19 Metal Press, четыре Blast Furnace, 31 Chemical Laboratory, семь Reaction Chamber, шесть Fabricator, два Charging Station и 56 Grinder** загружаются через Minecraft RecipeManager;
   в последнем журнале нет ошибок разбора данных.
 - По прямой просьбе пользователя 2026-09-09 запущен клиент предыдущего среза
@@ -2790,3 +2790,19 @@ legacy-классы и тестовые паки не включены. Гене
 Визуальная приёмка, другие природные seed, сторонняя генерация и Chisel
 остаются. Клиент не запускался, бинарные сборки не публиковались.
 Подробности: `docs/SURVIVOR_HIDEOUT.ru.md`.
+
+### Linux CI того же source commit
+
+[Verify development port #59](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36269738761)
+для **`ded089720c6ab1ad8813df9bfe5c8f594542cd7d`** завершился успешно
+2026-09-26 в **22:39 Europe/Zurich**. Подтверждены все 13 шагов:
+321 Python единым запуском за 228,155 секунды, сборка/ядро, 1659 основных
+GameTests, 31 природная/выборочная и 15 условных — всего **1705**.
+Генератор и ресурсный граф совпали с Windows: 2162 файла, 274 item definitions,
+565 texture references, 72 sound events, 358 рецептов. Обе точки SurvivorHideout,
+их повороты и цвета совпали с Windows; проверка дальнейшего размещения растений
+в готовом мире также прошла. Ошибок в полном журнале не обнаружено.
+
+Доказательства: `.tools/survivor-ci.json` и `.tools/survivor-ci-full.log`.
+Последующий коммит меняет только документацию: подтверждает CI и обновляет
+вводное описание использования камуфляжных сетей в убежище.

@@ -7,7 +7,7 @@
 |---|---|---|
 | Форк, исходная история, лицензия | Готово | Оригинал сохранён в `legacy/1.12.2`; upstream-коммит зафиксирован |
 | План и каталог | Готово | 15 этапов, 761 Java-файл, 44 записи оружия |
-| Современная сборка | SurvivorHideout проверен локально; Linux CI этого среза ожидает проверки | Gradle 9.2.1, Java 25, ModDevGradle 2.0.146; JAR, 1659 основных GameTests, пятнадцать условных и тридцать одна проверка генерации/выбора |
+| Современная сборка | SurvivorHideout проверен на Windows и Linux CI [#59](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36269738761), source commit `ded0897` | Gradle 9.2.1, Java 25, ModDevGradle 2.0.146; JAR, 1659 основных GameTests, пятнадцать условных и тридцать одна проверка генерации/выбора |
 | Общее ядро | Проверено unit-тестами | Ёмкость, расход, запрет выстрела, bundle reload, падение урона |
 | Защита и пробитие | Частично | Исходная формула пуль и пробития; ENERGY/EXPLOSION учитывают половину обычной брони и сопротивление ведьм магии; обычная броня не защищает от кислоты, как от legacy poison; собственная защита четырнадцати NPC, включая нулевую у Farmer/Miner/SkeletonSoldier/Ghastling, и FIRE-урон бластера/зажигательных патронов; для T1 Combat/T1 Miner/T1 Scout/T2 Combat/T2 Commando/Hazmat и берета игрока отдельное поглощение по частям, износ и смешанная обычная броня. Остальные комплекты/системы ещё переносятся |
 | Обычный баллистический арсенал | Частично, 17 серверных циклов проверены | Ручная пушка, обрез, два револьвера, Thompson, болтовая винтовка, боевой дробовик, пистолет, AK-47, M4, Infiltrator, LMG, MAC-10, AS50, AUG, SCAR, Vector |
@@ -362,9 +362,11 @@ NetherAltarMedium проверен в [Linux CI #54](https://github.com/PozziTiv
 Срез SurvivorHideout прошёл локально: **181 JUnit, 321 Python и 1705 GameTests
 (1659 + 31 + 15)**. Python — три пакета 107/107/107 с полной сверкой discovery.
 Оба Gradle-прогона завершились с кодом 0. Все 2079 сгенерированных ресурсных
-записей в JAR сверены побайтово, лицензия и legacy сохранены. Linux CI
-этого source-среза ещё ожидает проверки. Подробности: `docs/SURVIVOR_HIDEOUT.ru.md`
-и `docs/VERIFICATION.ru.md`.
+записей в JAR сверены побайтово, лицензия и legacy сохранены.
+[Linux CI #59](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36269738761)
+подтвердил все 13 шагов на source commit `ded089720c6ab1ad8813df9bfe5c8f594542cd7d`:
+321 Python единым запуском, сборка/ядро и все 1705 GameTests.
+Подробности: `docs/SURVIVOR_HIDEOUT.ru.md` и `docs/VERIFICATION.ru.md`.
 
 ## Следующий этап
 
