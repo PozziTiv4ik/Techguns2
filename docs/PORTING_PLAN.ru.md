@@ -858,5 +858,7 @@ PresetCastle; его билет сохранён в LAND-пуле 1:1. AircraftC
 Сохранение графа, seed и размещённых чанков проверено; два LAND-кандидата
 взаимно исключаются. Поздние соседние залежи сохраняют стены замка.
 Локально прошли **229 JUnit, 402 Python и 2219 GameTests (2153 + 50 + 16)**; Python единым discover.
-Linux CI нового source commit ожидается. Следующий срез — AircraftCarrier;
+[Linux CI #73](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36342776854) подтвердил source commit `1bc0ad48903a80c1851f7791892e7886d6f6154c`:
+402 Python единым discover, сборку/ядро и все 2219 GameTests; 13 успешных шагов.
+Следующий срез — AircraftCarrier;
 его WATER-билет не переносится в LAND. См. `docs/CASTLE.ru.md`.
