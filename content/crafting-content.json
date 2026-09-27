@@ -307,6 +307,10 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/concrete_0.json"
     },
     {
+      "id": "techguns:fraggrenade",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/fraggrenade.json"
+    },
+    {
       "id": "techguns:goldenrevolver",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/goldenrevolver.json"
     },
@@ -917,6 +921,10 @@
     {
       "id": "techguns:repair_bench",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/simplemachine_9_repair_bench.json"
+    },
+    {
+      "id": "techguns:stielgranate",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/stielgranate.json"
     },
     {
       "id": "techguns:t1_combat_boots",

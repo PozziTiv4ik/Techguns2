@@ -1,0 +1,30 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:display_context",
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "techguns:item/fraggrenade"
+    },
+    "cases": [
+      {
+        "when": [
+          "firstperson_lefthand",
+          "firstperson_righthand"
+        ],
+        "model": {
+          "type": "minecraft:condition",
+          "property": "minecraft:using_item",
+          "on_true": {
+            "type": "minecraft:model",
+            "model": "techguns:item/fraggrenade_primed"
+          },
+          "on_false": {
+            "type": "minecraft:model",
+            "model": "techguns:item/fraggrenade"
+          }
+        }
+      }
+    ]
+  }
+}

@@ -557,5 +557,12 @@
       "techguns:guns/powerhammer_impactground_d"
     ],
     "subtitle": "subtitles.techguns.guns.powerhammerimpactground"
+  },
+  "guns.grenade_pin": {
+    "sounds": [
+      "techguns:guns/grenade_pin_a",
+      "techguns:guns/grenade_pin_b"
+    ],
+    "subtitle": "subtitles.techguns.guns.grenade_pin"
   }
 }

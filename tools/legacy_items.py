@@ -14,7 +14,7 @@ ORE_TAGS = {
     'STONE': ('c:stones', None), 'COBBLESTONE': ('c:cobblestones', None),
     'NETHERRACK': ('c:netherracks', None),
     'SAND': ('minecraft:sand', None),
-    'LOGWOOD': ('minecraft:logs', None), 'BLOCKWOOL': ('minecraft:wool', None),
+    'LOGWOOD': ('minecraft:logs', None), 'PLANKWOOD': ('minecraft:planks', None), 'BLOCKWOOL': ('minecraft:wool', None),
     'BLOCKGLASS': ('c:glass_blocks', None), 'PANEGLASS': ('c:glass_panes', None),
     'HARDENEDGLASSORGLASS': ('c:glass_blocks/hardened', None),
     'ELECTRUMORGOLD': ('c:ingots/electrum', None),

@@ -45,6 +45,7 @@ public final class TGContent {
     public static final Map<String, DeferredItem<Item>> AMMO = registerAmmo();
     public static final Map<String, DeferredItem<Item>> MATERIALS = registerMaterials();
     public static final Map<String, DeferredItem<GunItem>> GUNS = registerGuns();
+    public static final Map<String, DeferredItem<GrenadeItem>> GRENADES = registerGrenades();
     public static final Map<String, DeferredHolder<SoundEvent, SoundEvent>> SOUND_EVENTS = registerSounds();
     public static final DeferredItem<Item> PISTOL_ROUNDS = AMMO.get("pistolrounds");
     public static final DeferredItem<GunItem> REVOLVER = GUNS.get("revolver");
@@ -67,6 +68,10 @@ public final class TGContent {
     public static final DeferredHolder<EntityType<?>, EntityType<RocketProjectile>> ROCKET = ENTITIES.register("rocket", () ->
             EntityType.Builder.<RocketProjectile>of(RocketProjectile::new, MobCategory.MISC).sized(.25f, .25f).clientTrackingRange(12).updateInterval(1)
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, id("rocket"))));
+    public static final DeferredHolder<EntityType<?>, EntityType<GrenadeProjectile>> HAND_GRENADE = ENTITIES.register("hand_grenade", () ->
+            EntityType.Builder.<GrenadeProjectile>of(GrenadeProjectile::new, MobCategory.MISC).sized(.25f,.25f).clientTrackingRange(12).updateInterval(1)
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE,id("hand_grenade"))));
+    public static final DeferredHolder<SoundEvent, SoundEvent> GRENADE_PIN = SOUNDS.register("guns.grenade_pin", () -> SoundEvent.createFixedRangeEvent(id("guns.grenade_pin"),24));
     public static final DeferredHolder<EntityType<?>, EntityType<techguns.modern.radiation.RadiationZone>> RADIATION_ZONE = ENTITIES.register("radiation_zone", () ->
             EntityType.Builder.<techguns.modern.radiation.RadiationZone>of(techguns.modern.radiation.RadiationZone::new, MobCategory.MISC).sized(.1f, .1f).clientTrackingRange(0).updateInterval(Integer.MAX_VALUE)
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, id("radiation_zone"))));
@@ -82,6 +87,7 @@ public final class TGContent {
             CreativeModeTab.builder().title(Component.translatable("itemGroup.techguns")).icon(REVOLVER::toStack)
                     .displayItems((parameters, output) -> {
                         GUNS.values().forEach(item -> output.accept(item.get()));
+                        GRENADES.values().forEach(item -> output.accept(item.get()));
                         output.accept(techguns.modern.npc.NpcContent.EGG.get());
                         output.accept(techguns.modern.npc.NpcContent.CYBER_EGG.get());
                         output.accept(techguns.modern.npc.NpcContent.PIGMAN_EGG.get());
@@ -144,6 +150,12 @@ public final class TGContent {
         for (WeaponDefinition gun : Weapons.ALL) items.put(gun.id(), ITEMS.registerItem(gun.id(), props -> gun.projectile()==techguns.core.ProjectileKind.CHAINSAW ? new ChainsawItem(props,gun) : new GunItem(props, gun),
                 props -> props.stacksTo(1).component(ROUNDS.get(), 0).component(DataComponents.USE_COOLDOWN,
                         new UseCooldown(gun.stats().fireDelay() / 20f, Optional.of(id("firearms"))))));
+        return Collections.unmodifiableMap(items);
+    }
+    private static Map<String, DeferredItem<GrenadeItem>> registerGrenades() {
+        Map<String, DeferredItem<GrenadeItem>> items=new LinkedHashMap<>();
+        for(var grenade:techguns.core.HandGrenade.values()) items.put(grenade.id(),ITEMS.registerItem(grenade.id(),
+                props -> new GrenadeItem(props,grenade),props -> props.stacksTo(grenade.stackSize)));
         return Collections.unmodifiableMap(items);
     }
     private static Map<String, DeferredItem<Item>> registerAmmo() {

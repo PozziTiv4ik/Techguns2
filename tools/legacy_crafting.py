@@ -20,6 +20,7 @@ from legacy_building import FAMILIES as BUILDING_FAMILIES, RECIPES as BUILDING_R
 from legacy_fortifications import RECIPES as FORTIFICATION_RECIPES, LAMPS, lamp_id
 from legacy_camonets import RECIPES as CAMONET_RECIPES, FAMILIES as CAMONET_FAMILIES, net_id, net_definitions
 from legacy_neon import RECIPES as NEON_RECIPES, neon_id, neon_definition
+from legacy_grenades import RECIPES as GRENADE_RECIPES
 from legacy_incendiary import incendiary_for
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -130,6 +131,7 @@ def plan_crafting(weapon_list):
     for name in FORTIFICATION_RECIPES: selected[name] = source_recipes[name]
     for name in CAMONET_RECIPES: selected[name] = source_recipes[name]
     for name in NEON_RECIPES: selected[name] = source_recipes[name]
+    for name in GRENADE_RECIPES: selected[name] = source_recipes[name]
     selected['basicmachine_2_chem_lab']=source_recipes['basicmachine_2_chem_lab']
     for meta, part in enumerate(FABRICATOR_PARTS+REACTION_PARTS):
         name = f'multiblockmachine_{meta}_{part}'

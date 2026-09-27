@@ -41,6 +41,7 @@ public final class TechgunsClient {
         modBus.addListener(TechgunsClient::screens);
         modBus.addListener(FluidRendering::register);
         modBus.addListener(BeretRendering::register);
+        modBus.addListener(GrenadeHandRendering::register);
         modBus.addListener(LaserBeamRenderer::pipelines);
         modBus.addListener(TechgunsClient::itemProperties);
         NeoForge.EVENT_BUS.addListener(TechgunsClient::tick);
@@ -184,6 +185,7 @@ public final class TechgunsClient {
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.COMMANDO.get(), ctx->new GenericNpcRenderer<>(ctx,TGContent.id("textures/entity/army_soldier.png")));
         event.registerEntityRenderer(TGContent.LASER_BEAM.get(), LaserBeamRenderer::new);
         event.registerEntityRenderer(TGContent.ROCKET.get(), RocketRenderer::new);
+        event.registerEntityRenderer(TGContent.HAND_GRENADE.get(), GrenadeRenderer::new);
         event.registerEntityRenderer(TGContent.RADIATION_ZONE.get(), NoopRenderer::new);
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.SUPER_MUTANT.get(), SuperMutantRenderer::new);
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.CYBER_DEMON.get(), CyberDemonRenderer::new);

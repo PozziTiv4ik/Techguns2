@@ -1,6 +1,7 @@
 # Продолжение работы в новом чате
 
-Обновлено 2026-09-27 после Neonlights и успешного Linux CI #67.
+Обновлено 2026-09-27 после локального переноса Stielgranate и FragGrenade.
+Linux CI нового source commit ожидается.
 Перед разработкой прочитать [порядок работы](DEVELOPMENT_WORKFLOW.ru.md),
 затем проверить Git. [AGENTS.md](../AGENTS.md) обязателен для всего проекта.
 
@@ -13,79 +14,84 @@
 | Writable fork / origin | `PozziTiv4ik/Techguns2` |
 | Оригинал / upstream, только чтение | `pWn3d1337/Techguns2` |
 | Платформа | Minecraft 26.2 / NeoForge 26.2.0.81 / Java 25 |
-| Последний проверенный код | `831662585099527c31e8bb3d215e242bf9a71424` — Neonlights |
-| Linux CI кода | [Linux CI #67](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36321764465), success; 2026-09-27 15:24 Europe/Zurich |
+| Последний проверенный код | Stielgranate / FragGrenade локально; точный source SHA будет записан после CI |
+| Linux CI кода | Ожидается для нового source commit; прежний CI #67 подтверждает только Neonlights |
 
-Все пять Neonlights перенесены: полные непрозрачные кубы, постоянный свет 15,
-исходные текстуры/названия, добыча рукой, рецепт на 16 штук, Camo Bench.
-Квадратный вариант metadata 4 готов как материал Helipad. Проверен цикл
-крафта, выбора оформления и установки семи светящихся клеток буквы H.
-См. [NEONLIGHTS.ru.md](NEONLIGHTS.ru.md).
+Обе ручные гранаты работают: удержание/отпускание, обе руки и ведущая рука,
+заряд для гравитации, 3/2 отскока, TTL 200 без взрыва по истечении,
+прямой/взрывной урон, броня, стены/права, сохранение, крафт по 16, модели и звук.
+Обе сохраняют блоки независимо от B: исходный коэффициент разрушения равен 0.
+Нулевой заряд обработан конечной гравитацией, сдвиг после отскока защищён
+от попадания внутрь пола. См. [HAND_GRENADES.ru.md](HAND_GRENADES.ru.md).
 
-Локально прошли **205 JUnit, 366 Python и 1885 GameTests**: 1823 основных
-(1822 Techguns + 1 встроенный), 46 worldgen/выборочных и 16 условных.
-Python выполнен единым discover. Генератор: 2250 файлов;
-2158 ресурсных записей JAR совпали побайтово. Лицензия, неизменность legacy
+Локально прошли **208 JUnit, 373 Python и 1930 GameTests**: 1868 основных
+(1867 Techguns + 1 встроенный), 46 worldgen/выборочных и 16 условных.
+Python выполнен единым discover за 193.099 с. Генератор: 2280 файлов;
+2186 ресурсных записей JAR совпали побайтово. Лицензия, неизменность legacy
 и исключение тестовых паков проверены. Подробности:
 последний раздел [VERIFICATION.ru.md](VERIFICATION.ru.md).
-Локальные `.tools/neon-*` помогают, но их отсутствие не блокирует новый клон.
+Локальные `.tools/grenade-*` помогают, но их отсутствие не блокирует новый клон.
 
-Linux CI #67 подтвердил именно указанный source SHA: 366 Python единым
-запуском, сборку/ядро и все 1885 GameTests. После него изменена только
-документация. Текущий HEAD получать из Git, не принимать source SHA за
-последний коммит ветки. Незавершённой реализации и известных красных
-проверок этого среза нет. Не повторять проверки без изменений или сомнений.
+До следующей реализации завершить CI именно нового source SHA и сделать
+документационный checkpoint `[skip ci]`. Старый зелёный CI не подтверждает
+новые гранаты. Незавершённой локальной реализации и красных локальных проверок нет.
 
-## Следующая задача: Stielgranate и FragGrenade
+## Следующая задача: GrenadeLauncher
 
-Перенести **две ручные гранаты** как следующую зависимость полного лута
-военных ящиков. Аудит шести таблиц выявил четыре отсутствующих боевых предмета:
-`stielgranate`, `fraggrenade`, `grenadelauncher`, `flamethrower`. Остальные
-перечисленные Techguns-предметы имеют современные определения; перед переносом
-ящиков всё равно сверить компоненты, функции лута, диапазоны и реальные применения.
-Нельзя удалять отсутствующие награды или отдавать их вес готовым предметам.
+Перенести **гранатомёт GrenadeLauncher** как следующую зависимость полного
+лута военных ящиков. После двух ручных гранат отсутствуют только
+`grenadelauncher` и `flamethrower`. Не удалять награды из исходных loot tables
+и не перераспределять их вес на готовые предметы.
 
 Начать с активного кода и вызываемых методов:
 
 ```text
 legacy/1.12.2/src/main/java/techguns/TGuns.java
-legacy/1.12.2/src/main/java/techguns/items/guns/GenericGrenade.java
-legacy/1.12.2/src/main/java/techguns/items/guns/IGrenadeProjectileFactory.java
+legacy/1.12.2/src/main/java/techguns/items/guns/GenericGun.java
+legacy/1.12.2/src/main/java/techguns/items/guns/ammo/AmmoTypes.java
+legacy/1.12.2/src/main/java/techguns/entities/projectiles/Grenade40mmProjectile.java
 legacy/1.12.2/src/main/java/techguns/entities/projectiles/GrenadeProjectile.java
-legacy/1.12.2/src/main/java/techguns/entities/projectiles/FragGrenadeProjectile.java
 legacy/1.12.2/src/main/java/techguns/entities/projectiles/GenericProjectile.java
-legacy/1.12.2/src/main/resources/assets/techguns/loot_tables/blocks/military_crate_explosives.json
+legacy/1.12.2/src/main/java/techguns/client/ClientProxy.java
+legacy/1.12.2/src/main/java/techguns/client/models/guns/ModelBaseBakedGrenadeLauncher.java
+legacy/1.12.2/src/main/resources/assets/techguns/recipes/grenadelauncher.json
 ```
 
-В TGuns обе гранаты — GenericGrenade со стаком 16 и maxUseDur 72000;
-обычный бросок начинается при отпускании использования. GenericGrenade задаёт
-fullChargeTime 30, TTL 200, speed 0,75, spread 0,1 и расчёт gravity 0,015/charge.
-Сверить действительное применение charge в фабриках, нулевой заряд,
-руки/ведущую руку, отскоки и момент взрыва: FragGrenadeProjectile.init()
-назначает bounces=2, тогда как базовое значение GenericGrenade равно 3.
-Не трактовать названия radiusMin/radiusMax без проверки TGExplosion.
+TGuns задаёт ёмкость 6, задержку 5, перезарядку 100, урон 30, TTL 160,
+spread 0,015, speed 0,5, damageDrop 4/8/12, gravity 0,01 и setAmmoCount(6).
+Первый boolean конструктора — semiauto: не перепутать его с automatic.
+AmmoTypes.GRENADES_40MM содержит TGItems.GRENADE_40MM; современный
+`40mmgrenade` уже производится Metal Press. Сверить действительный
+поштучный расход/перезарядку и набор исходных рецептов.
+Фабрика Grenade40mmProjectile задаёт два отскока, наследует GrenadeProjectile
+и не переопределяет explode: проверять прямой пулевой урон, взрыв с фактором
+разрушения 0, TTL и копирование состояния по активному пути, а не по имени оружия.
 
-Современные точки входа: `modern/RocketProjectile.java`, `LegacyShot.java`,
-`ShotDamage.java`, серверные права B и `core/ExplosionMath.java`.
-Нужны настоящие use/release, физика/сохранение/взрыв, рецепты и исходные модели/
-звуки. Проверить границы срока жизни, отскоки, стены, отмену событий и права
-разрушения блоков. Не заменять новый вид оружия инертным предметом добычи.
+Современные точки входа: `GrenadeProjectile.java`, `GrenadeExplosion.java`,
+`GrenadeItem.java`, `LegacyShot.java`, `RocketDamage.java`, `ArmorDamage.java`,
+`core/HandGrenade.java`, `core/ExplosionMath.java`, `tools/legacy_grenades.py`,
+`tools/generate_weapon_content.py` и `GrenadeGameTests.java`.
+Ручные гранаты имеют отдельный каталог и регистрацию, не являются GenericGun.
+Профиль гранатомёта следует подключить к штатным оружейным циклам, сохранив
+различия заряда руки и постоянной гравитации 40mm. Нужны модель/заряженные
+части, исходные звуки, R/сохранение/крафт и настоящая стрельба.
+ClientProxy использует RenderGunBaseObj и ModelBaseBakedGrenadeLauncher:
+проверить исходные OBJ/blockstates и подвижную часть, а не искать cuboid-модель.
 
-После гранат — GrenadeLauncher и Flamethrower, затем девять вариантов
-BlockMilitaryCrate с шестью таблицами. Взрывной пул: веса 2/2/2/2/1/1 для
-rocket/40mmgrenade/Stielgranate/FragGrenade/RocketLauncher/GrenadeLauncher;
-оружейный пул содержит Flamethrower. TGEventHandler заменяет дроп только
-при добыче игроком без Silk Touch и передаёт Fortune как luck. Остальные
-случаи сохраняют исходный блок. Проверить эти ветки и не путать ящики с сундуками.
+После гранатомёта — Flamethrower, затем девять BlockMilitaryCrate и шесть
+loot tables. Взрывной пул: веса 2/2/2/2/1/1 для rocket/40mmgrenade/
+Stielgranate/FragGrenade/RocketLauncher/GrenadeLauncher. TGEventHandler заменяет
+дроп только при добыче игроком без Silk Touch и передаёт Fortune как luck;
+остальные случаи сохраняют исходный ящик. Проверить функции/компоненты
+остальных наград и не путать эти блоки с сундуками.
 
 Далее MilitaryBaseStructure/MilitaryCamp. AttackHelicopter, ArmySoldier,
-военный пост и Neonlights уже есть. Сохранить билет CastleStructure в большой
-LAND-таблице; AircraftCarrier относится к WATER.
+военный пост и Neonlights уже готовы. Сохранить билет CastleStructure
+в большой LAND-таблице; AircraftCarrier относится к WATER.
 
 ## Границы результата
 
-MilitaryCamp пока не генерируется. Визуальная приёмка и внешний Chisel
-остаются; агенту нельзя запускать интерактивный Minecraft или управлять
-рабочим столом. Повернутые Neonlights — отдельные текстуры, не facing.
+MilitaryCamp пока не генерируется. GPU-приёмка, внешний Chisel и полная
+исходная FX-система остаются. Интерактивный клиент и рабочий стол не трогать.
 Полный порт, остальные оружие/машины/броня/структуры и интеграции остаются
 в [плане](PORTING_PLAN.ru.md) и [статусе](STATUS.ru.md).

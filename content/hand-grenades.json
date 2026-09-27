@@ -1,0 +1,36 @@
+[
+  {
+    "id": "stielgranate",
+    "stack_size": 16,
+    "use_duration": 72000,
+    "damage": 10.0,
+    "inner_radius": 3.0,
+    "minimum_damage": 5.0,
+    "outer_radius": 5.0,
+    "bounces": 3,
+    "charge_ticks": 30,
+    "lifetime": 200,
+    "speed": 0.75,
+    "spread": 0.1,
+    "penetration": 0.0,
+    "start_sound": "",
+    "projectile": "GrenadeProjectile"
+  },
+  {
+    "id": "fraggrenade",
+    "stack_size": 16,
+    "use_duration": 72000,
+    "damage": 12.0,
+    "inner_radius": 3.5,
+    "minimum_damage": 6.0,
+    "outer_radius": 7.0,
+    "bounces": 2,
+    "charge_ticks": 30,
+    "lifetime": 200,
+    "speed": 0.75,
+    "spread": 0.1,
+    "penetration": 0.0,
+    "start_sound": "guns.grenade_pin",
+    "projectile": "FragGrenadeProjectile"
+  }
+]

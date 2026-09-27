@@ -43,7 +43,9 @@ public final class ArmorDamage {
             }
             return;
         }
-        if (npc == null && weapon == null && !alien && !impulse && !(event.getSource() instanceof ChainsawItem.MeleeDamage) && !event.getSource().is(techguns.modern.fluid.TGLiquidBlock.ACID_DAMAGE)) return;
+        boolean grenade = event.getSource().getDirectEntity() instanceof GrenadeProjectile
+                && (event.getSource().is(GrenadeProjectile.IMPACT) || event.getSource().is(GrenadeProjectile.BLAST) || event.getSource().is(IncendiaryBullet.KNOCKBACK_TYPE));
+        if (npc == null && weapon == null && !alien && !impulse && !grenade && !(event.getSource() instanceof ChainsawItem.MeleeDamage) && !event.getSource().is(techguns.modern.fluid.TGLiquidBlock.ACID_DAMAGE)) return;
         float penetration = event.getSource() instanceof ChainsawItem.MeleeDamage melee ? melee.penetration() : weapon == null ? 0 : (float) weapon.penetration();
         float armor = npc != null ? npc.armorAgainst(kind)
                 : ArmorMath.defaultArmor(kind, (float) event.getEntity().getAttributeValue(Attributes.ARMOR), event.getEntity().fireImmune());

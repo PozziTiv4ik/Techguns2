@@ -18,10 +18,13 @@ public final class RocketDamage {
         return rocket.shotDamage().source(level, TYPE, rocket);
     }
     public static boolean hurt(ServerLevel level, RocketProjectile rocket, Entity target, float amount, float knockback) {
-        if (amount <= 0 || rocket.getOwner() instanceof Player owner && target instanceof Player player && !owner.canHarmPlayer(player)) return false;
+        return hurt(level,rocket.getOwner(),source(level,rocket),target,rocket.shotDamage().againstEntity(amount),knockback);
+    }
+    public static boolean hurt(ServerLevel level, Entity ownerEntity, DamageSource source, Entity target, float amount, float knockback) {
+        if (amount <= 0 || ownerEntity instanceof Player owner && target instanceof Player player && !owner.canHarmPlayer(player)) return false;
         Hit previous = ACTIVE.get();
-        ACTIVE.set(new Hit(target, rocket.getOwner(), knockback));
-        try { return target.hurtServer(level, source(level, rocket), rocket.shotDamage().againstEntity(amount)); }
+        ACTIVE.set(new Hit(target, ownerEntity, knockback));
+        try { return target.hurtServer(level, source, amount); }
         finally { if (previous == null) ACTIVE.remove(); else ACTIVE.set(previous); }
     }
     public static void knockback(LivingKnockBackEvent event) {
