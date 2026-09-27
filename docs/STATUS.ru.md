@@ -10,7 +10,7 @@
 |---|---|---|
 | Форк, исходная история, лицензия | Готово | Оригинал сохранён в `legacy/1.12.2`; upstream-коммит зафиксирован |
 | План и каталог | Готово | 15 этапов, 761 Java-файл, 44 записи оружия |
-| Современная сборка | AttackHelicopter проверен на Windows; Linux CI нового source commit ожидается | Gradle 9.2.1, Java 25, ModDevGradle 2.0.146; 205 JUnit, 360 Python, JAR, 1809 основных GameTests, 16 условных и 46 проверок генерации/выбора |
+| Современная сборка | AttackHelicopter проверен на Windows и [Linux CI #66](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36319408687), source commit `9b0046f` | Gradle 9.2.1, Java 25, ModDevGradle 2.0.146; 205 JUnit, 360 Python, JAR, 1809 основных GameTests, 16 условных и 46 проверок генерации/выбора |
 | Общее ядро | Проверено unit-тестами | Ёмкость, расход, запрет выстрела, bundle reload, падение урона |
 | Защита и пробитие | Частично | Исходная формула пуль и пробития; ENERGY/EXPLOSION учитывают половину обычной брони и сопротивление ведьм магии; обычная броня не защищает от кислоты, как от legacy poison; собственная защита пятнадцати NPC, включая нулевую у Farmer/Miner/SkeletonSoldier/Ghastling, и FIRE-урон бластера/зажигательных патронов; для T1 Combat/T1 Miner/T1 Scout/T2 Combat/T2 Commando/Hazmat и берета игрока отдельное поглощение по частям, износ и смешанная обычная броня. Остальные комплекты/системы ещё переносятся |
 | Обычный баллистический арсенал | Частично, 17 серверных циклов проверены | Ручная пушка, обрез, два револьвера, Thompson, болтовая винтовка, боевой дробовик, пистолет, AK-47, M4, Infiltrator, LMG, MAC-10, AS50, AUG, SCAR, Vector |
@@ -433,7 +433,9 @@ discover без повторов и пропусков. Все 2122 ресурс
 Первый [Linux CI #65](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36318307915) выявил влияние тестового игрока на соседний AI-тест.
 Игрок изолирован отдельной тестовой средой; подсчёт XP учитывает объединение
 сфер. Повторная сборка и все 1809 основных GameTests прошли локально.
-Linux CI нового source commit ожидается. Подробности:
+[Linux CI #66](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36319408687) подтвердил точный source commit `9b0046f8f28a2136e908b9537ef570157a3f5b57`:
+360 Python единым запуском, сборка/ядро и все 1871 GameTest;
+все 13 шагов успешны. Завершение: 2026-09-27 14:45 Europe/Zurich. Подробности:
 [ATTACK_HELICOPTER.ru.md](ATTACK_HELICOPTER.ru.md) и [VERIFICATION.ru.md](VERIFICATION.ru.md).
 
 ## Следующий этап
