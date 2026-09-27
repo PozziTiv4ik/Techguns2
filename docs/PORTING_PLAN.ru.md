@@ -777,8 +777,9 @@ source commit `45cf12ac99ab622d41a77be769a07c2eb6d92f0b`: 354 Python, сборк
 2026-09-27: Neonlights закрывают зависимость освещения Helipad. Перенесены
 все пять исходных текстур и полных кубов, свет 15, правильная добыча/редстоун,
 исходный рецепт и полный цикл Camo Bench с сохранением стаков. Локально прошли
-205 JUnit, 366 Python и 1885 GameTests (1823 + 46 + 16); Linux CI нового
-source commit ожидается. Клиентская приёмка и внешний Chisel остаются.
+205 JUnit, 366 Python и 1885 GameTests (1823 + 46 + 16). [Linux CI #67](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36321764465)
+подтвердил source commit `831662585099527c31e8bb3d215e242bf9a71424`:
+366 Python единым запуском, сборку/ядро и все 1885 GameTests. Клиентская приёмка и внешний Chisel остаются.
 Аудит шести loot tables ящиков установил следующие зависимости: Stielgranate,
 FragGrenade (ближайший срез), GrenadeLauncher и Flamethrower. Без них полный
 лут ящиков не готов. Далее — сами ящики и MilitaryCamp с сохранением весов.
