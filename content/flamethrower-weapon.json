@@ -1,0 +1,45 @@
+[
+  {
+    "id": "flamethrower",
+    "capacity": 100,
+    "fire_delay": 2,
+    "reload_ticks": 45,
+    "damage": 5.0,
+    "minimum_damage": 2.0,
+    "drop_start": 4.0,
+    "drop_end": 16.0,
+    "speed": 0.5,
+    "lifetime": 16,
+    "projectile": "flame",
+    "npc_ai": {
+      "range": 12.0,
+      "interval": 20,
+      "burst": 5,
+      "shot_delay": 5,
+      "forward_offset": 0.35
+    },
+    "accuracy": 0.05,
+    "automatic": true,
+    "extra_pellets": 0,
+    "pellet_spread": 0.0,
+    "gravity": 0.01,
+    "penetration": 0.0,
+    "zoom": 1.0,
+    "zoom_toggle": false,
+    "zoom_accuracy": 1.0,
+    "zoom_centered": false,
+    "ammo": {
+      "item": "fueltank",
+      "empty_item": "fueltankempty",
+      "loose_item": "",
+      "bundles_per_magazine": 0,
+      "individual": false
+    },
+    "fire_sound": "guns.flamethrowerfire",
+    "reload_sound": "guns.flamethrowerreload",
+    "model": "ModelFlamethrower",
+    "texture": "textures/guns/flamethrower",
+    "forward_axis": "+x",
+    "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java"
+  }
+]

@@ -72,12 +72,17 @@ final class ArsenalGameTests {
             helper.assertValueEqual(blasts.size(), 1, "One Nether Blaster charge");
             helper.assertValueEqual(blasts.getFirst().weapon().id(), gun.id(), "Correct Nether Blaster parameters");
             blasts.forEach(techguns.modern.NetherBlasterProjectile::discard);
-        } else {
+        } else if (gun.projectile() == techguns.core.ProjectileKind.FLAME) {
+            var flames = helper.getLevel().getEntitiesOfClass(techguns.modern.FlameProjectile.class, player.getBoundingBox().inflate(3), f -> f.getOwner() == player);
+            helper.assertValueEqual(flames.size(), 1, "One flame per fuel charge");
+            helper.assertValueEqual(flames.getFirst().weapon(), gun, "Correct flame profile");
+            flames.forEach(techguns.modern.FlameProjectile::discard);
+        } else if (gun.projectile() == techguns.core.ProjectileKind.ROCKET) {
             var rockets = helper.getLevel().getEntitiesOfClass(techguns.modern.RocketProjectile.class, player.getBoundingBox().inflate(3), r -> r.getOwner() == player);
             helper.assertValueEqual(rockets.size(), 1, "One rocket per shot");
             helper.assertValueEqual(rockets.getFirst().weapon().id(), gun.id(), "Correct rocket parameters");
             rockets.forEach(techguns.modern.RocketProjectile::discard);
-        }
+        } else throw new IllegalStateException("Add the native arsenal cycle for " + gun.projectile());
         helper.assertTrue(!GunNetwork.handle(player, new GunActionPayload(false)), "Same-tick spam rejected");
         helper.succeed();
     }

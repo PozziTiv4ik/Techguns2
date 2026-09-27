@@ -298,6 +298,22 @@
     ],
     "subtitle": "subtitles.techguns.guns.grenadelauncherreload"
   },
+  "guns.flamethrowerfire": {
+    "sounds": [
+      "techguns:guns/flamethrower_shot_a",
+      "techguns:guns/flamethrower_shot_b",
+      "techguns:guns/flamethrower_shot_c",
+      "techguns:guns/flamethrower_shot_d",
+      "techguns:guns/flamethrower_shot_e"
+    ],
+    "subtitle": "subtitles.techguns.guns.flamethrowerfire"
+  },
+  "guns.flamethrowerreload": {
+    "sounds": [
+      "techguns:guns/flamethrower_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.flamethrowerreload"
+  },
   "machines.ammopresswork1": {
     "sounds": [
       "techguns:machines/ammopress_work1_a",
@@ -578,5 +594,11 @@
       "techguns:guns/grenade_pin_b"
     ],
     "subtitle": "subtitles.techguns.guns.grenade_pin"
+  },
+  "guns.flamethrowerstart": {
+    "sounds": [
+      "techguns:guns/flamethrower_start_a"
+    ],
+    "subtitle": "subtitles.techguns.guns.flamethrowerstart"
   }
 }

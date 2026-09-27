@@ -27,6 +27,14 @@ public class GunItem extends Item {
         float accuracyMultiplier = techguns.modern.armor.TGArmorSystem.gunAccuracyMultiplier(player);
         if (aiming) accuracyMultiplier *= gun.aim().accuracyMultiplier();
         for (int pellet = 0; pellet < gun.projectileCount(); pellet++) {
+            if (gun.projectile() == techguns.core.ProjectileKind.FLAME) {
+                var flame = new FlameProjectile(TGContent.FLAME.get(), server);
+                flame.configure(gun, !SafeMode.enabled(player)); flame.setOwner(player);
+                flame.shootLegacy(player, gun.stats().spread() * accuracyMultiplier, LegacyShot.muzzleSide(player, player.getOffhandItem() == stack));
+                flame.setPos(flame.position().add(flame.getDeltaMovement().scale(techguns.core.NpcWeapons.forWeapon(gun.id()).forwardOffset() / gun.stats().projectileSpeed())));
+                if (!server.addFreshEntity(flame)) return false;
+                continue;
+            }
             if(gun.projectile()==techguns.core.ProjectileKind.GRENADE_40MM) {
                 var grenade=new Grenade40mmProjectile(TGContent.GRENADE_40MM.get(),server);
                 grenade.configure(gun);grenade.setOwner(player);grenade.shootLegacy(player,gun.stats().spread()*accuracyMultiplier);
@@ -85,6 +93,7 @@ public class GunItem extends Item {
             stack.set(TGContent.ROUNDS.get(), Magazine.afterShot(gun.stats(), rounds(stack)));
         player.getCooldowns().addCooldown(stack, gun.stats().fireDelay());
         if (item instanceof ChainsawItem) ChainsawItem.playChain(server,player);
+        else if (gun.projectile() == techguns.core.ProjectileKind.FLAME) FlameFiring.playerShot(server, player, stack);
         else server.playSound(null, player.getX(), player.getY(), player.getZ(),
                 TGContent.SOUND_EVENTS.get(gun.fireSound()).get(), SoundSource.PLAYERS, 2, 1);
         return true;
@@ -143,7 +152,8 @@ public class GunItem extends Item {
     }
 
     public static void playReload(Player player, WeaponDefinition gun) {
-        player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
+        var pos = gun.projectile() == techguns.core.ProjectileKind.FLAME ? FlameFiring.soundPosition(player) : player.position();
+        player.level().playSound(null, pos.x, pos.y, pos.z,
                 TGContent.SOUND_EVENTS.get(gun.reloadSound()).get(), SoundSource.PLAYERS, 1, 1);
     }
     @Override public boolean isBarVisible(ItemStack stack) { return rounds(stack) < definition.stats().capacity(); }

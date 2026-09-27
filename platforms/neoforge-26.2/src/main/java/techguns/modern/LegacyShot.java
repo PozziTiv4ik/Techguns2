@@ -8,6 +8,9 @@ import net.minecraft.world.phys.Vec3;
 
 /** Shared muzzle offset and dispersion from GenericProjectile.initProjectile/shoot. */
 final class LegacyShot {
+    static int muzzleSide(LivingEntity source, boolean offhand) {
+        return (source.getMainArm() == HumanoidArm.RIGHT) != offhand ? -1 : 1;
+    }
     static void shoot(Projectile projectile, LivingEntity source, RandomSource random,
                       double accuracy, boolean centered, double speed) {
         int side=centered?0:source instanceof net.minecraft.world.entity.Mob || source.getMainArm()==HumanoidArm.RIGHT?-1:1;

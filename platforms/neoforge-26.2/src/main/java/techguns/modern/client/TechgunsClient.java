@@ -45,6 +45,7 @@ public final class TechgunsClient {
         modBus.addListener(LaserBeamRenderer::pipelines);
         modBus.addListener(TechgunsClient::itemProperties);
         modBus.addListener((net.neoforged.neoforge.client.event.RegisterItemModelsEvent event)->event.register(TGContent.id("grenade_launcher"),GrenadeLauncherModel.Unbaked.CODEC));
+        modBus.addListener((net.neoforged.neoforge.client.event.RegisterItemModelsEvent event)->event.register(TGContent.id("flamethrower"),FlamethrowerModel.Unbaked.CODEC));
         NeoForge.EVENT_BUS.addListener(TechgunsClient::tick);
         NeoForge.EVENT_BUS.addListener(TechgunsClient::interaction);
         NeoForge.EVENT_BUS.addListener(TechgunsClient::fov);
@@ -177,6 +178,7 @@ public final class TechgunsClient {
         // The initial round uses vanilla tracer particles; a mesh renderer is part of M5.
         event.registerEntityRenderer(TGContent.BULLET.get(), NoopRenderer::new);
         event.registerEntityRenderer(TGContent.INCENDIARY_BULLET.get(), NoopRenderer::new);
+        event.registerEntityRenderer(TGContent.FLAME.get(), NoopRenderer::new);
         event.registerEntityRenderer(TGContent.CHAINSAW_ATTACK.get(), NoopRenderer::new);
         event.registerEntityRenderer(TGContent.NETHER_BLAST.get(), NoopRenderer::new);
         event.registerEntityRenderer(TGContent.ALIEN_BLAST.get(), NoopRenderer::new);

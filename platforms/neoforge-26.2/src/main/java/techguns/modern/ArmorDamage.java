@@ -15,10 +15,10 @@ public final class ArmorDamage {
         if (event.getEntity() instanceof net.minecraft.world.entity.player.Player player) techguns.modern.armor.TGArmorSystem.refresh(player);
         var npc = event.getEntity() instanceof techguns.modern.npc.NpcTypedArmor typed ? typed : null;
         boolean alien=event.getSource().getDirectEntity() instanceof AlienBlasterProjectile && event.getSource().is(AlienBlasterProjectile.DAMAGE_TYPE);
-        boolean incendiary = event.getSource().getDirectEntity() instanceof IncendiaryBullet && event.getSource().is(IncendiaryBullet.DAMAGE_TYPE);
-        boolean impulse = event.getSource().getDirectEntity() instanceof IncendiaryBullet && event.getSource().is(IncendiaryBullet.KNOCKBACK_TYPE);
+        boolean fireProjectile = event.getSource().getDirectEntity() instanceof BurningProjectile burning && event.getSource().is(burning.damageType());
+        boolean impulse = event.getSource().getDirectEntity() instanceof BurningProjectile && event.getSource().is(BurningProjectile.KNOCKBACK_TYPE);
         techguns.core.WeaponDefinition weapon = null;
-        if (incendiary) weapon = ((IncendiaryBullet)event.getSource().getDirectEntity()).weapon();
+        if (fireProjectile) weapon = ((BurningProjectile)event.getSource().getDirectEntity()).weapon();
         if (event.getSource().getDirectEntity() instanceof ChainsawAttack attack && event.getSource().is(ChainsawItem.DAMAGE)) weapon = attack.weapon();
         if (event.getSource().getDirectEntity() instanceof Bullet bullet && event.getSource().is(Bullet.DAMAGE_TYPE)) {
             weapon = bullet.weapon();
@@ -29,7 +29,7 @@ public final class ArmorDamage {
         } else if (event.getSource().getDirectEntity() instanceof NetherBlasterProjectile blast && event.getSource().is(NetherBlasterProjectile.DAMAGE_TYPE)) {
             weapon = blast.weapon();
         }
-        DamageKind kind = incendiary ? DamageKind.FIRE : impulse ? DamageKind.PHYSICAL : weapon != null ? weapon.projectile().damageKind() : sourceKind(event.getSource());
+        DamageKind kind = fireProjectile ? DamageKind.FIRE : impulse ? DamageKind.PHYSICAL : weapon != null ? weapon.projectile().damageKind() : sourceKind(event.getSource());
         if (event.getEntity() instanceof net.minecraft.world.entity.player.Player player && techguns.modern.armor.TGArmorSystem.hasArmor(player)) {
             // Legacy TG radiation is magic, not unblockable. Its modern tag must not suppress typed armor;
             // the reduction callback still runs at the accepted armor stage, after attack cancellation.
@@ -63,7 +63,7 @@ public final class ArmorDamage {
         });
     }
     private static DamageKind sourceKind(DamageSource source) {
-        if (source.is(NetherBlasterProjectile.DAMAGE_TYPE) || source.is(AlienBlasterProjectile.DAMAGE_TYPE) || source.is(IncendiaryBullet.DAMAGE_TYPE)) return DamageKind.FIRE;
+        if (source.is(NetherBlasterProjectile.DAMAGE_TYPE) || source.is(AlienBlasterProjectile.DAMAGE_TYPE) || source.is(IncendiaryBullet.DAMAGE_TYPE) || source.is(FlameProjectile.DAMAGE_TYPE)) return DamageKind.FIRE;
         if (source.is(techguns.modern.fluid.TGLiquidBlock.ACID_DAMAGE)) return DamageKind.POISON;
         if (source.is(techguns.modern.radiation.RadiationSystem.DAMAGE)) return DamageKind.RADIATION;
         if (source.is(techguns.modern.radiation.RadiationSystem.POISONING)) return DamageKind.UNRESISTABLE;

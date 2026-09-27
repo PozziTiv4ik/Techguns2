@@ -24,6 +24,10 @@ public final class NpcCombat {
             double spread = (n == 0 ? gun.stats().spread() : gun.pelletSpread()) * accuracy;
             Projectile projectile;
             switch (gun.projectile()) {
+                case FLAME -> {
+                    var flame = new FlameProjectile(TGContent.FLAME.get(), level); flame.configure(gun, false); flame.npcDamage(damage);
+                    flame.setOwner(npc); flame.shootLegacy(npc, spread, false); projectile = flame;
+                }
                 case BALLISTIC -> {
                     if (BallisticAmmo.variant(stack) == BallisticVariant.INCENDIARY) {
                         var bullet = new IncendiaryBullet(TGContent.INCENDIARY_BULLET.get(), level); bullet.configure(gun, false); bullet.npcDamage(damage);
@@ -58,9 +62,11 @@ public final class NpcCombat {
             projectile.setPos(projectile.position().add(projectile.getDeltaMovement().scale(ai.forwardOffset() / gun.stats().projectileSpeed())));
             if (!level.addFreshEntity(projectile)) { if (n == 0) return false; else continue; }
             if(projectile instanceof Grenade40mmProjectile) stack.set(TGContent.LAUNCHER_SHOT_TIME.get(),level.getGameTime());
+            if (projectile instanceof FlameProjectile) { FlameFiring.recoil(level, stack); FlameFiring.muzzle(level, npc, -1); }
             if (projectile instanceof LaserBeam beam) beam.trace();
         }
-        level.playSound(null, npc.getX(), npc.getY(), npc.getZ(), TGContent.SOUND_EVENTS.get(gun.fireSound()).get(), SoundSource.HOSTILE, 4, 1);
+        var soundPos = gun.projectile() == ProjectileKind.FLAME ? FlameFiring.soundPosition(npc) : npc.position();
+        level.playSound(null, soundPos.x, soundPos.y, soundPos.z, TGContent.SOUND_EVENTS.get(gun.fireSound()).get(), SoundSource.HOSTILE, 4, 1);
         return true; // Source NPC fire bypasses player ammo consumption, reload and cooldown.
     }
     private NpcCombat() {}

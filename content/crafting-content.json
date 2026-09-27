@@ -307,6 +307,14 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/concrete_0.json"
     },
     {
+      "id": "techguns:flamethrower",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/flamethrower.json"
+    },
+    {
+      "id": "techguns:flamethrower_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/flamethrower_alt.json"
+    },
+    {
       "id": "techguns:fraggrenade",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/fraggrenade.json"
     },

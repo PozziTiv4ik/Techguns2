@@ -21,5 +21,6 @@
   "rocketlauncher": "ModelRocketLauncher",
   "netherblaster": "ModelNetherBlaster",
   "chainsaw": "ModelChainsaw",
-  "grenadelauncher": "ModelBaseBakedGrenadeLauncher"
+  "grenadelauncher": "ModelBaseBakedGrenadeLauncher",
+  "flamethrower": "ModelFlamethrower"
 }

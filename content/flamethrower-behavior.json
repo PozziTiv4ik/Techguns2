@@ -1,0 +1,29 @@
+{
+  "sources": [
+    "legacy/1.12.2/src/main/java/techguns/entities/projectiles/FlamethrowerProjectile.java",
+    "legacy/1.12.2/src/main/java/techguns/items/guns/GenericGun.java",
+    "legacy/1.12.2/src/main/java/techguns/client/ClientProxy.java"
+  ],
+  "ignition_chance": 0.5,
+  "burn_seconds": 3,
+  "loop_delay": 10,
+  "recoil_ticks": 10,
+  "muzzle_ticks": 10,
+  "start_sound": "guns.flamethrowerstart",
+  "recoil_translation": 0.025,
+  "recoil_degrees": 2.5,
+  "muzzle_offset": [
+    -0.15,
+    -0.05,
+    0.5
+  ],
+  "damage": "FIRE with magic flag, not vanilla is_fire; 0.01 PHYSICAL preliminary hit; main hit bypasses cooldown and knockback",
+  "flight": "inherited motion, then air/water drag, gravity and wet removal; collision precedes wet removal",
+  "block_fire": "roll <= 0.5, air cell on hit face; unsafe permission snapshot at firing",
+  "audio": "one non-repeating start/shot sample per accepted player shot; restart after >=10 silent ticks; NPC always uses fire sample",
+  "effects": "native flame/bubble particles; source ten-tick sine recoil, no reset while active",
+  "pending": [
+    "Full legacy FX system, idle pilot flame and GPU acceptance",
+    "Optional Albedo lighting integration"
+  ]
+}

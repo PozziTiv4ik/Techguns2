@@ -302,6 +302,25 @@
       "random": false
     },
     {
+      "id": "flamethrower",
+      "input": "techguns:flamethrower",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:plasticsheet",
+            "count": 2
+          }
+        },
+        {
+          "result": {
+            "id": "minecraft:iron_ingot",
+            "count": 2
+          }
+        }
+      ],
+      "random": false
+    },
+    {
       "id": "rocketlauncher",
       "input": "techguns:rocketlauncher",
       "outputs": [
@@ -993,7 +1012,6 @@
     }
   ],
   "unported_weapon_inputs": [
-    "flamethrower",
     "grimreaper",
     "biogun",
     "teslagun",

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:flamethrower",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 0
+    }
+  },
+  "pattern": [
+    "prs",
+    "fm "
+  ],
+  "key": {
+    "p": "techguns:pumpmechanism",
+    "r": "techguns:ironreceiver",
+    "s": "techguns:plasticstock",
+    "f": "minecraft:flint_and_steel",
+    "m": "techguns:fueltankempty"
+  }
+}
