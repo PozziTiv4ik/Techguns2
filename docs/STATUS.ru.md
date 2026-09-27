@@ -430,6 +430,9 @@ legacy и лицензия сохранены. [Linux CI #63](https://github.com
 и шесть Python. Финальные Python-пакеты 180+180 покрывают все test ID полного
 discover без повторов и пропусков. Все 2122 ресурсные записи JAR совпали
 с генератором; лицензия, дерево legacy и исключение тестовых паков проверены.
+Первый [Linux CI #65](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36318307915) выявил влияние тестового игрока на соседний AI-тест.
+Игрок изолирован отдельной тестовой средой; подсчёт XP учитывает объединение
+сфер. Повторная сборка и все 1809 основных GameTests прошли локально.
 Linux CI нового source commit ожидается. Подробности:
 [ATTACK_HELICOPTER.ru.md](ATTACK_HELICOPTER.ru.md) и [VERIFICATION.ru.md](VERIFICATION.ru.md).
 

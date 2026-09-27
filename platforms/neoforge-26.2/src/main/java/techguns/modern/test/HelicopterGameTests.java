@@ -68,6 +68,10 @@ final class HelicopterGameTests {
         r.register("helicopter_peaceful_removal_preserves_death_quota",()->HelicopterGameTests::peaceful);
     }
     private static void near(GameTestHelper h,double a,double b,String message) { h.assertTrue(Math.abs(a-b)<.001,message+": "+a+" != "+b); }
+    private static int experienceValue(GameTestHelper h,List<ExperienceOrb> orbs) {
+        // Vanilla award() can merge equally valued orbs immediately; Value alone omits their stacked Count.
+        return orbs.stream().filter(e->!e.isRemoved()).mapToInt(e->e.getValue()*NetherGameTests.save(h,e).getIntOr("Count",1)).sum();
+    }
     private static AttackHelicopter mob(GameTestHelper h,Vec3 at) {
         var m=new AttackHelicopter(NpcContent.HELICOPTER.get(),h.getLevel()); m.setPos(h.absoluteVec(at)); m.removeFreeWill(); h.getLevel().addFreshEntity(m); return m;
     }
@@ -135,8 +139,8 @@ final class HelicopterGameTests {
             p.snapTo(m.position().add(110,0,0)); h.assertTrue(goal.acceptable(p),"Visible player inside follow range"); p.setShiftKeyDown(true); h.assertTrue(!goal.acceptable(p),"Sneaking reduces detection range to 80 percent"); p.setShiftKeyDown(false);
             p.snapTo(m.position().add(10,0,0)); p.setInvisible(true); h.assertTrue(!goal.acceptable(p),"Unarmored invisibility has minimum ten-percent coverage");
             p.setItemSlot(EquipmentSlot.HEAD,new ItemStack(Items.IRON_HELMET)); p.setItemSlot(EquipmentSlot.CHEST,new ItemStack(Items.IRON_CHESTPLATE)); p.setItemSlot(EquipmentSlot.LEGS,new ItemStack(Items.IRON_LEGGINGS)); p.setItemSlot(EquipmentSlot.FEET,new ItemStack(Items.IRON_BOOTS)); h.assertTrue(goal.acceptable(p),"Visible armor increases invisible-player detection");
-            p.getAbilities().invulnerable=true; h.assertTrue(!goal.acceptable(p),"Invulnerable players excluded"); h.succeed();
-        } finally { l.removePlayerImmediately(p,Entity.RemovalReason.DISCARDED); channel.finishAndReleaseAll(); cleanup(h,m); } });
+            p.getAbilities().invulnerable=true; h.assertTrue(!goal.acceptable(p),"Invulnerable players excluded");
+        } finally { l.removePlayerImmediately(p,Entity.RemovalReason.DISCARDED); channel.finishAndReleaseAll(); cleanup(h,m); } h.succeed(); });
     }
     private static void look(GameTestHelper h) {
         var m=mob(h,new Vec3(5,80,5)); var t=target(h,new Vec3(5,70,15)); m.setTarget(t); var goal=new HelicopterFlight.Look(m); goal.tick(); m.getLookControl().tick();
@@ -245,7 +249,7 @@ final class HelicopterGameTests {
             var saved=NetherGameTests.save(h,m); h.assertValueEqual(saved.getIntOr("experience_credit_ticks",-1),53,"Remaining player credit is saved with the corpse"); m.remove(Entity.RemovalReason.UNLOADED_TO_CHUNK);
             copy=new AttackHelicopter(NpcContent.HELICOPTER.get(),l); NetherGameTests.load(h,copy,saved); copy.removeFreeWill();
             for(int i=47;i<99;i++) copy.tick(); h.assertTrue(!copy.isRemoved() && xp.isEmpty(),"Saved corpse waits through tick 99"); copy.tick(); h.assertTrue(copy.isRemoved(),"Saved corpse finishes on tick 100");
-            h.assertValueEqual(xp.stream().mapToInt(ExperienceOrb::getValue).sum(),5,"Five XP emitted exactly once at completion"); h.assertValueEqual(drops.size(),4,"Saved corpse cannot reroll loot"); h.succeed();
+            h.assertValueEqual(experienceValue(h,xp),5,"Five XP emitted exactly once at completion"); h.assertValueEqual(drops.size(),4,"Saved corpse cannot reroll loot"); h.succeed();
         } finally { NeoForge.EVENT_BUS.unregister(observe); drops.forEach(Entity::discard); xp.forEach(Entity::discard); m.discard(); if(copy!=null)copy.discard(); }
     }
     private static void experience(GameTestHelper h,boolean enableAfterDeath) {
@@ -264,7 +268,7 @@ final class HelicopterGameTests {
             }
             h.assertTrue(!m.isAlive() && xp.isEmpty(),"No experience before animation completes");
             for(int i=0;i<99;i++) m.tick(); h.assertTrue(xp.isEmpty(),"No early experience"); m.tick(); h.assertTrue(m.isRemoved(),"Corpse removed at tick 100");
-            h.assertValueEqual(xp.stream().mapToInt(ExperienceOrb::getValue).sum(),enableAfterDeath?5:0,"Experience uses current gamerule and unexpired player credit at tick 100"); h.succeed();
+            h.assertValueEqual(experienceValue(h,xp),enableAfterDeath?5:0,"Experience uses current gamerule and unexpired player credit at tick 100"); h.succeed();
         } finally { l.getGameRules().set(GameRules.MOB_DROPS,before,l.getServer()); NeoForge.EVENT_BUS.unregister(observe); drops.forEach(Entity::discard); xp.forEach(Entity::discard); m.discard(); }
     }
     private static void spawner(GameTestHelper h) {

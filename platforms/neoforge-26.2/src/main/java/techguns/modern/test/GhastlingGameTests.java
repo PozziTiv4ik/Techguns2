@@ -110,7 +110,10 @@ final class GhastlingGameTests {
     private static void realAi(GameTestHelper h) {
         var g=new Ghastling(NpcContent.GHASTLING.get(),h.getLevel()); g.setPos(h.absoluteVec(new Vec3(3,2,2))); g.setNoGravity(true); g.setYHeadRot(0); h.getLevel().addFreshEntity(g);
         var t=target(h,new Vec3(3,2,10)); g.setTarget(t);
-        h.runAfterDelay(45,()->{ h.assertTrue(t.getHealth()<1000,"Goal selector, aiming and moving projectile deal real damage"); h.getLevel().getEntitiesOfClass(AlienBlasterProjectile.class,g.getBoundingBox().inflate(150),p->p.getOwner()==g).forEach(Entity::discard); g.discard(); t.discard(); h.succeed(); });
+        h.runAfterDelay(45,()->{ try {
+            h.assertTrue(!g.isRemoved(),"AI fixture must survive unrelated players' despawn checks");
+            h.assertTrue(t.getHealth()<1000,"Goal selector, aiming and moving projectile deal real damage: target="+(g.getTarget()==t)+", head="+g.getYHeadRot()+", pitch="+g.getXRot()); h.succeed();
+        } finally { h.getLevel().getEntitiesOfClass(AlienBlasterProjectile.class,g.getBoundingBox().inflate(150),p->p.getOwner()==g).forEach(Entity::discard); g.discard(); t.discard(); } });
     }
     private static void loot(GameTestHelper h) {
         var g=mob(h,new Vec3(3,2,3)); var p=WeaponGameTests.player(h);
