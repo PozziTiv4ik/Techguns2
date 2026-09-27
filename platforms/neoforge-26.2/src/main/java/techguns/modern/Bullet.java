@@ -51,6 +51,10 @@ public final class Bullet extends Projectile {
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {}
 
+    @Override protected boolean canHitEntity(net.minecraft.world.entity.Entity entity) {
+        return (!weapon.id().equals(techguns.core.HelicopterWeapons.BULLET.id()) || entity!=getOwner()) && super.canHitEntity(entity);
+    }
+
     @Override
     public void tick() {
         super.tick();
@@ -75,7 +79,10 @@ public final class Bullet extends Projectile {
             super.onHit(hit);
             discard();
         } else {
-            setDeltaMovement(getDeltaMovement().add(0, -weapon.gravity(), 0));
+            var velocity=getDeltaMovement();
+            if(weapon.id().equals(techguns.core.HelicopterWeapons.BULLET.id())) velocity=velocity.scale(isInWater()?(double).85f:(double).99f);
+            setDeltaMovement(velocity.add(0, -weapon.gravity(), 0));
+            if(weapon.id().equals(techguns.core.HelicopterWeapons.BULLET.id()) && age>=weapon.stats().projectileLifetime()) discard();
         }
     }
 
@@ -95,7 +102,7 @@ public final class Bullet extends Projectile {
         distance = Double.isFinite(stored) ? Math.max(0, stored) : 0;
         try {
             shotDamage = ShotDamage.load(input);
-            configure(Weapons.definition(input.getStringOr("weapon", "revolver")));
+            configure(techguns.core.HelicopterWeapons.resolve(input.getStringOr("weapon", "revolver")));
         } catch (IllegalArgumentException unknownWeapon) {
             discard();
             return;

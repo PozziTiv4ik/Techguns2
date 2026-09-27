@@ -44,6 +44,10 @@ public final class RocketProjectile extends Projectile {
         orient(1);
         yRotO = getYRot(); xRotO = getXRot();
     }
+    public void shootLegacy(LivingEntity source,double accuracy,int muzzleSide) {
+        LegacyShot.shoot(this,source,random,accuracy,muzzleSide,variant().speed(weapon.stats()));
+        orient(1); yRotO=getYRot(); xRotO=getXRot();
+    }
     @Override protected void defineSynchedData(SynchedEntityData.Builder builder) { builder.define(VARIANT, RocketVariant.DEFAULT.id()); }
     private boolean target(Entity entity) { return entity != getOwner() && !entity.isSpectator() && entity.isAlive() && entity.isPickable(); }
     @Override public void tick() {
@@ -107,7 +111,7 @@ public final class RocketProjectile extends Projectile {
     }
     @Override protected void readAdditionalSaveData(ValueInput input) {
         super.readAdditionalSaveData(input);
-        try { shotDamage = ShotDamage.load(input); configure(Weapons.definition(input.getStringOr("weapon", "rocketlauncher")), RocketVariant.fromId(input.getStringOr("variant", "default")), input.getBooleanOr("block_damage", false)); }
+        try { shotDamage = ShotDamage.load(input); configure(HelicopterWeapons.resolve(input.getStringOr("weapon", "rocketlauncher")), RocketVariant.fromId(input.getStringOr("variant", "default")), input.getBooleanOr("block_damage", false)); }
         catch (IllegalArgumentException invalid) { discard(); return; }
         age = Math.clamp(input.getIntOr("age", 0), 0, variant().lifetime(weapon.stats()));
         origin = input.read("origin", Vec3.CODEC).orElse(null);

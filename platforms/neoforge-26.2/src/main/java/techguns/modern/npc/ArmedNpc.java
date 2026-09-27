@@ -16,7 +16,7 @@ import techguns.modern.GunItem;
 import techguns.modern.TGContent;
 
 /** Shared GenericNPC behavior for the currently ported HOSTILE-faction NPCs. */
-public abstract class ArmedNpc extends SpawnerNpc implements NpcTypedArmor,HostileNpc {
+public abstract class ArmedNpc extends SpawnerNpc implements NpcTypedArmor,HostileNpc,NpcMuzzle {
     protected ArmedNpc(EntityType<? extends ArmedNpc> type, Level level) { super(type, level); setCanPickUpLoot(false); }
     @Override protected void registerGoals() {
         goalSelector.addGoal(1, new FloatGoal(this));

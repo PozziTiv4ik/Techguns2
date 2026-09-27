@@ -1,9 +1,8 @@
 # Продолжение работы в новом чате
 
-Обновлено 2026-09-27 после SmallMine и успешного Linux CI #64.
-Перед разработкой прочитать
-[порядок работы](DEVELOPMENT_WORKFLOW.ru.md), затем проверить Git.
-Инструкции [AGENTS.md](../AGENTS.md) обязательны для всего проекта.
+Обновлено 2026-09-27 после локальной проверки AttackHelicopter.
+Перед разработкой прочитать [порядок работы](DEVELOPMENT_WORKFLOW.ru.md),
+затем проверить Git. [AGENTS.md](../AGENTS.md) обязателен для всего проекта.
 
 ## Репозиторий и текущая точка
 
@@ -14,71 +13,72 @@
 | Writable fork / origin | `PozziTiv4ik/Techguns2` |
 | Оригинал / upstream, только чтение | `pWn3d1337/Techguns2` |
 | Платформа | Minecraft 26.2 / NeoForge 26.2.0.81 / Java 25 |
-| Последний проверенный код | `45cf12ac99ab622d41a77be769a07c2eb6d92f0b` — SmallMine |
-| Linux CI кода | [Linux CI #64](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36313470215), success; 2026-09-27 12:56 Europe/Zurich |
+| Текущий локально проверенный срез | AttackHelicopter; source SHA получить из Git после первого коммита |
+| Linux CI нового кода | Ожидается; прежний успешный CI не подтверждает новый код |
 
-SmallMine перенесена: 972 позиции, исходные семь типов кластера и смеси,
-биомное покрытие, заглубление на пять блоков, одна колонна очистки без
-фундамента, два конечных поста ZombieMiner и добыча настоящим буром.
-Все четыре малых кандидата Верхнего мира теперь используют исходный пул
-40 билетов без наложений. См. [SMALL_MINE.ru.md](SMALL_MINE.ru.md).
+AttackHelicopter перенесён: полёт и обнаружение игрока, пять пуль/ракета,
+исходная броня, четыре пула лута, смерть за 100 тиков и опыт, сохранение
+полёта/снарядов/погибающей сущности, конечный военный пост 1/1/200/0.
+Три OBJ, Apache-текстура и звуки подключены. Доступен через яйцо, команду
+и настроенный пост; MilitaryCamp ещё не генерируется.
+См. [ATTACK_HELICOPTER.ru.md](ATTACK_HELICOPTER.ru.md).
 
-Локально прошли **199 JUnit, 354 Python и 1845 GameTests**: 1783 основных
-(1782 Techguns + 1 встроенный), 46 worldgen/выборочных и 16 условных.
-Генератор: 2190 файлов; 2102 ресурсные записи JAR совпали побайтово.
-Подробности и ограничения: последний раздел [VERIFICATION.ru.md](VERIFICATION.ru.md).
-Локальные `.tools/mine-*` могут помочь, но отсутствие этих игнорируемых файлов
-не является блокером для нового клона.
+Локально прошли **205 JUnit, 360 Python и 1871 GameTest**: 1809 основных
+(1808 Techguns + 1 встроенный), 46 worldgen/выборочных и 16 условных.
+Python-пакеты 180+180 точно покрывают полный discover без повторов/пропусков.
+Генератор: 2212 файлов; 2122 ресурсные записи JAR совпали побайтово.
+Лицензия, неизменность legacy и исключение тестовых паков проверены.
+Подробности: последний раздел [VERIFICATION.ru.md](VERIFICATION.ru.md).
+Локальные `.tools/heli-*` помогают восстановить результаты, но их отсутствие
+не блокирует новый клон. Не повторять проверки без изменений или сомнений.
 
-Linux CI #64 подтвердил именно указанный source SHA: 354 Python, сборка/ядро
-и все 1845 GameTests. После него изменена только документация. Получать
-текущий HEAD из Git; не принимать source SHA за последний коммит ветки.
-Незавершённой реализации и известных красных проверок этого среза нет.
-Не повторять успешные проверки без изменений или конкретного сомнения.
+До закрытия среза: отправить проверенный source commit в origin, дождаться
+именно его Linux CI, записать фактический результат и отправить документационный
+checkpoint с `[skip ci]`. Новую функцию до завершения CI не начинать.
 
-## Следующая задача: AttackHelicopter
+## Следующая задача: Neonlights для MilitaryCamp
 
-Перенести **AttackHelicopter** как обязательную зависимость больших военных
-лагерей. В активном `MilitaryCamp` есть SOLDIER_SPAWN-пост вертолёта
-1/1/200/0 с поднятой точкой появления. ArmySoldier и военный пост уже
-реализованы; вертолёта в modern/core пока нет. После него следующий
-крупный срез — MilitaryBaseStructure/MilitaryCamp. Сохранить исходный
-билет CastleStructure в большой LAND-таблице; авианосец относится к WATER.
+Перенести **пять вариантов Neonlights**: NEONTUBES2, NEONTUBES2_ROTATED,
+NEONTUBES4, NEONTUBES4_ROTATED, NEONSQUARE_WHITE. Это обязательная зависимость
+Helipad: он использует metadata 4. В modern блоки пока отсутствуют.
+После них — военные ящики с настоящим лутом, затем MilitaryBaseStructure/
+MilitaryCamp. Активные CampProps/Bunker используют все девять типов ящиков;
+декоративная замена не закрывает зависимость.
 
-Начать с исходников и вызываемых ими методов:
+Начать с исходников и активных вызовов:
 
 ```text
-legacy/1.12.2/src/main/java/techguns/entities/npcs/AttackHelicopter.java
-legacy/1.12.2/src/main/java/techguns/entities/npcs/GenericFlyingMob.java
-legacy/1.12.2/src/main/java/techguns/client/render/entities/npcs/RenderAttackHelicopter.java
-legacy/1.12.2/src/main/resources/assets/techguns/loot_tables/entities/attackhelicopter.json
-legacy/1.12.2/src/main/java/techguns/world/structures/MilitaryCamp.java
-legacy/1.12.2/src/main/java/techguns/world/structures/MilitaryBaseStructure.java
-legacy/1.12.2/src/main/java/techguns/world/TGStructureSpawnRegister.java
+legacy/1.12.2/src/main/java/techguns/blocks/EnumLightblockType.java
+legacy/1.12.2/src/main/java/techguns/blocks/GenericBlockMetaEnumCamoChangeable.java
+legacy/1.12.2/src/main/java/techguns/TGBlocks.java
+legacy/1.12.2/src/main/resources/assets/techguns/blockstates/neonlights.json
+legacy/1.12.2/src/main/resources/assets/techguns/recipes/neonlights_0.json
+legacy/1.12.2/src/main/java/techguns/world/structures/Helipad.java
 ```
 
-Уже установлено: размер 4×4, здоровье 100, follow range 128, vanilla armor
-16/toughness 5, отдельная типовая броня; целевая высота 24. В бою пять пуль
-на тиках 14/16/18/20/22 и ракета на 35, затем таймер -30. Исходную смерть
-нужно отличать от мгновенного удаления: цикл 100 тиков, XP, звук и FX.
-Не принимать закомментированные ветки за активную механику.
+Уже установлено: Material.GLASS, звук стекла, свет 1,0, твёрдость 4,0;
+исходный рецепт даёт 16 блоков из шести железных самородков, двух стеклянных
+панелей и светопыли. Проверить геометрию/повороты, дроп, исходную смену
+оформления и интеграцию Camo Bench, не переносить внешний Chisel как уже
+поддержанную интеграцию. Современные точки входа: `tools/legacy_building.py`,
+`tools/legacy_fortifications.py`, `modern/world/BuildingContent.java`,
+`FortificationContent.java` и Camo Bench.
 
-Современные точки входа: `platforms/neoforge-26.2/src/main/java/techguns/modern/npc/`,
-`npc/spawner/`, `Bullet.java`, `RocketProjectile.java`, клиентские renderer
-в `modern/client/` и `tools/legacy_npcs.py`.
-Сначала уточнить зависимости лута, пуль/ракет и исходных моделей helicopter0/1/2,
-затем реализовать пригодный к игре NPC с сохранением и настоящей конечной
-встречей. Не заменять недостающие AI/лут/боевую механику декорацией.
+Военные ящики: BlockMilitaryCrate/EnumMilitaryCrateType, шесть loot tables,
+активная замена дропа при добыче без Silk Touch в TGEventHandler. Перед их
+реализацией проверить все предметы лута. Большой лагерь имеет 13 внутренних,
+семь граничных шаблонов и два вида башен. Сохранить исходный билет CastleStructure
+в большой LAND-таблице; AircraftCarrier относится к WATER.
 
 ## Границы результата
 
-SmallMine проверена во всех четырёх поворотах, для всех семи типов ресурса и
-биомных вариантов; природные точки — две на seed 0. Выбор четырёх кандидатов
-проверен на seed 0/1/42. Это не полная проверка нескольких природных миров.
-Защита от соседней травы действует только при первоначальной декорации;
-обычное изменение мира после генерации разрешено.
+У вертолёта нет исходной записи обычного биомного спавна. Он не относится
+к HOSTILE-фракции GenericNPC. Взрыв боевой ракеты имеет фактические исходные
+радиусы 30/40 и не ломает блоки; взрыв смерти только визуальный. Не менять
+эти особенности по комментариям или неиспользуемым аргументам конструктора.
 
-Клиентская/визуальная приёмка остаётся. Агенту нельзя запускать интерактивный
-Minecraft или управлять рабочим столом. Остальные структуры, оружие, броня,
-машины, анимации и интеграции остаются в [плане](PORTING_PLAN.ru.md) и
-[статусе](STATUS.ru.md). Полный порт ещё не завершён.
+Клиентская/визуальная приёмка остаётся; частицы смерти адаптированы к ванильным,
+полная FX-система не перенесена. Агенту нельзя запускать интерактивный Minecraft
+или управлять рабочим столом. Остальные структуры, оружие, броня, машины,
+анимации и интеграции остаются в [плане](PORTING_PLAN.ru.md) и [статусе](STATUS.ru.md).
+Полный порт ещё не завершён.

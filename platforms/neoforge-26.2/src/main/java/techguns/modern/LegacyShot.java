@@ -10,12 +10,18 @@ import net.minecraft.world.phys.Vec3;
 final class LegacyShot {
     static void shoot(Projectile projectile, LivingEntity source, RandomSource random,
                       double accuracy, boolean centered, double speed) {
+        int side=centered?0:source instanceof net.minecraft.world.entity.Mob || source.getMainArm()==HumanoidArm.RIGHT?-1:1;
+        shoot(projectile,source,random,accuracy,side,speed);
+    }
+    static void shoot(Projectile projectile, LivingEntity source, RandomSource random,
+                      double accuracy, int muzzleSide, double speed) {
+        if(muzzleSide < -1 || muzzleSide > 1) throw new IllegalArgumentException("Muzzle side must be left, center or right");
         boolean npc = source instanceof net.minecraft.world.entity.Mob;
         float yaw = (npc ? source.getYHeadRot() : source.getYRot()) + (float) (accuracy - 2 * random.nextDouble() * accuracy) * 40;
         float pitch = source.getXRot() + (float) (accuracy - 2 * random.nextDouble() * accuracy) * 40;
-        double offset = .16 + (source instanceof techguns.modern.npc.ArmedNpc armed ? armed.bulletSideOffset() : 0);
-        double height = -.1 + (source instanceof techguns.modern.npc.ArmedNpc armed ? armed.bulletHeightOffset() : 0);
-        double side = centered ? 0 : npc || source.getMainArm() == HumanoidArm.RIGHT ? -offset : offset;
+        double offset = .16 + (source instanceof techguns.modern.npc.NpcMuzzle armed ? armed.bulletSideOffset() : 0);
+        double height = -.1 + (source instanceof techguns.modern.npc.NpcMuzzle armed ? armed.bulletHeightOffset() : 0);
+        double side = muzzleSide*offset;
         projectile.setPos(source.getEyePosition().add(Math.cos(Math.toRadians(yaw)) * side, height,
                 Math.sin(Math.toRadians(yaw)) * side));
         Vec3 direction = Vec3.directionFromRotation(pitch, yaw).normalize().add(

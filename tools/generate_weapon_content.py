@@ -36,6 +36,7 @@ from legacy_army import generate_army_content, army_translations
 from legacy_alienbug import generate_alienbug_content, alienbug_translations, SOUNDS as BUG_SOUNDS
 from legacy_spike import generate_spike_content, spike_translations
 from legacy_ghastling import generate_ghastling_content, ghastling_translations
+from legacy_helicopter import generate_helicopter_content, helicopter_translations, SOUNDS as HELICOPTER_SOUNDS
 from legacy_locations import generate_location_content, location_translations
 from legacy_clusters import generate_cluster_content, cluster_translations
 from legacy_drill import generate_drill_content, drill_translations, SOUNDS as DRILL_SOUNDS
@@ -265,6 +266,7 @@ public final class NpcWeapons {
         selected_sounds[name] = {'sounds': sounds_data[name]['sounds']}
     for name in BUG_SOUNDS: selected_sounds[name] = {"sounds":sounds_data[name]["sounds"]}
     for name in NPC_SOUNDS: selected_sounds[name] = {'sounds':sounds_data[name]['sounds']}
+    for name in HELICOPTER_SOUNDS: selected_sounds[name] = {'sounds':sounds_data[name]['sounds']}
     for name in DRILL_SOUNDS: selected_sounds[name] = {'sounds':sounds_data[name]['sounds']}
     for name in FORTIFICATION_SOUNDS: selected_sounds[name] = {'sounds':sounds_data[name]['sounds']}
     for name in ('guns.chainsawhit', 'guns.chainsawloopstart', 'guns.powerhammerimpactground'):
@@ -286,6 +288,7 @@ public final class NpcWeapons {
             if sound == 'effects.nukeexplosion': translated[lang][subtitle] = 'Nuclear explosion' if lang == 'en_us' else 'Ядерный взрыв'
             if sound in BUG_SOUNDS: translated[lang][subtitle] = "Alien Bug" if lang == "en_us" else "Инопланетный жук"
             if sound in NPC_SOUNDS: translated[lang][subtitle] = 'Cyber Demon or Super Mutant' if lang == 'en_us' else 'Кибердемон или супермутант'
+            if sound in HELICOPTER_SOUNDS: translated[lang][subtitle] = 'Attack helicopter' if lang == 'en_us' else 'Боевой вертолёт'
             if sound in FORTIFICATION_SOUNDS: translated[lang][subtitle] = 'Bunker door moves' if lang == 'en_us' else 'Движется бункерная дверь'
         for entry in value['sounds']:
             name = entry if isinstance(entry, str) else entry['name']
@@ -327,6 +330,7 @@ public final class NpcWeapons {
         values.update(commando_translations(lang))
         values.update(policeman_translations(lang))
         values.update(ghastling_translations(lang))
+        values.update(helicopter_translations(lang))
         values.update(alienbug_translations(lang))
         values.update(spike_translations(lang))
         values.update(bugnest_translations(lang))
@@ -384,7 +388,7 @@ public final class Weapons {
 '''
     output('core/src/main/java/techguns/core/Weapons.java', source)
     files.update(generate_machine_content())
-    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_npc_content(), generate_cyber_content(), generate_armor_content(), generate_repair_content(), generate_camo_content(), generate_grinder_content(), generate_zombie_soldier_content(), generate_rural_content(), generate_skeleton_content(), generate_bandit_content(), generate_chainsaw_content(), generate_psycho_content(), generate_spawner_content(), generate_army_content(), generate_commando_content(), generate_policeman_content(), generate_police_station_content(), generate_survivor_hideout_content(), generate_desert_oil_content(), generate_gas_station_content(), generate_train_station_content(), generate_factory_house_content(), generate_small_mine_content(), generate_location_content(), generate_ghastling_content(), generate_alienbug_content(), generate_spike_content(), generate_cluster_content(), generate_drill_content(), generate_building_content(), generate_fortification_content(), generate_camonet_content(), generate_incendiary_content(weapons), generate_meteor_content(), generate_bugnest_content(), generate_nether_castle_content(), generate_medium_altar_content(), generate_ghast_spawner_content()) for entry in domain.items()]:
+    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_npc_content(), generate_cyber_content(), generate_armor_content(), generate_repair_content(), generate_camo_content(), generate_grinder_content(), generate_zombie_soldier_content(), generate_rural_content(), generate_skeleton_content(), generate_bandit_content(), generate_chainsaw_content(), generate_psycho_content(), generate_spawner_content(), generate_army_content(), generate_commando_content(), generate_policeman_content(), generate_police_station_content(), generate_survivor_hideout_content(), generate_desert_oil_content(), generate_gas_station_content(), generate_train_station_content(), generate_factory_house_content(), generate_small_mine_content(), generate_location_content(), generate_ghastling_content(), generate_helicopter_content(), generate_alienbug_content(), generate_spike_content(), generate_cluster_content(), generate_drill_content(), generate_building_content(), generate_fortification_content(), generate_camonet_content(), generate_incendiary_content(weapons), generate_meteor_content(), generate_bugnest_content(), generate_nether_castle_content(), generate_medium_altar_content(), generate_ghast_spawner_content()) for entry in domain.items()]:
         if path in files:
             # Several content domains contribute to the same mining/tool and common item tags.
             if '/tags/' not in path:

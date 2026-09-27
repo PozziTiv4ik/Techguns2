@@ -14,6 +14,12 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import techguns.modern.TGContent;
 
 public final class NpcContent {
+    public static final DeferredHolder<EntityType<?>,EntityType<AttackHelicopter>> HELICOPTER=TGContent.ENTITIES.register("attackhelicopter",()->
+            EntityType.Builder.<AttackHelicopter>of(AttackHelicopter::new,MobCategory.MONSTER).sized(4,4).eyeHeight(.5f).fireImmune().clientTrackingRange(13).updateInterval(3)
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE,TGContent.id("attackhelicopter"))));
+    public static final DeferredItem<SpawnEggItem> HELICOPTER_EGG=TGContent.ITEMS.registerItem("attackhelicopter_spawn_egg",SpawnEggItem::new,p->p.spawnEgg(HELICOPTER.get()));
+    public static final DeferredHolder<SoundEvent,SoundEvent> HELI_HIT=sound("npcs.apachehit"), HELI_ROTOR=sound("npcs.apacherotor"),
+            HELI_BURST=sound("npcs.apacheburst"), HELI_DEATH=sound("npcs.apachedie"), HELI_EXPLODE=sound("npcs.apacheexplode");
     public static final DeferredHolder<EntityType<?>, EntityType<SuperMutant>> SUPER_MUTANT = TGContent.ENTITIES.register("supermutantbasic", () ->
             EntityType.Builder.<SuperMutant>of(SuperMutant::new, MobCategory.MONSTER).sized(1, 2.7f).eyeHeight(2.295f).clientTrackingRange(5).updateInterval(3)
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, TGContent.id("supermutantbasic"))));
@@ -71,6 +77,7 @@ public final class NpcContent {
         bus.addListener(NpcContent::attributes);
     }
     private static void attributes(EntityAttributeCreationEvent event) {
+        event.put(HELICOPTER.get(),AttackHelicopter.attributes().build());
         event.put(SUPER_MUTANT.get(), SuperMutant.attributes().build());
         event.put(CYBER_DEMON.get(), CyberDemon.attributes().build());
         event.put(PIGMAN.get(),ZombiePigmanSoldier.attributes().build());

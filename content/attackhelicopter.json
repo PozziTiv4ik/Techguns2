@@ -1,0 +1,154 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/entities/npcs/AttackHelicopter.java",
+  "health": 100.0,
+  "follow_range": 128.0,
+  "armor": 16.0,
+  "armor_toughness": 5.0,
+  "size": [
+    4,
+    4
+  ],
+  "eye_height": 0.5,
+  "xp": 5,
+  "fire_immune": true,
+  "faction": "not GenericNPC / ITGNpcTeam",
+  "natural_spawn_entry": false,
+  "spawn_check_chance": 0.05,
+  "max_spawn_group": 1,
+  "original_egg_colors": [
+    3620131,
+    9355479
+  ],
+  "tracking_blocks": 200,
+  "update_interval": 3,
+  "flight": {
+    "height_above_current_column": 24,
+    "random_xz": 16,
+    "waypoint_min_squared": 1,
+    "waypoint_max_squared": 3600,
+    "course_delay": [
+      2,
+      6
+    ],
+    "acceleration": 0.1,
+    "nearest_player_vertical_inflate": 4,
+    "look_range": 96,
+    "sneaking_factor": 0.800000011920929,
+    "invisibility_factor": 0.7,
+    "minimum_armor_coverage": 0.1
+  },
+  "attack": {
+    "range_squared": 4096,
+    "bullets": [
+      14,
+      16,
+      18,
+      20,
+      22
+    ],
+    "rocket_tick": 35,
+    "rest_timer": -30,
+    "attacking_after": 10,
+    "clock_requires_sight": true,
+    "damage": 12.0,
+    "speed": 1.0,
+    "lifetime": 100,
+    "spread": 0.05,
+    "drop_start": 30,
+    "drop_end": 40,
+    "minimum_damage": 8.0,
+    "penetration": 0.25,
+    "block_damage": false,
+    "npc_difficulty_penalty": false,
+    "rocket_blast_radii": [
+      30,
+      40
+    ],
+    "unused_rocket_radius_argument": 4,
+    "rocket_gravity": 0,
+    "muzzle_side": 2.16,
+    "muzzle_height": -0.1
+  },
+  "death": {
+    "ticks": 100,
+    "loot_at_death": true,
+    "xp_at_finish": true,
+    "visual_y_offset": -4,
+    "visual_yaw_degrees": 1440,
+    "fx_y_offset": -8,
+    "damaging_explosion": false
+  },
+  "model": {
+    "scale": 2.5,
+    "yaw_offset": -90,
+    "gun_pivot_x": 1.2,
+    "rotor_degrees_per_tick": 24,
+    "dying_rotor_degrees_per_tick": 12,
+    "parts": [
+      {
+        "part": 0,
+        "vertices": 206,
+        "faces": 288,
+        "uvs": 340,
+        "source_sha256": "21cb55fe28045eb5cf577e423fd2da9895c4320212c66a1c92382d8823d866e9",
+        "bounds": [
+          [
+            -2.9369,
+            0.125,
+            -0.75
+          ],
+          [
+            1.6256,
+            1.25,
+            0.75
+          ]
+        ]
+      },
+      {
+        "part": 1,
+        "vertices": 32,
+        "faces": 40,
+        "uvs": 40,
+        "source_sha256": "d61d66a2cfeec902dd872d218313612630f4e51053c5e6ec845be23e7f53865d",
+        "bounds": [
+          [
+            -2.3119,
+            0.8125,
+            -2.3125
+          ],
+          [
+            2.3131,
+            1.125,
+            2.3125
+          ]
+        ]
+      },
+      {
+        "part": 2,
+        "vertices": 16,
+        "faces": 20,
+        "uvs": 16,
+        "source_sha256": "b7b866f0fcc31a619f408059cb6d0acd4543524cbd9c372d72879f4d1f89cefc",
+        "bounds": [
+          [
+            0.8756,
+            0.0,
+            -0.0625
+          ],
+          [
+            1.5006,
+            0.125,
+            0.0625
+          ]
+        ]
+      }
+    ]
+  },
+  "sounds": [
+    "npcs.apachehit",
+    "npcs.apacherotor",
+    "npcs.apacheburst",
+    "npcs.apachedie",
+    "npcs.apacheexplode"
+  ]
+}

@@ -466,6 +466,37 @@
     ],
     "subtitle": "subtitles.techguns.npcs.cyberdemonstep"
   },
+  "npcs.apachehit": {
+    "sounds": [
+      "techguns:npcs/apache_hit_a",
+      "techguns:npcs/apache_hit_b"
+    ],
+    "subtitle": "subtitles.techguns.npcs.apachehit"
+  },
+  "npcs.apacherotor": {
+    "sounds": [
+      "techguns:npcs/apache_rotor"
+    ],
+    "subtitle": "subtitles.techguns.npcs.apacherotor"
+  },
+  "npcs.apacheburst": {
+    "sounds": [
+      "techguns:npcs/apache_burst"
+    ],
+    "subtitle": "subtitles.techguns.npcs.apacheburst"
+  },
+  "npcs.apachedie": {
+    "sounds": [
+      "techguns:npcs/apache_die"
+    ],
+    "subtitle": "subtitles.techguns.npcs.apachedie"
+  },
+  "npcs.apacheexplode": {
+    "sounds": [
+      "techguns:npcs/apache_explode"
+    ],
+    "subtitle": "subtitles.techguns.npcs.apacheexplode"
+  },
   "machines.oredrillsmallwork": {
     "sounds": [
       "techguns:machines/oredrill_s_work_a",

@@ -93,6 +93,7 @@ public final class TGContent {
                         output.accept(techguns.modern.npc.NpcContent.PSYCHO_EGG.get());
                         output.accept(techguns.modern.npc.NpcContent.ARMY_EGG.get());
                         output.accept(techguns.modern.npc.NpcContent.GHASTLING_EGG.get());
+                        output.accept(techguns.modern.npc.NpcContent.HELICOPTER_EGG.get());
                         output.accept(techguns.modern.npc.NpcContent.BUG_EGG.get());
                         output.accept(techguns.modern.npc.NpcContent.COMMANDO_EGG.get());
                         output.accept(techguns.modern.npc.NpcContent.POLICEMAN_EGG.get());
