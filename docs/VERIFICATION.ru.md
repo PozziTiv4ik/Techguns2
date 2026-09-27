@@ -17,10 +17,10 @@ Minecraft 26.2, NeoForge 26.2.0.81, ModDevGradle 2.0.146.
   в 11:39, генерация в 11:45 и условные данные в 11:45 Europe/Zurich.
   Всего **1797 GameTests**. Текущий срез: FactoryHouseSmall, двойной сундук,
   рабочие печи, конечная охрана и общий малый LAND-пул. Minecraft-клиент не запускался.
-- Linux CI нового source commit ожидается после отправки. Предыдущий
-  [#62](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36277938464)
-  проверил SmallTrainstation на source commit `d146be6`; его результаты
-  не подменяют проверку текущего среза.
+- Linux CI [#63](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36310548871)
+  завершился успешно 2026-09-27 в 12:00 Europe/Zurich для source commit
+  `d50b3c69ba3251832226eecb0eb35941b631a847`: все 13 шагов, 348 Python
+  единым запуском за 239,437 секунды, сборка/ядро и все 1797 GameTests.
 - Все **210 рецептов верстака, 19 обычной печи, четыре Ammo Press, 19 Metal Press, четыре Blast Furnace, 31 Chemical Laboratory, семь Reaction Chamber, шесть Fabricator, два Charging Station и 56 Grinder** загружаются через Minecraft RecipeManager;
   в последнем журнале нет ошибок разбора данных.
 - По прямой просьбе пользователя 2026-09-09 запущен клиент предыдущего среза
@@ -3135,5 +3135,19 @@ LICENSE.txt совпал с исходником, дерево legacy
 и тестовые паки не включены. Генератор, ресурсный граф, legacy-аудит
 и `git diff --check` прошли. Бинарный релиз не публиковался.
 
-Linux CI нового source commit ожидается после отправки. Визуальная приёмка,
-другие природные seed, SmallMine и дальнейшие системы остаются.
+Визуальная приёмка, другие природные seed, SmallMine и дальнейшие системы
+остаются.
+
+### Контрольная запись Linux CI #63 — 2026-09-27
+
+[Verify development port #63](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36310548871)
+успешно завершился 2026-09-27 в 12:00 Europe/Zurich для source commit
+`d50b3c69ba3251832226eecb0eb35941b631a847`. Подтверждены все 13 шагов:
+348 Python единым запуском за 239,437 секунды, сборка/ядро, 1738 основных
+GameTests, 43 природных/выборочных и 16 условных — всего **1797**.
+Генератор и ресурсный граф совпали с Windows: 2185 файлов, 274 item definitions,
+565 texture references, 72 sound events и 358 рецептов. Обе природные точки
+FactoryHouseSmall, обе SmallTrainstation с их DamageSeed и обе GasStation
+совпали с локальными результатами. Ошибок в финальном серверном журнале нет.
+Последующий коммит меняет только документацию и фиксирует следующий срез
+SmallMine по исходнику; JAR не публикуется.
