@@ -10,6 +10,8 @@ import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import techguns.modern.world.structure.GasStationStructure;
 import techguns.modern.world.structure.MilitaryCampStructure;
+import techguns.modern.world.structure.CastleStructure;
+import techguns.modern.world.structure.CastlePiece;
 import techguns.modern.world.structure.MilitaryCampPiece;
 
 /** Neighbouring foliage respects the station and the military camp's cleared surface. */
@@ -20,7 +22,7 @@ public abstract class GasStationTreeProtectionMixin {
         // Only initial decoration: saplings and player-triggered tree growth remain available.
         if(!ci.getReturnValueZ() || !(level instanceof WorldGenRegion region)) return;
         var manager=region.getLevel().structureManager().forWorldGenRegion(region);
-        for(var start:manager.startsForStructure(SectionPos.of(pos).chunk(),s->s instanceof GasStationStructure || s instanceof MilitaryCampStructure))
-            if(start.getPieces().stream().anyMatch(p->p instanceof MilitaryCampPiece camp?camp.protectsDecoration(pos,region):p.getBoundingBox().isInside(pos))) { ci.setReturnValue(false); return; }
+        for(var start:manager.startsForStructure(SectionPos.of(pos).chunk(),s->s instanceof GasStationStructure || s instanceof MilitaryCampStructure || s instanceof CastleStructure))
+            if(start.getPieces().stream().anyMatch(p->p instanceof CastlePiece castle?castle.protectsDecoration(pos):p instanceof MilitaryCampPiece camp?camp.protectsDecoration(pos,region):p.getBoundingBox().isInside(pos))) { ci.setReturnValue(false); return; }
     }
 }

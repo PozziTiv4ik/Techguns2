@@ -12,7 +12,7 @@ import techguns.core.MilitaryCampRules;
 import techguns.modern.world.structure.camp.*;
 import techguns.modern.world.structure.camp.CampPart.BiomeColorType;
 
-/** First of the two original big LAND tickets; Castle's unported ticket remains empty. */
+/** First of the two original big LAND tickets; Castle owns the other ticket. */
 public final class MilitaryCampStructure extends Structure {
     public static final MapCodec<MilitaryCampStructure> CODEC=simpleCodec(MilitaryCampStructure::new);
     public MilitaryCampStructure(StructureSettings settings) { super(settings); }

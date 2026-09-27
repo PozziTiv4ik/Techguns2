@@ -1,6 +1,6 @@
 # Продолжение работы в новом чате
 
-Обновлено 2026-09-27 после MilitaryCamp и успешного Linux CI #72.
+Обновлено 2026-09-27 после локальной проверки Castle.
 Перед разработкой прочитать [порядок работы](DEVELOPMENT_WORKFLOW.ru.md),
 затем проверить Git. [AGENTS.md](../AGENTS.md) обязателен для всего проекта.
 
@@ -13,87 +13,88 @@
 | Writable fork / origin | `PozziTiv4ik/Techguns2` |
 | Оригинал / upstream, только чтение | `pWn3d1337/Techguns2` |
 | Платформа | Minecraft 26.2 / NeoForge 26.2.0.81 / Java 25 |
-| Последний проверенный код | `2fb998f08ae48145de23175a8f280277cd158330` — MilitaryCamp |
-| Linux CI кода | [Linux CI #72](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36338938613), success; 2026-09-27 20:13 Europe/Zurich |
+| Локально проверенный срез | Castle; Linux CI нового source commit ожидается |
+| Предыдущий проверенный код | `2fb998f08ae48145de23175a8f280277cd158330`, [Linux CI #72](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36338938613), MilitaryCamp |
 
-MilitaryCamp перенесён как процедурная структура: списки компонентов
-13/7/2, исходные размеры/повторы, рельеф, дороги/ограда, все постройки,
-военные ящики, две вложенные таблицы сундуков и конечные посты солдат/вертолёта.
-План сохраняется до размещения по чанкам. Природная генерация включена;
-билет пока не перенесённого Castle сохранён. См. [MILITARY_CAMP.ru.md](MILITARY_CAMP.ru.md).
+Castle перенесён как процедурный замок с исходным MazeDungeonPath:
+пять попыток, комнаты/развилки/лестницы, фундаменты/опоры/крыши, шесть
+семей / 96 сегментов / 12 750 клеток шаблонов. Полный граф, блоки,
+сундуки, seed и конечные HOLE-посты сохраняются до размещения по чанкам.
+Природная генерация и защита стен от соседних залежей проверены.
+Оба больших LAND-кандидата теперь работают с весами 1:1.
+См. [CASTLE.ru.md](CASTLE.ru.md).
 
-Локально прошли **222 JUnit, 396 Python и 2109 GameTests (2045 + 48 + 16)**; основной сервер включает
-2044 Techguns и один встроенный тест. Python — единый discover без пропусков.
-Генератор: 2410 файлов; 2297 ресурсных записей JAR совпали
+Локально прошли **229 JUnit, 402 Python и 2219 GameTests (2153 + 50 + 16)**; основной сервер включает
+2152 Techguns и один встроенный тест. Python — единый discover без пропусков.
+Генератор: 2417 файлов; 2301 ресурсная запись JAR совпала
 побайтово. Лицензия, legacy и исключение тестовых паков проверены.
 Подробности — последний раздел [VERIFICATION.ru.md](VERIFICATION.ru.md).
-Локальные `.tools/camp-*` помогают, но их отсутствие не блокирует новый клон.
+Локальные `.tools/castle-*` помогают, но их отсутствие не блокирует новый клон.
 
-Linux CI #72 подтвердил именно указанный source SHA: 396 Python единым
-discover, сборку/ядро и все 2109 GameTests. Все 13 шагов успешны.
-После source SHA меняется только документация с `[skip ci]`. Текущий HEAD
-получать из Git, не принимать source SHA за последний коммит ветки.
-Незавершённой реализации и известных красных проверок этого среза нет.
-Не повторять проверки без изменений или сомнений.
+Сначала завершить exact-SHA Linux CI этого source commit и записать
+документационный checkpoint с `[skip ci]`, если это ещё не сделано по Git.
 
-## Следующий законченный срез — CastleStructure / PresetCastle
+## Следующий законченный срез — AircraftCarrier
 
-Перенести второй большой LAND-кандидат: настоящий процедурный замок с
-исходным графом подземелья, шестью наборами сегментов, снабжением и охраной.
-Не заменять его одной декоративной постройкой и не перераспределять вес
-пока не перенесённого AircraftCarrier из отдельной WATER-таблицы.
+Перенести большой WATER-кандидат как настоящий авианосец с полной
+геометрией, снабжением и конечными NPC. Его билет отдельный от LAND 1:1;
+не отдавать ему веса MilitaryCamp или Castle и не размещать его на суше.
 
-Исходники под `legacy/1.12.2/src/main/java/techguns/`:
+Исходники под `legacy/1.12.2/src/main/`:
 
-- `world/structures/CastleStructure.java`, `WorldgenStructure.java`;
-- `world/dungeon/Dungeon.java`, `DungeonTemplate.java`, `DungeonSegment.java`,
-  `MazeDungeonPath.java`, `TemplateSegment.java`, `IDungeonPath.java`;
-- `world/dungeon/presets/PresetCastle.java`, `IDungeonPreset.java`;
-- палитры и specialblocks, на которые фактически ссылаются сегменты.
+- `java/techguns/world/structures/AircraftCarrier.java`, `WorldgenStructure.java`,
+  `MBlockRegister.java` в той же папке;
+- `java/techguns/util/BlockUtils.java`: `getValidSpawnYWater`,
+  `getHeightValueLiquid`, `placeScannedStructure` и повороты;
+- `java/techguns/world/TGStructureSpawnRegister.java` и `WorldGenTGStructureSpawn.java`;
+- `resources/assets/techguns/structures/aircraft_carrier`;
+- `resources/assets/techguns/loot_tables/chests/aircraftcarrier.json`;
+- `java/techguns/world/dungeon/presets/specialblocks/MBlockTGSpawner.java`,
+  `MBlockChestLoottable.java`, фактические реализации MBlockRegister.
 
-Castle выбирает X/Z независимо 32..47, Y 24..39; heightdiffLimit=10,
-наследуемый шаг проверки 4. Сверить исходные поворот, origin shift,
-выбор поверхности и смещение `posY+1-PRESET_CASTLE.getSizeY()`.
-Dungeon допускает пять попыток; восстановить активные ветки MazeDungeonPath,
-ограничения объёма, уровни, лестницы, развилки, комнаты, опоры и крышу.
-PresetCastle: startHeightLevel=1, chanceStraight=.8, chanceRamp=.5,
-chanceRoom=.25, chanceFork=.4, chanceUp=.65; foundations/pillars/roof включены.
+Регистрация: 54×24×21, X/Z 54/21. Скан содержит 3967 записей,
+3929 уникальных позиций, 41 индекс палитры. Сохранить порядок двух
+проходов и 38 повторных позиций; не удалять дубликаты до разбора слоёв.
+Сверить все варианты панелей, ламп, двери, лестницы, alias/fallbacks,
+SUPPLY_CRATES и SUPPLY_CRATES_CHANCE. Их базовый контент уже есть,
+но фактическую палитру нужно проверить по оригиналу.
 
-Все шесть исходных файлов находятся в
-`legacy/1.12.2/src/main/resources/assets/techguns/dungeons/`:
-`ncdung1.ser`, `nclower1.ser`, `ncmid1.ser`, `ncupper1.ser`, `nctop1.ser`,
-`ncroof1.ser`. Это сериализованные шаблоны: сначала разобрать их формат,
-все клетки/палитры/метаданные и реальные зависимости. Недостающие блоки
-переносить по исходнику, не подменять содержимое молча.
+Исходный water-check берёт четыре угла неповёрнутого прямоугольника,
+требует жидкость и разницу с первым углом строго меньше 2; высота —
+среднее двух центральных значений отсортированной четвёрки. Затем y−3,
+случайный поворот и исходный pivot/shift. Сверить, как эта семантика
+адаптируется к современной воде и границам чанков.
 
-Охрана PresetCastle: 2 смерти / 2 активных / 200 тиков / радиус 2,
-ZombieSoldier:SkeletonSoldier = 1:1. Оба NPC уже работают.
-`loot_tables/chests/castle.json`: gun 1..2, generic 3..6,
-ammo/explosives/armor 3..6 с весами 3:1:2; это вложенные loot tables.
-Все шесть целевых таблиц `techguns:blocks/military_crate_*` уже готовы.
+В скане девять HOLE-позиций с ArmySoldier:Commando=1:1, 6 смертей /
+2 активных / 150 тиков / радиус 2; одна SOLDIER_SPAWN-позиция с
+AttackHelicopter, 1/1/200/0. MBlockTGSpawner не задаёт подъём 64,
+который был у отдельного поста MilitaryCamp; проверить именно этот путь.
+Флаг/старые spawn-point массивы закомментированы и не заменяют активные посты.
+Лут авианосца: вложенный gun 1..3 и generic 3..7; обе дочерние таблицы готовы.
 
-Большой LAND-пул должен остаться MilitaryCamp:Castle = 1:1. При добавлении
-отдельного native ID использовать тот же seed кандидата, как у существующих
-малых/средних структур; оба объекта не должны занимать одну точку.
-Проверить целый сохранённый план, все сегменты, границы чанков и повороты,
-настоящий лут/конечные смерти и положительные/отрицательные природные точки.
+Проверить полный скан, все повороты, water-check/сухопутный отказ,
+сохранение между чанками, настоящие сундуки/ящики, конечные смерти,
+две природные водные точки и сосуществование с LAND-кандидатами.
 
 ## Полезные современные точки
 
-`tools/legacy_military_camp.py`, `content/military-camp.json`,
-`core/src/main/java/techguns/core/MilitaryCampRules.java` и пакет
-`modern/world/structure/camp/` содержат воспроизводимые алгоритмы и адаптеры.
-Все классы modern находятся в `platforms/neoforge-26.2/src/main/java/techguns/modern/`.
-`MilitaryCampStructure` выполняет выбор/планирование; `MilitaryCampPiece`
-сохраняет весь план, seeds, chest/post данные и уже размещённые чанки.
+`tools/legacy_castle.py` декодирует `.ser` без запуска Java, конвертирует
+палитры и генерирует ядро `core/.../castle/`. Native `CastlePlan` и
+`CastlePiece` сохраняют целую раскладку; `MilitaryCampPiece` показывает
+планирование отдельного decoration RNG и активных военных постов.
+`FactoryHousePiece`, `TrainStationPiece` и другие небольшие локации
+показывают сканы/metadata/повороты и настоящие block entities.
 
-Снимок шумовых колонок и окончательная поверхность отличаются. Соединения
-блоков используют полный план плюс реальный нетронутый грунт; учитывают
-предстоящую очистку соседа и штатную финальную обработку ProtoChunk.
-SimpleBlockFeature/TreeFeature защищают поверхность только во время worldgen;
-игрок и последующее выращивание не блокируются. Не расширять защиту на весь
-подземный объём высокого bounding box. Военные ящики не контейнеры;
-`blocks/military_crate_*` — награды, `*_self` — обычные block drops.
+Native формы зависят от полного плана и фактического грунта. Поздние
+SimpleBlockFeature/TreeFeature защищают только план во время worldgen.
+`CastleOreProtectionMixin` также защищает камень данжа от соседних
+гравийных/андезитовых/рудных залежей, сохраняя расход RNG. Проверен
+обычный вызов OreFeature после генерации: защита там не действует.
+Не расширять ограничения на всё измерение или действия игрока.
+
+При radius=0 для native locate брать исходный chunk кандидата: повернутый
+origin Castle может уйти в предыдущую область сетки. Генерация Minecraft
+26.2 не обязана совпадать с координатами или глобальным RNG 1.12.2.
 
 Графическая приёмка, внешний Chisel, анимации и полная legacy FX-система
 остаются. Интерактивный клиент/рабочий стол не трогать. Полный порт остаётся

@@ -10,6 +10,7 @@
     "CamouflagePaneMixin",
     "HideoutDecorationProtectionMixin",
     "GasStationTreeProtectionMixin",
+    "CastleOreProtectionMixin",
     "NetherDeltaProtectionMixin",
     "NetherBasaltProtectionMixin",
     "WorldgenTestOptionsMixin"
