@@ -26,6 +26,7 @@ public final class NpcWeapons {
             case "rocketlauncher" -> new NpcAttackSpec(24.0, 80, 0, 0, 0.35);
             case "netherblaster" -> new NpcAttackSpec(24.0, 40, 0, 0, 0.0);
             case "chainsaw" -> new NpcAttackSpec(3.0, 10, 0, 0, 0.0);
+            case "grenadelauncher" -> new NpcAttackSpec(24.0, 40, 3, 20, 0.0);
             default -> throw new IllegalArgumentException("Unported NPC weapon: " + id);
         };
     }

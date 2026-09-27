@@ -27,6 +27,13 @@ public class GunItem extends Item {
         float accuracyMultiplier = techguns.modern.armor.TGArmorSystem.gunAccuracyMultiplier(player);
         if (aiming) accuracyMultiplier *= gun.aim().accuracyMultiplier();
         for (int pellet = 0; pellet < gun.projectileCount(); pellet++) {
+            if(gun.projectile()==techguns.core.ProjectileKind.GRENADE_40MM) {
+                var grenade=new Grenade40mmProjectile(TGContent.GRENADE_40MM.get(),server);
+                grenade.configure(gun);grenade.setOwner(player);grenade.shootLegacy(player,gun.stats().spread()*accuracyMultiplier);
+                if(!server.addFreshEntity(grenade)) return false;
+                stack.set(TGContent.LAUNCHER_SHOT_TIME.get(),server.getGameTime());
+                continue;
+            }
             if (gun.projectile() == techguns.core.ProjectileKind.CHAINSAW) {
                 var attack = new ChainsawAttack(TGContent.CHAINSAW_ATTACK.get(), server);
                 attack.configure(gun); attack.setOwner(player); attack.shootLegacy(player, gun.stats().spread() * accuracyMultiplier);

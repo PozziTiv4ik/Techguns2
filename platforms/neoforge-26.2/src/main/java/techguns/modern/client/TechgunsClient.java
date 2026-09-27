@@ -44,6 +44,7 @@ public final class TechgunsClient {
         modBus.addListener(GrenadeHandRendering::register);
         modBus.addListener(LaserBeamRenderer::pipelines);
         modBus.addListener(TechgunsClient::itemProperties);
+        modBus.addListener((net.neoforged.neoforge.client.event.RegisterItemModelsEvent event)->event.register(TGContent.id("grenade_launcher"),GrenadeLauncherModel.Unbaked.CODEC));
         NeoForge.EVENT_BUS.addListener(TechgunsClient::tick);
         NeoForge.EVENT_BUS.addListener(TechgunsClient::interaction);
         NeoForge.EVENT_BUS.addListener(TechgunsClient::fov);
@@ -186,6 +187,7 @@ public final class TechgunsClient {
         event.registerEntityRenderer(TGContent.LASER_BEAM.get(), LaserBeamRenderer::new);
         event.registerEntityRenderer(TGContent.ROCKET.get(), RocketRenderer::new);
         event.registerEntityRenderer(TGContent.HAND_GRENADE.get(), GrenadeRenderer::new);
+        event.registerEntityRenderer(TGContent.GRENADE_40MM.get(),Grenade40mmRenderer::new);
         event.registerEntityRenderer(TGContent.RADIATION_ZONE.get(), NoopRenderer::new);
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.SUPER_MUTANT.get(), SuperMutantRenderer::new);
         event.registerEntityRenderer(techguns.modern.npc.NpcContent.CYBER_DEMON.get(), CyberDemonRenderer::new);

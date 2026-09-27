@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:grenadelauncher",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 0
+    }
+  },
+  "pattern": [
+    "mrs",
+    " p "
+  ],
+  "key": {
+    "p": "#c:plates/steel",
+    "r": "techguns:steelreceiver",
+    "s": "techguns:plasticstock",
+    "m": "techguns:obsidiansteelbarrel"
+  }
+}

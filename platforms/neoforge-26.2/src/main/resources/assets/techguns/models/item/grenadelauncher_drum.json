@@ -1,0 +1,12 @@
+{
+  "loader": "neoforge:obj",
+  "model": "techguns:models/item/grenadelauncher_drum.obj",
+  "automatic_culling": false,
+  "flip_v": false,
+  "emissive_ambient": false,
+  "textures": {
+    "skin": "techguns:item/grenadelauncher",
+    "particle": "techguns:item/grenadelauncher"
+  },
+  "display": {}
+}

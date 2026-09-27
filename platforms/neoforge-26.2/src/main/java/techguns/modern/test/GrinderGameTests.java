@@ -49,6 +49,7 @@ final class GrinderGameTests {
             new Case("combatshotgun","ingotobsidiansteel=3,ingotsteel=2,plasticsheet=2"),
             new Case("mac10","ingotobsidiansteel=3,ingotsteel=6,minecraft:iron_ingot=1"),
             new Case("rocketlauncher","ingotobsidiansteel=6,ingotsteel=6"),
+            new Case("grenadelauncher","ingotobsidiansteel=3,ingotsteel=2,plasticsheet=2"),
             new Case("aug","ingotobsidiansteel=3,ingotsteel=2,plasticsheet=2"),
             new Case("netherblaster","ingotobsidiansteel=4,cyberneticparts=2"),
             new Case("lmg","ingotobsidiansteel=6,ingotsteel=4,plasticsheet=2"),
@@ -228,7 +229,7 @@ final class GrinderGameTests {
         var m=place(h); h.assertTrue(m.getBlockState().canOcclude(),"Source full opaque block"); h.assertValueEqual(m.getBlockState().getCollisionShape(h.getLevel(),m.getBlockPos()).bounds(),new AABB(0,0,0,1,1,1),"Original collision"); h.succeed();
     }
     private static void codec(GameTestHelper h) {
-        var manager=h.getLevel().getServer().getRecipeManager(); var records=manager.recipeMap().byType(GrinderContent.RECIPE.get()); h.assertValueEqual(records.size(),56,"All selected source records loaded");
+        var manager=h.getLevel().getServer().getRecipeManager(); var records=manager.recipeMap().byType(GrinderContent.RECIPE.get()); h.assertValueEqual(records.size(),57,"All selected source records, including GrenadeLauncher, loaded");
         for(var holder:records) {
             var buffer=new RegistryFriendlyByteBuf(Unpooled.buffer(),h.getLevel().registryAccess());
             try { GrinderRecipe.STREAM_CODEC.encode(buffer,holder.value()); var copy=GrinderRecipe.STREAM_CODEC.decode(buffer); h.assertValueEqual(copy.outputs(),holder.value().outputs(),"Output counts/factors/preferred tag survive codec"); } finally { buffer.release(); }

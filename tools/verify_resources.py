@@ -23,6 +23,9 @@ def require(path):
 
 
 def check_item_model(definition):
+    if definition['type']=='techguns:grenade_launcher':
+        for name in ('grenadelauncher','grenadelauncher_body','grenadelauncher_drum'):require(ASSETS/'models/item'/f'{name}.json')
+        return
     if definition['type'] == 'minecraft:model':
         require(local_path(definition['model'], 'models', '.json'))
     elif definition['type'] == 'minecraft:select' and definition['property'] in ('minecraft:display_context', 'minecraft:component'):

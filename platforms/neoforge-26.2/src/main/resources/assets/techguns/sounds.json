@@ -284,6 +284,20 @@
     ],
     "subtitle": "subtitles.techguns.guns.powerhammerreload"
   },
+  "guns.grenadelauncherfire": {
+    "sounds": [
+      "techguns:guns/grenadelauncher_shot_a",
+      "techguns:guns/grenadelauncher_shot_b",
+      "techguns:guns/grenadelauncher_shot_c"
+    ],
+    "subtitle": "subtitles.techguns.guns.grenadelauncherfire"
+  },
+  "guns.grenadelauncherreload": {
+    "sounds": [
+      "techguns:guns/grenadelauncher_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.grenadelauncherreload"
+  },
   "machines.ammopresswork1": {
     "sounds": [
       "techguns:machines/ammopress_work1_a",

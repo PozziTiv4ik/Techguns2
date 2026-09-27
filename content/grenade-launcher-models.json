@@ -1,0 +1,37 @@
+{
+  "parts": [
+    {
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/models/item/grenadelauncher.obj",
+      "model": "grenadelauncher_body",
+      "vertices": 218,
+      "faces": 324,
+      "uvs": 506,
+      "scale": 0.0625
+    },
+    {
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/models/item/grenadelauncher_1.obj",
+      "model": "grenadelauncher_drum",
+      "vertices": 12,
+      "faces": 12,
+      "uvs": 8,
+      "scale": 0.0625
+    },
+    {
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/models/item/grenade40mm.obj",
+      "model": "grenade40mm",
+      "vertices": 10,
+      "faces": 16,
+      "uvs": 10,
+      "scale": 1
+    }
+  ],
+  "drum_pivot": [
+    0,
+    -2,
+    0
+  ],
+  "drum_degrees": 60,
+  "recoil_ticks": 5,
+  "projectile_scale": 0.5,
+  "projectile_tumbles": false
+}

@@ -64,6 +64,9 @@ final class ArsenalGameTests {
         } else if (gun.projectile() == techguns.core.ProjectileKind.CHAINSAW) {
             var attacks=helper.getLevel().getEntitiesOfClass(techguns.modern.ChainsawAttack.class,player.getBoundingBox().inflate(3),a -> a.getOwner()==player);
             helper.assertValueEqual(attacks.size(),1,"One physical chain attack"); attacks.forEach(techguns.modern.ChainsawAttack::discard);
+        } else if (gun.projectile() == techguns.core.ProjectileKind.GRENADE_40MM) {
+            var grenades=helper.getLevel().getEntitiesOfClass(techguns.modern.Grenade40mmProjectile.class,player.getBoundingBox().inflate(3),p->p.getOwner()==player);
+            helper.assertValueEqual(grenades.size(),1,"One 40mm grenade per shot");helper.assertValueEqual(grenades.getFirst().weapon(),gun,"Correct launcher parameters");grenades.forEach(techguns.modern.Grenade40mmProjectile::discard);
         } else if (gun.projectile() == techguns.core.ProjectileKind.NETHER_BLASTER) {
             var blasts = helper.getLevel().getEntitiesOfClass(techguns.modern.NetherBlasterProjectile.class, player.getBoundingBox().inflate(3), b -> b.getOwner() == player);
             helper.assertValueEqual(blasts.size(), 1, "One Nether Blaster charge");

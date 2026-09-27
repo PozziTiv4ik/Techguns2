@@ -41,6 +41,10 @@ public final class NpcCombat {
                     var rocket = new RocketProjectile(TGContent.ROCKET.get(), level); rocket.configure(gun, RocketAmmo.variant(stack), false); rocket.npcDamage(damage);
                     rocket.setOwner(npc); rocket.shootLegacy(npc, spread); projectile = rocket;
                 }
+                case GRENADE_40MM -> {
+                    var grenade=new Grenade40mmProjectile(TGContent.GRENADE_40MM.get(),level);grenade.configure(gun);grenade.npcDamage(damage);
+                    grenade.setOwner(npc);grenade.shootLegacy(npc,spread);projectile=grenade;
+                }
                 case NETHER_BLASTER -> {
                     var blast = new NetherBlasterProjectile(TGContent.NETHER_BLAST.get(), level); blast.configure(gun); blast.npcDamage(damage);
                     blast.setOwner(npc); blast.shootLegacy(npc, spread, false); projectile = blast;
@@ -53,6 +57,7 @@ public final class NpcCombat {
             }
             projectile.setPos(projectile.position().add(projectile.getDeltaMovement().scale(ai.forwardOffset() / gun.stats().projectileSpeed())));
             if (!level.addFreshEntity(projectile)) { if (n == 0) return false; else continue; }
+            if(projectile instanceof Grenade40mmProjectile) stack.set(TGContent.LAUNCHER_SHOT_TIME.get(),level.getGameTime());
             if (projectile instanceof LaserBeam beam) beam.trace();
         }
         level.playSound(null, npc.getX(), npc.getY(), npc.getZ(), TGContent.SOUND_EVENTS.get(gun.fireSound()).get(), SoundSource.HOSTILE, 4, 1);

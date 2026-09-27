@@ -1,0 +1,12 @@
+{
+  "loader": "neoforge:obj",
+  "model": "techguns:models/item/grenade40mm.obj",
+  "automatic_culling": false,
+  "flip_v": false,
+  "emissive_ambient": false,
+  "textures": {
+    "skin": "techguns:item/grenade40mm",
+    "particle": "techguns:item/grenade40mm"
+  },
+  "display": {}
+}

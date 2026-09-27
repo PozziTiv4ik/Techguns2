@@ -50,6 +50,8 @@ class ModelPortTests(unittest.TestCase):
 
     def test_all_selected_constructor_boxes_survive_and_fit(self):
         for identifier, class_name in SELECTION.items():
+            # Native source OBJ parts are checked vertex/UV/face-wise in test_grenade_launcher.
+            if class_name=='ModelBaseBakedGrenadeLauncher':continue
             source = (LEGACY / f'java/techguns/client/models/guns/{class_name}.java').read_text()
             _, _, shapes = extract_shapes(source, class_name)
             if any(s['inflate'] != 0 or s['render_scale'] != [1,1,1] or s['mirror'] for s in shapes) or identifier in ('m4_infiltrator','chainsaw'):

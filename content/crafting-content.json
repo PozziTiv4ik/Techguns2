@@ -323,6 +323,10 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/goldenrevolver_ammo_incendiary.json"
     },
     {
+      "id": "techguns:grenadelauncher",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/grenadelauncher.json"
+    },
+    {
       "id": "techguns:handcannon",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/handcannon.json"
     },

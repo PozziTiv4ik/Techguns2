@@ -41,6 +41,8 @@ public final class TGContent {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<techguns.core.BallisticVariant>> BALLISTIC_VARIANT = COMPONENTS.registerComponentType(
             "ballistic_variant", builder -> builder.persistent(BallisticAmmo.CODEC).networkSynchronized(ByteBufCodecs.STRING_UTF8.map(techguns.core.BallisticVariant::fromId, techguns.core.BallisticVariant::id)));
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Techguns.MOD_ID);
+    public static final DeferredHolder<DataComponentType<?>,DataComponentType<Long>> LAUNCHER_SHOT_TIME = COMPONENTS.registerComponentType(
+            "launcher_shot_time",builder->builder.networkSynchronized(ByteBufCodecs.VAR_LONG).ignoreSwapAnimation());
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, Techguns.MOD_ID);
     public static final Map<String, DeferredItem<Item>> AMMO = registerAmmo();
     public static final Map<String, DeferredItem<Item>> MATERIALS = registerMaterials();
@@ -71,6 +73,9 @@ public final class TGContent {
     public static final DeferredHolder<EntityType<?>, EntityType<GrenadeProjectile>> HAND_GRENADE = ENTITIES.register("hand_grenade", () ->
             EntityType.Builder.<GrenadeProjectile>of(GrenadeProjectile::new, MobCategory.MISC).sized(.25f,.25f).clientTrackingRange(12).updateInterval(1)
                     .build(ResourceKey.create(Registries.ENTITY_TYPE,id("hand_grenade"))));
+    public static final DeferredHolder<EntityType<?>,EntityType<Grenade40mmProjectile>> GRENADE_40MM=ENTITIES.register("grenade40mm",()->
+            EntityType.Builder.<Grenade40mmProjectile>of(Grenade40mmProjectile::new,MobCategory.MISC).sized(.25f,.25f).clientTrackingRange(12).updateInterval(1)
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE,id("grenade40mm"))));
     public static final DeferredHolder<SoundEvent, SoundEvent> GRENADE_PIN = SOUNDS.register("guns.grenade_pin", () -> SoundEvent.createFixedRangeEvent(id("guns.grenade_pin"),24));
     public static final DeferredHolder<EntityType<?>, EntityType<techguns.modern.radiation.RadiationZone>> RADIATION_ZONE = ENTITIES.register("radiation_zone", () ->
             EntityType.Builder.<techguns.modern.radiation.RadiationZone>of(techguns.modern.radiation.RadiationZone::new, MobCategory.MISC).sized(.1f, .1f).clientTrackingRange(0).updateInterval(Integer.MAX_VALUE)
