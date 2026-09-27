@@ -36,6 +36,7 @@ public final class Techguns {
         techguns.modern.world.TGOreConfig.register(container);
         techguns.modern.world.NetherMetalContent.register(modBus);
         techguns.modern.world.BuildingContent.register(modBus);
+        techguns.modern.world.MetalStairContent.register(modBus);
         techguns.modern.world.FortificationContent.register(modBus);
         techguns.modern.world.CamouflageNetContent.register(modBus);
         techguns.modern.world.NeonContent.register(modBus);

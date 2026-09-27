@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "techguns:block/steelframe_dark",
+    "top": "techguns:block/steelframe_dark",
+    "side": "techguns:block/steelframe_dark"
+  }
+}

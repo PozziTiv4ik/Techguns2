@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "result": {
+    "id": "techguns:metalpanel_steelframe_dark",
+    "count": 1
+  },
+  "ingredients": [
+    "techguns:stairs_metal_dark"
+  ]
+}

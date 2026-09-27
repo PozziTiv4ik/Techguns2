@@ -22,6 +22,7 @@ from legacy_camonets import RECIPES as CAMONET_RECIPES, FAMILIES as CAMONET_FAMI
 from legacy_neon import RECIPES as NEON_RECIPES, neon_id, neon_definition
 from legacy_military_crates import crate_id, crate_definition
 from legacy_grenades import RECIPES as GRENADE_RECIPES
+from legacy_metal_stairs import RECIPES as METAL_STAIR_RECIPES, VARIANTS as METAL_STAIRS
 from legacy_incendiary import incendiary_for
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -40,6 +41,7 @@ def convert_recipe(legacy, shared, weapons):
         if identifier == 'techguns:military_crate': return 'techguns:'+crate_id(value.get('data',0))
         if identifier.startswith('techguns:') and identifier.split(':')[1] in CAMONET_FAMILIES:
             return 'techguns:' + net_id(identifier.split(':')[1], value.get('data', 0))
+        if identifier == 'techguns:stairs_metal': return 'techguns:'+METAL_STAIRS[1 if value.get('data',0) & 8 else 0]
         if identifier == 'techguns:lamp0': return 'techguns:'+lamp_id(value.get('data',0))
         if identifier.removeprefix('techguns:') in BUILDING_FAMILIES and identifier.startswith('techguns:'):
             return 'techguns:'+building_id(identifier.split(':')[1], value.get('data', 0))
@@ -129,6 +131,7 @@ def plan_crafting(weapon_list):
     selected['simplemachine_8_camo_bench'] = source_recipes['simplemachine_8_camo_bench']
     selected['simplemachine2_8_grinder'] = source_recipes['simplemachine2_8_grinder']
     selected['nethermetal_0'] = source_recipes['nethermetal_0']
+    for name in METAL_STAIR_RECIPES: selected[name] = source_recipes[name]
     for name in BUILDING_RECIPES: selected[name] = source_recipes[name]
     for name in FORTIFICATION_RECIPES: selected[name] = source_recipes[name]
     for name in CAMONET_RECIPES: selected[name] = source_recipes[name]
@@ -232,6 +235,7 @@ def plan_crafting(weapon_list):
                'pending_upgrade_recipes': [name + '.json' for name in pending]}
     catalog['block_metadata'].update({f'techguns:multiblockmachine@{meta}':'techguns:'+part for meta,part in enumerate(FABRICATOR_PARTS+REACTION_PARTS)})
     catalog['block_metadata'].update({f'techguns:oredrill@{meta}':'techguns:oredrill_'+part for meta,part in enumerate(DRILL_PARTS)})
+    catalog['block_metadata'].update({f'techguns:stairs_metal@{7+8*i}':'techguns:'+name for i,name in enumerate(METAL_STAIRS)})
     catalog['block_metadata']['techguns:simplemachine@10'] = 'techguns:charging_station'
     catalog['block_metadata']['techguns:simplemachine@9'] = 'techguns:repair_bench'
     catalog['block_metadata']['techguns:simplemachine@8'] = 'techguns:camo_bench'

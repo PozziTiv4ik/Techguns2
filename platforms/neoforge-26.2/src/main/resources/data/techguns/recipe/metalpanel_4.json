@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "result": {
+    "id": "techguns:metalpanel_panel_large_border",
+    "count": 1
+  },
+  "ingredients": [
+    "techguns:stairs_metal"
+  ]
+}

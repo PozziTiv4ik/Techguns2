@@ -106,6 +106,7 @@ JUnit и GameTests ищите по [карте кода](../docs/CODE_MAP.ru.md#
 | Камуфляжные сети | [legacy_camonets.py](legacy_camonets.py) | [test_camonets.py](tests/test_camonets.py) |
 | Neonlights | [legacy_neon.py](legacy_neon.py) | [test_neon.py](tests/test_neon.py) |
 | Военные ящики | [legacy_military_crates.py](legacy_military_crates.py) | [test_military_crates.py](tests/test_military_crates.py) |
+| Металлические ступени, включая зависимость авианосца | [legacy_metal_stairs.py](legacy_metal_stairs.py), рецепты — [legacy_crafting.py](legacy_crafting.py) | [test_aircraft_carrier.py](tests/test_aircraft_carrier.py) |
 
 <a id="structures"></a>
 
@@ -129,6 +130,7 @@ JUnit и GameTests ищите по [карте кода](../docs/CODE_MAP.ru.md#
 | SmallMine | [legacy_small_mine.py](legacy_small_mine.py) | [test_small_mine.py](tests/test_small_mine.py) |
 | MilitaryBaseStructure / MilitaryCamp | [legacy_military_camp.py](legacy_military_camp.py) | [test_military_camp.py](tests/test_military_camp.py) |
 | CastleStructure / PresetCastle, чтение .ser как данных | [legacy_castle.py](legacy_castle.py), [legacy_java_serialization.py](legacy_java_serialization.py) | [test_castle.py](tests/test_castle.py) |
+| AircraftCarrier: полный скан, два прохода и WATER-билет | [legacy_aircraft_carrier.py](legacy_aircraft_carrier.py) | [test_aircraft_carrier.py](tests/test_aircraft_carrier.py) |
 
 ## Команды поиска и регенерации
 

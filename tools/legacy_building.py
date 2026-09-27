@@ -8,7 +8,7 @@ from legacy_models import strip_comments
 
 FAMILIES = {'metalpanel': 'TGMetalPanelType', 'concrete': 'EnumConcreteType', 'ladder0': 'EnumLadderType'}
 RECIPES = ('metalpanel_0', 'metalpanel_0_alt', 'concrete_0', 'ladder0_8', 'ladder0_8_alt')
-PENDING_RECIPES = ('metalpanel_4', 'metalpanel_6', 'concrete_1', 'concrete_3')
+PENDING_RECIPES = ('concrete_1', 'concrete_3')
 
 
 def building_definitions():

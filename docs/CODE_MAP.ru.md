@@ -68,7 +68,10 @@ Java-ссылки ведут прямо к классам адаптера и с
 [legacy_locations.py](../tools/legacy_locations.py). Общие современные сетки:
 [SmallNetherStructure](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/SmallNetherStructure.java), [MediumNetherStructure](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/MediumNetherStructure.java), [SmallOverworldStructure](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/SmallOverworldStructure.java).
 Большой LAND-выбор связывает MilitaryCamp и Castle; правила выбора нельзя
-менять только в одном кандидате. WATER-пул рассматривается отдельно.
+менять только в одном кандидате. WATER-пул содержит AircraftCarrier и рассматривается отдельно.
+[PlannedBlocks](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/PlannedBlocks.java)
+вычисляет соединения блоков по полному плану для Castle и AircraftCarrier.
+Ступени палитры регистрирует [MetalStairContent](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/MetalStairContent.java).
 
 | Имя оригинала / поиск | Современное размещение | Извлечение данных | GameTests |
 |---|---|---|---|
@@ -92,6 +95,7 @@ Java-ссылки ведут прямо к классам адаптера и с
 | [SmallMine](../legacy/1.12.2/src/main/java/techguns/world/structures/SmallMine.java) | [SmallMineStructure](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/SmallMineStructure.java), [SmallMinePiece](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/SmallMinePiece.java) | [legacy_small_mine.py](../tools/legacy_small_mine.py) | [SmallMineGameTests](../platforms/neoforge-26.2/src/main/java/techguns/modern/test/SmallMineGameTests.java) |
 | [MilitaryBaseStructure](../legacy/1.12.2/src/main/java/techguns/world/structures/MilitaryBaseStructure.java) | [MilitaryCampStructure](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/MilitaryCampStructure.java), [MilitaryCampPiece](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/MilitaryCampPiece.java) | [legacy_military_camp.py](../tools/legacy_military_camp.py) | [MilitaryCampGameTests](../platforms/neoforge-26.2/src/main/java/techguns/modern/test/MilitaryCampGameTests.java) |
 | [CastleStructure](../legacy/1.12.2/src/main/java/techguns/world/structures/CastleStructure.java) | [CastleStructure](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/CastleStructure.java), [CastlePiece](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/CastlePiece.java) | [legacy_castle.py](../tools/legacy_castle.py) | [CastleGameTests](../platforms/neoforge-26.2/src/main/java/techguns/modern/test/CastleGameTests.java) |
+| [AircraftCarrier](../legacy/1.12.2/src/main/java/techguns/world/structures/AircraftCarrier.java) | [AircraftCarrierStructure](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/AircraftCarrierStructure.java), [AircraftCarrierPiece](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/AircraftCarrierPiece.java), [AircraftCarrierPlan](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/AircraftCarrierPlan.java) | [legacy_aircraft_carrier.py](../tools/legacy_aircraft_carrier.py) | [AircraftCarrierGameTests](../platforms/neoforge-26.2/src/main/java/techguns/modern/test/AircraftCarrierGameTests.java) |
 
 Процедурные планы имеют отдельные точки входа: [CampLayout](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/camp/CampLayout.java), [CastlePlan](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/CastlePlan.java), [BugNestLayout](../core/src/main/java/techguns/core/BugNestLayout.java), [CastleLayout](../core/src/main/java/techguns/core/castle/CastleLayout.java).
 Если современной реализации нет в карте, сверить [статус](STATUS.ru.md),

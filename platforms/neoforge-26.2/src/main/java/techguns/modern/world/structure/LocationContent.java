@@ -10,6 +10,8 @@ import techguns.modern.Techguns;
 public final class LocationContent {
     private static final DeferredRegister<StructureType<?>> TYPES=DeferredRegister.create(Registries.STRUCTURE_TYPE,Techguns.MOD_ID);
     private static final DeferredRegister<StructurePieceType> PIECES=DeferredRegister.create(Registries.STRUCTURE_PIECE,Techguns.MOD_ID);
+    public static final DeferredHolder<StructureType<?>,StructureType<AircraftCarrierStructure>> AIRCRAFT_CARRIER=TYPES.register("aircraft_carrier",()->()->AircraftCarrierStructure.CODEC);
+    public static final DeferredHolder<StructurePieceType,StructurePieceType> AIRCRAFT_CARRIER_PIECE=PIECES.register("aircraft_carrier",()->AircraftCarrierPiece::new);
     public static final DeferredHolder<StructureType<?>,StructureType<CastleStructure>> CASTLE=TYPES.register("castle",()->()->CastleStructure.CODEC);
     public static final DeferredHolder<StructurePieceType,StructurePieceType> CASTLE_PIECE=PIECES.register("castle",()->CastlePiece::new);
     public static final DeferredHolder<StructureType<?>,StructureType<MilitaryCampStructure>> MILITARY_CAMP=TYPES.register("military_camp",()->()->MilitaryCampStructure.CODEC);

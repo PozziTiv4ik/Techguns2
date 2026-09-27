@@ -113,6 +113,7 @@
 - [SmallMine: малая шахта, рудные смеси, охрана и добыча буром](SMALL_MINE.ru.md)
 - [Процедурный военный лагерь MilitaryCamp](MILITARY_CAMP.ru.md)
 - [Процедурный замок Castle](CASTLE.ru.md)
+- [AircraftCarrier: авианосец, снабжение и конечные встречи](AIRCRAFT_CARRIER.ru.md)
 
 ## Исходный каталог
 

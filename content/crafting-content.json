@@ -141,6 +141,8 @@
     "techguns:oredrill@2": "techguns:oredrill_rod",
     "techguns:oredrill@3": "techguns:oredrill_engine",
     "techguns:oredrill@4": "techguns:oredrill_controller",
+    "techguns:stairs_metal@7": "techguns:stairs_metal",
+    "techguns:stairs_metal@15": "techguns:stairs_metal_dark",
     "techguns:simplemachine@10": "techguns:charging_station",
     "techguns:simplemachine@9": "techguns:repair_bench",
     "techguns:simplemachine@8": "techguns:camo_bench",
@@ -788,6 +790,14 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/metalpanel_0_alt.json"
     },
     {
+      "id": "techguns:metalpanel_4",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/metalpanel_4.json"
+    },
+    {
+      "id": "techguns:metalpanel_6",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/metalpanel_6.json"
+    },
+    {
       "id": "techguns:fabricator_housing",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/multiblockmachine_0_fabricator_housing.json"
     },
@@ -942,6 +952,14 @@
     {
       "id": "techguns:repair_bench",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/simplemachine_9_repair_bench.json"
+    },
+    {
+      "id": "techguns:stairs_metal_15",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/stairs_metal_15.json"
+    },
+    {
+      "id": "techguns:stairs_metal_7",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/stairs_metal_7.json"
     },
     {
       "id": "techguns:stielgranate",

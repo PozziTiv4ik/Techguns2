@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "techguns:block/panel_large_border",
+    "top": "techguns:block/panel_large_border",
+    "side": "techguns:block/panel_large_border"
+  }
+}

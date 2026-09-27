@@ -58,6 +58,8 @@
     "techguns:reactionchamber_controller",
     "techguns:reactionchamber_glass",
     "techguns:reactionchamber_housing",
-    "techguns:repair_bench"
+    "techguns:repair_bench",
+    "techguns:stairs_metal",
+    "techguns:stairs_metal_dark"
   ]
 }
