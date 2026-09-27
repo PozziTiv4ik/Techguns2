@@ -10,7 +10,7 @@
 |---|---|---|
 | Форк, исходная история, лицензия | Готово | Оригинал сохранён в `legacy/1.12.2`; upstream-коммит зафиксирован |
 | План и каталог | Готово | 15 этапов, 761 Java-файл, 44 записи оружия |
-| Современная сборка | MilitaryCamp проверен на Windows; Linux CI нового source commit ожидается | Gradle 9.2.1, Java 25, ModDevGradle 2.0.146; 222 JUnit, 396 Python и 2109 GameTests (2045 + 48 + 16), JAR |
+| Современная сборка | MilitaryCamp проверен на Windows и [Linux CI #72](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36338938613), source commit `2fb998f` | Gradle 9.2.1, Java 25, ModDevGradle 2.0.146; 222 JUnit, 396 Python и 2109 GameTests (2045 + 48 + 16), JAR |
 | Общее ядро | Проверено unit-тестами | Ёмкость, расход, запрет выстрела, bundle reload, падение урона |
 | Защита и пробитие | Частично | Исходная формула пуль и пробития; ENERGY/EXPLOSION учитывают половину обычной брони и сопротивление ведьм магии; обычная броня не защищает от кислоты, как от legacy poison; собственная защита пятнадцати NPC, включая нулевую у Farmer/Miner/SkeletonSoldier/Ghastling, и FIRE-урон бластера/зажигательных патронов; для T1 Combat/T1 Miner/T1 Scout/T2 Combat/T2 Commando/Hazmat и берета игрока отдельное поглощение по частям, износ и смешанная обычная броня. Остальные комплекты/системы ещё переносятся |
 | Обычный баллистический арсенал | Частично, 17 серверных циклов проверены | Ручная пушка, обрез, два револьвера, Thompson, болтовая винтовка, боевой дробовик, пистолет, AK-47, M4, Infiltrator, LMG, MAC-10, AS50, AUG, SCAR, Vector |
@@ -502,7 +502,9 @@ Fortune, защитные события, подбор и применение �
 реальные сундуки и смерти охраны, природные точки и защита от поздней декорации.
 Полный Python discover: 617.162 с, без пропусков;
 2297 ресурсных записей JAR совпали побайтово, лицензия и legacy сохранены.
-Linux CI нового source commit ожидается. Подробности:
+[Linux CI #72](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36338938613) подтвердил точный source commit `2fb998f08ae48145de23175a8f280277cd158330`:
+396 Python единым discover, сборку/ядро и все 2109 GameTests;
+все 13 шагов успешны. Завершение: 2026-09-27 20:13 Europe/Zurich. Подробности:
 [MILITARY_CAMP.ru.md](MILITARY_CAMP.ru.md) и [VERIFICATION.ru.md](VERIFICATION.ru.md).
 
 ## Следующий этап

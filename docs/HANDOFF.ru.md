@@ -1,6 +1,6 @@
 # Продолжение работы в новом чате
 
-Обновлено 2026-09-27 после локальной проверки MilitaryCamp.
+Обновлено 2026-09-27 после MilitaryCamp и успешного Linux CI #72.
 Перед разработкой прочитать [порядок работы](DEVELOPMENT_WORKFLOW.ru.md),
 затем проверить Git. [AGENTS.md](../AGENTS.md) обязателен для всего проекта.
 
@@ -13,8 +13,8 @@
 | Writable fork / origin | `PozziTiv4ik/Techguns2` |
 | Оригинал / upstream, только чтение | `pWn3d1337/Techguns2` |
 | Платформа | Minecraft 26.2 / NeoForge 26.2.0.81 / Java 25 |
-| Локально проверенный срез | MilitaryCamp; Linux CI нового source commit ожидается |
-| Предыдущий проверенный код | `75b40502971460dd1a4f6854867dcd8030b6dcf4`, [Linux CI #71](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36333299515), военные ящики |
+| Последний проверенный код | `2fb998f08ae48145de23175a8f280277cd158330` — MilitaryCamp |
+| Linux CI кода | [Linux CI #72](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36338938613), success; 2026-09-27 20:13 Europe/Zurich |
 
 MilitaryCamp перенесён как процедурная структура: списки компонентов
 13/7/2, исходные размеры/повторы, рельеф, дороги/ограда, все постройки,
@@ -29,8 +29,12 @@ MilitaryCamp перенесён как процедурная структура
 Подробности — последний раздел [VERIFICATION.ru.md](VERIFICATION.ru.md).
 Локальные `.tools/camp-*` помогают, но их отсутствие не блокирует новый клон.
 
-Сначала завершить exact-SHA Linux CI этого source commit и записать
-документационный checkpoint с `[skip ci]`, если это ещё не сделано по Git.
+Linux CI #72 подтвердил именно указанный source SHA: 396 Python единым
+discover, сборку/ядро и все 2109 GameTests. Все 13 шагов успешны.
+После source SHA меняется только документация с `[skip ci]`. Текущий HEAD
+получать из Git, не принимать source SHA за последний коммит ветки.
+Незавершённой реализации и известных красных проверок этого среза нет.
+Не повторять проверки без изменений или сомнений.
 
 ## Следующий законченный срез — CastleStructure / PresetCastle
 

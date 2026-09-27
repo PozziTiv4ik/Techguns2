@@ -845,6 +845,8 @@ MilitaryCamp; его природная генерация ещё не вклю�
 ограда, ящики, вложенный лут и конечные посты солдат/вертолёта. План,
 семена и размещённые чанки сохраняются; поздняя декорация защищена.
 Локально прошли **222 JUnit, 396 Python и 2109 GameTests (2045 + 48 + 16)**; Python единым discover.
-Linux CI нового source commit ожидается. Следующий срез — CastleStructure /
+[Linux CI #72](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36338938613) подтвердил source commit `2fb998f08ae48145de23175a8f280277cd158330`:
+396 Python единым discover, сборку/ядро и все 2109 GameTests; 13 успешных шагов.
+Следующий срез — CastleStructure /
 PresetCastle; его билет сохранён в LAND-пуле 1:1. AircraftCarrier относится
 к WATER. Графическая приёмка остаётся. См. `docs/MILITARY_CAMP.ru.md`.
