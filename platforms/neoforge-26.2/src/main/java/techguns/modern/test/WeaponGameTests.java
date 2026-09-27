@@ -69,6 +69,7 @@ public final class WeaponGameTests {
         DesertOilGameTests.register(FUNCTIONS);
         GasStationGameTests.register(FUNCTIONS);
         TrainStationGameTests.register(FUNCTIONS);
+        FactoryHouseGameTests.register(FUNCTIONS);
         CommandoArmorGameTests.register(FUNCTIONS);
         BeretGameTests.register(FUNCTIONS);
         NpcSpawnerGameTests.register(FUNCTIONS);

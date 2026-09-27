@@ -37,6 +37,8 @@ public final class LocationContent {
     public static final DeferredHolder<StructurePieceType,StructurePieceType> GAS_PIECE=PIECES.register("gasstation",()->(context,tag)->new GasStationPiece(context.structureTemplateManager(),tag));
     public static final DeferredHolder<StructureType<?>,StructureType<TrainStationStructure>> TRAIN=TYPES.register("small_trainstation",()->()->TrainStationStructure.CODEC);
     public static final DeferredHolder<StructurePieceType,StructurePieceType> TRAIN_PIECE=PIECES.register("small_trainstation",()->(context,tag)->new TrainStationPiece(context.structureTemplateManager(),tag));
+    public static final DeferredHolder<StructureType<?>,StructureType<FactoryHouseStructure>> FACTORY=TYPES.register("factory_house_small",()->()->FactoryHouseStructure.CODEC);
+    public static final DeferredHolder<StructurePieceType,StructurePieceType> FACTORY_PIECE=PIECES.register("factory_house_small",()->(context,tag)->new FactoryHousePiece(context.structureTemplateManager(),tag));
     private LocationContent() {}
     public static final DeferredHolder<StructureType<?>,StructureType<NetherMediumAltarStructure>> MEDIUM_ALTAR=TYPES.register("nether_altar_medium",()->()->NetherMediumAltarStructure.CODEC);
     public static final DeferredHolder<StructurePieceType,StructurePieceType> MEDIUM_ALTAR_PIECE=PIECES.register("nether_altar_medium",()->(context,tag)->new NetherMediumAltarPiece(context.structureTemplateManager(),tag));

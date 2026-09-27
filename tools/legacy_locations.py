@@ -186,6 +186,15 @@ def cluster_location_definition():
             'mixture_rng':'Saved per-piece seed + absolute position, including two independent foundation rolls; not legacy world.rand sequence'}
 
 
+def small_overworld_candidates():
+    source=strip_comments((LEGACY/'java/techguns/world/TGStructureSpawnRegister.java').read_text(encoding='utf-8'))
+    compact=re.sub(r'\s+','',source)
+    entries=re.findall(r'spawns_small.add\(newTGStructureSpawn\(new(\w+)\(.*?,(\d+),null,OVERWORLD,LAND,StructureSize.SMALL\)\);',compact)
+    names={'FactoryHouseSmall':'factory_house_small','SmallTrainstation':'small_trainstation','SmallMine':'small_mine','GasStation':'gasstation'}
+    assert [name for name,_ in entries]==list(names)
+    return [{'id':names[name],'weight':int(weight),'implemented':name!='SmallMine'} for name,weight in entries]
+
+
 def factory_chest_loot(name='factory_building'):
     source=json.loads((LEGACY/f'resources/assets/techguns/loot_tables/chests/{name}.json').read_text(encoding='utf-8'))
     pools=[]

@@ -15,6 +15,7 @@
 - [DesertOilCluster: нефтяное месторождение, охрана и добыча буром](docs/DESERT_OIL_CLUSTER.ru.md)
 - [GasStation: заправка, сундуки с топливом и конечная встреча](docs/GAS_STATION.ru.md)
 - [SmallTrainstation: станция, случайные разрушения, шахтёры и добыча](docs/SMALL_TRAIN_STATION.ru.md)
+- [FactoryHouseSmall: заводской дом, сундук, освещение и охрана](docs/FACTORY_HOUSE_SMALL.ru.md)
 - [Два лазера: попадания, батареи, модели и ограничения](docs/LASERS.ru.md)
 - [Ракетница: три боеприпаса, взрывы, безопасный режим и радиация](docs/ROCKET_LAUNCHER.ru.md)
 - [Соответствие metadata, рецептов и материалов](content/crafting-content.json)

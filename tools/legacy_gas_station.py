@@ -5,7 +5,7 @@ import json
 import re
 from legacy_building import building_id
 from legacy_items import shared_items
-from legacy_locations import location_nbt
+from legacy_locations import location_nbt, small_overworld_candidates
 from legacy_models import strip_comments
 from legacy_npcs import LEGACY, RESOURCES
 
@@ -94,7 +94,7 @@ def gas_station_definition():
             'foundation_cells':108,'foundation_depth':3,'clear_height':7,'worldgen_floor_offset':-1,
             'generation':{'dimension':'minecraft:overworld','small_grid':16,'reserved_medium_grid':32,'reserved_big_grid':64,'height_samples_x':[0,4,8],'height_samples_z':[0,4,8,12],
                           'maximum_height_spread':3,'weight':10,'ore_toggle_required':False,'ocean_excluded':True,
-                          'candidates':[{'id':name,'weight':10,'implemented':name in ('small_trainstation','gasstation')} for name in ('factory_house_small','small_trainstation','small_mine','gasstation')]}}
+                          'candidates':small_overworld_candidates()}}
 
 
 def generate_gas_station_content():

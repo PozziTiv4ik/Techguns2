@@ -8992,7 +8992,7 @@
       {
         "id": "factory_house_small",
         "weight": 10,
-        "implemented": false
+        "implemented": true
       },
       {
         "id": "small_trainstation",

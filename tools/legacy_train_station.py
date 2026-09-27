@@ -2,7 +2,7 @@
 import hashlib
 import json
 import re
-from legacy_locations import factory_chest_loot, location_nbt
+from legacy_locations import factory_chest_loot, location_nbt, small_overworld_candidates
 from legacy_models import strip_comments
 from legacy_npcs import LEGACY, RESOURCES
 
@@ -72,7 +72,7 @@ def train_station_definition():
             'mixture_rng':'Saved per-piece DamageSeed XOR absolute block position, including independent foundation rolls; not legacy world.rand sequence',
             'generation':{'dimension':'minecraft:overworld','small_grid':16,'reserved_medium_grid':32,'reserved_big_grid':64,'height_samples_x':[0,4,8],'height_samples_z':[0,4,8,12],
                           'maximum_height_spread':3,'weight':10,'tickets':[10,19],'ore_toggle_required':False,'ocean_excluded':True,
-                          'candidates':[{'id':name,'weight':10,'implemented':name in ('small_trainstation','gasstation')} for name in ('factory_house_small','small_trainstation','small_mine','gasstation')]}}
+                          'candidates':small_overworld_candidates()}}
 
 
 def generate_train_station_content():
