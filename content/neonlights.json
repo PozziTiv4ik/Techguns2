@@ -1,0 +1,53 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/TGBlocks.java",
+  "family": "neonlights",
+  "variants": [
+    {
+      "id": "neontubes2",
+      "metadata": 0,
+      "source_model": "neontubes2"
+    },
+    {
+      "id": "neontubes2_rotated",
+      "metadata": 1,
+      "source_model": "neontubes2_rotated"
+    },
+    {
+      "id": "neontubes4",
+      "metadata": 2,
+      "source_model": "neontubes4"
+    },
+    {
+      "id": "neontubes4_rotated",
+      "metadata": 3,
+      "source_model": "neontubes4_rotated"
+    },
+    {
+      "id": "neonsquare_white",
+      "metadata": 4,
+      "source_model": "neonsquare_white"
+    }
+  ],
+  "hardness": 4.0,
+  "explosion_resistance": 4.0,
+  "light_level": 15,
+  "full_cube": true,
+  "opaque_cube": true,
+  "requires_tool": false,
+  "redstone_conductor": false,
+  "note_instrument": "hat",
+  "rotation": "identity; rotated variants use distinct source textures",
+  "camo_order": [
+    "neontubes2",
+    "neontubes2_rotated",
+    "neontubes4",
+    "neontubes4_rotated",
+    "neonsquare_white"
+  ],
+  "recipes": [
+    "neonlights_0"
+  ],
+  "helipad_metadata": 4,
+  "chisel_integration": "not ported",
+  "client_acceptance": "pending"
+}

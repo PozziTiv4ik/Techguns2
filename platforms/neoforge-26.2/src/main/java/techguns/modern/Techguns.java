@@ -38,6 +38,7 @@ public final class Techguns {
         techguns.modern.world.BuildingContent.register(modBus);
         techguns.modern.world.FortificationContent.register(modBus);
         techguns.modern.world.CamouflageNetContent.register(modBus);
+        techguns.modern.world.NeonContent.register(modBus);
         techguns.modern.world.SlimyContent.register(modBus);
         techguns.modern.world.OreClusterContent.register(modBus);
         techguns.modern.world.OreClusterConfig.register(container);

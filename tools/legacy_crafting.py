@@ -19,6 +19,7 @@ from legacy_drill import PARTS as DRILL_PARTS, drill_heads
 from legacy_building import FAMILIES as BUILDING_FAMILIES, RECIPES as BUILDING_RECIPES, building_id, building_definitions
 from legacy_fortifications import RECIPES as FORTIFICATION_RECIPES, LAMPS, lamp_id
 from legacy_camonets import RECIPES as CAMONET_RECIPES, FAMILIES as CAMONET_FAMILIES, net_id, net_definitions
+from legacy_neon import RECIPES as NEON_RECIPES, neon_id, neon_definition
 from legacy_incendiary import incendiary_for
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -33,6 +34,7 @@ def inputs(recipe):
 def convert_recipe(legacy, shared, weapons):
     def item(value):
         identifier = value['item']
+        if identifier == 'techguns:neonlights': return 'techguns:'+neon_id(value.get('data',0))
         if identifier.startswith('techguns:') and identifier.split(':')[1] in CAMONET_FAMILIES:
             return 'techguns:' + net_id(identifier.split(':')[1], value.get('data', 0))
         if identifier == 'techguns:lamp0': return 'techguns:'+lamp_id(value.get('data',0))
@@ -127,6 +129,7 @@ def plan_crafting(weapon_list):
     for name in BUILDING_RECIPES: selected[name] = source_recipes[name]
     for name in FORTIFICATION_RECIPES: selected[name] = source_recipes[name]
     for name in CAMONET_RECIPES: selected[name] = source_recipes[name]
+    for name in NEON_RECIPES: selected[name] = source_recipes[name]
     selected['basicmachine_2_chem_lab']=source_recipes['basicmachine_2_chem_lab']
     for meta, part in enumerate(FABRICATOR_PARTS+REACTION_PARTS):
         name = f'multiblockmachine_{meta}_{part}'
@@ -233,4 +236,5 @@ def plan_crafting(weapon_list):
     catalog['block_metadata'].update({f'techguns:{v["family"]}@{v["metadata"]}':'techguns:'+v['id'] for v in building_definitions()})
     catalog['block_metadata'].update({f'techguns:lamp0@{m}':'techguns:'+n for n,m,_ in LAMPS})
     catalog['block_metadata'].update({f'techguns:{v["family"]}@{v["metadata"]}':'techguns:'+v['id'] for v in net_definitions()})
+    catalog['block_metadata'].update({f'techguns:neonlights@{v["metadata"]}':'techguns:'+v['id'] for v in neon_definition()['variants']})
     return {'recipes': recipes, 'materials': materials, 'extra_ammo': sorted(extra_ammo), 'tags': tags, 'catalog': catalog}

@@ -59,6 +59,7 @@
 - [Commando, броня T2 Commando и подводные бонусы](docs/COMMANDO.ru.md)
 - [Панели, армированный бетон и металлические лестницы](docs/BUILDING_BLOCKS.ru.md)
 - [Мешки с песком, лампы и бункерная дверь](docs/FORTIFICATIONS.ru.md)
+- [Neonlights: пять светящихся блоков, крафт и Camo Bench](docs/NEONLIGHTS.ru.md)
 - [Камуфляжные сети: соединения, навесы, крафт и перекраска](docs/CAMOUFLAGE_NETS.ru.md)
 - [Метеоритная база и её генерация](docs/METEOR_BASE.ru.md)
 - [Процедурное гнездо AlienBug и закалённый песок](docs/ALIENBUG_NEST.ru.md)

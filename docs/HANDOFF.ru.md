@@ -1,6 +1,6 @@
 # Продолжение работы в новом чате
 
-Обновлено 2026-09-27 после AttackHelicopter и успешного Linux CI #66.
+Обновлено 2026-09-27 после локальной проверки Neonlights.
 Перед разработкой прочитать [порядок работы](DEVELOPMENT_WORKFLOW.ru.md),
 затем проверить Git. [AGENTS.md](../AGENTS.md) обязателен для всего проекта.
 
@@ -13,79 +13,77 @@
 | Writable fork / origin | `PozziTiv4ik/Techguns2` |
 | Оригинал / upstream, только чтение | `pWn3d1337/Techguns2` |
 | Платформа | Minecraft 26.2 / NeoForge 26.2.0.81 / Java 25 |
-| Последний проверенный код | `9b0046f8f28a2136e908b9537ef570157a3f5b57` — AttackHelicopter |
-| Linux CI кода | [Linux CI #66](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36319408687), success; 2026-09-27 14:45 Europe/Zurich |
+| Текущий локально проверенный срез | Neonlights; source SHA получить из Git после первого коммита |
+| Linux CI нового кода | Ожидается; прежний успешный CI не подтверждает новый код |
 
-AttackHelicopter перенесён: полёт и обнаружение игрока, пять пуль/ракета,
-исходная броня, четыре пула лута, смерть за 100 тиков и опыт, сохранение
-полёта/снарядов/погибающей сущности, конечный военный пост 1/1/200/0.
-Три OBJ, Apache-текстура и звуки подключены. Доступен через яйцо, команду
-и настроенный пост; MilitaryCamp ещё не генерируется.
-См. [ATTACK_HELICOPTER.ru.md](ATTACK_HELICOPTER.ru.md).
+Все пять Neonlights перенесены: полные непрозрачные кубы, постоянный свет 15,
+исходные текстуры/названия, добыча рукой, рецепт на 16 штук, Camo Bench.
+Квадратный вариант metadata 4 готов как материал Helipad. Проверен цикл
+крафта, выбора оформления и установки семи светящихся клеток буквы H.
+См. [NEONLIGHTS.ru.md](NEONLIGHTS.ru.md).
 
-Локально прошли **205 JUnit, 360 Python и 1871 GameTest**: 1809 основных
-(1808 Techguns + 1 встроенный), 46 worldgen/выборочных и 16 условных.
-Python-пакеты 180+180 точно покрывают полный discover без повторов/пропусков.
-Генератор: 2212 файлов; 2122 ресурсные записи JAR совпали побайтово.
-Лицензия, неизменность legacy и исключение тестовых паков проверены.
-Подробности: последний раздел [VERIFICATION.ru.md](VERIFICATION.ru.md).
-Локальные `.tools/heli-*` помогают восстановить результаты, но их отсутствие
-не блокирует новый клон. Не повторять проверки без изменений или сомнений.
+Локально прошли **205 JUnit, 366 Python и 1885 GameTests**: 1823 основных
+(1822 Techguns + 1 встроенный), 46 worldgen/выборочных и 16 условных.
+Python выполнен единым discover. Генератор: 2250 файлов;
+2158 ресурсных записей JAR совпали побайтово. Лицензия, неизменность legacy
+и исключение тестовых паков проверены. Подробности:
+последний раздел [VERIFICATION.ru.md](VERIFICATION.ru.md).
+Локальные `.tools/neon-*` помогают, но их отсутствие не блокирует новый клон.
 
-Первый source `10533ba` / Linux CI #65 получил ошибку соседнего AI-теста.
-Исправлена изоляция настоящего тестового игрока и учёт объединённых сфер XP;
-повторные сборка и все 1809 основных тестов прошли. Игровое поведение NPC
-не изменялось. Успехом считать только CI последующего исправляющего SHA.
+До закрытия среза: отправить проверенный source commit в origin, дождаться
+именно его Linux CI, записать фактический результат и отправить документационный
+checkpoint с `[skip ci]`. Новую функцию до завершения CI не начинать.
 
-Linux CI #66 подтвердил именно указанный source SHA: 360 Python единым
-запуском, сборку/ядро и все 1871 GameTest. После него изменена только
-документация. Текущий HEAD получать из Git, не принимать source SHA за
-последний коммит ветки. Незавершённой реализации и известных красных
-проверок этого среза нет.
+## Следующая задача: Stielgranate и FragGrenade
 
-## Следующая задача: Neonlights для MilitaryCamp
+Перенести **две ручные гранаты** как следующую зависимость полного лута
+военных ящиков. Аудит шести таблиц выявил четыре отсутствующих боевых предмета:
+`stielgranate`, `fraggrenade`, `grenadelauncher`, `flamethrower`. Остальные
+перечисленные Techguns-предметы имеют современные определения; перед переносом
+ящиков всё равно сверить компоненты, функции лута, диапазоны и реальные применения.
+Нельзя удалять отсутствующие награды или отдавать их вес готовым предметам.
 
-Перенести **пять вариантов Neonlights**: NEONTUBES2, NEONTUBES2_ROTATED,
-NEONTUBES4, NEONTUBES4_ROTATED, NEONSQUARE_WHITE. Это обязательная зависимость
-Helipad: он использует metadata 4. В modern блоки пока отсутствуют.
-После них — военные ящики с настоящим лутом, затем MilitaryBaseStructure/
-MilitaryCamp. Активные CampProps/Bunker используют все девять типов ящиков;
-декоративная замена не закрывает зависимость.
-
-Начать с исходников и активных вызовов:
+Начать с активного кода и вызываемых методов:
 
 ```text
-legacy/1.12.2/src/main/java/techguns/blocks/EnumLightblockType.java
-legacy/1.12.2/src/main/java/techguns/blocks/GenericBlockMetaEnumCamoChangeable.java
-legacy/1.12.2/src/main/java/techguns/TGBlocks.java
-legacy/1.12.2/src/main/resources/assets/techguns/blockstates/neonlights.json
-legacy/1.12.2/src/main/resources/assets/techguns/recipes/neonlights_0.json
-legacy/1.12.2/src/main/java/techguns/world/structures/Helipad.java
+legacy/1.12.2/src/main/java/techguns/TGuns.java
+legacy/1.12.2/src/main/java/techguns/items/guns/GenericGrenade.java
+legacy/1.12.2/src/main/java/techguns/items/guns/IGrenadeProjectileFactory.java
+legacy/1.12.2/src/main/java/techguns/entities/projectiles/GrenadeProjectile.java
+legacy/1.12.2/src/main/java/techguns/entities/projectiles/FragGrenadeProjectile.java
+legacy/1.12.2/src/main/java/techguns/entities/projectiles/GenericProjectile.java
+legacy/1.12.2/src/main/resources/assets/techguns/loot_tables/blocks/military_crate_explosives.json
 ```
 
-Уже установлено: Material.GLASS, звук стекла, свет 1,0, твёрдость 4,0;
-исходный рецепт даёт 16 блоков из шести железных самородков, двух стеклянных
-панелей и светопыли. Проверить геометрию/повороты, дроп, исходную смену
-оформления и интеграцию Camo Bench, не переносить внешний Chisel как уже
-поддержанную интеграцию. Современные точки входа: `tools/legacy_building.py`,
-`tools/legacy_fortifications.py`, `modern/world/BuildingContent.java`,
-`FortificationContent.java` и Camo Bench.
+В TGuns обе гранаты — GenericGrenade со стаком 16 и maxUseDur 72000;
+обычный бросок начинается при отпускании использования. GenericGrenade задаёт
+fullChargeTime 30, TTL 200, speed 0,75, spread 0,1 и расчёт gravity 0,015/charge.
+Сверить действительное применение charge в фабриках, нулевой заряд,
+руки/ведущую руку, отскоки и момент взрыва: FragGrenadeProjectile.init()
+назначает bounces=2, тогда как базовое значение GenericGrenade равно 3.
+Не трактовать названия radiusMin/radiusMax без проверки TGExplosion.
 
-Военные ящики: BlockMilitaryCrate/EnumMilitaryCrateType, шесть loot tables,
-активная замена дропа при добыче без Silk Touch в TGEventHandler. Перед их
-реализацией проверить все предметы лута. Большой лагерь имеет 13 внутренних,
-семь граничных шаблонов и два вида башен. Сохранить исходный билет CastleStructure
-в большой LAND-таблице; AircraftCarrier относится к WATER.
+Современные точки входа: `modern/RocketProjectile.java`, `LegacyShot.java`,
+`ShotDamage.java`, серверные права B и `core/ExplosionMath.java`.
+Нужны настоящие use/release, физика/сохранение/взрыв, рецепты и исходные модели/
+звуки. Проверить границы срока жизни, отскоки, стены, отмену событий и права
+разрушения блоков. Не заменять новый вид оружия инертным предметом добычи.
+
+После гранат — GrenadeLauncher и Flamethrower, затем девять вариантов
+BlockMilitaryCrate с шестью таблицами. Взрывной пул: веса 2/2/2/2/1/1 для
+rocket/40mmgrenade/Stielgranate/FragGrenade/RocketLauncher/GrenadeLauncher;
+оружейный пул содержит Flamethrower. TGEventHandler заменяет дроп только
+при добыче игроком без Silk Touch и передаёт Fortune как luck. Остальные
+случаи сохраняют исходный блок. Проверить эти ветки и не путать ящики с сундуками.
+
+Далее MilitaryBaseStructure/MilitaryCamp. AttackHelicopter, ArmySoldier,
+военный пост и Neonlights уже есть. Сохранить билет CastleStructure в большой
+LAND-таблице; AircraftCarrier относится к WATER.
 
 ## Границы результата
 
-У вертолёта нет исходной записи обычного биомного спавна. Он не относится
-к HOSTILE-фракции GenericNPC. Взрыв боевой ракеты имеет фактические исходные
-радиусы 30/40 и не ломает блоки; взрыв смерти только визуальный. Не менять
-эти особенности по комментариям или неиспользуемым аргументам конструктора.
-
-Клиентская/визуальная приёмка остаётся; частицы смерти адаптированы к ванильным,
-полная FX-система не перенесена. Агенту нельзя запускать интерактивный Minecraft
-или управлять рабочим столом. Остальные структуры, оружие, броня, машины,
-анимации и интеграции остаются в [плане](PORTING_PLAN.ru.md) и [статусе](STATUS.ru.md).
-Полный порт ещё не завершён.
+MilitaryCamp пока не генерируется. Визуальная приёмка и внешний Chisel
+остаются; агенту нельзя запускать интерактивный Minecraft или управлять
+рабочим столом. Повернутые Neonlights — отдельные текстуры, не facing.
+Полный порт, остальные оружие/машины/броня/структуры и интеграции остаются
+в [плане](PORTING_PLAN.ru.md) и [статусе](STATUS.ru.md).

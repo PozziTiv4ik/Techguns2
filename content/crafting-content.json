@@ -182,7 +182,12 @@
     "techguns:camonet@2": "techguns:camonet_snow",
     "techguns:camonet_top@0": "techguns:camonet_top_wood",
     "techguns:camonet_top@1": "techguns:camonet_top_desert",
-    "techguns:camonet_top@2": "techguns:camonet_top_snow"
+    "techguns:camonet_top@2": "techguns:camonet_top_snow",
+    "techguns:neonlights@0": "techguns:neontubes2",
+    "techguns:neonlights@1": "techguns:neontubes2_rotated",
+    "techguns:neonlights@2": "techguns:neontubes4",
+    "techguns:neonlights@3": "techguns:neontubes4_rotated",
+    "techguns:neonlights@4": "techguns:neonsquare_white"
   },
   "recipes": [
     {
@@ -780,6 +785,10 @@
     {
       "id": "techguns:reactionchamber_controller",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/multiblockmachine_5_reactionchamber_controller.json"
+    },
+    {
+      "id": "techguns:neonlights_0",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/neonlights_0.json"
     },
     {
       "id": "techguns:netherblaster",
