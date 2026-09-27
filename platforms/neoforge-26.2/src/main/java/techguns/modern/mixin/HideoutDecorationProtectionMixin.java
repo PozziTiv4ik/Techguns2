@@ -8,8 +8,10 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import techguns.modern.world.structure.SurvivorHideoutStructure;
+import techguns.modern.world.structure.SmallMineStructure;
+import techguns.modern.world.structure.SmallMinePiece;
 
-/** A later neighbouring chunk must not grow a vanilla shrub inside the scanned hideout. */
+/** Later chunk decoration must preserve the hideout volume and the mine's sparse source cells. */
 @Mixin(SimpleBlockFeature.class)
 public abstract class HideoutDecorationProtectionMixin {
     @Inject(method="place",at=@At("HEAD"),cancellable=true)
@@ -17,7 +19,7 @@ public abstract class HideoutDecorationProtectionMixin {
         // Restrict this to initial terrain decoration: player placement and bonemeal stay available.
         if(!(context.level() instanceof WorldGenRegion region)) return;
         var manager=region.getLevel().structureManager().forWorldGenRegion(region); var pos=context.origin();
-        for(var start:manager.startsForStructure(SectionPos.of(pos).chunk(),s->s instanceof SurvivorHideoutStructure))
-            if(start.getPieces().stream().anyMatch(p->p.getBoundingBox().isInside(pos))) { ci.setReturnValue(false); return; }
+        for(var start:manager.startsForStructure(SectionPos.of(pos).chunk(),s->s instanceof SurvivorHideoutStructure || s instanceof SmallMineStructure))
+            if(start.getPieces().stream().anyMatch(p->p instanceof SmallMinePiece mine?mine.protectsDecoration(pos):p.getBoundingBox().isInside(pos))) { ci.setReturnValue(false); return; }
     }
 }

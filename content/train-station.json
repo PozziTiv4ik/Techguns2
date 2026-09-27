@@ -4541,7 +4541,7 @@
       {
         "id": "small_mine",
         "weight": 10,
-        "implemented": false
+        "implemented": true
       },
       {
         "id": "gasstation",

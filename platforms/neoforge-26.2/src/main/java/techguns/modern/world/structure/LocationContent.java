@@ -10,6 +10,8 @@ import techguns.modern.Techguns;
 public final class LocationContent {
     private static final DeferredRegister<StructureType<?>> TYPES=DeferredRegister.create(Registries.STRUCTURE_TYPE,Techguns.MOD_ID);
     private static final DeferredRegister<StructurePieceType> PIECES=DeferredRegister.create(Registries.STRUCTURE_PIECE,Techguns.MOD_ID);
+    public static final DeferredHolder<StructureType<?>,StructureType<SmallMineStructure>> MINE=TYPES.register("small_mine",()->()->SmallMineStructure.CODEC);
+    public static final DeferredHolder<StructurePieceType,StructurePieceType> MINE_PIECE=PIECES.register("small_mine",()->(context,tag)->new SmallMinePiece(context.structureTemplateManager(),tag));
     public static final DeferredHolder<StructureType<?>,StructureType<NetherAltarStructure>> ALTAR=TYPES.register("nether_altar_small",()->()->NetherAltarStructure.CODEC);
     public static final DeferredHolder<StructurePieceType,StructurePieceType> ALTAR_PIECE=PIECES.register("nether_altar_small",()->(context,tag)->new NetherAltarPiece(context.structureTemplateManager(),tag));
     public static final DeferredHolder<StructureType<?>,StructureType<NetherLootStructure>> LOOT=TYPES.register("nether_loot_01",()->()->NetherLootStructure.CODEC);

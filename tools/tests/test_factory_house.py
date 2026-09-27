@@ -56,9 +56,9 @@ class FactoryHouseTests(unittest.TestCase):
         self.assertEqual(p['rolls'],{'type':'minecraft:uniform','min':1,'max':3}); self.assertEqual(len(p['entries']),13); self.assertEqual(sum(e['weight'] for e in p['entries']),97)
         existing=Path(RESOURCES+'data/techguns/loot_table/chests/factory_building.json'); self.assertEqual(json.loads(existing.read_text(encoding='utf-8')),factory_chest_loot())
 
-    def test_shared_table_preserves_last_unported_mine(self):
+    def test_shared_table_preserves_original_mine_tickets(self):
         d=factory_house_definition(); g=d['generation']; self.assertEqual(g['candidates'],small_overworld_candidates())
         self.assertEqual(g['candidates'],gas_station_definition()['generation']['candidates']); self.assertEqual(g['candidates'],train_station_definition()['generation']['candidates'])
-        self.assertEqual([c['implemented'] for c in g['candidates']],[True,True,False,True]); self.assertEqual(g['tickets'],[0,9]); self.assertFalse(g['ore_toggle_required'])
+        self.assertEqual([c['implemented'] for c in g['candidates']],[True,True,True,True]); self.assertEqual(g['tickets'],[0,9]); self.assertFalse(g['ore_toggle_required'])
         f=generate_factory_house_content(); p=json.loads(f[RESOURCES+'data/techguns/worldgen/structure_set/factory_house_small.json'])['placement']
         self.assertEqual((p['spacing'],p['separation'],p['salt']),(16,15,1337262)); self.assertEqual(len(f),5)

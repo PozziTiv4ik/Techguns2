@@ -7,7 +7,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.*;
 import techguns.core.*;
 
-/** Shared candidate roll keeps native IDs disjoint and preserves tickets for unported locations. */
+/** Shared candidate roll keeps the four native small LAND structure IDs disjoint. */
 public abstract class SmallOverworldStructure extends Structure {
     protected final int medium,big;
     private final int candidate,width,depth,foundationDepth,top;

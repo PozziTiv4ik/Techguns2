@@ -192,7 +192,7 @@ def small_overworld_candidates():
     entries=re.findall(r'spawns_small.add\(newTGStructureSpawn\(new(\w+)\(.*?,(\d+),null,OVERWORLD,LAND,StructureSize.SMALL\)\);',compact)
     names={'FactoryHouseSmall':'factory_house_small','SmallTrainstation':'small_trainstation','SmallMine':'small_mine','GasStation':'gasstation'}
     assert [name for name,_ in entries]==list(names)
-    return [{'id':names[name],'weight':int(weight),'implemented':name!='SmallMine'} for name,weight in entries]
+    return [{'id':names[name],'weight':int(weight),'implemented':True} for name,weight in entries]
 
 
 def factory_chest_loot(name='factory_building'):
