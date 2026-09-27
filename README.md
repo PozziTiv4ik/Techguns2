@@ -6,6 +6,12 @@
 Основная платформа: **Minecraft Java 26.2 · NeoForge 26.2.0.81 · Java 25**.
 Другие версии Minecraft и загрузчики пока не поддерживаются.
 
+Новый чат для разработки открывать в проекте Techguns с актуальной рабочей
+веткой. Запроса «продолжай» достаточно для запуска следующего этапа по
+[AGENTS.md](AGENTS.md) и сохранённой точке продолжения.
+
+- [Продолжить разработку в новом чате: текущая точка и следующая задача](docs/HANDOFF.ru.md)
+- [Порядок разработки, проверок, коммитов и пушей](docs/DEVELOPMENT_WORKFLOW.ru.md)
 - [Подробный план полного переноса](docs/PORTING_PLAN.ru.md)
 - [Текущий статус и ограничения](docs/STATUS.ru.md)
 - [Каталог 761 исходного Java-файла и 44 записей оружия](content/legacy-inventory.json)
@@ -74,11 +80,12 @@ Gradle Wrapper скачает закреплённые зависимости п
 .\gradlew.bat :neoforge-26.2:runGameTestServer
 .\gradlew.bat :neoforge-26.2:runOreWorldTestServer
 .\gradlew.bat :neoforge-26.2:runChemistryTestServer
-.\gradlew.bat :neoforge-26.2:runClient
 ```
 
 Linux/macOS: использовать `./gradlew` с теми же аргументами.
 Первый запуск требует интернета и времени на подготовку Minecraft.
+Агент на этом рабочем месте использует только headless-проверки; ограничения
+на управление рабочим столом и запуск клиента заданы в [AGENTS.md](AGENTS.md).
 Локальная сборка появляется в
 `platforms/neoforge-26.2/build/libs/techguns-26.2-neoforge-0.1.0-dev.jar`.
 
