@@ -10,7 +10,7 @@
 |---|---|---|
 | Форк, исходная история, лицензия | Готово | Оригинал сохранён в `legacy/1.12.2`; upstream-коммит зафиксирован |
 | План и каталог | Готово | 15 этапов, 761 Java-файл, 44 записи оружия |
-| Современная сборка | GrenadeLauncher проверен на Windows; Linux CI нового source commit ожидается | Gradle 9.2.1, Java 25, ModDevGradle 2.0.146; 210 JUnit, 378 Python, JAR, 1894 основных GameTests, 16 условных и 46 проверок генерации/выбора |
+| Современная сборка | GrenadeLauncher проверен на Windows и [Linux CI #69](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36327092043), source commit `fada63e` | Gradle 9.2.1, Java 25, ModDevGradle 2.0.146; 210 JUnit, 378 Python, JAR, 1894 основных GameTests, 16 условных и 46 проверок генерации/выбора |
 | Общее ядро | Проверено unit-тестами | Ёмкость, расход, запрет выстрела, bundle reload, падение урона |
 | Защита и пробитие | Частично | Исходная формула пуль и пробития; ENERGY/EXPLOSION учитывают половину обычной брони и сопротивление ведьм магии; обычная броня не защищает от кислоты, как от legacy poison; собственная защита пятнадцати NPC, включая нулевую у Farmer/Miner/SkeletonSoldier/Ghastling, и FIRE-урон бластера/зажигательных патронов; для T1 Combat/T1 Miner/T1 Scout/T2 Combat/T2 Commando/Hazmat и берета игрока отдельное поглощение по частям, износ и смешанная обычная броня. Остальные комплекты/системы ещё переносятся |
 | Обычный баллистический арсенал | Частично, 17 серверных циклов проверены | Ручная пушка, обрез, два револьвера, Thompson, болтовая винтовка, боевой дробовик, пистолет, AK-47, M4, Infiltrator, LMG, MAC-10, AS50, AUG, SCAR, Vector |
@@ -467,7 +467,9 @@ GameTests (1894 + 46 + 16)**. Добавлены 24 специальных сц�
 Python: 371 успешный ID первого прогона и семь из исправленного модуля Grinder;
 объединение без повторов равно всем 378 ID discover. Все 2206 ресурсных записей
 JAR совпали с генератором; лицензия и legacy сохранены.
-Linux CI нового source commit ожидается. Подробности:
+[Linux CI #69](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36327092043) подтвердил точный source commit `fada63e61161be734fe16ff893328c7dfcc8cf81`:
+378 Python единым discover, сборку/ядро и все 1956 GameTests;
+все 13 шагов успешны. Завершение: 2026-09-27 16:58 Europe/Zurich. Подробности:
 [GRENADE_LAUNCHER.ru.md](GRENADE_LAUNCHER.ru.md) и [VERIFICATION.ru.md](VERIFICATION.ru.md).
 
 ## Следующий этап

@@ -810,7 +810,8 @@ FragGrenade, GrenadeLauncher и Flamethrower. Первые две зависим
 разрушения блоков. Крафт, Grinder, NPC и исходные три OBJ/PNG/OGG подключены;
 барабан вращается по серверному времени принятого выстрела.
 Локально прошли 210 JUnit, 378 Python и 1956 GameTests (1894 + 46 + 16);
-2206 ресурсных записей JAR сверены побайтово. Linux CI нового source commit
-ожидается. Следующий срез — Flamethrower, затем девять ящиков с шестью
+2206 ресурсных записей JAR сверены побайтово. [Linux CI #69](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36327092043)
+подтвердил source commit `fada63e61161be734fe16ff893328c7dfcc8cf81`:
+378 Python единым discover, сборку/ядро и все 1956 GameTests. Следующий срез — Flamethrower, затем девять ящиков с шестью
 полными loot tables и MilitaryCamp. GPU-приёмка и полная FX-система остаются.
 См. `docs/GRENADE_LAUNCHER.ru.md` и `docs/VERIFICATION.ru.md`.
