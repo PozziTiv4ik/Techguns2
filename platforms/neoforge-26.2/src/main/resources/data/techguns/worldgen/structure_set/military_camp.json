@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "techguns:military_camp",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 64,
+    "separation": 63,
+    "salt": 1337262
+  }
+}

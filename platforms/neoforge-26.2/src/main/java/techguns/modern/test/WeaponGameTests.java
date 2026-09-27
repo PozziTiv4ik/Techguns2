@@ -91,6 +91,7 @@ public final class WeaponGameTests {
         CamouflageNetGameTests.register(FUNCTIONS);
         NeonGameTests.register(FUNCTIONS);
         MilitaryCrateGameTests.register(FUNCTIONS);
+        MilitaryCampGameTests.register(FUNCTIONS);
         GrenadeGameTests.register(FUNCTIONS);
         GrenadeLauncherGameTests.register(FUNCTIONS);
         IncendiaryGameTests.register(FUNCTIONS);

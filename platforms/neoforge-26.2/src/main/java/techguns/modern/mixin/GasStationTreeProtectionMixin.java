@@ -9,8 +9,10 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import techguns.modern.world.structure.GasStationStructure;
+import techguns.modern.world.structure.MilitaryCampStructure;
+import techguns.modern.world.structure.MilitaryCampPiece;
 
-/** Neighbouring chunk foliage must respect the scanned station's cleared volume. */
+/** Neighbouring foliage respects the station and the military camp's cleared surface. */
 @Mixin(TreeFeature.class)
 public abstract class GasStationTreeProtectionMixin {
     @Inject(method="validTreePos",at=@At("RETURN"),cancellable=true)
@@ -18,7 +20,7 @@ public abstract class GasStationTreeProtectionMixin {
         // Only initial decoration: saplings and player-triggered tree growth remain available.
         if(!ci.getReturnValueZ() || !(level instanceof WorldGenRegion region)) return;
         var manager=region.getLevel().structureManager().forWorldGenRegion(region);
-        for(var start:manager.startsForStructure(SectionPos.of(pos).chunk(),s->s instanceof GasStationStructure))
-            if(start.getPieces().stream().anyMatch(p->p.getBoundingBox().isInside(pos))) { ci.setReturnValue(false); return; }
+        for(var start:manager.startsForStructure(SectionPos.of(pos).chunk(),s->s instanceof GasStationStructure || s instanceof MilitaryCampStructure))
+            if(start.getPieces().stream().anyMatch(p->p instanceof MilitaryCampPiece camp?camp.protectsDecoration(pos,region):p.getBoundingBox().isInside(pos))) { ci.setReturnValue(false); return; }
     }
 }

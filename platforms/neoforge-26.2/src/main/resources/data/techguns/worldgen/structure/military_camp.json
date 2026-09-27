@@ -1,0 +1,7 @@
+{
+  "type": "techguns:military_camp",
+  "biomes": "#techguns:has_military_camp",
+  "step": "top_layer_modification",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none"
+}

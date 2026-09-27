@@ -10,8 +10,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import techguns.modern.world.structure.SurvivorHideoutStructure;
 import techguns.modern.world.structure.SmallMineStructure;
 import techguns.modern.world.structure.SmallMinePiece;
+import techguns.modern.world.structure.MilitaryCampStructure;
+import techguns.modern.world.structure.MilitaryCampPiece;
 
-/** Later chunk decoration must preserve the hideout volume and the mine's sparse source cells. */
+/** Later decoration preserves authored hideout/mine cells and the camp's cleared surface columns. */
 @Mixin(SimpleBlockFeature.class)
 public abstract class HideoutDecorationProtectionMixin {
     @Inject(method="place",at=@At("HEAD"),cancellable=true)
@@ -19,7 +21,7 @@ public abstract class HideoutDecorationProtectionMixin {
         // Restrict this to initial terrain decoration: player placement and bonemeal stay available.
         if(!(context.level() instanceof WorldGenRegion region)) return;
         var manager=region.getLevel().structureManager().forWorldGenRegion(region); var pos=context.origin();
-        for(var start:manager.startsForStructure(SectionPos.of(pos).chunk(),s->s instanceof SurvivorHideoutStructure || s instanceof SmallMineStructure))
-            if(start.getPieces().stream().anyMatch(p->p instanceof SmallMinePiece mine?mine.protectsDecoration(pos):p.getBoundingBox().isInside(pos))) { ci.setReturnValue(false); return; }
+        for(var start:manager.startsForStructure(SectionPos.of(pos).chunk(),s->s instanceof SurvivorHideoutStructure || s instanceof SmallMineStructure || s instanceof MilitaryCampStructure))
+            if(start.getPieces().stream().anyMatch(p->p instanceof SmallMinePiece mine?mine.protectsDecoration(pos):p instanceof MilitaryCampPiece camp?camp.protectsDecoration(pos,region):p.getBoundingBox().isInside(pos))) { ci.setReturnValue(false); return; }
     }
 }
