@@ -795,7 +795,8 @@ FragGrenade, GrenadeLauncher и Flamethrower. Первые две зависим
 по 16 и исходные модели/звук. Нулевой заряд и размещение после медленного
 отскока обработаны без неконечных чисел и попадания внутрь пола.
 Локально прошли 208 JUnit, 373 Python и 1930 GameTests (1868 + 46 + 16);
-2186 записей ресурсов JAR совпали с генератором. Linux CI нового source commit
-ожидается. Следующий срез — GrenadeLauncher, затем Flamethrower, полный лут
+2186 записей ресурсов JAR совпали с генератором. [Linux CI #68](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36324166462)
+подтвердил source commit `6b29817b22f449e3975359990223355109d8d70c`:
+373 Python единым запуском, сборку/ядро и все 1930 GameTests. Следующий срез — GrenadeLauncher, затем Flamethrower, полный лут
 девяти ящиков и MilitaryCamp. Визуальная приёмка и полная система FX остаются.
 См. `docs/HAND_GRENADES.ru.md` и `docs/VERIFICATION.ru.md`.
