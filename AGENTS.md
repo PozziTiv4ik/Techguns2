@@ -18,6 +18,19 @@
 - Read only the relevant sections of the plan/status/verification history. The
   handoff holds the next task; Git, source and actual test results resolve stale notes.
 
+## Finding the right code
+
+- Use [the code map](docs/CODE_MAP.ru.md) to select a subsystem, shared entry
+  points and tests. Use [the topic index](docs/README.ru.md) for feature behavior;
+  do not read the entire verification history to locate an implementation.
+- Before editing catalogs, resources or generated Java, find the owning input
+  or converter in [the generator map](tools/README.ru.md). `content/weapon-ports.json`
+  is an input; many other content and Java files are outputs. Change the owner
+  and regenerate instead of patching its output alone.
+- When moving an entry point or adding a subsystem/converter, update the relevant
+  map row. Keep the next task in the handoff and test evidence in verification;
+  do not duplicate their changing values in navigation maps.
+
 ## Boundaries
 
 - Do not use Computer Use, native UI automation, keyboard/mouse injection, or take
