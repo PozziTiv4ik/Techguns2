@@ -833,6 +833,8 @@ FIRE-броня и поджог, безопасный режим, вода/до�
 Creative, правила мира, взрыв, подбор и применение наград проверены нативно.
 Перенесены геометрия двух частей и десять исходных PNG; рецепты/инвентарь
 не выдуманы. Локально прошли **214 JUnit, 390 Python и 2069 GameTests (2007 + 46 + 16)**; Python единым discover.
-Linux CI нового source commit ожидается. Следующий срез — MilitaryBaseStructure /
+[Linux CI #71](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36333299515) подтвердил source commit `75b40502971460dd1a4f6854867dcd8030b6dcf4`:
+390 Python единым discover, сборку/ядро и все 2069 GameTests; 13 успешных шагов.
+Следующий срез — MilitaryBaseStructure /
 MilitaryCamp; его природная генерация ещё не включена. Визуальная приёмка
 остаётся. См. `docs/MILITARY_CRATES.ru.md` и `docs/VERIFICATION.ru.md`.

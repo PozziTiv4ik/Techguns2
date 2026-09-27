@@ -1,6 +1,6 @@
 # Продолжение работы в новом чате
 
-Обновлено 2026-09-27 после локальной проверки военных ящиков.
+Обновлено 2026-09-27 после военных ящиков и успешного Linux CI #71.
 Перед разработкой прочитать [порядок работы](DEVELOPMENT_WORKFLOW.ru.md),
 затем проверить Git. [AGENTS.md](../AGENTS.md) обязателен для всего проекта.
 
@@ -13,8 +13,8 @@
 | Writable fork / origin | `PozziTiv4ik/Techguns2` |
 | Оригинал / upstream, только чтение | `pWn3d1337/Techguns2` |
 | Платформа | Minecraft 26.2 / NeoForge 26.2.0.81 / Java 25 |
-| Локально проверенный срез | Военные ящики; Linux CI нового source commit ожидается |
-| Предыдущий проверенный код | `65d1d90c2eef7792559f0ef97af4d46f281b99b7`, [Linux CI #70](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36330354852), Flamethrower |
+| Последний проверенный код | `75b40502971460dd1a4f6854867dcd8030b6dcf4` — военные ящики |
+| Linux CI кода | [Linux CI #71](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36333299515), success; 2026-09-27 18:40 Europe/Zurich |
 
 Девять военных ящиков работают: шесть полных таблиц / 60 наград, исходные
 веса/диапазоны, Fortune, Silk Touch, события и реальные добыча/взрыв/подбор.
@@ -28,8 +28,12 @@
 Подробности — последний раздел [VERIFICATION.ru.md](VERIFICATION.ru.md).
 Локальные `.tools/crate-*` помогают, но их отсутствие не блокирует новый клон.
 
-Сначала завершить exact-SHA Linux CI этого source commit и записать
-документационный checkpoint с `[skip ci]`, если это ещё не сделано по Git.
+Linux CI #71 подтвердил именно указанный source SHA: 390 Python единым
+discover, сборку/ядро и все 2069 GameTests. Все 13 шагов успешны.
+После source SHA меняется только документация с `[skip ci]`. Текущий HEAD
+получать из Git, не принимать source SHA за последний коммит ветки.
+Незавершённой реализации и известных красных проверок этого среза нет.
+Не повторять проверки без изменений или сомнений.
 
 ## Следующий законченный срез — MilitaryBaseStructure / MilitaryCamp
 
