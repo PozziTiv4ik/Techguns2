@@ -823,5 +823,7 @@ FIRE-броня и поджог, безопасный режим, вода/до�
 Оба рецепта, Grinder, 36 деталей, исходные PNG/семь OGG и синусоидальная отдача
 от первого лица перенесены. Полный FX и визуальная приёмка остаются.
 Локально прошли **214 JUnit, 383 Python и 1999 GameTests (1937 + 46 + 16)**; Python единым discover.
-Linux CI нового source commit ожидается. Следующий срез — девять военных
+[Linux CI #70](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36330354852) подтвердил source commit `65d1d90c2eef7792559f0ef97af4d46f281b99b7`:
+383 Python единым discover, сборку/ядро и все 1999 GameTests; 13 успешных шагов.
+Следующий срез — девять военных
 ящиков и шесть полных таблиц лута, затем MilitaryCamp. См. `docs/FLAMETHROWER.ru.md`.

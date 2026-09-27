@@ -1,6 +1,6 @@
 # Продолжение работы в новом чате
 
-Обновлено 2026-09-27 после локальной проверки Flamethrower.
+Обновлено 2026-09-27 после Flamethrower и успешного Linux CI #70.
 Перед разработкой прочитать [порядок работы](DEVELOPMENT_WORKFLOW.ru.md),
 затем проверить Git. [AGENTS.md](../AGENTS.md) обязателен для всего проекта.
 
@@ -13,8 +13,8 @@
 | Writable fork / origin | `PozziTiv4ik/Techguns2` |
 | Оригинал / upstream, только чтение | `pWn3d1337/Techguns2` |
 | Платформа | Minecraft 26.2 / NeoForge 26.2.0.81 / Java 25 |
-| Локально проверенный срез | Flamethrower; Linux CI нового source commit ожидается |
-| Предыдущий проверенный код | `fada63e61161be734fe16ff893328c7dfcc8cf81`, [Linux CI #69](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36327092043), GrenadeLauncher |
+| Последний проверенный код | `65d1d90c2eef7792559f0ef97af4d46f281b99b7` — Flamethrower |
+| Linux CI кода | [Linux CI #70](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36330354852), success; 2026-09-27 17:51 Europe/Zurich |
 
 Flamethrower работает: 100 зарядов топлива, автоматический огонь каждые
 2 тика, R 45 с возвратом пустого бака, оба рецепта и Grinder. FIRE/броня,
@@ -29,8 +29,12 @@ start/fire/reload проверены. Перенесены 36 деталей, и
 Подробности — последний раздел [VERIFICATION.ru.md](VERIFICATION.ru.md).
 Локальные `.tools/flame-*` помогают, но их отсутствие не блокирует новый клон.
 
-Сначала завершить exact-SHA Linux CI этого source commit и записать
-документационный checkpoint с `[skip ci]`, если это ещё не сделано по Git.
+Linux CI #70 подтвердил именно указанный source SHA: 383 Python единым
+discover, сборку/ядро и все 1999 GameTests. Все 13 шагов успешны.
+После source SHA меняется только документация с `[skip ci]`. Текущий HEAD
+получать из Git, не принимать source SHA за последний коммит ветки.
+Незавершённой реализации и известных красных проверок этого среза нет.
+Не повторять проверки без изменений или сомнений.
 
 ## Следующий законченный срез — военные ящики
 
