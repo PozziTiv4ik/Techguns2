@@ -187,7 +187,16 @@
     "techguns:neonlights@1": "techguns:neontubes2_rotated",
     "techguns:neonlights@2": "techguns:neontubes4",
     "techguns:neonlights@3": "techguns:neontubes4_rotated",
-    "techguns:neonlights@4": "techguns:neonsquare_white"
+    "techguns:neonlights@4": "techguns:neonsquare_white",
+    "techguns:military_crate@0": "techguns:military_crate_ammo",
+    "techguns:military_crate@1": "techguns:military_crate_gun",
+    "techguns:military_crate@2": "techguns:military_crate_armor",
+    "techguns:military_crate@3": "techguns:military_crate_medical",
+    "techguns:military_crate@4": "techguns:military_crate_explosive",
+    "techguns:military_crate@5": "techguns:military_crate_generic_oak",
+    "techguns:military_crate@6": "techguns:military_crate_generic_jungle",
+    "techguns:military_crate@7": "techguns:military_crate_generic_birch",
+    "techguns:military_crate@8": "techguns:military_crate_generic_spruce"
   },
   "recipes": [
     {

@@ -47,6 +47,7 @@ from legacy_building import generate_building_content, building_translations
 from legacy_fortifications import generate_fortification_content, fortification_translations, SOUNDS as FORTIFICATION_SOUNDS
 from legacy_camonets import generate_camonet_content, camonet_translations
 from legacy_neon import generate_neon_content, neon_translations
+from legacy_military_crates import generate_crate_content, crate_translations
 from legacy_grenades import generate_grenade_content, grenade_translations
 from legacy_grenade_launcher import generate_launcher_content, launcher_base_model, launcher_translations
 from legacy_incendiary import generate_incendiary_content, incendiary_translations
@@ -324,6 +325,7 @@ public final class NpcWeapons {
         values.update(camo_translations(lang))
         values.update(building_translations(lang))
         values.update(neon_translations(lang))
+        values.update(crate_translations(lang))
         values.update(grenade_translations(lang))
         values.update(launcher_translations(lang))
         values.update(fortification_translations(lang))
@@ -406,7 +408,7 @@ public final class Weapons {
     files.update(generate_machine_content())
     files.update(generate_neon_content())
     files.update(generate_launcher_content())
-    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_grenade_content(), generate_npc_content(), generate_cyber_content(), generate_armor_content(), generate_repair_content(), generate_camo_content(), generate_grinder_content(), generate_zombie_soldier_content(), generate_rural_content(), generate_skeleton_content(), generate_bandit_content(), generate_chainsaw_content(), generate_psycho_content(), generate_spawner_content(), generate_army_content(), generate_commando_content(), generate_policeman_content(), generate_police_station_content(), generate_survivor_hideout_content(), generate_desert_oil_content(), generate_gas_station_content(), generate_train_station_content(), generate_factory_house_content(), generate_small_mine_content(), generate_location_content(), generate_ghastling_content(), generate_helicopter_content(), generate_alienbug_content(), generate_spike_content(), generate_cluster_content(), generate_drill_content(), generate_building_content(), generate_fortification_content(), generate_camonet_content(), generate_incendiary_content(weapons), generate_flame_content(), generate_meteor_content(), generate_bugnest_content(), generate_nether_castle_content(), generate_medium_altar_content(), generate_ghast_spawner_content()) for entry in domain.items()]:
+    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_grenade_content(), generate_npc_content(), generate_cyber_content(), generate_armor_content(), generate_repair_content(), generate_camo_content(), generate_grinder_content(), generate_zombie_soldier_content(), generate_rural_content(), generate_skeleton_content(), generate_bandit_content(), generate_chainsaw_content(), generate_psycho_content(), generate_spawner_content(), generate_army_content(), generate_commando_content(), generate_policeman_content(), generate_police_station_content(), generate_survivor_hideout_content(), generate_desert_oil_content(), generate_gas_station_content(), generate_train_station_content(), generate_factory_house_content(), generate_small_mine_content(), generate_location_content(), generate_ghastling_content(), generate_helicopter_content(), generate_alienbug_content(), generate_spike_content(), generate_cluster_content(), generate_drill_content(), generate_building_content(), generate_fortification_content(), generate_camonet_content(), generate_incendiary_content(weapons), generate_flame_content(), generate_crate_content(weapons), generate_meteor_content(), generate_bugnest_content(), generate_nether_castle_content(), generate_medium_altar_content(), generate_ghast_spawner_content()) for entry in domain.items()]:
         if path in files:
             # Several content domains contribute to the same mining/tool and common item tags.
             if '/tags/' not in path:

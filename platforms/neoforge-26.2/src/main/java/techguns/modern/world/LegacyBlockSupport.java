@@ -26,7 +26,7 @@ final class LegacyBlockSupport {
     static boolean torchTop(BlockGetter level,BlockPos pos) {
         var s=level.getBlockState(pos); var b=s.getBlock();
         if(s.is(Blocks.END_GATEWAY) || s.is(Blocks.JACK_O_LANTERN)) return false;
-        if(b instanceof SandbagBlock || b instanceof FenceBlock || b instanceof WallBlock || s.is(Blocks.GLASS) || b instanceof StainedGlassBlock) return true;
+        if(b instanceof MilitaryCrateBlock || b instanceof SandbagBlock || b instanceof FenceBlock || b instanceof WallBlock || s.is(Blocks.GLASS) || b instanceof StainedGlassBlock) return true;
         return !attachingException(s) && (solid(level,pos,Direction.UP) || b instanceof HopperBlock);
     }
     static boolean normalCube(BlockState s) { return s.isSolidRender() && !s.isSignalSource() && !s.is(Blocks.GLOWSTONE) && !s.is(Blocks.SEA_LANTERN); }

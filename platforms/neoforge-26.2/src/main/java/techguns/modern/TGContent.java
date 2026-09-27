@@ -127,6 +127,7 @@ public final class TGContent {
                         techguns.modern.world.FortificationContent.LAMPS.values().forEach(block -> output.accept(block.get()));
                         techguns.modern.world.CamouflageNetContent.BLOCKS.values().forEach(block -> output.accept(block.get()));
                         techguns.modern.world.NeonContent.BLOCKS.values().forEach(block -> output.accept(block.get()));
+                        techguns.modern.world.MilitaryCrateContent.BLOCKS.values().forEach(block -> output.accept(block.get()));
                         techguns.modern.world.OreClusterContent.BLOCKS.values().forEach(block -> output.accept(block.get()));
                         techguns.modern.machine.drill.OreDrillContent.BLOCKS.values().forEach(block -> output.accept(block.get()));
                         output.accept(techguns.modern.armor.ArmorContent.BERET.get());

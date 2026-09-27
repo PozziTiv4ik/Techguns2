@@ -20,6 +20,7 @@ from legacy_building import FAMILIES as BUILDING_FAMILIES, RECIPES as BUILDING_R
 from legacy_fortifications import RECIPES as FORTIFICATION_RECIPES, LAMPS, lamp_id
 from legacy_camonets import RECIPES as CAMONET_RECIPES, FAMILIES as CAMONET_FAMILIES, net_id, net_definitions
 from legacy_neon import RECIPES as NEON_RECIPES, neon_id, neon_definition
+from legacy_military_crates import crate_id, crate_definition
 from legacy_grenades import RECIPES as GRENADE_RECIPES
 from legacy_incendiary import incendiary_for
 
@@ -36,6 +37,7 @@ def convert_recipe(legacy, shared, weapons):
     def item(value):
         identifier = value['item']
         if identifier == 'techguns:neonlights': return 'techguns:'+neon_id(value.get('data',0))
+        if identifier == 'techguns:military_crate': return 'techguns:'+crate_id(value.get('data',0))
         if identifier.startswith('techguns:') and identifier.split(':')[1] in CAMONET_FAMILIES:
             return 'techguns:' + net_id(identifier.split(':')[1], value.get('data', 0))
         if identifier == 'techguns:lamp0': return 'techguns:'+lamp_id(value.get('data',0))
@@ -239,4 +241,5 @@ def plan_crafting(weapon_list):
     catalog['block_metadata'].update({f'techguns:lamp0@{m}':'techguns:'+n for n,m,_ in LAMPS})
     catalog['block_metadata'].update({f'techguns:{v["family"]}@{v["metadata"]}':'techguns:'+v['id'] for v in net_definitions()})
     catalog['block_metadata'].update({f'techguns:neonlights@{v["metadata"]}':'techguns:'+v['id'] for v in neon_definition()['variants']})
+    catalog['block_metadata'].update({f'techguns:military_crate@{v["metadata"]}':'techguns:'+v['id'] for v in crate_definition()['variants']})
     return {'recipes': recipes, 'materials': materials, 'extra_ammo': sorted(extra_ammo), 'tags': tags, 'catalog': catalog}
