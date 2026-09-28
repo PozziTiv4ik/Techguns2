@@ -6,6 +6,9 @@ import com.mojang.authlib.GameProfile;
 import io.netty.channel.embedded.EmbeddedChannel;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.gametest.framework.GameTestInfo;
+import net.minecraft.gametest.framework.GameTestListener;
+import net.minecraft.gametest.framework.GameTestRunner;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.PacketFlow;
@@ -32,6 +35,7 @@ import net.minecraft.world.phys.*;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import techguns.core.*;
 import techguns.modern.*;
@@ -177,14 +181,49 @@ final class HelicopterGameTests {
     }
     private static void realAi(GameTestHelper h) {
         // Stay outside neighboring players' acquisition band and prevent distance-based despawning from those fixtures.
-        var center=h.absolutePos(new BlockPos(10,175,10)); load(h.getLevel(),center,48);
+        var level=h.getLevel(); var center=h.absolutePos(new BlockPos(10,175,10));
+        var required=new ArrayList<ChunkPos>(); var pinned=new ArrayList<ChunkPos>();
+        for(int x=(center.getX()-48)>>4;x<=(center.getX()+48)>>4;x++) for(int z=(center.getZ()-48)>>4;z<=(center.getZ()+48)>>4;z++) {
+            var chunk=new ChunkPos(x,z); required.add(chunk);
+            if(level.setChunkForced(x,z,true)) pinned.add(chunk);
+            level.getChunk(x,z);
+        }
         for(int x=-20;x<=32;x++) for(int z=-20;z<=32;z++) h.getLevel().setBlock(center.offset(x,0,z),Blocks.STONE.defaultBlockState(),2);
-        var m=new AttackHelicopter(NpcContent.HELICOPTER.get(),h.getLevel()); m.setPersistenceRequired(); m.setPos(h.absoluteVec(new Vec3(10,200,10))); m.setYHeadRot(0); m.getRandom().setSeed(42);
-        // Keep the first flight segment straight; random strafing plus dispersion may legitimately miss a narrow target.
-        m.getMoveControl().setWantedPosition(m.getX(),m.getY(),m.getZ()-12,1); h.getLevel().addFreshEntity(m);
-        var t=h.spawnWithNoFreeWill(EntityTypes.IRON_GOLEM,new Vec3(10,200,18)); t.setNoGravity(true); t.getAttribute(Attributes.MAX_HEALTH).setBaseValue(1000); t.setHealth(1000); m.setTarget(t); var start=m.position();
-        h.runAfterDelay(30,()->{ try { h.assertTrue(!m.isRemoved() && m.position().distanceToSqr(start)>.05,"Registered flight control moves the persistent helicopter: removed="+m.isRemoved()+", ticks="+m.tickCount); h.assertTrue(t.getHealth()<1000,"Registered attack, aiming and actual bullet flight hit the target: target="+(m.getTarget()==t)+", timer="+m.attackGoal().timer()+", yaw="+m.getYRot()+", head="+m.getYHeadRot()+", pitch="+m.getXRot()+", relative="+m.position().subtract(start)); h.succeed(); }
-            finally { cleanup(h,m); t.discard(); for(int x=-20;x<=32;x++) for(int z=-20;z<=32;z++) h.getLevel().setBlock(center.offset(x,0,z),Blocks.AIR.defaultBlockState(),2); } });
+        var m=new AttackHelicopter(NpcContent.HELICOPTER.get(),level); m.setPersistenceRequired(); m.setNoAi(true); m.setPos(h.absoluteVec(new Vec3(10,200,10)));
+        var t=EntityTypes.IRON_GOLEM.create(level,EntitySpawnReason.STRUCTURE); t.setPersistenceRequired(); t.removeFreeWill(); t.setPos(h.absoluteVec(new Vec3(10,200,18)));
+        t.setNoGravity(true); t.getAttribute(Attributes.MAX_HEALTH).setBaseValue(1000); t.setHealth(1000); var start=m.position();
+        var fired=new ArrayList<Bullet>(); float[] bulletDamage={0};
+        Consumer<EntityJoinLevelEvent> shots=e->{ if(e.getEntity() instanceof Bullet b && b.getOwner()==m) fired.add(b); };
+        Consumer<LivingDamageEvent.Post> hits=e->{ if(e.getEntity()==t && e.getSource().getDirectEntity() instanceof Bullet b && b.getOwner()==m) bulletDamage[0]+=e.getHealthDamage(); };
+        NeoForge.EVENT_BUS.addListener(shots); NeoForge.EVENT_BUS.addListener(hits);
+        h.testInfo.addListener(new GameTestListener() {
+            private void release() {
+                NeoForge.EVENT_BUS.unregister(shots); NeoForge.EVENT_BUS.unregister(hits);
+                fired.forEach(Entity::discard); cleanup(h,m); t.discard();
+                for(int x=-20;x<=32;x++) for(int z=-20;z<=32;z++) level.setBlock(center.offset(x,0,z),Blocks.AIR.defaultBlockState(),2);
+                pinned.forEach(c->level.setChunkForced(c.x(),c.z(),false));
+            }
+            @Override public void testStructureLoaded(GameTestInfo info) {}
+            @Override public void testPassed(GameTestInfo info,GameTestRunner runner) { release(); }
+            @Override public void testFailed(GameTestInfo info,GameTestRunner runner) { release(); }
+            @Override public void testAddedForRerun(GameTestInfo original,GameTestInfo copy,GameTestRunner runner) {}
+        });
+        h.startSequence().thenWaitUntil(()->{
+            // A FULL terrain chunk alone does not guarantee that native projectile queries can see the target.
+            for(var chunk:required) h.assertTrue(level.areEntitiesActuallyLoadedAndTicking(chunk),"Flight chunk entities ready: "+chunk);
+        }).thenExecute(()->{
+            h.assertTrue(level.addFreshEntity(m) && level.addFreshEntity(t),"Both native entities spawn");
+        }).thenWaitUntil(()->{
+            h.assertTrue(level.getEntity(m.getUUID())==m && level.getEntity(t.getUUID())==t,"Both combatants registered before the combat clock");
+        }).thenExecute(()->{
+            // Keep the first segment straight, with the normal attack and look goals and original dispersion.
+            m.setYHeadRot(0); m.getRandom().setSeed(42); m.setTarget(t);
+            m.getMoveControl().setWantedPosition(m.getX(),m.getY(),m.getZ()-12,1); m.setNoAi(false);
+        }).thenExecuteAfter(30,()->{
+            h.assertTrue(!m.isRemoved() && m.position().distanceToSqr(start)>.05,"Registered flight control moves the persistent helicopter");
+            h.assertValueEqual(fired.size(),5,"Registered AI emits the entire first five-round burst");
+            h.assertTrue(bulletDamage[0]>0 && t.getHealth()<1000,"Owned bullet flight inflicts real health damage: timer="+m.attackGoal().timer()+", targetRegistered="+(level.getEntity(t.getUUID())==t)+", targetTicking="+level.areEntitiesActuallyLoadedAndTicking(t.chunkPosition())+", targetTicks="+t.tickCount);
+        }).thenSucceed();
     }
     private static void savedShot(GameTestHelper h,boolean rocket) {
         Projectile p=rocket?new RocketProjectile(TGContent.ROCKET.get(),h.getLevel()):new Bullet(TGContent.BULLET.get(),h.getLevel());
