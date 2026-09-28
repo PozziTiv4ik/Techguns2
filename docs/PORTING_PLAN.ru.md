@@ -884,6 +884,9 @@ PresetCastle; его билет сохранён в LAND-пуле 1:1. AircraftC
 water-check, повороты, сундуки/ящики, конечные солдаты/коммандос и вертолёт.
 Сохранены отдельный WATER-билет и LAND 1:1; перенесены металлические ступени
 обеих отделок с моделями/рецептами. Локально прошли **234 JUnit, 409 Python
-и 2234 GameTests (2166 + 52 + 16)**. Python единым discover; Linux CI нового
-source commit ожидается. Следующий срез — настраиваемые сетки структур,
+и 2234 GameTests (2166 + 52 + 16)**. Python единым discover; [Linux CI #74](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36347828471)
+подтвердил source commit `c0349bc94cfb5862295c61b7b2ce17046eb43e14`,
+все 409 Python и 2234 GameTests, сборку/ядро и 13 успешных шагов.
+CI завершён 2026-09-27 22:33 Europe/Zurich; checkpoint документации — 2026-09-28.
+Следующий срез — настраиваемые сетки структур,
 резервирование/locate и несколько seed. См. `docs/AIRCRAFT_CARRIER.ru.md`.

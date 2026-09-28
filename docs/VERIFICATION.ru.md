@@ -6,7 +6,7 @@
 `rg -n '^## |^### ' docs/VERIFICATION.ru.md` из корня репозитория.
 Прямые ссылки на записи 2026-09-27: [Castle / Linux CI #73](#castle-ci-73),
 [проверка навигации по проекту](#navigation-2026-09-27),
-[AircraftCarrier](#aircraft-carrier-2026-09-27).
+[AircraftCarrier / Linux CI #74](#aircraft-carrier-ci-74).
 Старые клиентские прогоны ниже — исторические записи; текущие ограничения
 заданы в [AGENTS.md](../AGENTS.md).
 
@@ -4073,6 +4073,7 @@ locate, отсутствие LAND-старта, оба конфигурацио�
 `verify_resources.py`: 301 item definitions, 691 ссылка на текстуры,
 83 звука и 370 рецептов. Все 2322 генерируемые ресурсные записи JAR совпали
 побайтово; LICENSE.txt совпал, legacy и тестовые паки исключены.
+Все 674 класса JAR относятся только к `techguns/modern` и `techguns/core`.
 Дерево legacy/src: `270b27b1cc52019733bb79facda68ce29aa038be`;
 вся legacy неизменна относительно начального `80efe39`.
 
@@ -4082,4 +4083,27 @@ locate, отсутствие LAND-старта, оба конфигурацио�
 `.tools/aircraft-static.json`. Полные серверы — `aircraft-main`, `aircraft-world`,
 `aircraft-chemistry`; первый Python discover — `aircraft-python`, исправленный
 модуль — `aircraft-python-ores`, итоговый discover — `aircraft-python-final`.
-Linux CI нового source commit ожидается. Графическая приёмка не проводилась.
+Linux CI нового source commit подтверждён ниже. Графическая приёмка не проводилась.
+
+<a id="aircraft-carrier-ci-74"></a>
+
+### Linux CI #74 — 2026-09-27; checkpoint 2026-09-28
+
+Source commit: `c0349bc94cfb5862295c61b7b2ce17046eb43e14`. [Linux CI #74](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36347828471) завершён **success**
+2026-09-27 в **22:33 Europe/Zurich** (`20:33:13 UTC`); все **13 шагов** успешны.
+`headSha` проверен по API, полные журналы прочитаны после завершения.
+
+Linux подтвердил **409 Python единым discover за 171.458 с**, генератор,
+ресурсы, сборку/ядро и **2234 GameTests: 2166 + 52 + 16**. Пропусков Python,
+серверных ERROR и красных тестов нет. Локальные числа 234 JUnit, 2322 ресурса
+JAR и 674 класса относятся к отдельно зафиксированным проверкам выше.
+
+Доказательства: `.tools/aircraft-ci-result.json`, `.tools/aircraft-ci.log`,
+`.tools/aircraft-ci-watch.json` (код 0), `.tools/aircraft-final-facts.json`.
+После этого source SHA публикуется только документационный checkpoint
+с `[skip ci]`; код, ресурсы, сборка и CI в него не входят. Навигация по девяти
+затронутым документам до source commit: 532 локальные ссылки/якоря проверены.
+В четырёх документах checkpoint проверены 77 ссылок/якорей, согласованность
+SHA/CI/результатов и diff. Новый игровой прогон для этого документационного checkpoint не выполнялся.
+Следующий срез — настраиваемые сетки структур. Графическая приёмка,
+Chisel/другие реальные интеграции и полный порт остаются; релизы не публикуются.
