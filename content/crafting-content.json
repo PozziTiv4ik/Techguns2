@@ -124,6 +124,7 @@
     "140": "techguns:oredrilllarge_steel",
     "141": "techguns:oredrilllarge_obsidiansteel",
     "142": "techguns:oredrilllarge_carbon",
+    "143": "techguns:as50magazine_explosive",
     "144": "techguns:sniperrounds_explosive",
     "145": "techguns:rocket_high_velocity",
     "146": "techguns:infusionbag"
@@ -231,6 +232,10 @@
     {
       "id": "techguns:as50_ammo_default",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/as50_ammo_default.json"
+    },
+    {
+      "id": "techguns:as50_ammo_explosive",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/as50_ammo_explosive.json"
     },
     {
       "id": "techguns:as50_ammo_incendiary",
@@ -511,6 +516,10 @@
     {
       "id": "techguns:oredrilllarge_carbon",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_142_oredrilllarge_carbon.json"
+    },
+    {
+      "id": "techguns:as50magazine_explosive",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_143_as50magazine_explosive.json"
     },
     {
       "id": "techguns:infusionbag",

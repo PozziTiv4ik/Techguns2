@@ -11,12 +11,13 @@ public final class BallisticAmmo {
         catch (IllegalArgumentException invalid) { return DataResult.error(invalid::getMessage); }
     }, BallisticVariant::id);
     public static BallisticVariant variant(ItemStack stack) {
-        if (!(stack.getItem() instanceof GunItem gun) || !IncendiaryAmmo.supported(gun.definition())) return BallisticVariant.DEFAULT;
-        return stack.getOrDefault(TGContent.BALLISTIC_VARIANT.get(), BallisticVariant.DEFAULT);
+        if (!(stack.getItem() instanceof GunItem gun)) return BallisticVariant.DEFAULT;
+        var selected = stack.getOrDefault(TGContent.BALLISTIC_VARIANT.get(), BallisticVariant.DEFAULT);
+        return selected.supported(gun.definition()) ? selected : BallisticVariant.DEFAULT;
     }
     public static AmmoSpec ammo(ItemStack stack) {
         if (!(stack.getItem() instanceof GunItem gun)) throw new IllegalArgumentException("Expected gun");
-        return IncendiaryAmmo.ammo(gun.definition(), variant(stack));
+        return variant(stack).ammo(gun.definition());
     }
     private BallisticAmmo() {}
 }

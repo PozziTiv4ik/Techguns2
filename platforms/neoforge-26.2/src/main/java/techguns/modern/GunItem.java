@@ -84,6 +84,13 @@ public class GunItem extends Item {
                 if (!server.addFreshEntity(incendiary) && pellet == 0) return false;
                 continue;
             }
+            if (BallisticAmmo.variant(stack) == techguns.core.BallisticVariant.EXPLOSIVE) {
+                var explosive = new ExplosiveBullet(TGContent.EXPLOSIVE_BULLET.get(), server);
+                explosive.configure(gun, !SafeMode.enabled(player)); explosive.setOwner(player);
+                explosive.shootLegacy(player, gun.stats().spread() * accuracyMultiplier, aiming && gun.aim().centered());
+                if (!server.addFreshEntity(explosive)) return false;
+                continue;
+            }
             Bullet bullet = new Bullet(TGContent.BULLET.get(), server);
             bullet.configure(gun);
             bullet.setOwner(player);

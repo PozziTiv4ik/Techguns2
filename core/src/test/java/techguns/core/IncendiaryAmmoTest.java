@@ -44,7 +44,7 @@ class IncendiaryAmmoTest {
         assertEquals(3, IncendiaryAmmo.BURN_SECONDS);
     }
     @Test void malformedVariantAndArithmeticInputsAreRejected() {
-        for (String id : new String[]{"explosive", "INCENDIARY", "", "nuke"}) assertThrows(IllegalArgumentException.class, () -> BallisticVariant.fromId(id));
+        for (String id : new String[]{"unknown", "INCENDIARY", "", "nuke"}) assertThrows(IllegalArgumentException.class, () -> BallisticVariant.fromId(id));
         for (var v : BallisticVariant.values()) assertEquals(v, BallisticVariant.fromId(v.id()));
         var gun = Weapons.definition("pistol").stats();
         for (double d : new double[]{-1, Double.NaN, Double.POSITIVE_INFINITY}) assertThrows(IllegalArgumentException.class, () -> IncendiaryAmmo.damageAt(gun, d));

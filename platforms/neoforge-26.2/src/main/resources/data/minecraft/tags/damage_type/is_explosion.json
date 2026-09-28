@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "techguns:explosive_bullet",
     "techguns:grenade",
     "techguns:rocket"
   ]

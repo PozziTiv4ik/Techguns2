@@ -98,6 +98,7 @@ public final class WeaponGameTests {
         GrenadeGameTests.register(FUNCTIONS);
         GrenadeLauncherGameTests.register(FUNCTIONS);
         IncendiaryGameTests.register(FUNCTIONS);
+        ExplosiveAmmoGameTests.register(FUNCTIONS);
         FlamethrowerGameTests.register(FUNCTIONS);
         MinigunGameTests.register(FUNCTIONS);
         NetherSoulGameTests.register(FUNCTIONS);

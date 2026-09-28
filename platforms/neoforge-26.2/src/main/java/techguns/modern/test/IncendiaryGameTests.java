@@ -36,7 +36,7 @@ import techguns.modern.npc.*;
 final class IncendiaryGameTests {
     static void register(DeferredRegister<Consumer<GameTestHelper>> r) {
         for (var gun : Weapons.ALL) if (IncendiaryAmmo.supported(gun)) {
-            for (var variant : BallisticVariant.values()) r.register("incendiary_switch_" + gun.id() + "_" + variant.id(), () -> h -> switching(h, gun, variant));
+            for (var variant : List.of(BallisticVariant.DEFAULT, BallisticVariant.INCENDIARY)) r.register("incendiary_switch_" + gun.id() + "_" + variant.id(), () -> h -> switching(h, gun, variant));
             r.register("incendiary_reload_and_fire_" + gun.id(), () -> h -> reloadAndFire(h, gun));
             r.register("incendiary_damage_" + gun.id(), () -> h -> damage(h, gun));
         }
@@ -281,7 +281,7 @@ final class IncendiaryGameTests {
         } h.succeed();
     }
     private static void invalidItems(GameTestHelper h) {
-        h.assertTrue(BallisticAmmo.CODEC.parse(JsonOps.INSTANCE,new JsonPrimitive("explosive")).error().isPresent(),"Unsupported component rejected");
+        h.assertTrue(BallisticAmmo.CODEC.parse(JsonOps.INSTANCE,new JsonPrimitive("unknown")).error().isPresent(),"Unsupported component rejected");
         for(String id:List.of("handcannon","lasergun","rocketlauncher","chainsaw")) h.assertValueEqual(BallisticAmmo.variant(gun(id,1)),BallisticVariant.DEFAULT,"Unsupported weapon ignores injected ballistic mode");
         for(var wrong:List.of(ammo("pistolrounds_incendiary",1),ammo("smgmagazineempty",1),new ItemStack(Items.COAL))) {
             var input=CraftingInput.of(2,1,List.of(gun("thompson",5),wrong));

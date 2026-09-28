@@ -31,7 +31,8 @@ public record AmmoChangeRecipe(ShapelessRecipe base) implements CraftingRecipe {
             if (rocket) {
                 for (var candidate : RocketVariant.values()) if (item.is(TGContent.AMMO.get(candidate.ammo()).get())) variant = candidate;
             } else {
-                for (var candidate : BallisticVariant.values()) if (item.is(TGContent.AMMO.get(IncendiaryAmmo.ammo(gun.definition(), candidate).item()).get())) ballistic = candidate;
+                for (var candidate : BallisticVariant.values()) if (candidate.supported(gun.definition())
+                        && item.is(TGContent.AMMO.get(candidate.ammo(gun.definition()).item()).get())) ballistic = candidate;
             }
         }
         if (source.isEmpty() || (rocket ? variant == null : ballistic == null)) return ItemStack.EMPTY;

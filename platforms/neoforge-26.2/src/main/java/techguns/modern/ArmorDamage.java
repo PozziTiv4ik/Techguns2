@@ -17,8 +17,10 @@ public final class ArmorDamage {
         boolean alien=event.getSource().getDirectEntity() instanceof AlienBlasterProjectile && event.getSource().is(AlienBlasterProjectile.DAMAGE_TYPE);
         boolean fireProjectile = event.getSource().getDirectEntity() instanceof BurningProjectile burning && event.getSource().is(burning.damageType());
         boolean impulse = event.getSource().getDirectEntity() instanceof BurningProjectile && event.getSource().is(BurningProjectile.KNOCKBACK_TYPE);
+        boolean explosive = event.getSource().getDirectEntity() instanceof ExplosiveBullet && event.getSource().is(ExplosiveBullet.DAMAGE_TYPE);
         techguns.core.WeaponDefinition weapon = null;
         if (fireProjectile) weapon = ((BurningProjectile)event.getSource().getDirectEntity()).weapon();
+        if (explosive) weapon = ((ExplosiveBullet)event.getSource().getDirectEntity()).weapon();
         if (event.getSource().getDirectEntity() instanceof ChainsawAttack attack && event.getSource().is(ChainsawItem.DAMAGE)) weapon = attack.weapon();
         if (event.getSource().getDirectEntity() instanceof Bullet bullet && event.getSource().is(Bullet.DAMAGE_TYPE)) {
             weapon = bullet.weapon();
@@ -29,7 +31,7 @@ public final class ArmorDamage {
         } else if (event.getSource().getDirectEntity() instanceof NetherBlasterProjectile blast && event.getSource().is(NetherBlasterProjectile.DAMAGE_TYPE)) {
             weapon = blast.weapon();
         }
-        DamageKind kind = fireProjectile ? DamageKind.FIRE : impulse ? DamageKind.PHYSICAL : weapon != null ? weapon.projectile().damageKind() : sourceKind(event.getSource());
+        DamageKind kind = explosive ? DamageKind.EXPLOSION : fireProjectile ? DamageKind.FIRE : impulse ? DamageKind.PHYSICAL : weapon != null ? weapon.projectile().damageKind() : sourceKind(event.getSource());
         if (event.getEntity() instanceof net.minecraft.world.entity.player.Player player && techguns.modern.armor.TGArmorSystem.hasArmor(player)) {
             // Legacy TG radiation is magic, not unblockable. Its modern tag must not suppress typed armor;
             // the reduction callback still runs at the accepted armor stage, after attack cancellation.

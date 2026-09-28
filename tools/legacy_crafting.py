@@ -24,6 +24,7 @@ from legacy_military_crates import crate_id, crate_definition
 from legacy_grenades import RECIPES as GRENADE_RECIPES
 from legacy_metal_stairs import RECIPES as METAL_STAIR_RECIPES, VARIANTS as METAL_STAIRS
 from legacy_incendiary import incendiary_for
+from legacy_explosive import explosive_for
 
 ROOT = Path(__file__).resolve().parents[1]
 LEGACY = ROOT / 'legacy/1.12.2/src/main'
@@ -86,7 +87,9 @@ def convert_recipe(legacy, shared, weapons):
             if gun['projectile'] == 'rocket':
                 result['components']['techguns:rocket_variant'] = {'rocket': 'default', 'rocket_nuke': 'nuke', 'rocket_high_velocity': 'high_velocity'}[ammo]
             elif family := incendiary_for(gun):
-                result['components']['techguns:ballistic_variant'] = {family['default']: 'default', family['item']: 'incendiary'}[ammo]
+                variants = {family['default']: 'default', family['item']: 'incendiary'}
+                if explosive := explosive_for(gun): variants[explosive['item']] = 'explosive'
+                result['components']['techguns:ballistic_variant'] = variants[ammo]
                 if gun['ammo']['individual']: result['components']['techguns:rounds'] = 1
             else: raise ValueError('Unsupported ammunition change')
     recipe = {'type': 'techguns:copy_gun' if kind == 'techguns:copy_nbt' else kind,
@@ -113,7 +116,7 @@ def plan_crafting(weapon_list):
             name=armor['id']; selected[name]=source_recipes[name]
     for gun in weapon_list:
         if incendiary_for(gun):
-            for variant in ('default', 'incendiary'):
+            for variant in ('default', 'incendiary') + (('explosive',) if explosive_for(gun) else ()):
                 name = gun['id'] + '_ammo_' + variant
                 selected[name] = source_recipes[name]
     if 'rocketlauncher' in weapons:

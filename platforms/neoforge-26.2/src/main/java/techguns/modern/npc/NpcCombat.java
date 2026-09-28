@@ -29,7 +29,10 @@ public final class NpcCombat {
                     flame.setOwner(npc); flame.shootLegacy(npc, spread, false); projectile = flame;
                 }
                 case BALLISTIC -> {
-                    if (BallisticAmmo.variant(stack) == BallisticVariant.INCENDIARY) {
+                    if (BallisticAmmo.variant(stack) == BallisticVariant.EXPLOSIVE) {
+                        var bullet = new ExplosiveBullet(TGContent.EXPLOSIVE_BULLET.get(), level); bullet.configure(gun, false); bullet.npcDamage(damage);
+                        bullet.setOwner(npc); bullet.shootLegacy(npc, spread, false); projectile = bullet;
+                    } else if (BallisticAmmo.variant(stack) == BallisticVariant.INCENDIARY) {
                         var bullet = new IncendiaryBullet(TGContent.INCENDIARY_BULLET.get(), level); bullet.configure(gun, false); bullet.npcDamage(damage);
                         bullet.setOwner(npc); bullet.shootLegacy(npc, spread, false); projectile = bullet;
                     } else {

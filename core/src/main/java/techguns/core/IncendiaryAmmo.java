@@ -24,7 +24,7 @@ public final class IncendiaryAmmo {
     }
     public static AmmoSpec ammo(WeaponDefinition gun, BallisticVariant variant) {
         if (variant == BallisticVariant.DEFAULT) return gun.ammo();
-        if (!supported(gun)) throw new IllegalArgumentException("Weapon has no incendiary variant");
+        if (variant != BallisticVariant.INCENDIARY || !supported(gun)) throw new IllegalArgumentException("Weapon has no requested incendiary variant");
         var family = FAMILIES.stream().filter(f -> f.normal().equals(gun.ammo().item())).findFirst().orElseThrow();
         return new AmmoSpec(family.item(), family.empty(), family.loose(), family.bundles(), gun.ammo().individual());
     }

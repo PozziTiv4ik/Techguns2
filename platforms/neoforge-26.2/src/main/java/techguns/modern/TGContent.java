@@ -62,6 +62,9 @@ public final class TGContent {
     public static final DeferredHolder<EntityType<?>, EntityType<IncendiaryBullet>> INCENDIARY_BULLET = ENTITIES.register("incendiary_bullet", () ->
             EntityType.Builder.<IncendiaryBullet>of(IncendiaryBullet::new, MobCategory.MISC).sized(.25f, .25f).clientTrackingRange(8).updateInterval(1)
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, id("incendiary_bullet"))));
+    public static final DeferredHolder<EntityType<?>, EntityType<ExplosiveBullet>> EXPLOSIVE_BULLET = ENTITIES.register("explosive_bullet", () ->
+            EntityType.Builder.<ExplosiveBullet>of(ExplosiveBullet::new, MobCategory.MISC).sized(.25f, .25f).clientTrackingRange(8).updateInterval(1)
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE, id("explosive_bullet"))));
     public static final DeferredHolder<EntityType<?>, EntityType<FlameProjectile>> FLAME = ENTITIES.register("flame", () ->
             EntityType.Builder.<FlameProjectile>of(FlameProjectile::new, MobCategory.MISC).sized(.25f, .25f).clientTrackingRange(8).updateInterval(1)
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, id("flame"))));

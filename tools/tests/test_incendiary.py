@@ -42,7 +42,7 @@ class IncendiaryPortTests(unittest.TestCase):
                 self.assertEqual(recipe['ingredients'], ['techguns:' + gun['id'], 'techguns:' + shared[original['ingredients'][1]['data']]])
                 self.assertEqual(recipe['result']['components'], {'techguns:rounds':1 if gun['ammo']['individual'] else gun['capacity'],
                                                                  'techguns:ballistic_variant':variant})
-        self.assertNotIn('as50_ammo_explosive', self.graph['recipes'])
+        self.assertIn('as50_ammo_explosive', self.graph['recipes'])
         self.assertIn('minigun_ammo_incendiary', self.graph['recipes'])
 
     def test_five_magazines_keep_all_six_original_workbench_recipes(self):

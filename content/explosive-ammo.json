@@ -1,0 +1,36 @@
+{
+  "sources": [
+    "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+    "legacy/1.12.2/src/main/java/techguns/items/guns/ammo/AmmoTypes.java",
+    "legacy/1.12.2/src/main/java/techguns/entities/projectiles/GenericProjectileExplosive.java"
+  ],
+  "damage_multiplier": 1.15,
+  "explosion_power": 1.5,
+  "direct_knockback": 3.0,
+  "family": {
+    "family": "AS50_MAGAZINE",
+    "default": "as50magazine",
+    "item": "as50magazine_explosive",
+    "empty": "as50magazineempty",
+    "loose": "sniperrounds_explosive",
+    "bundles": 2
+  },
+  "weapons": [
+    "as50"
+  ],
+  "direct": "EXPLOSION with weapon penetration, ordinary hurt cooldown, no preliminary 0.01 hit",
+  "trigger": "block impact or accepted living-entity damage; non-living impact does not explode",
+  "blast": "vanilla 1.12 integer exposure formula, radius = 2 * power; not TGExplosion",
+  "blast_source": "unattributed vanilla explosion; independent of weapon falloff, penetration and NPC scale",
+  "terrain": "firing-time unsafe policy; no fire; entities hurt before blocks break; original 1/power drop decay",
+  "flight": {
+    "air_drag": 0.99,
+    "water_drag": 0.85,
+    "gravity": 0,
+    "falloff": "origin displacement at start of impact tick"
+  },
+  "pending": [
+    "Original MiningChargeBlockExplosion FX/light pulse and GPU acceptance",
+    "Modern Minecraft exposure, block hooks and knockback enchantments are native adaptations"
+  ]
+}

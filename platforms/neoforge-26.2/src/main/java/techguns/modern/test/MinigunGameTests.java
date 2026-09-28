@@ -30,7 +30,7 @@ final class MinigunGameTests {
     private static final GunActionPayload FIRE = new GunActionPayload(false), RELOAD = new GunActionPayload(true);
 
     static void register(DeferredRegister<Consumer<GameTestHelper>> r) {
-        for (var variant : BallisticVariant.values()) {
+        for (var variant : List.of(BallisticVariant.DEFAULT, BallisticVariant.INCENDIARY)) {
             String id = variant.id();
             r.register("minigun_held_200_ticks_" + id, () -> h -> held(h, variant));
             r.register("minigun_reload_100_ticks_" + id, () -> h -> reload(h, variant));
