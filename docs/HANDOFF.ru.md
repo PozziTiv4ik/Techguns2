@@ -1,7 +1,7 @@
 # Продолжение работы в новом чате
 
-Обновлено 2026-09-28 после локальных проверок Gauss Rifle.
-Linux CI нового source ещё ожидается. Прочитать [порядок работы](DEVELOPMENT_WORKFLOW.ru.md)
+Обновлено 2026-09-28 после CI checkpoint Gauss Rifle.
+Локальные проверки и Linux CI #80 успешны. Прочитать [порядок работы](DEVELOPMENT_WORKFLOW.ru.md)
 и [AGENTS.md](../AGENTS.md), проверить Git. Поиск — [карта кода](CODE_MAP.ru.md),
 [каталог систем](README.ru.md) и [карта генераторов](../tools/README.ru.md).
 
@@ -14,8 +14,8 @@ Linux CI нового source ещё ожидается. Прочитать [по
 | Writable fork / origin | `PozziTiv4ik/Techguns2` |
 | Оригинал / upstream, только чтение | `pWn3d1337/Techguns2` |
 | Платформа | Minecraft 26.2 / NeoForge 26.2.0.81 / Java 25 |
-| Последний прежний source, подтверждённый Linux | `13b2f15ec865f7293ee8158b9283455dbe138419` — AS50, CI #78 |
-| Gauss Rifle | Локальные проверки успешны; source commit / Linux CI ещё ожидаются |
+| Последний source, подтверждённый Linux | `985f7a1be85effe2b73bce014169a86b2b6fd63c` — Gauss Rifle |
+| Linux CI Gauss Rifle | [Linux CI #80](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36478221956), success |
 
 Работает Gauss Rifle: восемь зарядов, оба входа в одной транзакционной R,
 возврат пустой ячейки, реальный PROJECTILE с пробитием 2,0, события/броня,
@@ -29,11 +29,15 @@ Linux CI нового source ещё ожидается. Прочитать [по
 и один встроенный Minecraft. Генератор проверяет 2520 файлов; 2395 ресурсов
 и 701 класс JAR сверены побайтово. Лицензия, неизменность legacy и отсутствие
 семи уникальных файлов тестовых паков проверены. Журналы — `.tools/gauss-*`.
-Linux CI нового кода пока ожидается; прежний CI AS50 не подтверждает Гаусс.
+[Linux CI #80](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36478221956) подтвердил source `985f7a1be85effe2b73bce014169a86b2b6fd63c`:
+433 Python за 370.510 с, сборку/ядро и все 2356 GameTests
+(2276 + 52 + 16 + 6 + 6). Все 15 шагов успешны; завершение —
+2026-09-28 22:37:54 +0200 (Europe/Zurich), `2026-09-28T20:37:54Z`.
 
 Доказательства — [протокол](VERIFICATION.ru.md#gauss-rifle-2026-09-28).
-После успешного CI записать точный source SHA/ссылку и отправить отдельный
-документационный checkpoint с `[skip ci]`. Текущий HEAD получать из Git;
+После указанного source SHA меняется только документация с `[skip ci]`.
+Незавершённой реализации и известных красных проверок этого среза нет.
+Текущий HEAD получать из Git;
 не повторять уже прошедшие проверки без изменений или конкретного сомнения.
 
 
@@ -41,7 +45,7 @@ CI #79 нового Gauss source выявил сбой прежней фикст
 Добавлены ожидание native entity tracking, удержание чанков и проверка
 реального урона от своей пули; игровой AI не менялся. После исправления
 прошли сборка, 32 адресных повторения и полный основной сервер 2276/2276.
-Новый Linux CI исправленного source ожидается; история —
+Исправленный source подтверждён [Linux CI #80](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36478221956); история —
 [протокол](VERIFICATION.ru.md#gauss-rifle-2026-09-28).
 
 <a id="next-milestone"></a>
