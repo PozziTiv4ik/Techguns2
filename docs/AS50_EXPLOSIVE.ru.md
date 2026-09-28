@@ -96,7 +96,9 @@ B, `techguns.allowunsafemode` и `RestrictUnsafeModeToOP` определяют �
 Адресные сценарии проверяют реальный крафт, цепочку Metal Press → магазин →
 переключение → выстрел, все переходы боеприпасов, R/остатки/отмену, codecs,
 попадания/броню/cooldown, радиус/стены, события, B, NPC, воду, TTL и сохранение.
-Результаты полного набора и CI — в [протоколе](VERIFICATION.ru.md).
+Локально прошли 250 JUnit, 426 Python и 2319 GameTests;
+[Linux CI #78](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36461615823) подтвердил source `13b2f15ec865f7293ee8158b9283455dbe138419`.
+Подробные результаты — в [протоколе](VERIFICATION.ru.md#as50-explosive-2026-09-28).
 
 `MiningChargeBlockExplosion`, исходный световой импульс и визуальная приёмка
 ещё требуют общего движка эффектов и GPU-проверки. Геометрия видимости,
