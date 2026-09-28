@@ -74,12 +74,17 @@ def arguments(text):
     for i, char in enumerate(text):
         if char == '"': quoted = not quoted
         if not quoted:
-            if char == '(': depth += 1
-            elif char == ')': depth -= 1
+            if char in '({[': depth += 1
+            elif char in ')}]': depth -= 1
             elif char == ',' and depth == 0:
                 parts.append(text[start:i].strip())
                 start = i+1
     return parts + [text[start:].strip()]
+
+
+def ammo_components(ammo):
+    """Aligned AmmoType input/empty/loose arrays, including ordinary single-input ammo."""
+    return ammo.get('components', [ammo])
 
 
 def parse_stack(expression):

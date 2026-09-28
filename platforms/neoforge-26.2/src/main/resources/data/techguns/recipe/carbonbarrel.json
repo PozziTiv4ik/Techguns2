@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:carbonbarrel",
+    "count": 1
+  },
+  "pattern": [
+    "iii",
+    "   ",
+    "iii"
+  ],
+  "key": {
+    "i": "#c:plates/carbon"
+  }
+}

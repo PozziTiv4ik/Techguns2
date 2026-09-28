@@ -35,6 +35,7 @@
 - [GrenadeLauncher: шесть 40-мм гранат, отскоки и вращение барабана](GRENADE_LAUNCHER.ru.md)
 - [Flamethrower: топливо, автоматический огонь и поджог](FLAMETHROWER.ru.md)
 - [Minigun: нулевая задержка, барабаны, перезарядка и вращение стволов](MINIGUN.ru.md)
+- [Gauss Rifle: составной боеприпас, транзакционная R и летящий снаряд](GAUSS_RIFLE.ru.md)
 
 <a id="armor"></a>
 

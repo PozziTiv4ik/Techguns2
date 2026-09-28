@@ -1,0 +1,54 @@
+[
+  {
+    "id": "gaussrifle",
+    "capacity": 8,
+    "fire_delay": 30,
+    "reload_ticks": 60,
+    "damage": 40.0,
+    "minimum_damage": 40.0,
+    "drop_start": 90.0,
+    "drop_end": 90.0,
+    "speed": 5.0,
+    "lifetime": 90,
+    "projectile": "gauss",
+    "npc_ai": {
+      "range": 36.0,
+      "interval": 30,
+      "burst": 0,
+      "shot_delay": 0,
+      "forward_offset": 0.45
+    },
+    "accuracy": 0.025,
+    "automatic": false,
+    "extra_pellets": 0,
+    "pellet_spread": 0.0,
+    "gravity": 0.0,
+    "penetration": 2.0,
+    "zoom": 0.35,
+    "zoom_toggle": true,
+    "zoom_accuracy": 0.0,
+    "zoom_centered": true,
+    "ammo": {
+      "components": [
+        {
+          "item": "gaussrifleslugs",
+          "empty_item": "",
+          "loose_item": "gaussrifleslugs"
+        },
+        {
+          "item": "energycell",
+          "empty_item": "energycellempty",
+          "loose_item": ""
+        }
+      ],
+      "bundles_per_magazine": 1,
+      "individual": false
+    },
+    "fire_sound": "guns.gaussriflefire",
+    "reload_sound": "guns.gaussriflereload",
+    "model": "ModelBaseBaked",
+    "texture": "textures/guns/gaussrifle",
+    "forward_axis": "+x",
+    "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java"
+  }
+]

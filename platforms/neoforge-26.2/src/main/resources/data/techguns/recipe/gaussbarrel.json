@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:gaussbarrel",
+    "count": 1
+  },
+  "pattern": [
+    "pww",
+    "bbc",
+    "pww"
+  ],
+  "key": {
+    "p": "#c:plates/titanium",
+    "b": "techguns:carbonbarrel",
+    "c": "#c:circuits/elite",
+    "w": "#c:wires/gold"
+  }
+}

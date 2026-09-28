@@ -56,6 +56,11 @@ public final class TGContent {
     public static final DeferredItem<Item> PISTOL_ROUNDS = AMMO.get("pistolrounds");
     public static final DeferredItem<GunItem> REVOLVER = GUNS.get("revolver");
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(Registries.ENTITY_TYPE, Techguns.MOD_ID);
+    public static final DeferredHolder<SoundEvent, SoundEvent> GAUSS_RECHAMBER = SOUNDS.register(techguns.core.GaussRules.RECHAMBER_SOUND,
+            () -> SoundEvent.createVariableRangeEvent(id(techguns.core.GaussRules.RECHAMBER_SOUND)));
+    public static final DeferredHolder<EntityType<?>, EntityType<GaussProjectile>> GAUSS = ENTITIES.register("gauss", () ->
+            EntityType.Builder.<GaussProjectile>of(GaussProjectile::new, MobCategory.MISC).sized(.25f, .25f).clientTrackingRange(12).updateInterval(1)
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE, id("gauss"))));
     public static final DeferredHolder<EntityType<?>, EntityType<Bullet>> BULLET = ENTITIES.register("bullet", () ->
             EntityType.Builder.<Bullet>of(Bullet::new, MobCategory.MISC).sized(0.1f, 0.1f).clientTrackingRange(8).updateInterval(1)
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, id("bullet"))));
@@ -179,9 +184,11 @@ public final class TGContent {
         TreeSet<String> ids = new TreeSet<>();
         ids.addAll(CraftingContent.EXTRA_AMMO);
         for (WeaponDefinition gun : Weapons.ALL) {
-            ids.add(gun.ammo().item());
-            if (!gun.ammo().emptyItem().isEmpty()) ids.add(gun.ammo().emptyItem());
-            if (!gun.ammo().looseItem().isEmpty()) ids.add(gun.ammo().looseItem());
+            for (var part : gun.ammo().components()) {
+                ids.add(part.item());
+                if (!part.emptyItem().isEmpty()) ids.add(part.emptyItem());
+                if (!part.looseItem().isEmpty()) ids.add(part.looseItem());
+            }
         }
         Map<String, DeferredItem<Item>> items = new LinkedHashMap<>();
         ids.forEach(id -> items.put(id, ITEMS.registerSimpleItem(id)));

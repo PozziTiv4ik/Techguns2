@@ -47,6 +47,7 @@ JUnit и GameTests ищите по [карте кода](../docs/CODE_MAP.ru.md#
 | Область | Модуль преобразования | Проверки |
 |---|---|---|
 | Арсенал, боеприпасы, лазеры | [generate_weapon_content.py](generate_weapon_content.py), [legacy_crafting.py](legacy_crafting.py) | [test_lasers.py](tests/test_lasers.py), [test_crafting.py](tests/test_crafting.py) |
+| Gauss Rifle / составные массивы AmmoType / исходный OBJ | [legacy_gauss.py](legacy_gauss.py), [generate_weapon_content.py](generate_weapon_content.py), [legacy_items.py](legacy_items.py), рецепты — [legacy_crafting.py](legacy_crafting.py), [legacy_grinder.py](legacy_grinder.py) | [test_gauss.py](tests/test_gauss.py); вход выбора — weapon-ports.json, выходы — gauss-weapon.json, gauss-projectile.json, GaussRules.java и ресурсы |
 | Ракетница | [legacy_rockets.py](legacy_rockets.py) | [test_rockets.py](tests/test_rockets.py) |
 | Бензопила | [legacy_chainsaw.py](legacy_chainsaw.py) | [test_chainsaw.py](tests/test_chainsaw.py) |
 | Ручные гранаты | [legacy_grenades.py](legacy_grenades.py) | [test_grenades.py](tests/test_grenades.py) |

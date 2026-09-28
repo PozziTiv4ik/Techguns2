@@ -34,12 +34,15 @@
     "33": "techguns:ironreceiver",
     "34": "techguns:steelreceiver",
     "35": "techguns:obsidiansteelreceiver",
+    "36": "techguns:carbonreceiver",
     "37": "techguns:stonebarrel",
     "38": "techguns:ironbarrel",
     "39": "techguns:obsidiansteelbarrel",
+    "40": "techguns:carbonbarrel",
     "41": "techguns:laserbarrel",
     "42": "techguns:woodstock",
     "43": "techguns:plasticstock",
+    "44": "techguns:carbonstock",
     "45": "techguns:steamarmorplate",
     "46": "techguns:plateiron",
     "47": "techguns:platecopper",
@@ -114,6 +117,7 @@
     "125": "techguns:redstone_battery",
     "126": "techguns:redstone_battery_empty",
     "127": "techguns:gaussrifleslugs",
+    "128": "techguns:gaussbarrel",
     "133": "techguns:protectivefiber",
     "134": "techguns:oredrillsmall_steel",
     "135": "techguns:oredrillsmall_obsidiansteel",
@@ -338,6 +342,14 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/fraggrenade.json"
     },
     {
+      "id": "techguns:gaussrifle",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/gaussrifle.json"
+    },
+    {
+      "id": "techguns:gaussrifle_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/gaussrifle_alt.json"
+    },
+    {
       "id": "techguns:goldenrevolver",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/goldenrevolver.json"
     },
@@ -470,6 +482,10 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_125_redstone_battery_alt.json"
     },
     {
+      "id": "techguns:gaussbarrel",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_128_gaussbarrel.json"
+    },
+    {
       "id": "techguns:pistolmagazineempty",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_12_pistolmagazineempty.json"
     },
@@ -594,6 +610,10 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_35_obsidiansteelreceiver.json"
     },
     {
+      "id": "techguns:carbonreceiver",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_36_carbonreceiver.json"
+    },
+    {
       "id": "techguns:stonebarrel",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_37_stonebarrel.json"
     },
@@ -610,6 +630,10 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_3_riflerounds.json"
     },
     {
+      "id": "techguns:carbonbarrel",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_40_carbonbarrel.json"
+    },
+    {
       "id": "techguns:laserbarrel",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_41_laserbarrel.json"
     },
@@ -620,6 +644,10 @@
     {
       "id": "techguns:plasticstock",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_43_plasticstock.json"
+    },
+    {
+      "id": "techguns:carbonstock",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_44_carbonstock.json"
     },
     {
       "id": "techguns:mechanicalpartsiron",

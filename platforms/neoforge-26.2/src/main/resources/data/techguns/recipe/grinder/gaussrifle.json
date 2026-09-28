@@ -1,0 +1,31 @@
+{
+  "type": "techguns:grinder",
+  "input": "techguns:gaussrifle",
+  "outputs": [
+    {
+      "result": {
+        "id": "techguns:carbonfibers",
+        "count": 9
+      }
+    },
+    {
+      "result": {
+        "id": "techguns:ingottitanium",
+        "count": 1
+      }
+    },
+    {
+      "result": {
+        "id": "techguns:plasticsheet",
+        "count": 1
+      }
+    },
+    {
+      "result": {
+        "id": "techguns:circuitboardelite",
+        "count": 1
+      }
+    }
+  ],
+  "random": false
+}

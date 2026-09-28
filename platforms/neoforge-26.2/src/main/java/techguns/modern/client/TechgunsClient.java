@@ -178,6 +178,7 @@ public final class TechgunsClient {
     private static void renderers(EntityRenderersEvent.RegisterRenderers event) {
         // The initial round uses vanilla tracer particles; a mesh renderer is part of M5.
         event.registerEntityRenderer(TGContent.BULLET.get(), NoopRenderer::new);
+        event.registerEntityRenderer(TGContent.GAUSS.get(), NoopRenderer::new);
         event.registerEntityRenderer(TGContent.INCENDIARY_BULLET.get(), NoopRenderer::new);
         event.registerEntityRenderer(TGContent.EXPLOSIVE_BULLET.get(), NoopRenderer::new);
         event.registerEntityRenderer(TGContent.FLAME.get(), NoopRenderer::new);

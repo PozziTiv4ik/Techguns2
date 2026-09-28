@@ -1,0 +1,21 @@
+{
+  "source": "GaussProjectile -> AdvancedBulletProjectile -> GenericProjectile",
+  "air_drag": 0.99,
+  "water_drag": 0.85,
+  "gravity": 0,
+  "rechamber_sound": "guns.gaussriflerechamber",
+  "damage": "PROJECTILE, weapon penetration, bypass cooldown, ordinary 0.01 PHYSICAL impulse then no-knockback main hit",
+  "flight": "real projectile; 1.5 * configured speed with legacy spread; stops at first accepted entity/block impact; TTL after movement",
+  "model": {
+    "source": "legacy/1.12.2/src/main/resources/assets/techguns/models/item/gaussrifle.obj",
+    "vertices": 436,
+    "faces": 326,
+    "parts": 55,
+    "scale": 0.40609137055837563,
+    "rotation_y": 180,
+    "flip_v": true
+  },
+  "pending": [
+    "Original Gauss trail, muzzle/impact FX, dynamic light, scope/recoil animation and GPU acceptance"
+  ]
+}

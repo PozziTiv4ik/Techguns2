@@ -44,7 +44,8 @@ final class ArsenalGameTests {
         Player player = WeaponGameTests.player(helper);
         ItemStack stack = TGContent.GUNS.get(gun.id()).toStack();
         player.setItemInHand(InteractionHand.MAIN_HAND, stack);
-        player.getInventory().setItem(1, TGContent.AMMO.get(gun.ammo().item()).toStack(gun.ammo().individual() ? gun.stats().capacity() + 1 : 2));
+        for (int i = 0; i < gun.ammo().components().size(); i++)
+            player.getInventory().setItem(i + 1, TGContent.AMMO.get(gun.ammo().components().get(i).item()).toStack(gun.ammo().individual() ? gun.stats().capacity() + 1 : 2));
         helper.assertTrue(ReloadSessions.begin(player), "Reload starts: " + gun.id());
         for (int tick = 0; tick < gun.stats().reloadTicks(); tick++) player.tick();
         helper.assertValueEqual(GunItem.rounds(stack), gun.stats().capacity(), "Capacity: " + gun.id());
@@ -57,6 +58,11 @@ final class ArsenalGameTests {
             var bullets = helper.getLevel().getEntitiesOfClass(Bullet.class, player.getBoundingBox().inflate(3), b -> b.getOwner() == player);
             helper.assertValueEqual(bullets.size(), gun.projectileCount(), "Projectile count: " + gun.id());
             for (Bullet bullet : bullets) helper.assertValueEqual(bullet.weapon().id(), gun.id(), "Correct projectile parameters");
+        } else if (gun.projectile() == techguns.core.ProjectileKind.GAUSS) {
+            var slugs = helper.getLevel().getEntitiesOfClass(techguns.modern.GaussProjectile.class, player.getBoundingBox().inflate(3), b -> b.getOwner() == player);
+            helper.assertValueEqual(slugs.size(), 1, "One Gauss slug");
+            helper.assertValueEqual(slugs.getFirst().weapon(), gun, "Correct Gauss factory");
+            slugs.forEach(Entity -> Entity.discard());
         } else if (gun.projectile() == techguns.core.ProjectileKind.LASER) {
             var beams = helper.getLevel().getEntitiesOfClass(techguns.modern.LaserBeam.class, player.getBoundingBox().inflate(3), b -> b.getOwner() == player);
             helper.assertValueEqual(beams.size(), 1, "One beam per laser shot");

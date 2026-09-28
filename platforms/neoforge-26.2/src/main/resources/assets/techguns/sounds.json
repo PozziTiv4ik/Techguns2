@@ -329,6 +329,20 @@
     ],
     "subtitle": "subtitles.techguns.guns.minigunreload"
   },
+  "guns.gaussriflefire": {
+    "sounds": [
+      "techguns:guns/gaussrifle_shot_a",
+      "techguns:guns/gaussrifle_shot_b",
+      "techguns:guns/gaussrifle_shot_c"
+    ],
+    "subtitle": "subtitles.techguns.guns.gaussriflefire"
+  },
+  "guns.gaussriflereload": {
+    "sounds": [
+      "techguns:guns/gauss_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.gaussriflereload"
+  },
   "machines.ammopresswork1": {
     "sounds": [
       "techguns:machines/ammopress_work1_a",
@@ -615,5 +629,13 @@
       "techguns:guns/flamethrower_start_a"
     ],
     "subtitle": "subtitles.techguns.guns.flamethrowerstart"
+  },
+  "guns.gaussriflerechamber": {
+    "sounds": [
+      "techguns:guns/gauss_rechamber_a",
+      "techguns:guns/gauss_rechamber_b",
+      "techguns:guns/gauss_rechamber_c"
+    ],
+    "subtitle": "subtitles.techguns.guns.gaussriflerechamber"
   }
 }

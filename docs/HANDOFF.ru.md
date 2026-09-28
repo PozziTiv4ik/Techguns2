@@ -1,10 +1,9 @@
 # Продолжение работы в новом чате
 
-Обновлено 2026-09-28 после CI checkpoint взрывных патронов AS50.
-Локальные проверки и Linux CI #78 успешны. Прочитать
-[порядок работы](DEVELOPMENT_WORKFLOW.ru.md) и [AGENTS.md](../AGENTS.md),
-проверить Git. Поиск — [карта кода](CODE_MAP.ru.md), [каталог систем](README.ru.md)
-и [карта генераторов](../tools/README.ru.md).
+Обновлено 2026-09-28 после локальных проверок Gauss Rifle.
+Linux CI нового source ещё ожидается. Прочитать [порядок работы](DEVELOPMENT_WORKFLOW.ru.md)
+и [AGENTS.md](../AGENTS.md), проверить Git. Поиск — [карта кода](CODE_MAP.ru.md),
+[каталог систем](README.ru.md) и [карта генераторов](../tools/README.ru.md).
 
 ## Репозиторий и текущая точка
 
@@ -15,67 +14,55 @@
 | Writable fork / origin | `PozziTiv4ik/Techguns2` |
 | Оригинал / upstream, только чтение | `pWn3d1337/Techguns2` |
 | Платформа | Minecraft 26.2 / NeoForge 26.2.0.81 / Java 25 |
-| Последний source SHA, подтверждённый Linux | `13b2f15ec865f7293ee8158b9283455dbe138419` — взрывные патроны AS50 |
-| Linux CI кода AS50 | [Linux CI #78](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36461615823), success; 2026-09-28 20:06:52 Europe/Zurich |
+| Последний прежний source, подтверждённый Linux | `13b2f15ec865f7293ee8158b9283455dbe138419` — AS50, CI #78 |
+| Gauss Rifle | Локальные проверки успешны; source commit / Linux CI ещё ожидаются |
 
-Работают третий магазин AS50, все три варианта крафтовой смены, R за 80 тиков,
-возврат пустого магазина/целых пачек, сохранение и HUD. Прямое попадание
-EXPLOSION ×1,15 отделено от исходного **vanilla Explosion 1,5**: TGExplosion
-в оригинале закомментирован. Проверены настоящий взрыв, броня/cooldown,
-стены до разрушения, события, B/права, NPC, вода и TTL. Магазин использует
-исходные OBJ/PNG; рецепты пачек Metal Press/Grinder уже были подключены.
-Подробности — [AS50_EXPLOSIVE.ru.md](AS50_EXPLOSIVE.ru.md).
+Работает Gauss Rifle: восемь зарядов, оба входа в одной транзакционной R,
+возврат пустой ячейки, реальный PROJECTILE с пробитием 2,0, события/броня,
+вода/TTL, NPC, сохранение, рецепты/Grinder, исходный OBJ и звуки.
+Описание — [GAUSS_RIFLE.ru.md](GAUSS_RIFLE.ru.md).
 
-Локально прошли **250 JUnit, 426 Python и 2319 GameTests (2239 + 52 + 16 + 6 + 6)**. Все пять серверов
-завершились с кодом 0 и без ошибок загрузки данных; основной — 2238
-Techguns + один встроенный Minecraft. Python — единый discover за 721.376 с.
-Генератор проверяет 2485 файлов; 2363 ресурса и 696 классов JAR
-сверены побайтово. Лицензия/legacy/исключение тестовых паков проверены.
-Журналы — `.tools/as50-*`, доказательства —
-[протокол](VERIFICATION.ru.md#as50-explosive-2026-09-28).
+Локально прошли **255 JUnit, 433 Python и 2356 GameTests (2276 + 52 + 16 + 6 + 6)**. Python — четыре независимые группы за 334.591 с
+общего времени; сохранённые test ID точно покрывают полный discover без
+пропусков и повторов. JUnit failures/errors/skipped = 0. Все пять серверов завершились
+с кодом 0, без ошибок загрузки данных. Основной сервер — 2275 Techguns
+и один встроенный Minecraft. Генератор проверяет 2520 файлов; 2395 ресурсов
+и 700 классов JAR сверены побайтово. Лицензия, неизменность legacy и отсутствие
+семи уникальных файлов тестовых паков проверены. Журналы — `.tools/gauss-*`.
+Linux CI нового кода пока ожидается; прежний CI AS50 не подтверждает Гаусс.
 
-Выявленная CI #77 нестабильность MeteorGameTests устранена: фикстура ждёт
-native entity tracking, сохраняя timeout и все десять смертей/пять постов.
-32/32 адресных повторения и полный основной сервер прошли; игровой спавнер
-не менялся. История сбоя и исправления — в протоколе.
-
-[Linux CI #78](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36461615823) подтвердил source `13b2f15ec865f7293ee8158b9283455dbe138419`: 426 Python за 189.381 с,
-сборку/ядро и все 2319 GameTests (2239 + 52 + 16 + 6 + 6); все 15 шагов успешны.
-Завершение — 2026-09-28 20:06:52 Europe/Zurich (`2026-09-28T18:06:52Z`).
-После указанного source SHA меняется только документация с `[skip ci]`.
-Незавершённой реализации и известных красных проверок этого среза нет.
-Текущий HEAD получать из Git; не принимать source SHA за последний коммит.
-Не повторять проверки без изменений или конкретного сомнения.
+Доказательства — [протокол](VERIFICATION.ru.md#gauss-rifle-2026-09-28).
+После успешного CI записать точный source SHA/ссылку и отправить отдельный
+документационный checkpoint с `[skip ci]`. Текущий HEAD получать из Git;
+не повторять уже прошедшие проверки без изменений или конкретного сомнения.
 
 <a id="next-milestone"></a>
 
-## Следующий законченный срез — Gauss Rifle
+## Следующий законченный срез — Scatterbeam Rifle
 
-Перенести `gaussrifle` с составным исходным боеприпасом: `GAUSSRIFLE_SLUGS`
-и `ENERGY_CELL`, возврат `ENERGY_CELL_EMPTY`, остатки и транзакционная R
-без расхода одного входа при нехватке другого. Снаряды уже производит
-Metal Press; обычная зарядная станция/энергоячейка также работают.
+Перенести `scatterbeamrifle` и `BlasterProjectile.Factory`. В `TGuns` две
+последовательные setBulletSpeed: действующее значение 2,0. Проверить пять
+энергетических снарядов на один расход заряда оружия, реальный полёт, прямой урон,
+броню/события/сохранение и NPC. Боеприпас — уже работающая ENERGY_CELL,
+возврат ENERGY_CELL_EMPTY, исходная ёмкость 40 и R 45 тиков.
+Не заменять фабрику обычной пулей/мгновенным лазером. Восстановить активные
+ветки самого BlasterProjectile до реализации; полный FX не объявлять готовым.
 
-Сначала восстановить `TGuns.gaussrifle`, `AmmoTypes.AMMO_GAUSS_RIFLE`,
-составные ветки `AmmoType`/`GenericGun`, `GaussProjectile` и
-`AdvancedBulletProjectile`. Отдельно сверить фабрику, реальный полёт,
-урон/пробитие/события и сохранение. Не сводить массив входов к одному
-магазину и не объявлять незавершённые FX готовыми. Исходные рецепты —
-`gaussrifle`, `gaussrifle_alt`, ствол Gauss и рецепт Grinder.
-
-Современные точки — `GunItem`, `ReloadSessions`, `AmmoSpec`, `Magazine`,
-`LegacyShot`, `ShotDamage`, `ArmorDamage`, примеры BallisticAmmo/RocketAmmo.
-Вход оружия — `content/weapon-ports.json`; владельцы —
-`generate_weapon_content.py`, `legacy_crafting.py`, `legacy_items.py`,
-`legacy_grinder.py` и карта генераторов. Новый converter/subsystem добавить
-в карты и пройти полный workflow. Прежние AS50/Minigun заново не переносить.
+Исходные точки — TGuns, AmmoTypes, GenericGun, BlasterProjectile,
+рецепты scatterbeamrifle/alt, TGMachineRecipes и ClientProxy/ModelLasergun2.
+Современные — GunItem, ReloadSessions, AmmoSpec, LegacyShot, ShotDamage,
+ArmorDamage, NpcCombat и GaussProjectile как пример интеграции.
+Вход выбора — content/weapon-ports.json, владельцы — generate_weapon_content.py,
+legacy_crafting.py, legacy_items.py и legacy_grinder.py. Новый subsystem/converter
+добавить в карты и пройти полный workflow. Прежние AS50/Minigun/Gauss заново не переносить.
 
 ## Существенные ограничения
 
-AS50 MiningChargeBlockExplosion/световой импульс и GPU-приёмка остаются.
-У Minigun остаются полные muzzle FX, движения рук, отдача корпуса и анимация R.
-Обычная баллистика использует общие правила порта; полного сравнения полёта
-с 1.12.2 нет. M4/M5 и полный порт не объявлены завершёнными.
+Gauss: исходные GaussFireFX/GaussProjectileTrail/impact FX, свет, прицельная
+сетка/отдача и GPU-приёмка остаются; голубой след — native-адаптация.
+AS50: MiningChargeBlockExplosion/световой импульс; Minigun: полный muzzle FX,
+движения рук, отдача корпуса и анимация R. Обычная баллистика использует общие
+правила порта без полного сравнения полёта с 1.12.2. M4/M5 и весь порт не завершены.
 
 Все 21 активных природных кандидата и сетки реализованы, но полный M10
 и матрица seed/высот остаются. Locate перебирает текущую сетку: сохранённый

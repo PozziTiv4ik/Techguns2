@@ -23,5 +23,6 @@
   "chainsaw": "ModelChainsaw",
   "grenadelauncher": "ModelBaseBakedGrenadeLauncher",
   "flamethrower": "ModelFlamethrower",
-  "minigun": "ModelMinigun"
+  "minigun": "ModelMinigun",
+  "gaussrifle": "ModelBaseBaked"
 }

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:gaussrifle",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 0
+    }
+  },
+  "pattern": [
+    "dpc",
+    "brs",
+    "  e"
+  ],
+  "key": {
+    "p": "#c:plates/titanium",
+    "b": "techguns:gaussbarrel",
+    "r": "techguns:carbonreceiver",
+    "s": "techguns:carbonstock",
+    "c": "#c:circuits/elite",
+    "d": "#c:gems/diamond",
+    "e": "techguns:energycellempty"
+  }
+}

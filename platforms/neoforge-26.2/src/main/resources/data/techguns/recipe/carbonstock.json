@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:carbonstock",
+    "count": 1
+  },
+  "pattern": [
+    "iii",
+    " pp"
+  ],
+  "key": {
+    "p": "#c:sheets/plastic",
+    "i": "#c:plates/carbon"
+  }
+}

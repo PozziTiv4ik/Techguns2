@@ -6,7 +6,7 @@ production step; it is never replaced by cheaper vanilla ingredients.
 from pathlib import Path
 import json
 import re
-from legacy_items import ORE_TAGS, shared_items, ammo_slot_items
+from legacy_items import ORE_TAGS, shared_items, ammo_slot_items, ammo_components
 from legacy_machines import metal_press_data, blast_furnace_data
 from legacy_ores import smelting_data
 from legacy_chemistry import chemical_recipes, STANDALONE_ITEMS
@@ -108,7 +108,8 @@ def plan_crafting(weapon_list):
     by_name = {name: meta for meta, name in shared.items()}
     source_recipes = {path.stem: json.loads(path.read_text()) for path in sorted(
         (LEGACY / 'resources/assets/techguns/recipes').glob('*.json'), key=lambda p: p.name) if not path.name.startswith('_')}
-    ammo = {gun['ammo'][field] for gun in weapon_list for field in ('item', 'empty_item', 'loose_item') if gun['ammo'][field]}
+    ammo = {part[field] for gun in weapon_list for part in ammo_components(gun['ammo'])
+            for field in ('item', 'empty_item', 'loose_item') if part[field]}
     selected = {name: recipe for name, recipe in source_recipes.items()
                 if name in weapons or name.endswith('_alt') and name[:-4] in weapons}
     for armor_set in ARMOR_SETS:

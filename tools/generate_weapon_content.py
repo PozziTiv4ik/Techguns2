@@ -59,13 +59,14 @@ from legacy_incendiary import generate_incendiary_content, incendiary_translatio
 from legacy_explosive import generate_explosive_content, explosive_translations
 from legacy_flamethrower import generate_flame_content, flame_translations
 from legacy_minigun import generate_minigun_content
+from legacy_gauss import generate_gauss_content, gauss_model, gauss_translations
 from legacy_meteor import generate_meteor_content
 from legacy_bugnests import generate_bugnest_content, bugnest_translations
 from legacy_nether_castle import generate_nether_castle_content
 from legacy_medium_altar import generate_medium_altar_content
 from legacy_ghast_spawner import generate_ghast_spawner_content
 from legacy_grinder import generate_grinder_content, grinder_translations
-from legacy_items import arguments
+from legacy_items import arguments, ammo_components
 
 ROOT = Path(__file__).resolve().parents[1]
 LEGACY = ROOT / 'legacy/1.12.2/src/main'
@@ -85,7 +86,7 @@ def parse_weapons():
     projectile_classes.update(dict(re.findall(r'(\w+)\s*=\s*new ProjectileSelector\(AmmoTypes\.\w+,\s*new (\w+)\.Factory\(', source)))
     render_source = strip_comments((LEGACY / 'java/techguns/client/ClientProxy.java').read_text())
     renderers = {identifier: (renderer, model) for identifier, renderer, model in re.findall(
-        r'registerItemRenderer\(TGuns\.(\w+),\s*new (RenderGunBase90|RenderGunBase|RenderRocketLauncher|RenderGunChainsaw|RenderGunBaseObj|RenderGunFlamethrower)\(new (\w+)\(', render_source)}
+        r'registerItemRenderer\(TGuns\.(\w+),\s*new (RenderGunBase90|RenderGunBase|RenderRocketLauncher|RenderGunChainsaw|RenderGunBaseObj|RenderGunFlamethrower)\(\s*new (\w+)\(', render_source)}
     sounds = dict(re.findall(r'(\w+)\s*=\s*createSoundEvent\("([^"]+)"\)',
                             strip_comments((LEGACY / 'java/techguns/TGSounds.java').read_text())))
     # 1.12 ResourceLocation normalizes paths to lowercase; 26.2 rejects uppercase paths.
@@ -104,10 +105,20 @@ def parse_weapons():
         values = arguments(match[1])
         def item(value):
             if value == 'ItemStack.EMPTY': return ''
-            if not value.startswith('TGItems.'): raise ValueError(f'Compound ammo requires a dedicated port: {value}')
+            if not value.startswith('TGItems.'): raise ValueError(f'Unsupported ammo item: {value}')
             return item_ids[value.split('.')[1]]
-        if len(values) == 1: return item(values[0]), '', '', 0
-        if len(values) == 4: return item(values[0]), item(values[1]), item(values[2]), int(num(values[3]))
+        if len(values) == 1:
+            return {'item': item(values[0]), 'empty_item': '', 'loose_item': '', 'bundles_per_magazine': 0}
+        if len(values) == 4:
+            def array(value):
+                if value.startswith('new ItemStack[]'):
+                    if ammo_type != 'AMMO_GAUSS_RIFLE': raise ValueError('Compound family requires a verified port: ' + ammo_type)
+                    return [item(v) for v in arguments(value[value.index('{')+1:value.rindex('}')])]
+                return [item(value)]
+            arrays = [array(v) for v in values[:3]]
+            if len({len(v) for v in arrays}) != 1: raise ValueError('Unaligned ammo arrays: ' + ammo_type)
+            parts = [dict(zip(('item', 'empty_item', 'loose_item'), row)) for row in zip(*arrays)]
+            return {**(parts[0] if len(parts) == 1 else {'components': parts}), 'bundles_per_magazine': int(num(values[3]))}
         raise ValueError(f'Unsupported ammo constructor for {ammo_type}')
 
     result = []
@@ -132,11 +143,11 @@ def parse_weapons():
         npc_ai = calls.get('setAIStats', ['15', '60', '0', '0'])
         shotgun = calls.get('setShotgunSpread', ['0', '0', 'false'])
         if shotgun[2] != 'false': raise ValueError(f'{identifier}: burst behavior not ported yet')
-        ammo_item, empty, loose, bundles = ammo_for(args[1])
+        ammo = ammo_for(args[1])
         inline_projectile = re.search(r'new ProjectileSelector<(\w+)>', args[1])
         projectile_class = inline_projectile[1] if inline_projectile else projectile_classes[args[1]]
         projectile = {'GenericProjectile': 'ballistic', 'StoneBulletProjectile': 'ballistic',
-                      'LaserProjectile': 'laser', 'RocketProjectile': 'rocket',
+                      'LaserProjectile': 'laser', 'RocketProjectile': 'rocket', 'GaussProjectile': 'gauss',
                       'CyberdemonBlasterProjectile': 'nether_blaster', 'ChainsawProjectile': 'chainsaw', 'Grenade40mmProjectile':'grenade_40mm', 'FlamethrowerProjectile':'flame'}.get(projectile_class)
         if projectile is None: raise ValueError(f'Projectile factory not ported: {projectile_class}')
         lifetime = int(num(args[9]))
@@ -161,8 +172,7 @@ def parse_weapons():
             'zoom_toggle': calls.get('setZoom', ['1', 'false'])[1] == 'true',
             'zoom_accuracy': num(calls.get('setZoom', ['1', 'false', '1'])[2]),
             'zoom_centered': calls.get('setZoom', ['1', 'false', '1', 'false'])[3] == 'true',
-            'ammo': {'item': ammo_item, 'empty_item': empty, 'loose_item': loose,
-                     'bundles_per_magazine': bundles, 'individual': int(num(calls.get('setAmmoCount', ['1'])[0])) > 1},
+            'ammo': {**ammo, 'individual': int(num(calls.get('setAmmoCount', ['1'])[0])) > 1},
             'fire_sound': sounds[args[7].split('.')[-1]], 'reload_sound': sounds[args[8].split('.')[-1]],
             'model': model, 'texture': texture, 'forward_axis': '+x' if renderer in ('RenderGunBase90', 'RenderRocketLauncher', 'RenderGunChainsaw', 'RenderGunBaseObj', 'RenderGunFlamethrower') else '-z',
             'source': 'legacy/1.12.2/src/main/java/techguns/TGuns.java'})
@@ -205,6 +215,7 @@ public final class NpcWeapons {
     data('content/chainsaw-weapons.json', [gun for gun in weapons if gun['projectile'] == 'chainsaw'])
     data('content/grenade-launcher.json', [gun for gun in weapons if gun['projectile'] == 'grenade_40mm'])
     data('content/flamethrower-weapon.json', [gun for gun in weapons if gun['projectile'] == 'flame'])
+    data('content/gauss-weapon.json', [gun for gun in weapons if gun['projectile'] == 'gauss'])
     definitions = []
     ammo_items = set(crafting['extra_ammo'])
     sounds_data = json.loads(resolve_asset('sounds.json').read_text())
@@ -222,14 +233,22 @@ public final class NpcWeapons {
     for gun in weapons:
         identifier = gun['id']
         ammo = gun['ammo']
-        for field in ('item', 'empty_item', 'loose_item'):
-            if ammo[field]: ammo_items.add(ammo[field])
+        for part in ammo_components(ammo):
+            for field in ('item', 'empty_item', 'loose_item'):
+                if part[field]: ammo_items.add(part[field])
         java_stats = ', '.join([f'"{identifier}"', str(gun['capacity']), str(gun['fire_delay']), str(gun['reload_ticks']),
             f"{gun['damage']}f", f"{gun['minimum_damage']}f", str(gun['drop_start']), str(gun['drop_end']),
             str(gun['speed']), str(gun['lifetime']), str(gun['accuracy'])])
-        ammo_java = f'new AmmoSpec("{ammo["item"]}", "{ammo["empty_item"]}", "{ammo["loose_item"]}", {ammo["bundles_per_magazine"]}, {str(ammo["individual"]).lower()})'
+        if 'components' in ammo:
+            parts = ', '.join(f'new AmmoSpec.Component("{p["item"]}", "{p["empty_item"]}", "{p["loose_item"]}")' for p in ammo['components'])
+            ammo_java = f'new AmmoSpec(List.of({parts}), {ammo["bundles_per_magazine"]}, {str(ammo["individual"]).lower()})'
+        else:
+            ammo_java = f'new AmmoSpec("{ammo["item"]}", "{ammo["empty_item"]}", "{ammo["loose_item"]}", {ammo["bundles_per_magazine"]}, {str(ammo["individual"]).lower()})'
         definitions.append(f'        new WeaponDefinition(new WeaponSpec({java_stats}), {ammo_java}, ProjectileKind.{gun["projectile"].upper()}, {str(gun["automatic"]).lower()}, {gun["extra_pellets"]}, {gun["pellet_spread"]}, {gun["gravity"]}, {gun["penetration"]}, new AimSpec({gun["zoom"]}f, {str(gun["zoom_toggle"]).lower()}, {gun["zoom_accuracy"]}f, {str(gun["zoom_centered"]).lower()}), "{gun["fire_sound"]}", "{gun["reload_sound"]}")')
-        if identifier=='grenadelauncher':
+        gui_hidden = GUI_HIDDEN_PARTS.get(identifier, ())
+        if identifier=='gaussrifle':
+            model = gauss_model()
+        elif identifier=='grenadelauncher':
             model=launcher_base_model()
         else:
             source = (LEGACY / f'java/techguns/client/models/guns/{gun["model"]}.java').read_text()
@@ -289,7 +308,7 @@ public final class NpcWeapons {
     for name in HELICOPTER_SOUNDS: selected_sounds[name] = {'sounds':sounds_data[name]['sounds']}
     for name in DRILL_SOUNDS: selected_sounds[name] = {'sounds':sounds_data[name]['sounds']}
     for name in FORTIFICATION_SOUNDS: selected_sounds[name] = {'sounds':sounds_data[name]['sounds']}
-    for name in ('guns.chainsawhit', 'guns.chainsawloopstart', 'guns.powerhammerimpactground', 'guns.grenade_pin', 'guns.flamethrowerstart'):
+    for name in ('guns.chainsawhit', 'guns.chainsawloopstart', 'guns.powerhammerimpactground', 'guns.grenade_pin', 'guns.flamethrowerstart', 'guns.gaussriflerechamber'):
         selected_sounds[name] = {'sounds':sounds_data[name]['sounds']}
     for sound, value in selected_sounds.items():
         subtitle = f'subtitles.techguns.{sound}'
@@ -341,6 +360,7 @@ public final class NpcWeapons {
         values.update(camonet_translations(lang))
         values.update(incendiary_translations(lang))
         values.update(explosive_translations(lang))
+        values.update(gauss_translations(lang))
         values.update(flame_translations(lang))
         values.update(grinder_translations(lang))
         values.update(rocket_translations(lang))
@@ -418,7 +438,7 @@ public final class Weapons {
     files.update(generate_machine_content())
     files.update(generate_neon_content())
     files.update(generate_launcher_content())
-    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_grenade_content(), generate_npc_content(), generate_cyber_content(), generate_armor_content(), generate_repair_content(), generate_camo_content(), generate_grinder_content(), generate_zombie_soldier_content(), generate_rural_content(), generate_skeleton_content(), generate_bandit_content(), generate_chainsaw_content(), generate_psycho_content(), generate_spawner_content(), generate_army_content(), generate_commando_content(), generate_policeman_content(), generate_police_station_content(), generate_survivor_hideout_content(), generate_desert_oil_content(), generate_gas_station_content(), generate_train_station_content(), generate_factory_house_content(), generate_small_mine_content(), generate_location_content(), generate_grid_content(), generate_ghastling_content(), generate_helicopter_content(), generate_alienbug_content(), generate_spike_content(), generate_cluster_content(), generate_drill_content(), generate_building_content(), generate_fortification_content(), generate_camonet_content(), generate_incendiary_content(weapons), generate_explosive_content(weapons), generate_flame_content(), generate_minigun_content(), generate_crate_content(weapons), generate_camp_content(), generate_castle_content(), generate_carrier_content(), generate_metal_stairs_content(), generate_meteor_content(), generate_bugnest_content(), generate_nether_castle_content(), generate_medium_altar_content(), generate_ghast_spawner_content()) for entry in domain.items()]:
+    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_grenade_content(), generate_npc_content(), generate_cyber_content(), generate_armor_content(), generate_repair_content(), generate_camo_content(), generate_grinder_content(), generate_zombie_soldier_content(), generate_rural_content(), generate_skeleton_content(), generate_bandit_content(), generate_chainsaw_content(), generate_psycho_content(), generate_spawner_content(), generate_army_content(), generate_commando_content(), generate_policeman_content(), generate_police_station_content(), generate_survivor_hideout_content(), generate_desert_oil_content(), generate_gas_station_content(), generate_train_station_content(), generate_factory_house_content(), generate_small_mine_content(), generate_location_content(), generate_grid_content(), generate_ghastling_content(), generate_helicopter_content(), generate_alienbug_content(), generate_spike_content(), generate_cluster_content(), generate_drill_content(), generate_building_content(), generate_fortification_content(), generate_camonet_content(), generate_incendiary_content(weapons), generate_explosive_content(weapons), generate_gauss_content(), generate_flame_content(), generate_minigun_content(), generate_crate_content(weapons), generate_camp_content(), generate_castle_content(), generate_carrier_content(), generate_metal_stairs_content(), generate_meteor_content(), generate_bugnest_content(), generate_nether_castle_content(), generate_medium_altar_content(), generate_ghast_spawner_content()) for entry in domain.items()]:
         if path in files:
             # Several content domains contribute to the same mining/tool and common item tags.
             if '/tags/' not in path:

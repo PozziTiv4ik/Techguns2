@@ -14,7 +14,8 @@ public class GunItem extends Item {
     public WeaponDefinition definition() { return definition; }
     public boolean trigger(ServerLevel server, Player player, ItemStack stack) { return fire(server, player, stack); }
     protected boolean consumesLoadedAmmo(Player player) {
-        return !(this instanceof ChainsawItem) || !player.getAbilities().instabuild;
+        return !(this instanceof ChainsawItem || definition.projectile() == techguns.core.ProjectileKind.GAUSS)
+                || !player.getAbilities().instabuild;
     }
     public static int rounds(ItemStack stack) {
         return stack.getItem() instanceof GunItem gun
@@ -31,6 +32,14 @@ public class GunItem extends Item {
         float accuracyMultiplier = techguns.modern.armor.TGArmorSystem.gunAccuracyMultiplier(player);
         if (aiming) accuracyMultiplier *= gun.aim().accuracyMultiplier();
         for (int pellet = 0; pellet < gun.projectileCount(); pellet++) {
+            if (gun.projectile() == techguns.core.ProjectileKind.GAUSS) {
+                var slug = new GaussProjectile(TGContent.GAUSS.get(), server);
+                slug.configure(gun); slug.setOwner(player);
+                slug.shootLegacy(player, gun.stats().spread() * accuracyMultiplier,
+                        aiming && gun.aim().centered() ? 0 : LegacyShot.muzzleSide(player, player.getOffhandItem() == stack));
+                if (!server.addFreshEntity(slug)) return false;
+                continue;
+            }
             if (gun.projectile() == techguns.core.ProjectileKind.FLAME) {
                 var flame = new FlameProjectile(TGContent.FLAME.get(), server);
                 flame.configure(gun, !SafeMode.enabled(player)); flame.setOwner(player);
@@ -112,17 +121,24 @@ public class GunItem extends Item {
         else if (definition.projectile() == techguns.core.ProjectileKind.FLAME) FlameFiring.playerShot(server, player, stack);
         else server.playSound(null, player.getX(), player.getY(), player.getZ(),
                 TGContent.SOUND_EVENTS.get(definition.fireSound()).get(), SoundSource.PLAYERS, 2, 1);
+        if (definition.projectile() == techguns.core.ProjectileKind.GAUSS)
+            server.playSound(null, player.getX(), player.getY(), player.getZ(), TGContent.GAUSS_RECHAMBER.get(), SoundSource.PLAYERS, 1, 1);
     }
 
     public static int availableAmmo(Player player, WeaponDefinition gun) {
-        return availableAmmo(player, gun.ammo().item());
+        return availableAmmo(player, gun.ammo());
     }
     public static String ammoId(ItemStack stack) {
         if (!(stack.getItem() instanceof GunItem gun)) return "";
         return gun.definition.projectile() == techguns.core.ProjectileKind.ROCKET ? RocketAmmo.variant(stack).ammo() : BallisticAmmo.ammo(stack).item();
     }
     public static int availableAmmo(Player player, ItemStack stack) {
-        return stack.getItem() instanceof GunItem ? availableAmmo(player, ammoId(stack)) : 0;
+        if (!(stack.getItem() instanceof GunItem gun)) return 0;
+        return gun.definition.projectile() == techguns.core.ProjectileKind.ROCKET
+                ? availableAmmo(player, ammoId(stack)) : availableAmmo(player, BallisticAmmo.ammo(stack));
+    }
+    private static int availableAmmo(Player player, techguns.core.AmmoSpec ammo) {
+        return ammo.components().stream().mapToInt(part -> availableAmmo(player, part.item())).min().orElse(0);
     }
     private static int availableAmmo(Player player, String id) {
         Item ammo = TGContent.AMMO.get(id).get();
@@ -143,24 +159,32 @@ public class GunItem extends Item {
         if (!(player.level() instanceof ServerLevel) || !(stack.getItem() instanceof GunItem item)) return;
         WeaponDefinition gun = item.definition;
         Magazine.Plan plan = Magazine.plan(gun, rounds(stack), availableAmmo(player, stack), player.getAbilities().instabuild);
-        int pending = plan.consumedItems();
-        Item ammo = TGContent.AMMO.get(ammoId(stack)).get();
-        for (int slot = 0; slot < player.getInventory().getContainerSize() && pending > 0; slot++) {
-            ItemStack candidate = player.getInventory().getItem(slot);
-            if (candidate.is(ammo)) {
-                int count = Math.min(candidate.getCount(), pending);
-                candidate.shrink(count);
-                pending -= count;
+        var selectedAmmo = BallisticAmmo.ammo(stack);
+        var inputs = gun.projectile() == techguns.core.ProjectileKind.ROCKET
+                ? java.util.List.of(ammoId(stack)) : selectedAmmo.components().stream().map(techguns.core.AmmoSpec.Component::item).toList();
+        // Check every input before mutating any stack. No hooks run between this check and consumption.
+        if (inputs.stream().anyMatch(id -> availableAmmo(player, id) < plan.consumedItems())) return;
+        for (String id : inputs) {
+            int pending = plan.consumedItems();
+            Item ammo = TGContent.AMMO.get(id).get();
+            for (int slot = 0; slot < player.getInventory().getContainerSize() && pending > 0; slot++) {
+                ItemStack candidate = player.getInventory().getItem(slot);
+                if (candidate.is(ammo)) {
+                    int count = Math.min(candidate.getCount(), pending);
+                    candidate.shrink(count);
+                    pending -= count;
+                }
             }
         }
         stack.set(TGContent.ROUNDS.get(), plan.rounds());
-        var selectedAmmo = BallisticAmmo.ammo(stack);
-        giveRemainder(player, selectedAmmo.emptyItem(), plan.emptyMagazines());
-        giveRemainder(player, selectedAmmo.looseItem(), plan.looseBundles());
+        for (var part : selectedAmmo.components()) {
+            giveRemainder(player, part.emptyItem(), plan.emptyMagazines());
+            giveRemainder(player, part.looseItem(), plan.looseBundles());
+        }
     }
 
     private static void giveRemainder(Player player, String id, int count) {
-        if (count <= 0) return;
+        if (count <= 0 || id.isEmpty()) return;
         ItemStack remainder = TGContent.AMMO.get(id).toStack(count);
         player.getInventory().add(remainder);
         if (!remainder.isEmpty()) player.drop(remainder, false);
@@ -177,6 +201,9 @@ public class GunItem extends Item {
     @Override public void appendHoverText(ItemStack stack, TooltipContext context, net.minecraft.world.item.component.TooltipDisplay display,
                                          java.util.function.Consumer<net.minecraft.network.chat.Component> lines, net.minecraft.world.item.TooltipFlag flag) {
         super.appendHoverText(stack, context, display, lines, flag);
+        if (definition.ammo().components().size() == 2) lines.accept(net.minecraft.network.chat.Component.translatable("tooltip.techguns.compound_ammo",
+                TGContent.AMMO.get(definition.ammo().components().get(0).item()).toStack().getHoverName(),
+                TGContent.AMMO.get(definition.ammo().components().get(1).item()).toStack().getHoverName()));
         if (techguns.core.IncendiaryAmmo.supported(definition)) lines.accept(net.minecraft.network.chat.Component.translatable("tooltip.techguns.loaded_ammo",
                 net.minecraft.network.chat.Component.translatable("hud.techguns.ballistic." + BallisticAmmo.variant(stack).id())));
     }
