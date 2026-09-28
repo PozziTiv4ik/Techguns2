@@ -8,6 +8,10 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 /** Vanilla GameTestServer disables structures. Enable its native pipeline only in the opt-in worldgen run. */
 @Mixin(GameTestServer.class)
 public abstract class WorldgenTestOptionsMixin {
+    @ModifyArg(method="<clinit>",at=@At(value="INVOKE",target="Lnet/minecraft/world/level/levelgen/WorldOptions;<init>(JZZ)V"),index=0)
+    private static long techguns$worldgenTestSeed(long original) {
+        return Boolean.getBoolean("techguns.worldgenTest")?Long.getLong("techguns.worldgenSeed",original):original;
+    }
     @ModifyArg(method="<clinit>",at=@At(value="INVOKE",target="Lnet/minecraft/world/level/levelgen/WorldOptions;<init>(JZZ)V"),index=1)
     private static boolean techguns$enableNativeStructureTests(boolean original) {
         return original || Boolean.getBoolean("techguns.worldgenTest");

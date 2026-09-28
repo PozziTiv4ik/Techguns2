@@ -70,5 +70,5 @@ class SurvivorHideoutTests(unittest.TestCase):
     def test_native_medium_slot_and_overworld_only_data(self):
         d=survivor_hideout_definition(); self.assertEqual(d['generation']['height_sample_count'],15); self.assertFalse(d['generation']['ore_toggle_required'])
         f=generate_survivor_hideout_content(); p=json.loads(f[RESOURCES+'data/techguns/worldgen/structure_set/survivor_hideout.json'])['placement']
-        self.assertEqual((p['spacing'],p['separation'],p['salt']),(32,31,1337262))
+        self.assertEqual(p,{'type':'techguns:structure_grid','size':'medium','salt':1337262})
         self.assertEqual(json.loads(f[RESOURCES+'data/techguns/tags/worldgen/biome/has_survivor_hideout.json'])['values'],['#minecraft:is_overworld'])

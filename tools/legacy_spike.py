@@ -1,4 +1,5 @@
 """Original Overworld ore spike scan, palette, two encounters and slimy block assets."""
+from legacy_structure_grids import grid_placement
 import copy
 import hashlib
 import json
@@ -49,8 +50,8 @@ def generate_spike_content():
     d=spike_definition(); data('content/orecluster-spike.json',d)
     files[RESOURCES+'data/techguns/structure/orecluster_spike.nbt']=location_nbt(d)
     data(RESOURCES+'data/techguns/tags/worldgen/biome/has_orecluster_spike.json',{'replace':False,'values':['#minecraft:is_overworld']})
-    data(RESOURCES+'data/techguns/worldgen/structure/orecluster_spike.json',{'type':'techguns:orecluster_spike','biomes':'#techguns:has_orecluster_spike','step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none','reserved_big_grid':64})
-    data(RESOURCES+'data/techguns/worldgen/structure_set/orecluster_spike.json',{'structures':[{'structure':'techguns:orecluster_spike','weight':1}],'placement':{'type':'minecraft:random_spread','spacing':32,'separation':31,'salt':1337262}})
+    data(RESOURCES+'data/techguns/worldgen/structure/orecluster_spike.json',{'type':'techguns:orecluster_spike','biomes':'#techguns:has_orecluster_spike','step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none'})
+    data(RESOURCES+'data/techguns/worldgen/structure_set/orecluster_spike.json',{'structures':[{'structure':'techguns:orecluster_spike','weight':1}],'placement':grid_placement('medium')})
     for name,texture in [('bugnest_eggs','bugnest_eggs'),('slimyladder','bugnestslimy')]:
         model=json.loads((assets/f'models/block/{name}.json').read_text(encoding='utf-8')); model.pop('groups',None)
         if model.get('parent','').startswith('block/'): model['parent']='minecraft:'+model['parent']

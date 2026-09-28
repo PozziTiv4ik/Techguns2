@@ -9,13 +9,10 @@ import techguns.core.*;
 
 /** Shared candidate roll keeps the four native small LAND structure IDs disjoint. */
 public abstract class SmallOverworldStructure extends Structure {
-    protected final int medium,big;
     private final int candidate,width,depth,foundationDepth,top;
-    protected SmallOverworldStructure(StructureSettings settings,int medium,int big,int candidate,int width,int depth,int foundationDepth,int top) {
-        super(settings); this.medium=medium; this.big=big; this.candidate=candidate; this.width=width; this.depth=depth; this.foundationDepth=foundationDepth; this.top=top;
+    protected SmallOverworldStructure(StructureSettings settings,int candidate,int width,int depth,int foundationDepth,int top) {
+        super(settings); this.candidate=candidate; this.width=width; this.depth=depth; this.foundationDepth=foundationDepth; this.top=top;
     }
-    public int mediumGrid() { return medium; }
-    public int bigGrid() { return big; }
     protected abstract TemplateStructurePiece createPiece(GenerationContext context,BlockPos origin,int turns);
     @Override public StructureStart generate(Holder<Structure> selected,net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level> dimension,
             RegistryAccess registries,net.minecraft.world.level.chunk.ChunkGenerator generator,net.minecraft.world.level.biome.BiomeSource biomes,
@@ -26,7 +23,7 @@ public abstract class SmallOverworldStructure extends Structure {
         return super.generate(selected,dimension,registries,generator,biomes,randomState,templates,seed,chunk,references,height,validBiome);
     }
     @Override public Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
-        var chunk=context.chunkPos(); if(!LocationConfig.ENABLED.get() || !StructureRules.smallSite(chunk.x(),chunk.z(),1,medium,big)) return Optional.empty();
+        var chunk=context.chunkPos(); if(!LocationConfig.accepts(StructureGrid.Size.SMALL,chunk.x(),chunk.z())) return Optional.empty();
         int x=chunk.getMinBlockX(),z=chunk.getMinBlockZ();
         var biome=context.biomeSource().getNoiseBiome(QuartPos.fromBlock(x),QuartPos.fromBlock(64),QuartPos.fromBlock(z),context.randomState().sampler());
         if(biome.is(BiomeTags.IS_OCEAN)) return Optional.empty();

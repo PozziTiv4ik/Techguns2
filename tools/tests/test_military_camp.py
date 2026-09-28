@@ -54,7 +54,7 @@ class MilitaryCampSourceTests(unittest.TestCase):
         self.assertRegex(raw,r'new AircraftCarrier\([^;]+,1,null, OVERWORLD, WATER, StructureSize.BIG')
         files=generate_camp_content()
         placement=json.loads(files[RESOURCES+'data/techguns/worldgen/structure_set/military_camp.json'])['placement']
-        self.assertEqual((placement['spacing'],placement['separation']),(64,63))
+        self.assertEqual((placement['type'],placement['size']),('techguns:structure_grid','big'))
         self.assertNotIn('reserved_big_grid',json.loads(files[RESOURCES+'data/techguns/worldgen/structure/military_camp.json']))
 
     def test_spawn_flag_comment_does_not_replace_active_encounters(self):

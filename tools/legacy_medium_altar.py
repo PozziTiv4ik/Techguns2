@@ -1,4 +1,5 @@
 """Original NetherAltarMedium scan, rotated stairs and four finite CyberDemon encounters."""
+from legacy_structure_grids import grid_placement
 import copy
 import hashlib
 import json
@@ -49,9 +50,9 @@ def generate_medium_altar_content():
     files[RESOURCES+f'data/techguns/structure/{name}.nbt']=location_nbt(d)
     data(RESOURCES+f'data/techguns/tags/worldgen/biome/has_{name}.json',{'replace':False,'values':['#minecraft:is_nether']})
     data(RESOURCES+f'data/techguns/worldgen/structure/{name}.json',{'type':'techguns:'+name,'biomes':'#techguns:has_'+name,
-         'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none','reserved_big_grid':64})
+         'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none'})
     data(RESOURCES+f'data/techguns/worldgen/structure_set/{name}.json',{'structures':[{'structure':'techguns:'+name,'weight':1}],
-         'placement':{'type':'minecraft:random_spread','spacing':32,'separation':31,'salt':1337262}})
+         'placement':grid_placement('medium')})
     # DeltaFeature and BasaltColumnsFeature have hardcoded vanilla fortress/spawner lists.
     # Targeted mixins extend them when a neighbouring chunk decorates later.
     data(RESOURCES+'data/techguns/tags/block/nether_structure_blocks.json',{'replace':False,

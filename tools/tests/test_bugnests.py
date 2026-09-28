@@ -32,7 +32,7 @@ class BugNestPortTests(unittest.TestCase):
     def test_shared_medium_placement_and_block_resources(self):
         files=generate_bugnest_content()
         placement=json.loads(files[RESOURCES+'data/techguns/worldgen/structure_set/alienbug_nest.json'])['placement']
-        self.assertEqual((placement['spacing'],placement['separation'],placement['salt']),(32,31,1337262))
+        self.assertEqual(placement,{'type':'techguns:structure_grid','size':'medium','salt':1337262})
         self.assertEqual(json.loads(files[RESOURCES+'data/minecraft/tags/block/mineable/shovel.json'])['values'],['techguns:bugnest_sand'])
         self.assertTrue(bugnest_definition()['generation']['ore_toggle_independent'])
 

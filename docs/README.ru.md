@@ -94,6 +94,7 @@
 
 ## Генерация мира и локации
 
+- [Настраиваемые сетки структур, пересечения, locate и существующие миры](STRUCTURE_GRIDS.ru.md)
 - [Малый адский алтарь и десять блоков Nether Metal](NETHER_ALTAR.ru.md)
 - [NetherLoot01: сундук с исходными ресурсами и охрана](NETHER_LOOT.ru.md)
 - [NetherAcidHole: природная кислота и её использование](NETHER_ACID.ru.md)

@@ -1,4 +1,5 @@
 """PoliceStation's scan, paired door/chest states, finite posts and four original loot pools."""
+from legacy_structure_grids import grid_placement
 import copy
 import hashlib
 import json
@@ -95,6 +96,6 @@ def generate_police_station_content():
     data('content/police-station.json',d); files[RESOURCES+f'data/techguns/structure/{name}.nbt']=location_nbt(d)
     data(RESOURCES+'data/techguns/loot_table/chests/policestation.json',police_loot())
     data(RESOURCES+f'data/techguns/tags/worldgen/biome/has_{name}.json',{'replace':False,'values':['#minecraft:is_overworld']})
-    data(RESOURCES+f'data/techguns/worldgen/structure/{name}.json',{'type':'techguns:'+name,'biomes':'#techguns:has_'+name,'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none','reserved_big_grid':64})
-    data(RESOURCES+f'data/techguns/worldgen/structure_set/{name}.json',{'structures':[{'structure':'techguns:'+name,'weight':1}],'placement':{'type':'minecraft:random_spread','spacing':32,'separation':31,'salt':1337262}})
+    data(RESOURCES+f'data/techguns/worldgen/structure/{name}.json',{'type':'techguns:'+name,'biomes':'#techguns:has_'+name,'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none'})
+    data(RESOURCES+f'data/techguns/worldgen/structure_set/{name}.json',{'structures':[{'structure':'techguns:'+name,'weight':1}],'placement':grid_placement('medium')})
     return files

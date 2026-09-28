@@ -70,6 +70,8 @@ powershell -NoProfile -File tools/dev.ps1 build --no-daemon --console=plain
 powershell -NoProfile -File tools/dev.ps1 :neoforge-26.2:runGameTestServer --no-daemon --console=plain
 powershell -NoProfile -File tools/dev.ps1 :neoforge-26.2:runOreWorldTestServer --no-daemon --console=plain
 powershell -NoProfile -File tools/dev.ps1 :neoforge-26.2:runChemistryTestServer --no-daemon --console=plain
+powershell -NoProfile -File tools/dev.ps1 :neoforge-26.2:runGridWorldTestServer --no-daemon --console=plain
+powershell -NoProfile -File tools/dev.ps1 :neoforge-26.2:runGridAlternateTestServer --no-daemon --console=plain
 git diff --check
 ```
 
@@ -95,6 +97,10 @@ Python можно разбить на независимые пакеты, ес�
 Различать основной, worldgen и условный серверы; встроенный тест Minecraft
 учитывать отдельно от тестов Techguns. Проверять ошибки загрузки данных и коды
 завершения, а не только последнюю строку журнала.
+
+Два grid-сервера используют настоящий рельеф с seed `246813579` и `-975318642`,
+раздельные временные миры и проверяют изменённые интервалы, locate и сохранённые
+старты. Основной worldgen-прогон сохраняет seed `0` и стандартные интервалы.
 
 При изменении содержимого/сборки сверить ресурсы JAR с результатом
 `generate_weapon_content.generate()`, лицензию с `LICENSE.txt`, исключение legacy

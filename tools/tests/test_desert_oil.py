@@ -48,4 +48,4 @@ class DesertOilTests(unittest.TestCase):
         self.assertEqual(d['generation']['weight'],15)
         self.assertEqual(d['no_fluid_debug_palette'],{'rim':'minecraft:magma_block','cluster_alternative':'minecraft:sandstone','oil':'minecraft:lava'})
         f=generate_desert_oil_content(); p=json.loads(f[RESOURCES+'data/techguns/worldgen/structure_set/desert_oil_cluster.json'])['placement']
-        self.assertEqual((p['spacing'],p['separation'],p['salt']),(32,31,1337262))
+        self.assertEqual(p,{'type':'techguns:structure_grid','size':'medium','salt':1337262})

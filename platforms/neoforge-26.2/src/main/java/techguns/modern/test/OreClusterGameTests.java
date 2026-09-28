@@ -87,7 +87,7 @@ final class OreClusterGameTests {
     private static void registry(GameTestHelper h) {
         var l=h.getLevel(); var s=structure(l); var ops=l.registryAccess().createSerializationContext(JsonOps.INSTANCE);
         var restored=(NetherClusterStructure)Structure.DIRECT_CODEC.parse(ops,Structure.DIRECT_CODEC.encodeStart(ops,s).getOrThrow()).getOrThrow();
-        h.assertValueEqual(restored.mediumGrid(),32,"Reserved medium grid"); h.assertValueEqual(restored.bigGrid(),64,"Reserved big grid");
+        h.assertTrue(!Structure.DIRECT_CODEC.encodeStart(ops,restored).getOrThrow().getAsJsonObject().has("reserved_medium_grid"),"Grid reservation belongs to the shared placement"); h.assertTrue(!Structure.DIRECT_CODEC.encodeStart(ops,restored).getOrThrow().getAsJsonObject().has("reserved_big_grid"),"Grid reservation belongs to the shared placement");
         h.assertValueEqual(s.step(),net.minecraft.world.level.levelgen.GenerationStep.Decoration.TOP_LAYER_MODIFICATION,"Placement after vanilla delta features");
         var t=l.getServer().getStructureManager().get(NetherClusterPiece.TEMPLATE).orElseThrow(); h.assertValueEqual(t.getSize(),new Vec3i(3,3,3),"Source dimensions");
         h.assertValueEqual(t.save(new CompoundTag()).getListOrEmpty("blocks").size(),27,"Every source cell retained");

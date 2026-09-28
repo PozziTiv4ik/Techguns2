@@ -41,9 +41,9 @@ class MediumAltarPortTests(unittest.TestCase):
         self.assertEqual(d['generation']['candidates'],nether_castle_definition()['generation']['candidates'])
         self.assertEqual([(c['weight'],c['implemented']) for c in d['generation']['candidates']],[(10,True),(10,True),(1000,True)])
         files=generate_medium_altar_content(); s=json.loads(files[RESOURCES+'data/techguns/worldgen/structure/nether_altar_medium.json'])
-        self.assertEqual((s['step'],s['reserved_big_grid']),('top_layer_modification',64))
+        self.assertEqual(s['step'],'top_layer_modification'); self.assertNotIn('reserved_big_grid',s)
         placement=json.loads(files[RESOURCES+'data/techguns/worldgen/structure_set/nether_altar_medium.json'])['placement']
-        self.assertEqual((placement['spacing'],placement['separation'],placement['salt']),(32,31,1337262))
+        self.assertEqual(placement,{'type':'techguns:structure_grid','size':'medium','salt':1337262})
 
     def test_delta_protection_is_limited_to_original_tg_structure_blocks(self):
         files=generate_medium_altar_content(); tag=json.loads(files[RESOURCES+'data/techguns/tags/block/nether_structure_blocks.json'])

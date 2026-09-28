@@ -34,4 +34,8 @@ jobs:
         run: ./gradlew :neoforge-26.2:runOreWorldTestServer --console=plain
       - name: Test conditional Chemical Laboratory recipes
         run: ./gradlew :neoforge-26.2:runChemistryTestServer --console=plain
+      - name: Test configured structure grids with seed 246813579
+        run: ./gradlew :neoforge-26.2:runGridWorldTestServer --console=plain
+      - name: Test configured structure grids with seed -975318642
+        run: ./gradlew :neoforge-26.2:runGridAlternateTestServer --console=plain
       # No artifact upload or release publishing: see the original Techguns license.

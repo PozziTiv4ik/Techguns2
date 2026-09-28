@@ -1,0 +1,61 @@
+{
+  "source": "legacy/1.12.2/src/main/java/techguns/world/WorldGenTGStructureSpawn.java",
+  "sizes": {
+    "small": {
+      "setting": "StructureSpawnWeightSmall",
+      "default": 16,
+      "minimum": 4,
+      "maximum": 100000,
+      "candidates": [
+        "FactoryHouseSmall",
+        "SmallTrainstation",
+        "SmallMine",
+        "GasStation",
+        "NetherAltarSmall",
+        "NetherSoulPlatform",
+        "NetherLoot01",
+        "NetherAcidHole",
+        "NetherOreClusterSmall"
+      ]
+    },
+    "medium": {
+      "setting": "StructureSpawnWeightMedium",
+      "default": 32,
+      "minimum": 8,
+      "maximum": 100000,
+      "candidates": [
+        "AlienBugNestStructure",
+        "PoliceStation",
+        "SurvivorHideout",
+        "OreClusterSpike",
+        "OreClusterMeteorBasis",
+        "DesertOilCluster",
+        "NetherAltarMedium",
+        "NetherGhastSpawner",
+        "NetherOreClusterCastle"
+      ]
+    },
+    "big": {
+      "setting": "StructureSpawnWeightBig",
+      "default": 64,
+      "minimum": 16,
+      "maximum": 100000,
+      "candidates": [
+        "MilitaryBaseStructure",
+        "CastleStructure",
+        "AircraftCarrier"
+      ]
+    }
+  },
+  "priority": [
+    "big",
+    "medium",
+    "small"
+  ],
+  "native_type": "techguns:structure_grid",
+  "restart": "world/server",
+  "existing_starts": "preserved; locate searches the currently configured grid",
+  "nether_big": "reserved even though there is no active big Nether candidate",
+  "random_offsets": false,
+  "frequency_is_not_a_probability": true
+}

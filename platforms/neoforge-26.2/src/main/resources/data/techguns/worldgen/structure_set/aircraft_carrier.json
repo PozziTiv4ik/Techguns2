@@ -6,9 +6,8 @@
     }
   ],
   "placement": {
-    "type": "minecraft:random_spread",
-    "spacing": 64,
-    "separation": 63,
+    "type": "techguns:structure_grid",
+    "size": "big",
     "salt": 1337262
   }
 }

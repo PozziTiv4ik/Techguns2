@@ -47,7 +47,7 @@ class AcidLocationTests(unittest.TestCase):
         self.assertEqual([v['implemented'] for v in d['generation']['candidates']],[True,True,True,True,True])
         self.assertEqual(d['generation'],altar_definition()['generation'])
         structure=json.loads(files[RESOURCES+'data/techguns/worldgen/structure/nether_acid_hole.json'])
-        self.assertEqual((structure['reserved_medium_grid'],structure['reserved_big_grid']),(32,64)); self.assertEqual(structure['spawn_overrides'],{})
+        self.assertNotIn('reserved_medium_grid',structure); self.assertNotIn('reserved_big_grid',structure); self.assertEqual(structure['spawn_overrides'],{})
         self.assertEqual(structure['step'],'top_layer_modification')
         old=json.loads(files[RESOURCES+'data/techguns/worldgen/structure_set/nether_altar_small.json'])
         new=json.loads(files[RESOURCES+'data/techguns/worldgen/structure_set/nether_acid_hole.json'])

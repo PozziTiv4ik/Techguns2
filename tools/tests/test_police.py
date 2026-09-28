@@ -72,4 +72,4 @@ class PolicePortTests(unittest.TestCase):
         self.assertEqual((d['foundation_depth'],d['clear_height'],d['worldgen_floor_offset']),(3,7,-1))
         self.assertEqual(d['generation']['height_samples'],[0,4,8,12]); self.assertFalse(d['generation']['ore_toggle_required'])
         f=generate_police_station_content(); p=json.loads(f[RESOURCES+'data/techguns/worldgen/structure_set/policestation.json'])['placement']
-        self.assertEqual((p['spacing'],p['separation'],p['salt']),(32,31,1337262))
+        self.assertEqual(p,{'type':'techguns:structure_grid','size':'medium','salt':1337262})

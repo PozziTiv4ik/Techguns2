@@ -61,4 +61,4 @@ class FactoryHouseTests(unittest.TestCase):
         self.assertEqual(g['candidates'],gas_station_definition()['generation']['candidates']); self.assertEqual(g['candidates'],train_station_definition()['generation']['candidates'])
         self.assertEqual([c['implemented'] for c in g['candidates']],[True,True,True,True]); self.assertEqual(g['tickets'],[0,9]); self.assertFalse(g['ore_toggle_required'])
         f=generate_factory_house_content(); p=json.loads(f[RESOURCES+'data/techguns/worldgen/structure_set/factory_house_small.json'])['placement']
-        self.assertEqual((p['spacing'],p['separation'],p['salt']),(16,15,1337262)); self.assertEqual(len(f),5)
+        self.assertEqual(p,{'type':'techguns:structure_grid','size':'small','salt':1337262}); self.assertEqual(len(f),5)

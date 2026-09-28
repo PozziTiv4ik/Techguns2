@@ -47,6 +47,6 @@ class GhastSpawnerPortTests(unittest.TestCase):
         self.assertEqual([(c['weight'],c['implemented']) for c in d['generation']['candidates']],[(10,True),(10,True),(1000,True)])
         files=generate_ghast_spawner_content()
         s=json.loads(files[RESOURCES+'data/techguns/worldgen/structure/nether_ghast_spawner.json'])
-        self.assertEqual((s['step'],s['reserved_big_grid']),('top_layer_modification',64))
+        self.assertEqual(s['step'],'top_layer_modification'); self.assertNotIn('reserved_big_grid',s)
         placement=json.loads(files[RESOURCES+'data/techguns/worldgen/structure_set/nether_ghast_spawner.json'])['placement']
-        self.assertEqual((placement['spacing'],placement['separation'],placement['salt']),(32,31,1337262))
+        self.assertEqual(placement,{'type':'techguns:structure_grid','size':'medium','salt':1337262})

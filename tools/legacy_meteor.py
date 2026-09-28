@@ -1,4 +1,5 @@
 """The 2265-cell OreClusterMeteorBasis scan and its native 26.2 template."""
+from legacy_structure_grids import grid_placement
 import hashlib
 import json
 import re
@@ -86,8 +87,8 @@ def generate_meteor_content():
     data(RESOURCES+'data/techguns/tags/worldgen/biome/has_orecluster_meteor_basis.json',{'replace':False,'values':['#minecraft:is_overworld']})
     data(RESOURCES+'data/techguns/worldgen/structure/orecluster_meteor_basis.json',
          {'type':'techguns:orecluster_meteor_basis','biomes':'#techguns:has_orecluster_meteor_basis','step':'top_layer_modification',
-          'spawn_overrides':{},'terrain_adaptation':'none','reserved_big_grid':64})
+          'spawn_overrides':{},'terrain_adaptation':'none'})
     data(RESOURCES+'data/techguns/worldgen/structure_set/orecluster_meteor_basis.json',
          {'structures':[{'structure':'techguns:orecluster_meteor_basis','weight':1}],
-          'placement':{'type':'minecraft:random_spread','spacing':32,'separation':31,'salt':1337262}})
+          'placement':grid_placement('medium')})
     return files

@@ -47,7 +47,7 @@ final class NetherSoulGameTests {
     }
     private static void registry(GameTestHelper h) {
         var l=h.getLevel(); var s=structure(l); var ops=l.registryAccess().createSerializationContext(JsonOps.INSTANCE);
-        var decoded=(NetherSoulStructure)Structure.DIRECT_CODEC.parse(ops,Structure.DIRECT_CODEC.encodeStart(ops,s).getOrThrow()).getOrThrow(); h.assertValueEqual(decoded.mediumGrid(),32,"Reserved medium grid"); h.assertValueEqual(decoded.bigGrid(),64,"Reserved large grid");
+        var decoded=(NetherSoulStructure)Structure.DIRECT_CODEC.parse(ops,Structure.DIRECT_CODEC.encodeStart(ops,s).getOrThrow()).getOrThrow(); h.assertTrue(!Structure.DIRECT_CODEC.encodeStart(ops,decoded).getOrThrow().getAsJsonObject().has("reserved_medium_grid"),"Grid reservation belongs to the shared placement"); h.assertTrue(!Structure.DIRECT_CODEC.encodeStart(ops,decoded).getOrThrow().getAsJsonObject().has("reserved_big_grid"),"Grid reservation belongs to the shared placement");
         var p=piece(h,1); h.assertValueEqual(p.template().getSize(),new Vec3i(13,10,13),"Full source scan is thirteen wide"); h.assertValueEqual(p.template().save(new CompoundTag()).getListOrEmpty("blocks").size(),898,"All source entries"); h.assertValueEqual(p.placeSettings().getRotationPivot(),new BlockPos(5,0,5),"Source registration uses eleven-wide pivot");
         h.assertValueEqual(spawner(p),p.templatePosition().offset(6,6,4),"Spawner rotates about registered pivot, not visual centre"); h.assertValueEqual(cells(p,Blocks.SKELETON_SKULL).size(),24,"Twenty-four original skulls");
         var holder=l.registryAccess().lookupOrThrow(Registries.STRUCTURE).getOrThrow(ResourceKey.create(Registries.STRUCTURE,NetherSoulPiece.TEMPLATE)); var g=l.getChunkSource().getGenerator();

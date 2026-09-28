@@ -81,7 +81,7 @@ class LocationPortTests(unittest.TestCase):
         for name in ('nether_altar_small','nether_loot_01'):
             definition=json.loads(files[RESOURCES+f'data/techguns/worldgen/structure/{name}.json'])
             self.assertEqual(definition['type'],'techguns:'+name); self.assertEqual(definition['biomes'],'#techguns:has_'+name)
-            self.assertEqual(definition['spawn_overrides'],{}); self.assertEqual((definition['reserved_medium_grid'],definition['reserved_big_grid']),(32,64))
+            self.assertEqual(definition['spawn_overrides'],{}); self.assertNotIn('reserved_medium_grid',definition); self.assertNotIn('reserved_big_grid',definition)
             self.assertEqual(definition['step'],'top_layer_modification')
             setting=json.loads(files[RESOURCES+f'data/techguns/worldgen/structure_set/{name}.json']); self.assertEqual(setting['structures'],[{'structure':'techguns:'+name,'weight':1}]); placements.append(setting['placement'])
         self.assertEqual(placements[0],placements[1])
@@ -152,9 +152,9 @@ class LocationPortTests(unittest.TestCase):
         d=altar_definition(); g=d['generation']; self.assertEqual([e['weight'] for e in g['candidates']],[10]*5)
         self.assertEqual([e['implemented'] for e in g['candidates']],[True,True,True,True,True])
         files=generate_location_content(); structure=json.loads(files[RESOURCES+'data/techguns/worldgen/structure/nether_altar_small.json'])
-        self.assertEqual((structure['reserved_medium_grid'],structure['reserved_big_grid']),(32,64)); self.assertEqual(structure['spawn_overrides'],{})
+        self.assertNotIn('reserved_medium_grid',structure); self.assertNotIn('reserved_big_grid',structure); self.assertEqual(structure['spawn_overrides'],{})
         placement=json.loads(files[RESOURCES+'data/techguns/worldgen/structure_set/nether_altar_small.json'])['placement']
-        self.assertEqual((placement['type'],placement['spacing'],placement['separation']),('minecraft:random_spread',16,15))
+        self.assertEqual((placement['type'],placement['size']),('techguns:structure_grid','small'))
 
     def test_spawner_item_models_have_their_own_atlas_textures(self):
         files=generate_spawner_content()

@@ -93,11 +93,15 @@ final class MeteorGameTests {
     }
     private static void encounters(GameTestHelper h) {
         var p=piece(h,0,0); place(h,p,p.getBoundingBox()); var holes=cells(p,NpcSpawnerContent.BLOCK.get()); h.assertValueEqual(holes.size(),5,"Five separate encounters");
-        var box=p.getBoundingBox(); for(int x=box.minX()>>4;x<=box.maxX()>>4;x++) for(int z=box.minZ()>>4;z<=box.maxZ()>>4;z++) h.getLevel().getChunk(x,z);
-        encounter(h,holes,0,0);
+        // The 17x17 piece and its spawn offsets extend beyond the small GameTest template.
+        // Loading FULL chunks alone does not make their entities visible to the UUID lookup.
+        var pinned=new ArrayList<ChunkPos>();var box=p.getBoundingBox();
+        for(int x=(box.minX()-2)>>4;x<=(box.maxX()+2)>>4;x++) for(int z=(box.minZ()-2)>>4;z<=(box.maxZ()+2)>>4;z++)
+            if(h.getLevel().setChunkForced(x,z,true)) pinned.add(new ChunkPos(x,z));
+        h.runAfterDelay(2,()->encounter(h,holes,0,0,pinned));
     }
-    private static void encounter(GameTestHelper h,List<StructureTemplate.StructureBlockInfo> holes,int index,int deaths) {
-        if(index==holes.size()) { h.succeed(); return; }
+    private static void encounter(GameTestHelper h,List<StructureTemplate.StructureBlockInfo> holes,int index,int deaths,List<ChunkPos> pinned) {
+        if(index==holes.size()) { pinned.forEach(c->h.getLevel().setChunkForced(c.x(),c.z(),false));h.succeed(); return; }
         var cell=holes.get(index); var s=(NpcSpawnerBlockEntity)h.getLevel().getBlockEntity(cell.pos());
         if(deaths==0) for(int n=0;n<400;n++) NpcSpawnerBlockEntity.serverTick(h.getLevel(),cell.pos(),s.getBlockState(),s);
         h.assertValueEqual(s.activeCount(),1,"At most one NPC per hole");
@@ -107,8 +111,8 @@ final class MeteorGameTests {
             h.assertTrue(mob instanceof ArmySoldier || mob instanceof Commando,"Original encounter variants");
             mob.hurtServer(h.getLevel(),h.getLevel().damageSources().genericKill(),1000);
             for(int n=0;n<200 && !s.isRemoved();n++) NpcSpawnerBlockEntity.serverTick(h.getLevel(),cell.pos(),s.getBlockState(),s);
-            if(deaths==0) encounter(h,holes,index,1);
-            else { h.assertTrue(h.getLevel().getBlockState(cell.pos()).isAir(),"Hole vanishes after two actual deaths"); encounter(h,holes,index+1,0); }
+            if(deaths==0) encounter(h,holes,index,1,pinned);
+            else { h.assertTrue(h.getLevel().getBlockState(cell.pos()).isAir(),"Hole vanishes after two actual deaths"); encounter(h,holes,index+1,0,pinned); }
         });
     }
     private static MeteorStructure structure(ServerLevel l) { return (MeteorStructure)l.registryAccess().lookupOrThrow(Registries.STRUCTURE).getValue(MeteorPiece.TEMPLATE); }

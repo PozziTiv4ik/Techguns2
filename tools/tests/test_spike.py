@@ -49,8 +49,8 @@ class OreSpikePortTests(unittest.TestCase):
     def test_medium_native_grid_and_unported_ticket_reservation(self):
         f=generate_spike_content(); d=spike_definition()['generation']; self.assertEqual((d['ordinary_land_total'],d['sandy_wasteland_total'],d['sandy_wasteland_with_block_oil_total']),(35,55,70))
         self.assertTrue(d['unported_candidates_retain_weight']); self.assertTrue(d['ocean_excluded'])
-        structure=json.loads(f[RESOURCES+'data/techguns/worldgen/structure/orecluster_spike.json']); self.assertEqual(structure['reserved_big_grid'],64); self.assertEqual(structure['step'],'top_layer_modification')
-        placement=json.loads(f[RESOURCES+'data/techguns/worldgen/structure_set/orecluster_spike.json'])['placement']; self.assertEqual((placement['spacing'],placement['separation']),(32,31))
+        structure=json.loads(f[RESOURCES+'data/techguns/worldgen/structure/orecluster_spike.json']); self.assertNotIn('reserved_big_grid',structure); self.assertEqual(structure['step'],'top_layer_modification')
+        placement=json.loads(f[RESOURCES+'data/techguns/worldgen/structure_set/orecluster_spike.json'])['placement']; self.assertEqual((placement['type'],placement['size']),('techguns:structure_grid','medium'))
 
     def test_slimy_assets_keep_all_trail_boxes_and_animation_bytes(self):
         f=generate_spike_content(); assets=LEGACY/'resources/assets/techguns'; model=json.loads(f[RESOURCES+'assets/techguns/models/block/slimyladder.json']); original=json.loads((assets/'models/block/slimyladder.json').read_text())

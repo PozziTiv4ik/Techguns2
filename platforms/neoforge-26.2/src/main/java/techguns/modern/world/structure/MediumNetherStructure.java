@@ -7,12 +7,10 @@ import techguns.core.*;
 
 /** Shared first RNG roll, cave search and dimension guard for the original medium Nether table. */
 public abstract class MediumNetherStructure extends Structure {
-    protected final int big;
     private final int candidate,width,floorOffset,top;
-    protected MediumNetherStructure(StructureSettings settings,int big,int candidate,int width,int floorOffset,int top) {
-        super(settings); this.big=big; this.candidate=candidate; this.width=width; this.floorOffset=floorOffset; this.top=top;
+    protected MediumNetherStructure(StructureSettings settings,int candidate,int width,int floorOffset,int top) {
+        super(settings); this.candidate=candidate; this.width=width; this.floorOffset=floorOffset; this.top=top;
     }
-    public int bigGrid() { return big; }
     protected abstract TemplateStructurePiece createPiece(GenerationContext context,BlockPos origin,int turns);
     @Override public StructureStart generate(Holder<Structure> selected,net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level> dimension,
             RegistryAccess registries,net.minecraft.world.level.chunk.ChunkGenerator generator,net.minecraft.world.level.biome.BiomeSource biomes,
@@ -24,9 +22,9 @@ public abstract class MediumNetherStructure extends Structure {
     }
     @Override public Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
         var chunk=context.chunkPos();
-        if(!LocationConfig.ENABLED.get() || chunk.x()%big==0 && chunk.z()%big==0) return Optional.empty();
+        if(!LocationConfig.accepts(StructureGrid.Size.MEDIUM,chunk.x(),chunk.z())) return Optional.empty();
         boolean clusters=LocationConfig.ORE_CLUSTERS.get();
-        // Native random_spread supplies spacing 32 with zero offset. Every candidate sees
+        // The shared placement supplies the configured medium grid. Every candidate sees
         // the same first draw, including when the optional castle's 1000 tickets are disabled.
         if(NetherCastleRules.candidate(context.random().nextInt(NetherCastleRules.total(clusters)),clusters)!=candidate) return Optional.empty();
         int turns=context.random().nextInt(4),index=0; int[] heights=new int[4];

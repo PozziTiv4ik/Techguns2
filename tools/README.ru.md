@@ -114,6 +114,7 @@ JUnit и GameTests ищите по [карте кода](../docs/CODE_MAP.ru.md#
 
 | Область | Модуль преобразования | Проверки |
 |---|---|---|
+| Общая схема placement всех размеров, исходные настройки и активные кандидаты; `content/structure-grids.json` | [legacy_structure_grids.py](legacy_structure_grids.py); остальные конвертеры структур вызывают его `grid_placement()` | [test_structure_grids.py](tests/test_structure_grids.py) |
 | Nether Metal, малые локации Незера, общие таблицы/сканы | [legacy_locations.py](legacy_locations.py) | [test_locations.py](tests/test_locations.py), [test_acid_location.py](tests/test_acid_location.py), [test_ghastling.py](tests/test_ghastling.py), [test_clusters.py](tests/test_clusters.py) |
 | OreClusterSpike | [legacy_spike.py](legacy_spike.py) | [test_spike.py](tests/test_spike.py) |
 | OreClusterMeteorBasis | [legacy_meteor.py](legacy_meteor.py) | [test_meteor.py](tests/test_meteor.py) |

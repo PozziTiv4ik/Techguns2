@@ -3,6 +3,7 @@
 The original files remain reference-only. Generated classes use modern BlockState
 and a bounded, in-memory CampWorld; they never write into neighbouring chunks.
 """
+from legacy_structure_grids import grid_placement
 import hashlib
 import json
 import re
@@ -174,5 +175,5 @@ def generate_camp_content():
         data(RESOURCES+f'data/techguns/loot_table/chests/{name}.json',nested_loot(name))
     data(RESOURCES+'data/techguns/tags/worldgen/biome/has_military_camp.json',{'replace':False,'values':['#minecraft:is_overworld']})
     data(RESOURCES+'data/techguns/worldgen/structure/military_camp.json',{'type':'techguns:military_camp','biomes':'#techguns:has_military_camp','step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none'})
-    data(RESOURCES+'data/techguns/worldgen/structure_set/military_camp.json',{'structures':[{'structure':'techguns:military_camp','weight':1}],'placement':{'type':'minecraft:random_spread','spacing':64,'separation':63,'salt':1337262}})
+    data(RESOURCES+'data/techguns/worldgen/structure_set/military_camp.json',{'structures':[{'structure':'techguns:military_camp','weight':1}],'placement':grid_placement('big')})
     return files

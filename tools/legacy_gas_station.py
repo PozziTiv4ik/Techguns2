@@ -1,4 +1,5 @@
 """GasStation's original scan, three double chests, finite zombies and fuel loot."""
+from legacy_structure_grids import grid_placement
 import copy
 import hashlib
 import json
@@ -103,6 +104,6 @@ def generate_gas_station_content():
     data('content/gas-station.json',d); files[RESOURCES+f'data/techguns/structure/{name}.nbt']=location_nbt(d)
     data(RESOURCES+f'data/techguns/loot_table/chests/{name}.json',gas_station_loot())
     data(RESOURCES+f'data/techguns/tags/worldgen/biome/has_{name}.json',{'replace':False,'values':['#minecraft:is_overworld']})
-    data(RESOURCES+f'data/techguns/worldgen/structure/{name}.json',{'type':'techguns:'+name,'biomes':'#techguns:has_'+name,'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none','reserved_medium_grid':32,'reserved_big_grid':64})
-    data(RESOURCES+f'data/techguns/worldgen/structure_set/{name}.json',{'structures':[{'structure':'techguns:'+name,'weight':1}],'placement':{'type':'minecraft:random_spread','spacing':16,'separation':15,'salt':1337262}})
+    data(RESOURCES+f'data/techguns/worldgen/structure/{name}.json',{'type':'techguns:'+name,'biomes':'#techguns:has_'+name,'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none'})
+    data(RESOURCES+f'data/techguns/worldgen/structure_set/{name}.json',{'structures':[{'structure':'techguns:'+name,'weight':1}],'placement':grid_placement('small')})
     return files

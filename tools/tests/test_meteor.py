@@ -47,8 +47,8 @@ class MeteorPortTests(unittest.TestCase):
         f=generate_meteor_content(); d=meteor_definition()['generation']
         self.assertEqual((d['ordinary_land_total'],d['sandy_wasteland_total'],d['sandy_wasteland_with_block_oil_total']),(35,55,70)); self.assertEqual(d['height_samples'],[0,4,8,12,16])
         self.assertTrue(d['ocean_excluded'] and d['unported_candidates_retain_weight'])
-        structure=json.loads(f[RESOURCES+'data/techguns/worldgen/structure/orecluster_meteor_basis.json']); self.assertEqual(structure['reserved_big_grid'],64); self.assertEqual(structure['step'],'top_layer_modification')
-        placement=json.loads(f[RESOURCES+'data/techguns/worldgen/structure_set/orecluster_meteor_basis.json'])['placement']; self.assertEqual((placement['spacing'],placement['separation'],placement['salt']),(32,31,1337262))
+        structure=json.loads(f[RESOURCES+'data/techguns/worldgen/structure/orecluster_meteor_basis.json']); self.assertNotIn('reserved_big_grid',structure); self.assertEqual(structure['step'],'top_layer_modification')
+        placement=json.loads(f[RESOURCES+'data/techguns/worldgen/structure_set/orecluster_meteor_basis.json'])['placement']; self.assertEqual(placement,{'type':'techguns:structure_grid','size':'medium','salt':1337262})
         self.assertEqual(f[RESOURCES+'data/techguns/structure/orecluster_meteor_basis.nbt'],location_nbt(meteor_definition()))
 
 

@@ -2,7 +2,6 @@ package techguns.modern.world.structure;
 
 import java.util.Optional;
 import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.*;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -12,11 +11,8 @@ import techguns.core.*;
 import techguns.modern.machine.drill.ClusterOutputs;
 
 public final class SurvivorHideoutStructure extends Structure {
-    public static final MapCodec<SurvivorHideoutStructure> CODEC=RecordCodecBuilder.mapCodec(i->i.group(settingsCodec(i),
-            Codec.intRange(1,100000).fieldOf("reserved_big_grid").forGetter(s->s.big)).apply(i,SurvivorHideoutStructure::new));
-    private final int big;
-    public SurvivorHideoutStructure(StructureSettings settings,int big) { super(settings); this.big=big; }
-    public int bigGrid() { return big; }
+    public static final MapCodec<SurvivorHideoutStructure> CODEC=simpleCodec(SurvivorHideoutStructure::new);
+    public SurvivorHideoutStructure(StructureSettings settings) { super(settings); }
     @Override public StructureStart generate(Holder<Structure> selected,net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level> dimension,
             RegistryAccess registries,net.minecraft.world.level.chunk.ChunkGenerator generator,net.minecraft.world.level.biome.BiomeSource biomes,
             net.minecraft.world.level.levelgen.RandomState randomState,net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager templates,
@@ -26,7 +22,7 @@ public final class SurvivorHideoutStructure extends Structure {
         return super.generate(selected,dimension,registries,generator,biomes,randomState,templates,seed,chunk,references,height,validBiome);
     }
     @Override public Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
-        var chunk=context.chunkPos(); if(!LocationConfig.ENABLED.get() || chunk.x()%big==0 && chunk.z()%big==0) return Optional.empty();
+        var chunk=context.chunkPos(); if(!LocationConfig.accepts(StructureGrid.Size.MEDIUM,chunk.x(),chunk.z())) return Optional.empty();
         int x=chunk.getMinBlockX(),z=chunk.getMinBlockZ();
         var biome=context.biomeSource().getNoiseBiome(QuartPos.fromBlock(x),QuartPos.fromBlock(64),QuartPos.fromBlock(z),context.randomState().sampler());
         if(biome.is(BiomeTags.IS_OCEAN)) return Optional.empty();

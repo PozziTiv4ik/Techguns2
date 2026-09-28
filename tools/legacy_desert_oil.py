@@ -1,4 +1,5 @@
 """Original conditional DesertOilCluster scan, its two mixtures, and finite military posts."""
+from legacy_structure_grids import grid_placement
 import hashlib
 import json
 import re
@@ -45,6 +46,6 @@ def generate_desert_oil_content():
     data('content/desert-oil-cluster.json',d); files[RESOURCES+f'data/techguns/structure/{name}.nbt']=location_nbt(d)
     data(RESOURCES+'data/techguns/tags/fluid/worldgen_oils.json',{'replace':False,'values':[]})
     data(RESOURCES+f'data/techguns/tags/worldgen/biome/has_{name}.json',{'replace':False,'values':['#minecraft:is_overworld']})
-    data(RESOURCES+f'data/techguns/worldgen/structure/{name}.json',{'type':'techguns:'+name,'biomes':'#techguns:has_'+name,'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none','reserved_big_grid':64})
-    data(RESOURCES+f'data/techguns/worldgen/structure_set/{name}.json',{'structures':[{'structure':'techguns:'+name,'weight':1}],'placement':{'type':'minecraft:random_spread','spacing':32,'separation':31,'salt':1337262}})
+    data(RESOURCES+f'data/techguns/worldgen/structure/{name}.json',{'type':'techguns:'+name,'biomes':'#techguns:has_'+name,'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none'})
+    data(RESOURCES+f'data/techguns/worldgen/structure_set/{name}.json',{'structures':[{'structure':'techguns:'+name,'weight':1}],'placement':grid_placement('medium')})
     return files

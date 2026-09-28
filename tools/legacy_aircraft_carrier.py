@@ -1,4 +1,5 @@
 """AircraftCarrier's complete ordered scan, active fallback palette and nested supplies."""
+from legacy_structure_grids import grid_placement
 import copy
 import hashlib
 import json
@@ -111,5 +112,5 @@ def generate_carrier_content():
     data(RESOURCES+'data/techguns/aircraft_carrier/scan.json', {k:d[k] for k in ('palette','cells')})
     data(RESOURCES+'data/techguns/loot_table/chests/aircraftcarrier.json', nested_loot('aircraftcarrier'))
     data(RESOURCES+'data/techguns/worldgen/structure/aircraft_carrier.json', {'type':'techguns:aircraft_carrier','biomes':'#minecraft:is_ocean','step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none'})
-    data(RESOURCES+'data/techguns/worldgen/structure_set/aircraft_carrier.json', {'structures':[{'structure':'techguns:aircraft_carrier','weight':1}], 'placement':{'type':'minecraft:random_spread','spacing':64,'separation':63,'salt':1337262}})
+    data(RESOURCES+'data/techguns/worldgen/structure_set/aircraft_carrier.json', {'structures':[{'structure':'techguns:aircraft_carrier','weight':1}], 'placement':grid_placement('big')})
     return files

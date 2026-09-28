@@ -1,5 +1,8 @@
 # Ghastling и NetherSoulPlatform
 
+Указанные ниже интервалы сеток — значения по умолчанию. Их настройка и влияние
+на locate описаны в [общих правилах генерации](STRUCTURE_GRIDS.ru.md).
+
 Срез от 2026-09-20 для Minecraft 26.2 / NeoForge. Перенесены одиннадцатый
 NPC **Ghastling** («Гастёныш»), его зажигательный снаряд и четвёртая малая
 локация Nether — **NetherSoulPlatform**.

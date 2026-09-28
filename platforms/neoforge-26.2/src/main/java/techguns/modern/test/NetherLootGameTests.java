@@ -78,7 +78,7 @@ final class NetherLootGameTests {
     private static void registry(GameTestHelper h) {
         var l=h.getLevel(); var s=structure(l); var ops=l.registryAccess().createSerializationContext(JsonOps.INSTANCE);
         var decoded=(NetherLootStructure)Structure.DIRECT_CODEC.parse(ops,Structure.DIRECT_CODEC.encodeStart(ops,s).getOrThrow()).getOrThrow();
-        h.assertValueEqual(decoded.mediumGrid(),32,"Medium sites reserved"); h.assertValueEqual(decoded.bigGrid(),64,"Big sites reserved");
+        h.assertTrue(!Structure.DIRECT_CODEC.encodeStart(ops,decoded).getOrThrow().getAsJsonObject().has("reserved_medium_grid"),"Grid reservation belongs to the shared placement"); h.assertTrue(!Structure.DIRECT_CODEC.encodeStart(ops,decoded).getOrThrow().getAsJsonObject().has("reserved_big_grid"),"Grid reservation belongs to the shared placement");
         var t=l.getServer().getStructureManager().get(NetherLootPiece.TEMPLATE).orElseThrow();
         h.assertValueEqual(t.getSize(),new Vec3i(6,10,6),"All original scanned bounds"); h.assertValueEqual(t.save(new CompoundTag()).getListOrEmpty("blocks").size(),146,"All source cells including air");
         var c=t.filterBlocks(BlockPos.ZERO,new StructurePlaceSettings(),Blocks.CHEST).getFirst();

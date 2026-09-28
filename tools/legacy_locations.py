@@ -1,4 +1,5 @@
 """Original Nether Metal and small Nether locations, preserving scanned cells and encounter/loot NBT."""
+from legacy_structure_grids import grid_placement
 import gzip
 import hashlib
 import json
@@ -289,41 +290,41 @@ def generate_location_content():
     # Vanilla DELTA is a SURFACE_STRUCTURES feature, after native structures in that step.
     # Place these locations later so lava deltas/basalt cannot overwrite their acid or metal.
     data(RESOURCES+'data/techguns/worldgen/structure/nether_altar_small.json',{'type':'techguns:nether_altar_small','biomes':'#techguns:has_nether_altar_small',
-         'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none','reserved_medium_grid':32,'reserved_big_grid':64})
-    # separation=spacing-1 removes the vanilla random offset: exactly the original modulo lattice.
+         'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none'})
+    # All size groups use the source modulo lattice and one server configuration.
     data(RESOURCES+'data/techguns/worldgen/structure_set/nether_altar_small.json',{'structures':[{'structure':'techguns:nether_altar_small','weight':1}],
-         'placement':{'type':'minecraft:random_spread','spacing':16,'separation':15,'salt':1337262}})
+         'placement':grid_placement('small')})
     data('content/nether-loot-01.json',loot_location_definition())
     files[RESOURCES+'data/techguns/structure/nether_loot_01.nbt']=location_nbt(loot_location_definition())
     data(RESOURCES+'data/techguns/loot_table/chests/factory_building.json',factory_chest_loot())
     data(RESOURCES+'data/techguns/tags/worldgen/biome/has_nether_loot_01.json',{'replace':False,'values':['#minecraft:is_nether']})
     data(RESOURCES+'data/techguns/worldgen/structure/nether_loot_01.json',{'type':'techguns:nether_loot_01','biomes':'#techguns:has_nether_loot_01',
-         'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none','reserved_medium_grid':32,'reserved_big_grid':64})
+         'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none'})
     # Separate native IDs keep /locate useful. Both structures read the same chunk-seeded candidate roll,
     # so their disjoint original tickets can never place both locations on the same site.
     data(RESOURCES+'data/techguns/worldgen/structure_set/nether_loot_01.json',{'structures':[{'structure':'techguns:nether_loot_01','weight':1}],
-         'placement':{'type':'minecraft:random_spread','spacing':16,'separation':15,'salt':1337262}})
+         'placement':grid_placement('small')})
     data('content/nether-acid-hole.json',acid_location_definition())
     files[RESOURCES+'data/techguns/structure/nether_acid_hole.nbt']=location_nbt(acid_location_definition())
     data(RESOURCES+'data/techguns/tags/worldgen/biome/has_nether_acid_hole.json',{'replace':False,'values':['#minecraft:is_nether']})
     data(RESOURCES+'data/techguns/worldgen/structure/nether_acid_hole.json',{'type':'techguns:nether_acid_hole','biomes':'#techguns:has_nether_acid_hole',
-         'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none','reserved_medium_grid':32,'reserved_big_grid':64})
+         'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none'})
     data(RESOURCES+'data/techguns/worldgen/structure_set/nether_acid_hole.json',{'structures':[{'structure':'techguns:nether_acid_hole','weight':1}],
-         'placement':{'type':'minecraft:random_spread','spacing':16,'separation':15,'salt':1337262}})
+         'placement':grid_placement('small')})
     data('content/nether-soul-platform.json',soul_location_definition())
     files[RESOURCES+'data/techguns/structure/nether_soul_platform.nbt']=location_nbt(soul_location_definition())
     data(RESOURCES+'data/techguns/tags/worldgen/biome/has_nether_soul_platform.json',{'replace':False,'values':['#minecraft:is_nether']})
     data(RESOURCES+'data/techguns/worldgen/structure/nether_soul_platform.json',{'type':'techguns:nether_soul_platform','biomes':'#techguns:has_nether_soul_platform',
-         'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none','reserved_medium_grid':32,'reserved_big_grid':64})
+         'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none'})
     data(RESOURCES+'data/techguns/worldgen/structure_set/nether_soul_platform.json',{'structures':[{'structure':'techguns:nether_soul_platform','weight':1}],
-         'placement':{'type':'minecraft:random_spread','spacing':16,'separation':15,'salt':1337262}})
+         'placement':grid_placement('small')})
     data('content/nether-ore-cluster-small.json',cluster_location_definition())
     files[RESOURCES+'data/techguns/structure/nether_ore_cluster_small.nbt']=location_nbt(cluster_location_definition())
     data(RESOURCES+'data/techguns/tags/worldgen/biome/has_nether_ore_cluster_small.json',{'replace':False,'values':['#minecraft:is_nether']})
     data(RESOURCES+'data/techguns/worldgen/structure/nether_ore_cluster_small.json',{'type':'techguns:nether_ore_cluster_small','biomes':'#techguns:has_nether_ore_cluster_small',
-         'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none','reserved_medium_grid':32,'reserved_big_grid':64})
+         'step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none'})
     data(RESOURCES+'data/techguns/worldgen/structure_set/nether_ore_cluster_small.json',{'structures':[{'structure':'techguns:nether_ore_cluster_small','weight':1}],
-         'placement':{'type':'minecraft:random_spread','spacing':16,'separation':15,'salt':1337262}})
+         'placement':grid_placement('small')})
     entries=',\n'.join(f'        new Variant("{m["id"]}", {m["metadata"]}, {m["light"]})' for m in metals)
     files['core/src/main/java/techguns/core/NetherMetal.java']=('''package techguns.core;
 import java.util.List;

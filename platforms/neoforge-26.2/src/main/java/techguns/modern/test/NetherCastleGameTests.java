@@ -125,7 +125,7 @@ final class NetherCastleGameTests {
     private static Structure.GenerationContext context(ServerLevel l,ChunkPos chunk) { var g=l.getChunkSource().getGenerator(); return new Structure.GenerationContext(l.registryAccess(),g,g.getBiomeSource(),l.getChunkSource().randomState(),l.getServer().getStructureManager(),l.getSeed(),chunk,l,b->true); }
     private static void registry(GameTestHelper h) {
         var l=h.getLevel(); var s=structure(l); var ops=l.registryAccess().createSerializationContext(JsonOps.INSTANCE);
-        var restored=(NetherCastleStructure)Structure.DIRECT_CODEC.parse(ops,Structure.DIRECT_CODEC.encodeStart(ops,s).getOrThrow()).getOrThrow(); h.assertValueEqual(restored.bigGrid(),64,"Reserved big grid in native codec");
+        var restored=(NetherCastleStructure)Structure.DIRECT_CODEC.parse(ops,Structure.DIRECT_CODEC.encodeStart(ops,s).getOrThrow()).getOrThrow(); h.assertTrue(!Structure.DIRECT_CODEC.encodeStart(ops,restored).getOrThrow().getAsJsonObject().has("reserved_big_grid"),"Grid reservation belongs to the shared placement");
         var placement=(RandomSpreadStructurePlacement)l.registryAccess().lookupOrThrow(Registries.STRUCTURE_SET).getValue(NetherCastlePiece.TEMPLATE).placement();
         h.assertValueEqual(placement.spacing(),32,"Original medium grid"); h.assertValueEqual(placement.separation(),31,"Zero random placement offset");
         for(int sign:List.of(-1,1)) h.assertValueEqual(placement.getPotentialStructureChunk(l.getSeed(),32*sign,64*sign),new ChunkPos(32*sign,64*sign),"Signed modulo lattice");

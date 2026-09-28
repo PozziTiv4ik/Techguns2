@@ -63,7 +63,7 @@ final class NetherAcidGameTests {
     private static void registry(GameTestHelper h) {
         var l=h.getLevel(); var s=structure(l); var ops=l.registryAccess().createSerializationContext(JsonOps.INSTANCE);
         var decoded=(NetherAcidStructure)Structure.DIRECT_CODEC.parse(ops,Structure.DIRECT_CODEC.encodeStart(ops,s).getOrThrow()).getOrThrow();
-        h.assertValueEqual(decoded.mediumGrid(),32,"Reserved medium grid"); h.assertValueEqual(decoded.bigGrid(),64,"Reserved big grid");
+        h.assertTrue(!Structure.DIRECT_CODEC.encodeStart(ops,decoded).getOrThrow().getAsJsonObject().has("reserved_medium_grid"),"Grid reservation belongs to the shared placement"); h.assertTrue(!Structure.DIRECT_CODEC.encodeStart(ops,decoded).getOrThrow().getAsJsonObject().has("reserved_big_grid"),"Grid reservation belongs to the shared placement");
         h.assertValueEqual(decoded.step(),net.minecraft.world.level.levelgen.GenerationStep.Decoration.TOP_LAYER_MODIFICATION,"Place after vanilla deltas that would overwrite the pool");
         var t=l.getServer().getStructureManager().get(NetherAcidPiece.TEMPLATE).orElseThrow(); h.assertValueEqual(t.getSize(),new Vec3i(9,6,9),"Original complete scanned dimensions");
         h.assertValueEqual(t.save(new CompoundTag()).getListOrEmpty("blocks").size(),269,"Every source cell retained");

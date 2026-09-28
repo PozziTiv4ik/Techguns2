@@ -172,7 +172,7 @@ final class NetherGhastGameTests {
     private static Structure.GenerationContext context(ServerLevel l,ChunkPos c,long seed) { var g=l.getChunkSource().getGenerator(); return new Structure.GenerationContext(l.registryAccess(),g,g.getBiomeSource(),l.getChunkSource().randomState(),l.getServer().getStructureManager(),seed,c,l,b->true); }
     private static void registry(GameTestHelper h) {
         var l=h.getLevel(); var s=structure(l); var ops=l.registryAccess().createSerializationContext(JsonOps.INSTANCE);
-        var restored=(NetherGhastStructure)Structure.DIRECT_CODEC.parse(ops,Structure.DIRECT_CODEC.encodeStart(ops,s).getOrThrow()).getOrThrow(); h.assertValueEqual(restored.bigGrid(),64,"Reserved big grid in native codec");
+        var restored=(NetherGhastStructure)Structure.DIRECT_CODEC.parse(ops,Structure.DIRECT_CODEC.encodeStart(ops,s).getOrThrow()).getOrThrow(); h.assertTrue(!Structure.DIRECT_CODEC.encodeStart(ops,restored).getOrThrow().getAsJsonObject().has("reserved_big_grid"),"Grid reservation belongs to the shared placement");
         var placement=(RandomSpreadStructurePlacement)l.registryAccess().lookupOrThrow(Registries.STRUCTURE_SET).getValue(NetherGhastPiece.TEMPLATE).placement();
         h.assertValueEqual(placement.spacing(),32,"Medium spacing"); h.assertValueEqual(placement.separation(),31,"Zero jitter");
         var holder=l.registryAccess().lookupOrThrow(Registries.STRUCTURE).getOrThrow(ResourceKey.create(Registries.STRUCTURE,NetherGhastPiece.TEMPLATE)); var g=l.getChunkSource().getGenerator();

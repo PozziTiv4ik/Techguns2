@@ -82,7 +82,7 @@ final class LocationGameTests {
     private static void registry(GameTestHelper h) {
         var level=h.getLevel(); var structure=structure(level); h.assertTrue(structure!=null,"Native structure registry loaded");
         var ops=level.registryAccess().createSerializationContext(JsonOps.INSTANCE); var encoded=Structure.DIRECT_CODEC.encodeStart(ops,structure).getOrThrow(); var decoded=(NetherAltarStructure)Structure.DIRECT_CODEC.parse(ops,encoded).getOrThrow();
-        h.assertValueEqual(decoded.mediumGrid(),32,"Medium sites remain reserved"); h.assertValueEqual(decoded.bigGrid(),64,"Big sites remain reserved");
+        h.assertTrue(!Structure.DIRECT_CODEC.encodeStart(ops,decoded).getOrThrow().getAsJsonObject().has("reserved_medium_grid"),"Grid reservation belongs to the shared placement"); h.assertTrue(!Structure.DIRECT_CODEC.encodeStart(ops,decoded).getOrThrow().getAsJsonObject().has("reserved_big_grid"),"Grid reservation belongs to the shared placement");
         var set=level.registryAccess().lookupOrThrow(Registries.STRUCTURE_SET).getValue(NetherAltarPiece.TEMPLATE); var placement=(RandomSpreadStructurePlacement)set.placement();
         h.assertValueEqual(placement.spacing(),16,"Source small lattice"); h.assertValueEqual(placement.separation(),15,"Zero randomized cell offset");
         for(int sign:new int[]{-1,1}) { var at=placement.getPotentialStructureChunk(level.getSeed(),sign*16,sign*32); h.assertValueEqual(at,new ChunkPos(sign*16,sign*32),"Vanilla candidate exactly matches signed modulo lattice"); }

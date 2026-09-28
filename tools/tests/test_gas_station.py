@@ -61,5 +61,5 @@ class GasStationTests(unittest.TestCase):
         d=gas_station_definition(); g=d['generation']; self.assertFalse(g['ore_toggle_required'])
         self.assertEqual([c['weight'] for c in g['candidates']],[10]*4); self.assertEqual([c['implemented'] for c in g['candidates']],[True,True,True,True])
         f=generate_gas_station_content(); p=json.loads(f[RESOURCES+'data/techguns/worldgen/structure_set/gasstation.json'])['placement']
-        self.assertEqual((p['spacing'],p['separation'],p['salt']),(16,15,1337262))
-        s=json.loads(f[RESOURCES+'data/techguns/worldgen/structure/gasstation.json']); self.assertEqual((s['reserved_medium_grid'],s['reserved_big_grid']),(32,64))
+        self.assertEqual(p,{'type':'techguns:structure_grid','size':'small','salt':1337262})
+        s=json.loads(f[RESOURCES+'data/techguns/worldgen/structure/gasstation.json']); self.assertNotIn('reserved_medium_grid',s); self.assertNotIn('reserved_big_grid',s)

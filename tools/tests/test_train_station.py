@@ -63,5 +63,5 @@ class TrainStationTests(unittest.TestCase):
         d=train_station_definition(); g=d['generation']; self.assertEqual(g['candidates'],gas_station_definition()['generation']['candidates'])
         self.assertEqual([c['implemented'] for c in g['candidates']],[True,True,True,True]); self.assertEqual(g['tickets'],[10,19]); self.assertFalse(g['ore_toggle_required'])
         f=generate_train_station_content(); p=json.loads(f[RESOURCES+'data/techguns/worldgen/structure_set/small_trainstation.json'])['placement']
-        self.assertEqual((p['spacing'],p['separation'],p['salt']),(16,15,1337262))
-        s=json.loads(f[RESOURCES+'data/techguns/worldgen/structure/small_trainstation.json']); self.assertEqual((s['reserved_medium_grid'],s['reserved_big_grid']),(32,64))
+        self.assertEqual(p,{'type':'techguns:structure_grid','size':'small','salt':1337262})
+        s=json.loads(f[RESOURCES+'data/techguns/worldgen/structure/small_trainstation.json']); self.assertNotIn('reserved_medium_grid',s); self.assertNotIn('reserved_big_grid',s)

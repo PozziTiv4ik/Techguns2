@@ -1,5 +1,6 @@
 package techguns.modern.world.structure;
 
+import techguns.core.StructureGrid;
 import java.util.Optional;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.levelgen.structure.*;
@@ -7,14 +8,11 @@ import techguns.core.StructureRules;
 
 /** Shared original candidate roll and cave search; separate native IDs never reroll on a failed candidate. */
 public abstract class SmallNetherStructure extends Structure {
-    protected final int medium,big;
     private final int candidate,width,floorOffset,foundationDepth;
-    protected SmallNetherStructure(StructureSettings settings,int medium,int big,int candidate,int width,int floorOffset,int foundationDepth) {
-        super(settings); this.medium=medium; this.big=big; this.candidate=candidate; this.width=width;
+    protected SmallNetherStructure(StructureSettings settings,int candidate,int width,int floorOffset,int foundationDepth) {
+        super(settings); this.candidate=candidate; this.width=width;
         this.floorOffset=floorOffset; this.foundationDepth=foundationDepth;
     }
-    public int mediumGrid() { return medium; }
-    public int bigGrid() { return big; }
     protected abstract TemplateStructurePiece createPiece(GenerationContext context,BlockPos origin,int direction);
     @Override public StructureStart generate(net.minecraft.core.Holder<Structure> selected,
             net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level> dimension,
@@ -28,8 +26,8 @@ public abstract class SmallNetherStructure extends Structure {
     }
     @Override public Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
         var chunk=context.chunkPos();
-        // The native random_spread set supplies the small grid, with spacing-1 separation (zero offset).
-        if(!LocationConfig.ENABLED.get() || !StructureRules.smallSite(chunk.x(),chunk.z(),1,medium,big)) return Optional.empty();
+        // Generation and native locate share the server-configured grid and priority.
+        if(!LocationConfig.accepts(StructureGrid.Size.SMALL,chunk.x(),chunk.z())) return Optional.empty();
         boolean clusters=LocationConfig.ORE_CLUSTERS.get();
         if(StructureRules.smallNetherCandidate(context.random().nextInt(StructureRules.smallNetherTotal(clusters)),clusters)!=candidate) return Optional.empty();
         int direction=context.random().nextInt(4),index=0; int[] heights=new int[4];

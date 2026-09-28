@@ -1,5 +1,6 @@
 package techguns.modern.world.structure;
 
+import techguns.core.StructureGrid;
 import java.util.*;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.*;
@@ -27,7 +28,7 @@ public final class AircraftCarrierStructure extends Structure {
         return state.getBlock() instanceof LiquidBlock && state.getFluidState().is(FluidTags.WATER)?top:-1;
     }
     @Override public Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
-        if(!LocationConfig.ENABLED.get()) return Optional.empty();
+        if(!LocationConfig.accepts(StructureGrid.Size.BIG,context.chunkPos().x(),context.chunkPos().z())) return Optional.empty();
         int x=context.chunkPos().getMinBlockX(),z=context.chunkPos().getMinBlockZ();
         var biome=context.biomeSource().getNoiseBiome(QuartPos.fromBlock(x),QuartPos.fromBlock(64),QuartPos.fromBlock(z),context.randomState().sampler());
         if(!biome.is(BiomeTags.IS_OCEAN)) return Optional.empty();

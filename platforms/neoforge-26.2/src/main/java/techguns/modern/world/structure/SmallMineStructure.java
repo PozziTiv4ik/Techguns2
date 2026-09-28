@@ -1,7 +1,6 @@
 package techguns.modern.world.structure;
 
 import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.*;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.structure.*;
@@ -9,10 +8,8 @@ import net.neoforged.neoforge.common.Tags;
 import techguns.core.SmallMineRules;
 
 public final class SmallMineStructure extends SmallOverworldStructure {
-    public static final MapCodec<SmallMineStructure> CODEC=RecordCodecBuilder.mapCodec(i->i.group(settingsCodec(i),
-            Codec.intRange(1,100000).fieldOf("reserved_medium_grid").forGetter(s->s.medium),
-            Codec.intRange(1,100000).fieldOf("reserved_big_grid").forGetter(s->s.big)).apply(i,SmallMineStructure::new));
-    public SmallMineStructure(StructureSettings settings,int medium,int big) { super(settings,medium,big,2,17,11,5,5); }
+    public static final MapCodec<SmallMineStructure> CODEC=simpleCodec(SmallMineStructure::new);
+    public SmallMineStructure(StructureSettings settings) { super(settings,2,17,11,5,5); }
     @Override protected TemplateStructurePiece createPiece(GenerationContext context,BlockPos origin,int turns) {
         var chunk=context.chunkPos(); var biome=context.biomeSource().getNoiseBiome(QuartPos.fromBlock(chunk.getMinBlockX()),QuartPos.fromBlock(64),QuartPos.fromBlock(chunk.getMinBlockZ()),context.randomState().sampler());
         return new SmallMinePiece(context.structureTemplateManager(),origin.below(5),turns,

@@ -1,8 +1,8 @@
 package techguns.modern.world.structure;
 
+import techguns.core.StructureGrid;
 import java.util.*;
 import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.*;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.NoiseColumn;
@@ -14,10 +14,8 @@ import techguns.modern.machine.drill.ClusterOutputs;
 
 /** The first twenty sandy/wasteland medium tickets; independent of the ore-cluster toggle. */
 public final class BugNestStructure extends Structure {
-    public static final MapCodec<BugNestStructure> CODEC=RecordCodecBuilder.mapCodec(i->i.group(settingsCodec(i),
-            Codec.intRange(1,100000).fieldOf("reserved_big_grid").forGetter(s->s.big)).apply(i,BugNestStructure::new));
-    private final int big;
-    public BugNestStructure(StructureSettings settings,int big) { super(settings); this.big=big; }
+    public static final MapCodec<BugNestStructure> CODEC=simpleCodec(BugNestStructure::new);
+    public BugNestStructure(StructureSettings settings) { super(settings); }
     @Override public StructureStart generate(Holder<Structure> selected,net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level> dimension,
             RegistryAccess registries,net.minecraft.world.level.chunk.ChunkGenerator generator,net.minecraft.world.level.biome.BiomeSource biomes,
             RandomState randomState,net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager templates,
@@ -27,7 +25,7 @@ public final class BugNestStructure extends Structure {
         return super.generate(selected,dimension,registries,generator,biomes,randomState,templates,seed,chunk,references,height,validBiome);
     }
     @Override public Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
-        var chunk=context.chunkPos(); if(!LocationConfig.ENABLED.get() || chunk.x()%big==0 && chunk.z()%big==0) return Optional.empty();
+        var chunk=context.chunkPos(); if(!LocationConfig.accepts(StructureGrid.Size.MEDIUM,chunk.x(),chunk.z())) return Optional.empty();
         int x=chunk.getMinBlockX(),z=chunk.getMinBlockZ();
         var biome=context.biomeSource().getNoiseBiome(QuartPos.fromBlock(x),QuartPos.fromBlock(64),QuartPos.fromBlock(z),context.randomState().sampler());
         boolean sandy=biome.is(Tags.Biomes.IS_SANDY) || biome.is(Tags.Biomes.IS_WASTELAND),clusters=LocationConfig.ORE_CLUSTERS.get(),oil=ClusterOutputs.hasWorldOil();

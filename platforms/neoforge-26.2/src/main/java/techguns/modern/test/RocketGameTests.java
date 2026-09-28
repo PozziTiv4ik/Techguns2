@@ -367,10 +367,13 @@ final class RocketGameTests {
         var targets=new ArrayList<LivingEntity>();
         try {
             rocket.explode(); var zones=zones(h,rocket.position()); h.assertValueEqual(zones.size(),1,"Nuke creates one fallout zone"); var zone=zones.getFirst();
-            for(double distance:new double[]{2,16,24,25}) { var target=target(h,new Vec3(3+distance,80,3)); targets.add(target); }
+            // Keep every target in the test's tracked chunk. Horizontal offsets up to 25
+            // sometimes cross outside the GameTest area's loaded chunks at its random origin.
+            for(double distance:new double[]{2,16,24,25}) { var target=target(h,new Vec3(3,80+distance,3)); targets.add(target); near(h,target.position().distanceTo(zone.position()),distance,"Exact radial test distance"); }
+            h.assertTrue(h.getLevel().getEntitiesOfClass(LivingEntity.class,zone.getBoundingBox().inflate(26)).containsAll(targets),"All four radial targets are visible to the native entity query");
             for(int i=0;i<19;i++) zone.tick(); h.assertTrue(!targets.getFirst().hasEffect(RadiationSystem.EXPOSURE),"No exposure before 20-tick interval"); zone.tick();
             int[] expected={9,3,8};
-            for(int i=0;i<3;i++) { var effect=targets.get(i).getEffect(RadiationSystem.EXPOSURE); h.assertValueEqual(effect.getAmplifier(),expected[i],"Original fallout strength and increasing outer ring"); h.assertValueEqual(effect.getDuration(),22,"22-tick exposure refresh"); }
+            for(int i=0;i<3;i++) { var effect=targets.get(i).getEffect(RadiationSystem.EXPOSURE); h.assertTrue(effect!=null,"Exposure reaches radial target "+i); h.assertValueEqual(effect.getAmplifier(),expected[i],"Original fallout strength and increasing outer ring"); h.assertValueEqual(effect.getDuration(),22,"22-tick exposure refresh"); }
             h.assertTrue(!targets.get(3).hasEffect(RadiationSystem.EXPOSURE),"Outer radius boundary is excluded");
             var saved=save(h,zone); saved.putInt("age",899); var restored=new RadiationZone(TGContent.RADIATION_ZONE.get(),h.getLevel()); load(h,restored,saved);
             targets.forEach(t -> t.removeEffect(RadiationSystem.EXPOSURE)); restored.tick();

@@ -2,7 +2,6 @@ package techguns.modern.world.structure;
 
 import java.util.Optional;
 import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.*;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -13,10 +12,8 @@ import techguns.modern.machine.drill.ClusterOutputs;
 
 /** The original medium LAND slot after OreClusterSpike, with 17x17 surface sampling. */
 public final class MeteorStructure extends Structure {
-    public static final MapCodec<MeteorStructure> CODEC=RecordCodecBuilder.mapCodec(i->i.group(settingsCodec(i),
-            Codec.intRange(1,100000).fieldOf("reserved_big_grid").forGetter(s->s.big)).apply(i,MeteorStructure::new));
-    private final int big;
-    public MeteorStructure(StructureSettings settings,int big) { super(settings); this.big=big; }
+    public static final MapCodec<MeteorStructure> CODEC=simpleCodec(MeteorStructure::new);
+    public MeteorStructure(StructureSettings settings) { super(settings); }
     @Override public StructureStart generate(Holder<Structure> selected,net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level> dimension,
             RegistryAccess registries,net.minecraft.world.level.chunk.ChunkGenerator generator,net.minecraft.world.level.biome.BiomeSource biomes,
             net.minecraft.world.level.levelgen.RandomState randomState,net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager templates,
@@ -27,7 +24,7 @@ public final class MeteorStructure extends Structure {
     }
     @Override public Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
         var chunk=context.chunkPos();
-        if(!LocationConfig.ENABLED.get() || !LocationConfig.ORE_CLUSTERS.get() || (chunk.x()%big==0 && chunk.z()%big==0)) return Optional.empty();
+        if(!LocationConfig.accepts(StructureGrid.Size.MEDIUM,chunk.x(),chunk.z()) || !LocationConfig.ORE_CLUSTERS.get()) return Optional.empty();
         int x=chunk.getMinBlockX(),z=chunk.getMinBlockZ();
         var biome=context.biomeSource().getNoiseBiome(QuartPos.fromBlock(x),QuartPos.fromBlock(64),QuartPos.fromBlock(z),context.randomState().sampler());
         if(biome.is(BiomeTags.IS_OCEAN)) return Optional.empty();

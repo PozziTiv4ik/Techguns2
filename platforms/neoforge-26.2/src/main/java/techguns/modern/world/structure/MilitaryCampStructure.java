@@ -1,5 +1,6 @@
 package techguns.modern.world.structure;
 
+import techguns.core.StructureGrid;
 import java.util.*;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.*;
@@ -24,7 +25,7 @@ public final class MilitaryCampStructure extends Structure {
         return super.generate(selected,dimension,registries,generator,biomes,randomState,templates,seed,chunk,references,height,validBiome);
     }
     @Override public Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
-        if(!LocationConfig.ENABLED.get()) return Optional.empty();
+        if(!LocationConfig.accepts(StructureGrid.Size.BIG,context.chunkPos().x(),context.chunkPos().z())) return Optional.empty();
         int x=context.chunkPos().getMinBlockX(),z=context.chunkPos().getMinBlockZ();
         var biome=context.biomeSource().getNoiseBiome(QuartPos.fromBlock(x),QuartPos.fromBlock(64),QuartPos.fromBlock(z),context.randomState().sampler());
         if(biome.is(BiomeTags.IS_OCEAN)||!MilitaryCampRules.selected(context.random().nextInt(2))) return Optional.empty();

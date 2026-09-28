@@ -65,7 +65,11 @@ Java-ссылки ведут прямо к классам адаптера и с
 ## Структуры: от оригинала к размещению и проверке
 
 Реестр — LocationContent; исходные пулы и небольшие NBT-шаблоны —
-[legacy_locations.py](../tools/legacy_locations.py). Общие современные сетки:
+[legacy_locations.py](../tools/legacy_locations.py). Сетки, пересечения и native locate:
+[StructureGrid](../core/src/main/java/techguns/core/StructureGrid.java),
+[LocationConfig](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/LocationConfig.java),
+[StructureGridPlacement](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/StructureGridPlacement.java).
+Общий выбор кандидатов и поиск рельефа:
 [SmallNetherStructure](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/SmallNetherStructure.java), [MediumNetherStructure](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/MediumNetherStructure.java), [SmallOverworldStructure](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/SmallOverworldStructure.java).
 Большой LAND-выбор связывает MilitaryCamp и Castle; правила выбора нельзя
 менять только в одном кандидате. WATER-пул содержит AircraftCarrier и рассматривается отдельно.
@@ -75,6 +79,7 @@ Java-ссылки ведут прямо к классам адаптера и с
 
 | Имя оригинала / поиск | Современное размещение | Извлечение данных | GameTests |
 |---|---|---|---|
+| [WorldGenTGStructureSpawn](../legacy/1.12.2/src/main/java/techguns/world/WorldGenTGStructureSpawn.java), TGConfig | StructureGrid / StructureGridPlacement; интервалы задаёт LocationConfig | [legacy_structure_grids.py](../tools/legacy_structure_grids.py) | [StructureGridGameTests](../platforms/neoforge-26.2/src/main/java/techguns/modern/test/StructureGridGameTests.java) |
 | [NetherAltarSmall](../legacy/1.12.2/src/main/java/techguns/world/structures/NetherAltarSmall.java) | [NetherAltarStructure](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/NetherAltarStructure.java), [NetherAltarPiece](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/NetherAltarPiece.java) | [legacy_locations.py](../tools/legacy_locations.py) | [LocationGameTests](../platforms/neoforge-26.2/src/main/java/techguns/modern/test/LocationGameTests.java) |
 | [NetherLoot01](../legacy/1.12.2/src/main/java/techguns/world/structures/NetherLoot01.java) | [NetherLootStructure](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/NetherLootStructure.java), [NetherLootPiece](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/NetherLootPiece.java) | [legacy_locations.py](../tools/legacy_locations.py) | [NetherLootGameTests](../platforms/neoforge-26.2/src/main/java/techguns/modern/test/NetherLootGameTests.java) |
 | [NetherAcidHole](../legacy/1.12.2/src/main/java/techguns/world/structures/NetherAcidHole.java) | [NetherAcidStructure](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/NetherAcidStructure.java), [NetherAcidPiece](../platforms/neoforge-26.2/src/main/java/techguns/modern/world/structure/NetherAcidPiece.java) | [legacy_locations.py](../tools/legacy_locations.py) | [NetherAcidGameTests](../platforms/neoforge-26.2/src/main/java/techguns/modern/test/NetherAcidGameTests.java) |
@@ -118,6 +123,7 @@ NetherDeltaProtectionMixin и NetherBasaltProtectionMixin. Их регистра
 | JUnit | [core/src/test/](../core/src/test/java/techguns/core/) — чистые правила. Например, [CastleLayoutTest](../core/src/test/java/techguns/core/CastleLayoutTest.java) для CastleLayout и [WeaponTest](../core/src/test/java/techguns/core/WeaponTest.java) для боезапаса Magazine. |
 | GameTests | [test/](../platforms/neoforge-26.2/src/main/java/techguns/modern/test/) — игра, сохранение, размещение, настоящие события. Классы подключаются через [WeaponGameTests](../platforms/neoforge-26.2/src/main/java/techguns/modern/test/WeaponGameTests.java), несмотря на общее имя оружия. |
 | Природная генерация | [worldgen-packs/](../tests/worldgen-packs/) и задача runOreWorldTestServer — фильтр `techguns:*_natural_chunks`. |
+| Настраиваемые сетки и дополнительные seed | Тот же worldgen pack; runGridWorldTestServer и runGridAlternateTestServer — фильтр `techguns:structure_grid_*_natural_chunks`. [WorldgenTestOptionsMixin](../platforms/neoforge-26.2/src/main/java/techguns/modern/mixin/WorldgenTestOptionsMixin.java) задаёт seed только тестовым серверам. |
 | Условные рецепты | [chemistry-packs/](../tests/chemistry-packs/) и задача runChemistryTestServer — фильтр `techguns:chem_optional_*`. |
 
 Параметры запуска и opt-in свойства — в [Gradle-файле платформы](../platforms/neoforge-26.2/build.gradle).

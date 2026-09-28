@@ -3,6 +3,7 @@
 Serialization is decoded without loading or executing legacy Java classes. The
 runtime only consumes explicit native palettes/cells, never Java serialization.
 """
+from legacy_structure_grids import grid_placement
 import hashlib
 import json
 import re
@@ -164,5 +165,5 @@ def generate_castle_content():
     data(RESOURCES+'data/techguns/castle/templates.json',templates)
     data(RESOURCES+'data/techguns/loot_table/chests/castle.json',nested_loot('castle'))
     data(RESOURCES+'data/techguns/worldgen/structure/castle.json',{'type':'techguns:castle','biomes':'#minecraft:is_overworld','step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none'})
-    data(RESOURCES+'data/techguns/worldgen/structure_set/castle.json',{'structures':[{'structure':'techguns:castle','weight':1}],'placement':{'type':'minecraft:random_spread','spacing':64,'separation':63,'salt':1337262}})
+    data(RESOURCES+'data/techguns/worldgen/structure_set/castle.json',{'structures':[{'structure':'techguns:castle','weight':1}],'placement':grid_placement('big')})
     return files

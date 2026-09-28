@@ -29,6 +29,34 @@ neoForge {
             programArgument '--tests'
             programArgument 'techguns:*_natural_chunks'
         }
+        gridWorldTestServer {
+            type = 'gameTestServer'
+            systemProperty 'neoforge.enabledGameTestNamespaces', 'techguns'
+            systemProperty 'techguns.gametest', 'true'
+            systemProperty 'techguns.worldgenTest', 'true'
+            systemProperty 'techguns.gridWorldTest', 'true'
+            systemProperty 'techguns.worldgenSeed', '246813579'
+            programArgument '--packs'
+            programArgument rootProject.file('tests/worldgen-packs').absolutePath
+            programArgument '--universe'
+            programArgument 'grid-worldgen-tests'
+            programArgument '--tests'
+            programArgument 'techguns:structure_grid_*_natural_chunks'
+        }
+        gridAlternateTestServer {
+            type = 'gameTestServer'
+            systemProperty 'neoforge.enabledGameTestNamespaces', 'techguns'
+            systemProperty 'techguns.gametest', 'true'
+            systemProperty 'techguns.worldgenTest', 'true'
+            systemProperty 'techguns.gridWorldTest', 'true'
+            systemProperty 'techguns.worldgenSeed', '-975318642'
+            programArgument '--packs'
+            programArgument rootProject.file('tests/worldgen-packs').absolutePath
+            programArgument '--universe'
+            programArgument 'grid-alternate-tests'
+            programArgument '--tests'
+            programArgument 'techguns:structure_grid_*_natural_chunks'
+        }
         chemistryTestServer {
             type = 'gameTestServer'
             systemProperty 'neoforge.enabledGameTestNamespaces', 'techguns'

@@ -1,4 +1,5 @@
 """AlienBugNest source inventory and original hardened-sand assets (no prebuilt room template)."""
+from legacy_structure_grids import grid_placement
 import hashlib
 import json
 import re
@@ -38,8 +39,8 @@ def generate_bugnest_content():
     data(RESOURCES+f'data/techguns/loot_table/blocks/{name}.json',{'type':'minecraft:block','pools':[{'rolls':1,'entries':[{'type':'minecraft:item','name':f'techguns:{name}'}],'conditions':[{'condition':'minecraft:survives_explosion'}]}]})
     data(RESOURCES+'data/minecraft/tags/block/mineable/shovel.json',{'replace':False,'values':['techguns:bugnest_sand']})
     data(RESOURCES+'data/techguns/tags/worldgen/biome/has_alienbug_nest.json',{'replace':False,'values':['#minecraft:is_overworld']})
-    data(RESOURCES+'data/techguns/worldgen/structure/alienbug_nest.json',{'type':'techguns:alienbug_nest','biomes':'#techguns:has_alienbug_nest','step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none','reserved_big_grid':64})
-    data(RESOURCES+'data/techguns/worldgen/structure_set/alienbug_nest.json',{'structures':[{'structure':'techguns:alienbug_nest','weight':1}],'placement':{'type':'minecraft:random_spread','spacing':32,'separation':31,'salt':1337262}})
+    data(RESOURCES+'data/techguns/worldgen/structure/alienbug_nest.json',{'type':'techguns:alienbug_nest','biomes':'#techguns:has_alienbug_nest','step':'top_layer_modification','spawn_overrides':{},'terrain_adaptation':'none'})
+    data(RESOURCES+'data/techguns/worldgen/structure_set/alienbug_nest.json',{'structures':[{'structure':'techguns:alienbug_nest','weight':1}],'placement':grid_placement('medium')})
     return files
 
 

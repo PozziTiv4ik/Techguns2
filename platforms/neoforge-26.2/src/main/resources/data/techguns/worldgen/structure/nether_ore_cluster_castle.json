@@ -3,6 +3,5 @@
   "biomes": "#techguns:has_nether_ore_cluster_castle",
   "step": "top_layer_modification",
   "spawn_overrides": {},
-  "terrain_adaptation": "none",
-  "reserved_big_grid": 64
+  "terrain_adaptation": "none"
 }

@@ -174,7 +174,7 @@ final class MediumAltarGameTests {
     }
     private static void registry(GameTestHelper h) {
         var l=h.getLevel(); var s=structure(l); var ops=l.registryAccess().createSerializationContext(JsonOps.INSTANCE);
-        var restored=(NetherMediumAltarStructure)Structure.DIRECT_CODEC.parse(ops,Structure.DIRECT_CODEC.encodeStart(ops,s).getOrThrow()).getOrThrow(); h.assertValueEqual(restored.bigGrid(),64,"Reserved big grid survives native codec");
+        var restored=(NetherMediumAltarStructure)Structure.DIRECT_CODEC.parse(ops,Structure.DIRECT_CODEC.encodeStart(ops,s).getOrThrow()).getOrThrow(); h.assertTrue(!Structure.DIRECT_CODEC.encodeStart(ops,restored).getOrThrow().getAsJsonObject().has("reserved_big_grid"),"Grid reservation belongs to the shared placement");
         var set=l.registryAccess().lookupOrThrow(Registries.STRUCTURE_SET).getValue(NetherMediumAltarPiece.TEMPLATE); var placement=(RandomSpreadStructurePlacement)set.placement();
         h.assertValueEqual(placement.spacing(),32,"Medium grid"); h.assertValueEqual(placement.separation(),31,"No placement jitter");
         var holder=l.registryAccess().lookupOrThrow(Registries.STRUCTURE).getOrThrow(ResourceKey.create(Registries.STRUCTURE,NetherMediumAltarPiece.TEMPLATE)); var g=l.getChunkSource().getGenerator();

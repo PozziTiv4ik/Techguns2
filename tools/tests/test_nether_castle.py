@@ -47,9 +47,9 @@ class NetherCastlePortTests(unittest.TestCase):
         self.assertEqual([(c['weight'],c['implemented']) for c in d['generation']['candidates']],[(10,True),(10,True),(1000,True)])
         self.assertTrue(d['generation']['ore_toggle_required'])
         placement=json.loads(files[RESOURCES+f'data/techguns/worldgen/structure_set/{name}.json'])['placement']
-        self.assertEqual((placement['spacing'],placement['separation'],placement['salt']),(32,31,1337262))
+        self.assertEqual(placement,{'type':'techguns:structure_grid','size':'medium','salt':1337262})
         s=json.loads(files[RESOURCES+f'data/techguns/worldgen/structure/{name}.json'])
-        self.assertEqual((s['step'],s['reserved_big_grid']),('top_layer_modification',64))
+        self.assertEqual(s['step'],'top_layer_modification'); self.assertNotIn('reserved_big_grid',s)
         self.assertEqual(json.loads(files[RESOURCES+f'data/techguns/tags/worldgen/biome/has_{name}.json'])['values'],['#minecraft:is_nether'])
 
 
