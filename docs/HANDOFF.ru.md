@@ -1,7 +1,7 @@
 # Продолжение работы в новом чате
 
-Обновлено 2026-09-28: настраиваемые сетки структур завершены локально.
-Linux CI нового source commit ещё ожидается. Перед разработкой прочитать
+Обновлено 2026-09-28 после CI checkpoint настраиваемых сеток структур.
+Локальные проверки и Linux CI #75 успешны. Перед разработкой прочитать
 [порядок работы](DEVELOPMENT_WORKFLOW.ru.md) и [AGENTS.md](../AGENTS.md),
 проверить Git. Для поиска использовать [карту кода](CODE_MAP.ru.md),
 [каталог систем](README.ru.md) и [карту генераторов](../tools/README.ru.md).
@@ -15,8 +15,8 @@ Linux CI нового source commit ещё ожидается. Перед раз
 | Writable fork / origin | `PozziTiv4ik/Techguns2` |
 | Оригинал / upstream, только чтение | `pWn3d1337/Techguns2` |
 | Платформа | Minecraft 26.2 / NeoForge 26.2.0.81 / Java 25 |
-| Последний source SHA с подтверждённым Linux CI | `c0349bc94cfb5862295c61b7b2ce17046eb43e14` — предыдущий AircraftCarrier |
-| CI предыдущего кода | [Linux CI #74](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36347828471), success; новый grid-срез им не подтверждён |
+| Последний проверенный source SHA | `95e1b9a4d7022ffb3ef6f874457a05b1d3707a9a` — настраиваемые сетки |
+| Linux CI кода | [Linux CI #75](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36407038180), success; завершён 2026-09-28 12:19:09 Europe/Zurich |
 
 Все 21 активных кандидата используют общий `StructureGridPlacement`.
 Исходные SMALL/MEDIUM/BIG: default 16/32/64, min 4/8/16, max 100000;
@@ -39,9 +39,11 @@ vanilla StructureCheck; отдельный процесс полного пер�
 [протокол](VERIFICATION.ru.md#structure-grids-2026-09-28); журналы `.tools/grid-*`.
 Новый клон воспроизводится командами workflow без локальной `.tools/`.
 
-Перед новым игровым срезом закончить source push/точный Linux CI и отдельный
-документационный checkpoint с `[skip ci]`. Не выдавать прежний CI за новый.
-Текущий HEAD и наличие source commit получать из Git, не из этой таблицы.
+[Linux CI #75](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36407038180) подтвердил source `95e1b9a4d7022ffb3ef6f874457a05b1d3707a9a`, 413 Python за 309.404 с, сборку/ядро и все 2250 GameTests (2170 + 52 + 16 + 6 + 6). Все 15 шагов успешны.
+После проверенного SHA меняется только документация с `[skip ci]`.
+Незавершённой реализации и известных красных проверок этого среза нет.
+Текущий HEAD получать из Git; не принимать source SHA за последний коммит.
+Не повторять проверки без изменений или конкретного сомнения.
 
 <a id="next-milestone"></a>
 
