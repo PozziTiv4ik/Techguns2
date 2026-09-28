@@ -46,6 +46,7 @@ public final class TechgunsClient {
         modBus.addListener(TechgunsClient::itemProperties);
         modBus.addListener((net.neoforged.neoforge.client.event.RegisterItemModelsEvent event)->event.register(TGContent.id("grenade_launcher"),GrenadeLauncherModel.Unbaked.CODEC));
         modBus.addListener((net.neoforged.neoforge.client.event.RegisterItemModelsEvent event)->event.register(TGContent.id("flamethrower"),FlamethrowerModel.Unbaked.CODEC));
+        modBus.addListener((net.neoforged.neoforge.client.event.RegisterItemModelsEvent event)->event.register(TGContent.id("minigun"),MinigunModel.Unbaked.CODEC));
         NeoForge.EVENT_BUS.addListener(TechgunsClient::tick);
         NeoForge.EVENT_BUS.addListener(TechgunsClient::interaction);
         NeoForge.EVENT_BUS.addListener(TechgunsClient::fov);

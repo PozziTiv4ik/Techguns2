@@ -440,6 +440,31 @@
       "random": false
     },
     {
+      "id": "minigun",
+      "input": "techguns:minigun",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:ingotobsidiansteel",
+            "count": 20
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:ingotsteel",
+            "count": 2
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:electricengine",
+            "count": 1
+          }
+        }
+      ],
+      "random": false
+    },
+    {
       "id": "as50",
       "input": "techguns:as50",
       "outputs": [
@@ -1015,7 +1040,6 @@
     "grimreaper",
     "biogun",
     "teslagun",
-    "minigun",
     "blasterrifle",
     "sonicshotgun",
     "pdw",

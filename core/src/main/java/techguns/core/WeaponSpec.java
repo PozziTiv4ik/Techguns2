@@ -6,7 +6,7 @@ public record WeaponSpec(String id, int capacity, int fireDelay, int reloadTicks
                          double projectileSpeed, int projectileLifetime, double spread) {
     public WeaponSpec {
         if (id == null || !id.matches("[a-z0-9_]+")) throw new IllegalArgumentException("Invalid weapon id");
-        if (capacity < 1 || fireDelay < 1 || reloadTicks < 1 || projectileLifetime < 1)
+        if (capacity < 1 || fireDelay < 0 || reloadTicks < 1 || projectileLifetime < 1)
             throw new IllegalArgumentException("Invalid weapon timing or capacity");
         if (!Float.isFinite(damage) || !Float.isFinite(minimumDamage) || damage <= 0
                 || minimumDamage < 0 || minimumDamage > damage)
@@ -26,4 +26,7 @@ public record WeaponSpec(String id, int capacity, int fireDelay, int reloadTicks
     }
 
     public int clampRounds(int rounds) { return Math.clamp(rounds, 0, capacity); }
+
+    /** Legacy held fire is requested once per player tick, even when minFiretime is zero. */
+    public int firingInterval() { return Math.max(1, fireDelay); }
 }

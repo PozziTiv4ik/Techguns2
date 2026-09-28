@@ -50,7 +50,7 @@ def generate_incendiary_content(weapons):
         'knockback': 'inherited 0.01 PHYSICAL preliminary hit; main FIRE hit adds no knockback',
         'flight': {'air_drag': .99, 'water_drag': .85, 'falloff': 'origin displacement at start of impact tick', 'gravity': 0},
         'block_fire': 'air cell on hit face, roll <= modified initial damage / 40, firing-time unsafe policy',
-        'pending': ['Original FX engine and visual acceptance', 'Minigun weapon and its incendiary drum',
+        'pending': ['Original FX engine and visual acceptance',
                     'Explosive AS50 ammunition']})
     for key in ('incendiary', 'incendiary_knockback'):
         data(RESOURCES + f'data/techguns/damage_type/{key}.json',

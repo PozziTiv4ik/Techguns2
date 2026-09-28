@@ -52,6 +52,7 @@ JUnit и GameTests ищите по [карте кода](../docs/CODE_MAP.ru.md#
 | Ручные гранаты | [legacy_grenades.py](legacy_grenades.py) | [test_grenades.py](tests/test_grenades.py) |
 | GrenadeLauncher / 40 мм | [legacy_grenade_launcher.py](legacy_grenade_launcher.py) | [test_grenade_launcher.py](tests/test_grenade_launcher.py) |
 | Flamethrower | [legacy_flamethrower.py](legacy_flamethrower.py) | [test_flamethrower.py](tests/test_flamethrower.py) |
+| Minigun / раздельные корпус и стволы, общий цикл вращения | [legacy_minigun.py](legacy_minigun.py); параметры/рецепты — общие оружейные конвертеры | [test_minigun.py](tests/test_minigun.py) |
 | Зажигательные боеприпасы | [legacy_incendiary.py](legacy_incendiary.py) | [test_incendiary.py](tests/test_incendiary.py) |
 | Броня, включая Pigman; берет и Commando дополняют свои NPC-модули | [legacy_armors.py](legacy_armors.py) | [test_armors.py](tests/test_armors.py), [test_hazmat.py](tests/test_hazmat.py), [test_t1_combat.py](tests/test_t1_combat.py), [test_t1_miner.py](tests/test_t1_miner.py), [test_t1_scout.py](tests/test_t1_scout.py) |
 | Общие Java-модели / OBJ и исходные ItemStack | [legacy_models.py](legacy_models.py), [legacy_items.py](legacy_items.py) | [test_models.py](tests/test_models.py), [test_crafting.py](tests/test_crafting.py) |

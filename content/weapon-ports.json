@@ -22,5 +22,6 @@
   "netherblaster": "ModelNetherBlaster",
   "chainsaw": "ModelChainsaw",
   "grenadelauncher": "ModelBaseBakedGrenadeLauncher",
-  "flamethrower": "ModelFlamethrower"
+  "flamethrower": "ModelFlamethrower",
+  "minigun": "ModelMinigun"
 }

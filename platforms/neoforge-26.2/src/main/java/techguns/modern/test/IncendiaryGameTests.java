@@ -91,6 +91,7 @@ final class IncendiaryGameTests {
         inputGun.set(DataComponents.CUSTOM_NAME, Component.literal("Old magazine"));
         var data = new CompoundTag(); data.putInt("supply",42); inputGun.set(DataComponents.CUSTOM_DATA,CustomData.of(data));
         inputGun.set(TGContent.AIMING.get(),true); inputGun.set(TGContent.RELOAD_TICKS.get(),12);
+        if (gun.id().equals("minigun")) inputGun.set(TGContent.MINIGUN_SPIN_TIME.get(), 123L);
         var original = inputGun.copy(); var ammunition = ammo(IncendiaryAmmo.ammo(gun,variant).item(),1);
         var input = CraftingInput.of(2,1,List.of(inputGun,ammunition)); var recipe = recipe(h,input); var result = recipe.assemble(input);
         h.assertTrue(recipe instanceof AmmoChangeRecipe,"Original ammo-change serializer");
@@ -99,6 +100,7 @@ final class IncendiaryGameTests {
         h.assertValueEqual(result.get(DataComponents.CUSTOM_NAME),original.get(DataComponents.CUSTOM_NAME),"Name retained");
         h.assertValueEqual(result.get(DataComponents.CUSTOM_DATA),original.get(DataComponents.CUSTOM_DATA),"Custom data retained");
         h.assertTrue(!result.has(TGContent.AIMING.get()) && !result.has(TGContent.RELOAD_TICKS.get()),"Transient actions removed");
+        h.assertTrue(!result.has(TGContent.MINIGUN_SPIN_TIME.get()), "Ammo change clears old spin clock");
         h.assertTrue(ItemStack.matches(inputGun,original),"Preview leaves input unchanged");
         h.assertTrue(recipe.getRemainingItems(input).stream().allMatch(ItemStack::isEmpty),"Old rounds consumed without duplicated magazine");
         var ops=h.getLevel().registryAccess().createSerializationContext(NbtOps.INSTANCE);
@@ -158,7 +160,10 @@ final class IncendiaryGameTests {
     }
     private static void magazine(GameTestHelper h, IncendiaryAmmo.Family family) {
         var inputs=new ArrayList<ItemStack>(); inputs.add(ammo(family.empty(),1));
-        for(int i=0;i<family.bundles();i++) inputs.add(ammo(family.loose(),1));
+        // The 16-bundle Minigun recipe uses four packed rifle stacks, not a 17-slot grid.
+        if (family.normal().equals("minigundrum")) {
+            for(int i=0;i<4;i++) inputs.add(ammo("rifleroundsstack_incendiary",1));
+        } else for(int i=0;i<family.bundles();i++) inputs.add(ammo(family.loose(),1));
         var result=craft(h,grid(inputs.toArray(ItemStack[]::new)));
         h.assertTrue(result.is(TGContent.AMMO.get(family.item()).get()),"Source empty magazine and loose incendiary rounds");
         h.assertValueEqual(result.getCount(),1,"Exactly one full magazine"); h.succeed();

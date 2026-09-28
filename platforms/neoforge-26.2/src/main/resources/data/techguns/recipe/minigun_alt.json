@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:minigun",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 0
+    }
+  },
+  "pattern": [
+    "bbe",
+    "bbr",
+    "bbm"
+  ],
+  "key": {
+    "b": "techguns:obsidiansteelbarrel",
+    "r": "techguns:obsidiansteelreceiver",
+    "e": "techguns:electricengine",
+    "m": "techguns:minigundrumempty"
+  }
+}

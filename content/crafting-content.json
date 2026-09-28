@@ -17,6 +17,8 @@
     "14": "techguns:assaultriflemagazineempty",
     "15": "techguns:lmgmagazine",
     "16": "techguns:lmgmagazineempty",
+    "17": "techguns:minigundrum",
+    "18": "techguns:minigundrumempty",
     "19": "techguns:as50magazine",
     "20": "techguns:as50magazineempty",
     "23": "techguns:compressedairtank",
@@ -102,6 +104,7 @@
     "111": "techguns:rifleroundsstack_incendiary",
     "112": "techguns:smgmagazine_incendiary",
     "113": "techguns:pistolmagazine_incendiary",
+    "114": "techguns:minigundrum_incendiary",
     "115": "techguns:assaultriflemagazine_incendiary",
     "116": "techguns:lmgmagazine_incendiary",
     "117": "techguns:rocket_nuke",
@@ -418,6 +421,10 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_113_pistolmagazine_incendiary.json"
     },
     {
+      "id": "techguns:minigundrum_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_114_minigundrum_incendiary.json"
+    },
+    {
       "id": "techguns:assaultriflemagazine_incendiary",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_115_assaultriflemagazine_incendiary.json"
     },
@@ -524,6 +531,14 @@
     {
       "id": "techguns:lmgmagazineempty",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_16_lmgmagazineempty.json"
+    },
+    {
+      "id": "techguns:minigundrum",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_17_minigundrum.json"
+    },
+    {
+      "id": "techguns:minigundrumempty",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_18_minigundrumempty.json"
     },
     {
       "id": "techguns:as50magazine",
@@ -796,6 +811,22 @@
     {
       "id": "techguns:metalpanel_6",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/metalpanel_6.json"
+    },
+    {
+      "id": "techguns:minigun",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/minigun.json"
+    },
+    {
+      "id": "techguns:minigun_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/minigun_alt.json"
+    },
+    {
+      "id": "techguns:minigun_ammo_default",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/minigun_ammo_default.json"
+    },
+    {
+      "id": "techguns:minigun_ammo_incendiary",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/minigun_ammo_incendiary.json"
     },
     {
       "id": "techguns:fabricator_housing",

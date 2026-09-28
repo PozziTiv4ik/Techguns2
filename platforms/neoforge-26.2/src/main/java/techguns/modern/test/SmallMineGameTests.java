@@ -199,6 +199,7 @@ final class SmallMineGameTests {
         for(int x=(box.minX()>>4)-1;x<=(box.maxX()>>4)+1;x++) for(int z=(box.minZ()>>4)-1;z<=(box.maxZ()>>4)+1;z++) l.getChunk(x,z);
         for(int x=box.minX()>>4;x<=box.maxX()>>4;x++) for(int z=box.minZ()>>4;z<=box.maxZ()>>4;z++) l.getChunk(x,z).postProcessGeneration(l);
         verify(h,l,p);
+        oreDecoration(h,l,p);
         for(var id:List.of(FactoryHousePiece.TEMPLATE,TrainStationPiece.TEMPLATE,GasStationPiece.TEMPLATE,PoliceStationPiece.TEMPLATE,SurvivorHideoutPiece.TEMPLATE,DesertOilPiece.TEMPLATE,MeteorPiece.TEMPLATE,OreSpikePiece.TEMPLATE,TGContent.id("alienbug_nest"))) {
             var other=chunk.getStartForStructure(l.registryAccess().lookupOrThrow(Registries.STRUCTURE).getValue(id)); h.assertTrue(other==null || !other.isValid(),"Other small/medium candidates never overlap mine ticket"); }
         var holder=l.registryAccess().lookupOrThrow(Registries.STRUCTURE).getOrThrow(ResourceKey.create(Registries.STRUCTURE,SmallMinePiece.TEMPLATE)); var found=l.getChunkSource().getGenerator().findNearestMapStructure(l,HolderSet.direct(holder),p.templatePosition().offset(8,5,5),0,false);
@@ -226,6 +227,30 @@ final class SmallMineGameTests {
         }
         var out=d.getItem(2); h.assertTrue(out.getCount()==1 && ClusterOutputs.entries(SmallMinePiece.TYPES.get(p.clusterType())).stream().anyMatch(e->e.item().is(out.getItem())),"One actual source resource from this mine");
         h.assertValueEqual(d.energy().getAmountAsInt(),0,"All and only paid energy consumed"); h.assertValueEqual(l.getBlockState(target),cluster,"Cluster survives real production");
+    }
+    private static void oreDecoration(GameTestHelper h,ServerLevel level,SmallMinePiece piece) {
+        var stone=cells(piece,Blocks.STONE).getFirst().pos(); var before=snapshot(level,piece);
+        // Exercise native OreFeature's section writer deterministically, including structure references.
+        // The region fixture reads the already-generated chunks instead of launching another generation task.
+        var step=net.minecraft.world.level.chunk.status.ChunkPyramid.GENERATION_PYRAMID.getStepTo(net.minecraft.world.level.chunk.status.ChunkStatus.FEATURES);
+        var region=new net.minecraft.server.level.WorldGenRegion(level,null,step,level.getChunkAt(stone)) {
+            @Override public net.minecraft.world.level.chunk.ChunkAccess getChunk(int x,int z,net.minecraft.world.level.chunk.status.ChunkStatus status,boolean load) {
+                return level.getChunk(x,z,status,load);
+            }
+        };
+        var feature=new OreProbe(); feature.placeAt(region,stone);
+        verify(h,level,piece);
+        h.assertTrue(feature.placeAt(level,stone),"Ordinary ore placement remains available after world generation");
+        h.assertTrue(cells(piece,Blocks.STONE).stream().anyMatch(c->level.getBlockState(c.pos()).is(Blocks.DIAMOND_ORE)),"The same native vein reaches authored stone when outside WorldGenRegion");
+        before.forEach((pos,state)->{if(!level.getBlockState(pos).equals(state))level.setBlock(pos,state,2);});
+        verify(h,level,piece);
+    }
+    private static final class OreProbe extends net.minecraft.world.level.levelgen.feature.OreFeature {
+        OreProbe() { super(net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration.CODEC); }
+        boolean placeAt(WorldGenLevel level,BlockPos pos) {
+            var config=new net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration(new BlockMatchTest(Blocks.STONE),Blocks.DIAMOND_ORE.defaultBlockState(),32);
+            return doPlace(level,RandomSource.create(31),config,pos.getX(),pos.getX(),pos.getZ(),pos.getZ(),pos.getY(),pos.getY(),pos.getX()-6,pos.getY()-6,pos.getZ()-6,12,12);
+        }
     }
     private static void selection(GameTestHelper h) {
         var l=h.getLevel(); var r=l.registryAccess().lookupOrThrow(Registries.STRUCTURE); var candidates=List.of(FactoryHousePiece.TEMPLATE,TrainStationPiece.TEMPLATE,SmallMinePiece.TEMPLATE,GasStationPiece.TEMPLATE).stream().map(id->(SmallOverworldStructure)r.getValue(id)).toList();

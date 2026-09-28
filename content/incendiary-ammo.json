@@ -65,6 +65,14 @@
       "bundles": 8
     },
     {
+      "family": "MINIGUN_AMMO_DRUM",
+      "default": "minigundrum",
+      "item": "minigundrum_incendiary",
+      "empty": "minigundrumempty",
+      "loose": "riflerounds_incendiary",
+      "bundles": 16
+    },
+    {
       "family": "AS50_MAGAZINE",
       "default": "as50magazine",
       "item": "as50magazine_incendiary",
@@ -89,7 +97,8 @@
     "as50",
     "aug",
     "scar",
-    "vector"
+    "vector",
+    "minigun"
   ],
   "crafting_rounds": "1 for individual shotgun shells, full capacity for bundles/magazines; old rounds consumed",
   "damage_kind": "FIRE, magic flag, not vanilla is_fire; ordinary hurt cooldown bypassed",
@@ -103,7 +112,6 @@
   "block_fire": "air cell on hit face, roll <= modified initial damage / 40, firing-time unsafe policy",
   "pending": [
     "Original FX engine and visual acceptance",
-    "Minigun weapon and its incendiary drum",
     "Explosive AS50 ammunition"
   ]
 }

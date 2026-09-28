@@ -23,6 +23,9 @@ def require(path):
 
 
 def check_item_model(definition):
+    if definition['type']=='techguns:minigun':
+        for name in ('minigun','minigun_body','minigun_rotor'): require(ASSETS/'models/item'/f'{name}.json')
+        return
     if definition['type']=='techguns:flamethrower':
         require(ASSETS/'models/item/flamethrower.json')
         return

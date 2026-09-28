@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "result": {
+    "id": "techguns:minigundrum_incendiary",
+    "count": 1
+  },
+  "ingredients": [
+    "techguns:minigundrumempty",
+    "techguns:rifleroundsstack_incendiary",
+    "techguns:rifleroundsstack_incendiary",
+    "techguns:rifleroundsstack_incendiary",
+    "techguns:rifleroundsstack_incendiary"
+  ]
+}

@@ -314,6 +314,21 @@
     ],
     "subtitle": "subtitles.techguns.guns.flamethrowerreload"
   },
+  "guns.minigunfire": {
+    "sounds": [
+      "techguns:guns/minigun_shot_a",
+      "techguns:guns/minigun_shot_b",
+      "techguns:guns/minigun_shot_c",
+      "techguns:guns/minigun_shot_d"
+    ],
+    "subtitle": "subtitles.techguns.guns.minigunfire"
+  },
+  "guns.minigunreload": {
+    "sounds": [
+      "techguns:guns/minigun_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.minigunreload"
+  },
   "machines.ammopresswork1": {
     "sounds": [
       "techguns:machines/ammopress_work1_a",

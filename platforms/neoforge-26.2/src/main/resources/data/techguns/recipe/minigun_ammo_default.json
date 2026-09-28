@@ -1,0 +1,16 @@
+{
+  "type": "techguns:ammo_change_crafting",
+  "category": "misc",
+  "result": {
+    "id": "techguns:minigun",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 200,
+      "techguns:ballistic_variant": "default"
+    }
+  },
+  "ingredients": [
+    "techguns:minigun",
+    "techguns:minigundrum"
+  ]
+}

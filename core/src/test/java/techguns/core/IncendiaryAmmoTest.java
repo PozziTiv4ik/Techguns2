@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class IncendiaryAmmoTest {
     @Test void onlySourceWeaponsSupportTheVariant() {
-        assertEquals(16, Weapons.ALL.stream().filter(IncendiaryAmmo::supported).count());
+        assertEquals(17, Weapons.ALL.stream().filter(IncendiaryAmmo::supported).count());
         for (var gun : Weapons.ALL) {
             assertEquals(gun.ammo(), IncendiaryAmmo.ammo(gun, BallisticVariant.DEFAULT));
             if (IncendiaryAmmo.supported(gun)) {

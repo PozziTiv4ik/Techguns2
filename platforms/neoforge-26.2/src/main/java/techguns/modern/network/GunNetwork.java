@@ -18,9 +18,9 @@ public final class GunNetwork {
 
     public static boolean handle(Player player, GunActionPayload payload) {
         if (!(player.level() instanceof ServerLevel server) || !player.isAlive() || player.isSpectator()
-                || !(player.getMainHandItem().getItem() instanceof GunItem)) return false;
+                || !(player.getMainHandItem().getItem() instanceof GunItem gun)) return false;
         return payload.reload() ? ReloadSessions.begin(player)
-                : GunItem.fire(server, player, player.getMainHandItem());
+                : gun.trigger(server, player, player.getMainHandItem());
     }
 
     private GunNetwork() {}

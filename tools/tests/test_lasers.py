@@ -30,7 +30,7 @@ class LaserPortTests(unittest.TestCase):
             self.assertEqual(gun['ammo']['loose_item'], '')
         self.assertEqual(self.guns['lasergun']['zoom'], .75)
         self.assertEqual(self.guns['laserpistol']['zoom'], 1)
-        self.assertEqual(len(json.loads(self.files['content/ballistic-weapons.json'])), 17)
+        self.assertEqual(len(json.loads(self.files['content/ballistic-weapons.json'])), 18)
         self.assertEqual(len(json.loads(self.files['content/laser-weapons.json'])), 2)
 
     def test_other_energy_factories_cannot_silently_become_ballistic_guns(self):

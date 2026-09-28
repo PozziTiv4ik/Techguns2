@@ -41,6 +41,7 @@ public record AmmoChangeRecipe(ShapelessRecipe base) implements CraftingRecipe {
         else copy.set(TGContent.BALLISTIC_VARIANT.get(), ballistic);
         copy.remove(TGContent.AIMING.get());
         copy.remove(TGContent.RELOAD_TICKS.get());
+        copy.remove(TGContent.MINIGUN_SPIN_TIME.get());
         return copy;
     }
     @Override public RecipeSerializer<AmmoChangeRecipe> getSerializer() { return TGCrafting.AMMO_CHANGE.get(); }

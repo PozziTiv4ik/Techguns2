@@ -729,5 +729,48 @@
     "texture": "textures/guns/vector_texture",
     "forward_axis": "-z",
     "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java"
+  },
+  {
+    "id": "minigun",
+    "capacity": 200,
+    "fire_delay": 0,
+    "reload_ticks": 100,
+    "damage": 5.0,
+    "minimum_damage": 3.0,
+    "drop_start": 30.0,
+    "drop_end": 50.0,
+    "speed": 3.0,
+    "lifetime": 75,
+    "projectile": "ballistic",
+    "npc_ai": {
+      "range": 24.0,
+      "interval": 40,
+      "burst": 10,
+      "shot_delay": 1,
+      "forward_offset": 0.0
+    },
+    "accuracy": 0.025,
+    "automatic": true,
+    "extra_pellets": 0,
+    "pellet_spread": 0.0,
+    "gravity": 0.0,
+    "penetration": 0.5,
+    "zoom": 1.0,
+    "zoom_toggle": false,
+    "zoom_accuracy": 1.0,
+    "zoom_centered": false,
+    "ammo": {
+      "item": "minigundrum",
+      "empty_item": "minigundrumempty",
+      "loose_item": "riflerounds",
+      "bundles_per_magazine": 16,
+      "individual": false
+    },
+    "fire_sound": "guns.minigunfire",
+    "reload_sound": "guns.minigunreload",
+    "model": "ModelMinigun",
+    "texture": "textures/guns/minigun",
+    "forward_axis": "+x",
+    "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java"
   }
 ]

@@ -16,6 +16,7 @@ public final class IncendiaryAmmo {
         new Family("assaultriflemagazine", "assaultriflemagazine_incendiary", "assaultriflemagazineempty", "riflerounds_incendiary", 3),
         new Family("pistolmagazine", "pistolmagazine_incendiary", "pistolmagazineempty", "pistolrounds_incendiary", 3),
         new Family("lmgmagazine", "lmgmagazine_incendiary", "lmgmagazineempty", "riflerounds_incendiary", 8),
+        new Family("minigundrum", "minigundrum_incendiary", "minigundrumempty", "riflerounds_incendiary", 16),
         new Family("as50magazine", "as50magazine_incendiary", "as50magazineempty", "sniperrounds_incendiary", 2)
     );
     public static boolean supported(WeaponDefinition gun) {

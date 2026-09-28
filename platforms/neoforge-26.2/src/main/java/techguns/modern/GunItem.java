@@ -12,6 +12,10 @@ public class GunItem extends Item {
     private final WeaponDefinition definition;
     public GunItem(Properties properties, WeaponDefinition definition) { super(properties); this.definition = definition; }
     public WeaponDefinition definition() { return definition; }
+    public boolean trigger(ServerLevel server, Player player, ItemStack stack) { return fire(server, player, stack); }
+    protected boolean consumesLoadedAmmo(Player player) {
+        return !(this instanceof ChainsawItem) || !player.getAbilities().instabuild;
+    }
     public static int rounds(ItemStack stack) {
         return stack.getItem() instanceof GunItem gun
                 ? gun.definition.stats().clampRounds(stack.getOrDefault(TGContent.ROUNDS.get(), 0)) : 0;
@@ -89,14 +93,18 @@ public class GunItem extends Item {
             // cancellation suppresses that pellet but does not refund an already fired shot.
             if (!server.addFreshEntity(bullet) && pellet == 0) return false;
         }
-        if (!(item instanceof ChainsawItem) || !player.getAbilities().instabuild)
+        if (item.consumesLoadedAmmo(player))
             stack.set(TGContent.ROUNDS.get(), Magazine.afterShot(gun.stats(), rounds(stack)));
-        player.getCooldowns().addCooldown(stack, gun.stats().fireDelay());
-        if (item instanceof ChainsawItem) ChainsawItem.playChain(server,player);
-        else if (gun.projectile() == techguns.core.ProjectileKind.FLAME) FlameFiring.playerShot(server, player, stack);
-        else server.playSound(null, player.getX(), player.getY(), player.getZ(),
-                TGContent.SOUND_EVENTS.get(gun.fireSound()).get(), SoundSource.PLAYERS, 2, 1);
+        player.getCooldowns().addCooldown(stack, gun.stats().firingInterval());
+        item.shotEffects(server, player, stack);
         return true;
+    }
+
+    protected void shotEffects(ServerLevel server, Player player, ItemStack stack) {
+        if (this instanceof ChainsawItem) ChainsawItem.playChain(server,player);
+        else if (definition.projectile() == techguns.core.ProjectileKind.FLAME) FlameFiring.playerShot(server, player, stack);
+        else server.playSound(null, player.getX(), player.getY(), player.getZ(),
+                TGContent.SOUND_EVENTS.get(definition.fireSound()).get(), SoundSource.PLAYERS, 2, 1);
     }
 
     public static int availableAmmo(Player player, WeaponDefinition gun) {

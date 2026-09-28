@@ -15,8 +15,10 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import techguns.modern.world.structure.CastlePiece;
 import techguns.modern.world.structure.CastleStructure;
+import techguns.modern.world.structure.SmallMinePiece;
+import techguns.modern.world.structure.SmallMineStructure;
 
-/** Neighbouring ore/gravel/stone blobs must not replace authored dungeon walls. */
+/** Neighbouring ore/gravel/stone blobs must not replace authored castle or mine cells. */
 @Mixin(OreFeature.class)
 public abstract class CastleOreProtectionMixin {
     @WrapOperation(method="doPlace",at=@At(value="INVOKE",target="Lnet/minecraft/world/level/levelgen/feature/OreFeature;canPlaceOre(Lnet/minecraft/world/level/block/state/BlockState;Ljava/util/function/Function;Lnet/minecraft/util/RandomSource;Lnet/minecraft/world/level/levelgen/feature/configurations/OreConfiguration;Lnet/minecraft/world/level/levelgen/feature/configurations/OreConfiguration$TargetBlockState;Lnet/minecraft/core/BlockPos$MutableBlockPos;)Z"))
@@ -27,8 +29,8 @@ public abstract class CastleOreProtectionMixin {
         if(!original.call(state,getter,random,config,target,pos)) return false;
         if(!(level instanceof WorldGenRegion region)) return true;
         var manager=region.getLevel().structureManager().forWorldGenRegion(region);
-        for(var start:manager.startsForStructure(SectionPos.of(pos).chunk(),s->s instanceof CastleStructure))
-            if(start.getPieces().stream().anyMatch(p->p instanceof CastlePiece castle&&castle.protectsDecoration(pos))) return false;
+        for(var start:manager.startsForStructure(SectionPos.of(pos).chunk(),s->s instanceof CastleStructure || s instanceof SmallMineStructure))
+            if(start.getPieces().stream().anyMatch(p->p instanceof CastlePiece castle?castle.protectsDecoration(pos):p instanceof SmallMinePiece mine&&mine.protectsDecoration(pos))) return false;
         return true;
     }
 }

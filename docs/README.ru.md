@@ -33,6 +33,7 @@
 - [Stielgranate и FragGrenade: бросок, отскоки, взрыв и крафт](HAND_GRENADES.ru.md)
 - [GrenadeLauncher: шесть 40-мм гранат, отскоки и вращение барабана](GRENADE_LAUNCHER.ru.md)
 - [Flamethrower: топливо, автоматический огонь и поджог](FLAMETHROWER.ru.md)
+- [Minigun: нулевая задержка, барабаны, перезарядка и вращение стволов](MINIGUN.ru.md)
 
 <a id="armor"></a>
 

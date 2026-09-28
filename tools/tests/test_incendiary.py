@@ -19,8 +19,8 @@ class IncendiaryPortTests(unittest.TestCase):
         cls.selected = [g for g in cls.weapons if incendiary_for(g)]
 
     def test_original_ammo_families_and_factory_parameters(self):
-        self.assertEqual(len(incendiary_families()), 9)  # Includes the still-unported minigun.
-        self.assertEqual(len(self.selected), 16)
+        self.assertEqual(len(incendiary_families()), 9)
+        self.assertEqual(len(self.selected), 17)
         self.assertNotIn('handcannon', {g['id'] for g in self.selected})
         self.assertEqual(incendiary_parameters(), {'damage_multiplier':1.1, 'burn_seconds':3, 'ignition_divisor':40})
         for g in self.selected:
@@ -43,7 +43,7 @@ class IncendiaryPortTests(unittest.TestCase):
                 self.assertEqual(recipe['result']['components'], {'techguns:rounds':1 if gun['ammo']['individual'] else gun['capacity'],
                                                                  'techguns:ballistic_variant':variant})
         self.assertNotIn('as50_ammo_explosive', self.graph['recipes'])
-        self.assertNotIn('minigun_ammo_incendiary', self.graph['recipes'])
+        self.assertIn('minigun_ammo_incendiary', self.graph['recipes'])
 
     def test_five_magazines_keep_all_six_original_workbench_recipes(self):
         names = ['smgmagazine_incendiary','pistolmagazine_incendiary','assaultriflemagazine_incendiary',
@@ -92,7 +92,7 @@ class IncendiaryPortTests(unittest.TestCase):
         for lang in ('en_us','ru_ru'):
             translated = json.loads(self.files[RESOURCES + f'assets/techguns/lang/{lang}.json'])
             for family in incendiary_families():
-                if family['family'] != 'MINIGUN_AMMO_DRUM': self.assertIn('item.techguns.' + family['item'], translated)
+                self.assertIn('item.techguns.' + family['item'], translated)
             for key, value in incendiary_translations(lang).items(): self.assertEqual(translated[key], value)
 
 

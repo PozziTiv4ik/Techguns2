@@ -46,6 +46,8 @@ public final class TGContent {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, Techguns.MOD_ID);
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Long>> FLAME_RECOIL_TIME = COMPONENTS.registerComponentType(
             "flame_recoil_time", builder -> builder.networkSynchronized(ByteBufCodecs.VAR_LONG).ignoreSwapAnimation());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Long>> MINIGUN_SPIN_TIME = COMPONENTS.registerComponentType(
+            "minigun_spin_time", builder -> builder.networkSynchronized(ByteBufCodecs.VAR_LONG).ignoreSwapAnimation());
     public static final Map<String, DeferredItem<Item>> AMMO = registerAmmo();
     public static final Map<String, DeferredItem<Item>> MATERIALS = registerMaterials();
     public static final Map<String, DeferredItem<GunItem>> GUNS = registerGuns();
@@ -159,9 +161,9 @@ public final class TGContent {
 
     private static Map<String, DeferredItem<GunItem>> registerGuns() {
         Map<String, DeferredItem<GunItem>> items = new LinkedHashMap<>();
-        for (WeaponDefinition gun : Weapons.ALL) items.put(gun.id(), ITEMS.registerItem(gun.id(), props -> gun.projectile()==techguns.core.ProjectileKind.CHAINSAW ? new ChainsawItem(props,gun) : new GunItem(props, gun),
+        for (WeaponDefinition gun : Weapons.ALL) items.put(gun.id(), ITEMS.registerItem(gun.id(), props -> gun.projectile()==techguns.core.ProjectileKind.CHAINSAW ? new ChainsawItem(props,gun) : gun.id().equals("minigun") ? new MinigunItem(props, gun) : new GunItem(props, gun),
                 props -> props.stacksTo(1).component(ROUNDS.get(), 0).component(DataComponents.USE_COOLDOWN,
-                        new UseCooldown(gun.stats().fireDelay() / 20f, Optional.of(id("firearms"))))));
+                        new UseCooldown(gun.stats().firingInterval() / 20f, Optional.of(id("firearms"))))));
         return Collections.unmodifiableMap(items);
     }
     private static Map<String, DeferredItem<GrenadeItem>> registerGrenades() {

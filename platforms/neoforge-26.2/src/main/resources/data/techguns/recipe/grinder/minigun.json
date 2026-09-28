@@ -1,0 +1,25 @@
+{
+  "type": "techguns:grinder",
+  "input": "techguns:minigun",
+  "outputs": [
+    {
+      "result": {
+        "id": "techguns:ingotobsidiansteel",
+        "count": 20
+      }
+    },
+    {
+      "result": {
+        "id": "techguns:ingotsteel",
+        "count": 2
+      }
+    },
+    {
+      "result": {
+        "id": "techguns:electricengine",
+        "count": 1
+      }
+    }
+  ],
+  "random": false
+}
