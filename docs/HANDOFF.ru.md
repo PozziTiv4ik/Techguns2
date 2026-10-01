@@ -1,7 +1,7 @@
 # Продолжение работы в новом чате
 
-Обновлено 2026-10-01 после локальных проверок Blaster Rifle.
-Linux CI нового source ожидается. Прочитать [порядок работы](DEVELOPMENT_WORKFLOW.ru.md)
+Обновлено 2026-10-01 после CI checkpoint Blaster Rifle.
+Локальные проверки и Linux CI #82 успешны. Прочитать [порядок работы](DEVELOPMENT_WORKFLOW.ru.md)
 и [AGENTS.md](../AGENTS.md), затем проверить Git. Поиск — [карта кода](CODE_MAP.ru.md),
 [каталог систем](README.ru.md) и [карта генераторов](../tools/README.ru.md).
 
@@ -14,8 +14,8 @@ Linux CI нового source ожидается. Прочитать [поряд�
 | Writable fork / origin | `PozziTiv4ik/Techguns2` |
 | Оригинал / upstream, только чтение | `pWn3d1337/Techguns2` |
 | Платформа | Minecraft 26.2 / NeoForge 26.2.0.81 / Java 25 |
-| Последний source, подтверждённый Linux | `35ac9169f04bab79eda1ed1b39373fd1621070e6` — Scatterbeam Rifle |
-| Linux CI Blaster Rifle | Ожидается; прежний [CI #81](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36894452571) новый код не подтверждает |
+| Последний source, подтверждённый Linux | `dedec5d3fdd3542fdf984a33f2ce5cd50f58209c` — Blaster Rifle |
+| Linux CI Blaster Rifle | [Linux CI #82](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36902057470), success |
 
 Работает Blaster Rifle: один летящий ENERGY-снаряд, 50 зарядов/R 45 тиков,
 темп 5, падение 10→8 на 25–35 блоках, TTL 30 и сохранённый origin.
@@ -32,12 +32,15 @@ JUnit failures/errors/skipped = 0. Все пять серверов заверш
 встроенный Minecraft. Генератор проверяет 2539 файлов; 2410 ресурсов и
 708 классов JAR сверены побайтово. Лицензия, неизменность legacy и отсутствие
 8 уникальных файлов тестовых паков проверены. Журналы — `.tools/blaster-*`.
-Linux CI нового source пока ожидается.
+[Linux CI #82](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36902057470) подтвердил source `dedec5d3fdd3542fdf984a33f2ce5cd50f58209c`:
+445 Python за 393.119 с, сборку/ядро и все 2423 GameTests
+(2342 + 52 + 17 + 6 + 6). Все 15 шагов успешны; завершение —
+2026-10-01 20:08:17 +02:00 (Europe/Zurich), `2026-10-01T18:08:17Z`.
 
 Доказательства — [протокол](VERIFICATION.ru.md#blaster-rifle-2026-10-01).
-Сначала дождаться CI точного source, устранить ошибки, записать результат,
-сделать documentation-only checkpoint `[skip ci]` и push. Текущий HEAD
-получать из Git; старый зелёный CI не подтверждает новый source.
+После указанного source меняется только документация с `[skip ci]`.
+Незавершённой реализации и известных красных проверок этого среза нет.
+Текущий HEAD получать из Git; прошедшие проверки без новых изменений не повторять.
 
 <a id="next-milestone"></a>
 
