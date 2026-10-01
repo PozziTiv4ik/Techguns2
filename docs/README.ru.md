@@ -36,6 +36,7 @@
 - [Flamethrower: топливо, автоматический огонь и поджог](FLAMETHROWER.ru.md)
 - [Minigun: нулевая задержка, барабаны, перезарядка и вращение стволов](MINIGUN.ru.md)
 - [Gauss Rifle: составной боеприпас, транзакционная R и летящий снаряд](GAUSS_RIFLE.ru.md)
+- [Scatterbeam Rifle: пять энергетических снарядов, вода, R и отсутствие исходных рецептов](SCATTERBEAM_RIFLE.ru.md)
 
 <a id="armor"></a>
 

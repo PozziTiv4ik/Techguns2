@@ -281,11 +281,11 @@ final class GaussGameTests {
     }
     private static void ttl(GameTestHelper h) {
         var s = shot(h, h.absoluteVec(new Vec3(4, 80, 4))); var saved = NetherGameTests.save(h, s);
-        for (int i = 0; i < 89; i++) s.tick(); h.assertTrue(!s.isRemoved(), "89 valid movement ticks");
-        var copy = new GaussProjectile(TGContent.GAUSS.get(), h.getLevel()); NetherGameTests.load(h, copy, NetherGameTests.save(h, s)); s.discard(); copy.tick(); h.assertTrue(copy.isRemoved(), "Restored final tick expires at 90");
+        for (int i = 0; i < 17; i++) s.tick(); h.assertTrue(!s.isRemoved(), "17 valid movement ticks");
+        var copy = new GaussProjectile(TGContent.GAUSS.get(), h.getLevel()); NetherGameTests.load(h, copy, NetherGameTests.save(h, s)); s.discard(); copy.tick(); h.assertTrue(copy.isRemoved(), "Restored final tick expires at 18");
         for (String key : List.of("wrong_weapon", "unknown_weapon", "negative_age", "expired", "scale", "nan")) {
             var broken = saved.copy(); switch (key) { case "wrong_weapon" -> broken.putString("weapon", "revolver"); case "unknown_weapon" -> broken.putString("weapon", "missing");
-                case "negative_age" -> broken.putInt("age", -1); case "expired" -> broken.putInt("age", 90); case "scale" -> broken.putFloat("damage_scale", -1); case "nan" -> broken.putFloat("damage_scale", Float.NaN); }
+                case "negative_age" -> broken.putInt("age", -1); case "expired" -> broken.putInt("age", 18); case "scale" -> broken.putFloat("damage_scale", -1); case "nan" -> broken.putFloat("damage_scale", Float.NaN); }
             var bad = new GaussProjectile(TGContent.GAUSS.get(), h.getLevel()); NetherGameTests.load(h, bad, broken); h.assertTrue(bad.isRemoved(), "Reject invalid save: " + key);
         } h.succeed();
     }

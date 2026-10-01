@@ -56,6 +56,9 @@ public final class TGContent {
     public static final DeferredItem<Item> PISTOL_ROUNDS = AMMO.get("pistolrounds");
     public static final DeferredItem<GunItem> REVOLVER = GUNS.get("revolver");
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(Registries.ENTITY_TYPE, Techguns.MOD_ID);
+    public static final DeferredHolder<EntityType<?>, EntityType<BlasterProjectile>> BLASTER = ENTITIES.register("blaster", () ->
+            EntityType.Builder.<BlasterProjectile>of(BlasterProjectile::new, MobCategory.MISC).sized(.25f, .25f).fireImmune().clientTrackingRange(12).updateInterval(1)
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE, id("blaster"))));
     public static final DeferredHolder<SoundEvent, SoundEvent> GAUSS_RECHAMBER = SOUNDS.register(techguns.core.GaussRules.RECHAMBER_SOUND,
             () -> SoundEvent.createVariableRangeEvent(id(techguns.core.GaussRules.RECHAMBER_SOUND)));
     public static final DeferredHolder<EntityType<?>, EntityType<GaussProjectile>> GAUSS = ENTITIES.register("gauss", () ->

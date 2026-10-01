@@ -102,6 +102,7 @@ public final class WeaponGameTests {
         FlamethrowerGameTests.register(FUNCTIONS);
         MinigunGameTests.register(FUNCTIONS);
         GaussGameTests.register(FUNCTIONS);
+        ScatterbeamGameTests.register(FUNCTIONS);
         NetherSoulGameTests.register(FUNCTIONS);
         OreClusterGameTests.register(FUNCTIONS);
         OreDrillGameTests.register(FUNCTIONS);

@@ -9,7 +9,7 @@
     "drop_start": 90.0,
     "drop_end": 90.0,
     "speed": 5.0,
-    "lifetime": 90,
+    "lifetime": 18,
     "projectile": "gauss",
     "npc_ai": {
       "range": 36.0,

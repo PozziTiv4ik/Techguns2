@@ -30,6 +30,7 @@ public final class NpcWeapons {
             case "flamethrower" -> new NpcAttackSpec(12.0, 20, 5, 5, 0.35);
             case "minigun" -> new NpcAttackSpec(24.0, 40, 10, 1, 0.0);
             case "gaussrifle" -> new NpcAttackSpec(36.0, 30, 0, 0, 0.45);
+            case "scatterbeamrifle" -> new NpcAttackSpec(18.0, 30, 0, 0, 0.0);
             default -> throw new IllegalArgumentException("Unported NPC weapon: " + id);
         };
     }

@@ -34,8 +34,9 @@ class LaserPortTests(unittest.TestCase):
         self.assertEqual(len(json.loads(self.files['content/laser-weapons.json'])), 2)
 
     def test_other_energy_factories_cannot_silently_become_ballistic_guns(self):
-        with patch.dict(SELECTION, {'scatterbeamrifle': 'ModelLasergun2'}, clear=True):
-            with self.assertRaisesRegex(ValueError, 'Projectile factory not ported: BlasterProjectile'):
+        self.assertEqual(self.guns['scatterbeamrifle']['projectile'], 'blaster')
+        with patch.dict(SELECTION, {'alienblaster': 'ModelAlienBlaster'}, clear=True):
+            with self.assertRaisesRegex(ValueError, 'Projectile factory not ported: AlienBlasterProjectile'):
                 parse_weapons()
 
     def test_battery_and_laser_material_costs_and_loaded_crafts(self):

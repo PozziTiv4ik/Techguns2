@@ -16,10 +16,12 @@ public final class ArmorDamage {
         var npc = event.getEntity() instanceof techguns.modern.npc.NpcTypedArmor typed ? typed : null;
         boolean alien=event.getSource().getDirectEntity() instanceof AlienBlasterProjectile && event.getSource().is(AlienBlasterProjectile.DAMAGE_TYPE);
         boolean fireProjectile = event.getSource().getDirectEntity() instanceof BurningProjectile burning && event.getSource().is(burning.damageType());
-        boolean impulse = (event.getSource().getDirectEntity() instanceof BurningProjectile || event.getSource().getDirectEntity() instanceof GaussProjectile)
+        boolean impulse = (event.getSource().getDirectEntity() instanceof BurningProjectile || event.getSource().getDirectEntity() instanceof GaussProjectile
+                || event.getSource().getDirectEntity() instanceof BlasterProjectile)
                 && event.getSource().is(BurningProjectile.KNOCKBACK_TYPE);
         boolean explosive = event.getSource().getDirectEntity() instanceof ExplosiveBullet && event.getSource().is(ExplosiveBullet.DAMAGE_TYPE);
         techguns.core.WeaponDefinition weapon = null;
+        if (event.getSource().getDirectEntity() instanceof BlasterProjectile blast && event.getSource().is(BlasterProjectile.DAMAGE_TYPE)) weapon = blast.weapon();
         if (event.getSource().getDirectEntity() instanceof GaussProjectile slug && event.getSource().is(GaussProjectile.DAMAGE_TYPE)) weapon = slug.weapon();
         if (fireProjectile) weapon = ((BurningProjectile)event.getSource().getDirectEntity()).weapon();
         if (explosive) weapon = ((ExplosiveBullet)event.getSource().getDirectEntity()).weapon();

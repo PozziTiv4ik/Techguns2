@@ -24,5 +24,6 @@
   "grenadelauncher": "ModelBaseBakedGrenadeLauncher",
   "flamethrower": "ModelFlamethrower",
   "minigun": "ModelMinigun",
-  "gaussrifle": "ModelBaseBaked"
+  "gaussrifle": "ModelBaseBaked",
+  "scatterbeamrifle": "ModelLasergun2"
 }

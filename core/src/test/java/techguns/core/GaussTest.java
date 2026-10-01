@@ -25,7 +25,7 @@ class GaussTest {
         assertEquals(ProjectileKind.GAUSS, gun.projectile()); assertEquals(DamageKind.PROJECTILE, gun.projectile().damageKind());
         assertEquals(2, gun.penetration()); assertEquals(8, gun.stats().capacity());
         assertEquals(30, gun.stats().fireDelay()); assertEquals(60, gun.stats().reloadTicks());
-        assertEquals(90, gun.stats().projectileLifetime()); assertEquals(5, gun.stats().projectileSpeed());
+        assertEquals(18, gun.stats().projectileLifetime()); assertEquals(5, gun.stats().projectileSpeed());
         for (int distance : new int[]{0, 89, 90, 91, 1000}) assertEquals(40, gun.stats().damageAt(distance));
         assertFalse(gun.automatic()); assertTrue(gun.aim().centered()); assertEquals(0, gun.aim().accuracyMultiplier());
         assertThrows(IllegalArgumentException.class, () -> new AimSpec(.35f, true, -.01f, true));

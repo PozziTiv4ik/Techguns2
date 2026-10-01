@@ -40,6 +40,7 @@ public final class LaserBeamRenderer extends EntityRenderer<LaserBeam, LaserBeam
             .withDepthStencilState(new DepthStencilState(CompareOp.GREATER_THAN_OR_EQUAL, false))
             .withCull(false).build();
     private static final RenderType BODY = type("laser3"), START = type("laser3_start");
+    static RenderType blasterBody() { return BODY; }
 
     private static RenderType type(String name) {
         return RenderType.create("techguns_" + name,

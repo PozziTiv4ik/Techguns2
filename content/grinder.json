@@ -1083,7 +1083,8 @@
     "tfg"
   ],
   "ported_weapons_without_source_recipe": [
-    "laserpistol"
+    "laserpistol",
+    "scatterbeamrifle"
   ],
   "duration": 100,
   "power_per_tick": 5,

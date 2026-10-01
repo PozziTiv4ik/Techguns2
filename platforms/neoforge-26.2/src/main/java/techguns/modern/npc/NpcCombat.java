@@ -24,6 +24,10 @@ public final class NpcCombat {
             double spread = (n == 0 ? gun.stats().spread() : gun.pelletSpread()) * accuracy;
             Projectile projectile;
             switch (gun.projectile()) {
+                case BLASTER -> {
+                    var blast = new BlasterProjectile(TGContent.BLASTER.get(), level); blast.configure(gun); blast.npcDamage(damage);
+                    blast.setOwner(npc); blast.shootLegacy(npc, spread, -1); projectile = blast;
+                }
                 case GAUSS -> {
                     var slug = new GaussProjectile(TGContent.GAUSS.get(), level); slug.configure(gun); slug.npcDamage(damage);
                     slug.setOwner(npc); slug.shootLegacy(npc, spread, -1); projectile = slug;

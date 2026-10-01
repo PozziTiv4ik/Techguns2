@@ -14,7 +14,8 @@ public class GunItem extends Item {
     public WeaponDefinition definition() { return definition; }
     public boolean trigger(ServerLevel server, Player player, ItemStack stack) { return fire(server, player, stack); }
     protected boolean consumesLoadedAmmo(Player player) {
-        return !(this instanceof ChainsawItem || definition.projectile() == techguns.core.ProjectileKind.GAUSS)
+        return !(this instanceof ChainsawItem || definition.projectile() == techguns.core.ProjectileKind.GAUSS
+                || definition.projectile() == techguns.core.ProjectileKind.BLASTER)
                 || !player.getAbilities().instabuild;
     }
     public static int rounds(ItemStack stack) {
@@ -32,6 +33,14 @@ public class GunItem extends Item {
         float accuracyMultiplier = techguns.modern.armor.TGArmorSystem.gunAccuracyMultiplier(player);
         if (aiming) accuracyMultiplier *= gun.aim().accuracyMultiplier();
         for (int pellet = 0; pellet < gun.projectileCount(); pellet++) {
+            if (gun.projectile() == techguns.core.ProjectileKind.BLASTER) {
+                var blast = new BlasterProjectile(TGContent.BLASTER.get(), server);
+                blast.configure(gun); blast.setOwner(player);
+                blast.shootLegacy(player, (pellet == 0 ? gun.stats().spread() : gun.pelletSpread()) * accuracyMultiplier,
+                        aiming && gun.aim().centered() ? 0 : LegacyShot.muzzleSide(player, player.getOffhandItem() == stack));
+                if (!server.addFreshEntity(blast) && pellet == 0) return false;
+                continue;
+            }
             if (gun.projectile() == techguns.core.ProjectileKind.GAUSS) {
                 var slug = new GaussProjectile(TGContent.GAUSS.get(), server);
                 slug.configure(gun); slug.setOwner(player);

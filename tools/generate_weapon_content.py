@@ -60,6 +60,7 @@ from legacy_explosive import generate_explosive_content, explosive_translations
 from legacy_flamethrower import generate_flame_content, flame_translations
 from legacy_minigun import generate_minigun_content
 from legacy_gauss import generate_gauss_content, gauss_model, gauss_translations
+from legacy_scatterbeam import generate_scatterbeam_content, blaster_translations, scaled_projectile_lifetime
 from legacy_meteor import generate_meteor_content
 from legacy_bugnests import generate_bugnest_content, bugnest_translations
 from legacy_nether_castle import generate_nether_castle_content
@@ -147,10 +148,12 @@ def parse_weapons():
         inline_projectile = re.search(r'new ProjectileSelector<(\w+)>', args[1])
         projectile_class = inline_projectile[1] if inline_projectile else projectile_classes[args[1]]
         projectile = {'GenericProjectile': 'ballistic', 'StoneBulletProjectile': 'ballistic',
-                      'LaserProjectile': 'laser', 'RocketProjectile': 'rocket', 'GaussProjectile': 'gauss',
+                      'LaserProjectile': 'laser', 'RocketProjectile': 'rocket', 'GaussProjectile': 'gauss', 'BlasterProjectile': 'blaster',
                       'CyberdemonBlasterProjectile': 'nether_blaster', 'ChainsawProjectile': 'chainsaw', 'Grenade40mmProjectile':'grenade_40mm', 'FlamethrowerProjectile':'flame'}.get(projectile_class)
         if projectile is None: raise ValueError(f'Projectile factory not ported: {projectile_class}')
         lifetime = int(num(args[9]))
+        if projectile in ('gauss', 'blaster'):
+            lifetime = scaled_projectile_lifetime(lifetime, num(calls.get('setBulletSpeed', ['2'])[0]))
         if projectile == 'laser':
             laser = strip_comments((LEGACY / 'java/techguns/entities/projectiles/LaserProjectile.java').read_text())
             lifetime = int(re.search(r'return new LaserProjectile\(world, p, damage, speed, (\d+),', laser)[1])
@@ -216,6 +219,7 @@ public final class NpcWeapons {
     data('content/grenade-launcher.json', [gun for gun in weapons if gun['projectile'] == 'grenade_40mm'])
     data('content/flamethrower-weapon.json', [gun for gun in weapons if gun['projectile'] == 'flame'])
     data('content/gauss-weapon.json', [gun for gun in weapons if gun['projectile'] == 'gauss'])
+    data('content/scatterbeam-weapon.json', [gun for gun in weapons if gun['projectile'] == 'blaster'])
     definitions = []
     ammo_items = set(crafting['extra_ammo'])
     sounds_data = json.loads(resolve_asset('sounds.json').read_text())
@@ -255,8 +259,8 @@ public final class NpcWeapons {
             _, _, shapes = extract_shapes(source, gun['model'])
             gui_hidden = GUI_HIDDEN_PARTS.get(identifier, ())
             mesh = gun['projectile'] == 'rocket' or identifier == 'minigun' or gui_hidden or any(s['inflate'] != 0 or s['render_scale'] != [1, 1, 1] or s['mirror'] for s in shapes)
-            if identifier == 'chainsaw':
-                model, obj, material = convert_mesh(source, gun['model'], identifier, f'techguns:item/{identifier}', gun['forward_axis'], skip_parts=('blade2',), repeat_texture=True)
+            if identifier in ('chainsaw', 'scatterbeamrifle'):
+                model, obj, material = convert_mesh(source, gun['model'], identifier, f'techguns:item/{identifier}', gun['forward_axis'], skip_parts=('blade2',) if identifier == 'chainsaw' else (), repeat_texture=True)
                 output(RESOURCES / f'assets/techguns/models/item/{identifier}.obj', obj)
                 output(RESOURCES / f'assets/techguns/models/item/{identifier}.mtl', material)
             elif mesh:
@@ -361,6 +365,7 @@ public final class NpcWeapons {
         values.update(incendiary_translations(lang))
         values.update(explosive_translations(lang))
         values.update(gauss_translations(lang))
+        values.update(blaster_translations(lang))
         values.update(flame_translations(lang))
         values.update(grinder_translations(lang))
         values.update(rocket_translations(lang))
@@ -438,7 +443,7 @@ public final class Weapons {
     files.update(generate_machine_content())
     files.update(generate_neon_content())
     files.update(generate_launcher_content())
-    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_grenade_content(), generate_npc_content(), generate_cyber_content(), generate_armor_content(), generate_repair_content(), generate_camo_content(), generate_grinder_content(), generate_zombie_soldier_content(), generate_rural_content(), generate_skeleton_content(), generate_bandit_content(), generate_chainsaw_content(), generate_psycho_content(), generate_spawner_content(), generate_army_content(), generate_commando_content(), generate_policeman_content(), generate_police_station_content(), generate_survivor_hideout_content(), generate_desert_oil_content(), generate_gas_station_content(), generate_train_station_content(), generate_factory_house_content(), generate_small_mine_content(), generate_location_content(), generate_grid_content(), generate_ghastling_content(), generate_helicopter_content(), generate_alienbug_content(), generate_spike_content(), generate_cluster_content(), generate_drill_content(), generate_building_content(), generate_fortification_content(), generate_camonet_content(), generate_incendiary_content(weapons), generate_explosive_content(weapons), generate_gauss_content(), generate_flame_content(), generate_minigun_content(), generate_crate_content(weapons), generate_camp_content(), generate_castle_content(), generate_carrier_content(), generate_metal_stairs_content(), generate_meteor_content(), generate_bugnest_content(), generate_nether_castle_content(), generate_medium_altar_content(), generate_ghast_spawner_content()) for entry in domain.items()]:
+    for path, value in [entry for domain in (generate_ore_content(), generate_fluid_content(), generate_chemical_content(), generate_reaction_content(), generate_radiation_content(), generate_fabricator_content(), generate_charging_content(), generate_rocket_content(), generate_grenade_content(), generate_npc_content(), generate_cyber_content(), generate_armor_content(), generate_repair_content(), generate_camo_content(), generate_grinder_content(), generate_zombie_soldier_content(), generate_rural_content(), generate_skeleton_content(), generate_bandit_content(), generate_chainsaw_content(), generate_psycho_content(), generate_spawner_content(), generate_army_content(), generate_commando_content(), generate_policeman_content(), generate_police_station_content(), generate_survivor_hideout_content(), generate_desert_oil_content(), generate_gas_station_content(), generate_train_station_content(), generate_factory_house_content(), generate_small_mine_content(), generate_location_content(), generate_grid_content(), generate_ghastling_content(), generate_helicopter_content(), generate_alienbug_content(), generate_spike_content(), generate_cluster_content(), generate_drill_content(), generate_building_content(), generate_fortification_content(), generate_camonet_content(), generate_incendiary_content(weapons), generate_explosive_content(weapons), generate_gauss_content(), generate_scatterbeam_content(), generate_flame_content(), generate_minigun_content(), generate_crate_content(weapons), generate_camp_content(), generate_castle_content(), generate_carrier_content(), generate_metal_stairs_content(), generate_meteor_content(), generate_bugnest_content(), generate_nether_castle_content(), generate_medium_altar_content(), generate_ghast_spawner_content()) for entry in domain.items()]:
         if path in files:
             # Several content domains contribute to the same mining/tool and common item tags.
             if '/tags/' not in path:

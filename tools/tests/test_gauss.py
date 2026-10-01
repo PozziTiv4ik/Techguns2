@@ -27,7 +27,7 @@ class GaussPortTests(unittest.TestCase):
 
     def test_source_stats_factory_and_constant_damage(self):
         self.assertEqual([self.gun[k] for k in ('capacity', 'fire_delay', 'reload_ticks', 'damage', 'minimum_damage', 'speed', 'lifetime', 'penetration')],
-                         [8, 30, 60, 40, 40, 5, 90, 2])
+                         [8, 30, 60, 40, 40, 5, 18, 2])
         self.assertEqual(self.gun['projectile'], 'gauss')
         self.assertEqual(gauss_parameters(), {'air_drag': .99, 'water_drag': .85, 'gravity': 0, 'rechamber_sound': 'guns.gaussriflerechamber'})
 

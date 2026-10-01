@@ -56,6 +56,7 @@ final class HelicopterGameTests {
         r.register("helicopter_occluded_clock_and_saved_attack",()->HelicopterGameTests::occluded);
         r.register("helicopter_both_rotated_rocket_muzzles",()->HelicopterGameTests::muzzles);
         r.register("helicopter_registered_server_ai_hits_target",()->HelicopterGameTests::realAi);
+        r.register("helicopter_chunk_lease_preserves_later_forced_ticket",()->HelicopterGameTests::chunkLease);
         r.register("helicopter_bullet_saved_flight_and_100_movements",()->h->savedShot(h,false));
         r.register("helicopter_rocket_saved_flight_and_100_movements",()->h->savedShot(h,true));
         r.register("helicopter_bullet_native_water_drag",()->HelicopterGameTests::water);
@@ -179,15 +180,38 @@ final class HelicopterGameTests {
             near(h,r.getX()-m.getX(),Math.cos(Math.toRadians(yaw))*side*2.16,"Rotated launcher side X"); near(h,r.getZ()-m.getZ(),Math.sin(Math.toRadians(yaw))*side*2.16,"Rotated launcher side Z"); r.discard();
         } cleanup(h,m); h.succeed();
     }
+    /** Per-fixture identity, never persisted and distinct from the GameTest runner's FORCED tickets. */
+    private static final class FlightChunks implements AutoCloseable {
+        private final ServerLevel level;
+        private final List<ChunkPos> chunks;
+        private final TicketType ticket = new TicketType(0, TicketType.FLAG_LOADING | TicketType.FLAG_SIMULATION | TicketType.FLAG_KEEP_DIMENSION_ACTIVE);
+        FlightChunks(ServerLevel level,List<ChunkPos> chunks) {
+            this.level=level; this.chunks=List.copyOf(chunks);
+            this.chunks.forEach(c->level.getChunkSource().addTicketWithRadius(ticket,c,2));
+        }
+        @Override public void close() { chunks.forEach(c->level.getChunkSource().removeTicketWithRadius(ticket,c,2)); }
+    }
+    private static void chunkLease(GameTestHelper h) {
+        var level=h.getLevel(); var center=ChunkPos.containing(h.absolutePos(new BlockPos(2048,2,0)));
+        while(level.getForceLoadedChunks().contains(center.pack())) center=new ChunkPos(center.x()+1,center.z());
+        var later=center;
+        try(var lease=new FlightChunks(level,List.of(later))) {
+            h.assertTrue(!level.getForceLoadedChunks().contains(later.pack()),"Fixture does not own the runner's FORCED type");
+            level.setChunkForced(later.x(),later.z(),true); // The runner has now placed a later batch in the same chunk.
+            lease.close();
+            h.assertTrue(level.getForceLoadedChunks().contains(later.pack()),"Late cleanup cannot steal the new batch's ticket");
+        } finally { level.setChunkForced(later.x(),later.z(),false); }
+        h.succeed();
+    }
     private static void realAi(GameTestHelper h) {
         // Stay outside neighboring players' acquisition band and prevent distance-based despawning from those fixtures.
         var level=h.getLevel(); var center=h.absolutePos(new BlockPos(10,175,10));
-        var required=new ArrayList<ChunkPos>(); var pinned=new ArrayList<ChunkPos>();
+        var required=new ArrayList<ChunkPos>();
         for(int x=(center.getX()-48)>>4;x<=(center.getX()+48)>>4;x++) for(int z=(center.getZ()-48)>>4;z<=(center.getZ()+48)>>4;z++) {
             var chunk=new ChunkPos(x,z); required.add(chunk);
-            if(level.setChunkForced(x,z,true)) pinned.add(chunk);
             level.getChunk(x,z);
         }
+        var flightChunks=new FlightChunks(level,required);
         for(int x=-20;x<=32;x++) for(int z=-20;z<=32;z++) h.getLevel().setBlock(center.offset(x,0,z),Blocks.STONE.defaultBlockState(),2);
         var m=new AttackHelicopter(NpcContent.HELICOPTER.get(),level); m.setPersistenceRequired(); m.setNoAi(true); m.setPos(h.absoluteVec(new Vec3(10,200,10)));
         var t=EntityTypes.IRON_GOLEM.create(level,EntitySpawnReason.STRUCTURE); t.setPersistenceRequired(); t.removeFreeWill(); t.setPos(h.absoluteVec(new Vec3(10,200,18)));
@@ -196,16 +220,19 @@ final class HelicopterGameTests {
         Consumer<EntityJoinLevelEvent> shots=e->{ if(e.getEntity() instanceof Bullet b && b.getOwner()==m) fired.add(b); };
         Consumer<LivingDamageEvent.Post> hits=e->{ if(e.getEntity()==t && e.getSource().getDirectEntity() instanceof Bullet b && b.getOwner()==m) bulletDamage[0]+=e.getHealthDamage(); };
         NeoForge.EVENT_BUS.addListener(shots); NeoForge.EVENT_BUS.addListener(hits);
-        h.testInfo.addListener(new GameTestListener() {
-            private void release() {
+        boolean[] cleaned={false};
+        Runnable release=()->{
+                if(cleaned[0]) return;
+                cleaned[0]=true;
                 NeoForge.EVENT_BUS.unregister(shots); NeoForge.EVENT_BUS.unregister(hits);
                 fired.forEach(Entity::discard); cleanup(h,m); t.discard();
                 for(int x=-20;x<=32;x++) for(int z=-20;z<=32;z++) level.setBlock(center.offset(x,0,z),Blocks.AIR.defaultBlockState(),2);
-                pinned.forEach(c->level.setChunkForced(c.x(),c.z(),false));
-            }
+                flightChunks.close();
+        };
+        h.testInfo.addListener(new GameTestListener() {
             @Override public void testStructureLoaded(GameTestInfo info) {}
-            @Override public void testPassed(GameTestInfo info,GameTestRunner runner) { release(); }
-            @Override public void testFailed(GameTestInfo info,GameTestRunner runner) { release(); }
+            @Override public void testPassed(GameTestInfo info,GameTestRunner runner) { release.run(); }
+            @Override public void testFailed(GameTestInfo info,GameTestRunner runner) { release.run(); }
             @Override public void testAddedForRerun(GameTestInfo original,GameTestInfo copy,GameTestRunner runner) {}
         });
         h.startSequence().thenWaitUntil(()->{
@@ -223,7 +250,7 @@ final class HelicopterGameTests {
             h.assertTrue(!m.isRemoved() && m.position().distanceToSqr(start)>.05,"Registered flight control moves the persistent helicopter");
             h.assertValueEqual(fired.size(),5,"Registered AI emits the entire first five-round burst");
             h.assertTrue(bulletDamage[0]>0 && t.getHealth()<1000,"Owned bullet flight inflicts real health damage: timer="+m.attackGoal().timer()+", targetRegistered="+(level.getEntity(t.getUUID())==t)+", targetTicking="+level.areEntitiesActuallyLoadedAndTicking(t.chunkPosition())+", targetTicks="+t.tickCount);
-        }).thenSucceed();
+        }).thenExecute(release).thenSucceed();
     }
     private static void savedShot(GameTestHelper h,boolean rocket) {
         Projectile p=rocket?new RocketProjectile(TGContent.ROCKET.get(),h.getLevel()):new Bullet(TGContent.BULLET.get(),h.getLevel());
