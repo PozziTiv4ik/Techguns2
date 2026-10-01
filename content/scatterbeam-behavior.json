@@ -9,6 +9,7 @@
   "water": "same drag as air; extinguish when wet; no bubbles",
   "damage": "ENERGY / magic, armor retained, separate 0.01 PHYSICAL impulse; main hit bypasses cooldown and knockback",
   "block_impact": "visual LaserGunImpact only; no explosion, ignition or block destruction",
+  "distance_damage": "GenericProjectile displacement from first-tick origin, evaluated before movement on the impact tick; Scatterbeam stays constant",
   "flight": "LegacyShot initial 1.5 * speed; swept collision, movement, drag, then TTL expiration",
   "lifetime": "ceil(TGuns ticksToLive / final setBulletSpeed), 30 / 2 = 15 for Scatterbeam",
   "recipes": "No source workbench or Grinder recipe for scatterbeamrifle; blasterrifle is a separate weapon",

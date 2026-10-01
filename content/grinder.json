@@ -560,6 +560,38 @@
       "random": false
     },
     {
+      "id": "blasterrifle",
+      "input": "techguns:blasterrifle",
+      "outputs": [
+        {
+          "result": {
+            "id": "techguns:carbonfibers",
+            "count": 3
+          }
+        },
+        {
+          "result": {
+            "id": "techguns:plasticsheet",
+            "count": 1
+          }
+        },
+        {
+          "result": {
+            "id": "minecraft:redstone",
+            "count": 20
+          }
+        },
+        {
+          "result": {
+            "id": "minecraft:gold_ingot",
+            "count": 3
+          },
+          "preferred_tag": "c:ingots/electrum"
+        }
+      ],
+      "random": false
+    },
+    {
       "id": "chainsaw",
       "input": "techguns:chainsaw",
       "outputs": [
@@ -1071,7 +1103,6 @@
     "grimreaper",
     "biogun",
     "teslagun",
-    "blasterrifle",
     "sonicshotgun",
     "pdw",
     "pulserifle",

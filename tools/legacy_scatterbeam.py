@@ -20,6 +20,11 @@ def scaled_projectile_lifetime(lifetime, speed):
 def blaster_parameters():
     source = strip_comments((LEGACY / 'java/techguns/entities/projectiles/BlasterProjectile.java').read_text())
     generic = strip_comments((LEGACY / 'java/techguns/entities/projectiles/GenericProjectile.java').read_text())
+    if not all(contract in generic for contract in ('return start.distanceTo(end);', 'distance <= this.damageDropStart',
+            'distance > this.damageDropEnd', 'this.damageMin + (this.damage - this.damageMin) * factor')):
+        raise ValueError('Review changed GenericProjectile displacement falloff')
+    if not generic.index('this.initStartPos();') < generic.index('this.onHit(raytraceresult);') < generic.index('this.posX += this.motionX;'):
+        raise ValueError('Review changed projectile origin/impact/movement ordering')
     if 'extends GenericProjectile' not in source or re.search(r'void (onUpdate|onHit|onHitEffect)\(', source):
         raise ValueError('Review changed Blaster flight/impact inheritance')
     factory = arguments(re.search(r'return new BlasterProjectile\(([^;]+)\)', source)[1])
@@ -36,7 +41,8 @@ def blaster_parameters():
     return {'drag': numeric(re.search(r'float f1 = (0\.99F);', generic)[1]), 'gravity': 0,
             'water': 'same drag as air; extinguish when wet; no bubbles',
             'damage': 'ENERGY / magic, armor retained, separate 0.01 PHYSICAL impulse; main hit bypasses cooldown and knockback',
-            'block_impact': 'visual LaserGunImpact only; no explosion, ignition or block destruction'}
+            'block_impact': 'visual LaserGunImpact only; no explosion, ignition or block destruction',
+            'distance_damage': 'GenericProjectile displacement from first-tick origin, evaluated before movement on the impact tick; Scatterbeam stays constant'}
 
 
 def generate_scatterbeam_content():

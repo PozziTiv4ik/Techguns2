@@ -345,7 +345,7 @@ final class LaserGameTests {
     }
     private static void electrum(GameTestHelper h) {
         // Dedicated conditional pack uses emeralds as a stand-in for another mod's electrum.
-        var electrum = new ItemStack(Items.EMERALD); var glass = new ItemStack(Items.GLASS);
+        var electrum = new ItemStack(Items.EMERALD); var glass = new ItemStack(Items.OBSIDIAN);
         var input = CraftingInput.of(3, 3, List.of(electrum, electrum, electrum, glass, glass, item("laserfocus"), electrum, electrum, electrum));
         var manager = h.getLevel().getServer().getRecipeManager();
         var recipe = manager.getRecipeFor(RecipeType.CRAFTING, input, h.getLevel()).orElseThrow().value();

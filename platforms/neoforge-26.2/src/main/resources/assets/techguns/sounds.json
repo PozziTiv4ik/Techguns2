@@ -343,6 +343,14 @@
     ],
     "subtitle": "subtitles.techguns.guns.gaussriflereload"
   },
+  "guns.blasterriflefire": {
+    "sounds": [
+      "techguns:guns/blasterrifle_shot_a",
+      "techguns:guns/blasterrifle_shot_b",
+      "techguns:guns/blasterrifle_shot_c"
+    ],
+    "subtitle": "subtitles.techguns.guns.blasterriflefire"
+  },
   "machines.ammopresswork1": {
     "sounds": [
       "techguns:machines/ammopress_work1_a",

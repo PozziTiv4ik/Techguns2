@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "techguns:blasterrifle",
+    "count": 1,
+    "components": {
+      "techguns:rounds": 0
+    }
+  },
+  "pattern": [
+    "pcg",
+    "bms",
+    " e "
+  ],
+  "key": {
+    "p": "#c:plates/carbon",
+    "b": "techguns:laserbarrel",
+    "c": "#c:circuits/elite",
+    "s": "techguns:carbonstock",
+    "e": "techguns:energycellempty",
+    "g": {
+      "neoforge:ingredient_type": "techguns:tag_fallback",
+      "preferred": "c:glass_blocks/hardened",
+      "fallback": "c:glass_blocks"
+    },
+    "m": "techguns:carbonreceiver"
+  }
+}

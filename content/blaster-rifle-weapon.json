@@ -1,0 +1,45 @@
+[
+  {
+    "id": "blasterrifle",
+    "capacity": 50,
+    "fire_delay": 5,
+    "reload_ticks": 45,
+    "damage": 10.0,
+    "minimum_damage": 8.0,
+    "drop_start": 25.0,
+    "drop_end": 35.0,
+    "speed": 2.0,
+    "lifetime": 30,
+    "projectile": "blaster",
+    "npc_ai": {
+      "range": 24.0,
+      "interval": 30,
+      "burst": 5,
+      "shot_delay": 3,
+      "forward_offset": 0.0
+    },
+    "accuracy": 0.025,
+    "automatic": true,
+    "extra_pellets": 0,
+    "pellet_spread": 0.0,
+    "gravity": 0.0,
+    "penetration": 1.0,
+    "zoom": 0.5,
+    "zoom_toggle": true,
+    "zoom_accuracy": 0.75,
+    "zoom_centered": true,
+    "ammo": {
+      "item": "energycell",
+      "empty_item": "energycellempty",
+      "loose_item": "",
+      "bundles_per_magazine": 0,
+      "individual": false
+    },
+    "fire_sound": "guns.blasterriflefire",
+    "reload_sound": "guns.lasergunreload",
+    "model": "ModelBlasterRifle",
+    "texture": "textures/guns/blasterrifle",
+    "forward_axis": "-z",
+    "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java"
+  }
+]

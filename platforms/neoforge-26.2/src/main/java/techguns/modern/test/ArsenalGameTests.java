@@ -60,7 +60,7 @@ final class ArsenalGameTests {
             for (Bullet bullet : bullets) helper.assertValueEqual(bullet.weapon().id(), gun.id(), "Correct projectile parameters");
         } else if (gun.projectile() == techguns.core.ProjectileKind.BLASTER) {
             var blasts = helper.getLevel().getEntitiesOfClass(techguns.modern.BlasterProjectile.class, player.getBoundingBox().inflate(3), b -> b.getOwner() == player);
-            helper.assertValueEqual(blasts.size(), 5, "Five moving energy pellets per charge");
+            helper.assertValueEqual(blasts.size(), gun.projectileCount(), "Source count of moving energy projectiles per charge");
             for (var blast : blasts) helper.assertValueEqual(blast.weapon(), gun, "Correct Blaster factory");
             blasts.forEach(techguns.modern.BlasterProjectile::discard);
         } else if (gun.projectile() == techguns.core.ProjectileKind.GAUSS) {

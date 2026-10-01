@@ -278,6 +278,14 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/basicmachine_2_chem_lab.json"
     },
     {
+      "id": "techguns:blasterrifle",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/blasterrifle.json"
+    },
+    {
+      "id": "techguns:blasterrifle_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/blasterrifle_alt.json"
+    },
+    {
       "id": "techguns:boltaction",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/boltaction.json"
     },

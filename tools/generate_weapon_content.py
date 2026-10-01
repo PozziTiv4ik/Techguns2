@@ -79,6 +79,8 @@ MISSING_SOURCE_SOUNDS = {'guns.cyberdemonblasterreload'}  # Registered in TGSoun
 
 def parse_weapons():
     source = strip_comments((LEGACY / 'java/techguns/TGuns.java').read_text())
+    generic_gun = strip_comments((LEGACY / 'java/techguns/items/guns/GenericGun.java').read_text())
+    default_speed = re.search(r'float speed\s*=\s*([^;]+);', generic_gun)[1]
     ammo_source = strip_comments((LEGACY / 'java/techguns/items/guns/ammo/AmmoTypes.java').read_text())
     item_source = strip_comments((LEGACY / 'java/techguns/TGItems.java').read_text())
     item_ids = dict(re.findall(r'(\w+)\s*=\s*SHARED_ITEM\.addsharedVariant\("([^"]+)"', item_source))
@@ -153,7 +155,7 @@ def parse_weapons():
         if projectile is None: raise ValueError(f'Projectile factory not ported: {projectile_class}')
         lifetime = int(num(args[9]))
         if projectile in ('gauss', 'blaster'):
-            lifetime = scaled_projectile_lifetime(lifetime, num(calls.get('setBulletSpeed', ['2'])[0]))
+            lifetime = scaled_projectile_lifetime(lifetime, num(calls.get('setBulletSpeed', [default_speed])[0]))
         if projectile == 'laser':
             laser = strip_comments((LEGACY / 'java/techguns/entities/projectiles/LaserProjectile.java').read_text())
             lifetime = int(re.search(r'return new LaserProjectile\(world, p, damage, speed, (\d+),', laser)[1])
@@ -163,7 +165,7 @@ def parse_weapons():
         result.append({'id': identifier, 'capacity': int(num(args[4])), 'fire_delay': int(num(args[3])),
             'reload_ticks': int(num(args[5])), 'damage': num(args[6]), 'minimum_damage': num(drop[2]),
             'drop_start': num(drop[0]), 'drop_end': num(drop[1]),
-            'speed': num(calls.get('setBulletSpeed', ['2'])[0]), 'lifetime': lifetime,
+            'speed': num(calls.get('setBulletSpeed', [default_speed])[0]), 'lifetime': lifetime,
             'projectile': projectile,
             'npc_ai': {'range':num(npc_ai[0]), 'interval':int(num(npc_ai[1])), 'burst':int(num(npc_ai[2])),
                        'shot_delay':int(num(npc_ai[3])), 'forward_offset':num(calls.get('setForwardOffset', ['0'])[0])},
@@ -219,7 +221,8 @@ public final class NpcWeapons {
     data('content/grenade-launcher.json', [gun for gun in weapons if gun['projectile'] == 'grenade_40mm'])
     data('content/flamethrower-weapon.json', [gun for gun in weapons if gun['projectile'] == 'flame'])
     data('content/gauss-weapon.json', [gun for gun in weapons if gun['projectile'] == 'gauss'])
-    data('content/scatterbeam-weapon.json', [gun for gun in weapons if gun['projectile'] == 'blaster'])
+    data('content/scatterbeam-weapon.json', [gun for gun in weapons if gun['id'] == 'scatterbeamrifle'])
+    data('content/blaster-rifle-weapon.json', [gun for gun in weapons if gun['id'] == 'blasterrifle'])
     definitions = []
     ammo_items = set(crafting['extra_ammo'])
     sounds_data = json.loads(resolve_asset('sounds.json').read_text())
