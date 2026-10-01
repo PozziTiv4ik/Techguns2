@@ -1,7 +1,7 @@
 # Продолжение работы в новом чате
 
-Обновлено 2026-10-01 после локальных проверок Scatterbeam Rifle.
-Linux CI нового source ожидается. Прочитать [порядок работы](DEVELOPMENT_WORKFLOW.ru.md)
+Обновлено 2026-10-01 после CI checkpoint Scatterbeam Rifle.
+Локальные проверки и Linux CI #81 успешны. Прочитать [порядок работы](DEVELOPMENT_WORKFLOW.ru.md)
 и [AGENTS.md](../AGENTS.md), затем проверить Git. Поиск — [карта кода](CODE_MAP.ru.md),
 [каталог систем](README.ru.md) и [карта генераторов](../tools/README.ru.md).
 
@@ -14,8 +14,8 @@ Linux CI нового source ожидается. Прочитать [поряд�
 | Writable fork / origin | `PozziTiv4ik/Techguns2` |
 | Оригинал / upstream, только чтение | `pWn3d1337/Techguns2` |
 | Платформа | Minecraft 26.2 / NeoForge 26.2.0.81 / Java 25 |
-| Последний source, подтверждённый Linux | `985f7a1be85effe2b73bce014169a86b2b6fd63c` — Gauss Rifle до исправления TTL |
-| Linux CI Scatterbeam | Ожидается; прежний [CI #80](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36478221956) новый код не подтверждает |
+| Последний source, подтверждённый Linux | `35ac9169f04bab79eda1ed1b39373fd1621070e6` — Scatterbeam Rifle и исправления TTL/фикстуры |
+| Linux CI Scatterbeam | [Linux CI #81](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36894452571), success |
 
 Работает Scatterbeam Rifle: пять летящих ENERGY-снарядов на один заряд,
 40 зарядов/R 45 тиков/возврат пустой ячейки, броня/события/вода/NPC/сохранение,
@@ -33,12 +33,15 @@ JUnit failures/errors/skipped = 0. Все пять серверов заверш
 встроенный Minecraft. Генератор проверяет 2529 файлов; 2401 ресурс и
 707 классов JAR сверены побайтово. Лицензия, неизменность legacy и отсутствие
 семи уникальных файлов тестовых паков проверены. Журналы — `.tools/scatterbeam-*`.
-Linux CI нового source пока ожидается.
+[Linux CI #81](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36894452571) подтвердил source `35ac9169f04bab79eda1ed1b39373fd1621070e6`:
+439 Python за 379.186 с, сборку/ядро и все 2391 GameTests
+(2311 + 52 + 16 + 6 + 6). Все 15 шагов успешны; завершение —
+2026-10-01 19:06:21 +02:00 (Europe/Zurich), `2026-10-01T17:06:21Z`.
 
 Доказательства — [протокол](VERIFICATION.ru.md#scatterbeam-rifle-2026-10-01).
-Сначала дождаться CI точного source, устранить ошибки, записать результат,
-сделать documentation-only checkpoint `[skip ci]` и push. Текущий HEAD
-получать из Git; старый зелёный CI не подтверждает новый source.
+После указанного source меняется только документация с `[skip ci]`.
+Незавершённой реализации и известных красных проверок этого среза нет.
+Текущий HEAD получать из Git; прошедшие проверки без новых изменений не повторять.
 
 <a id="next-milestone"></a>
 

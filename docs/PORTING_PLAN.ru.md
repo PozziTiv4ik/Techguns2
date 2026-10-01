@@ -973,7 +973,7 @@ CI #79 нового Gauss source выявил сбой прежней фикст
 Исправленный source подтверждён [Linux CI #80](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36478221956); история —
 [протокол](VERIFICATION.ru.md#gauss-rifle-2026-09-28).
 
-2026-10-01: Scatterbeam Rifle (M4/M5) — локальные проверки пройдены.
+2026-10-01: Scatterbeam Rifle (M4/M5) — локальные проверки и Linux CI пройдены.
 
 Работают пять летящих ENERGY-снарядов на заряд, R/ячейки, броня и события,
 вода, сохранение и NPC. Время жизни — 15 тиков; Gauss исправлен с 90 до 18.
@@ -989,7 +989,10 @@ JUnit failures/errors/skipped = 0. Все пять серверов заверш
 встроенный Minecraft. Генератор проверяет 2529 файлов; 2401 ресурс и
 707 классов JAR сверены побайтово. Лицензия, неизменность legacy и отсутствие
 семи уникальных файлов тестовых паков проверены. Журналы — `.tools/scatterbeam-*`.
-Linux CI нового source пока ожидается.
+[Linux CI #81](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36894452571) подтвердил source `35ac9169f04bab79eda1ed1b39373fd1621070e6`:
+439 Python за 379.186 с, сборку/ядро и все 2391 GameTests
+(2311 + 52 + 16 + 6 + 6). Все 15 шагов успешны; завершение —
+2026-10-01 19:06:21 +02:00 (Europe/Zurich), `2026-10-01T17:06:21Z`.
 
 Следующий срез — Blaster Rifle. Подробности — [Scatterbeam](SCATTERBEAM_RIFLE.ru.md),
 доказательства — [протокол](VERIFICATION.ru.md#scatterbeam-rifle-2026-10-01).
