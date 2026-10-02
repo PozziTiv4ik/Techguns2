@@ -1,0 +1,25 @@
+{
+  "source": "AdvancedBulletProjectile -> GenericProjectile",
+  "air_drag": 0.99,
+  "water_drag": 0.85,
+  "gravity": 0,
+  "impact_sounds": {
+    "BULLET_IMPACT_STONE": "guns.impact.rock",
+    "BULLET_IMPACT_WOOD": "guns.impact.wood",
+    "BULLET_IMPACT_GLASS": "guns.impact.glass",
+    "BULLET_IMPACT_METAL": "guns.impact.metal",
+    "BULLET_IMPACT_DIRT": "guns.impact.dirt"
+  },
+  "render": {
+    "texture": "textures/entity/bullet_blue.png",
+    "half_length": 0.2,
+    "half_width": 0.025,
+    "delay_factor": 2.5
+  },
+  "damage": "PROJECTILE with penetration; ordinary 0.01 PHYSICAL impulse, main hit bypasses cooldown and knockback",
+  "falloff": "displacement from first-tick origin, evaluated before movement on the impact tick",
+  "block_impact": "material sound and blue FX only, no explosion, ignition or destruction",
+  "pending": [
+    "Complete original impact/muzzle FX, poses/recoil animation, dynamic light and GPU acceptance"
+  ]
+}

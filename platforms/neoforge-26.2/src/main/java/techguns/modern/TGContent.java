@@ -28,6 +28,8 @@ import techguns.core.CraftingContent;
 
 public final class TGContent {
     public static final DeferredRegister.DataComponents COMPONENTS = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, Techguns.MOD_ID);
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> GUN_CAMO = COMPONENTS.registerComponentType(
+            "gun_camo", builder -> builder.persistent(Codec.intRange(0, techguns.core.GunCamos.MAX_INDEX)).networkSynchronized(ByteBufCodecs.VAR_INT));
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ROUNDS = COMPONENTS.registerComponentType(
             "rounds", builder -> builder.persistent(Codec.intRange(0, 10000)).networkSynchronized(ByteBufCodecs.VAR_INT).ignoreSwapAnimation());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> MINING_HEAD = COMPONENTS.registerComponentType(
@@ -56,6 +58,9 @@ public final class TGContent {
     public static final DeferredItem<Item> PISTOL_ROUNDS = AMMO.get("pistolrounds");
     public static final DeferredItem<GunItem> REVOLVER = GUNS.get("revolver");
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(Registries.ENTITY_TYPE, Techguns.MOD_ID);
+    public static final DeferredHolder<EntityType<?>, EntityType<AdvancedBulletProjectile>> ADVANCED_BULLET = ENTITIES.register("advanced_bullet", () ->
+            EntityType.Builder.<AdvancedBulletProjectile>of(AdvancedBulletProjectile::new, MobCategory.MISC).sized(.25f, .25f).clientTrackingRange(12).updateInterval(1)
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE, id("advanced_bullet"))));
     public static final DeferredHolder<EntityType<?>, EntityType<BlasterProjectile>> BLASTER = ENTITIES.register("blaster", () ->
             EntityType.Builder.<BlasterProjectile>of(BlasterProjectile::new, MobCategory.MISC).sized(.25f, .25f).fireImmune().clientTrackingRange(12).updateInterval(1)
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, id("blaster"))));
@@ -207,6 +212,9 @@ public final class TGContent {
     private static Map<String, DeferredHolder<SoundEvent, SoundEvent>> registerSounds() {
         Map<String, DeferredHolder<SoundEvent, SoundEvent>> sounds = new LinkedHashMap<>();
         for (WeaponDefinition gun : Weapons.ALL) for (String name : new String[]{gun.fireSound(), gun.reloadSound()})
+            sounds.computeIfAbsent(name, key -> SOUNDS.register(key, () -> SoundEvent.createVariableRangeEvent(id(key))));
+        for (String name : new String[]{techguns.core.AdvancedBulletRules.BULLET_IMPACT_STONE, techguns.core.AdvancedBulletRules.BULLET_IMPACT_WOOD,
+                techguns.core.AdvancedBulletRules.BULLET_IMPACT_GLASS, techguns.core.AdvancedBulletRules.BULLET_IMPACT_METAL, techguns.core.AdvancedBulletRules.BULLET_IMPACT_DIRT})
             sounds.computeIfAbsent(name, key -> SOUNDS.register(key, () -> SoundEvent.createVariableRangeEvent(id(key))));
         return Collections.unmodifiableMap(sounds);
     }

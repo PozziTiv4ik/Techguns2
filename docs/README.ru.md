@@ -39,6 +39,7 @@
 - [Scatterbeam Rifle: пять энергетических снарядов, вода, R и отсутствие исходных рецептов](SCATTERBEAM_RIFLE.ru.md)
 - [Blaster Rifle: одиночный энергетический снаряд, падение урона, R, крафт и Grinder](BLASTER_RIFLE.ru.md)
 - [Alien Blaster: FIRE-снаряд, ячейка/R, поджог с правами B и профиль Ghastling](ALIEN_BLASTER.ru.md)
+- [PDW: Advanced-пуля, магазин/R, производство и три расцветки](PDW.ru.md)
 
 <a id="armor"></a>
 

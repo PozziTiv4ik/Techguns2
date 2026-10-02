@@ -197,6 +197,9 @@
     "CAMONET",
     "CAMONET_TOP"
   ],
+  "weapons": [
+    "pdw"
+  ],
   "minecraft_reference": {
     "version": "1.12.2",
     "client_sha1": "0f275bc1547d01fa5f56ba34bdc87d981ee12daf",

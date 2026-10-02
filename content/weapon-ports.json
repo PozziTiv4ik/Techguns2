@@ -27,5 +27,6 @@
   "gaussrifle": "ModelBaseBaked",
   "scatterbeamrifle": "ModelLasergun2",
   "blasterrifle": "ModelBlasterRifle",
-  "alienblaster": "ModelAlienBlaster"
+  "alienblaster": "ModelAlienBlaster",
+  "pdw": {"model": "ModelPDW", "camos": true}
 }

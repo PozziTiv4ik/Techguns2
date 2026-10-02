@@ -365,6 +365,22 @@
     ],
     "subtitle": "subtitles.techguns.guns.alienblasterreload"
   },
+  "guns.pdwfire": {
+    "sounds": [
+      "techguns:guns/pdw_shot_a",
+      "techguns:guns/pdw_shot_b",
+      "techguns:guns/pdw_shot_c",
+      "techguns:guns/pdw_shot_d",
+      "techguns:guns/pdw_shot_e"
+    ],
+    "subtitle": "subtitles.techguns.guns.pdwfire"
+  },
+  "guns.pdwreload": {
+    "sounds": [
+      "techguns:guns/pdw_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.pdwreload"
+  },
   "machines.ammopresswork1": {
     "sounds": [
       "techguns:machines/ammopress_work1_a",
@@ -604,6 +620,54 @@
       "techguns:machines/oredrill_l_work_d"
     ],
     "subtitle": "subtitles.techguns.machines.oredrilllargework"
+  },
+  "guns.impact.dirt": {
+    "sounds": [
+      "techguns:effects/impact_dirt-01",
+      "techguns:effects/impact_dirt-02",
+      "techguns:effects/impact_dirt-03",
+      "techguns:effects/impact_dirt-04"
+    ],
+    "subtitle": "subtitles.techguns.guns.impact.dirt"
+  },
+  "guns.impact.glass": {
+    "sounds": [
+      "techguns:effects/impact_glass-01",
+      "techguns:effects/impact_glass-02",
+      "techguns:effects/impact_glass-03",
+      "techguns:effects/impact_glass-04",
+      "techguns:effects/impact_glass-05"
+    ],
+    "subtitle": "subtitles.techguns.guns.impact.glass"
+  },
+  "guns.impact.metal": {
+    "sounds": [
+      "techguns:effects/impact_metal-01",
+      "techguns:effects/impact_metal-02",
+      "techguns:effects/impact_metal-03",
+      "techguns:effects/impact_metal-04",
+      "techguns:effects/impact_metal-05"
+    ],
+    "subtitle": "subtitles.techguns.guns.impact.metal"
+  },
+  "guns.impact.rock": {
+    "sounds": [
+      "techguns:effects/impact_rock-01",
+      "techguns:effects/impact_rock-02",
+      "techguns:effects/impact_rock-03",
+      "techguns:effects/impact_rock-04"
+    ],
+    "subtitle": "subtitles.techguns.guns.impact.rock"
+  },
+  "guns.impact.wood": {
+    "sounds": [
+      "techguns:effects/impact_wood-01",
+      "techguns:effects/impact_wood-02",
+      "techguns:effects/impact_wood-03",
+      "techguns:effects/impact_wood-04",
+      "techguns:effects/impact_wood-05"
+    ],
+    "subtitle": "subtitles.techguns.guns.impact.wood"
   },
   "blocks.metaldooropen": {
     "sounds": [

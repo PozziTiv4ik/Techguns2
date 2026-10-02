@@ -1,8 +1,8 @@
 # Продолжение работы в новом чате
 
-Обновлено 2026-10-02 после CI checkpoint Alien Blaster.
-Локальные проверки и Linux CI #84 успешны. Прочитать [порядок работы](DEVELOPMENT_WORKFLOW.ru.md)
-и [AGENTS.md](../AGENTS.md), затем проверить Git. Поиск — [карта кода](CODE_MAP.ru.md),
+Обновлено 2026-10-02 после локального среза PDW. Linux CI нового source PDW ожидается; предыдущий CI не подтверждает эти изменения.
+Прочитать [порядок работы](DEVELOPMENT_WORKFLOW.ru.md) и [AGENTS.md](../AGENTS.md),
+затем проверить Git. Поиск — [карта кода](CODE_MAP.ru.md),
 [каталог систем](README.ru.md) и [карта генераторов](../tools/README.ru.md).
 
 ## Репозиторий и текущая точка
@@ -14,74 +14,66 @@
 | Writable fork / origin | `PozziTiv4ik/Techguns2` |
 | Оригинал / upstream, только чтение | `pWn3d1337/Techguns2` |
 | Платформа | Minecraft 26.2 / NeoForge 26.2.0.81 / Java 25 |
-| Последний source, подтверждённый Linux | `33b8da91a96090c747e0195b2df5b7cce5121182` — Alien Blaster |
-| Linux CI Alien Blaster | [Linux CI #84](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36985188545), success |
+| Последний source, подтверждённый Linux | `33b8da91a96090c747e0195b2df5b7cce5121182` — предыдущий Alien Blaster |
+| Linux CI PDW | Ожидается после первого commit/push |
 
-Работает Alien Blaster: один FIRE-снаряд, 10 зарядов/R 35 тиков,
-темп 8, урон 16/пробитие 1, TTL 40, обычное отбрасывание и поджог
-сущности на 3 секунды. Поджог соседнего воздуха с вероятностью 0,35
-подчинён B/серверным правам. Взрыва и исходных survival-рецептов нет.
-Перенесены 24 детали модели, PNG, три звука выстрела и R.
-Отдельный профиль Ghastling и его старые сохранения сохранены.
-[Описание Alien Blaster](ALIEN_BLASTER.ru.md).
+PDW: 40 зарядов/R 40 тиков, автоматический темп 1, один Advanced-снаряд,
+PROJECTILE 5→3 на 18–25 блоках, пробитие 1 и TTL 20. Восстановлены
+смещение до движения в тик попадания, air/water drag, PHYSICAL-импульс,
+события, сохранение и очередь NPC. Работают оба крафта, цепочка Metal Press
+→ магазин → R → попадание, округление трёх пачек и исходный Grinder.
+Модель сохраняет 41 деталь, UV repeat, три текстуры/расцветки в Camo Bench,
+исходные звуки и bullet_blue с исходными размерами/задержкой видимости.
 
-Локально прошли **265 JUnit, 451 Python и 2462 GameTests (2381 + 52 + 17 + 6 + 6)**.
-JUnit failures/errors/skipped = 0. Python выполнен четырьмя независимыми
-группами; после исправления устаревшего ожидания в test_lasers повторена
-группа 3. Объединение сохранённых test ID точно совпало с полным discover
-без пропусков и повторов. Все пять серверов завершились с кодом 0,
-без ошибок загрузки данных. Основной сервер — 2380 Techguns и один
-встроенный Minecraft. Генератор проверяет 2549 файлов; 2417 ресурсов и
-710 классов JAR сверены побайтово. Лицензия, отсутствие legacy/тестовых
-паков в JAR и неизменность всей legacy проверены. Журналы — `.tools/alien-*`.
+Локально прошли **269 JUnit, 459 Python и 2508 GameTests (2427 + 52 + 17 + 6 + 6)**. В JUnit нет failures/errors/skipped.
+Python выполнен четырьмя независимыми группами 117/114/114/114; их test ID
+точно совпали с полным discover без пропусков и повторов. Окно прогонов —
+240.242 с. Все пять серверов завершились с кодом 0, без ошибок
+загрузки данных. Основной сервер — 2426 Techguns и один встроенный Minecraft.
+Генератор проверил 2605 файлов; 2468 ресурсов и 717 классов JAR
+сверены побайтово. Лицензия, отсутствие legacy/восьми файлов тестовых паков
+и неизменность всей legacy проверены. Журналы — `.tools/pdw-*`.
 
-После сбоя первого Linux CI #83 исправлено размещение участников двух
-NPC-тестов внутри чанков шаблона 12×12. Боевая логика и ожидаемый урон
-не менялись. Повторно прошли по 400 размещений/поворотов Blaster Rifle и
-Alien Blaster, сборка, основной сервер 2381/2381 и сверка JAR. Python,
-ядро и остальные четыре серверных профиля не изменялись; их успешные
-результаты выше сохранены, новые прогоны им не приписываются.
+Адресно прошли 44 GameTests PDW и 400 повторов NPC-сценария
+с четырьмя поворотами. Проверка Grinder входит в основной сервер.
+Подробности — [PDW](PDW.ru.md), доказательства —
+[протокол](VERIFICATION.ru.md#pdw-2026-10-02).
 
-[Linux CI #84](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36985188545) подтвердил source `33b8da91a96090c747e0195b2df5b7cce5121182`:
-451 Python за 404.939 с, сборку/ядро и все 2462 GameTests
-(2381 + 52 + 17 + 6 + 6). Все 15 шагов успешны; завершение —
-2026-10-02 10:58:24 +02:00 (Europe/Zurich), `2026-10-02T08:58:24Z`.
-
-Доказательства — [протокол](VERIFICATION.ru.md#alien-blaster-2026-10-02).
-Адресно прошли 38 новых GameTests и все 23 проверки Ghastling.
-После указанного source меняется только документация с `[skip ci]`.
-Незавершённой реализации и известных красных проверок этого среза нет.
+Linux CI нового source PDW ожидается; предыдущий CI не подтверждает эти изменения.
 Текущий HEAD получать из Git; прошедшие проверки без новых изменений не повторять.
 
 <a id="next-milestone"></a>
 
-## Следующий законченный срез — PDW / AdvancedBulletProjectile
+## Следующий законченный срез — Pulse Rifle / исходный burst
 
-Перенести `pdw` и фабрику AdvancedBulletProjectile. В TGuns: автоматический
-темп 1 тик, магазин 40/R 40, урон 5→3 на 18–25 блоках, пробитие 1,
-скорость GenericGun по умолчанию 2 и TTL `ceil(40 / 2) = 20`.
-NPC range 18 / interval 30 / очередь 4 с промежутком 2. Закомментированную
-setShotgunSpread у PDW не включать. Pulse Rifle — следующий отдельный
-кандидат этой фабрики: его активный burst пока не поддерживается парсером.
+Перенести pulserifle на AdvancedBulletProjectile. TGuns: темп 7, магазин
+12/R 45, урон 10→8 на 30–45 блоках, скорость 3,25, TTL ceil(75/3,25)=24,
+пробитие 1, zoom 0,35 и точность в прицеле ×0,5, три текстуры.
+Используется тот же ADVANCED_MAGAZINE; проверить исходные три пачки,
+частичную R, оба рецепта/Grinder и Camo Bench.
 
-AmmoTypes.ADVANCED_MAGAZINE задаёт полный/пустой магазин и ADVANCED_ROUNDS,
-три пачки на магазин. Сверить исходное округление 40 зарядов на три пачки,
-остатки при частичной R, производство боеприпаса, оба крафта PDW и Grinder.
-Фабрика наследует GenericProjectile: восстановить PROJECTILE-урон, падение
-по смещению, air/water drag, launch/TTL и события; цвет FX сам по себе не
-меняет тип урона. Не подменять поведение непроверенным текущим Bullet.
-Перенести ModelPDW/ClientProxy, три текстуры, звуки и исходное переключение
-расцветок. Проверить игрока/NPC, броню, R, сохранение и полную регрессию.
+Активная setShotgunSpread(2,0.015,true) сейчас явно отклоняется парсером.
+В GenericGun.shootGun burst создаёт основной и два дополнительных снаряда
+в одном вызове, с forward offset speed/bulletcount и дальнейшим
+shiftForward(offset/speed). Это пространственный сдвиг, а не очередь
+по тикам; не подменять его NPC burst. Tooltip показывает ammo×3 и clip×3,
+хотя расходуется одна из 12 единиц. Сверить initStartPos/shiftForward,
+основную точность 0,024 против 0,015 дополнительных снарядов и отдельный
+NPC range 24 / interval 30 / без AI-очереди. Не включать комментарии PDW.
 
-Точки входа — TGuns, AmmoTypes, GenericGun, GenericProjectile,
-AdvancedBulletProjectile, TGMachineRecipes, ModelPDW/ClientProxy;
-современные — GunItem, Bullet, LegacyShot, ReloadSessions, ShotDamage,
-ArmorDamage, NpcCombat и Camo Bench. Вход — content/weapon-ports.json;
-владельцы — generate_weapon_content.py, legacy_models.py, legacy_crafting.py,
-legacy_items.py, legacy_machines.py и legacy_grinder.py. Новую реализацию
-ещё не начинали. Пройти полный workflow.
+Точки входа: TGuns, GenericGun (shootGun/spawnProjectile/tooltip),
+GenericProjectile.shiftForward/initStartPos, AmmoTypes, TGMachineRecipes,
+ModelPulseRifle/ClientProxy; современные GunItem, AdvancedBulletProjectile,
+LegacyShot, NpcCombat/NpcAttackCycle, WeaponDefinition, HUD и Camo Bench.
+Владельцы — generate_weapon_content.py, legacy_advanced.py,
+legacy_gun_camos.py, legacy_models.py, legacy_crafting.py, legacy_grinder.py.
+Проверить игрока/NPC, сдвиги/стены, расход, R, броню, сохранение, интерфейсные
+числа и полную регрессию. Реализацию Pulse Rifle ещё не начинали.
 
 ## Существенные ограничения
+
+PDW: полные FX/свет, исходные позиции рук, отдача/R, прицельная сетка
+и GPU-приёмка. Три расцветки и модель перенесены; клиент не запускался.
 
 Alien Blaster: полный FX, свет, позиции рук, breechReload/отдача,
 прицельная сетка и GPU-приёмка остаются. Используются общие современные

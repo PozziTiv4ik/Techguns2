@@ -1,7 +1,7 @@
 """Original Camo Bench palettes, textures and control contract."""
 import json
 import re
-from legacy_items import LEGACY
+from legacy_items import LEGACY, ROOT
 from legacy_models import strip_comments
 from legacy_repair import RESOURCES
 
@@ -20,6 +20,7 @@ def camo_data():
     return {'source': 'legacy/1.12.2/src/main/java/techguns/TGMachineRecipes.java', 'legacy_item': 'techguns:simplemachine@8',
             'palettes': palettes, 'input_slots': 1, 'energy': 0, 'recolor_cost': 0, 'armor': ['T2_COMBAT','T2_HAZMAT','T1_MINER','T1_SCOUT','T2_BERET'],
             'decorative': ['NETHER_METAL', 'METAL_PANEL', 'CONCRETE', 'LADDER_0', 'CAMONET', 'CAMONET_TOP'],
+            'weapons': [key for key,value in json.loads((ROOT/'content/weapon-ports.json').read_text()).items() if isinstance(value,dict) and value.get('camos')],
             'minecraft_reference': {'version':'1.12.2', 'client_sha1':'0f275bc1547d01fa5f56ba34bdc87d981ee12daf',
                 'manifest':'https://piston-meta.mojang.com/v1/packages/832d95b9f40699d4961394dcf6cf549e65f15dc5/1.12.2.json'},
             'pending': ['Other Techguns armor, masks, backpacks and decorative blocks', 'Client acceptance and real two-client verification']}

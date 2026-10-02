@@ -21,6 +21,8 @@
     "18": "techguns:minigundrumempty",
     "19": "techguns:as50magazine",
     "20": "techguns:as50magazineempty",
+    "21": "techguns:advancedmagazine",
+    "22": "techguns:advancedmagazineempty",
     "23": "techguns:compressedairtank",
     "24": "techguns:compressedairtankempty",
     "25": "techguns:biotank",
@@ -586,6 +588,14 @@
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_20_as50magazineempty.json"
     },
     {
+      "id": "techguns:advancedmagazine",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_21_advancedmagazine.json"
+    },
+    {
+      "id": "techguns:advancedmagazineempty",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_22_advancedmagazineempty.json"
+    },
+    {
       "id": "techguns:compressedairtankempty",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/itemshared_24_compressedairtankempty.json"
     },
@@ -928,6 +938,14 @@
     {
       "id": "techguns:oredrill_controller",
       "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/oredrill_4_controller.json"
+    },
+    {
+      "id": "techguns:pdw",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/pdw.json"
+    },
+    {
+      "id": "techguns:pdw_alt",
+      "source": "legacy/1.12.2/src/main/resources/assets/techguns/recipes/pdw_alt.json"
     },
     {
       "id": "techguns:pistol",

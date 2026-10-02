@@ -7,14 +7,16 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import techguns.core.*;
 import techguns.modern.armor.TGArmorItem;
+import techguns.modern.GunCamo;
 
 public final class CamoCycling {
     private static String id(ItemStack stack) { return BuiltInRegistries.ITEM.getKey(stack.getItem()).toString(); }
     private static Optional<CamoPalette> palette(String item) { return CamoPalettes.forItem(item).or(()->NetherMetal.PALETTE.index(item)>=0?Optional.of(NetherMetal.PALETTE):Optional.empty()).or(()->BuildingBlocks.palette(item)).or(()->CamouflageNets.palette(item)).or(()->NeonLights.palette(item)); }
-    public static int count(ItemStack stack) { return stack.isEmpty() ? 0 : stack.getItem() instanceof TGArmorItem item ? (item.spec().canChangeCamo() ? item.spec().camos().size() : 0) : palette(id(stack)).map(p -> p.items().size()).orElse(0); }
-    public static int index(ItemStack stack) { return count(stack)==0 ? -1 : stack.getItem() instanceof TGArmorItem ? TGArmorItem.camo(stack) : palette(id(stack)).map(p -> p.index(id(stack))).orElse(-1); }
+    public static int count(ItemStack stack) { return stack.isEmpty() ? 0 : GunCamo.count(stack) > 0 ? GunCamo.count(stack) : stack.getItem() instanceof TGArmorItem item ? (item.spec().canChangeCamo() ? item.spec().camos().size() : 0) : palette(id(stack)).map(p -> p.items().size()).orElse(0); }
+    public static int index(ItemStack stack) { return count(stack)==0 ? -1 : GunCamo.count(stack) > 0 ? GunCamo.index(stack) : stack.getItem() instanceof TGArmorItem ? TGArmorItem.camo(stack) : palette(id(stack)).map(p -> p.index(id(stack))).orElse(-1); }
     public static Component variantName(ItemStack stack) {
         if (count(stack)==0) return Component.translatable("gui.techguns.camo.unsupported");
+        if (GunCamo.count(stack)>0) return GunCamo.name(stack);
         if (stack.getItem() instanceof TGArmorItem) return TGArmorItem.camoName(stack);
         if (NetherMetal.PALETTE.index(id(stack))>=0 || CamouflageNets.palette(id(stack)).isPresent() || NeonLights.palette(id(stack)).isPresent()) return Component.translatable("block.techguns."+BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath());
         var building=BuildingBlocks.variant(id(stack));
@@ -24,6 +26,9 @@ public final class CamoCycling {
     }
     public static Optional<ItemStack> change(ItemStack stack, boolean back) {
         if (count(stack)==0) return Optional.empty();
+        if (GunCamo.count(stack)>0) {
+            var result = stack.copy(); GunCamo.set(result, CamoPalette.cycle(GunCamo.index(stack), count(stack), back)); return Optional.of(result);
+        }
         if (stack.getItem() instanceof TGArmorItem) {
             var result = stack.copy(); TGArmorItem.setCamo(result, CamoPalette.cycle(TGArmorItem.camo(stack), count(stack), back)); return Optional.of(result);
         }

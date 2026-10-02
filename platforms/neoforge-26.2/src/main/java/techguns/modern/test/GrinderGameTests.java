@@ -35,6 +35,7 @@ final class GrinderGameTests {
     private record Case(String input, String results) {}
     // Independent fixtures from TGMachineRecipes: the misleading steel helper returns 1+5 ingots.
     private static final List<Case> GUNS = List.of(
+            new Case("pdw","carbonfibers=6,plasticsheet=1,ingotobsidiansteel=1"),
             new Case("blasterrifle","carbonfibers=3,plasticsheet=1,minecraft:redstone=20,minecraft:gold_ingot=3"),
             new Case("gaussrifle","carbonfibers=9,ingottitanium=1,plasticsheet=1,circuitboardelite=1"),
             new Case("minigun","ingotobsidiansteel=20,ingotsteel=2,electricengine=1"),
@@ -233,7 +234,7 @@ final class GrinderGameTests {
         var m=place(h); h.assertTrue(m.getBlockState().canOcclude(),"Source full opaque block"); h.assertValueEqual(m.getBlockState().getCollisionShape(h.getLevel(),m.getBlockPos()).bounds(),new AABB(0,0,0,1,1,1),"Original collision"); h.succeed();
     }
     private static void codec(GameTestHelper h) {
-        var manager=h.getLevel().getServer().getRecipeManager(); var records=manager.recipeMap().byType(GrinderContent.RECIPE.get()); h.assertValueEqual(records.size(),61,"All selected source records, including Blaster Rifle, loaded");
+        var manager=h.getLevel().getServer().getRecipeManager(); var records=manager.recipeMap().byType(GrinderContent.RECIPE.get()); h.assertValueEqual(records.size(),62,"All selected source records, including PDW, loaded");
         for(var holder:records) {
             var buffer=new RegistryFriendlyByteBuf(Unpooled.buffer(),h.getLevel().registryAccess());
             try { GrinderRecipe.STREAM_CODEC.encode(buffer,holder.value()); var copy=GrinderRecipe.STREAM_CODEC.decode(buffer); h.assertValueEqual(copy.outputs(),holder.value().outputs(),"Output counts/factors/preferred tag survive codec"); } finally { buffer.release(); }

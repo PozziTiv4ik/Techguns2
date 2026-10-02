@@ -1,0 +1,25 @@
+{
+  "type": "techguns:grinder",
+  "input": "techguns:pdw",
+  "outputs": [
+    {
+      "result": {
+        "id": "techguns:carbonfibers",
+        "count": 6
+      }
+    },
+    {
+      "result": {
+        "id": "techguns:plasticsheet",
+        "count": 1
+      }
+    },
+    {
+      "result": {
+        "id": "techguns:ingotobsidiansteel",
+        "count": 1
+      }
+    }
+  ],
+  "random": false
+}

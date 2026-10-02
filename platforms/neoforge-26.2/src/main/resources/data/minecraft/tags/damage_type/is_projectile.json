@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "techguns:advanced_bullet",
     "techguns:bullet",
     "techguns:gauss",
     "techguns:grenade_impact"

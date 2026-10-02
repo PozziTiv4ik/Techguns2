@@ -58,6 +58,10 @@ final class ArsenalGameTests {
             var bullets = helper.getLevel().getEntitiesOfClass(Bullet.class, player.getBoundingBox().inflate(3), b -> b.getOwner() == player);
             helper.assertValueEqual(bullets.size(), gun.projectileCount(), "Projectile count: " + gun.id());
             for (Bullet bullet : bullets) helper.assertValueEqual(bullet.weapon().id(), gun.id(), "Correct projectile parameters");
+        } else if (gun.projectile() == techguns.core.ProjectileKind.ADVANCED_BULLET) {
+            var bullets = helper.getLevel().getEntitiesOfClass(techguns.modern.AdvancedBulletProjectile.class, player.getBoundingBox().inflate(3), b -> b.getOwner() == player);
+            helper.assertValueEqual(bullets.size(), 1, "One advanced bullet per charge");
+            helper.assertValueEqual(bullets.getFirst().weapon(), gun, "Correct Advanced factory"); bullets.forEach(techguns.modern.AdvancedBulletProjectile::discard);
         } else if (gun.projectile() == techguns.core.ProjectileKind.ALIEN_BLASTER) {
             var blasts = helper.getLevel().getEntitiesOfClass(techguns.modern.AlienBlasterProjectile.class, player.getBoundingBox().inflate(3), b -> b.getOwner() == player);
             helper.assertValueEqual(blasts.size(), 1, "One Alien Blaster charge");

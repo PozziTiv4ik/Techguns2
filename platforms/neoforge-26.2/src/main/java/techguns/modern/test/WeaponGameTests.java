@@ -105,6 +105,7 @@ public final class WeaponGameTests {
         ScatterbeamGameTests.register(FUNCTIONS);
         BlasterRifleGameTests.register(FUNCTIONS);
         AlienBlasterGameTests.register(FUNCTIONS);
+        PdwGameTests.register(FUNCTIONS);
         NetherSoulGameTests.register(FUNCTIONS);
         OreClusterGameTests.register(FUNCTIONS);
         OreDrillGameTests.register(FUNCTIONS);
@@ -129,7 +130,7 @@ public final class WeaponGameTests {
         var playerEnvironment = event.registerEnvironment(TGContent.id("isolated_player"));
         FUNCTIONS.getEntries().forEach(function -> event.registerTest(function.getId(),
                 new FunctionGameTestInstance(function.getKey(),
-                        new TestData<>(function.getId().getPath().equals("helicopter_original_player_acquisition_band_and_stealth")?playerEnvironment:environment, TGContent.id("weapon_test"), function.getId().getPath().startsWith("minigun_") || function.getId().getPath().startsWith("zombie_overworld_") || function.getId().getPath().startsWith("grinder_") || function.getId().getPath().startsWith("charging_") || function.getId().getPath().startsWith("fabricator_") ? 400 : function.getId().getPath().startsWith("chainsaw_") ? 300 : function.getId().getPath().startsWith("reaction_") ? 800 : function.getId().getPath().startsWith("blast_") ? 1200 :
+                        new TestData<>(function.getId().getPath().equals("helicopter_original_player_acquisition_band_and_stealth")?playerEnvironment:environment, TGContent.id("weapon_test"), function.getId().getPath().equals("helicopter_registered_server_ai_hits_target") || function.getId().getPath().startsWith("minigun_") || function.getId().getPath().startsWith("zombie_overworld_") || function.getId().getPath().startsWith("grinder_") || function.getId().getPath().startsWith("charging_") || function.getId().getPath().startsWith("fabricator_") ? 400 : function.getId().getPath().startsWith("chainsaw_") ? 300 : function.getId().getPath().startsWith("reaction_") ? 800 : function.getId().getPath().startsWith("blast_") ? 1200 :
                                 function.getId().getPath().startsWith("structure_") || function.getId().getPath().startsWith("smelting_") || function.getId().getPath().startsWith("chem_") ? 800 :
                                 function.getId().getPath().startsWith("press_") || function.getId().getPath().startsWith("metal_") ? 300 : 100, 0, true))));
     }

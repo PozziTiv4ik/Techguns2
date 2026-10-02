@@ -16,6 +16,7 @@ public class GunItem extends Item {
     protected boolean consumesLoadedAmmo(Player player) {
         return !(this instanceof ChainsawItem || definition.projectile() == techguns.core.ProjectileKind.GAUSS
                 || definition.projectile() == techguns.core.ProjectileKind.BLASTER
+                || definition.projectile() == techguns.core.ProjectileKind.ADVANCED_BULLET
                 || definition.projectile() == techguns.core.ProjectileKind.ALIEN_BLASTER)
                 || !player.getAbilities().instabuild;
     }
@@ -34,6 +35,12 @@ public class GunItem extends Item {
         float accuracyMultiplier = techguns.modern.armor.TGArmorSystem.gunAccuracyMultiplier(player);
         if (aiming) accuracyMultiplier *= gun.aim().accuracyMultiplier();
         for (int pellet = 0; pellet < gun.projectileCount(); pellet++) {
+            if (gun.projectile() == techguns.core.ProjectileKind.ADVANCED_BULLET) {
+                var bullet = new AdvancedBulletProjectile(TGContent.ADVANCED_BULLET.get(), server); bullet.configure(gun); bullet.setOwner(player);
+                bullet.shootLegacy(player, gun.stats().spread() * accuracyMultiplier, LegacyShot.muzzleSide(player, player.getOffhandItem() == stack));
+                if (!server.addFreshEntity(bullet)) return false;
+                continue;
+            }
             if (gun.projectile() == techguns.core.ProjectileKind.ALIEN_BLASTER) {
                 var blast = new AlienBlasterProjectile(TGContent.ALIEN_BLAST.get(), server);
                 blast.configure(gun, !SafeMode.enabled(player)); blast.setOwner(player);
@@ -218,6 +225,7 @@ public class GunItem extends Item {
     @Override public void appendHoverText(ItemStack stack, TooltipContext context, net.minecraft.world.item.component.TooltipDisplay display,
                                          java.util.function.Consumer<net.minecraft.network.chat.Component> lines, net.minecraft.world.item.TooltipFlag flag) {
         super.appendHoverText(stack, context, display, lines, flag);
+        if (GunCamo.count(stack) > 0) lines.accept(net.minecraft.network.chat.Component.translatable("tooltip.techguns.gun.camo", GunCamo.name(stack)));
         if (definition.ammo().components().size() == 2) lines.accept(net.minecraft.network.chat.Component.translatable("tooltip.techguns.compound_ammo",
                 TGContent.AMMO.get(definition.ammo().components().get(0).item()).toStack().getHoverName(),
                 TGContent.AMMO.get(definition.ammo().components().get(1).item()).toStack().getHoverName()));

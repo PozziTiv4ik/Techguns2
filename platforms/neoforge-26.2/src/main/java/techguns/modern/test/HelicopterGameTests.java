@@ -204,6 +204,8 @@ final class HelicopterGameTests {
         h.succeed();
     }
     private static void realAi(GameTestHelper h) {
+        // These 49 flight chunks load after the test clock starts, beyond the runner's 12x12 template.
+        // The 400-tick fixture budget includes asynchronous entity loading; combat still has exactly 30 ticks.
         // Stay outside neighboring players' acquisition band and prevent distance-based despawning from those fixtures.
         var level=h.getLevel(); var center=h.absolutePos(new BlockPos(10,175,10));
         var required=new ArrayList<ChunkPos>();
@@ -237,7 +239,7 @@ final class HelicopterGameTests {
         });
         h.startSequence().thenWaitUntil(()->{
             // A FULL terrain chunk alone does not guarantee that native projectile queries can see the target.
-            for(var chunk:required) h.assertTrue(level.areEntitiesActuallyLoadedAndTicking(chunk),"Flight chunk entities ready: "+chunk);
+            for(var chunk:required) h.assertTrue(level.areEntitiesActuallyLoadedAndTicking(chunk),"Flight chunk entities ready: "+chunk+", positionTicking="+level.isPositionEntityTicking(chunk.getWorldPosition()));
         }).thenExecute(()->{
             h.assertTrue(level.addFreshEntity(m) && level.addFreshEntity(t),"Both native entities spawn");
         }).thenWaitUntil(()->{

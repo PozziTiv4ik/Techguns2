@@ -24,6 +24,10 @@ public final class NpcCombat {
             double spread = (n == 0 ? gun.stats().spread() : gun.pelletSpread()) * accuracy;
             Projectile projectile;
             switch (gun.projectile()) {
+                case ADVANCED_BULLET -> {
+                    var bullet = new AdvancedBulletProjectile(TGContent.ADVANCED_BULLET.get(), level); bullet.configure(gun); bullet.npcDamage(damage);
+                    bullet.setOwner(npc); bullet.shootLegacy(npc, spread, -1); projectile = bullet;
+                }
                 case ALIEN_BLASTER -> {
                     var blast = new AlienBlasterProjectile(TGContent.ALIEN_BLAST.get(), level); blast.configure(gun, false); blast.npcDamage(damage);
                     blast.setOwner(npc); blast.shootLegacy(npc, spread, -1); projectile = blast;

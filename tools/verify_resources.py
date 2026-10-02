@@ -97,6 +97,7 @@ def main():
                 require(local_path(entry['texture'],f'textures/entity/equipment/{layer}','.png'))
     for name in ('laser3', 'laser3_start'):
         require(local_path(f'techguns:fx/{name}', 'textures', '.png'))
+    require(local_path('techguns:entity/bullet_blue', 'textures', '.png'))
     fluid_catalog=json.loads((Path(__file__).resolve().parents[1]/'content/fluids.json').read_text(encoding='utf-8'))
     for fluid in fluid_catalog['fluids']:
         for key in ('still_texture','flow_texture'):

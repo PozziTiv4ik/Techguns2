@@ -41,6 +41,9 @@ public final class LaserBeamRenderer extends EntityRenderer<LaserBeam, LaserBeam
             .withCull(false).build();
     private static final RenderType BODY = type("laser3"), START = type("laser3_start");
     static RenderType blasterBody() { return BODY; }
+    private static final RenderType ADVANCED_BULLET = RenderType.create("techguns_advanced_bullet",
+            RenderSetup.builder(PIPELINE).withTexture("Sampler0", TGContent.id("textures/entity/bullet_blue.png")).createRenderSetup());
+    static RenderType advancedBulletBody() { return ADVANCED_BULLET; }
 
     private static RenderType type(String name) {
         return RenderType.create("techguns_" + name,

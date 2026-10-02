@@ -1,0 +1,59 @@
+[
+  {
+    "id": "pdw",
+    "capacity": 40,
+    "fire_delay": 1,
+    "reload_ticks": 40,
+    "damage": 5.0,
+    "minimum_damage": 3.0,
+    "drop_start": 18.0,
+    "drop_end": 25.0,
+    "speed": 2.0,
+    "lifetime": 20,
+    "projectile": "advanced_bullet",
+    "npc_ai": {
+      "range": 18.0,
+      "interval": 30,
+      "burst": 4,
+      "shot_delay": 2,
+      "forward_offset": 0.0
+    },
+    "accuracy": 0.03,
+    "automatic": true,
+    "extra_pellets": 0,
+    "pellet_spread": 0.0,
+    "gravity": 0.0,
+    "penetration": 1.0,
+    "zoom": 1.0,
+    "zoom_toggle": false,
+    "zoom_accuracy": 1.0,
+    "zoom_centered": false,
+    "ammo": {
+      "item": "advancedmagazine",
+      "empty_item": "advancedmagazineempty",
+      "loose_item": "advancedrounds",
+      "bundles_per_magazine": 3,
+      "individual": false
+    },
+    "fire_sound": "guns.pdwfire",
+    "reload_sound": "guns.pdwreload",
+    "model": "ModelPDW",
+    "texture": "textures/guns/pdw",
+    "forward_axis": "+x",
+    "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java",
+    "camos": [
+      {
+        "texture": "textures/guns/pdw",
+        "name_key": "techguns.item.defaultcamo"
+      },
+      {
+        "texture": "textures/guns/pdw_1",
+        "name_key": "item.techguns.pdw.camoname.1"
+      },
+      {
+        "texture": "textures/guns/pdw_2",
+        "name_key": "item.techguns.pdw.camoname.2"
+      }
+    ]
+  }
+]

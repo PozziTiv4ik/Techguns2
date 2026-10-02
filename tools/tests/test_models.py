@@ -49,7 +49,8 @@ class ModelPortTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'repeat seam'): repeat_uv_interval(-2,4,64)
 
     def test_all_selected_constructor_boxes_survive_and_fit(self):
-        for identifier, class_name in SELECTION.items():
+        for gun in parse_weapons():
+            identifier, class_name = gun['id'], gun['model']
             # These source OBJ wrappers have no Java boxes. Their vertices, UVs and faces
             # are checked in test_grenade_launcher and test_gauss respectively.
             if (identifier, class_name) in {('grenadelauncher', 'ModelBaseBakedGrenadeLauncher'),
@@ -57,9 +58,9 @@ class ModelPortTests(unittest.TestCase):
                 continue
             source = (LEGACY / f'java/techguns/client/models/guns/{class_name}.java').read_text()
             _, _, shapes = extract_shapes(source, class_name)
-            if any(s['inflate'] != 0 or s['render_scale'] != [1,1,1] or s['mirror'] for s in shapes) or identifier in ('m4_infiltrator','chainsaw','scatterbeamrifle'):
+            if any(s['inflate'] != 0 or s['render_scale'] != [1,1,1] or s['mirror'] for s in shapes) or identifier in ('m4_infiltrator','chainsaw','scatterbeamrifle','pdw'):
                 _, mesh, _ = convert_mesh(source, class_name, identifier, 'techguns:item/'+identifier, '-z',
-                                          skip_parts=('blade2',) if identifier=='chainsaw' else (),repeat_texture=identifier in ('chainsaw','scatterbeamrifle'))
+                                          skip_parts=('blade2',) if identifier=='chainsaw' else (),repeat_texture=identifier in ('chainsaw','scatterbeamrifle','pdw'))
                 self.assertEqual(mesh.count('\no '), len(shapes)-(1 if identifier=='chainsaw' else 0), identifier)
                 continue
             model = convert_model(source, class_name, f'techguns:item/{identifier}')
