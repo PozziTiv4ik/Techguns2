@@ -1114,6 +1114,7 @@
     "tfg"
   ],
   "ported_weapons_without_source_recipe": [
+    "alienblaster",
     "laserpistol",
     "scatterbeamrifle"
   ],

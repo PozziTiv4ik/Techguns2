@@ -1,0 +1,45 @@
+[
+  {
+    "id": "alienblaster",
+    "capacity": 10,
+    "fire_delay": 8,
+    "reload_ticks": 35,
+    "damage": 16.0,
+    "minimum_damage": 16.0,
+    "drop_start": 40.0,
+    "drop_end": 40.0,
+    "speed": 1.0,
+    "lifetime": 40,
+    "projectile": "alien_blaster",
+    "npc_ai": {
+      "range": 24.0,
+      "interval": 40,
+      "burst": 0,
+      "shot_delay": 0,
+      "forward_offset": 0.0
+    },
+    "accuracy": 0.0,
+    "automatic": true,
+    "extra_pellets": 0,
+    "pellet_spread": 0.0,
+    "gravity": 0.0,
+    "penetration": 1.0,
+    "zoom": 1.0,
+    "zoom_toggle": false,
+    "zoom_accuracy": 1.0,
+    "zoom_centered": false,
+    "ammo": {
+      "item": "energycell",
+      "empty_item": "energycellempty",
+      "loose_item": "",
+      "bundles_per_magazine": 0,
+      "individual": false
+    },
+    "fire_sound": "guns.alienblasterfire",
+    "reload_sound": "guns.alienblasterreload",
+    "model": "ModelAlienBlaster",
+    "texture": "textures/guns/alien_blaster",
+    "forward_axis": "-z",
+    "source": "legacy/1.12.2/src/main/java/techguns/TGuns.java"
+  }
+]

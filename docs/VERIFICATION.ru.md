@@ -4829,3 +4829,67 @@ JUnit-отчёт Linux workflow не публикует.
 отправляется вторым push. Игровые проверки для документации не повторялись.
 Следующий срез — Alien Blaster с сохранением профиля Ghastling;
 полный FX/GPU-приёмка и весь порт остаются незавершёнными.
+
+<a id="alien-blaster-2026-10-02"></a>
+
+## Alien Blaster — 2026-10-02
+
+Начальная точка — `2ec1b7dd48e196c4288dbd62b184b0635f9fc9b3`, чистая
+`port/26.2-neoforge`; origin совпал с HEAD. GitHub API подтвердил предыдущий
+CI #82 на source `dedec5d3fdd3542fdf984a33f2ce5cd50f58209c`.
+
+Перенесены исходные TGuns/AmmoTypes/AlienBlasterProjectile и 24 детали
+ModelAlienBlaster. Общие константы и зарегистрированная фабрика Ghastling
+извлекаются legacy_alien_blaster.py без дублирования чисел в Java.
+Проверены R/ячейка, десять выстрелов/темп/Creative, обе руки/launch speed,
+item codecs, броня/NPC/ведьма/огнестойкость, обычное отбрасывание без
+dummy-удара, события, нулевой урон, владелец, вода и TTL 40.
+Сохранение профилей игрока/вооружённого NPC, старый Ghastling age-only,
+некорректные данные, шесть граней поджога, RNG и B/OP-права проверены.
+Настоящий NPC-goal и полёт в тиках мира успешны. Исходных рецептов
+верстака/Grinder нет; проверено отсутствие выдуманного производства.
+
+На первом запуске новые тесты потребовали исправления двух имён Java API;
+адресный Python — корректного PYTHONPATH для старого test_ghastling.
+Полный Python обнаружил старое ожидание отказа AlienBlasterProjectile
+в test_lasers. Проверка сохранена для ещё не перенесённого Deatomizer,
+а Alien проверяется как отдельное FIRE-семейство. После исправлений
+повторены затронутые проверки, без отключения тестов.
+
+Локально прошли **265 JUnit, 451 Python и 2462 GameTests (2381 + 52 + 17 + 6 + 6)**.
+JUnit failures/errors/skipped = 0. Python выполнен четырьмя независимыми
+группами; после исправления устаревшего ожидания в test_lasers повторена
+группа 3. Объединение сохранённых test ID точно совпало с полным discover
+без пропусков и повторов. Все пять серверов завершились с кодом 0,
+без ошибок загрузки данных. Основной сервер — 2380 Techguns и один
+встроенный Minecraft. Генератор проверяет 2549 файлов; 2417 ресурсов и
+710 классов JAR сверены побайтово. Лицензия, отсутствие legacy/тестовых
+паков в JAR и неизменность всей legacy проверены. Журналы — `.tools/alien-*`.
+
+| Проверка | Результат | Журнал |
+|---|---|---|
+| Аудит legacy | Код 0 | `.tools/alien-audit.log` |
+| Генератор --check | Код 0 | `.tools/alien-generate-check.log` |
+| Ресурсные ссылки | Код 0 | `.tools/alien-resources.log` |
+| Сборка/ядро | Код 0 | `.tools/alien-build-fixed.log` |
+| Адресный Python, 25 тестов | Код 0 | `.tools/alien-python-focused-fixed.log` |
+| Адресный Alien Blaster | Код 0; 38 GameTests | `.tools/alien-focused.log` |
+| Регрессия Ghastling | Код 0; 23 GameTests | `.tools/alien-ghastling.log` |
+| Основной сервер | Код 0; 2381 GameTests | `.tools/alien-main.log` |
+| Руды/структуры, seed 0 | Код 0; 52 GameTests | `.tools/alien-world.log` |
+| Условная химия | Код 0; 17 GameTests | `.tools/alien-chemistry.log` |
+| Сетки, seed 246813579 | Код 0; 6 GameTests | `.tools/alien-grid.log` |
+| Сетки, seed −975318642 | Код 0; 6 GameTests | `.tools/alien-grid-alternate.log` |
+| Полный Python-набор | Код 0; покрытие test ID сверено | `.tools/alien-python-complete.json` |
+| JAR/лицензия/тестовые паки | Побайтовое совпадение | `.tools/alien-artifacts.log` |
+
+Времена/коды команд — `.tools/alien-*.json`; сводка —
+`.tools/alien-final-facts.json`. Локальные JUnit XML подтверждают число тестов;
+первоначальные неудачные попытки сохранены в отдельных журналах.
+Linux CI нового source ещё ожидается. После source commit/push проверить его
+точный SHA и полный журнал, затем отдельным docs checkpoint `[skip ci]`
+зафиксировать результат и отправить второй push.
+
+Полные FX/свет, позиции рук, breechReload/отдача, прицельная сетка и
+GPU-приёмка остаются; клиент не запускался. Следующий срез —
+PDW / AdvancedBulletProjectile. См. [ALIEN_BLASTER.ru.md](ALIEN_BLASTER.ru.md).

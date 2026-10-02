@@ -3,6 +3,7 @@ import json
 import re
 from legacy_models import strip_comments
 from legacy_npcs import LEGACY, RESOURCES, npc_loot
+from legacy_alien_blaster import ghastling_projectile
 
 
 def ghastling_definition():
@@ -19,16 +20,13 @@ def ghastling_definition():
     body={'name':'body','uv':[0,0],'box':[-8,-8,-8,16,16,16],'pivot':[0,8,0]}
     parts=[body]+[{'name':'tentacle'+str(i),'uv':[0,0],'box':[-1,0,-1,2,n,2],
                   'pivot':[((i%3-(i//3%2)*.5+.25)/2*2-1)*5,15,(i//3/2*2-1)*5]} for i,n in enumerate(lengths)]
-    attack=source.split('protected static class AIFireballAttack',1)[1]
-    shot=re.search(r'new AlienBlasterProjectile\(this.parentEntity.world, parentEntity, ([^;]+)\);',attack)[1]
-    assert shot=='6, 1.5f, 200, 0.05f, 200, 200, 6, 0, false, EnumBulletFirePos.CENTER'
     return {'source':'legacy/1.12.2/src/main/java/techguns/entities/npcs/Ghastling.java',
             'base':'EntityMob; ground navigation, no flying or slow-fall behavior','health':20,'movement_speed':.7,
             'attack_damage':2,'follow_range':64,'armor_attribute':10,'typed_armor':0,'toughness':0,
             'size':[1,2.1],'eye_height':1.5,'xp':10,'fire_immune':True,'undead':False,'natural_spawn_entry':False,
             'faction':'not GenericNPC / ITGNpcTeam','original_egg_colors':[0xaeaeae,0xce81ff],
             'registered_goal':'AIFireballAttack','warmup':30,'burst_shots':3,'burst_interval':6,'rest':50,'melee_interval':20,
-            'line_of_sight_in_attack_goal':False,'projectile':{'damage':6,'speed':1.5,'spread':.05,'lifetime':200,'ignite_seconds':3,'block_damage':False,'kind':'FIRE'},
+            'line_of_sight_in_attack_goal':False,'projectile':ghastling_projectile(),
             'model':{'seed':seed,'texture_size':[64,32],'translation':[0,-.6,0],'parts':parts,'tentacle_animation':'.2*sin(age*.3+index)+.4'},
             'textures':['minecraft:textures/entity/ghast/ghast.png','minecraft:textures/entity/ghast/ghast_shooting.png']}
 
@@ -68,5 +66,5 @@ def ghastling_translations(lang):
     names=dict(line.split('=',1) for line in (LEGACY/f'resources/assets/techguns/lang/{lang}.lang').read_text(encoding='utf-8').splitlines() if '=' in line)
     return {'entity.techguns.ghastling':names['entity.techguns.Ghastling.name'],
             'item.techguns.ghastling_spawn_egg':'Яйцо призыва гастёныша' if lang=='ru_ru' else 'Ghastling Spawn Egg',
-            'entity.techguns.alien_blast':'Зажигательный заряд гастёныша' if lang=='ru_ru' else 'Ghastling Incendiary Charge',
+            'entity.techguns.alien_blast':'Заряд инопланетного бластера' if lang=='ru_ru' else 'Alien Blaster Charge',
             **{'death.attack.techguns.alien_blast'+suffix:('%1$s испепелён зарядом %2$s' if lang=='ru_ru' else '%1$s was incinerated by %2$s') for suffix in ('','.player','.item')}}

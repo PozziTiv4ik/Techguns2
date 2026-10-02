@@ -351,6 +351,20 @@
     ],
     "subtitle": "subtitles.techguns.guns.blasterriflefire"
   },
+  "guns.alienblasterfire": {
+    "sounds": [
+      "techguns:guns/alienblaster_shot_a",
+      "techguns:guns/alienblaster_shot_b",
+      "techguns:guns/alienblaster_shot_c"
+    ],
+    "subtitle": "subtitles.techguns.guns.alienblasterfire"
+  },
+  "guns.alienblasterreload": {
+    "sounds": [
+      "techguns:guns/alienblaster_reload"
+    ],
+    "subtitle": "subtitles.techguns.guns.alienblasterreload"
+  },
   "machines.ammopresswork1": {
     "sounds": [
       "techguns:machines/ammopress_work1_a",

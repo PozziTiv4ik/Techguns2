@@ -47,6 +47,7 @@ JUnit и GameTests ищите по [карте кода](../docs/CODE_MAP.ru.md#
 | Область | Модуль преобразования | Проверки |
 |---|---|---|
 | Арсенал, боеприпасы, лазеры | [generate_weapon_content.py](generate_weapon_content.py), [legacy_crafting.py](legacy_crafting.py) | [test_lasers.py](tests/test_lasers.py), [test_crafting.py](tests/test_crafting.py) |
+| Alien Blaster / общий профиль снаряда Ghastling | [legacy_alien_blaster.py](legacy_alien_blaster.py), [generate_weapon_content.py](generate_weapon_content.py), модель — [legacy_models.py](legacy_models.py) | [test_alien_blaster.py](tests/test_alien_blaster.py), [test_ghastling.py](tests/test_ghastling.py); вход — weapon-ports.json, выходы — alien-blaster-weapon.json, alien-blaster-behavior.json, AlienBlasterRules.java и ресурсы. Фабрика Ghastling извлекается здесь и используется legacy_ghastling.py; отсутствие рецептов сохраняют legacy_crafting.py / legacy_grinder.py. |
 | Scatterbeam / Blaster Rifle / масштабирование TTL Gauss и Blaster | [legacy_scatterbeam.py](legacy_scatterbeam.py), [generate_weapon_content.py](generate_weapon_content.py), модель — [legacy_models.py](legacy_models.py) | [test_scatterbeam.py](tests/test_scatterbeam.py), [test_blaster_rifle.py](tests/test_blaster_rifle.py), [test_gauss.py](tests/test_gauss.py); вход — weapon-ports.json, выходы — scatterbeam-weapon.json, blaster-rifle-weapon.json, scatterbeam-behavior.json, BlasterRules.java и ресурсы. Рецепты Blaster Rifle и отсутствие рецептов Scatterbeam сохраняют legacy_crafting.py / legacy_grinder.py. |
 | Gauss Rifle / составные массивы AmmoType / исходный OBJ | [legacy_gauss.py](legacy_gauss.py), [generate_weapon_content.py](generate_weapon_content.py), [legacy_items.py](legacy_items.py), рецепты — [legacy_crafting.py](legacy_crafting.py), [legacy_grinder.py](legacy_grinder.py) | [test_gauss.py](tests/test_gauss.py); вход выбора — weapon-ports.json, выходы — gauss-weapon.json, gauss-projectile.json, GaussRules.java и ресурсы |
 | Ракетница | [legacy_rockets.py](legacy_rockets.py) | [test_rockets.py](tests/test_rockets.py) |
@@ -92,7 +93,7 @@ JUnit и GameTests ищите по [карте кода](../docs/CODE_MAP.ru.md#
 | HOLE / SOLDIER_SPAWN | [legacy_spawner.py](legacy_spawner.py) | [test_spawner.py](tests/test_spawner.py) |
 | ArmySoldier / берет | [legacy_army.py](legacy_army.py) | [test_army.py](tests/test_army.py) |
 | Commando / T2 Commando | [legacy_commando.py](legacy_commando.py) | [test_commando.py](tests/test_commando.py) |
-| Ghastling | [legacy_ghastling.py](legacy_ghastling.py) | [test_ghastling.py](tests/test_ghastling.py) |
+| Ghastling | [legacy_ghastling.py](legacy_ghastling.py), общие константы/фабрика снаряда — [legacy_alien_blaster.py](legacy_alien_blaster.py) | [test_ghastling.py](tests/test_ghastling.py), [test_alien_blaster.py](tests/test_alien_blaster.py) |
 | AttackHelicopter | [legacy_helicopter.py](legacy_helicopter.py) | [test_helicopter.py](tests/test_helicopter.py) |
 | AlienBug | [legacy_alienbug.py](legacy_alienbug.py) | [test_spike.py](tests/test_spike.py) |
 | ZombiePoliceman | [legacy_policeman.py](legacy_policeman.py) | [test_police.py](tests/test_police.py) |

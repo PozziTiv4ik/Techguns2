@@ -26,5 +26,6 @@
   "minigun": "ModelMinigun",
   "gaussrifle": "ModelBaseBaked",
   "scatterbeamrifle": "ModelLasergun2",
-  "blasterrifle": "ModelBlasterRifle"
+  "blasterrifle": "ModelBlasterRifle",
+  "alienblaster": "ModelAlienBlaster"
 }

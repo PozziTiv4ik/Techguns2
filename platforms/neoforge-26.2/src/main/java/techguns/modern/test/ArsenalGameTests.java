@@ -58,6 +58,11 @@ final class ArsenalGameTests {
             var bullets = helper.getLevel().getEntitiesOfClass(Bullet.class, player.getBoundingBox().inflate(3), b -> b.getOwner() == player);
             helper.assertValueEqual(bullets.size(), gun.projectileCount(), "Projectile count: " + gun.id());
             for (Bullet bullet : bullets) helper.assertValueEqual(bullet.weapon().id(), gun.id(), "Correct projectile parameters");
+        } else if (gun.projectile() == techguns.core.ProjectileKind.ALIEN_BLASTER) {
+            var blasts = helper.getLevel().getEntitiesOfClass(techguns.modern.AlienBlasterProjectile.class, player.getBoundingBox().inflate(3), b -> b.getOwner() == player);
+            helper.assertValueEqual(blasts.size(), 1, "One Alien Blaster charge");
+            helper.assertValueEqual(blasts.getFirst().weapon(), gun, "Weapon profile, not the Ghastling default");
+            blasts.forEach(techguns.modern.AlienBlasterProjectile::discard);
         } else if (gun.projectile() == techguns.core.ProjectileKind.BLASTER) {
             var blasts = helper.getLevel().getEntitiesOfClass(techguns.modern.BlasterProjectile.class, player.getBoundingBox().inflate(3), b -> b.getOwner() == player);
             helper.assertValueEqual(blasts.size(), gun.projectileCount(), "Source count of moving energy projectiles per charge");

@@ -61,6 +61,7 @@ from legacy_flamethrower import generate_flame_content, flame_translations
 from legacy_minigun import generate_minigun_content
 from legacy_gauss import generate_gauss_content, gauss_model, gauss_translations
 from legacy_scatterbeam import generate_scatterbeam_content, blaster_translations, scaled_projectile_lifetime
+from legacy_alien_blaster import generate_alien_content
 from legacy_meteor import generate_meteor_content
 from legacy_bugnests import generate_bugnest_content, bugnest_translations
 from legacy_nether_castle import generate_nether_castle_content
@@ -151,10 +152,10 @@ def parse_weapons():
         projectile_class = inline_projectile[1] if inline_projectile else projectile_classes[args[1]]
         projectile = {'GenericProjectile': 'ballistic', 'StoneBulletProjectile': 'ballistic',
                       'LaserProjectile': 'laser', 'RocketProjectile': 'rocket', 'GaussProjectile': 'gauss', 'BlasterProjectile': 'blaster',
-                      'CyberdemonBlasterProjectile': 'nether_blaster', 'ChainsawProjectile': 'chainsaw', 'Grenade40mmProjectile':'grenade_40mm', 'FlamethrowerProjectile':'flame'}.get(projectile_class)
+                      'AlienBlasterProjectile': 'alien_blaster', 'CyberdemonBlasterProjectile': 'nether_blaster', 'ChainsawProjectile': 'chainsaw', 'Grenade40mmProjectile':'grenade_40mm', 'FlamethrowerProjectile':'flame'}.get(projectile_class)
         if projectile is None: raise ValueError(f'Projectile factory not ported: {projectile_class}')
         lifetime = int(num(args[9]))
-        if projectile in ('gauss', 'blaster'):
+        if projectile in ('gauss', 'blaster', 'alien_blaster'):
             lifetime = scaled_projectile_lifetime(lifetime, num(calls.get('setBulletSpeed', [default_speed])[0]))
         if projectile == 'laser':
             laser = strip_comments((LEGACY / 'java/techguns/entities/projectiles/LaserProjectile.java').read_text())
@@ -223,6 +224,8 @@ public final class NpcWeapons {
     data('content/gauss-weapon.json', [gun for gun in weapons if gun['projectile'] == 'gauss'])
     data('content/scatterbeam-weapon.json', [gun for gun in weapons if gun['id'] == 'scatterbeamrifle'])
     data('content/blaster-rifle-weapon.json', [gun for gun in weapons if gun['id'] == 'blasterrifle'])
+    data('content/alien-blaster-weapon.json', [gun for gun in weapons if gun['projectile'] == 'alien_blaster'])
+    files.update(generate_alien_content())
     definitions = []
     ammo_items = set(crafting['extra_ammo'])
     sounds_data = json.loads(resolve_asset('sounds.json').read_text())

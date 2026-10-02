@@ -21,6 +21,7 @@ public final class ArmorDamage {
                 && event.getSource().is(BurningProjectile.KNOCKBACK_TYPE);
         boolean explosive = event.getSource().getDirectEntity() instanceof ExplosiveBullet && event.getSource().is(ExplosiveBullet.DAMAGE_TYPE);
         techguns.core.WeaponDefinition weapon = null;
+        if (alien) weapon = ((AlienBlasterProjectile)event.getSource().getDirectEntity()).weapon();
         if (event.getSource().getDirectEntity() instanceof BlasterProjectile blast && event.getSource().is(BlasterProjectile.DAMAGE_TYPE)) weapon = blast.weapon();
         if (event.getSource().getDirectEntity() instanceof GaussProjectile slug && event.getSource().is(GaussProjectile.DAMAGE_TYPE)) weapon = slug.weapon();
         if (fireProjectile) weapon = ((BurningProjectile)event.getSource().getDirectEntity()).weapon();

@@ -1,0 +1,29 @@
+{
+  "sources": [
+    "legacy/1.12.2/src/main/java/techguns/entities/projectiles/AlienBlasterProjectile.java",
+    "legacy/1.12.2/src/main/java/techguns/entities/projectiles/GenericProjectile.java",
+    "legacy/1.12.2/src/main/java/techguns/entities/npcs/Ghastling.java"
+  ],
+  "ignite_seconds": 3,
+  "block_ignite_chance": 0.35,
+  "air_drag": 0.99,
+  "water_drag": 0.85,
+  "gravity": 0,
+  "damage": "FIRE / magic, ordinary knockback, no separate dummy impulse",
+  "water": "GenericProjectile water drag and bubbles; extinguish projectile when wet, keep flying",
+  "block_impact": "AlienExplosion FX only; burn adjacent air when blockdamage is allowed; no explosion",
+  "ghastling_projectile": {
+    "damage": 6.0,
+    "speed": 1.5,
+    "spread": 0.05,
+    "lifetime": 200,
+    "ignite_seconds": 3,
+    "block_damage": false,
+    "kind": "FIRE"
+  },
+  "weapon_profile": "TGuns / GenericGun: see alien-blaster-weapon.json; TTL is ceil(range / speed)",
+  "recipes": "No source workbench or Grinder recipe for alienblaster",
+  "pending": [
+    "Original AlienBlasterTrail/AlienExplosion, muzzle FX, dynamic light, recoil/crosshair and GPU acceptance"
+  ]
+}

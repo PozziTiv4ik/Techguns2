@@ -1,7 +1,7 @@
 # Продолжение работы в новом чате
 
-Обновлено 2026-10-01 после CI checkpoint Blaster Rifle.
-Локальные проверки и Linux CI #82 успешны. Прочитать [порядок работы](DEVELOPMENT_WORKFLOW.ru.md)
+Обновлено 2026-10-02 после локального среза Alien Blaster.
+Linux CI нового source ещё ожидается. Прочитать [порядок работы](DEVELOPMENT_WORKFLOW.ru.md)
 и [AGENTS.md](../AGENTS.md), затем проверить Git. Поиск — [карта кода](CODE_MAP.ru.md),
 [каталог систем](README.ru.md) и [карта генераторов](../tools/README.ru.md).
 
@@ -14,65 +14,66 @@
 | Writable fork / origin | `PozziTiv4ik/Techguns2` |
 | Оригинал / upstream, только чтение | `pWn3d1337/Techguns2` |
 | Платформа | Minecraft 26.2 / NeoForge 26.2.0.81 / Java 25 |
-| Последний source, подтверждённый Linux | `dedec5d3fdd3542fdf984a33f2ce5cd50f58209c` — Blaster Rifle |
-| Linux CI Blaster Rifle | [Linux CI #82](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36902057470), success |
+| Последний source, подтверждённый Linux | `dedec5d3fdd3542fdf984a33f2ce5cd50f58209c` — предыдущий Blaster Rifle |
+| CI нового Alien Blaster | Ожидается после source commit/push |
 
-Работает Blaster Rifle: один летящий ENERGY-снаряд, 50 зарядов/R 45 тиков,
-темп 5, падение 10→8 на 25–35 блоках, TTL 30 и сохранённый origin.
-Проверены броня/события/вода/NPC/сохранение, оба крафта, Grinder с выбором
-материалов и модель из 23 деталей. Старый Scatterbeam без origin совместим;
-его постоянный урон и отсутствие исходных рецептов сохранены.
-[Описание Blaster Rifle](BLASTER_RIFLE.ru.md).
+Работает Alien Blaster: один FIRE-снаряд, 10 зарядов/R 35 тиков,
+темп 8, урон 16/пробитие 1, TTL 40, обычное отбрасывание и поджог
+сущности на 3 секунды. Поджог соседнего воздуха с вероятностью 0,35
+подчинён B/серверным правам. Взрыва и исходных survival-рецептов нет.
+Перенесены 24 детали модели, PNG, три звука выстрела и R.
+Отдельный профиль Ghastling и его старые сохранения сохранены.
+[Описание Alien Blaster](ALIEN_BLASTER.ru.md).
 
-Локально прошли **261 JUnit, 445 Python и 2423 GameTests (2342 + 52 + 17 + 6 + 6)**.
-Python — четыре независимые группы за 255.676 с общего времени;
-сохранённые test ID точно покрывают полный discover без пропусков и повторов.
-JUnit failures/errors/skipped = 0. Все пять серверов завершились с кодом 0,
-без ошибок загрузки данных. Основной сервер — 2341 Techguns и один
-встроенный Minecraft. Генератор проверяет 2539 файлов; 2410 ресурсов и
-708 классов JAR сверены побайтово. Лицензия, неизменность legacy и отсутствие
-8 уникальных файлов тестовых паков проверены. Журналы — `.tools/blaster-*`.
-[Linux CI #82](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36902057470) подтвердил source `dedec5d3fdd3542fdf984a33f2ce5cd50f58209c`:
-445 Python за 393.119 с, сборку/ядро и все 2423 GameTests
-(2342 + 52 + 17 + 6 + 6). Все 15 шагов успешны; завершение —
-2026-10-01 20:08:17 +02:00 (Europe/Zurich), `2026-10-01T18:08:17Z`.
+Локально прошли **265 JUnit, 451 Python и 2462 GameTests (2381 + 52 + 17 + 6 + 6)**.
+JUnit failures/errors/skipped = 0. Python выполнен четырьмя независимыми
+группами; после исправления устаревшего ожидания в test_lasers повторена
+группа 3. Объединение сохранённых test ID точно совпало с полным discover
+без пропусков и повторов. Все пять серверов завершились с кодом 0,
+без ошибок загрузки данных. Основной сервер — 2380 Techguns и один
+встроенный Minecraft. Генератор проверяет 2549 файлов; 2417 ресурсов и
+710 классов JAR сверены побайтово. Лицензия, отсутствие legacy/тестовых
+паков в JAR и неизменность всей legacy проверены. Журналы — `.tools/alien-*`.
 
-Доказательства — [протокол](VERIFICATION.ru.md#blaster-rifle-2026-10-01).
-После указанного source меняется только документация с `[skip ci]`.
-Незавершённой реализации и известных красных проверок этого среза нет.
-Текущий HEAD получать из Git; прошедшие проверки без новых изменений не повторять.
+Доказательства — [протокол](VERIFICATION.ru.md#alien-blaster-2026-10-02).
+Адресно прошли 38 новых GameTests и все 23 проверки Ghastling.
+Известных красных локальных проверок нет. Сначала завершить workflow:
+source commit/push, CI для его точного SHA, затем docs checkpoint `[skip ci]`.
+Текущий HEAD получать из Git; не выдавать предыдущий CI за проверку нового кода.
 
 <a id="next-milestone"></a>
 
-## Следующий законченный срез — Alien Blaster
+## Следующий законченный срез — PDW / AdvancedBulletProjectile
 
-Перенести `alienblaster` и его фабрику. В TGuns: автоматический темп 8 тиков,
-10 зарядов ENERGY_CELL/R 35 тиков, урон 16 FIRE, скорость 1, TTL
-`ceil(40/1)=40`, пробитие 1; NPC range 24 / interval 40 без очереди.
-Сверить GenericGun/GenericProjectile и активные ветки AlienBlasterProjectile:
-поджог сущности на 3 секунды, обычное отбрасывание, air/water drag,
-burnBlocks с вероятностью 0,35 только при разрешении blockdamage.
-AlienExplosion — название FX; не добавлять отсутствующий взрыв.
+Перенести `pdw` и фабрику AdvancedBulletProjectile. В TGuns: автоматический
+темп 1 тик, магазин 40/R 40, урон 5→3 на 18–25 блоках, пробитие 1,
+скорость GenericGun по умолчанию 2 и TTL `ceil(40 / 2) = 20`.
+NPC range 18 / interval 30 / очередь 4 с промежутком 2. Закомментированную
+setShotgunSpread у PDW не включать. Pulse Rifle — следующий отдельный
+кандидат этой фабрики: его активный burst пока не поддерживается парсером.
 
-Современная AlienBlasterProjectile сейчас обслуживает только Ghastling:
-фиксированные 6 урона, TTL 200, скорость 1,5, разброс 0,05 и центрированный
-запуск; NPC-профиль и старые сохранения должны сохраниться при обобщении.
-Проверить игрока/NPC, R/ячейки, воду, броню, события, права B/поджог и saved
-flight, затем полную регрессию Ghastling. У оружия в оригинале нет рецепта
-верстака и Grinder: не придумывать survival-рецепт; повторно сверить источники.
-Перенести ModelAlienBlaster, ClientProxy, исходные текстуру и звуки.
+AmmoTypes.ADVANCED_MAGAZINE задаёт полный/пустой магазин и ADVANCED_ROUNDS,
+три пачки на магазин. Сверить исходное округление 40 зарядов на три пачки,
+остатки при частичной R, производство боеприпаса, оба крафта PDW и Grinder.
+Фабрика наследует GenericProjectile: восстановить PROJECTILE-урон, падение
+по смещению, air/water drag, launch/TTL и события; цвет FX сам по себе не
+меняет тип урона. Не подменять поведение непроверенным текущим Bullet.
+Перенести ModelPDW/ClientProxy, три текстуры, звуки и исходное переключение
+расцветок. Проверить игрока/NPC, броню, R, сохранение и полную регрессию.
 
 Точки входа — TGuns, AmmoTypes, GenericGun, GenericProjectile,
-AlienBlasterProjectile, TGMachineRecipes, Ghastling/его AI и ClientProxy;
-современные — AlienBlasterProjectile, GunItem, ReloadSessions, LegacyShot,
-ShotDamage, ArmorDamage, NpcCombat, SafeMode, GhastlingGameTests.
-Вход — content/weapon-ports.json; владельцы — generate_weapon_content.py,
-legacy_ghastling.py, legacy_models.py, legacy_crafting.py и legacy_grinder.py.
-Разделить профиль оружия и Ghastling в генераторе/каталоге без дублирования
-исходных констант. Пройти полный workflow; новую реализацию ещё не начинали.
+AdvancedBulletProjectile, TGMachineRecipes, ModelPDW/ClientProxy;
+современные — GunItem, Bullet, LegacyShot, ReloadSessions, ShotDamage,
+ArmorDamage, NpcCombat и Camo Bench. Вход — content/weapon-ports.json;
+владельцы — generate_weapon_content.py, legacy_models.py, legacy_crafting.py,
+legacy_items.py, legacy_machines.py и legacy_grinder.py. Новую реализацию
+ещё не начинали; сначала проверить CI текущего среза, если он pending.
 
 ## Существенные ограничения
 
+Alien Blaster: полный FX, свет, позиции рук, breechReload/отдача,
+прицельная сетка и GPU-приёмка остаются. Используются общие современные
+положения модели и native-частицы. Рецептов в оригинале нет.
 Blaster Rifle/Scatterbeam: полный muzzle/impact FX, свет, отдача/оптика
 и GPU-приёмка остаются. У Scatterbeam нет исходных рецептов.
 Gauss: исходные FX, свет, прицел/отдача и GPU-приёмка; голубой след —

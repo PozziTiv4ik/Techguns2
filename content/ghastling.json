@@ -30,7 +30,7 @@
   "melee_interval": 20,
   "line_of_sight_in_attack_goal": false,
   "projectile": {
-    "damage": 6,
+    "damage": 6.0,
     "speed": 1.5,
     "spread": 0.05,
     "lifetime": 200,
