@@ -1,6 +1,6 @@
 # Продолжение работы в новом чате
 
-Обновлено 2026-10-02 после локального среза PDW. Linux CI нового source PDW ожидается; предыдущий CI не подтверждает эти изменения.
+Обновлено 2026-10-02 после CI checkpoint PDW. Локальные проверки и Linux CI #85 успешны.
 Прочитать [порядок работы](DEVELOPMENT_WORKFLOW.ru.md) и [AGENTS.md](../AGENTS.md),
 затем проверить Git. Поиск — [карта кода](CODE_MAP.ru.md),
 [каталог систем](README.ru.md) и [карта генераторов](../tools/README.ru.md).
@@ -14,8 +14,8 @@
 | Writable fork / origin | `PozziTiv4ik/Techguns2` |
 | Оригинал / upstream, только чтение | `pWn3d1337/Techguns2` |
 | Платформа | Minecraft 26.2 / NeoForge 26.2.0.81 / Java 25 |
-| Последний source, подтверждённый Linux | `33b8da91a96090c747e0195b2df5b7cce5121182` — предыдущий Alien Blaster |
-| Linux CI PDW | Ожидается после первого commit/push |
+| Последний source, подтверждённый Linux | `71ab97670725551ec84f402506da5f484eb88eb7` — PDW |
+| Linux CI PDW | [Linux CI #85](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36993942213), success |
 
 PDW: 40 зарядов/R 40 тиков, автоматический темп 1, один Advanced-снаряд,
 PROJECTILE 5→3 на 18–25 блоках, пробитие 1 и TTL 20. Восстановлены
@@ -39,7 +39,13 @@ Python выполнен четырьмя независимыми группам
 Подробности — [PDW](PDW.ru.md), доказательства —
 [протокол](VERIFICATION.ru.md#pdw-2026-10-02).
 
-Linux CI нового source PDW ожидается; предыдущий CI не подтверждает эти изменения.
+[Linux CI #85](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36993942213) подтвердил source `71ab97670725551ec84f402506da5f484eb88eb7`:
+459 Python за 413.322 с, сборку/ядро и все 2508 GameTests
+(2427 + 52 + 17 + 6 + 6). Все 15 шагов успешны; завершение —
+2026-10-02T12:30:26+02:00 (Europe/Zurich), `2026-10-02T10:30:26+00:00`.
+
+После этого source меняется только документация с `[skip ci]`.
+Незавершённых действий и известных красных проверок этого серверного среза нет.
 Текущий HEAD получать из Git; прошедшие проверки без новых изменений не повторять.
 
 <a id="next-milestone"></a>
