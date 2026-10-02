@@ -251,7 +251,11 @@ final class AlienBlasterGameTests {
         } h.getLevel().setBlockAndUpdate(dest, Blocks.AIR.defaultBlockState()); t.discard(); h.succeed();
     }
     private static void npc(GameTestHelper h) {
-        var npc = h.spawnWithNoFreeWill(NpcContent.BANDIT.get(), new Vec3(3, 90, 4)); var t = target(h, "bare", new Vec3(3, 90, 16));
+        // Match the Blaster fixture: no target outside the runner's 12x12 owned XZ footprint.
+        // A (8,9) separation preserves the 26-tick Alien interval band.
+        var npc = h.spawnWithNoFreeWill(NpcContent.BANDIT.get(), new Vec3(2, 90, 2)); var t = target(h, "bare", new Vec3(10, 90, 11));
+        h.assertTrue(h.getLevel().areEntitiesActuallyLoadedAndTicking(t.chunkPosition())
+                && h.getLevel().getEntity(t.getUUID()) == t, "NPC target is registered in an owned ticking chunk");
         npc.setNoGravity(true); npc.setItemSlot(EquipmentSlot.MAINHAND, TGContent.GUNS.get(GUN.id()).toStack()); npc.setTarget(t);
         var goal = new NpcRangedGoal(npc); int[] clock = {0}; var ticks = new ArrayList<Integer>(); var fired = new ArrayList<AlienBlasterProjectile>();
         Consumer<EntityJoinLevelEvent> listener = e -> { if (e.getEntity() instanceof AlienBlasterProjectile s && s.getOwner() == npc) { ticks.add(clock[0]); fired.add(s); } };

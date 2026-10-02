@@ -231,7 +231,11 @@ final class BlasterRifleGameTests {
         h.assertTrue(TGArmorSystem.SLOTS.stream().anyMatch(slot -> p.getItemBySlot(slot).getDamageValue() > 0), "Armor durability spent"); s.discard(); h.succeed();
     }
     private static void npc(GameTestHelper h) {
-        var npc = h.spawnWithNoFreeWill(NpcContent.BANDIT.get(), new Vec3(3, 90, 4)); var t = target(h, "bare", new Vec3(3, 90, 16));
+        // Both XZ footprints must remain inside the 12x12 template's entity-ticking chunks.
+        // The (8,9) separation stays in the original 20-tick interval band at roughly 12 blocks.
+        var npc = h.spawnWithNoFreeWill(NpcContent.BANDIT.get(), new Vec3(2, 90, 2)); var t = target(h, "bare", new Vec3(10, 90, 11));
+        h.assertTrue(h.getLevel().areEntitiesActuallyLoadedAndTicking(t.chunkPosition())
+                && h.getLevel().getEntity(t.getUUID()) == t, "NPC target is registered in an owned ticking chunk");
         npc.setNoGravity(true); npc.setItemSlot(EquipmentSlot.MAINHAND, TGContent.GUNS.get(GUN.id()).toStack()); npc.setTarget(t);
         var goal = new NpcRangedGoal(npc); int[] clock = {0}; var ticks = new ArrayList<Integer>(); var fired = new ArrayList<BlasterProjectile>();
         Consumer<EntityJoinLevelEvent> listener = e -> { if (e.getEntity() instanceof BlasterProjectile s && s.getOwner() == npc) { ticks.add(clock[0]); fired.add(s); } };
