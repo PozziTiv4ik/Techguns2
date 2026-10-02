@@ -4886,9 +4886,7 @@ JUnit failures/errors/skipped = 0. Python выполнен четырьмя не
 Времена/коды команд — `.tools/alien-*.json`; сводка —
 `.tools/alien-final-facts.json`. Локальные JUnit XML подтверждают число тестов;
 первоначальные неудачные попытки сохранены в отдельных журналах.
-Linux CI нового source ещё ожидается. После source commit/push проверить его
-точный SHA и полный журнал, затем отдельным docs checkpoint `[skip ci]`
-зафиксировать результат и отправить второй push.
+Linux CI нового source подтверждён ниже.
 
 Полные FX/свет, позиции рук, breechReload/отдача, прицельная сетка и
 GPU-приёмка остаются; клиент не запускался. Следующий срез —
@@ -4928,4 +4926,25 @@ legacy/тестовых паков — `.tools/alien-artifacts-ci-fix.log`.
 Python, ядро и остальные четыре серверных профиля не изменились; для них
 сохраняются прежние успешные локальные результаты этого среза.
 Сводка обновлена в `.tools/alien-final-facts.json`; исходная сохранена как
-`.tools/alien-local-first-facts.json`. Новому source нужен новый Linux CI.
+`.tools/alien-local-first-facts.json`. Linux CI исправленного source подтверждён ниже.
+
+
+### Linux CI #84 — 2026-10-02
+
+[Linux CI #84](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36985188545) подтвердил source `33b8da91a96090c747e0195b2df5b7cce5121182`:
+451 Python за 404.939 с, сборку/ядро и все 2462 GameTests
+(2381 + 52 + 17 + 6 + 6). Все 15 шагов успешны; завершение —
+2026-10-02 10:58:24 +02:00 (Europe/Zurich), `2026-10-02T08:58:24Z`.
+
+API headSha совпал с полным SHA source. Проверены все шаги и полный журнал
+`.tools/alien-ci-full.log`; API-отчёт — `.tools/alien-ci-final.json`.
+Генератор, ресурсные ссылки, единый Python discover, сборка и все пять
+серверных профилей успешны, ошибок загрузки данных нет. Число
+265 JUnit получено из локальных XML; отдельный числовой
+JUnit-отчёт Linux workflow не публикует.
+
+Реализация и исправление фикстур отправлены двумя содержательными коммитами и двумя push.
+Documentation-only checkpoint `[skip ci]` фиксирует этот CI и отправляется
+третьим push. Игровые проверки для документации не повторялись.
+Следующий срез — PDW / AdvancedBulletProjectile; полный FX/GPU-приёмка
+и весь порт остаются незавершёнными.

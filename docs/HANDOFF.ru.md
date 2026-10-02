@@ -1,7 +1,7 @@
 # Продолжение работы в новом чате
 
-Обновлено 2026-10-02 после локального среза Alien Blaster.
-Linux CI нового source ещё ожидается. Прочитать [порядок работы](DEVELOPMENT_WORKFLOW.ru.md)
+Обновлено 2026-10-02 после CI checkpoint Alien Blaster.
+Локальные проверки и Linux CI #84 успешны. Прочитать [порядок работы](DEVELOPMENT_WORKFLOW.ru.md)
 и [AGENTS.md](../AGENTS.md), затем проверить Git. Поиск — [карта кода](CODE_MAP.ru.md),
 [каталог систем](README.ru.md) и [карта генераторов](../tools/README.ru.md).
 
@@ -14,8 +14,8 @@ Linux CI нового source ещё ожидается. Прочитать [по
 | Writable fork / origin | `PozziTiv4ik/Techguns2` |
 | Оригинал / upstream, только чтение | `pWn3d1337/Techguns2` |
 | Платформа | Minecraft 26.2 / NeoForge 26.2.0.81 / Java 25 |
-| Последний source, подтверждённый Linux | `dedec5d3fdd3542fdf984a33f2ce5cd50f58209c` — предыдущий Blaster Rifle |
-| CI нового Alien Blaster | Ожидается после source commit/push |
+| Последний source, подтверждённый Linux | `33b8da91a96090c747e0195b2df5b7cce5121182` — Alien Blaster |
+| Linux CI Alien Blaster | [Linux CI #84](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36985188545), success |
 
 Работает Alien Blaster: один FIRE-снаряд, 10 зарядов/R 35 тиков,
 темп 8, урон 16/пробитие 1, TTL 40, обычное отбрасывание и поджог
@@ -42,11 +42,16 @@ Alien Blaster, сборка, основной сервер 2381/2381 и свер
 ядро и остальные четыре серверных профиля не изменялись; их успешные
 результаты выше сохранены, новые прогоны им не приписываются.
 
+[Linux CI #84](https://github.com/PozziTiv4ik/Techguns2/actions/runs/36985188545) подтвердил source `33b8da91a96090c747e0195b2df5b7cce5121182`:
+451 Python за 404.939 с, сборку/ядро и все 2462 GameTests
+(2381 + 52 + 17 + 6 + 6). Все 15 шагов успешны; завершение —
+2026-10-02 10:58:24 +02:00 (Europe/Zurich), `2026-10-02T08:58:24Z`.
+
 Доказательства — [протокол](VERIFICATION.ru.md#alien-blaster-2026-10-02).
 Адресно прошли 38 новых GameTests и все 23 проверки Ghastling.
-Известных красных локальных проверок нет. Сначала завершить workflow:
-source commit/push, CI для его точного SHA, затем docs checkpoint `[skip ci]`.
-Текущий HEAD получать из Git; не выдавать предыдущий CI за проверку нового кода.
+После указанного source меняется только документация с `[skip ci]`.
+Незавершённой реализации и известных красных проверок этого среза нет.
+Текущий HEAD получать из Git; прошедшие проверки без новых изменений не повторять.
 
 <a id="next-milestone"></a>
 
@@ -74,7 +79,7 @@ AdvancedBulletProjectile, TGMachineRecipes, ModelPDW/ClientProxy;
 ArmorDamage, NpcCombat и Camo Bench. Вход — content/weapon-ports.json;
 владельцы — generate_weapon_content.py, legacy_models.py, legacy_crafting.py,
 legacy_items.py, legacy_machines.py и legacy_grinder.py. Новую реализацию
-ещё не начинали; сначала проверить CI текущего среза, если он pending.
+ещё не начинали. Пройти полный workflow.
 
 ## Существенные ограничения
 
